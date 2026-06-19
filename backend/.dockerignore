@@ -1,0 +1,10 @@
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+.env
+notenix.db
+chroma_db
+.git
+*.bat
