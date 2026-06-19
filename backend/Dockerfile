@@ -16,4 +16,4 @@ ENV CHROMA_PERSIST_DIR=/data/chroma
 EXPOSE 8000
 
 # Render injects $PORT — fall back to 8000 for local/Railway
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-10000}
