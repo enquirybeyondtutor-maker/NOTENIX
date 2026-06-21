@@ -37,16 +37,10 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
 
 # CORS
-_origins = list({
-    settings.frontend_url,
-    "http://localhost:3000",
-    "https://notenix.com",
-    "https://www.notenix.com",
-})
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
