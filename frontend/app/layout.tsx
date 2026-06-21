@@ -3,7 +3,9 @@ import "./globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Zap, BookOpen, BarChart3, Brain, CreditCard, LogOut, Trophy } from "lucide-react";
+import { Menu, X, Zap, BookOpen, BarChart3, Brain, CreditCard, LogOut, Trophy, PenLine } from "lucide-react";
+
+const CLASSBOARD_URL = "https://ciliary-ambagiously-kaleigh.ngrok-free.dev";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -70,6 +72,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       <Icon size={15} />{label}
                     </Link>
                   ))}
+                  <a
+                    href={CLASSBOARD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-all text-gray-500 hover:text-purple-600 hover:bg-purple-50"
+                  >
+                    <PenLine size={15} /> Whiteboard
+                  </a>
                 </div>
               )}
 
@@ -109,6 +119,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Icon size={16} /> {label}
                   </Link>
                 ))}
+                <a
+                  href={CLASSBOARD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <PenLine size={16} /> Whiteboard
+                </a>
               </div>
             )}
           </nav>
