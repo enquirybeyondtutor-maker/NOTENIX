@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_BASE = "https://notenix.onrender.com";
+const API_BASE = typeof window !== "undefined" && window.location.hostname !== "localhost"
+  ? "/api"
+  : "http://localhost:8000";
 
 export const api = axios.create({ baseURL: API_BASE, headers: { "Content-Type": "application/json" } });
 
