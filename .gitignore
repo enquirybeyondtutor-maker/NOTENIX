@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.egg-info/
+
+# Env
+.env
+.env.local
+
+# DB / data
+*.db
+*.sqlite3
+chroma_db/
+backend/chroma_db/
+
+# Knowledge base PDFs (too large for git; ingested separately)
+knowledge_base/
+*.pdf
+
+# Node / Next
+node_modules/
+.next/
+out/
+frontend/.vercel
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Ingestion artifacts
+ingestion/output/
+*.log
