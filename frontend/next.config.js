@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const BACKEND = process.env.BACKEND_URL || "https://notenix-api-v2.onrender.com";
+const BACKEND = process.env.BACKEND_URL || "https://notenix.onrender.com";
 
 const nextConfig = {
   async rewrites() {
