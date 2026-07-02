@@ -25,7 +25,7 @@ export default function RegisterPage() {
     } finally { setLoading(false); }
   };
 
-  const perks = ["3 free quizzes to start", "Built on real past papers", "AI-powered marking", "No credit card required"];
+  const perks = ["3 free quizzes to start", "Built on real past papers", "Instant examiner-style marking", "No credit card required"];
 
   return (
     <div className="min-h-screen grid-bg flex items-center justify-center px-4 relative overflow-hidden py-8">

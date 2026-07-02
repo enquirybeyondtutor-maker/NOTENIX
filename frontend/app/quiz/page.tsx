@@ -8,7 +8,7 @@ import { quizAPI, getUser } from "@/lib/api";
 type Stage = "setup" | "loading" | "taking" | "results";
 const GEN_STEPS = [
   { label: "Finding real past-paper questions", icon: FileText },
-  { label: "Generating your quiz with AI", icon: Brain },
+  { label: "Building your questions", icon: Brain },
   { label: "Formatting questions", icon: Sparkles },
 ];
 
@@ -161,7 +161,7 @@ export default function QuizPage() {
 
         {topic && (
           <button onClick={start} className="btn-primary w-full justify-center py-3.5 text-base">
-            Generate Quiz <ArrowRight size={18} />
+            Start Quiz <ArrowRight size={18} />
           </button>
         )}
       </div>

@@ -32,8 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <title>Notenix — AI GCSE & A-Level Quiz Platform</title>
-        <meta name="description" content="Master GCSE and A-Level subjects with AI quizzes built on real past papers." />
+        <title>Notenix — Smart GCSE & A-Level Quiz Platform</title>
+        <meta name="description" content="Master GCSE and A-Level subjects with smart quizzes built on real past papers. By Beyond Imagination." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />

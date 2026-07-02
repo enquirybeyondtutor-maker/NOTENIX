@@ -14,11 +14,11 @@ async def plans():
     return {
         "free": {"price": 0, "features": [
             f"{settings.free_quiz_limit} free quizzes",
-            "AI-generated MCQ quizzes", "Progress tracking", "Leaderboard access",
+            "Smart MCQ quizzes", "Progress tracking", "Leaderboard access",
         ]},
         "pro": {"price": 9.99, "features": [
             "Unlimited quizzes", "Exam mode (real past papers)",
-            "AI marking of written answers", "All subjects & boards", "Priority support",
+            "Instant marking of written answers", "All subjects & boards", "Priority support",
         ]},
     }
 

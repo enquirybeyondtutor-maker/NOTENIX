@@ -5,8 +5,8 @@ import { Brain, Target, TrendingUp, Clock, Trophy, FileText, ArrowRight, Sparkle
 
 const features = [
   { icon: FileText, title: "Real past papers", desc: "Quizzes built from authentic GCSE & A-Level exam questions, not generic content." },
-  { icon: Brain, title: "AI question generation", desc: "Fresh multiple-choice questions on any topic, grounded in real exam material." },
-  { icon: Target, title: "Exam mode (Pro)", desc: "Practise actual past-paper questions and get your written answers marked by AI." },
+  { icon: Brain, title: "Smart question engine", desc: "Fresh multiple-choice questions on any topic, grounded in real exam material." },
+  { icon: Target, title: "Exam mode (Pro)", desc: "Practise actual past-paper questions and get instant, examiner-style marking on your written answers." },
   { icon: TrendingUp, title: "Track progress", desc: "See your average scores per subject, streaks, and earned badges over time." },
   { icon: Clock, title: "Spaced practice", desc: "Build consistent revision habits with daily streaks and XP." },
   { icon: Trophy, title: "Leaderboards", desc: "Compete with other students on weekly and all-time XP rankings." },
@@ -14,7 +14,7 @@ const features = [
 
 const steps = [
   { n: "1", title: "Pick your topic", desc: "Choose your level, subject and exact topic from real exam specifications." },
-  { n: "2", title: "Take the quiz", desc: "Answer AI-generated MCQs or real past-paper questions in exam mode." },
+  { n: "2", title: "Take the quiz", desc: "Answer smart multiple-choice questions or real past-paper questions in exam mode." },
   { n: "3", title: "Learn & improve", desc: "Get instant marking, explanations, and track your progress over time." },
 ];
 
@@ -26,12 +26,12 @@ export default function Landing() {
         <div className="orb w-96 h-96 bg-purple-300/20 top-0 right-0" />
         <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div className="badge-pill mb-6"><Sparkles size={14} className="text-purple-600" /> AI quizzes from real past papers · GCSE & A-Level</div>
+            <div className="badge-pill mb-6"><Sparkles size={14} className="text-purple-600" /> Smart quizzes from real past papers · GCSE & A-Level</div>
             <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-5">
               Master your exams with <span className="gradient-text">real past-paper</span> practice
             </h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Notenix turns authentic GCSE & A-Level exam papers into smart quizzes — with AI marking, progress tracking, and instant explanations.
+              Notenix turns authentic GCSE & A-Level exam papers into smart quizzes — with instant marking, progress tracking, and clear explanations.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/register"><button className="btn-primary text-base py-3 px-7">Start for Free <ArrowRight size={18} /></button></Link>
@@ -98,7 +98,7 @@ export default function Landing() {
       </section>
 
       <footer className="border-t border-purple-100 py-8 text-center text-sm text-gray-400">
-        <span className="font-bold"><span className="text-purple-600">Note</span>nix</span> · AI exam practice for GCSE & A-Level
+        <span className="font-bold"><span className="text-purple-600">Note</span>nix</span> · Smart exam practice for GCSE & A-Level · by Beyond Imagination
       </footer>
     </div>
   );
