@@ -1,25 +1,29 @@
+from urllib.parse import urlsplit, urlunsplit
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from config import settings
 
 
-def _normalize(url: str) -> str:
-    # Neon / Render give postgres:// or postgresql:// — convert to async driver
+def _prepare(url: str):
+    """Convert to async driver and strip libpq-only query params asyncpg rejects
+    (sslmode, channel_binding, etc.). Returns (url, connect_args)."""
     if url.startswith("postgresql://"):
-        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
-    if url.startswith("postgres://"):
-        return url.replace("postgres://", "postgresql+asyncpg://", 1)
-    return url
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+
+    connect_args = {}
+    if "asyncpg" in url:
+        parts = urlsplit(url)
+        had_ssl = "sslmode=require" in (parts.query or "") or "sslmode=verify" in (parts.query or "")
+        # drop the entire query string — Neon params (sslmode, channel_binding) are libpq-only
+        url = urlunsplit((parts.scheme, parts.netloc, parts.path, "", ""))
+        if had_ssl or "neon.tech" in parts.netloc:
+            connect_args = {"ssl": True}
+    return url, connect_args
 
 
-DATABASE_URL = _normalize(settings.database_url)
-
-# asyncpg doesn't accept ?sslmode=, strip it (ssl handled via connect_args)
-connect_args = {}
-if "asyncpg" in DATABASE_URL:
-    if "sslmode=require" in DATABASE_URL:
-        DATABASE_URL = DATABASE_URL.replace("?sslmode=require", "").replace("&sslmode=require", "")
-        connect_args = {"ssl": True}
+DATABASE_URL, connect_args = _prepare(settings.database_url)
 
 engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True, connect_args=connect_args)
 SessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
