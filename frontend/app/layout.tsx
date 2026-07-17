@@ -1,109 +1,93 @@
-"use client";
 import "./globals.css";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Menu, X, Zap, BarChart3, Brain, TrendingUp, CreditCard, LogOut, Trophy } from "lucide-react";
-import { getUser, logout } from "@/lib/api";
+import type { Metadata } from "next";
+import Shell from "@/components/Shell";
+
+const SITE = "https://notenix.com";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE),
+  title: {
+    default: "Notenix — Smart GCSE & A-Level Quiz & Past Paper Practice",
+    template: "%s | Notenix",
+  },
+  description:
+    "Notenix helps UK students ace GCSE & A-Level exams with smart quizzes built on real past papers, instant marking, progress tracking and leaderboards. Start free.",
+  keywords: [
+    "Notenix", "notenix", "GCSE quiz", "A-Level quiz", "past papers", "GCSE revision",
+    "A-Level revision", "exam practice", "AQA", "Edexcel", "OCR", "GCSE past papers",
+    "A-Level past papers", "online quiz platform", "Beyond Imagination", "Beyond Tutors",
+  ],
+  authors: [{ name: "Beyond Imagination" }],
+  creator: "Beyond Imagination",
+  publisher: "Beyond Imagination",
+  applicationName: "Notenix",
+  alternates: { canonical: SITE },
+  openGraph: {
+    type: "website",
+    url: SITE,
+    siteName: "Notenix",
+    title: "Notenix — Smart GCSE & A-Level Quiz & Past Paper Practice",
+    description:
+      "Ace GCSE & A-Level exams with smart quizzes built on real past papers, instant marking and progress tracking. Start free.",
+    locale: "en_GB",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Notenix — Smart GCSE & A-Level Quiz & Past Paper Practice",
+    description: "Ace GCSE & A-Level exams with smart quizzes built on real past papers. Start free.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  category: "education",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE}/#org`,
+      name: "Notenix",
+      url: SITE,
+      description: "Smart GCSE & A-Level quiz and past-paper practice platform by Beyond Imagination.",
+      parentOrganization: { "@type": "Organization", name: "Beyond Imagination" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "Notenix",
+      publisher: { "@id": `${SITE}/#org` },
+      inLanguage: "en-GB",
+    },
+    {
+      "@type": "WebApplication",
+      name: "Notenix",
+      url: SITE,
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Web",
+      offers: [
+        { "@type": "Offer", price: "0", priceCurrency: "GBP", name: "Free" },
+        { "@type": "Offer", price: "9.99", priceCurrency: "GBP", name: "Pro" },
+      ],
+    },
+  ],
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => { setLoggedIn(!!getUser()); }, [pathname]);
-
-  const isAuthPage = pathname === "/login" || pathname === "/register";
-  const isLanding = pathname === "/";
-
-  const navLinks = [
-    { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
-    { href: "/quiz", label: "New Quiz", icon: Brain },
-    { href: "/progress", label: "Progress", icon: TrendingUp },
-    { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
-    { href: "/pricing", label: "Pricing", icon: CreditCard },
-  ];
-  const landingLinks = [
-    { href: "#features", label: "Features" },
-    { href: "#how", label: "How it works" },
-    { href: "/pricing", label: "Pricing" },
-  ];
-
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
-        <title>Notenix — Smart GCSE & A-Level Quiz Platform</title>
-        <meta name="description" content="Master GCSE and A-Level subjects with smart quizzes built on real past papers. By Beyond Imagination." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="min-h-screen bg-[#F5F3FF] text-[#1E1B4B]">
-        {!isAuthPage && (
-          <nav className="fixed top-0 left-0 right-0 z-50 border-b border-purple-100 bg-white/80 backdrop-blur-xl">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-purple">
-                  <Zap size={18} className="text-white" />
-                </div>
-                <span className="text-lg font-bold"><span className="text-purple-600">Note</span>nix</span>
-              </Link>
-
-              {isLanding && !loggedIn ? (
-                <div className="hidden md:flex items-center gap-1">
-                  {landingLinks.map(({ href, label }) => (
-                    <Link key={href} href={href} className="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-purple-600">{label}</Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="hidden md:flex items-center gap-1">
-                  {navLinks.map(({ href, label, icon: Icon }) => (
-                    <Link key={href} href={href}
-                      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
-                        pathname === href ? "bg-purple-50 text-purple-600 border border-purple-200" : "text-gray-500 hover:text-purple-600 hover:bg-purple-50"
-                      }`}>
-                      <Icon size={15} />{label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex items-center gap-3">
-                {loggedIn ? (
-                  <>
-                    <button className="md:hidden text-gray-500" onClick={() => setMobileOpen(!mobileOpen)}>
-                      {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-                    </button>
-                    <button onClick={logout} className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-purple-600">
-                      <LogOut size={14} /> Logout
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link href="/login" className="hidden md:block text-sm font-medium text-gray-600 hover:text-purple-600 px-3 py-2">Login</Link>
-                    <Link href="/register"><button className="btn-primary text-sm py-2.5 px-5">Get Started Free →</button></Link>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {mobileOpen && loggedIn && (
-              <div className="md:hidden border-t border-purple-100 bg-white px-4 py-3 space-y-1">
-                {navLinks.map(({ href, label, icon: Icon }) => (
-                  <Link key={href} href={href} onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50">
-                    <Icon size={16} /> {label}
-                  </Link>
-                ))}
-                <button onClick={logout} className="flex items-center gap-3 px-3 py-2.5 w-full text-left text-sm text-gray-600 hover:text-purple-600">
-                  <LogOut size={16} /> Logout
-                </button>
-              </div>
-            )}
-          </nav>
-        )}
-
-        <main className={!isAuthPage ? "pt-16 min-h-screen" : "min-h-screen"}>{children}</main>
+        <Shell>{children}</Shell>
       </body>
     </html>
   );
