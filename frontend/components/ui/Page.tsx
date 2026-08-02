@@ -1,4 +1,4 @@
-import { Loader2 } from "lucide-react";
+import { Loader2, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function PageContainer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -14,7 +14,7 @@ export function PageHeader({
   title: string;
   subtitle?: string;
   actions?: React.ReactNode;
-  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  icon?: LucideIcon;
 }) {
   return (
     <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -43,7 +43,7 @@ export function StatCard({
   label: string;
   value: React.ReactNode;
   hint?: string;
-  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  icon?: LucideIcon;
 }) {
   return (
     <div className="card p-5">
@@ -63,7 +63,7 @@ export function EmptyState({
   desc,
   action,
 }: {
-  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  icon?: LucideIcon;
   title: string;
   desc?: string;
   action?: React.ReactNode;
