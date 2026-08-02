@@ -63,6 +63,45 @@ Return only the JSON array, nothing else."""
     return []
 
 
+def generate_mcqs_from_document(document_text: str, subject: str, level: str, n: int) -> list[dict]:
+    """Read a source document (e.g. a past paper or worksheet PDF) and produce
+    auto-gradable MCQs covering its content."""
+    excerpt = document_text.strip()[:12000] or "(empty document)"
+    prompt = f"""You are an expert {subject} examiner. Below is the text of a {level} document
+(a past paper, worksheet or set of notes) uploaded by a teacher.
+
+DOCUMENT:
+\"\"\"
+{excerpt}
+\"\"\"
+
+Create exactly {n} multiple choice questions that assess understanding of the material in this
+document. Prefer questions grounded in the actual content above. Return ONLY a JSON array where
+each object is:
+{{
+  "question": "the question text",
+  "options": ["A) ...", "B) ...", "C) ...", "D) ..."],
+  "answer": "B) ...",   // must exactly match one option
+  "explanation": "1-2 sentence explanation of why the answer is correct"
+}}
+Return only the JSON array, nothing else."""
+
+    for attempt in range(3):
+        try:
+            msg = client().messages.create(
+                model=settings.claude_model,
+                max_tokens=4000,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            data = _extract_json(msg.content[0].text)
+            if isinstance(data, list) and data:
+                return data[:n]
+        except Exception:
+            if attempt == 2:
+                raise
+    return []
+
+
 def generate_mark_scheme(question: str, marks: int, subject: str) -> str:
     """Generate a concise mark scheme for an extracted exam question."""
     prompt = f"""You are a {subject} examiner. Write a concise mark scheme for this {marks}-mark question.

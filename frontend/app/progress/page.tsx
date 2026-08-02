@@ -1,43 +1,58 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { quizAPI, getUser } from "@/lib/api";
+import { LineChart, Brain, FileText } from "lucide-react";
+import { quizAPI } from "@/lib/api";
+import { useAuthGuard } from "@/lib/guard";
+import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
+import { Button } from "@/components/ui/Button";
+import { humanize, formatDate } from "@/lib/utils";
 
 export default function Progress() {
-  const router = useRouter();
+  const { ready } = useAuthGuard();
   const [history, setHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!getUser()) { router.push("/login"); return; }
-    quizAPI.history().then((r) => setHistory(r.data)).finally(() => setLoading(false));
-  }, [router]);
+    if (!ready) return;
+    quizAPI.history().then((r) => setHistory(r.data)).catch(() => setHistory([])).finally(() => setLoading(false));
+  }, [ready]);
+
+  if (!ready || loading) return <Spinner label="Loading your progress…" />;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
-      <h1 className="text-3xl font-bold mb-2">Your Progress</h1>
-      <p className="text-gray-500 mb-8">Every quiz you&apos;ve completed.</p>
-      {loading ? <p className="text-gray-400">Loading…</p> :
-        history.length === 0 ? (
-          <div className="card p-10 text-center text-gray-400">No quizzes yet. Take your first quiz!</div>
-        ) : (
-          <div className="card divide-y divide-purple-50">
-            {history.map((h) => (
-              <div key={h.id} className="flex items-center justify-between p-4">
+    <PageContainer>
+      <PageHeader icon={LineChart} title="Your progress" subtitle="Every quiz and practice session you've completed." />
+
+      {history.length === 0 ? (
+        <EmptyState
+          icon={Brain}
+          title="No practice yet"
+          desc="Take your first quiz to start tracking your progress over time."
+          action={<Button href="/quiz"><Brain size={16} /> Start a quiz</Button>}
+        />
+      ) : (
+        <div className="card divide-y divide-line">
+          {history.map((h) => (
+            <div key={h.id} className="flex items-center justify-between gap-3 p-4">
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-50 text-brand-600">
+                  {h.mode === "exam" ? <FileText size={16} /> : <Brain size={16} />}
+                </span>
                 <div>
-                  <div className="font-medium">{h.subject} · {h.topic}</div>
-                  <div className="text-xs text-gray-400">
-                    {h.mode === "exam" ? "Exam mode" : "Quiz"} · {h.completed_at ? new Date(h.completed_at).toLocaleDateString() : ""}
+                  <div className="text-sm font-medium text-ink">{humanize(h.subject)} · {humanize(h.topic)}</div>
+                  <div className="text-xs text-ink-subtle">
+                    {h.mode === "exam" ? "Exam mode" : "Quiz"} · {h.completed_at ? formatDate(h.completed_at) : ""}
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-bold text-purple-600">{h.score}%</div>
-                  <div className="text-xs text-gray-400">+{h.xp_earned} XP</div>
-                </div>
               </div>
-            ))}
-          </div>
-        )}
-    </div>
+              <div className="text-right">
+                <div className="text-sm font-semibold text-ink">{h.score}%</div>
+                <div className="text-xs text-ink-subtle">+{h.xp_earned} XP</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </PageContainer>
   );
 }

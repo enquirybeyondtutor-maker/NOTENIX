@@ -2,94 +2,153 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, Zap, BarChart3, Brain, TrendingUp, CreditCard, LogOut, Trophy } from "lucide-react";
-import { getUser, logout } from "@/lib/api";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy } from "lucide-react";
+import { getUser, logout, authAPI } from "@/lib/api";
+import { Logo } from "./ui/Logo";
+import { Button } from "./ui/Button";
+import { cn } from "@/lib/utils";
+
+const STUDENT_LINKS = [
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/tests", label: "My Tests", icon: ClipboardList },
+  { href: "/progress", label: "Progress", icon: LineChart },
+  { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
+];
+
+const TEACHER_LINKS = [
+  { href: "/teacher", label: "Overview", icon: LayoutDashboard },
+  { href: "/teacher/tests", label: "Tests", icon: ClipboardList },
+  { href: "/teacher/tests/new", label: "Create", icon: FilePlus2 },
+  { href: "/teacher/students", label: "Students", icon: Users },
+];
+
+const PUBLIC_LINKS = [
+  { href: "/#features", label: "Features" },
+  { href: "/#how", label: "How it works" },
+  { href: "/pricing", label: "Pricing" },
+];
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const pathname = usePathname() || "/";
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<any | null>(null);
 
-  useEffect(() => { setLoggedIn(!!getUser()); }, [pathname]);
+  useEffect(() => {
+    const cached = getUser();
+    setUser(cached);
+    // Only refresh from server when we actually have a session token.
+    const hasToken = typeof window !== "undefined" && !!localStorage.getItem("notenix_token");
+    if (!hasToken) return;
+    authAPI
+      .me()
+      .then(({ data }) => {
+        setUser(data);
+        try {
+          localStorage.setItem("notenix_user", JSON.stringify(data));
+        } catch {}
+      })
+      .catch(() => {});
+  }, [pathname]);
 
-  const isAuthPage = pathname === "/login" || pathname === "/register";
-  const isLanding = pathname === "/";
-  if (isAuthPage) return null;
+  useEffect(() => setOpen(false), [pathname]);
 
-  const navLinks = [
-    { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
-    { href: "/quiz", label: "New Quiz", icon: Brain },
-    { href: "/progress", label: "Progress", icon: TrendingUp },
-    { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
-    { href: "/pricing", label: "Pricing", icon: CreditCard },
-  ];
-  const landingLinks = [
-    { href: "#features", label: "Features" },
-    { href: "#how", label: "How it works" },
-    { href: "/pricing", label: "Pricing" },
-  ];
+  if (pathname === "/login" || pathname === "/register") return null;
+
+  const isAuthed = !!user;
+  const isTeacher = user?.role === "teacher" || user?.role === "admin";
+  const links = !isAuthed ? PUBLIC_LINKS : isTeacher ? TEACHER_LINKS : STUDENT_LINKS;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-purple-100 bg-white/80 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Notenix home">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-purple">
-            <Zap size={18} className="text-white" />
-          </div>
-          <span className="text-lg font-bold"><span className="text-purple-600">Note</span>nix</span>
-        </Link>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-white/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div className="flex items-center gap-8">
+          <Logo />
+          <nav className="hidden items-center gap-1 md:flex">
+            {links.map(({ href, label }) => {
+              const active = pathname === href || (href !== "/" && !href.includes("#") && pathname.startsWith(href));
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={cn(
+                    "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    active ? "bg-brand-50 text-brand-700" : "text-ink-muted hover:bg-slate-100 hover:text-ink"
+                  )}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
 
-        {isLanding && !loggedIn ? (
-          <div className="hidden md:flex items-center gap-1">
-            {landingLinks.map(({ href, label }) => (
-              <Link key={href} href={href} className="px-3.5 py-2 text-sm font-medium text-gray-500 hover:text-purple-600">{label}</Link>
-            ))}
-          </div>
-        ) : (
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(({ href, label, icon: Icon }) => (
-              <Link key={href} href={href}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
-                  pathname === href ? "bg-purple-50 text-purple-600 border border-purple-200" : "text-gray-500 hover:text-purple-600 hover:bg-purple-50"
-                }`}>
-                <Icon size={15} />{label}
-              </Link>
-            ))}
-          </div>
-        )}
-
-        <div className="flex items-center gap-3">
-          {loggedIn ? (
-            <>
-              <button className="md:hidden text-gray-500" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
-                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+        <div className="flex items-center gap-2">
+          {isAuthed ? (
+            <div className="hidden items-center gap-3 md:flex">
+              <div className="flex items-center gap-2.5 rounded-lg border border-line py-1.5 pl-1.5 pr-3">
+                <span className="grid h-7 w-7 place-items-center rounded-md bg-brand-600 text-xs font-semibold text-white">
+                  {(user.full_name?.[0] || "U").toUpperCase()}
+                </span>
+                <div className="leading-tight">
+                  <div className="text-xs font-semibold text-ink">{user.full_name?.split(" ")[0] || "Account"}</div>
+                  <div className="text-[10px] uppercase tracking-wide text-ink-subtle">{user.role || "student"}</div>
+                </div>
+              </div>
+              <button
+                onClick={logout}
+                className="grid h-9 w-9 place-items-center rounded-lg text-ink-subtle transition-colors hover:bg-slate-100 hover:text-ink"
+                title="Sign out"
+              >
+                <LogOut size={16} />
               </button>
-              <button onClick={logout} className="hidden md:flex items-center gap-1.5 text-sm text-gray-500 hover:text-purple-600">
-                <LogOut size={14} /> Logout
-              </button>
-            </>
+            </div>
           ) : (
-            <>
-              <Link href="/login" className="hidden md:block text-sm font-medium text-gray-600 hover:text-purple-600 px-3 py-2">Login</Link>
-              <Link href="/register"><button className="btn-primary text-sm py-2.5 px-5">Get Started Free →</button></Link>
-            </>
+            <div className="hidden items-center gap-2 md:flex">
+              <Button href="/login" variant="ghost" size="sm">Sign in</Button>
+              <Button href="/register" size="sm">Get started</Button>
+            </div>
           )}
+
+          <button
+            className="grid h-9 w-9 place-items-center rounded-lg text-ink-muted hover:bg-slate-100 md:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
 
-      {mobileOpen && loggedIn && (
-        <div className="md:hidden border-t border-purple-100 bg-white px-4 py-3 space-y-1">
-          {navLinks.map(({ href, label, icon: Icon }) => (
-            <Link key={href} href={href} onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50">
-              <Icon size={16} /> {label}
-            </Link>
-          ))}
-          <button onClick={logout} className="flex items-center gap-3 px-3 py-2.5 w-full text-left text-sm text-gray-600 hover:text-purple-600">
-            <LogOut size={16} /> Logout
-          </button>
+      {open && (
+        <div className="border-t border-line bg-white px-4 py-3 md:hidden">
+          <nav className="space-y-1">
+            {links.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="block rounded-lg px-3 py-2.5 text-sm font-medium text-ink-muted hover:bg-slate-100 hover:text-ink"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="mt-3 border-t border-line pt-3">
+            {isAuthed ? (
+              <button
+                onClick={logout}
+                className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50"
+              >
+                <LogOut size={16} /> Sign out
+              </button>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <Button href="/login" variant="secondary">Sign in</Button>
+                <Button href="/register">Get started</Button>
+              </div>
+            )}
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

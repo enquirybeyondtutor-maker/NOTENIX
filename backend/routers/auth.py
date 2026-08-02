@@ -15,11 +15,13 @@ class RegisterIn(BaseModel):
     email: EmailStr
     password: str
     full_name: str
+    role: str | None = None  # student | teacher
 
 
 def _user_dict(u: User) -> dict:
     return {
         "id": u.id, "email": u.email, "full_name": u.full_name,
+        "role": getattr(u, "role", None) or "student",
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 
@@ -31,10 +33,12 @@ async def register(data: RegisterIn, db: AsyncSession = Depends(get_db)):
     existing = (await db.execute(select(User).where(User.email == data.email))).scalar_one_or_none()
     if existing:
         raise HTTPException(400, "An account with this email already exists")
+    role = data.role if data.role in ("student", "teacher") else "student"
     user = User(
         email=data.email.lower(),
         password_hash=hash_password(data.password),
         full_name=data.full_name.strip()[:120],
+        role=role,
         last_active=datetime.utcnow(),
     )
     db.add(user)

@@ -1,59 +1,145 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Brain, Flame, Star, Trophy, Target, ArrowRight, Award } from "lucide-react";
-import { progressAPI, getUser } from "@/lib/api";
+import { Star, Flame, Brain, Target, ArrowRight, ClipboardList, CalendarClock, CheckCircle2, Trophy } from "lucide-react";
+import { progressAPI, testsAPI } from "@/lib/api";
+import { useAuthGuard } from "@/lib/guard";
+import { PageContainer, PageHeader, StatCard, Spinner } from "@/components/ui/Page";
+import { Button } from "@/components/ui/Button";
+import { humanize, formatDate } from "@/lib/utils";
 
-export default function Dashboard() {
-  const router = useRouter();
+interface Assignment {
+  assignment_id: number;
+  title: string;
+  subject: string;
+  topic: string;
+  exam_board: string;
+  num_questions: number;
+  due_at: string | null;
+  status: string;
+  assigned_by: string;
+}
+
+function dueLabel(due: string | null) {
+  if (!due) return { text: "No deadline", danger: false };
+  const diff = new Date(due).getTime() - Date.now();
+  const days = Math.ceil(diff / 86400000);
+  if (diff < 0) return { text: "Overdue", danger: true };
+  if (days <= 1) return { text: "Due tomorrow", danger: true };
+  if (days <= 3) return { text: `Due in ${days} days`, danger: false };
+  return { text: `Due ${formatDate(due)}`, danger: false };
+}
+
+export default function StudentDashboard() {
+  const { user, ready } = useAuthGuard("student");
   const [data, setData] = useState<any>(null);
-  const user = typeof window !== "undefined" ? getUser() : null;
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!getUser()) { router.push("/login"); return; }
-    progressAPI.dashboard().then((r) => setData(r.data)).catch(() => {});
-  }, [router]);
+    if (!ready) return;
+    Promise.all([
+      progressAPI.dashboard().then((r) => r.data).catch(() => ({})),
+      testsAPI.mine().then((r) => r.data).catch(() => []),
+    ])
+      .then(([d, a]) => {
+        setData(d || {});
+        setAssignments(Array.isArray(a) ? a : []);
+      })
+      .finally(() => setLoading(false));
+  }, [ready]);
 
-  if (!data) return <div className="max-w-6xl mx-auto px-4 py-20 text-center text-gray-400">Loading…</div>;
+  if (!ready || loading) return <Spinner label="Loading your dashboard…" />;
 
-  const stats = [
-    { label: "Total XP", value: data.xp, icon: Star, color: "text-purple-600 bg-purple-50" },
-    { label: "Streak", value: `${data.streak} 🔥`, icon: Flame, color: "text-pink-500 bg-pink-50" },
-    { label: "Quizzes", value: data.quiz_count, icon: Brain, color: "text-blue-500 bg-blue-50" },
-    { label: "Avg Score", value: `${data.avg_score}%`, icon: Target, color: "text-green-500 bg-green-50" },
-  ];
+  const pending = assignments.filter((a) => a.status !== "completed");
+  const completedCount = assignments.filter((a) => a.status === "completed").length;
+  const subjectStats: any[] = data?.subject_stats || [];
+  const recent: any[] = data?.recent || [];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-      <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">Welcome back, {user?.full_name?.split(" ")[0]} 👋</h1>
-          <p className="text-gray-500 mt-1">{data.plan === "pro" ? "Pro member" : `Free plan · ${Math.max(0, 3 - data.quiz_count)} quizzes left`}</p>
+    <PageContainer>
+      <PageHeader
+        title={`Welcome back, ${user?.full_name?.split(" ")[0] || "there"}`}
+        subtitle={data?.plan === "pro" ? "Pro member" : "Free plan"}
+        actions={<Button href="/quiz" variant="secondary"><Brain size={16} /> Practise a quiz</Button>}
+      />
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <StatCard label="Total XP" value={data?.xp ?? 0} icon={Star} />
+        <StatCard label="Day streak" value={data?.streak ?? 0} icon={Flame} />
+        <StatCard label="Tests done" value={completedCount} icon={CheckCircle2} />
+        <StatCard label="Avg score" value={data?.avg_score != null ? `${data.avg_score}%` : "—"} icon={Target} />
+      </div>
+
+      {/* Assigned tests — primary focus */}
+      <section className="mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-subtle">
+            Assigned to you {pending.length > 0 && `· ${pending.length}`}
+          </h2>
+          <Link href="/tests" className="text-sm font-medium text-brand-600 hover:text-brand-700">View all</Link>
         </div>
-        <Link href="/quiz"><button className="btn-primary">New Quiz <ArrowRight size={16} /></button></Link>
-      </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {stats.map((s, i) => (
-          <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="card p-5">
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${s.color}`}><s.icon size={18} /></div>
-            <div className="text-2xl font-bold">{s.value}</div>
-            <div className="text-xs text-gray-400">{s.label}</div>
-          </motion.div>
-        ))}
-      </div>
+        {pending.length === 0 ? (
+          <div className="card flex items-center gap-4 p-6">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
+              <CheckCircle2 size={20} />
+            </span>
+            <div>
+              <div className="font-medium text-ink">You're all caught up</div>
+              <div className="text-sm text-ink-muted">No tests due right now. Practise a quiz to keep your streak going.</div>
+            </div>
+          </div>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {pending.slice(0, 6).map((t) => {
+              const due = dueLabel(t.due_at);
+              return (
+                <div key={t.assignment_id} className="card card-hover flex flex-col p-5">
+                  <div className="flex items-center gap-2">
+                    <span className="badge-brand">{humanize(t.subject)}</span>
+                    <span className="badge-neutral">{t.exam_board}</span>
+                  </div>
+                  <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
+                  <p className="mt-0.5 text-sm text-ink-muted">{humanize(t.topic)}</p>
+                  <div className="mt-3 flex items-center gap-3 text-xs text-ink-subtle">
+                    <span className="inline-flex items-center gap-1"><ClipboardList size={13} /> {t.num_questions} Q</span>
+                    <span className={`inline-flex items-center gap-1 ${due.danger ? "text-amber-600" : ""}`}>
+                      <CalendarClock size={13} /> {due.text}
+                    </span>
+                  </div>
+                  <div className="mt-4 border-t border-line pt-4">
+                    <Button href={`/tests/${t.assignment_id}`} size="sm" className="w-full">
+                      Start test <ArrowRight size={14} />
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      {/* Performance + activity */}
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <div className="card p-6">
-          <h2 className="font-bold mb-4 flex items-center gap-2"><Target size={18} className="text-purple-600" /> Subject performance</h2>
-          {data.subject_stats.length === 0 ? <p className="text-sm text-gray-400">Take a quiz to see your stats.</p> : (
-            <div className="space-y-4">
-              {data.subject_stats.map((s: any) => (
+          <h2 className="flex items-center gap-2 font-semibold text-ink">
+            <Target size={17} className="text-brand-600" /> Subject performance
+          </h2>
+          {subjectStats.length === 0 ? (
+            <p className="mt-4 text-sm text-ink-muted">Complete a test or quiz to see your subject breakdown.</p>
+          ) : (
+            <div className="mt-5 space-y-4">
+              {subjectStats.map((s: any) => (
                 <div key={s.subject}>
-                  <div className="flex justify-between text-sm mb-1"><span className="font-medium">{s.subject}</span><span className="text-gray-400">{s.avg}% · {s.count} quizzes</span></div>
-                  <div className="h-2 bg-purple-100 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-purple-600 to-pink-500" style={{ width: `${s.avg}%` }} /></div>
+                  <div className="mb-1 flex justify-between text-sm">
+                    <span className="font-medium text-ink">{humanize(s.subject)}</span>
+                    <span className="text-ink-subtle">{s.avg}% · {s.count}</span>
+                  </div>
+                  <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+                    <div className="h-full rounded-full bg-brand-600" style={{ width: `${s.avg}%` }} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -61,30 +147,27 @@ export default function Dashboard() {
         </div>
 
         <div className="card p-6">
-          <h2 className="font-bold mb-4 flex items-center gap-2"><Award size={18} className="text-purple-600" /> Badges</h2>
-          {data.badges.length === 0 ? <p className="text-sm text-gray-400">Earn badges by taking quizzes and building streaks.</p> : (
-            <div className="flex flex-wrap gap-2">
-              {data.badges.map((b: any) => (
-                <div key={b.id} className="badge-pill"><Trophy size={14} className="text-pink-500" /> {b.name}</div>
+          <h2 className="flex items-center gap-2 font-semibold text-ink">
+            <Trophy size={17} className="text-brand-600" /> Recent activity
+          </h2>
+          {recent.length === 0 ? (
+            <p className="mt-4 text-sm text-ink-muted">Your recent quizzes and tests will appear here.</p>
+          ) : (
+            <div className="mt-4 divide-y divide-line">
+              {recent.map((r: any, i: number) => (
+                <div key={i} className="flex items-center justify-between py-2.5">
+                  <div className="text-sm">
+                    <span className="font-medium text-ink">{humanize(r.subject)}</span>
+                    <span className="text-ink-subtle"> · {humanize(r.topic)}</span>
+                    {r.mode === "exam" && <span className="ml-1 text-xs text-brand-600">(exam)</span>}
+                  </div>
+                  <span className="text-sm font-semibold text-ink">{r.score}%</span>
+                </div>
               ))}
             </div>
           )}
         </div>
       </div>
-
-      {data.recent.length > 0 && (
-        <div className="card p-6 mt-6">
-          <h2 className="font-bold mb-4">Recent quizzes</h2>
-          <div className="space-y-2">
-            {data.recent.map((r: any, i: number) => (
-              <div key={i} className="flex items-center justify-between py-2 border-b border-purple-50 last:border-0">
-                <div><span className="font-medium text-sm">{r.subject}</span> <span className="text-gray-400 text-sm">· {r.topic}</span> {r.mode === "exam" && <span className="text-xs text-purple-600">(exam)</span>}</div>
-                <span className="font-bold text-sm text-purple-600">{r.score}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+    </PageContainer>
   );
 }

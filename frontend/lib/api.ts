@@ -24,7 +24,8 @@ api.interceptors.response.use(
 );
 
 export const authAPI = {
-  register: (data: { email: string; password: string; full_name: string }) => api.post("/auth/register", data),
+  register: (data: { email: string; password: string; full_name: string; role?: string }) =>
+    api.post("/auth/register", data),
   login: (email: string, password: string) =>
     api.post("/auth/login", new URLSearchParams({ username: email, password }), {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -37,6 +38,29 @@ export const quizAPI = {
   create: (data: object) => api.post("/quiz/create", data),
   submit: (data: object) => api.post("/quiz/submit", data),
   history: () => api.get("/quiz/history"),
+};
+
+export const testsAPI = {
+  mine: () => api.get("/tests"),
+  get: (assignmentId: number | string) => api.get(`/tests/${assignmentId}`),
+  submit: (assignmentId: number | string, data: { answers: any[]; time_taken_seconds?: number }) =>
+    api.post(`/tests/${assignmentId}/submit`, data),
+  result: (assignmentId: number | string) => api.get(`/tests/${assignmentId}/result`),
+  join: (token: string) => api.post(`/tests/join/${token}`),
+};
+
+export const teacherAPI = {
+  overview: () => api.get("/teacher/overview"),
+  listTests: () => api.get("/teacher/tests"),
+  createTest: (data: object) => api.post("/teacher/tests", data),
+  createFromPdf: (formData: FormData) =>
+    api.post("/teacher/tests/from-pdf", formData, { headers: { "Content-Type": "multipart/form-data" } }),
+  testDetail: (id: number | string) => api.get(`/teacher/tests/${id}`),
+  assign: (id: number | string, data: { student_emails: string[]; class_label?: string; due_at?: string | null }) =>
+    api.post(`/teacher/tests/${id}/assign`, data),
+  share: (id: number | string) => api.post(`/teacher/tests/${id}/share`),
+  unshare: (id: number | string) => api.delete(`/teacher/tests/${id}/share`),
+  students: () => api.get("/teacher/students"),
 };
 
 export const progressAPI = { dashboard: () => api.get("/progress/dashboard") };

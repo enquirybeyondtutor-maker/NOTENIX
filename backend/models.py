@@ -11,6 +11,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String(255))
     full_name: Mapped[str] = mapped_column(String(120))
+    role: Mapped[str] = mapped_column(String(20), default="student", server_default="student", index=True)  # student | teacher | admin
     plan: Mapped[str] = mapped_column(String(20), default="free")  # free | pro
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
@@ -58,3 +59,59 @@ class QuizSession(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     user: Mapped["User"] = relationship(back_populates="sessions")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Assigned-test system (teacher creates → assigns → student attempts → AI marks)
+# All additive: new tables auto-created by create_all on next backend start.
+# ─────────────────────────────────────────────────────────────────────────────
+
+class Test(Base):
+    """A teacher-authored assessment. `questions` is the canonical content
+    snapshot (includes answers/explanations) — MCQ, auto-gradable."""
+    __tablename__ = "tests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)  # teacher
+    title: Mapped[str] = mapped_column(String(200))
+    subject: Mapped[str] = mapped_column(String(80), index=True)
+    topic: Mapped[str] = mapped_column(String(160))
+    level: Mapped[str] = mapped_column(String(20), default="GCSE")       # GCSE | A-Level
+    exam_board: Mapped[str] = mapped_column(String(40), default="AQA")
+    difficulty: Mapped[str] = mapped_column(String(20), default="medium")
+    questions: Mapped[list] = mapped_column(JSON)                        # full snapshot w/ answers
+    num_questions: Mapped[int] = mapped_column(Integer, default=0)
+    duration_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)  # timed sitting
+    share_token: Mapped[str | None] = mapped_column(String(64), nullable=True, unique=True, index=True)  # public join link
+    is_archived: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class TestAssignment(Base):
+    """A test handed to a specific student, optionally with a class label + deadline."""
+    __tablename__ = "test_assignments"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    test_id: Mapped[int] = mapped_column(ForeignKey("tests.id"), index=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    assigned_by: Mapped[int] = mapped_column(ForeignKey("users.id"))     # teacher
+    class_label: Mapped[str | None] = mapped_column(String(80), nullable=True)  # e.g. "Year 11 Chem"
+    due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default="assigned", index=True)  # assigned | completed
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class TestAttempt(Base):
+    """A student's completed sitting of an assigned test."""
+    __tablename__ = "test_attempts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    assignment_id: Mapped[int] = mapped_column(ForeignKey("test_assignments.id"), index=True)
+    test_id: Mapped[int] = mapped_column(ForeignKey("tests.id"), index=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    answers: Mapped[list | None] = mapped_column(JSON, nullable=True)
+    results: Mapped[list | None] = mapped_column(JSON, nullable=True)    # per-question breakdown
+    score: Mapped[float] = mapped_column(Float, default=0.0)
+    grade: Mapped[str | None] = mapped_column(String(8), nullable=True)  # estimated grade
+    time_taken_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

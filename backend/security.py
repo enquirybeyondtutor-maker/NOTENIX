@@ -46,3 +46,14 @@ async def get_current_user(
     if user is None:
         raise creds_exc
     return user
+
+
+def _role(user: User) -> str:
+    return getattr(user, "role", None) or "student"
+
+
+async def require_teacher(user: User = Depends(get_current_user)) -> User:
+    """Guard for teacher/admin-only endpoints."""
+    if _role(user) not in ("teacher", "admin"):
+        raise HTTPException(status_code=403, detail="Teacher access required")
+    return user

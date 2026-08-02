@@ -42,3 +42,31 @@ async def init_db():
     import models  # noqa: F401  (register models)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+    await run_migrations()
+
+
+async def run_migrations():
+    """Idempotent, additive-only migrations for columns create_all cannot add to
+    pre-existing tables. Safe to run on every boot."""
+    from sqlalchemy import text
+
+    dialect = engine.dialect.name  # 'postgresql' | 'sqlite'
+    async with engine.begin() as conn:
+        if dialect == "postgresql":
+            await conn.execute(text(
+                "ALTER TABLE users ADD COLUMN IF NOT EXISTS role VARCHAR(20) DEFAULT 'student'"
+            ))
+            await conn.execute(text(
+                "UPDATE users SET role = 'student' WHERE role IS NULL"
+            ))
+            await conn.execute(text(
+                "ALTER TABLE tests ADD COLUMN IF NOT EXISTS share_token VARCHAR(64)"
+            ))
+        elif dialect == "sqlite":
+            # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
+            cols = (await conn.execute(text("PRAGMA table_info(users)"))).all()
+            if "role" not in {c[1] for c in cols}:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'student'"))
+            tcols = (await conn.execute(text("PRAGMA table_info(tests)"))).all()
+            if tcols and "share_token" not in {c[1] for c in tcols}:
+                await conn.execute(text("ALTER TABLE tests ADD COLUMN share_token VARCHAR(64)"))
