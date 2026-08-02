@@ -4,7 +4,7 @@ import Script from "next/script";
 import Shell from "@/components/Shell";
 
 const SITE = "https://notenix.com";
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID; // GA4 Measurement ID, e.g. G-XXXXXXXXXX
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-6NVHXT86PC"; // GA4 Measurement ID (env var overrides)
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
