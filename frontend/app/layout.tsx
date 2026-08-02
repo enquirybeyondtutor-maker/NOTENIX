@@ -1,8 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import Shell from "@/components/Shell";
 
 const SITE = "https://notenix.com";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID; // GA4 Measurement ID, e.g. G-XXXXXXXXXX
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -88,6 +90,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen bg-canvas text-ink antialiased">
         <Shell>{children}</Shell>
+
+        {/* Google Analytics 4 — loads only when NEXT_PUBLIC_GA_ID is set */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="ga4-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_ID}', { anonymize_ip: true });
+                `,
+              }}
+            />
+          </>
+        )}
       </body>
     </html>
   );
