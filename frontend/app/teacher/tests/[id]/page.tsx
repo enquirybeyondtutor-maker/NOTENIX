@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { ArrowLeft, Users, Send, AlertCircle, CheckCircle2, Clock, UserPlus, Link2, Copy, Check } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { ArrowLeft, Users, Send, AlertCircle, CheckCircle2, Clock, UserPlus, Link2, Copy, Check, Pencil, Trash2 } from "lucide-react";
 import { teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, Spinner } from "@/components/ui/Page";
@@ -33,8 +33,22 @@ interface Detail {
 
 export default function TeacherTestDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const id = params?.id as string;
   const { ready } = useAuthGuard("teacher");
+  const [deleting, setDeleting] = useState(false);
+
+  const removeTest = async () => {
+    if (!confirm("Delete this test? This removes it for all assigned students and can't be undone.")) return;
+    setDeleting(true);
+    try {
+      await teacherAPI.deleteTest(id);
+      router.replace("/teacher/tests");
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Could not delete the test.");
+      setDeleting(false);
+    }
+  };
   const [data, setData] = useState<Detail | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -147,8 +161,20 @@ export default function TeacherTestDetailPage() {
         <span className="badge-neutral">{test.exam_board}</span>
         {test.duration_minutes ? <span className="badge-neutral"><Clock size={12} /> {test.duration_minutes} min</span> : null}
       </div>
-      <h1 className="text-2xl font-bold tracking-tight text-ink">{test.title}</h1>
-      <p className="mt-1 text-sm text-ink-muted">{humanize(test.topic)} · {test.num_questions} questions</p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-ink">{test.title}</h1>
+          <p className="mt-1 text-sm text-ink-muted">{humanize(test.topic)} · {test.num_questions} questions</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button href={`/teacher/tests/${id}/edit`} variant="secondary" size="sm">
+            <Pencil size={14} /> Edit
+          </Button>
+          <Button onClick={removeTest} loading={deleting} variant="secondary" size="sm" className="text-red-600 hover:bg-red-50">
+            <Trash2 size={14} /> Delete
+          </Button>
+        </div>
+      </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
         {/* Left: assignments + results */}

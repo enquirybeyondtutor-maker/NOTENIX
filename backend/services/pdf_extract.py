@@ -22,3 +22,15 @@ def extract_text(data: bytes) -> str:
             pass
 
     return text
+
+
+def render_pages_to_png(data: bytes, max_pages: int = 8, zoom: float = 2.0) -> list[bytes]:
+    """Render the first `max_pages` PDF pages to PNG image bytes (for vision models).
+    zoom=2.0 ~= 144 DPI, enough for legible text/equations."""
+    import fitz  # PyMuPDF
+    images: list[bytes] = []
+    with fitz.open(stream=data, filetype="pdf") as doc:
+        for page in doc[:max_pages]:
+            pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom))
+            images.append(pix.tobytes("png"))
+    return images

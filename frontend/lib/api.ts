@@ -56,11 +56,22 @@ export const teacherAPI = {
   createFromPdf: (formData: FormData) =>
     api.post("/teacher/tests/from-pdf", formData, { headers: { "Content-Type": "multipart/form-data" } }),
   testDetail: (id: number | string) => api.get(`/teacher/tests/${id}`),
+  testFull: (id: number | string) => api.get(`/teacher/tests/${id}/full`),
+  updateTest: (id: number | string, data: object) => api.put(`/teacher/tests/${id}`, data),
+  deleteTest: (id: number | string) => api.delete(`/teacher/tests/${id}`),
   assign: (id: number | string, data: { student_emails: string[]; class_label?: string; due_at?: string | null }) =>
     api.post(`/teacher/tests/${id}/assign`, data),
   share: (id: number | string) => api.post(`/teacher/tests/${id}/share`),
   unshare: (id: number | string) => api.delete(`/teacher/tests/${id}/share`),
   students: () => api.get("/teacher/students"),
+};
+
+export const adminAPI = {
+  overview: () => api.get("/admin/overview"),
+  users: () => api.get("/admin/users"),
+  ban: (id: number | string) => api.post(`/admin/users/${id}/ban`),
+  unban: (id: number | string) => api.post(`/admin/users/${id}/unban`),
+  setRole: (id: number | string, role: string) => api.post(`/admin/users/${id}/role`, { role }),
 };
 
 export const progressAPI = { dashboard: () => api.get("/progress/dashboard") };

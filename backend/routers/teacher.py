@@ -10,7 +10,7 @@ from database import get_db
 from models import User, Question, Test, TestAssignment, TestAttempt
 from security import require_teacher
 from services import ai
-from services.pdf_extract import extract_text
+from services.pdf_extract import extract_text, render_pages_to_png
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
 
@@ -42,6 +42,12 @@ class AssignIn(BaseModel):
     student_emails: list[str]
     class_label: str | None = None
     due_at: datetime | None = None
+
+
+class UpdateTestIn(BaseModel):
+    title: str | None = None
+    duration_minutes: int | None = None
+    questions: list[QuestionIn] | None = None  # if provided, replaces the question set
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -169,24 +175,40 @@ async def create_test_from_pdf(
     exam_board: str = Form("AQA"),
     num_questions: int = Form(10),
     duration_minutes: int | None = Form(None),
+    faithful: bool = Form(True),  # True = transcribe existing questions verbatim (vision)
     teacher: User = Depends(require_teacher),
     db: AsyncSession = Depends(get_db),
 ):
-    """Upload a PDF (past paper / worksheet); extract its text and auto-generate a test from it."""
+    """Upload a PDF (past paper / worksheet) and build a test from it.
+    faithful=True → read the pages as images and transcribe the questions EXACTLY.
+    faithful=False → extract text and let AI generate fresh questions from it."""
     if not (file.filename or "").lower().endswith(".pdf"):
         raise HTTPException(400, "Please upload a PDF file.")
     data = await file.read()
     if len(data) > 15 * 1024 * 1024:
         raise HTTPException(400, "PDF too large (max 15 MB).")
 
-    text = extract_text(data)
-    if len(text) < 40:
-        raise HTTPException(422, "Couldn't read any text from that PDF. It may be scanned images rather than text.")
-
     n = max(1, min(num_questions, 30))
-    generated = ai.generate_mcqs_from_document(text, subject, level, n)
+    generated = []
+
+    if faithful:
+        try:
+            images = render_pages_to_png(data, max_pages=8)
+        except Exception:
+            images = []
+        if images:
+            generated = ai.transcribe_mcqs_from_images(images, subject, n)
+
     if not generated:
-        raise HTTPException(502, "Could not generate questions from the document. Please try again.")
+        # fallback (or faithful=False): text extraction + generation
+        text = extract_text(data)
+        if len(text) < 40 and not faithful:
+            raise HTTPException(422, "Couldn't read any text from that PDF. It may be scanned images rather than text.")
+        if text and len(text) >= 40:
+            generated = ai.generate_mcqs_from_document(text, subject, level, n)
+
+    if not generated:
+        raise HTTPException(502, "Could not read questions from the document. Please try again or use a clearer PDF.")
 
     test = Test(
         owner_id=teacher.id,
@@ -311,6 +333,63 @@ async def assign_test(test_id: int, data: AssignIn, teacher: User = Depends(requ
         created += 1
     await db.commit()
     return {"assigned": created, "skipped_already_assigned": skipped, "not_found": not_found}
+
+
+@router.get("/tests/{test_id}/full")
+async def test_full(test_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Full test incl. answers — for the teacher's edit screen."""
+    test = (await db.execute(
+        select(Test).where(Test.id == test_id, Test.owner_id == teacher.id)
+    )).scalar_one_or_none()
+    if not test:
+        raise HTTPException(404, "Test not found")
+    attempts = (await db.execute(
+        select(func.count()).select_from(TestAttempt).where(TestAttempt.test_id == test_id)
+    )).scalar() or 0
+    return {
+        **_test_summary(test),
+        "attempt_count": attempts,
+        "questions": test.questions,  # full objects incl. answer/explanation
+    }
+
+
+@router.put("/tests/{test_id}")
+async def update_test(test_id: int, data: UpdateTestIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    test = (await db.execute(
+        select(Test).where(Test.id == test_id, Test.owner_id == teacher.id)
+    )).scalar_one_or_none()
+    if not test:
+        raise HTTPException(404, "Test not found")
+
+    if data.title is not None:
+        test.title = data.title.strip()[:200] or test.title
+    if data.duration_minutes is not None:
+        test.duration_minutes = data.duration_minutes or None
+    if data.questions is not None:
+        cleaned = [q.model_dump() for q in data.questions if q.question.strip() and all(o.strip() for o in q.options)]
+        if not cleaned:
+            raise HTTPException(400, "A test needs at least one complete question.")
+        test.questions = cleaned
+        test.num_questions = len(cleaned)
+    await db.commit()
+    await db.refresh(test)
+    return _test_summary(test)
+
+
+@router.delete("/tests/{test_id}")
+async def delete_test(test_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    test = (await db.execute(
+        select(Test).where(Test.id == test_id, Test.owner_id == teacher.id)
+    )).scalar_one_or_none()
+    if not test:
+        raise HTTPException(404, "Test not found")
+    # remove dependent rows first (no DB-level cascade defined)
+    from sqlalchemy import delete as sa_delete
+    await db.execute(sa_delete(TestAttempt).where(TestAttempt.test_id == test_id))
+    await db.execute(sa_delete(TestAssignment).where(TestAssignment.test_id == test_id))
+    await db.execute(sa_delete(Test).where(Test.id == test_id))
+    await db.commit()
+    return {"deleted": test_id}
 
 
 @router.get("/students")

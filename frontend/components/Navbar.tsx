@@ -2,27 +2,29 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
 
-const STUDENT_LINKS = [
+type NavItem = { href: string; label: string; icon?: LucideIcon };
+
+const STUDENT_LINKS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/tests", label: "My Tests", icon: ClipboardList },
   { href: "/progress", label: "Progress", icon: LineChart },
   { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
 ];
 
-const TEACHER_LINKS = [
+const TEACHER_LINKS: NavItem[] = [
   { href: "/teacher", label: "Overview", icon: LayoutDashboard },
   { href: "/teacher/tests", label: "Tests", icon: ClipboardList },
   { href: "/teacher/tests/new", label: "Create", icon: FilePlus2 },
   { href: "/teacher/students", label: "Students", icon: Users },
 ];
 
-const PUBLIC_LINKS = [
+const PUBLIC_LINKS: NavItem[] = [
   { href: "/#features", label: "Features" },
   { href: "/#how", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
@@ -56,7 +58,10 @@ export default function Navbar() {
 
   const isAuthed = !!user;
   const isTeacher = user?.role === "teacher" || user?.role === "admin";
-  const links = !isAuthed ? PUBLIC_LINKS : isTeacher ? TEACHER_LINKS : STUDENT_LINKS;
+  let links = !isAuthed ? PUBLIC_LINKS : isTeacher ? TEACHER_LINKS : STUDENT_LINKS;
+  if (isAuthed && user?.is_admin) {
+    links = [...links, { href: "/admin", label: "Admin", icon: Shield }];
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-white/80 backdrop-blur-xl">

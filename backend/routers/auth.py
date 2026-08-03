@@ -6,7 +6,7 @@ from sqlalchemy import select
 from datetime import datetime
 from database import get_db
 from models import User
-from security import hash_password, verify_password, create_token, get_current_user
+from security import hash_password, verify_password, create_token, get_current_user, is_admin
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -22,6 +22,8 @@ def _user_dict(u: User) -> dict:
     return {
         "id": u.id, "email": u.email, "full_name": u.full_name,
         "role": getattr(u, "role", None) or "student",
+        "is_admin": is_admin(u),
+        "is_active": getattr(u, "is_active", True),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 
@@ -52,6 +54,8 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = 
     user = (await db.execute(select(User).where(User.email == form.username.lower()))).scalar_one_or_none()
     if not user or not verify_password(form.password, user.password_hash):
         raise HTTPException(401, "Incorrect email or password")
+    if getattr(user, "is_active", True) is False:
+        raise HTTPException(403, "Your account has been suspended. Please contact support.")
     user.last_active = datetime.utcnow()
     await db.commit()
     return {"access_token": create_token(user.id), "token_type": "bearer", "user": _user_dict(user)}

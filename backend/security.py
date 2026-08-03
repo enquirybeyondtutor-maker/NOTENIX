@@ -45,7 +45,17 @@ async def get_current_user(
     user = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
     if user is None:
         raise creds_exc
+    if getattr(user, "is_active", True) is False:
+        raise HTTPException(status_code=403, detail="Your account has been suspended. Contact support.")
     return user
+
+
+def _admin_emails() -> set[str]:
+    return {e.strip().lower() for e in (settings.admin_emails or "").split(",") if e.strip()}
+
+
+def is_admin(user: User) -> bool:
+    return (getattr(user, "role", None) == "admin") or (user.email.lower() in _admin_emails())
 
 
 def _role(user: User) -> str:
@@ -54,6 +64,13 @@ def _role(user: User) -> str:
 
 async def require_teacher(user: User = Depends(get_current_user)) -> User:
     """Guard for teacher/admin-only endpoints."""
-    if _role(user) not in ("teacher", "admin"):
+    if _role(user) not in ("teacher", "admin") and not is_admin(user):
         raise HTTPException(status_code=403, detail="Teacher access required")
+    return user
+
+
+async def require_admin(user: User = Depends(get_current_user)) -> User:
+    """Guard for admin-only endpoints (role=admin or email in ADMIN_EMAILS)."""
+    if not is_admin(user):
+        raise HTTPException(status_code=403, detail="Admin access required")
     return user

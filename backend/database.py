@@ -62,11 +62,19 @@ async def run_migrations():
             await conn.execute(text(
                 "ALTER TABLE tests ADD COLUMN IF NOT EXISTS share_token VARCHAR(64)"
             ))
+            await conn.execute(text(
+                "ALTER TABLE users ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE"
+            ))
+            await conn.execute(text(
+                "UPDATE users SET is_active = TRUE WHERE is_active IS NULL"
+            ))
         elif dialect == "sqlite":
             # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
-            cols = (await conn.execute(text("PRAGMA table_info(users)"))).all()
-            if "role" not in {c[1] for c in cols}:
+            cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
+            if "role" not in cols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'student'"))
+            if "is_active" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT 1"))
             tcols = (await conn.execute(text("PRAGMA table_info(tests)"))).all()
             if tcols and "share_token" not in {c[1] for c in tcols}:
                 await conn.execute(text("ALTER TABLE tests ADD COLUMN share_token VARCHAR(64)"))

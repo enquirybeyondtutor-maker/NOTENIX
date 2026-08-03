@@ -12,6 +12,7 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(255))
     full_name: Mapped[str] = mapped_column(String(120))
     role: Mapped[str] = mapped_column(String(20), default="student", server_default="student", index=True)  # student | teacher | admin
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default="1")  # False = suspended/banned
     plan: Mapped[str] = mapped_column(String(20), default="free")  # free | pro
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)

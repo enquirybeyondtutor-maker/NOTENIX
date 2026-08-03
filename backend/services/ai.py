@@ -1,6 +1,7 @@
 """Claude-powered question generation and exam answer marking."""
 import json
 import re
+import base64
 from anthropic import Anthropic
 from config import settings
 
@@ -92,6 +93,50 @@ Return only the JSON array, nothing else."""
                 model=settings.claude_model,
                 max_tokens=4000,
                 messages=[{"role": "user", "content": prompt}],
+            )
+            data = _extract_json(msg.content[0].text)
+            if isinstance(data, list) and data:
+                return data[:n]
+        except Exception:
+            if attempt == 2:
+                raise
+    return []
+
+
+def transcribe_mcqs_from_images(images: list[bytes], subject: str, n: int) -> list[dict]:
+    """Read rendered PDF page images with vision and transcribe the multiple-choice
+    questions EXACTLY as written (verbatim) — preserves original wording, numbers,
+    equations and symbols. Only fills in options/answer when the source lacks them."""
+    if not images:
+        return []
+    blocks: list[dict] = [{
+        "type": "text",
+        "text": (
+            f"These images are pages of a {subject} exam paper or worksheet uploaded by a teacher.\n\n"
+            f"Transcribe up to {n} multiple-choice questions from these pages EXACTLY as written — "
+            "do NOT paraphrase, reword, simplify or fix anything. Preserve the original wording, "
+            "numbers, units, equations and symbols verbatim. Include every answer option exactly as "
+            "printed. If a question has no printed options, write four sensible options with the "
+            "correct one included.\n\n"
+            "Return ONLY a JSON array; each object:\n"
+            '{"question": "verbatim question text", "options": ["A) ...","B) ...","C) ...","D) ..."], '
+            '"answer": "the exact correct option (must match one of options)", '
+            '"explanation": "one short sentence"}\n'
+            "Return only the JSON array."
+        ),
+    }]
+    for img in images[:8]:
+        blocks.append({
+            "type": "image",
+            "source": {"type": "base64", "media_type": "image/png", "data": base64.b64encode(img).decode()},
+        })
+
+    for attempt in range(3):
+        try:
+            msg = client().messages.create(
+                model=settings.claude_model,
+                max_tokens=4500,
+                messages=[{"role": "user", "content": blocks}],
             )
             data = _extract_json(msg.content[0].text)
             if isinstance(data, list) and data:

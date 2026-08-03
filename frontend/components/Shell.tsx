@@ -12,6 +12,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/tests") ||
     pathname.startsWith("/teacher") ||
+    pathname.startsWith("/admin") ||
     pathname.startsWith("/quiz") ||
     pathname.startsWith("/progress") ||
     pathname.startsWith("/leaderboard");

@@ -37,6 +37,7 @@ export default function NewTestPage() {
   });
   const [questions, setQuestions] = useState<ManualQ[]>([blankQ()]);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [faithful, setFaithful] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -97,6 +98,7 @@ export default function NewTestPage() {
         fd.append("level", meta.level);
         fd.append("exam_board", meta.exam_board);
         fd.append("num_questions", String(meta.num_questions));
+        fd.append("faithful", String(faithful));
         if (meta.duration_minutes) fd.append("duration_minutes", String(meta.duration_minutes));
         const { data } = await teacherAPI.createFromPdf(fd);
         router.replace(`/teacher/tests/${data.id}`);
@@ -252,7 +254,22 @@ export default function NewTestPage() {
                   onChange={(e) => setPdfFile(e.target.files?.[0] || null)} />
               </label>
             </Field>
-            <Field label="Number of questions to generate" hint="1–30">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-ink">How should we handle the questions?</label>
+              <div className="grid gap-2 sm:grid-cols-2">
+                <button type="button" onClick={() => setFaithful(true)}
+                  className={cn("rounded-xl border p-3 text-left transition-all", faithful ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
+                  <div className="text-sm font-semibold text-ink">Keep exactly as written</div>
+                  <div className="text-xs text-ink-subtle">Reads the pages visually and transcribes the questions word-for-word.</div>
+                </button>
+                <button type="button" onClick={() => setFaithful(false)}
+                  className={cn("rounded-xl border p-3 text-left transition-all", !faithful ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
+                  <div className="text-sm font-semibold text-ink">Create new questions</div>
+                  <div className="text-xs text-ink-subtle">AI writes fresh questions based on the document's content.</div>
+                </button>
+              </div>
+            </div>
+            <Field label="Number of questions" hint="1–30">
               <Input type="number" min={1} max={30} value={meta.num_questions}
                 onChange={(e) => set("num_questions", Math.max(1, Math.min(30, Number(e.target.value) || 1)))} />
             </Field>
