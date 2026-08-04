@@ -32,11 +32,12 @@ export default function RegisterPage() {
     setLoading(true);
     setError("");
     try {
-      const res = await authAPI.register({ ...form, role });
-      saveAuth(res.data.access_token, res.data.user);
-      const returnedRole = res.data.user?.role || role;
+      await authAPI.register({ ...form, role });
+      // Account created but unverified — a code was emailed. Go enter it.
       const returnTo = new URLSearchParams(window.location.search).get("returnTo");
-      router.push(returnTo || (returnedRole === "teacher" ? "/teacher" : "/dashboard"));
+      const qs = new URLSearchParams({ email: form.email.toLowerCase(), sent: "1" });
+      if (returnTo) qs.set("returnTo", returnTo);
+      router.push(`/verify-email?${qs.toString()}`);
     } catch (err: any) {
       setError(err.response?.data?.detail || "Registration failed. Please try again.");
     } finally {

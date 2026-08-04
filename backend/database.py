@@ -68,6 +68,17 @@ async def run_migrations():
             await conn.execute(text(
                 "UPDATE users SET is_active = TRUE WHERE is_active IS NULL"
             ))
+            # Email-verification columns. is_verified DEFAULT TRUE keeps existing
+            # accounts verified; only new signups are set False by register().
+            await conn.execute(text(
+                "ALTER TABLE users ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT TRUE"
+            ))
+            await conn.execute(text(
+                "UPDATE users SET is_verified = TRUE WHERE is_verified IS NULL"
+            ))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_hash VARCHAR(255)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_expires_at TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_attempts INTEGER DEFAULT 0"))
         elif dialect == "sqlite":
             # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
@@ -75,6 +86,14 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'student'"))
             if "is_active" not in cols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT 1"))
+            if "is_verified" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN is_verified BOOLEAN DEFAULT 1"))
+            if "otp_hash" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN otp_hash VARCHAR(255)"))
+            if "otp_expires_at" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN otp_expires_at TIMESTAMP"))
+            if "otp_attempts" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN otp_attempts INTEGER DEFAULT 0"))
             tcols = (await conn.execute(text("PRAGMA table_info(tests)"))).all()
             if tcols and "share_token" not in {c[1] for c in tcols}:
                 await conn.execute(text("ALTER TABLE tests ADD COLUMN share_token VARCHAR(64)"))

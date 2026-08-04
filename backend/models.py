@@ -13,6 +13,12 @@ class User(Base):
     full_name: Mapped[str] = mapped_column(String(120))
     role: Mapped[str] = mapped_column(String(20), default="student", server_default="student", index=True)  # student | teacher | admin
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default="1")  # False = suspended/banned
+    # Email verification (OTP). Defaults True so pre-existing accounts stay verified;
+    # register() sets it False for new signups until they enter the emailed code.
+    is_verified: Mapped[bool] = mapped_column(Boolean, default=True, server_default="1")
+    otp_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)      # bcrypt hash of the 6-digit code
+    otp_expires_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    otp_attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     plan: Mapped[str] = mapped_column(String(20), default="free")  # free | pro
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)

@@ -24,8 +24,11 @@ api.interceptors.response.use(
 );
 
 export const authAPI = {
+  // Returns { status: "otp_sent", email, dev_otp? } — a verification code is emailed, no token yet.
   register: (data: { email: string; password: string; full_name: string; role?: string }) =>
     api.post("/auth/register", data),
+  verifyOtp: (email: string, code: string) => api.post("/auth/verify-otp", { email, code }),
+  resendOtp: (email: string) => api.post("/auth/resend-otp", { email }),
   login: (email: string, password: string) =>
     api.post("/auth/login", new URLSearchParams({ username: email, password }), {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

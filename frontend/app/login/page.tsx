@@ -26,7 +26,14 @@ export default function LoginPage() {
       const returnTo = new URLSearchParams(window.location.search).get("returnTo");
       router.push(returnTo || (role === "teacher" || role === "admin" ? "/teacher" : "/dashboard"));
     } catch (err: any) {
-      setError(err.response?.data?.detail || "Login failed. Check your credentials.");
+      const status = err.response?.status;
+      const detail: string = err.response?.data?.detail || "";
+      // Unverified account — send them to the verification screen (auto-resends a code).
+      if (status === 403 && detail.toLowerCase().includes("verify")) {
+        router.push(`/verify-email?email=${encodeURIComponent(email.toLowerCase())}&resend=1`);
+        return;
+      }
+      setError(detail || "Login failed. Check your credentials.");
     } finally {
       setLoading(false);
     }

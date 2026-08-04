@@ -29,5 +29,19 @@ class Settings(BaseSettings):
     # Admin — comma-separated emails auto-treated as admin (for /admin dashboard)
     admin_emails: str = ""
 
+    # Email / SMTP (Gmail app password) — for signup OTP verification
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 587
+    smtp_user: str = ""          # e.g. beyondimagination608@gmail.com
+    smtp_password: str = ""      # Google App Password (not the account password)
+    smtp_from: str = ""          # falls back to smtp_user
+    smtp_from_name: str = "Notenix"
+
+    # OTP policy
+    otp_expiry_minutes: int = 10
+    otp_max_attempts: int = 5
+    otp_resend_cooldown_seconds: int = 60
+    dev_expose_otp: bool = False  # DEV ONLY: return the code in the API response for local testing. Never true in prod.
+
 
 settings = Settings()
