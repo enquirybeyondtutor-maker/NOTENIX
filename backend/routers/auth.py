@@ -7,8 +7,10 @@ from datetime import datetime, timedelta
 from database import get_db
 from models import User
 from security import hash_password, verify_password, create_token, get_current_user, is_admin
-from services.email import generate_otp, send_otp_email
+from services.email import generate_otp, send_otp_email, EmailSendError
 from config import settings
+
+EMAIL_FAIL_MSG = "We couldn't send the verification email right now. Please try again in a moment."
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -41,13 +43,17 @@ def _user_dict(u: User) -> dict:
 
 
 async def _issue_otp(user: User, db: AsyncSession) -> str:
-    """Generate a fresh OTP, persist its hash + expiry, reset attempts, and email it."""
+    """Generate a fresh OTP, persist its hash + expiry, reset attempts, and email it.
+    Raises HTTP 502 if a configured email provider rejects the message."""
     code = generate_otp()
     user.otp_hash = hash_password(code)
     user.otp_expires_at = datetime.utcnow() + timedelta(minutes=settings.otp_expiry_minutes)
     user.otp_attempts = 0
     await db.commit()
-    await send_otp_email(user.email, user.full_name, code)
+    try:
+        await send_otp_email(user.email, user.full_name, code)
+    except EmailSendError:
+        raise HTTPException(502, EMAIL_FAIL_MSG)
     return code
 
 

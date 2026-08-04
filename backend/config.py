@@ -29,7 +29,12 @@ class Settings(BaseSettings):
     # Admin — comma-separated emails auto-treated as admin (for /admin dashboard)
     admin_emails: str = ""
 
-    # Email / SMTP (Gmail app password) — for signup OTP verification
+    # Email — for signup OTP verification.
+    # Prefer an HTTPS email API (works on hosts that block SMTP, e.g. Render):
+    resend_api_key: str = ""     # https://resend.com  (set RESEND_API_KEY)
+    brevo_api_key: str = ""      # https://brevo.com   (set BREVO_API_KEY)
+    email_from: str = ""         # the verified sender address, e.g. noreply@notenix.com
+    # SMTP fallback (used only if no API key is set; blocked on Render):
     smtp_host: str = "smtp.gmail.com"
     smtp_port: int = 587
     smtp_user: str = ""          # e.g. beyondimagination608@gmail.com
