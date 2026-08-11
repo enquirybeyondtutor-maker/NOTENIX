@@ -147,6 +147,66 @@ def transcribe_mcqs_from_images(images: list[bytes], subject: str, n: int) -> li
     return []
 
 
+def extract_written_from_images(images: list[bytes], subject: str, level: str, n: int) -> list[dict]:
+    """Read rendered PDF page images with vision and transcribe the EXTENDED-RESPONSE
+    (written-answer) questions EXACTLY as written — the ones a student answers in prose,
+    not multiple choice. Preserves original wording, mark allocations and symbols, and
+    drafts a concise mark scheme for each so answers can be marked later."""
+    if not images:
+        return []
+    blocks: list[dict] = [{
+        "type": "text",
+        "text": (
+            f"These images are pages of a {level} {subject} exam paper uploaded for practice.\n\n"
+            f"Transcribe up to {n} EXTENDED-RESPONSE / written-answer questions from these pages — "
+            "the questions a student answers in prose or working (e.g. 'Explain…', 'Describe…', "
+            "'Calculate…', 'Evaluate…'), each worth a stated number of marks. IGNORE multiple-choice "
+            "questions. Transcribe each question EXACTLY as written — do NOT paraphrase, reword or "
+            "simplify. Preserve the original wording, numbers, units, equations and symbols verbatim. "
+            "Use the printed mark allocation (e.g. '[6 marks]'); if none is printed, estimate a sensible "
+            "one. For each question also draft a concise mark scheme (credit-worthy points, roughly one "
+            "per mark).\n\n"
+            "Return ONLY a JSON array; each object:\n"
+            '{"question": "verbatim question text", "marks": <int>, '
+            '"mark_scheme": "bullet points of credit-worthy points, one per line"}\n'
+            "Return only the JSON array."
+        ),
+    }]
+    for img in images[:8]:
+        blocks.append({
+            "type": "image",
+            "source": {"type": "base64", "media_type": "image/png", "data": base64.b64encode(img).decode()},
+        })
+
+    for attempt in range(3):
+        try:
+            msg = client().messages.create(
+                model=settings.claude_model,
+                max_tokens=4500,
+                messages=[{"role": "user", "content": blocks}],
+            )
+            data = _extract_json(msg.content[0].text)
+            if isinstance(data, list) and data:
+                out = []
+                for q in data[:n]:
+                    try:
+                        marks = max(1, min(int(q.get("marks", 1)), 30))
+                    except (TypeError, ValueError):
+                        marks = 1
+                    out.append({
+                        "question": (q.get("question") or "").strip(),
+                        "marks": marks,
+                        "mark_scheme": (q.get("mark_scheme") or "").strip(),
+                    })
+                out = [q for q in out if q["question"]]
+                if out:
+                    return out
+        except Exception:
+            if attempt == 2:
+                raise
+    return []
+
+
 def generate_mark_scheme(question: str, marks: int, subject: str) -> str:
     """Generate a concise mark scheme for an extracted exam question."""
     prompt = f"""You are a {subject} examiner. Write a concise mark scheme for this {marks}-mark question.

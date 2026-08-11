@@ -6,7 +6,10 @@ from sqlalchemy import select
 from datetime import datetime, timedelta
 from database import get_db
 from models import User
-from security import hash_password, verify_password, create_token, get_current_user, is_admin
+from security import (
+    hash_password, verify_password, create_token, get_current_user, is_admin,
+    can_write_practice, ai_marks_for,
+)
 from services.email import generate_otp, send_otp_email, EmailSendError
 from config import settings
 
@@ -32,12 +35,17 @@ class ResendOtpIn(BaseModel):
 
 
 def _user_dict(u: User) -> dict:
+    role = getattr(u, "role", None) or "student"
     return {
         "id": u.id, "email": u.email, "full_name": u.full_name,
-        "role": getattr(u, "role", None) or "student",
+        "role": role,
         "is_admin": is_admin(u),
         "is_active": getattr(u, "is_active", True),
         "is_verified": getattr(u, "is_verified", True),
+        "can_write": getattr(u, "can_write", False),
+        "can_write_practice": can_write_practice(u),  # may access written practice
+        "ai_marking": ai_marks_for(u),                # Pro → instant AI marking
+        "can_mark": role in ("teacher", "admin") or is_admin(u),  # may manually mark
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 

@@ -8,7 +8,7 @@ import secrets
 
 from database import get_db
 from models import User, Question, Test, TestAssignment, TestAttempt
-from security import require_teacher
+from security import require_teacher, is_admin
 from services import ai
 from services.pdf_extract import extract_text, render_pages_to_png
 
@@ -56,6 +56,7 @@ def _test_summary(t: Test, assigned: int = 0, completed: int = 0, avg: float | N
     return {
         "id": t.id, "title": t.title, "subject": t.subject, "topic": t.topic,
         "level": t.level, "exam_board": t.exam_board, "difficulty": t.difficulty,
+        "mode": getattr(t, "mode", "mcq"), "is_library": getattr(t, "is_library", False),
         "num_questions": t.num_questions, "duration_minutes": t.duration_minutes,
         "created_at": t.created_at.isoformat() if t.created_at else None,
         "assigned_count": assigned, "completed_count": completed,
@@ -176,45 +177,61 @@ async def create_test_from_pdf(
     num_questions: int = Form(10),
     duration_minutes: int | None = Form(None),
     faithful: bool = Form(True),  # True = transcribe existing questions verbatim (vision)
+    mode: str = Form("mcq"),      # mcq | written
+    is_library: bool = Form(False),  # admin only: publish to shared practice library
     teacher: User = Depends(require_teacher),
     db: AsyncSession = Depends(get_db),
 ):
     """Upload a PDF (past paper / worksheet) and build a test from it.
-    faithful=True → read the pages as images and transcribe the questions EXACTLY.
-    faithful=False → extract text and let AI generate fresh questions from it."""
+    mode=mcq → multiple-choice (faithful transcription or AI generation).
+    mode=written → transcribe extended-response questions + draft mark schemes."""
     if not (file.filename or "").lower().endswith(".pdf"):
         raise HTTPException(400, "Please upload a PDF file.")
     data = await file.read()
     if len(data) > 15 * 1024 * 1024:
         raise HTTPException(400, "PDF too large (max 15 MB).")
 
+    mode = "written" if mode == "written" else "mcq"
+    library = bool(is_library) and is_admin(teacher)  # only admins publish to the library
     n = max(1, min(num_questions, 30))
     generated = []
 
-    if faithful:
+    if mode == "written":
+        # written practice: vision-transcribe the extended-response questions only
         try:
             images = render_pages_to_png(data, max_pages=8)
         except Exception:
             images = []
         if images:
-            generated = ai.transcribe_mcqs_from_images(images, subject, n)
+            generated = ai.extract_written_from_images(images, subject, level, n)
+        if not generated:
+            raise HTTPException(502, "Could not read written questions from the document. Try a clearer PDF.")
+    else:
+        if faithful:
+            try:
+                images = render_pages_to_png(data, max_pages=8)
+            except Exception:
+                images = []
+            if images:
+                generated = ai.transcribe_mcqs_from_images(images, subject, n)
 
-    if not generated:
-        # fallback (or faithful=False): text extraction + generation
-        text = extract_text(data)
-        if len(text) < 40 and not faithful:
-            raise HTTPException(422, "Couldn't read any text from that PDF. It may be scanned images rather than text.")
-        if text and len(text) >= 40:
-            generated = ai.generate_mcqs_from_document(text, subject, level, n)
+        if not generated:
+            # fallback (or faithful=False): text extraction + generation
+            text = extract_text(data)
+            if len(text) < 40 and not faithful:
+                raise HTTPException(422, "Couldn't read any text from that PDF. It may be scanned images rather than text.")
+            if text and len(text) >= 40:
+                generated = ai.generate_mcqs_from_document(text, subject, level, n)
 
-    if not generated:
-        raise HTTPException(502, "Could not read questions from the document. Please try again or use a clearer PDF.")
+        if not generated:
+            raise HTTPException(502, "Could not read questions from the document. Please try again or use a clearer PDF.")
 
     test = Test(
         owner_id=teacher.id,
         title=(title.strip() or (file.filename or "PDF").rsplit(".", 1)[0])[:200],
         subject=subject, topic=topic.strip() or "From document", level=level,
         exam_board=exam_board, difficulty="medium",
+        mode=mode, is_library=library,
         questions=generated, num_questions=len(generated),
         duration_minutes=duration_minutes,
     )
@@ -273,25 +290,40 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
         )).scalars().all()
         attempts_by_assignment = {a.assignment_id: a for a in att}
 
+    is_written = getattr(test, "mode", "mcq") == "written"
     assignments = []
     for a, name, email in rows:
         at = attempts_by_assignment.get(a.id)
+        pending = bool(at and getattr(at, "status", "graded") == "awaiting_marking")
+        if not at:
+            status = a.status
+        elif pending:
+            status = "awaiting_marking"
+        else:
+            status = "completed"
         assignments.append({
-            "assignment_id": a.id, "student": name, "email": email,
+            "assignment_id": a.id, "attempt_id": at.id if at else None,
+            "student": name, "email": email,
             "class_label": a.class_label,
             "due_at": a.due_at.isoformat() if a.due_at else None,
-            "status": "completed" if at else a.status,
-            "score": at.score if at else None,
-            "grade": at.grade if at else None,
+            "status": status,
+            "score": None if (not at or pending) else at.score,
+            "grade": None if (not at or pending) else at.grade,
             "completed_at": at.completed_at.isoformat() if at and at.completed_at else None,
         })
+
+    if is_written:
+        preview = [{"question": q.get("question"), "marks": q.get("marks"),
+                    "mark_scheme": q.get("mark_scheme")} for q in test.questions]
+    else:
+        # question text + options only (no answers) for teacher preview
+        preview = [{"question": q.get("question"), "options": q.get("options")} for q in test.questions]
 
     return {
         "test": {
             **_test_summary(test),
             "share_token": test.share_token,
-            # question text + options only (no answers) for teacher preview
-            "questions": [{"question": q.get("question"), "options": q.get("options")} for q in test.questions],
+            "questions": preview,
         },
         "assignments": assignments,
     }

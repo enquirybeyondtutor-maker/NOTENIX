@@ -14,12 +14,17 @@ class RoleIn(BaseModel):
     role: str  # student | teacher | admin
 
 
+class WriteAccessIn(BaseModel):
+    enabled: bool
+
+
 def _user_row(u: User) -> dict:
     return {
         "id": u.id, "email": u.email, "full_name": u.full_name,
         "role": (getattr(u, "role", None) or "student"),
         "is_active": getattr(u, "is_active", True),
         "is_admin": is_admin(u),
+        "can_write": getattr(u, "can_write", False),
         "plan": u.plan, "xp": u.xp,
         "created_at": u.created_at.isoformat() if u.created_at else None,
         "last_active": u.last_active.isoformat() if u.last_active else None,
@@ -81,3 +86,14 @@ async def set_role(user_id: int, data: RoleIn, admin: User = Depends(require_adm
     u.role = data.role
     await db.commit()
     return {"id": u.id, "role": u.role}
+
+
+@router.post("/users/{user_id}/write-access")
+async def set_write_access(user_id: int, data: WriteAccessIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
+    """Grant/revoke written-answer practice access for a non-Pro account."""
+    u = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
+    if not u:
+        raise HTTPException(404, "User not found")
+    u.can_write = bool(data.enabled)
+    await db.commit()
+    return {"id": u.id, "can_write": u.can_write}

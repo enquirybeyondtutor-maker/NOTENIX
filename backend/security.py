@@ -74,3 +74,33 @@ async def require_admin(user: User = Depends(get_current_user)) -> User:
     if not is_admin(user):
         raise HTTPException(status_code=403, detail="Admin access required")
     return user
+
+
+# ── Written-answer practice gates ────────────────────────────────────────────
+
+def can_write_practice(user: User) -> bool:
+    """May access written-answer practice: Pro, admin-whitelisted, or teacher/admin."""
+    return (
+        getattr(user, "plan", "free") == "pro"
+        or getattr(user, "can_write", False)
+        or _role(user) in ("teacher", "admin")
+        or is_admin(user)
+    )
+
+
+def ai_marks_for(user: User) -> bool:
+    """Whether this user's written answers are AI-marked on submit. Pro only —
+    everyone else is marked by hand by a teacher/admin."""
+    return getattr(user, "plan", "free") == "pro"
+
+
+def can_mark_written(user: User, test) -> bool:
+    """May manually mark an attempt: admins mark anything; teachers mark tests they own."""
+    return is_admin(user) or (_role(user) == "teacher" and getattr(test, "owner_id", None) == user.id)
+
+
+async def require_write_practice(user: User = Depends(get_current_user)) -> User:
+    """Guard for the student written-practice endpoints."""
+    if not can_write_practice(user):
+        raise HTTPException(status_code=403, detail="Written practice is available on Pro or by invitation.")
+    return user

@@ -79,6 +79,16 @@ async def run_migrations():
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_hash VARCHAR(255)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_expires_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_attempts INTEGER DEFAULT 0"))
+            # Written-answer practice (extended-response). All additive.
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS can_write BOOLEAN DEFAULT FALSE"))
+            await conn.execute(text("UPDATE users SET can_write = FALSE WHERE can_write IS NULL"))
+            await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS mode VARCHAR(20) DEFAULT 'mcq'"))
+            await conn.execute(text("UPDATE tests SET mode = 'mcq' WHERE mode IS NULL"))
+            await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS is_library BOOLEAN DEFAULT FALSE"))
+            await conn.execute(text("UPDATE tests SET is_library = FALSE WHERE is_library IS NULL"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'graded'"))
+            await conn.execute(text("UPDATE test_attempts SET status = 'graded' WHERE status IS NULL"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS marked_by INTEGER"))
         elif dialect == "sqlite":
             # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
@@ -94,6 +104,17 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE users ADD COLUMN otp_expires_at TIMESTAMP"))
             if "otp_attempts" not in cols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN otp_attempts INTEGER DEFAULT 0"))
-            tcols = (await conn.execute(text("PRAGMA table_info(tests)"))).all()
-            if tcols and "share_token" not in {c[1] for c in tcols}:
+            if "can_write" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN can_write BOOLEAN DEFAULT 0"))
+            tcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(tests)"))).all()}
+            if tcols and "share_token" not in tcols:
                 await conn.execute(text("ALTER TABLE tests ADD COLUMN share_token VARCHAR(64)"))
+            if tcols and "mode" not in tcols:
+                await conn.execute(text("ALTER TABLE tests ADD COLUMN mode VARCHAR(20) DEFAULT 'mcq'"))
+            if tcols and "is_library" not in tcols:
+                await conn.execute(text("ALTER TABLE tests ADD COLUMN is_library BOOLEAN DEFAULT 0"))
+            acols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(test_attempts)"))).all()}
+            if acols and "status" not in acols:
+                await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN status VARCHAR(20) DEFAULT 'graded'"))
+            if acols and "marked_by" not in acols:
+                await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN marked_by INTEGER"))

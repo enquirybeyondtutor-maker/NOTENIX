@@ -75,6 +75,24 @@ export const adminAPI = {
   ban: (id: number | string) => api.post(`/admin/users/${id}/ban`),
   unban: (id: number | string) => api.post(`/admin/users/${id}/unban`),
   setRole: (id: number | string, role: string) => api.post(`/admin/users/${id}/role`, { role }),
+  setWriteAccess: (id: number | string, enabled: boolean) =>
+    api.post(`/admin/users/${id}/write-access`, { enabled }),
+};
+
+// Student written-answer practice (library + upload your own past paper).
+export const practiceAPI = {
+  library: () => api.get("/practice/library"),
+  startLibrary: (testId: number | string) => api.post(`/practice/library/${testId}/start`),
+  uploadPaper: (formData: FormData) =>
+    api.post("/practice/upload", formData, { headers: { "Content-Type": "multipart/form-data" } }),
+};
+
+// Teacher/admin manual marking of written answers.
+export const markingAPI = {
+  queue: () => api.get("/marking/queue"),
+  get: (attemptId: number | string) => api.get(`/marking/${attemptId}`),
+  submit: (attemptId: number | string, marks: { marks_awarded: number; feedback?: string; model_answer?: string }[]) =>
+    api.post(`/marking/${attemptId}`, { marks }),
 };
 
 export const progressAPI = { dashboard: () => api.get("/progress/dashboard") };

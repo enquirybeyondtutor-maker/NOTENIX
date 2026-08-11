@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Shield, Users, GraduationCap, PenSquare, Ban, CheckCircle2, UserX } from "lucide-react";
+import { Shield, Users, GraduationCap, PenSquare, Ban, CheckCircle2, UserX, PenLine } from "lucide-react";
 import { adminAPI, getUser, authAPI } from "@/lib/api";
 import { PageContainer, PageHeader, StatCard, Spinner, EmptyState } from "@/components/ui/Page";
 import { Badge } from "@/components/ui/Badge";
@@ -14,6 +14,7 @@ interface Row {
   role: string;
   is_active: boolean;
   is_admin: boolean;
+  can_write: boolean;
   plan: string;
   created_at: string;
   last_active: string | null;
@@ -79,6 +80,18 @@ export default function AdminPage() {
     }
   };
 
+  const toggleWrite = async (row: Row) => {
+    setBusy(row.id);
+    try {
+      await adminAPI.setWriteAccess(row.id, !row.can_write);
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Action failed");
+    } finally {
+      setBusy(null);
+    }
+  };
+
   if (!ready) return <Spinner label="Loading admin…" />;
 
   return (
@@ -107,6 +120,7 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-medium">User</th>
                   <th className="px-4 py-3 font-medium">Role</th>
                   <th className="px-4 py-3 font-medium">Status</th>
+                  <th className="px-4 py-3 font-medium">Written</th>
                   <th className="px-4 py-3 font-medium">Joined</th>
                   <th className="px-4 py-3 font-medium text-right">Action</th>
                 </tr>
@@ -144,6 +158,25 @@ export default function AdminPage() {
                         <span className="badge-success"><CheckCircle2 size={12} /> Active</span>
                       ) : (
                         <span className="badge-danger"><Ban size={12} /> Suspended</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      {u.plan === "pro" ? (
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-700">
+                          <PenLine size={12} /> Pro
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => toggleWrite(u)}
+                          disabled={busy === u.id}
+                          className={cn(
+                            "inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium transition-colors disabled:opacity-50",
+                            u.can_write ? "bg-brand-50 text-brand-700 hover:bg-brand-100" : "text-ink-subtle hover:bg-slate-100"
+                          )}
+                          title={u.can_write ? "Revoke written practice access" : "Grant written practice access"}
+                        >
+                          <PenLine size={12} /> {u.can_write ? "On" : "Off"}
+                        </button>
                       )}
                     </td>
                     <td className="px-4 py-3 text-xs text-ink-subtle">{formatDate(u.created_at)}</td>

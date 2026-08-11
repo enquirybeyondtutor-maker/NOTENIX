@@ -15,6 +15,8 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     pathname.startsWith("/admin") ||
     pathname.startsWith("/quiz") ||
     pathname.startsWith("/progress") ||
+    pathname.startsWith("/practice") ||
+    pathname.startsWith("/marking") ||
     pathname.startsWith("/leaderboard");
 
   return (

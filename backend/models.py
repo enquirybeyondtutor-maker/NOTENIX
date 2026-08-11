@@ -19,6 +19,9 @@ class User(Base):
     otp_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)      # bcrypt hash of the 6-digit code
     otp_expires_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     otp_attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    # Written-practice whitelist: admin-granted access for non-Pro accounts. Their
+    # written answers are marked by hand (teacher/admin), not by AI (Pro-only).
+    can_write: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     plan: Mapped[str] = mapped_column(String(20), default="free")  # free | pro
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
@@ -86,6 +89,8 @@ class Test(Base):
     level: Mapped[str] = mapped_column(String(20), default="GCSE")       # GCSE | A-Level
     exam_board: Mapped[str] = mapped_column(String(40), default="AQA")
     difficulty: Mapped[str] = mapped_column(String(20), default="medium")
+    mode: Mapped[str] = mapped_column(String(20), default="mcq", server_default="mcq")  # mcq | written
+    is_library: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")  # shared self-practice library
     questions: Mapped[list] = mapped_column(JSON)                        # full snapshot w/ answers
     num_questions: Mapped[int] = mapped_column(Integer, default=0)
     duration_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)  # timed sitting
@@ -120,5 +125,8 @@ class TestAttempt(Base):
     results: Mapped[list | None] = mapped_column(JSON, nullable=True)    # per-question breakdown
     score: Mapped[float] = mapped_column(Float, default=0.0)
     grade: Mapped[str | None] = mapped_column(String(8), nullable=True)  # estimated grade
+    # graded (MCQ or Pro AI-marked) | awaiting_marking (non-Pro written, pending human marking)
+    status: Mapped[str] = mapped_column(String(20), default="graded", server_default="graded", index=True)
+    marked_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)  # teacher/admin who marked
     time_taken_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
     completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

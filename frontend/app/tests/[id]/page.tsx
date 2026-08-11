@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
-import { testsAPI } from "@/lib/api";
+import { testsAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
@@ -11,7 +11,8 @@ import { cn, humanize } from "@/lib/utils";
 
 interface Question {
   question: string;
-  options: string[];
+  options?: string[];
+  marks?: number;
 }
 interface TestData {
   assignment_id: number;
@@ -20,6 +21,7 @@ interface TestData {
   topic: string;
   level: string;
   exam_board: string;
+  mode?: "mcq" | "written";
   duration_minutes: number | null;
   questions: Question[];
 }
@@ -87,6 +89,9 @@ export default function AttemptTestPage() {
 
   const answeredCount = useMemo(() => Object.values(answers).filter(Boolean).length, [answers]);
 
+  const isWritten = test?.mode === "written";
+  const aiMarking = !!getUser()?.ai_marking;
+
   if (!ready || loading) return <Spinner label="Preparing your test…" />;
 
   if (error && !test) {
@@ -115,7 +120,10 @@ export default function AttemptTestPage() {
           <Logo href={null} />
           <div className="hidden border-l border-line pl-3 sm:block">
             <div className="text-sm font-semibold text-ink">{test.title}</div>
-            <div className="text-xs text-ink-subtle">{humanize(test.subject)} · {test.exam_board}</div>
+            <div className="text-xs text-ink-subtle">
+              {humanize(test.subject)}{test.exam_board ? ` · ${test.exam_board}` : ""}
+              {isWritten ? " · Written" : ""}
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -166,27 +174,49 @@ export default function AttemptTestPage() {
         {/* Question */}
         <main className="flex-1 overflow-y-auto">
           <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6">
-            <div className="text-sm font-medium text-ink-subtle">Question {current + 1} of {total}</div>
-            <h2 className="mt-2 text-lg font-semibold leading-relaxed text-ink sm:text-xl">{q.question}</h2>
-
-            <div className="mt-6 space-y-3">
-              {q.options.map((opt) => {
-                const selected = answers[current] === opt;
-                return (
-                  <button
-                    key={opt}
-                    onClick={() => setAnswers((a) => ({ ...a, [current]: opt }))}
-                    className={cn("option-btn flex items-center gap-3", selected && "selected")}
-                  >
-                    <span className={cn("grid h-5 w-5 shrink-0 place-items-center rounded-full border",
-                      selected ? "border-brand-600 bg-brand-600 text-white" : "border-line-strong")}>
-                      {selected && <CheckCircle2 size={14} />}
-                    </span>
-                    <span>{opt}</span>
-                  </button>
-                );
-              })}
+            <div className="flex items-center justify-between">
+              <div className="text-sm font-medium text-ink-subtle">Question {current + 1} of {total}</div>
+              {isWritten && q.marks != null && (
+                <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-semibold text-brand-700">
+                  {q.marks} {q.marks === 1 ? "mark" : "marks"}
+                </span>
+              )}
             </div>
+            <h2 className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed text-ink sm:text-xl">{q.question}</h2>
+
+            {isWritten ? (
+              <div className="mt-6">
+                <textarea
+                  value={answers[current] ?? ""}
+                  onChange={(e) => setAnswers((a) => ({ ...a, [current]: e.target.value }))}
+                  placeholder="Write your answer here…"
+                  rows={12}
+                  className="w-full resize-y rounded-xl border border-line bg-white p-4 text-sm leading-relaxed text-ink shadow-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+                />
+                <div className="mt-2 text-right text-xs text-ink-subtle">
+                  {(answers[current] ?? "").trim().split(/\s+/).filter(Boolean).length} words
+                </div>
+              </div>
+            ) : (
+              <div className="mt-6 space-y-3">
+                {(q.options ?? []).map((opt) => {
+                  const selected = answers[current] === opt;
+                  return (
+                    <button
+                      key={opt}
+                      onClick={() => setAnswers((a) => ({ ...a, [current]: opt }))}
+                      className={cn("option-btn flex items-center gap-3", selected && "selected")}
+                    >
+                      <span className={cn("grid h-5 w-5 shrink-0 place-items-center rounded-full border",
+                        selected ? "border-brand-600 bg-brand-600 text-white" : "border-line-strong")}>
+                        {selected && <CheckCircle2 size={14} />}
+                      </span>
+                      <span>{opt}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
 
             <div className="mt-8 flex items-center justify-between">
               <Button variant="secondary" size="sm" disabled={current === 0} onClick={() => setCurrent((c) => Math.max(0, c - 1))}>
@@ -210,11 +240,18 @@ export default function AttemptTestPage() {
       {reviewOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/30 p-4" onClick={() => !submitting && setReviewOpen(false)}>
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-semibold text-ink">Submit your test?</h3>
+            <h3 className="text-lg font-semibold text-ink">Submit your {isWritten ? "answers" : "test"}?</h3>
             <p className="mt-1.5 text-sm text-ink-muted">
               You've answered <span className="font-semibold text-ink">{answeredCount}</span> of {total} questions.
-              {answeredCount < total && " Unanswered questions will be marked as incorrect."}
+              {answeredCount < total && (isWritten ? " Unanswered questions will score zero." : " Unanswered questions will be marked as incorrect.")}
             </p>
+            {isWritten && (
+              <p className="mt-2 text-sm text-ink-muted">
+                {aiMarking
+                  ? "Your answers will be marked instantly by AI with feedback and a model answer."
+                  : "Your answers will be sent to your teacher for marking — you'll see feedback once they're marked."}
+              </p>
+            )}
             {error && (
               <div className="mt-4 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
                 <AlertCircle size={16} /> {error}
@@ -225,7 +262,9 @@ export default function AttemptTestPage() {
                 Keep working
               </Button>
               <Button onClick={handleSubmit} loading={submitting}>
-                {submitting ? "Submitting…" : "Submit test"}
+                {submitting
+                  ? (isWritten && aiMarking ? "Marking your answers…" : "Submitting…")
+                  : (isWritten ? "Submit answers" : "Submit test")}
               </Button>
             </div>
           </div>

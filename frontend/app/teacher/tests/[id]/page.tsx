@@ -25,8 +25,9 @@ interface Detail {
   test: {
     id: number; title: string; subject: string; topic: string; level: string;
     exam_board: string; num_questions: number; duration_minutes: number | null;
+    mode?: "mcq" | "written"; is_library?: boolean;
     share_token: string | null;
-    questions: { question: string; options: string[] }[];
+    questions: { question: string; options?: string[]; marks?: number; mark_scheme?: string }[];
   };
   assignments: Assignment[];
 }
@@ -147,6 +148,7 @@ export default function TeacherTestDetailPage() {
   }
 
   const { test, assignments } = data;
+  const isWritten = test.mode === "written";
   const completed = assignments.filter((a) => a.status === "completed");
 
   return (
@@ -158,7 +160,9 @@ export default function TeacherTestDetailPage() {
       <div className="mb-6 flex flex-wrap items-center gap-2">
         <span className="badge-brand">{humanize(test.subject)}</span>
         <span className="badge-neutral">{test.level}</span>
-        <span className="badge-neutral">{test.exam_board}</span>
+        {test.exam_board && <span className="badge-neutral">{test.exam_board}</span>}
+        {isWritten && <span className="inline-flex items-center gap-1 badge-neutral"><Pencil size={11} /> Written</span>}
+        {test.is_library && <span className="badge-neutral">In library</span>}
         {test.duration_minutes ? <span className="badge-neutral"><Clock size={12} /> {test.duration_minutes} min</span> : null}
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -167,9 +171,11 @@ export default function TeacherTestDetailPage() {
           <p className="mt-1 text-sm text-ink-muted">{humanize(test.topic)} · {test.num_questions} questions</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button href={`/teacher/tests/${id}/edit`} variant="secondary" size="sm">
-            <Pencil size={14} /> Edit
-          </Button>
+          {!isWritten && (
+            <Button href={`/teacher/tests/${id}/edit`} variant="secondary" size="sm">
+              <Pencil size={14} /> Edit
+            </Button>
+          )}
           <Button onClick={removeTest} loading={deleting} variant="secondary" size="sm" className="text-red-600 hover:bg-red-50">
             <Trash2 size={14} /> Delete
           </Button>
@@ -208,6 +214,8 @@ export default function TeacherTestDetailPage() {
                         <td className="px-4 py-3">
                           {a.status === "completed" ? (
                             <span className="badge-success"><CheckCircle2 size={12} /> Completed</span>
+                          ) : a.status === "awaiting_marking" ? (
+                            <Link href="/marking" className="badge-warning hover:underline"><Clock size={12} /> Awaiting marking</Link>
                           ) : (
                             <span className="badge-warning"><Clock size={12} /> Assigned</span>
                           )}
@@ -233,13 +241,26 @@ export default function TeacherTestDetailPage() {
           <div className="card divide-y divide-line">
             {test.questions.map((q, i) => (
               <div key={i} className="p-4">
-                <div className="text-xs font-medium text-ink-subtle">Question {i + 1}</div>
-                <p className="mt-1 text-sm font-medium text-ink">{q.question}</p>
-                <ul className="mt-2 grid gap-1 sm:grid-cols-2">
-                  {q.options?.map((o, j) => (
-                    <li key={j} className="text-xs text-ink-muted">{o}</li>
-                  ))}
-                </ul>
+                <div className="flex items-center justify-between">
+                  <div className="text-xs font-medium text-ink-subtle">Question {i + 1}</div>
+                  {isWritten && q.marks != null && (
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-ink-muted">{q.marks} marks</span>
+                  )}
+                </div>
+                <p className="mt-1 whitespace-pre-line text-sm font-medium text-ink">{q.question}</p>
+                {isWritten ? (
+                  q.mark_scheme && (
+                    <div className="mt-2 whitespace-pre-line rounded-lg bg-slate-50 p-2.5 text-xs text-ink-muted">
+                      <span className="font-medium text-ink">Mark scheme: </span>{q.mark_scheme}
+                    </div>
+                  )
+                ) : (
+                  <ul className="mt-2 grid gap-1 sm:grid-cols-2">
+                    {q.options?.map((o, j) => (
+                      <li key={j} className="text-xs text-ink-muted">{o}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -58,7 +58,14 @@ export default function Navbar() {
 
   const isAuthed = !!user;
   const isTeacher = user?.role === "teacher" || user?.role === "admin";
-  let links = !isAuthed ? PUBLIC_LINKS : isTeacher ? TEACHER_LINKS : STUDENT_LINKS;
+  let links = !isAuthed ? PUBLIC_LINKS : isTeacher ? [...TEACHER_LINKS] : [...STUDENT_LINKS];
+  if (isAuthed && isTeacher && user?.can_mark) {
+    links = [...links, { href: "/marking", label: "Marking", icon: CheckSquare }];
+  }
+  if (isAuthed && !isTeacher && user?.can_write_practice) {
+    // insert Practice right after My Tests
+    links = [...STUDENT_LINKS.slice(0, 2), { href: "/practice", label: "Practice", icon: PenLine }, ...STUDENT_LINKS.slice(2)];
+  }
   if (isAuthed && user?.is_admin) {
     links = [...links, { href: "/admin", label: "Admin", icon: Shield }];
   }

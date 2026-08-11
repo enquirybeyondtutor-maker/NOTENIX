@@ -6,7 +6,7 @@ import {
   FilePlus2, Sparkles, AlertCircle, ArrowLeft, Wand2, PenLine, FileUp,
   Plus, Trash2, CheckCircle2, Loader2,
 } from "lucide-react";
-import { teacherAPI } from "@/lib/api";
+import { teacherAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
@@ -38,8 +38,11 @@ export default function NewTestPage() {
   const [questions, setQuestions] = useState<ManualQ[]>([blankQ()]);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [faithful, setFaithful] = useState(true);
+  const [pdfMode, setPdfMode] = useState<"mcq" | "written">("mcq");
+  const [isLibrary, setIsLibrary] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const isAdmin = !!getUser()?.is_admin;
 
   const set = (k: string, v: any) => setMeta((m) => ({ ...m, [k]: v }));
   const setQ = (i: number, patch: Partial<ManualQ>) =>
@@ -99,6 +102,8 @@ export default function NewTestPage() {
         fd.append("exam_board", meta.exam_board);
         fd.append("num_questions", String(meta.num_questions));
         fd.append("faithful", String(faithful));
+        fd.append("mode", pdfMode);
+        if (isAdmin && isLibrary) fd.append("is_library", "true");
         if (meta.duration_minutes) fd.append("duration_minutes", String(meta.duration_minutes));
         const { data } = await teacherAPI.createFromPdf(fd);
         router.replace(`/teacher/tests/${data.id}`);
@@ -255,21 +260,51 @@ export default function NewTestPage() {
               </label>
             </Field>
             <div>
-              <label className="mb-2 block text-sm font-medium text-ink">How should we handle the questions?</label>
+              <label className="mb-2 block text-sm font-medium text-ink">Question format</label>
               <div className="grid gap-2 sm:grid-cols-2">
-                <button type="button" onClick={() => setFaithful(true)}
-                  className={cn("rounded-xl border p-3 text-left transition-all", faithful ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
-                  <div className="text-sm font-semibold text-ink">Keep exactly as written</div>
-                  <div className="text-xs text-ink-subtle">Reads the pages visually and transcribes the questions word-for-word.</div>
+                <button type="button" onClick={() => setPdfMode("mcq")}
+                  className={cn("rounded-xl border p-3 text-left transition-all", pdfMode === "mcq" ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
+                  <div className="text-sm font-semibold text-ink">Multiple choice</div>
+                  <div className="text-xs text-ink-subtle">Auto-marked. Options with one correct answer.</div>
                 </button>
-                <button type="button" onClick={() => setFaithful(false)}
-                  className={cn("rounded-xl border p-3 text-left transition-all", !faithful ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
-                  <div className="text-sm font-semibold text-ink">Create new questions</div>
-                  <div className="text-xs text-ink-subtle">AI writes fresh questions based on the document's content.</div>
+                <button type="button" onClick={() => setPdfMode("written")}
+                  className={cn("rounded-xl border p-3 text-left transition-all", pdfMode === "written" ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
+                  <div className="flex items-center gap-1.5 text-sm font-semibold text-ink"><PenLine size={13} /> Written answers</div>
+                  <div className="text-xs text-ink-subtle">Extended-response questions. Pro students AI-marked; others marked by you.</div>
                 </button>
               </div>
             </div>
-            <Field label="Number of questions" hint="1–30">
+
+            {pdfMode === "mcq" && (
+              <div>
+                <label className="mb-2 block text-sm font-medium text-ink">How should we handle the questions?</label>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <button type="button" onClick={() => setFaithful(true)}
+                    className={cn("rounded-xl border p-3 text-left transition-all", faithful ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
+                    <div className="text-sm font-semibold text-ink">Keep exactly as written</div>
+                    <div className="text-xs text-ink-subtle">Reads the pages visually and transcribes the questions word-for-word.</div>
+                  </button>
+                  <button type="button" onClick={() => setFaithful(false)}
+                    className={cn("rounded-xl border p-3 text-left transition-all", !faithful ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300")}>
+                    <div className="text-sm font-semibold text-ink">Create new questions</div>
+                    <div className="text-xs text-ink-subtle">AI writes fresh questions based on the document's content.</div>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {pdfMode === "written" && isAdmin && (
+              <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-white p-3">
+                <input type="checkbox" checked={isLibrary} onChange={(e) => setIsLibrary(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-line-strong text-brand-600 focus:ring-brand-500" />
+                <span>
+                  <span className="block text-sm font-semibold text-ink">Add to shared practice library</span>
+                  <span className="block text-xs text-ink-subtle">Any student with written-practice access can self-start this paper.</span>
+                </span>
+              </label>
+            )}
+
+            <Field label={pdfMode === "written" ? "Max questions to extract" : "Number of questions"} hint="1–30">
               <Input type="number" min={1} max={30} value={meta.num_questions}
                 onChange={(e) => set("num_questions", Math.max(1, Math.min(30, Number(e.target.value) || 1)))} />
             </Field>

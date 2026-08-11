@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ClipboardList, Clock, CheckCircle2, ArrowRight, CalendarClock } from "lucide-react";
+import { ClipboardList, Clock, CheckCircle2, ArrowRight, CalendarClock, PenLine, Hourglass } from "lucide-react";
 import { testsAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
@@ -15,12 +15,14 @@ interface Assignment {
   topic: string;
   level: string;
   exam_board: string;
+  mode?: "mcq" | "written";
   num_questions: number;
   duration_minutes: number | null;
   class_label: string | null;
   assigned_by: string;
   due_at: string | null;
   status: "assigned" | "completed";
+  marking_status?: "graded" | "awaiting_marking" | null;
   score: number | null;
   grade: string | null;
 }
@@ -88,7 +90,10 @@ export default function StudentTestsPage() {
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
                             <span className="badge-brand">{humanize(t.subject)}</span>
-                            <span className="badge-neutral">{t.exam_board}</span>
+                            {t.exam_board && <span className="badge-neutral">{t.exam_board}</span>}
+                            {t.mode === "written" && (
+                              <span className="inline-flex items-center gap-1 badge-neutral"><PenLine size={11} /> Written</span>
+                            )}
                             {t.class_label && <span className="badge-neutral">{t.class_label}</span>}
                           </div>
                           <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
@@ -111,7 +116,7 @@ export default function StudentTestsPage() {
                       <div className="mt-4 flex items-center justify-between border-t border-line pt-4">
                         <span className="text-xs text-ink-subtle">Set by {t.assigned_by}</span>
                         <Button href={`/tests/${t.assignment_id}`} size="sm">
-                          Start test <ArrowRight size={14} />
+                          {t.mode === "written" ? "Write answers" : "Start test"} <ArrowRight size={14} />
                         </Button>
                       </div>
                     </div>
@@ -128,34 +133,39 @@ export default function StudentTestsPage() {
                 Completed · {done.length}
               </h2>
               <div className="card divide-y divide-line">
-                {done.map((t) => (
+                {done.map((t) => {
+                  const awaiting = t.marking_status === "awaiting_marking";
+                  return (
                   <Link
                     key={t.assignment_id}
                     href={`/tests/${t.assignment_id}/result`}
                     className="flex items-center justify-between gap-3 p-4 transition-colors hover:bg-slate-50"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="grid h-9 w-9 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
-                        <CheckCircle2 size={16} />
+                      <span className={`grid h-9 w-9 place-items-center rounded-lg ${awaiting ? "bg-amber-50 text-amber-600" : "bg-emerald-50 text-emerald-600"}`}>
+                        {awaiting ? <Hourglass size={16} /> : <CheckCircle2 size={16} />}
                       </span>
                       <div>
                         <div className="text-sm font-medium text-ink">{t.title}</div>
                         <div className="text-xs text-ink-subtle">
-                          {humanize(t.subject)} · {t.exam_board}
+                          {humanize(t.subject)}{t.exam_board ? ` · ${t.exam_board}` : ""}
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="text-right">
-                        <div className="text-sm font-semibold text-ink">{t.score}%</div>
-                        <div className="text-xs text-ink-subtle">
-                          {t.level?.toUpperCase().startsWith("A") ? "Grade" : "Grade"} {t.grade}
+                      {awaiting ? (
+                        <span className="text-xs font-medium text-amber-600">Awaiting marking</span>
+                      ) : (
+                        <div className="text-right">
+                          <div className="text-sm font-semibold text-ink">{t.score}%</div>
+                          <div className="text-xs text-ink-subtle">Grade {t.grade}</div>
                         </div>
-                      </div>
+                      )}
                       <ArrowRight size={16} className="text-ink-subtle" />
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}
