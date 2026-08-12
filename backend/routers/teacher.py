@@ -10,7 +10,7 @@ from database import get_db
 from models import User, Question, Test, TestAssignment, TestAttempt
 from security import require_teacher, is_admin
 from services import ai
-from services.pdf_extract import extract_text, render_pages_to_png, crop_figures
+from services.pdf_extract import extract_text, render_pages_to_png, crop_figures, ensure_pdf, is_image_upload
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
 
@@ -182,14 +182,16 @@ async def create_test_from_pdf(
     teacher: User = Depends(require_teacher),
     db: AsyncSession = Depends(get_db),
 ):
-    """Upload a PDF (past paper / worksheet) and build a test from it.
+    """Upload a PDF or image (screenshot/photo) of a past paper and build a test from it.
     mode=mcq → multiple-choice (faithful transcription or AI generation).
     mode=written → transcribe extended-response questions + draft mark schemes."""
-    if not (file.filename or "").lower().endswith(".pdf"):
-        raise HTTPException(400, "Please upload a PDF file.")
+    fname = file.filename or ""
+    if not (fname.lower().endswith(".pdf") or is_image_upload(fname)):
+        raise HTTPException(400, "Please upload a PDF or an image (PNG/JPG).")
     data = await file.read()
     if len(data) > 15 * 1024 * 1024:
-        raise HTTPException(400, "PDF too large (max 15 MB).")
+        raise HTTPException(400, "File too large (max 15 MB).")
+    data = ensure_pdf(data, fname)  # wrap images in a 1-page PDF so the pipeline is uniform
 
     mode = "written" if mode == "written" else "mcq"
     library = bool(is_library) and is_admin(teacher)  # only admins publish to the library

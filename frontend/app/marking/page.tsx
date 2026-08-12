@@ -22,6 +22,7 @@ interface MarkQ {
   marks: number;
   mark_scheme: string | null;
   image?: string | null;
+  answer_images?: string[] | null;
   your_answer: string;
 }
 interface Detail {
@@ -135,7 +136,16 @@ export default function MarkingPage() {
 
               <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
                 <span className="mb-1 block font-medium text-ink">Student answer</span>
-                {q.your_answer || "— (not answered)"}
+                {q.your_answer || (q.answer_images?.length ? "(uploaded photo below)" : "— (not answered)")}
+                {(q.answer_images?.length ?? 0) > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-3">
+                    {q.answer_images!.map((src, j) => (
+                      <a key={j} href={src} target="_blank" rel="noopener noreferrer">
+                        <img src={src} alt={`Student answer photo ${j + 1}`} className="max-h-96 w-auto max-w-full rounded-lg border border-line hover:opacity-90" />
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-[140px_1fr]">

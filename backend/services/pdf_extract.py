@@ -8,6 +8,24 @@ _FIGURE_ZOOM = 2.0               # render scale for crops (~144 DPI)
 _FIGURE_PAD = 0.02               # expand the AI box by 2% each side
 
 
+_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp", ".tif", ".tiff")
+
+
+def is_image_upload(filename: str) -> bool:
+    return (filename or "").lower().endswith(_IMAGE_EXTS)
+
+
+def ensure_pdf(data: bytes, filename: str) -> bytes:
+    """Return PDF bytes for `data`. If it's an image (screenshot/photo), wrap it in a
+    single-page PDF so the rest of the pipeline (render_pages_to_png, crop_figures,
+    extract_text) works unchanged. PDFs pass through untouched."""
+    if not is_image_upload(filename):
+        return data
+    import fitz  # PyMuPDF
+    with fitz.open(stream=data, filetype="image") as img:
+        return img.convert_to_pdf()
+
+
 def extract_text(data: bytes) -> str:
     """Best-effort text extraction. Tries pdfplumber, falls back to pypdf."""
     text = ""

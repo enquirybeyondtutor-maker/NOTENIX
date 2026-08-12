@@ -46,7 +46,7 @@ export const quizAPI = {
 export const testsAPI = {
   mine: () => api.get("/tests"),
   get: (assignmentId: number | string) => api.get(`/tests/${assignmentId}`),
-  submit: (assignmentId: number | string, data: { answers: any[]; time_taken_seconds?: number }) =>
+  submit: (assignmentId: number | string, data: { answers: any[]; answer_images?: string[][]; time_taken_seconds?: number }) =>
     api.post(`/tests/${assignmentId}/submit`, data),
   result: (assignmentId: number | string) => api.get(`/tests/${assignmentId}/result`),
   join: (token: string) => api.post(`/tests/join/${token}`),

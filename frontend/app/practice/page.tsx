@@ -140,9 +140,9 @@ export default function PracticePage() {
         </div>
         <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-line-strong bg-slate-50 px-4 py-8 text-center transition-colors hover:border-brand-400 hover:bg-brand-50/40">
           <FileUp size={22} className="text-ink-subtle" />
-          <span className="mt-2 text-sm font-medium text-ink">{file ? file.name : "Choose a PDF file"}</span>
-          <span className="mt-0.5 text-xs text-ink-subtle">Max 15 MB</span>
-          <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+          <span className="mt-2 text-sm font-medium text-ink">{file ? file.name : "Choose a PDF or image"}</span>
+          <span className="mt-0.5 text-xs text-ink-subtle">PDF, PNG or JPG · Max 15 MB</span>
+          <input type="file" accept="application/pdf,.pdf,image/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} />
         </label>
         <div className="grid gap-5 sm:grid-cols-2">
           <Field label="Subject">

@@ -69,6 +69,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
     attempt, test = await _load_for_marking(attempt_id, marker, db)
     student = (await db.execute(select(User).where(User.id == attempt.student_id))).scalar_one_or_none()
     answers = attempt.answers or []
+    answer_images = attempt.answer_images or []
     questions = []
     for i, q in enumerate(test.questions):
         questions.append({
@@ -77,6 +78,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
             "mark_scheme": q.get("mark_scheme"),
             "image": q.get("image"),
             "your_answer": answers[i] if i < len(answers) else "",
+            "answer_images": answer_images[i] if i < len(answer_images) else [],
         })
     return {
         "attempt_id": attempt.id,
@@ -97,6 +99,10 @@ async def submit_marks(attempt_id: int, data: SubmitMarksIn, marker: User = Depe
 
     per_q = [m.model_dump() for m in data.marks]
     score, results = finalize_written_marks(test.questions, per_q, attempt.answers or [])
+    # keep the student's uploaded answer photos visible on the graded result
+    answer_images = attempt.answer_images or []
+    for i, row in enumerate(results):
+        row["answer_images"] = answer_images[i] if i < len(answer_images) else []
     grade = estimate_grade(score, test.level)
 
     attempt.results = results

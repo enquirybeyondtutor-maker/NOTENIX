@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2, ImagePlus, X } from "lucide-react";
 import { testsAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { Spinner } from "@/components/ui/Page";
@@ -33,6 +33,34 @@ function fmtTime(s: number) {
   return `${m}:${sec.toString().padStart(2, "0")}`;
 }
 
+const MAX_PHOTOS_PER_Q = 4;
+
+// Downscale + JPEG-compress a photo in the browser so multi-MB camera shots become
+// ~150–400 KB before upload. Retries at lower quality if still large.
+function compressImage(file: File, maxSide = 1400): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * scale));
+      const h = Math.max(1, Math.round(img.height * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("Canvas not supported"));
+      ctx.drawImage(img, 0, 0, w, h);
+      let out = canvas.toDataURL("image/jpeg", 0.8);
+      if (out.length > 1_400_000) out = canvas.toDataURL("image/jpeg", 0.6);
+      resolve(out);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Could not read image")); };
+    img.src = url;
+  });
+}
+
 export default function AttemptTestPage() {
   const router = useRouter();
   const params = useParams();
@@ -44,6 +72,8 @@ export default function AttemptTestPage() {
   const [error, setError] = useState("");
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
+  const [photos, setPhotos] = useState<Record<number, string[]>>({});
+  const [photoBusy, setPhotoBusy] = useState(false);
   const [remaining, setRemaining] = useState<number | null>(null);
   const [startedAt] = useState(() => Date.now());
   const [submitting, setSubmitting] = useState(false);
@@ -65,9 +95,12 @@ export default function AttemptTestPage() {
     if (!test || submitting) return;
     setSubmitting(true);
     const ordered = test.questions.map((_, i) => answers[i] ?? "");
+    const orderedImages = test.questions.map((_, i) => photos[i] ?? []);
+    const hasAnyPhotos = orderedImages.some((imgs) => imgs.length > 0);
     try {
       await testsAPI.submit(id, {
         answers: ordered,
+        answer_images: hasAnyPhotos ? orderedImages : undefined,
         time_taken_seconds: Math.round((Date.now() - startedAt) / 1000),
       });
       router.replace(`/tests/${id}/result`);
@@ -75,7 +108,32 @@ export default function AttemptTestPage() {
       setError(e.response?.data?.detail || "Submission failed. Please try again.");
       setSubmitting(false);
     }
-  }, [test, submitting, answers, id, startedAt, router]);
+  }, [test, submitting, answers, photos, id, startedAt, router]);
+
+  async function addPhotos(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setError("");
+    setPhotoBusy(true);
+    try {
+      const existing = photos[current] ?? [];
+      const room = MAX_PHOTOS_PER_Q - existing.length;
+      if (room <= 0) {
+        setError(`You can attach up to ${MAX_PHOTOS_PER_Q} photos per question.`);
+        return;
+      }
+      const picked = Array.from(files).slice(0, room);
+      const encoded = await Promise.all(picked.map((f) => compressImage(f)));
+      setPhotos((p) => ({ ...p, [current]: [...(p[current] ?? []), ...encoded] }));
+    } catch {
+      setError("Couldn't process that image. Please try another photo.");
+    } finally {
+      setPhotoBusy(false);
+    }
+  }
+
+  function removePhoto(qi: number, idx: number) {
+    setPhotos((p) => ({ ...p, [qi]: (p[qi] ?? []).filter((_, j) => j !== idx) }));
+  }
 
   // countdown
   useEffect(() => {
@@ -88,7 +146,15 @@ export default function AttemptTestPage() {
     return () => clearInterval(t);
   }, [remaining, handleSubmit]);
 
-  const answeredCount = useMemo(() => Object.values(answers).filter(Boolean).length, [answers]);
+  const isAnswered = useCallback(
+    (i: number) => Boolean((answers[i] ?? "").trim()) || (photos[i]?.length ?? 0) > 0,
+    [answers, photos]
+  );
+  const answeredCount = useMemo(
+    () => (test ? test.questions.filter((_, i) => isAnswered(i)).length : 0),
+    [test, isAnswered]
+  );
+  const anyPhotos = useMemo(() => Object.values(photos).some((p) => p.length > 0), [photos]);
 
   const isWritten = test?.mode === "written";
   const aiMarking = !!getUser()?.ai_marking;
@@ -160,7 +226,7 @@ export default function AttemptTestPage() {
                   "grid h-9 place-items-center rounded-lg border text-sm font-medium transition-colors",
                   i === current
                     ? "border-brand-600 bg-brand-600 text-white"
-                    : answers[i]
+                    : isAnswered(i)
                     ? "border-brand-200 bg-brand-50 text-brand-700"
                     : "border-line text-ink-muted hover:bg-slate-50"
                 )}
@@ -200,6 +266,40 @@ export default function AttemptTestPage() {
                 />
                 <div className="mt-2 text-right text-xs text-ink-subtle">
                   {(answers[current] ?? "").trim().split(/\s+/).filter(Boolean).length} words
+                </div>
+
+                {/* Photo answers — for handwritten working, diagrams, etc. */}
+                <div className="mt-5 rounded-xl border border-dashed border-line-strong bg-slate-50/60 p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm font-medium text-ink">Or upload a photo of your working</div>
+                    <span className="text-xs text-ink-subtle">{(photos[current]?.length ?? 0)}/{MAX_PHOTOS_PER_Q}</span>
+                  </div>
+                  <p className="mt-0.5 text-xs text-ink-subtle">Handwritten answers, diagrams or maths working. Marked by your teacher.</p>
+
+                  {(photos[current]?.length ?? 0) > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      {photos[current].map((src, idx) => (
+                        <div key={idx} className="relative">
+                          <img src={src} alt={`Answer photo ${idx + 1}`} className="h-24 w-24 rounded-lg border border-line object-cover" />
+                          <button type="button" onClick={() => removePhoto(current, idx)}
+                            className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-white text-ink-muted shadow ring-1 ring-line hover:text-red-600"
+                            title="Remove photo">
+                            <X size={13} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {(photos[current]?.length ?? 0) < MAX_PHOTOS_PER_Q && (
+                    <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-sm font-medium text-ink shadow-xs hover:bg-slate-50">
+                      {photoBusy ? <Loader2 size={15} className="animate-spin" /> : <ImagePlus size={15} />}
+                      {photoBusy ? "Processing…" : "Add photo"}
+                      <input type="file" accept="image/*" capture="environment" multiple className="hidden"
+                        disabled={photoBusy}
+                        onChange={(e) => { addPhotos(e.target.files); e.target.value = ""; }} />
+                    </label>
+                  )}
                 </div>
               </div>
             ) : (
@@ -252,8 +352,10 @@ export default function AttemptTestPage() {
             </p>
             {isWritten && (
               <p className="mt-2 text-sm text-ink-muted">
-                {aiMarking
+                {aiMarking && !anyPhotos
                   ? "Your answers will be marked instantly by AI with feedback and a model answer."
+                  : anyPhotos
+                  ? "Because you've attached photos, your answers will be sent to your teacher for marking — you'll see feedback once they're marked."
                   : "Your answers will be sent to your teacher for marking — you'll see feedback once they're marked."}
               </p>
             )}
@@ -268,7 +370,7 @@ export default function AttemptTestPage() {
               </Button>
               <Button onClick={handleSubmit} loading={submitting}>
                 {submitting
-                  ? (isWritten && aiMarking ? "Marking your answers…" : "Submitting…")
+                  ? (isWritten && aiMarking && !anyPhotos ? "Marking your answers…" : "Submitting…")
                   : (isWritten ? "Submit answers" : "Submit test")}
               </Button>
             </div>

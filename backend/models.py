@@ -122,6 +122,8 @@ class TestAttempt(Base):
     test_id: Mapped[int] = mapped_column(ForeignKey("tests.id"), index=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     answers: Mapped[list | None] = mapped_column(JSON, nullable=True)
+    # per-question list of uploaded answer photos (compressed JPEG data URIs); written only
+    answer_images: Mapped[list | None] = mapped_column(JSON, nullable=True)
     results: Mapped[list | None] = mapped_column(JSON, nullable=True)    # per-question breakdown
     score: Mapped[float] = mapped_column(Float, default=0.0)
     grade: Mapped[str | None] = mapped_column(String(8), nullable=True)  # estimated grade

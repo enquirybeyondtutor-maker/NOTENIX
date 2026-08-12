@@ -12,7 +12,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import require_write_practice, ai_marks_for
 from services import ai
-from services.pdf_extract import render_pages_to_png, crop_figures
+from services.pdf_extract import render_pages_to_png, crop_figures, ensure_pdf, is_image_upload
 
 router = APIRouter(prefix="/practice", tags=["practice"])
 
@@ -96,13 +96,15 @@ async def upload_paper(
     user: User = Depends(require_write_practice),
     db: AsyncSession = Depends(get_db),
 ):
-    """Upload a past-paper PDF → extract its written questions → start a private
-    practice test the student can answer immediately."""
-    if not (file.filename or "").lower().endswith(".pdf"):
-        raise HTTPException(400, "Please upload a PDF file.")
+    """Upload a past-paper PDF or image (screenshot/photo) → extract its written
+    questions → start a private practice test the student can answer immediately."""
+    fname = file.filename or ""
+    if not (fname.lower().endswith(".pdf") or is_image_upload(fname)):
+        raise HTTPException(400, "Please upload a PDF or an image (PNG/JPG).")
     data = await file.read()
     if len(data) > 15 * 1024 * 1024:
-        raise HTTPException(400, "PDF too large (max 15 MB).")
+        raise HTTPException(400, "File too large (max 15 MB).")
+    data = ensure_pdf(data, fname)
 
     n = max(1, min(num_questions, 20))
     try:

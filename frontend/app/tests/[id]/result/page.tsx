@@ -13,6 +13,7 @@ interface QResult {
   question: string;
   options?: string[];
   image?: string | null;
+  answer_images?: string[] | null;
   your_answer: string | null;
   // MCQ
   correct_answer?: string;
@@ -102,9 +103,18 @@ export default function TestResultPage() {
               </div>
               <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>
               {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
-              <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
-                {r.your_answer || "— (not answered)"}
-              </div>
+              {(r.your_answer || !(r.answer_images?.length)) && (
+                <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
+                  {r.your_answer || "— (not answered)"}
+                </div>
+              )}
+              {(r.answer_images?.length ?? 0) > 0 && (
+                <div className="mt-3 flex flex-wrap gap-3">
+                  {r.answer_images!.map((src, j) => (
+                    <img key={j} src={src} alt={`Your answer photo ${j + 1}`} className="max-h-72 w-auto max-w-full rounded-lg border border-line" />
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -166,7 +176,14 @@ export default function TestResultPage() {
 
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
                   <span className="mb-1 flex items-center gap-1.5 font-medium text-ink"><PenLine size={13} /> Your answer</span>
-                  {r.your_answer || "— (not answered)"}
+                  {r.your_answer || (r.answer_images?.length ? "(see uploaded photo)" : "— (not answered)")}
+                  {(r.answer_images?.length ?? 0) > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-3">
+                      {r.answer_images!.map((src, j) => (
+                        <img key={j} src={src} alt={`Your answer photo ${j + 1}`} className="max-h-72 w-auto max-w-full rounded-lg border border-line" />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {r.feedback && (

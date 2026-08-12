@@ -15,7 +15,38 @@ router = APIRouter(prefix="/tests", tags=["student-tests"])
 
 class SubmitIn(BaseModel):
     answers: list
+    # written only: per-question list of uploaded answer photos (compressed JPEG data URIs)
+    answer_images: list[list[str]] | None = None
     time_taken_seconds: int | None = None
+
+
+# Cap embedded answer photos so they don't bloat the attempts row.
+_MAX_ANSWER_IMAGES_PER_Q = 4
+_MAX_ANSWER_IMAGE_CHARS = 1_600_000        # ~1.2 MB per photo (base64)
+_MAX_ANSWER_IMAGES_TOTAL_CHARS = 18_000_000  # whole submission
+
+
+def _sanitize_answer_images(answer_images, n_questions: int) -> list[list[str]]:
+    """Validate/trim uploaded answer photos: keep only data-URI images, cap count per
+    question and total payload. Returns a per-question list aligned to the questions."""
+    out: list[list[str]] = [[] for _ in range(n_questions)]
+    if not answer_images:
+        return out
+    total = 0
+    for i in range(min(len(answer_images), n_questions)):
+        imgs = answer_images[i] or []
+        kept: list[str] = []
+        for img in imgs[:_MAX_ANSWER_IMAGES_PER_Q]:
+            if not isinstance(img, str) or not img.startswith("data:image/"):
+                continue
+            if len(img) > _MAX_ANSWER_IMAGE_CHARS:
+                raise HTTPException(400, "One of your photos is too large. Please retake or use a smaller image.")
+            total += len(img)
+            if total > _MAX_ANSWER_IMAGES_TOTAL_CHARS:
+                raise HTTPException(400, "Your uploaded photos are too large in total. Please remove some and try again.")
+            kept.append(img)
+        out[i] = kept
+    return out
 
 
 @router.post("/join/{token}")
@@ -153,12 +184,20 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
 
     mode = getattr(test, "mode", "mcq")
 
-    # ── Written test that isn't AI-marked (non-Pro): queue for human marking. ──
-    if mode == "written" and not ai_marks_for(user):
+    # Answer photos (written only). Their presence forces human marking — AI can't
+    # reliably grade handwriting — even for Pro students.
+    answer_images = _sanitize_answer_images(data.answer_images, len(test.questions)) if mode == "written" else []
+    has_photos = any(imgs for imgs in answer_images)
+
+    # ── Written test that isn't AI-marked (non-Pro OR any photo answers): human marking. ──
+    if mode == "written" and (not ai_marks_for(user) or has_photos):
         results = _pending_written_results(test.questions, data.answers)
+        for i, row in enumerate(results):
+            row["answer_images"] = answer_images[i] if i < len(answer_images) else []
         attempt = TestAttempt(
             assignment_id=assignment.id, test_id=test.id, student_id=user.id,
-            answers=data.answers, results=results, score=0.0, grade=None,
+            answers=data.answers, answer_images=answer_images, results=results,
+            score=0.0, grade=None,
             status="awaiting_marking", time_taken_seconds=data.time_taken_seconds,
         )
         db.add(attempt)
