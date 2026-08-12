@@ -26,6 +26,57 @@ def ensure_pdf(data: bytes, filename: str) -> bytes:
         return img.convert_to_pdf()
 
 
+_MAX_UPLOAD_FILES = 10
+_MAX_UPLOAD_BYTES = 15 * 1024 * 1024
+_MAX_UPLOAD_TOTAL = 40 * 1024 * 1024
+
+
+async def read_uploads(files) -> bytes:
+    """Validate a list of UploadFiles (PDFs/images), read them, and merge into one PDF.
+    Raises HTTP 400 on bad type/size. Shared by the teacher and practice upload routes."""
+    from fastapi import HTTPException
+    if not files:
+        raise HTTPException(400, "Please upload at least one PDF or image.")
+    if len(files) > _MAX_UPLOAD_FILES:
+        raise HTTPException(400, f"Please upload at most {_MAX_UPLOAD_FILES} files.")
+    items: list[tuple[bytes, str]] = []
+    total = 0
+    for f in files:
+        name = f.filename or ""
+        if not (name.lower().endswith(".pdf") or is_image_upload(name)):
+            raise HTTPException(400, "Each file must be a PDF or an image (PNG/JPG).")
+        b = await f.read()
+        total += len(b)
+        if len(b) > _MAX_UPLOAD_BYTES:
+            raise HTTPException(400, "One of your files is too large (max 15 MB each).")
+        if total > _MAX_UPLOAD_TOTAL:
+            raise HTTPException(400, "Your files are too large in total. Please upload fewer or smaller files.")
+        items.append((b, name))
+    return combine_to_pdf(items)
+
+
+def combine_to_pdf(items: list[tuple[bytes, str]]) -> bytes:
+    """Merge several uploaded files (screenshots/photos and/or PDFs) into one PDF, in
+    order — each image becomes a page. Lets a question spread across multiple images be
+    read as a single document by the extract/crop pipeline."""
+    if not items:
+        raise ValueError("no files to combine")
+    if len(items) == 1:
+        return ensure_pdf(items[0][0], items[0][1])
+    import fitz  # PyMuPDF
+    out = fitz.open()
+    try:
+        for data, name in items:
+            src = fitz.open(stream=ensure_pdf(data, name), filetype="pdf")
+            try:
+                out.insert_pdf(src)
+            finally:
+                src.close()
+        return out.tobytes()
+    finally:
+        out.close()
+
+
 def extract_text(data: bytes) -> str:
     """Best-effort text extraction. Tries pdfplumber, falls back to pypdf."""
     text = ""

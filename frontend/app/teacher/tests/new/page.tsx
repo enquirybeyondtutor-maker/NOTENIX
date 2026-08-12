@@ -36,7 +36,7 @@ export default function NewTestPage() {
     exam_board: "AQA", difficulty: "medium", num_questions: 10, duration_minutes: 30,
   });
   const [questions, setQuestions] = useState<ManualQ[]>([blankQ()]);
-  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [pdfFiles, setPdfFiles] = useState<File[]>([]);
   const [faithful, setFaithful] = useState(true);
   const [pdfMode, setPdfMode] = useState<"mcq" | "written">("mcq");
   const [isLibrary, setIsLibrary] = useState(false);
@@ -87,14 +87,14 @@ export default function NewTestPage() {
 
     // ---- PDF ----
     if (mode === "pdf") {
-      if (!pdfFile) {
-        setError("Choose a PDF to upload.");
+      if (pdfFiles.length === 0) {
+        setError("Choose a PDF or image to upload.");
         return;
       }
       setBusy(true);
       try {
         const fd = new FormData();
-        fd.append("file", pdfFile);
+        pdfFiles.forEach((f) => fd.append("files", f));
         fd.append("title", meta.title.trim());
         fd.append("subject", meta.subject);
         fd.append("topic", meta.topic.trim());
@@ -250,14 +250,31 @@ export default function NewTestPage() {
 
         {mode === "pdf" && (
           <div className="card space-y-5 p-6">
-            <Field label="Upload PDF or image" hint="Past paper, worksheet, or a screenshot / photo of a question.">
+            <Field label="Upload PDF or images" hint="Past paper, worksheet, or one or more screenshots / photos of the questions.">
               <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-line-strong bg-slate-50 px-4 py-8 text-center transition-colors hover:border-brand-400 hover:bg-brand-50/40">
                 <FileUp size={22} className="text-ink-subtle" />
-                <span className="mt-2 text-sm font-medium text-ink">{pdfFile ? pdfFile.name : "Choose a PDF or image"}</span>
-                <span className="mt-0.5 text-xs text-ink-subtle">PDF, PNG or JPG · Max 15 MB</span>
-                <input type="file" accept="application/pdf,.pdf,image/*" className="hidden"
-                  onChange={(e) => setPdfFile(e.target.files?.[0] || null)} />
+                <span className="mt-2 text-sm font-medium text-ink">{pdfFiles.length ? "Add more files" : "Choose a PDF or images"}</span>
+                <span className="mt-0.5 text-xs text-ink-subtle">PDF, PNG or JPG · up to 10 files · 15 MB each</span>
+                <input type="file" accept="application/pdf,.pdf,image/*" multiple className="hidden"
+                  onChange={(e) => {
+                    const picked = Array.from(e.target.files || []);
+                    setPdfFiles((prev) => [...prev, ...picked].slice(0, 10));
+                    e.target.value = "";
+                  }} />
               </label>
+              {pdfFiles.length > 0 && (
+                <ul className="mt-3 space-y-2">
+                  {pdfFiles.map((f, i) => (
+                    <li key={i} className="flex items-center justify-between gap-3 rounded-lg border border-line bg-white px-3 py-2 text-sm">
+                      <span className="truncate text-ink">{i + 1}. {f.name}</span>
+                      <button type="button" onClick={() => setPdfFiles((prev) => prev.filter((_, j) => j !== i))}
+                        className="shrink-0 text-ink-subtle hover:text-red-600" title="Remove">
+                        <Trash2 size={14} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </Field>
             <div>
               <label className="mb-2 block text-sm font-medium text-ink">Question format</label>
@@ -310,7 +327,7 @@ export default function NewTestPage() {
             </Field>
             <div className="flex items-center justify-between border-t border-line pt-5">
               <span className="inline-flex items-center gap-1.5 text-xs text-ink-subtle"><Sparkles size={13} className="text-brand-600" /> AI reads your document</span>
-              <Button type="submit" size="lg" disabled={!pdfFile}><FileUp size={16} /> Build from PDF</Button>
+              <Button type="submit" size="lg" disabled={pdfFiles.length === 0}><FileUp size={16} /> Build test</Button>
             </div>
           </div>
         )}

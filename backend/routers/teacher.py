@@ -10,7 +10,7 @@ from database import get_db
 from models import User, Question, Test, TestAssignment, TestAttempt
 from security import require_teacher, is_admin
 from services import ai
-from services.pdf_extract import extract_text, render_pages_to_png, crop_figures, ensure_pdf, is_image_upload
+from services.pdf_extract import extract_text, render_pages_to_png, crop_figures, read_uploads
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
 
@@ -168,7 +168,7 @@ async def create_test(data: CreateTestIn, teacher: User = Depends(require_teache
 
 @router.post("/tests/from-pdf")
 async def create_test_from_pdf(
-    file: UploadFile = File(...),
+    files: list[UploadFile] = File(...),
     title: str = Form(""),
     subject: str = Form("general"),
     topic: str = Form(""),
@@ -182,16 +182,12 @@ async def create_test_from_pdf(
     teacher: User = Depends(require_teacher),
     db: AsyncSession = Depends(get_db),
 ):
-    """Upload a PDF or image (screenshot/photo) of a past paper and build a test from it.
+    """Upload one or more PDFs/images (screenshots/photos) of a past paper and build a
+    test from them. Multiple files are merged into one document in order.
     mode=mcq → multiple-choice (faithful transcription or AI generation).
     mode=written → transcribe extended-response questions + draft mark schemes."""
-    fname = file.filename or ""
-    if not (fname.lower().endswith(".pdf") or is_image_upload(fname)):
-        raise HTTPException(400, "Please upload a PDF or an image (PNG/JPG).")
-    data = await file.read()
-    if len(data) > 15 * 1024 * 1024:
-        raise HTTPException(400, "File too large (max 15 MB).")
-    data = ensure_pdf(data, fname)  # wrap images in a 1-page PDF so the pipeline is uniform
+    data = await read_uploads(files)
+    first_name = files[0].filename or "PDF"
 
     mode = "written" if mode == "written" else "mcq"
     library = bool(is_library) and is_admin(teacher)  # only admins publish to the library
@@ -233,7 +229,7 @@ async def create_test_from_pdf(
 
     test = Test(
         owner_id=teacher.id,
-        title=(title.strip() or (file.filename or "PDF").rsplit(".", 1)[0])[:200],
+        title=(title.strip() or first_name.rsplit(".", 1)[0])[:200],
         subject=subject, topic=topic.strip() or "From document", level=level,
         exam_board=exam_board, difficulty="medium",
         mode=mode, is_library=library,

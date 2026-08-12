@@ -32,10 +32,22 @@ interface Result {
   level: string;
   mode?: "mcq" | "written";
   status?: "graded" | "awaiting_marking";
+  purged?: boolean;
+  retention_days?: number;
   score: number | null;
   grade: string | null;
   time_taken_seconds: number | null;
   results: QResult[];
+}
+
+function PurgeNote({ days }: { days?: number }) {
+  const weeks = days ? Math.round(days / 7) : null;
+  return (
+    <div className="mb-6 rounded-xl border border-line bg-slate-50 p-4 text-sm text-ink-muted">
+      Your submitted answers{weeks ? ` were removed ${weeks} week${weeks === 1 ? "" : "s"} after submission` : " were removed"} for privacy.
+      Your marks, grade and feedback are kept.
+    </div>
+  );
 }
 
 export default function TestResultPage() {
@@ -90,6 +102,7 @@ export default function TestResultPage() {
         </div>
 
         <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">Your answers</h2>
+        {data.purged && <PurgeNote days={data.retention_days} />}
         <div className="space-y-4">
           {data.results.map((r, i) => (
             <div key={i} className="card p-5">
@@ -159,6 +172,7 @@ export default function TestResultPage() {
         </div>
 
         <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">Examiner feedback</h2>
+        {data.purged && <PurgeNote days={data.retention_days} />}
         <div className="space-y-4">
           {data.results.map((r, i) => {
             const full = (r.marks_awarded ?? 0) >= (r.marks ?? 0);
@@ -176,7 +190,7 @@ export default function TestResultPage() {
 
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
                   <span className="mb-1 flex items-center gap-1.5 font-medium text-ink"><PenLine size={13} /> Your answer</span>
-                  {r.your_answer || (r.answer_images?.length ? "(see uploaded photo)" : "— (not answered)")}
+                  {r.your_answer || (data.purged ? "(removed for privacy)" : (r.answer_images?.length ? "(see uploaded photo)" : "— (not answered)"))}
                   {(r.answer_images?.length ?? 0) > 0 && (
                     <div className="mt-2 flex flex-wrap gap-3">
                       {r.answer_images!.map((src, j) => (
@@ -248,6 +262,7 @@ export default function TestResultPage() {
       <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
         Question review
       </h2>
+      {data.purged && <PurgeNote days={data.retention_days} />}
       <div className="space-y-4">
         {data.results.map((r, i) => (
           <div key={i} className="card p-5">
@@ -264,7 +279,7 @@ export default function TestResultPage() {
                 <div className="mt-3 space-y-1.5 text-sm">
                   {!r.is_correct && (
                     <div className="text-red-600">
-                      <span className="text-ink-subtle">Your answer:</span> {r.your_answer || "— (not answered)"}
+                      <span className="text-ink-subtle">Your answer:</span> {r.your_answer || (data.purged ? "(removed for privacy)" : "— (not answered)")}
                     </div>
                   )}
                   <div className="text-emerald-700">

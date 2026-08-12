@@ -132,3 +132,5 @@ class TestAttempt(Base):
     marked_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)  # teacher/admin who marked
     time_taken_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
     completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    # set when the student's raw response (answers + photos) is purged by retention policy
+    purged_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

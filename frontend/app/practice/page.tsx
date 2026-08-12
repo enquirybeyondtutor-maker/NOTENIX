@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { PenLine, FileUp, Lock, Sparkles, ArrowRight, BookOpen, CheckCircle2, Hourglass, Wand2 } from "lucide-react";
+import { PenLine, FileUp, Lock, Sparkles, ArrowRight, BookOpen, CheckCircle2, Hourglass, Wand2, X } from "lucide-react";
 import { practiceAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
@@ -37,7 +37,7 @@ export default function PracticePage() {
   const [error, setError] = useState("");
 
   // upload form
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [subject, setSubject] = useState("chemistry");
   const [level, setLevel] = useState("GCSE");
   const [uploading, setUploading] = useState(false);
@@ -54,18 +54,18 @@ export default function PracticePage() {
 
   async function upload(e: React.FormEvent) {
     e.preventDefault();
-    if (!file) { setError("Choose a PDF past paper to upload."); return; }
+    if (files.length === 0) { setError("Choose a PDF or image to upload."); return; }
     setError("");
     setUploading(true);
     try {
       const fd = new FormData();
-      fd.append("file", file);
+      files.forEach((f) => fd.append("files", f));
       fd.append("subject", subject);
       fd.append("level", level);
       const { data } = await practiceAPI.uploadPaper(fd);
       router.push(`/tests/${data.assignment_id}`);
     } catch (e: any) {
-      setError(e.response?.data?.detail || "Couldn't read that paper. Try a clearer PDF.");
+      setError(e.response?.data?.detail || "Couldn't read that paper. Try a clearer file.");
       setUploading(false);
     }
   }
@@ -140,10 +140,28 @@ export default function PracticePage() {
         </div>
         <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-line-strong bg-slate-50 px-4 py-8 text-center transition-colors hover:border-brand-400 hover:bg-brand-50/40">
           <FileUp size={22} className="text-ink-subtle" />
-          <span className="mt-2 text-sm font-medium text-ink">{file ? file.name : "Choose a PDF or image"}</span>
-          <span className="mt-0.5 text-xs text-ink-subtle">PDF, PNG or JPG · Max 15 MB</span>
-          <input type="file" accept="application/pdf,.pdf,image/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+          <span className="mt-2 text-sm font-medium text-ink">{files.length ? "Add more files" : "Choose a PDF or images"}</span>
+          <span className="mt-0.5 text-xs text-ink-subtle">PDF, PNG or JPG · up to 10 files · 15 MB each</span>
+          <input type="file" accept="application/pdf,.pdf,image/*" multiple className="hidden"
+            onChange={(e) => {
+              const picked = Array.from(e.target.files || []);
+              setFiles((prev) => [...prev, ...picked].slice(0, 10));
+              e.target.value = "";
+            }} />
         </label>
+        {files.length > 0 && (
+          <ul className="space-y-2">
+            {files.map((f, i) => (
+              <li key={i} className="flex items-center justify-between gap-3 rounded-lg border border-line bg-white px-3 py-2 text-sm">
+                <span className="truncate text-ink">{i + 1}. {f.name}</span>
+                <button type="button" onClick={() => setFiles((prev) => prev.filter((_, j) => j !== i))}
+                  className="shrink-0 text-ink-subtle hover:text-red-600" title="Remove">
+                  <X size={15} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="grid gap-5 sm:grid-cols-2">
           <Field label="Subject">
             <Select value={subject} onChange={(e) => setSubject(e.target.value)}>
@@ -155,7 +173,7 @@ export default function PracticePage() {
           </Field>
         </div>
         <div className="flex justify-end border-t border-line pt-5">
-          <Button type="submit" disabled={!file}><FileUp size={16} /> Start practice</Button>
+          <Button type="submit" disabled={files.length === 0}><FileUp size={16} /> Start practice</Button>
         </div>
       </form>
 

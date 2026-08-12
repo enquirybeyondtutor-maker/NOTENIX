@@ -1,14 +1,32 @@
+import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
+from services.retention import purge_old_responses
 from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking
+
+
+async def _retention_loop():
+    """Purge expired student responses on boot, then once a day."""
+    while True:
+        try:
+            n = await purge_old_responses()
+            if n:
+                print(f"[retention] purged responses from {n} record(s)")
+        except Exception as e:  # never let the loop die
+            print(f"[retention] purge failed: {e}")
+        await asyncio.sleep(24 * 3600)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    yield
+    task = asyncio.create_task(_retention_loop())
+    try:
+        yield
+    finally:
+        task.cancel()
 
 
 app = FastAPI(title="Notenix API", version="2.0", lifespan=lifespan)

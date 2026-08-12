@@ -12,7 +12,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import require_write_practice, ai_marks_for
 from services import ai
-from services.pdf_extract import render_pages_to_png, crop_figures, ensure_pdf, is_image_upload
+from services.pdf_extract import render_pages_to_png, crop_figures, read_uploads
 
 router = APIRouter(prefix="/practice", tags=["practice"])
 
@@ -88,7 +88,7 @@ async def start_library(test_id: int, user: User = Depends(require_write_practic
 
 @router.post("/upload")
 async def upload_paper(
-    file: UploadFile = File(...),
+    files: list[UploadFile] = File(...),
     subject: str = Form("general"),
     level: str = Form("GCSE"),
     title: str = Form(""),
@@ -96,15 +96,10 @@ async def upload_paper(
     user: User = Depends(require_write_practice),
     db: AsyncSession = Depends(get_db),
 ):
-    """Upload a past-paper PDF or image (screenshot/photo) → extract its written
-    questions → start a private practice test the student can answer immediately."""
-    fname = file.filename or ""
-    if not (fname.lower().endswith(".pdf") or is_image_upload(fname)):
-        raise HTTPException(400, "Please upload a PDF or an image (PNG/JPG).")
-    data = await file.read()
-    if len(data) > 15 * 1024 * 1024:
-        raise HTTPException(400, "File too large (max 15 MB).")
-    data = ensure_pdf(data, fname)
+    """Upload one or more past-paper PDFs/images (screenshots/photos) → extract the
+    written questions → start a private practice test the student can answer now."""
+    data = await read_uploads(files)
+    first_name = files[0].filename or "Practice"
 
     n = max(1, min(num_questions, 20))
     try:
@@ -112,16 +107,16 @@ async def upload_paper(
     except Exception:
         images = []
     if not images:
-        raise HTTPException(422, "Couldn't read that PDF. It may be corrupted or password-protected.")
+        raise HTTPException(422, "Couldn't read that file. It may be corrupted or password-protected.")
 
     questions = ai.extract_written_from_images(images, subject, level, n)
     if not questions:
-        raise HTTPException(502, "Couldn't find written questions in that paper. Try a clearer PDF.")
+        raise HTTPException(502, "Couldn't find written questions in that paper. Try a clearer file.")
     questions = crop_figures(data, questions)
 
     test = Test(
         owner_id=user.id,
-        title=(title.strip() or (file.filename or "Practice").rsplit(".", 1)[0])[:200],
+        title=(title.strip() or first_name.rsplit(".", 1)[0])[:200],
         subject=subject, topic="Self-practice", level=level,
         exam_board="", difficulty="medium",
         mode="written", is_library=False,

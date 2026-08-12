@@ -9,6 +9,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import get_current_user, ai_marks_for
 from services.grading import grade_mcq, grade_written, estimate_grade, _pending_written_results
+from config import settings
 
 router = APIRouter(prefix="/tests", tags=["student-tests"])
 
@@ -271,6 +272,8 @@ async def get_result(assignment_id: int, user: User = Depends(get_current_user),
         "level": test.level,
         "mode": getattr(test, "mode", "mcq"),
         "status": getattr(attempt, "status", "graded"),
+        "purged": getattr(attempt, "purged_at", None) is not None,
+        "retention_days": settings.response_retention_days,
         "score": None if pending else attempt.score,
         "grade": None if pending else attempt.grade,
         "time_taken_seconds": attempt.time_taken_seconds,

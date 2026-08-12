@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     # Freemium limits
     free_quiz_limit: int = 3
 
+    # Data retention: student responses (typed answers + uploaded photos) are purged
+    # this many days after submission. Marks, grades and feedback are kept. 0 = never.
+    response_retention_days: int = 28
+
     # Admin — comma-separated emails auto-treated as admin (for /admin dashboard)
     admin_emails: str = ""
 

@@ -90,6 +90,7 @@ async def run_migrations():
             await conn.execute(text("UPDATE test_attempts SET status = 'graded' WHERE status IS NULL"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS marked_by INTEGER"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS answer_images JSON"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS purged_at TIMESTAMP"))
         elif dialect == "sqlite":
             # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
@@ -121,3 +122,5 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN marked_by INTEGER"))
             if acols and "answer_images" not in acols:
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN answer_images JSON"))
+            if acols and "purged_at" not in acols:
+                await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN purged_at TIMESTAMP"))
