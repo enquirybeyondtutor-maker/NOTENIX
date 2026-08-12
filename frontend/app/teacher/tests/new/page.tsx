@@ -150,8 +150,8 @@ export default function NewTestPage() {
 
   const MODES: { id: Mode; label: string; icon: typeof Wand2; desc: string }[] = [
     { id: "ai", label: "AI generate", icon: Wand2, desc: "From a topic" },
-    { id: "manual", label: "Write manually", icon: PenLine, desc: "Author each question" },
-    { id: "pdf", label: "From PDF", icon: FileUp, desc: "Upload a past paper" },
+    { id: "manual", label: "Write manually", icon: PenLine, desc: "Author each MCQ" },
+    { id: "pdf", label: "From PDF or image", icon: FileUp, desc: "Past paper → MCQ or written" },
   ];
 
   return (
@@ -166,7 +166,7 @@ export default function NewTestPage() {
         </span>
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-ink">Create a test</h1>
-          <p className="mt-1 text-sm text-ink-muted">Generate with AI, write your own questions, or upload a PDF.</p>
+          <p className="mt-1 text-sm text-ink-muted">Generate with AI, write questions by hand, or upload a PDF or image — as multiple-choice or written-answer.</p>
         </div>
       </div>
 
