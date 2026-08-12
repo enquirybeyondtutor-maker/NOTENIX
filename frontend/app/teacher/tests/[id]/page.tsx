@@ -27,7 +27,7 @@ interface Detail {
     exam_board: string; num_questions: number; duration_minutes: number | null;
     mode?: "mcq" | "written"; is_library?: boolean;
     share_token: string | null;
-    questions: { question: string; options?: string[]; marks?: number; mark_scheme?: string }[];
+    questions: { question: string; options?: string[]; marks?: number; mark_scheme?: string; image?: string | null }[];
   };
   assignments: Assignment[];
 }
@@ -248,6 +248,7 @@ export default function TeacherTestDetailPage() {
                   )}
                 </div>
                 <p className="mt-1 whitespace-pre-line text-sm font-medium text-ink">{q.question}</p>
+                {q.image && <img src={q.image} alt="Question figure" className="mt-2 max-h-72 w-auto max-w-full rounded-lg border border-line" />}
                 {isWritten ? (
                   q.mark_scheme && (
                     <div className="mt-2 whitespace-pre-line rounded-lg bg-slate-50 p-2.5 text-xs text-ink-muted">

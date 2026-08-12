@@ -75,6 +75,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
             "question": q.get("question"),
             "marks": q.get("marks"),
             "mark_scheme": q.get("mark_scheme"),
+            "image": q.get("image"),
             "your_answer": answers[i] if i < len(answers) else "",
         })
     return {

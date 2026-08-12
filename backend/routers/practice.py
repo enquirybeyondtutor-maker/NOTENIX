@@ -12,7 +12,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import require_write_practice, ai_marks_for
 from services import ai
-from services.pdf_extract import render_pages_to_png
+from services.pdf_extract import render_pages_to_png, crop_figures
 
 router = APIRouter(prefix="/practice", tags=["practice"])
 
@@ -115,6 +115,7 @@ async def upload_paper(
     questions = ai.extract_written_from_images(images, subject, level, n)
     if not questions:
         raise HTTPException(502, "Couldn't find written questions in that paper. Try a clearer PDF.")
+    questions = crop_figures(data, questions)
 
     test = Test(
         owner_id=user.id,

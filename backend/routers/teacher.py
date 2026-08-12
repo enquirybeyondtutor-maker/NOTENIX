@@ -10,7 +10,7 @@ from database import get_db
 from models import User, Question, Test, TestAssignment, TestAttempt
 from security import require_teacher, is_admin
 from services import ai
-from services.pdf_extract import extract_text, render_pages_to_png
+from services.pdf_extract import extract_text, render_pages_to_png, crop_figures
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
 
@@ -226,6 +226,9 @@ async def create_test_from_pdf(
         if not generated:
             raise HTTPException(502, "Could not read questions from the document. Please try again or use a clearer PDF.")
 
+    # Crop any figures/diagrams the vision model located and embed them in the questions.
+    generated = crop_figures(data, generated)
+
     test = Test(
         owner_id=teacher.id,
         title=(title.strip() or (file.filename or "PDF").rsplit(".", 1)[0])[:200],
@@ -314,10 +317,10 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
 
     if is_written:
         preview = [{"question": q.get("question"), "marks": q.get("marks"),
-                    "mark_scheme": q.get("mark_scheme")} for q in test.questions]
+                    "mark_scheme": q.get("mark_scheme"), "image": q.get("image")} for q in test.questions]
     else:
         # question text + options only (no answers) for teacher preview
-        preview = [{"question": q.get("question"), "options": q.get("options")} for q in test.questions]
+        preview = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
 
     return {
         "test": {

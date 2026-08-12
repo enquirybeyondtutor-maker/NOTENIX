@@ -118,10 +118,15 @@ def transcribe_mcqs_from_images(images: list[bytes], subject: str, n: int) -> li
             "numbers, units, equations and symbols verbatim. Include every answer option exactly as "
             "printed. If a question has no printed options, write four sensible options with the "
             "correct one included.\n\n"
+            "The page images are numbered 0, 1, 2 … in the order given. If a question has "
+            "an associated figure, diagram, graph, map or image, add a \"figure\" object: "
+            '{"page": <0-based page index it appears on>, "box": [x0,y0,x1,y1]} where the '
+            "box coordinates are fractions from 0 to 1 of that page's width/height "
+            "(top-left origin) tightly bounding just the figure. Omit \"figure\" if there is none.\n\n"
             "Return ONLY a JSON array; each object:\n"
             '{"question": "verbatim question text", "options": ["A) ...","B) ...","C) ...","D) ..."], '
             '"answer": "the exact correct option (must match one of options)", '
-            '"explanation": "one short sentence"}\n'
+            '"explanation": "one short sentence", "figure": {"page": 0, "box": [0.1,0.2,0.6,0.5]}}\n'
             "Return only the JSON array."
         ),
     }]
@@ -166,9 +171,15 @@ def extract_written_from_images(images: list[bytes], subject: str, level: str, n
             "Use the printed mark allocation (e.g. '[6 marks]'); if none is printed, estimate a sensible "
             "one. For each question also draft a concise mark scheme (credit-worthy points, roughly one "
             "per mark).\n\n"
+            "The page images are numbered 0, 1, 2 … in the order given. If a question has an associated "
+            "figure, diagram, graph, map or image, add a \"figure\" object: "
+            '{"page": <0-based page index it appears on>, "box": [x0,y0,x1,y1]} where the box '
+            "coordinates are fractions from 0 to 1 of that page's width/height (top-left origin) tightly "
+            "bounding just the figure. Omit \"figure\" if there is none.\n\n"
             "Return ONLY a JSON array; each object:\n"
             '{"question": "verbatim question text", "marks": <int>, '
-            '"mark_scheme": "bullet points of credit-worthy points, one per line"}\n'
+            '"mark_scheme": "bullet points of credit-worthy points, one per line", '
+            '"figure": {"page": 0, "box": [0.1,0.2,0.6,0.5]}}\n'
             "Return only the JSON array."
         ),
     }]
@@ -193,11 +204,14 @@ def extract_written_from_images(images: list[bytes], subject: str, level: str, n
                         marks = max(1, min(int(q.get("marks", 1)), 30))
                     except (TypeError, ValueError):
                         marks = 1
-                    out.append({
+                    item = {
                         "question": (q.get("question") or "").strip(),
                         "marks": marks,
                         "mark_scheme": (q.get("mark_scheme") or "").strip(),
-                    })
+                    }
+                    if isinstance(q.get("figure"), dict):
+                        item["figure"] = q["figure"]  # cropped to an image later
+                    out.append(item)
                 out = [q for q in out if q["question"]]
                 if out:
                     return out

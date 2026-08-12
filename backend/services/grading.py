@@ -18,6 +18,7 @@ def grade_mcq(questions: list[dict], answers: list) -> tuple[float, list[dict]]:
         results.append({
             "question": q.get("question"),
             "options": q.get("options"),
+            "image": q.get("image"),
             "your_answer": given,
             "correct_answer": right,
             "is_correct": is_correct,
@@ -34,6 +35,7 @@ def _pending_written_results(questions: list[dict], answers: list) -> list[dict]
         results.append({
             "question": q.get("question"),
             "marks": q.get("marks"),
+            "image": q.get("image"),
             "your_answer": answers[i] if i < len(answers) else "",
             "marks_awarded": None,
             "feedback": None,
@@ -51,14 +53,14 @@ async def grade_written(questions: list[dict], answers: list, subject: str) -> t
         marks = int(q.get("marks") or 0)
         if not ans.strip():
             return {
-                "question": q.get("question"), "marks": marks, "your_answer": ans,
+                "question": q.get("question"), "marks": marks, "image": q.get("image"), "your_answer": ans,
                 "marks_awarded": 0, "feedback": "No answer was given.", "model_answer": "",
             }
         m = await run_in_threadpool(
             ai.mark_answer, q.get("question", ""), marks, q.get("mark_scheme", ""), ans, subject,
         )
         return {
-            "question": q.get("question"), "marks": marks, "your_answer": ans,
+            "question": q.get("question"), "marks": marks, "image": q.get("image"), "your_answer": ans,
             "marks_awarded": m.get("marks_awarded", 0),
             "feedback": m.get("feedback", ""),
             "model_answer": m.get("model_answer", ""),
@@ -86,6 +88,7 @@ def finalize_written_marks(questions: list[dict], per_q: list[dict], answers: li
         results.append({
             "question": q.get("question"),
             "marks": marks,
+            "image": q.get("image"),
             "your_answer": answers[i] if i < len(answers) else "",
             "marks_awarded": got,
             "feedback": (entry.get("feedback") or "").strip(),

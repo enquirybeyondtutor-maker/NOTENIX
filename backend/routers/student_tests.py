@@ -122,10 +122,10 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
     mode = getattr(test, "mode", "mcq")
     if mode == "written":
         # written questions: marks visible, mark scheme hidden
-        safe = [{"question": q.get("question"), "marks": q.get("marks")} for q in test.questions]
+        safe = [{"question": q.get("question"), "marks": q.get("marks"), "image": q.get("image")} for q in test.questions]
     else:
         # MCQ questions WITHOUT answers/explanations
-        safe = [{"question": q.get("question"), "options": q.get("options")} for q in test.questions]
+        safe = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
     return {
         "assignment_id": assignment.id,
         "test_id": test.id,

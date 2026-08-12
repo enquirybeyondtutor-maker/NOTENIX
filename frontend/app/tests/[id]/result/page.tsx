@@ -12,6 +12,7 @@ import { cn, humanize } from "@/lib/utils";
 interface QResult {
   question: string;
   options?: string[];
+  image?: string | null;
   your_answer: string | null;
   // MCQ
   correct_answer?: string;
@@ -100,6 +101,7 @@ export default function TestResultPage() {
                 )}
               </div>
               <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>
+              {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
               <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
                 {r.your_answer || "— (not answered)"}
               </div>
@@ -160,6 +162,7 @@ export default function TestResultPage() {
                   </span>
                 </div>
                 <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>
+                {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
 
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
                   <span className="mb-1 flex items-center gap-1.5 font-medium text-ink"><PenLine size={13} /> Your answer</span>
@@ -239,6 +242,7 @@ export default function TestResultPage() {
               <div className="flex-1">
                 <div className="text-xs font-medium text-ink-subtle">Question {i + 1}</div>
                 <p className="mt-1 font-medium text-ink">{r.question}</p>
+                {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
 
                 <div className="mt-3 space-y-1.5 text-sm">
                   {!r.is_correct && (
