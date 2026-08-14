@@ -89,6 +89,14 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
         "subject": test.subject,
         "level": test.level,
         "questions": questions,
+        "integrity": {
+            "focus_lost": getattr(attempt, "focus_lost_count", 0) or 0,
+            "time_away_seconds": getattr(attempt, "time_away_seconds", 0) or 0,
+            "paste_attempts": getattr(attempt, "paste_attempts", 0) or 0,
+            "auto_submitted": bool(getattr(attempt, "auto_submitted", False)),
+            "ai_flag": getattr(attempt, "ai_flag", None),
+            "ai_notes": getattr(attempt, "ai_notes", None),
+        },
     }
 
 

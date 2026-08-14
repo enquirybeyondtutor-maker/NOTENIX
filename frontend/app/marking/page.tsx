@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import { CheckSquare, ArrowLeft, User as UserIcon, ClipboardList, Send, AlertCircle } from "lucide-react";
-import { markingAPI } from "@/lib/api";
+import { CheckSquare, ArrowLeft, User as UserIcon, ClipboardList, Send, AlertCircle, ShieldAlert, Bot, Eye } from "lucide-react";
+import { markingAPI, teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
@@ -25,6 +25,14 @@ interface MarkQ {
   answer_images?: string[] | null;
   your_answer: string;
 }
+interface Integrity {
+  focus_lost: number;
+  time_away_seconds: number;
+  paste_attempts: number;
+  auto_submitted: boolean;
+  ai_flag: string | null;
+  ai_notes: string | null;
+}
 interface Detail {
   attempt_id: number;
   student: string;
@@ -32,8 +40,14 @@ interface Detail {
   subject: string;
   level: string;
   questions: MarkQ[];
+  integrity?: Integrity;
 }
 interface Entry { marks_awarded: number; feedback: string; model_answer: string }
+
+function fmtAway(s: number) {
+  if (s < 60) return `${s}s`;
+  return `${Math.floor(s / 60)}m ${s % 60}s`;
+}
 
 export default function MarkingPage() {
   const { ready } = useAuthGuard("teacher");
@@ -43,6 +57,8 @@ export default function MarkingPage() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [aiCheck, setAiCheck] = useState<{ verdict: string; notes: string } | null>(null);
+  const [aiBusy, setAiBusy] = useState(false);
 
   const loadQueue = useCallback(() => {
     setLoading(true);
@@ -56,12 +72,28 @@ export default function MarkingPage() {
 
   async function open(id: number) {
     setError("");
+    setAiCheck(null);
     try {
       const { data } = await markingAPI.get(id);
       setDetail(data);
       setEntries(data.questions.map(() => ({ marks_awarded: 0, feedback: "", model_answer: "" })));
+      if (data.integrity?.ai_flag) setAiCheck({ verdict: data.integrity.ai_flag, notes: data.integrity.ai_notes || "" });
     } catch (e: any) {
       setError(e.response?.data?.detail || "Could not open this attempt.");
+    }
+  }
+
+  async function runAiCheck() {
+    if (!detail) return;
+    setAiBusy(true);
+    setError("");
+    try {
+      const { data } = await teacherAPI.aiCheck(detail.attempt_id);
+      setAiCheck({ verdict: data.verdict, notes: data.notes });
+    } catch (e: any) {
+      setError(e.response?.data?.detail || "AI check failed.");
+    } finally {
+      setAiBusy(false);
     }
   }
 
@@ -111,6 +143,43 @@ export default function MarkingPage() {
             <div className="text-2xl font-bold text-ink">{awarded}<span className="text-base text-ink-subtle">/{totalMarks}</span></div>
           </div>
         </div>
+
+        {/* Integrity panel */}
+        {detail.integrity && (
+          <div className="card mb-6 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-sm font-semibold text-ink">
+                <ShieldAlert size={16} className="text-ink-subtle" /> Integrity
+              </div>
+              <Button size="sm" variant="secondary" onClick={runAiCheck} loading={aiBusy}>
+                <Bot size={14} /> {aiBusy ? "Checking…" : "Check for AI"}
+              </Button>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs">
+              <span className={`rounded-lg px-2.5 py-1 font-medium ${detail.integrity.focus_lost >= 3 ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-ink-muted"}`}>
+                <Eye size={11} className="mr-1 inline" /> Left tab {detail.integrity.focus_lost}× · away {fmtAway(detail.integrity.time_away_seconds)}
+              </span>
+              <span className={`rounded-lg px-2.5 py-1 font-medium ${detail.integrity.paste_attempts > 0 ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-ink-muted"}`}>
+                {detail.integrity.paste_attempts} paste attempt{detail.integrity.paste_attempts === 1 ? "" : "s"}
+              </span>
+              {detail.integrity.auto_submitted && (
+                <span className="rounded-lg bg-slate-100 px-2.5 py-1 font-medium text-ink-muted">Auto-submitted (time ran out)</span>
+              )}
+            </div>
+            {aiCheck && (
+              <div className={`mt-3 rounded-lg border p-3 text-sm ${
+                aiCheck.verdict === "likely_ai" ? "border-red-200 bg-red-50 text-red-700"
+                : aiCheck.verdict === "likely_human" ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                : "border-line bg-slate-50 text-ink-muted"}`}>
+                <span className="font-semibold">
+                  AI check: {aiCheck.verdict === "likely_ai" ? "Likely AI-written" : aiCheck.verdict === "likely_human" ? "Likely the student" : "Uncertain"}
+                </span>
+                {aiCheck.notes && <span> — {aiCheck.notes}</span>}
+                <span className="mt-1 block text-xs opacity-70">A soft signal, not proof. Use your judgement.</span>
+              </div>
+            )}
+          </div>
+        )}
 
         {error && (
           <div className="mb-5 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">

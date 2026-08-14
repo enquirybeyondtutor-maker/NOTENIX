@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from services.retention import purge_old_responses
+from services.sittings import auto_submit_expired
 from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking
 
 
@@ -19,14 +20,27 @@ async def _retention_loop():
         await asyncio.sleep(24 * 3600)
 
 
+async def _sittings_loop():
+    """Finalize timed sittings whose clock has run out, every minute."""
+    while True:
+        try:
+            n = await auto_submit_expired()
+            if n:
+                print(f"[sittings] auto-submitted {n} expired sitting(s)")
+        except Exception as e:
+            print(f"[sittings] sweep failed: {e}")
+        await asyncio.sleep(60)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    task = asyncio.create_task(_retention_loop())
+    tasks = [asyncio.create_task(_retention_loop()), asyncio.create_task(_sittings_loop())]
     try:
         yield
     finally:
-        task.cancel()
+        for t in tasks:
+            t.cancel()
 
 
 app = FastAPI(title="Notenix API", version="2.0", lifespan=lifespan)

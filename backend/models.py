@@ -110,6 +110,11 @@ class TestAssignment(Base):
     class_label: Mapped[str | None] = mapped_column(String(80), nullable=True)  # e.g. "Year 11 Chem"
     due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     status: Mapped[str] = mapped_column(String(20), default="assigned", index=True)  # assigned | completed
+    # Server-anchored exam clock: set when the student first opens the test so the
+    # countdown can't be reset by closing/reopening the tab.
+    started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # Autosaved in-progress text answers so a resumed sitting isn't blank.
+    draft_answers: Mapped[list | None] = mapped_column(JSON, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 
@@ -130,6 +135,13 @@ class TestAttempt(Base):
     # graded (MCQ or Pro AI-marked) | awaiting_marking (non-Pro written, pending human marking)
     status: Mapped[str] = mapped_column(String(20), default="graded", server_default="graded", index=True)
     marked_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)  # teacher/admin who marked
+    # ── Integrity / anti-cheat signals captured during the sitting ──
+    focus_lost_count: Mapped[int] = mapped_column(Integer, default=0, server_default="0")   # tab/window switches
+    time_away_seconds: Mapped[int] = mapped_column(Integer, default=0, server_default="0")   # total time off-tab
+    paste_attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")       # blocked paste events
+    auto_submitted: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")  # finalized by the sweep
+    ai_flag: Mapped[str | None] = mapped_column(String(20), nullable=True)   # likely_ai | likely_human | uncertain
+    ai_notes: Mapped[str | None] = mapped_column(Text, nullable=True)        # examiner-facing AI-check reasoning
     time_taken_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
     completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     # set when the student's raw response (answers + photos) is purged by retention policy

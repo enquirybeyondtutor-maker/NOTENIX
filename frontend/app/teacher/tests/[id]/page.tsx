@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Users, Send, AlertCircle, CheckCircle2, Clock, UserPlus, Link2, Copy, Check, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, Users, Send, AlertCircle, CheckCircle2, Clock, UserPlus, Link2, Copy, Check, Pencil, Trash2, ShieldCheck } from "lucide-react";
 import { teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, Spinner } from "@/components/ui/Page";
@@ -10,8 +10,16 @@ import { Button } from "@/components/ui/Button";
 import { Input, Field } from "@/components/ui/Input";
 import { cn, humanize, formatDate } from "@/lib/utils";
 
+interface Integrity {
+  focus_lost: number;
+  time_away_seconds: number;
+  paste_attempts: number;
+  auto_submitted: boolean;
+  ai_flag: string | null;
+}
 interface Assignment {
   assignment_id: number;
+  attempt_id: number | null;
   student: string;
   email: string;
   class_label: string | null;
@@ -20,6 +28,24 @@ interface Assignment {
   score: number | null;
   grade: string | null;
   completed_at: string | null;
+  integrity: Integrity | null;
+}
+
+function IntegrityFlags({ i }: { i: Integrity | null }) {
+  if (!i) return <span className="text-ink-subtle">—</span>;
+  const flags: { label: string; tone: string }[] = [];
+  if (i.ai_flag === "likely_ai") flags.push({ label: "AI?", tone: "bg-red-50 text-red-700" });
+  if (i.focus_lost > 0) flags.push({ label: `${i.focus_lost}× left tab`, tone: i.focus_lost >= 3 ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-ink-muted" });
+  if (i.paste_attempts > 0) flags.push({ label: `${i.paste_attempts} paste`, tone: "bg-amber-50 text-amber-700" });
+  if (i.auto_submitted) flags.push({ label: "auto-submitted", tone: "bg-slate-100 text-ink-muted" });
+  if (flags.length === 0) return <span className="inline-flex items-center gap-1 text-xs text-emerald-600"><ShieldCheck size={12} /> Clean</span>;
+  return (
+    <div className="flex flex-wrap gap-1">
+      {flags.map((f, k) => (
+        <span key={k} className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${f.tone}`}>{f.label}</span>
+      ))}
+    </div>
+  );
 }
 interface Detail {
   test: {
@@ -200,6 +226,7 @@ export default function TeacherTestDetailPage() {
                     <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-ink-subtle">
                       <th className="px-4 py-3 font-medium">Student</th>
                       <th className="px-4 py-3 font-medium">Status</th>
+                      <th className="px-4 py-3 font-medium">Integrity</th>
                       <th className="px-4 py-3 font-medium text-right">Score</th>
                       <th className="px-4 py-3 font-medium text-right">Grade</th>
                     </tr>
@@ -220,6 +247,7 @@ export default function TeacherTestDetailPage() {
                             <span className="badge-warning"><Clock size={12} /> Assigned</span>
                           )}
                         </td>
+                        <td className="px-4 py-3"><IntegrityFlags i={a.integrity} /></td>
                         <td className="px-4 py-3 text-right font-semibold text-ink">
                           {a.score != null ? `${a.score}%` : "—"}
                         </td>

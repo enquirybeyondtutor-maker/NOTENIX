@@ -1,5 +1,6 @@
 """Teacher endpoints: author tests, assign to students, review results."""
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
@@ -359,6 +360,14 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
             "score": None if (not at or pending) else at.score,
             "grade": None if (not at or pending) else at.grade,
             "completed_at": at.completed_at.isoformat() if at and at.completed_at else None,
+            # integrity signals (null when not yet attempted)
+            "integrity": None if not at else {
+                "focus_lost": getattr(at, "focus_lost_count", 0) or 0,
+                "time_away_seconds": getattr(at, "time_away_seconds", 0) or 0,
+                "paste_attempts": getattr(at, "paste_attempts", 0) or 0,
+                "auto_submitted": bool(getattr(at, "auto_submitted", False)),
+                "ai_flag": getattr(at, "ai_flag", None),
+            },
         })
 
     if is_written:
@@ -481,6 +490,33 @@ async def delete_test(test_id: int, teacher: User = Depends(require_teacher), db
     await db.execute(sa_delete(Test).where(Test.id == test_id))
     await db.commit()
     return {"deleted": test_id}
+
+
+@router.post("/attempts/{attempt_id}/ai-check")
+async def ai_check(attempt_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Teacher-initiated: analyse a written attempt for likely AI authorship."""
+    row = (await db.execute(
+        select(TestAttempt, Test).join(Test, Test.id == TestAttempt.test_id)
+        .where(TestAttempt.id == attempt_id)
+    )).first()
+    if not row:
+        raise HTTPException(404, "Attempt not found")
+    attempt, test = row
+    if not (is_admin(teacher) or test.owner_id == teacher.id):
+        raise HTTPException(403, "You don't have access to this attempt.")
+    if getattr(test, "mode", "mcq") != "written":
+        raise HTTPException(400, "AI check only applies to written answers.")
+    items = [
+        {"question": r.get("question", ""), "answer": r.get("your_answer", "")}
+        for r in (attempt.results or []) if (r.get("your_answer") or "").strip()
+    ]
+    if not items:
+        raise HTTPException(400, "No typed answers to check (the student may have uploaded photos, or the responses were removed).")
+    result = await run_in_threadpool(ai.assess_ai_likelihood, items, test.subject)
+    attempt.ai_flag = result.get("verdict")
+    attempt.ai_notes = result.get("notes")
+    await db.commit()
+    return result
 
 
 @router.get("/students")

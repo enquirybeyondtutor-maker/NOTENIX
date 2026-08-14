@@ -49,8 +49,12 @@ export const quizAPI = {
 export const testsAPI = {
   mine: () => api.get("/tests"),
   get: (assignmentId: number | string) => api.get(`/tests/${assignmentId}`),
-  submit: (assignmentId: number | string, data: { answers: any[]; answer_images?: string[][]; time_taken_seconds?: number }) =>
-    api.post(`/tests/${assignmentId}/submit`, data),
+  submit: (assignmentId: number | string, data: {
+    answers: any[]; answer_images?: string[][]; time_taken_seconds?: number;
+    focus_lost_count?: number; time_away_seconds?: number; paste_attempts?: number;
+  }) => api.post(`/tests/${assignmentId}/submit`, data),
+  saveDraft: (assignmentId: number | string, answers: any[]) =>
+    api.post(`/tests/${assignmentId}/draft`, { answers }),
   result: (assignmentId: number | string) => api.get(`/tests/${assignmentId}/result`),
   join: (token: string) => api.post(`/tests/join/${token}`),
 };
@@ -74,6 +78,7 @@ export const teacherAPI = {
   share: (id: number | string) => api.post(`/teacher/tests/${id}/share`),
   unshare: (id: number | string) => api.delete(`/teacher/tests/${id}/share`),
   students: () => api.get("/teacher/students"),
+  aiCheck: (attemptId: number | string) => api.post(`/teacher/attempts/${attemptId}/ai-check`),
 };
 
 export const adminAPI = {

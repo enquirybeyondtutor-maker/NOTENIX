@@ -91,6 +91,16 @@ async def run_migrations():
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS marked_by INTEGER"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS answer_images JSON"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS purged_at TIMESTAMP"))
+            # Server-anchored timer + draft autosave
+            await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS started_at TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS draft_answers JSON"))
+            # Integrity signals
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS focus_lost_count INTEGER DEFAULT 0"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS time_away_seconds INTEGER DEFAULT 0"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS paste_attempts INTEGER DEFAULT 0"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS auto_submitted BOOLEAN DEFAULT FALSE"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS ai_flag VARCHAR(20)"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS ai_notes TEXT"))
         elif dialect == "sqlite":
             # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
@@ -124,3 +134,15 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN answer_images JSON"))
             if acols and "purged_at" not in acols:
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN purged_at TIMESTAMP"))
+            for col, ddl in [
+                ("focus_lost_count", "INTEGER DEFAULT 0"), ("time_away_seconds", "INTEGER DEFAULT 0"),
+                ("paste_attempts", "INTEGER DEFAULT 0"), ("auto_submitted", "BOOLEAN DEFAULT 0"),
+                ("ai_flag", "VARCHAR(20)"), ("ai_notes", "TEXT"),
+            ]:
+                if acols and col not in acols:
+                    await conn.execute(text(f"ALTER TABLE test_attempts ADD COLUMN {col} {ddl}"))
+            ascols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(test_assignments)"))).all()}
+            if ascols and "started_at" not in ascols:
+                await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN started_at TIMESTAMP"))
+            if ascols and "draft_answers" not in ascols:
+                await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN draft_answers JSON"))

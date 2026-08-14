@@ -19,6 +19,14 @@ class SubmitIn(BaseModel):
     # written only: per-question list of uploaded answer photos (compressed JPEG data URIs)
     answer_images: list[list[str]] | None = None
     time_taken_seconds: int | None = None
+    # integrity signals gathered client-side during the sitting
+    focus_lost_count: int = 0
+    time_away_seconds: int = 0
+    paste_attempts: int = 0
+
+
+class DraftIn(BaseModel):
+    answers: list
 
 
 # Cap embedded answer photos so they don't bloat the attempts row.
@@ -158,6 +166,13 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
     else:
         # MCQ questions WITHOUT answers/explanations
         safe = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
+
+    # Anchor the exam clock on first open so it can't be reset by closing the tab.
+    now = datetime.utcnow()
+    if getattr(assignment, "started_at", None) is None:
+        assignment.started_at = now
+        await db.commit()
+
     return {
         "assignment_id": assignment.id,
         "test_id": test.id,
@@ -169,8 +184,26 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
         "mode": mode,
         "duration_minutes": test.duration_minutes,
         "due_at": assignment.due_at.isoformat() if assignment.due_at else None,
+        # server-anchored timer: client computes remaining = duration - (server_now - started_at)
+        "started_at": assignment.started_at.isoformat() if assignment.started_at else None,
+        "server_now": now.isoformat(),
+        "draft_answers": getattr(assignment, "draft_answers", None),
         "questions": safe,
     }
+
+
+@router.post("/{assignment_id}/draft")
+async def save_draft(assignment_id: int, data: DraftIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """Autosave in-progress text answers so a resumed sitting isn't blank."""
+    assignment, test = await _load_assignment(assignment_id, user, db)
+    existing = (await db.execute(
+        select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)
+    )).scalar_one_or_none()
+    if existing:
+        return {"saved": False}  # already submitted
+    assignment.draft_answers = data.answers
+    await db.commit()
+    return {"saved": True}
 
 
 @router.post("/{assignment_id}/submit")
@@ -203,9 +236,12 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
             answers=data.answers, answer_images=answer_images, results=results,
             score=0.0, grade=None,
             status="awaiting_marking", time_taken_seconds=data.time_taken_seconds,
+            focus_lost_count=max(0, data.focus_lost_count), time_away_seconds=max(0, data.time_away_seconds),
+            paste_attempts=max(0, data.paste_attempts),
         )
         db.add(attempt)
         assignment.status = "completed"
+        assignment.draft_answers = None
         await db.commit()
         await db.refresh(attempt)
         return {
@@ -227,9 +263,12 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
         assignment_id=assignment.id, test_id=test.id, student_id=user.id,
         answers=data.answers, results=results, score=score, grade=grade,
         status="graded", time_taken_seconds=data.time_taken_seconds,
+        focus_lost_count=max(0, data.focus_lost_count), time_away_seconds=max(0, data.time_away_seconds),
+        paste_attempts=max(0, data.paste_attempts),
     )
     db.add(attempt)
     assignment.status = "completed"
+    assignment.draft_answers = None
 
     # light gamification, consistent with quiz flow
     xp = int(score / 10) + (5 if score >= 80 else 0)

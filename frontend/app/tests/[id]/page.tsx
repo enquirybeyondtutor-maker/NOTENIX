@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2, ImagePlus, X } from "lucide-react";
 import { testsAPI, getUser } from "@/lib/api";
@@ -24,6 +24,9 @@ interface TestData {
   exam_board: string;
   mode?: "mcq" | "written";
   duration_minutes: number | null;
+  started_at?: string | null;
+  server_now?: string | null;
+  draft_answers?: (string | null)[] | null;
   questions: Question[];
 }
 
@@ -79,13 +82,46 @@ export default function AttemptTestPage() {
   const [submitting, setSubmitting] = useState(false);
   const [reviewOpen, setReviewOpen] = useState(false);
 
+  // Server-anchored deadline (local-clock ms). Set once the test loads.
+  const deadlineRef = useRef<number | null>(null);
+  // Integrity signals gathered during the sitting.
+  const focusLost = useRef(0);
+  const timeAwayMs = useRef(0);
+  const pasteAttempts = useRef(0);
+  const awayStart = useRef<number | null>(null);
+
+  const markAway = useCallback(() => {
+    if (awayStart.current == null) {
+      awayStart.current = Date.now();
+      focusLost.current += 1;
+    }
+  }, []);
+  const markBack = useCallback(() => {
+    if (awayStart.current != null) {
+      timeAwayMs.current += Date.now() - awayStart.current;
+      awayStart.current = null;
+    }
+  }, []);
+
   useEffect(() => {
     if (!ready) return;
     testsAPI
       .get(id)
       .then(({ data }) => {
         setTest(data);
-        if (data.duration_minutes) setRemaining(data.duration_minutes * 60);
+        // restore any autosaved draft
+        if (Array.isArray(data.draft_answers)) {
+          const restored: Record<number, string> = {};
+          data.draft_answers.forEach((a: string | null, i: number) => { if (a) restored[i] = a; });
+          if (Object.keys(restored).length) setAnswers(restored);
+        }
+        // server-anchored countdown: deadline = started_at + duration, in the local clock
+        if (data.duration_minutes && data.started_at && data.server_now) {
+          const skew = Date.now() - Date.parse(data.server_now); // localNow - serverNow
+          const deadline = Date.parse(data.started_at) + skew + data.duration_minutes * 60000;
+          deadlineRef.current = deadline;
+          setRemaining(Math.max(0, Math.round((deadline - Date.now()) / 1000)));
+        }
       })
       .catch((e) => setError(e.response?.data?.detail || "Could not load this test."))
       .finally(() => setLoading(false));
@@ -94,6 +130,7 @@ export default function AttemptTestPage() {
   const handleSubmit = useCallback(async () => {
     if (!test || submitting) return;
     setSubmitting(true);
+    markBack(); // flush any in-progress away time
     const ordered = test.questions.map((_, i) => answers[i] ?? "");
     const orderedImages = test.questions.map((_, i) => photos[i] ?? []);
     const hasAnyPhotos = orderedImages.some((imgs) => imgs.length > 0);
@@ -102,13 +139,16 @@ export default function AttemptTestPage() {
         answers: ordered,
         answer_images: hasAnyPhotos ? orderedImages : undefined,
         time_taken_seconds: Math.round((Date.now() - startedAt) / 1000),
+        focus_lost_count: focusLost.current,
+        time_away_seconds: Math.round(timeAwayMs.current / 1000),
+        paste_attempts: pasteAttempts.current,
       });
       router.replace(`/tests/${id}/result`);
     } catch (e: any) {
       setError(e.response?.data?.detail || "Submission failed. Please try again.");
       setSubmitting(false);
     }
-  }, [test, submitting, answers, photos, id, startedAt, router]);
+  }, [test, submitting, answers, photos, id, startedAt, router, markBack]);
 
   async function addPhotos(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -135,16 +175,44 @@ export default function AttemptTestPage() {
     setPhotos((p) => ({ ...p, [qi]: (p[qi] ?? []).filter((_, j) => j !== idx) }));
   }
 
-  // countdown
+  // Countdown driven by the server-anchored deadline — resilient to refresh/reopen.
   useEffect(() => {
-    if (remaining === null) return;
-    if (remaining <= 0) {
-      handleSubmit();
-      return;
-    }
-    const t = setInterval(() => setRemaining((r) => (r === null ? r : r - 1)), 1000);
+    if (deadlineRef.current == null) return;
+    const tick = () => {
+      const left = Math.max(0, Math.round((deadlineRef.current! - Date.now()) / 1000));
+      setRemaining(left);
+      if (left <= 0) handleSubmit();
+    };
+    tick();
+    const t = setInterval(tick, 1000);
     return () => clearInterval(t);
-  }, [remaining, handleSubmit]);
+  }, [test, handleSubmit]);
+
+  // Integrity: count tab/window switches and time spent away from the exam.
+  useEffect(() => {
+    if (!test) return;
+    const onVis = () => (document.hidden ? markAway() : markBack());
+    document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("blur", markAway);
+    window.addEventListener("focus", markBack);
+    return () => {
+      document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("blur", markAway);
+      window.removeEventListener("focus", markBack);
+    };
+  }, [test, markAway, markBack]);
+
+  // Autosave draft answers (text) every couple of seconds while working.
+  useEffect(() => {
+    if (!test || submitting) return;
+    const t = setTimeout(() => {
+      const ordered = test.questions.map((_, i) => answers[i] ?? "");
+      if (ordered.some((a) => a)) testsAPI.saveDraft(id, ordered).catch(() => {});
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [answers, test, id, submitting]);
+
+  const blockPaste = (e: React.ClipboardEvent) => { e.preventDefault(); pasteAttempts.current += 1; };
 
   const isAnswered = useCallback(
     (i: number) => Boolean((answers[i] ?? "").trim()) || (photos[i]?.length ?? 0) > 0,
@@ -180,7 +248,11 @@ export default function AttemptTestPage() {
   const lowTime = remaining !== null && remaining <= 60;
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-canvas">
+    <div
+      className="fixed inset-0 z-[60] flex flex-col bg-canvas"
+      onCopy={(e) => e.preventDefault()}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       {/* Exam top bar */}
       <header className="flex items-center justify-between border-b border-line bg-white px-4 py-3 sm:px-6">
         <div className="flex items-center gap-3">
@@ -262,6 +334,7 @@ export default function AttemptTestPage() {
                 <textarea
                   value={answers[current] ?? ""}
                   onChange={(e) => setAnswers((a) => ({ ...a, [current]: e.target.value }))}
+                  onPaste={blockPaste}
                   placeholder="Write your answer here…"
                   rows={12}
                   className="w-full resize-y rounded-xl border border-line bg-white p-4 text-sm leading-relaxed text-ink shadow-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
