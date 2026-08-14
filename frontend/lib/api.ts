@@ -61,6 +61,10 @@ export const teacherAPI = {
   createTest: (data: object) => api.post("/teacher/tests", data),
   createFromPdf: (formData: FormData) =>
     api.post("/teacher/tests/from-pdf", formData, { headers: { "Content-Type": "multipart/form-data" } }),
+  createPhotoQuestions: (data: {
+    title?: string; subject: string; topic?: string; level: string; exam_board?: string;
+    marks_per_question: number; images: string[]; is_library?: boolean;
+  }) => api.post("/teacher/tests/photo-questions", data),
   testDetail: (id: number | string) => api.get(`/teacher/tests/${id}`),
   testFull: (id: number | string) => api.get(`/teacher/tests/${id}/full`),
   updateTest: (id: number | string, data: object) => api.put(`/teacher/tests/${id}`, data),

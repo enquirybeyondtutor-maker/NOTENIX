@@ -44,6 +44,17 @@ class AssignIn(BaseModel):
     due_at: datetime | None = None
 
 
+class PhotoQuestionsIn(BaseModel):
+    title: str = ""
+    subject: str = "general"
+    topic: str = ""
+    level: str = "GCSE"
+    exam_board: str = ""
+    marks_per_question: int = 10
+    images: list[str] = []          # compressed image data URIs, one per question
+    is_library: bool = False
+
+
 class UpdateTestIn(BaseModel):
     title: str | None = None
     duration_minutes: int | None = None
@@ -235,6 +246,41 @@ async def create_test_from_pdf(
         mode=mode, is_library=library,
         questions=generated, num_questions=len(generated),
         duration_minutes=duration_minutes,
+    )
+    db.add(test)
+    await db.commit()
+    await db.refresh(test)
+    return _test_summary(test)
+
+
+@router.post("/tests/photo-questions")
+async def create_photo_questions(data: PhotoQuestionsIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Build a written test where each uploaded screenshot IS a question — shown whole,
+    no cropping, no AI transcription. Students answer (type/photo) and a teacher marks it."""
+    imgs = [i for i in (data.images or []) if isinstance(i, str) and i.startswith("data:image/")]
+    if not imgs:
+        raise HTTPException(400, "Add at least one screenshot.")
+    if len(imgs) > 20:
+        raise HTTPException(400, "You can add up to 20 screenshots.")
+    total = 0
+    for i in imgs:
+        if len(i) > 1_600_000:
+            raise HTTPException(400, "One of your screenshots is too large. Please use a smaller image.")
+        total += len(i)
+    if total > 32_000_000:
+        raise HTTPException(400, "Your screenshots are too large in total. Please add fewer.")
+
+    marks = max(1, min(int(data.marks_per_question or 10), 100))
+    questions = [{"question": "", "marks": marks, "mark_scheme": "", "image": uri} for uri in imgs]
+    library = bool(data.is_library) and is_admin(teacher)
+
+    test = Test(
+        owner_id=teacher.id,
+        title=(data.title.strip() or "Photo questions")[:200],
+        subject=data.subject, topic=data.topic.strip() or "From screenshots", level=data.level,
+        exam_board=(data.exam_board or "").strip(), difficulty="medium",
+        mode="written", is_library=library,
+        questions=questions, num_questions=len(questions),
     )
     db.add(test)
     await db.commit()

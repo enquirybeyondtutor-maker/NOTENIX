@@ -114,7 +114,7 @@ export default function TestResultPage() {
                   </span>
                 )}
               </div>
-              <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>
+              {r.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>}
               {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
               {(r.your_answer || !(r.answer_images?.length)) && (
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
@@ -185,7 +185,7 @@ export default function TestResultPage() {
                     {r.marks_awarded ?? 0} / {r.marks ?? 0} marks
                   </span>
                 </div>
-                <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>
+                {r.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>}
                 {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
 
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">

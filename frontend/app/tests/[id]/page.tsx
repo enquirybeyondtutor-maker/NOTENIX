@@ -249,7 +249,9 @@ export default function AttemptTestPage() {
                 </span>
               )}
             </div>
-            <h2 className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed text-ink sm:text-xl">{q.question}</h2>
+            {q.question && (
+              <h2 className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed text-ink sm:text-xl">{q.question}</h2>
+            )}
 
             {q.image && (
               <img src={q.image} alt="Question figure" className="mt-4 max-h-96 w-auto max-w-full rounded-lg border border-line" />

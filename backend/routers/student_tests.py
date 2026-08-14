@@ -189,9 +189,12 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
     # reliably grade handwriting — even for Pro students.
     answer_images = _sanitize_answer_images(data.answer_images, len(test.questions)) if mode == "written" else []
     has_photos = any(imgs for imgs in answer_images)
+    # Image-only questions (a screenshot IS the question, no transcribed text/mark scheme)
+    # can't be AI-graded — always route to a human.
+    image_only = any(q.get("image") and not (q.get("question") or "").strip() for q in test.questions)
 
-    # ── Written test that isn't AI-marked (non-Pro OR any photo answers): human marking. ──
-    if mode == "written" and (not ai_marks_for(user) or has_photos):
+    # ── Written test that isn't AI-marked (non-Pro, photo answers, or image questions): human marking. ──
+    if mode == "written" and (not ai_marks_for(user) or has_photos or image_only):
         results = _pending_written_results(test.questions, data.answers)
         for i, row in enumerate(results):
             row["answer_images"] = answer_images[i] if i < len(answer_images) else []

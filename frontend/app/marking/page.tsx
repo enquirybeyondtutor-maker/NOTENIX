@@ -125,8 +125,8 @@ export default function MarkingPage() {
                 <span className="text-sm font-semibold text-ink">Question {i + 1}</span>
                 <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-ink-muted">{q.marks} marks</span>
               </div>
-              <p className="mt-1 whitespace-pre-line font-medium text-ink">{q.question}</p>
-              {q.image && <img src={q.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
+              {q.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{q.question}</p>}
+              {q.image && <img src={q.image} alt="Question" className="mt-3 max-h-96 w-auto max-w-full rounded-lg border border-line" />}
 
               {q.mark_scheme && (
                 <div className="mt-3 whitespace-pre-line rounded-lg border border-brand-100 bg-brand-50/50 p-3 text-sm text-ink-muted">

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   FilePlus2, Sparkles, AlertCircle, ArrowLeft, Wand2, PenLine, FileUp,
-  Plus, Trash2, CheckCircle2, Loader2,
+  Plus, Trash2, CheckCircle2, Loader2, Images, X,
 } from "lucide-react";
 import { teacherAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
@@ -18,7 +18,7 @@ const BOARDS = ["AQA", "Edexcel", "OCR", "Cambridge", "WJEC", "CCEA"];
 const LEVELS = ["GCSE", "A-Level"];
 const DIFFICULTIES = ["easy", "medium", "hard"];
 
-type Mode = "ai" | "manual" | "pdf";
+type Mode = "ai" | "manual" | "pdf" | "photo";
 interface ManualQ {
   question: string;
   options: string[];
@@ -26,6 +26,32 @@ interface ManualQ {
   explanation: string;
 }
 const blankQ = (): ManualQ => ({ question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "" });
+
+const MAX_PHOTO_QS = 20;
+
+// Downscale + JPEG-compress an image in the browser before upload.
+function compressImage(file: File, maxSide = 1500): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * scale));
+      const h = Math.max(1, Math.round(img.height * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("Canvas not supported"));
+      ctx.drawImage(img, 0, 0, w, h);
+      let out = canvas.toDataURL("image/jpeg", 0.82);
+      if (out.length > 1_500_000) out = canvas.toDataURL("image/jpeg", 0.6);
+      resolve(out);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Could not read image")); };
+    img.src = url;
+  });
+}
 
 export default function NewTestPage() {
   const router = useRouter();
@@ -40,6 +66,9 @@ export default function NewTestPage() {
   const [faithful, setFaithful] = useState(true);
   const [pdfMode, setPdfMode] = useState<"mcq" | "written">("mcq");
   const [isLibrary, setIsLibrary] = useState(false);
+  const [photoImgs, setPhotoImgs] = useState<string[]>([]);   // compressed data URIs
+  const [photoMarks, setPhotoMarks] = useState(10);
+  const [photoBusy, setPhotoBusy] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const isAdmin = !!getUser()?.is_admin;
@@ -50,9 +79,46 @@ export default function NewTestPage() {
   const setOpt = (qi: number, oi: number, val: string) =>
     setQuestions((qs) => qs.map((q, idx) => (idx === qi ? { ...q, options: q.options.map((o, j) => (j === oi ? val : o)) } : q)));
 
+  async function addPhotoImgs(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setError("");
+    setPhotoBusy(true);
+    try {
+      const room = MAX_PHOTO_QS - photoImgs.length;
+      if (room <= 0) { setError(`You can add up to ${MAX_PHOTO_QS} screenshots.`); return; }
+      const picked = Array.from(files).filter((f) => f.type.startsWith("image/")).slice(0, room);
+      const encoded = await Promise.all(picked.map((f) => compressImage(f)));
+      setPhotoImgs((prev) => [...prev, ...encoded]);
+    } catch {
+      setError("Couldn't process one of those images. Please try another.");
+    } finally {
+      setPhotoBusy(false);
+    }
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+
+    // ---- Photo questions (each screenshot is a question, no transcription) ----
+    if (mode === "photo") {
+      if (photoImgs.length === 0) { setError("Add at least one screenshot."); return; }
+      setBusy(true);
+      try {
+        const { data } = await teacherAPI.createPhotoQuestions({
+          title: meta.title.trim(),
+          subject: meta.subject, topic: meta.topic.trim(), level: meta.level, exam_board: meta.exam_board,
+          marks_per_question: photoMarks, images: photoImgs,
+          is_library: isAdmin && isLibrary,
+        });
+        router.replace(`/teacher/tests/${data.id}`);
+        return;
+      } catch (e: any) {
+        setError(e.response?.data?.detail || "Could not create the test.");
+        setBusy(false);
+        return;
+      }
+    }
 
     // ---- Manual ----
     if (mode === "manual") {
@@ -136,11 +202,11 @@ export default function NewTestPage() {
   if (!ready) return <Spinner />;
 
   if (busy) {
-    const label = mode === "manual" ? "Saving your test…" : mode === "pdf" ? "Reading your PDF & writing questions…" : `Generating ${meta.num_questions} questions on ${meta.topic}…`;
+    const label = mode === "manual" || mode === "photo" ? "Saving your test…" : mode === "pdf" ? "Reading your PDF & writing questions…" : `Generating ${meta.num_questions} questions on ${meta.topic}…`;
     return (
       <div className="mx-auto flex max-w-md flex-col items-center px-4 py-24 text-center">
         <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand-600">
-          {mode === "manual" ? <Loader2 size={26} className="animate-spin" /> : <Wand2 size={26} className="animate-pulse" />}
+          {mode === "manual" || mode === "photo" ? <Loader2 size={26} className="animate-spin" /> : <Wand2 size={26} className="animate-pulse" />}
         </span>
         <h1 className="mt-5 text-lg font-semibold text-ink">{label}</h1>
         {mode !== "manual" && <p className="mt-1.5 text-sm text-ink-muted">This takes a few seconds.</p>}
@@ -152,6 +218,7 @@ export default function NewTestPage() {
     { id: "ai", label: "AI generate", icon: Wand2, desc: "From a topic" },
     { id: "manual", label: "Write manually", icon: PenLine, desc: "Author each MCQ" },
     { id: "pdf", label: "From PDF or image", icon: FileUp, desc: "Past paper → MCQ or written" },
+    { id: "photo", label: "Photo questions", icon: Images, desc: "Screenshots as questions" },
   ];
 
   return (
@@ -171,7 +238,7 @@ export default function NewTestPage() {
       </div>
 
       {/* Mode selector */}
-      <div className="mb-6 grid gap-3 sm:grid-cols-3">
+      <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {MODES.map((m) => (
           <button
             key={m.id}
@@ -328,6 +395,68 @@ export default function NewTestPage() {
             <div className="flex items-center justify-between border-t border-line pt-5">
               <span className="inline-flex items-center gap-1.5 text-xs text-ink-subtle"><Sparkles size={13} className="text-brand-600" /> AI reads your document</span>
               <Button type="submit" size="lg" disabled={pdfFiles.length === 0}><FileUp size={16} /> Build test</Button>
+            </div>
+          </div>
+        )}
+
+        {mode === "photo" && (
+          <div className="card space-y-5 p-6">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-50 text-brand-600"><Images size={17} /></span>
+                <div>
+                  <h2 className="text-base font-semibold text-ink">Screenshots as questions</h2>
+                  <p className="text-sm text-ink-muted">Each screenshot becomes one question, shown exactly as uploaded. Students answer (type or photo) and you mark it.</p>
+                </div>
+              </div>
+            </div>
+
+            <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-line-strong bg-slate-50 px-4 py-8 text-center transition-colors hover:border-brand-400 hover:bg-brand-50/40">
+              {photoBusy ? <Loader2 size={22} className="animate-spin text-brand-600" /> : <Images size={22} className="text-ink-subtle" />}
+              <span className="mt-2 text-sm font-medium text-ink">{photoImgs.length ? "Add more screenshots" : "Choose screenshots"}</span>
+              <span className="mt-0.5 text-xs text-ink-subtle">PNG or JPG · up to {MAX_PHOTO_QS} · {photoImgs.length}/{MAX_PHOTO_QS} added</span>
+              <input type="file" accept="image/*" multiple className="hidden" disabled={photoBusy}
+                onChange={(e) => { addPhotoImgs(e.target.files); e.target.value = ""; }} />
+            </label>
+
+            {photoImgs.length > 0 && (
+              <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+                {photoImgs.map((src, i) => (
+                  <div key={i} className="relative">
+                    <img src={src} alt={`Question ${i + 1}`} className="h-28 w-full rounded-lg border border-line object-cover" />
+                    <span className="absolute left-1 top-1 rounded bg-ink/70 px-1.5 py-0.5 text-[10px] font-semibold text-white">Q{i + 1}</span>
+                    <button type="button" onClick={() => setPhotoImgs((prev) => prev.filter((_, j) => j !== i))}
+                      className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-white text-ink-muted shadow ring-1 ring-line hover:text-red-600" title="Remove">
+                      <X size={13} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field label="Marks per question" hint="Applied to every question.">
+                <Input type="number" min={1} max={100} value={photoMarks}
+                  onChange={(e) => setPhotoMarks(Math.max(1, Math.min(100, Number(e.target.value) || 1)))} />
+              </Field>
+            </div>
+
+            {isAdmin && (
+              <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-white p-3">
+                <input type="checkbox" checked={isLibrary} onChange={(e) => setIsLibrary(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-line-strong text-brand-600 focus:ring-brand-500" />
+                <span>
+                  <span className="block text-sm font-semibold text-ink">Add to shared practice library</span>
+                  <span className="block text-xs text-ink-subtle">Any student with written-practice access can self-start this.</span>
+                </span>
+              </label>
+            )}
+
+            <div className="flex items-center justify-between border-t border-line pt-5">
+              <span className="text-xs text-ink-subtle">Marked by you — no AI transcription.</span>
+              <Button type="submit" size="lg" disabled={photoImgs.length === 0 || photoBusy}>
+                <Images size={16} /> Build test ({photoImgs.length})
+              </Button>
             </div>
           </div>
         )}
