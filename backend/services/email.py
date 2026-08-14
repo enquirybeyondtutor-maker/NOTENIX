@@ -26,29 +26,44 @@ def _from() -> tuple[str, str]:
     return name, email
 
 
-def _content(full_name: str, code: str) -> tuple[str, str, str]:
-    """Returns (subject, html, plaintext)."""
+def _content(full_name: str, code: str, kind: str = "verify") -> tuple[str, str, str]:
+    """Returns (subject, html, plaintext). kind = 'verify' | 'reset'."""
     mins = settings.otp_expiry_minutes
     name = (full_name or "there").split(" ")[0]
-    subject = f"{code} is your Notenix verification code"
-    text = (
-        f"Hi {name},\n\n"
-        f"Your Notenix verification code is: {code}\n\n"
-        f"It expires in {mins} minutes. If you didn't sign up, you can ignore this email.\n\n"
-        f"— Notenix"
-    )
+    if kind == "reset":
+        subject = f"{code} is your Notenix password reset code"
+        heading = "Reset your password"
+        lead = "enter this code to set a new password."
+        text = (
+            f"Hi {name},\n\n"
+            f"Your Notenix password reset code is: {code}\n\n"
+            f"It expires in {mins} minutes. If you didn't request a password reset, you can ignore this email.\n\n"
+            f"— Notenix"
+        )
+        ignore = "If you didn't request a password reset, you can safely ignore this email."
+    else:
+        subject = f"{code} is your Notenix verification code"
+        heading = "Verify your email"
+        lead = "enter this code to finish creating your account."
+        text = (
+            f"Hi {name},\n\n"
+            f"Your Notenix verification code is: {code}\n\n"
+            f"It expires in {mins} minutes. If you didn't sign up, you can ignore this email.\n\n"
+            f"— Notenix"
+        )
+        ignore = "If you didn't sign up for Notenix, you can safely ignore this email."
     html = f"""\
 <div style="font-family:Inter,system-ui,sans-serif;max-width:440px;margin:0 auto;color:#0f172a">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
     <span style="display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#4F46E5;color:#fff;font-weight:700">N</span>
     <span style="font-size:17px;font-weight:700">Notenix</span>
   </div>
-  <h1 style="font-size:20px;margin:0 0 8px">Verify your email</h1>
-  <p style="color:#475569;margin:0 0 24px">Hi {name}, enter this code to finish creating your account.</p>
+  <h1 style="font-size:20px;margin:0 0 8px">{heading}</h1>
+  <p style="color:#475569;margin:0 0 24px">Hi {name}, {lead}</p>
   <div style="font-size:34px;font-weight:800;letter-spacing:10px;background:#EEF2FF;color:#4F46E5;
               text-align:center;padding:18px;border-radius:14px">{code}</div>
   <p style="color:#94a3b8;font-size:13px;margin:20px 0 0">
-    This code expires in {mins} minutes. If you didn't sign up for Notenix, you can safely ignore this email.
+    This code expires in {mins} minutes. {ignore}
   </p>
 </div>"""
     return subject, html, text
@@ -98,11 +113,11 @@ def _send_smtp_sync(to_email: str, subject: str, html: str, text: str) -> None:
         server.send_message(msg)
 
 
-async def send_otp_email(to_email: str, full_name: str, code: str) -> None:
+async def send_otp_email(to_email: str, full_name: str, code: str, kind: str = "verify") -> None:
     """Email the OTP via the first configured provider. Providers (Resend/Brevo)
     raise EmailSendError on failure so signup can report it; SMTP/no-provider
-    fall back to logging the code so local dev keeps working."""
-    subject, html, text = _content(full_name, code)
+    fall back to logging the code so local dev keeps working. kind = 'verify' | 'reset'."""
+    subject, html, text = _content(full_name, code, kind)
     provider = None
     try:
         if settings.resend_api_key:

@@ -29,6 +29,9 @@ export const authAPI = {
     api.post("/auth/register", data),
   verifyOtp: (email: string, code: string) => api.post("/auth/verify-otp", { email, code }),
   resendOtp: (email: string) => api.post("/auth/resend-otp", { email }),
+  forgotPassword: (email: string) => api.post("/auth/forgot-password", { email }),
+  resetPassword: (email: string, code: string, new_password: string) =>
+    api.post("/auth/reset-password", { email, code, new_password }),
   login: (email: string, password: string) =>
     api.post("/auth/login", new URLSearchParams({ username: email, password }), {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

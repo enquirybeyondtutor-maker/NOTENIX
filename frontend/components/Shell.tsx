@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 export default function Shell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
-  const isAuthPage = pathname === "/login" || pathname === "/register" || pathname === "/verify-email";
+  const isAuthPage = pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password";
 
   // App surfaces get the nav but not the marketing footer.
   const isAppSurface =

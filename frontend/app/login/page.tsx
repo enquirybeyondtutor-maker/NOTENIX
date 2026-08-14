@@ -86,6 +86,14 @@ export default function LoginPage() {
                 <Lock size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle" />
                 <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••" className="pl-9" />
               </div>
+              <div className="mt-1.5 text-right">
+                <Link
+                  href={`/reset-password${email ? `?email=${encodeURIComponent(email.toLowerCase())}` : ""}`}
+                  className="text-xs font-medium text-brand-600 hover:text-brand-700"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </Field>
             <Button type="submit" loading={loading} size="lg" className="w-full">
               {loading ? "Signing in…" : <>Sign in <ArrowRight size={16} /></>}

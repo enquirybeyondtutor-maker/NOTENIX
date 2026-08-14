@@ -34,6 +34,16 @@ class ResendOtpIn(BaseModel):
     email: EmailStr
 
 
+class ForgotPasswordIn(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordIn(BaseModel):
+    email: EmailStr
+    code: str
+    new_password: str
+
+
 def _user_dict(u: User) -> dict:
     role = getattr(u, "role", None) or "student"
     return {
@@ -50,8 +60,9 @@ def _user_dict(u: User) -> dict:
     }
 
 
-async def _issue_otp(user: User, db: AsyncSession) -> str:
+async def _issue_otp(user: User, db: AsyncSession, kind: str = "verify") -> str:
     """Generate a fresh OTP, persist its hash + expiry, reset attempts, and email it.
+    kind = 'verify' (signup) | 'reset' (forgot password).
     Raises HTTP 502 if a configured email provider rejects the message."""
     code = generate_otp()
     user.otp_hash = hash_password(code)
@@ -59,10 +70,18 @@ async def _issue_otp(user: User, db: AsyncSession) -> str:
     user.otp_attempts = 0
     await db.commit()
     try:
-        await send_otp_email(user.email, user.full_name, code)
+        await send_otp_email(user.email, user.full_name, code, kind=kind)
     except EmailSendError:
         raise HTTPException(502, EMAIL_FAIL_MSG)
     return code
+
+
+def _within_cooldown(user: User) -> bool:
+    """True if a code was issued too recently (used to rate-limit sends)."""
+    if not user.otp_expires_at:
+        return False
+    last_sent = user.otp_expires_at - timedelta(minutes=settings.otp_expiry_minutes)
+    return (datetime.utcnow() - last_sent).total_seconds() < settings.otp_resend_cooldown_seconds
 
 
 def _otp_sent_response(email: str, code: str) -> dict:
@@ -147,6 +166,54 @@ async def resend_otp(data: ResendOtpIn, db: AsyncSession = Depends(get_db)):
             raise HTTPException(429, f"Please wait {wait}s before requesting another code.")
     code = await _issue_otp(user, db)
     return _otp_sent_response(data.email.lower(), code)
+
+
+@router.post("/forgot-password")
+async def forgot_password(data: ForgotPasswordIn, db: AsyncSession = Depends(get_db)):
+    """Email a password-reset code. Always returns the same response whether or not the
+    account exists, to avoid revealing which emails are registered."""
+    email = data.email.lower()
+    generic = {"status": "reset_sent", "email": email}
+    user = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
+    if not user:
+        return generic
+    if _within_cooldown(user):
+        return generic  # silently rate-limit; don't reveal the account exists
+    try:
+        code = await _issue_otp(user, db, kind="reset")
+    except HTTPException:
+        return generic  # email provider hiccup — stay generic, code is logged server-side
+    if settings.dev_expose_otp:  # DEV ONLY
+        generic["dev_otp"] = code
+    return generic
+
+
+@router.post("/reset-password")
+async def reset_password(data: ResetPasswordIn, db: AsyncSession = Depends(get_db)):
+    """Verify the reset code and set a new password; logs the user in on success."""
+    if len(data.new_password) < 8:
+        raise HTTPException(400, "Password must be at least 8 characters")
+    user = (await db.execute(select(User).where(User.email == data.email.lower()))).scalar_one_or_none()
+    if not user or not user.otp_hash or not user.otp_expires_at:
+        raise HTTPException(400, "No reset request found. Please request a new code.")
+    if datetime.utcnow() > user.otp_expires_at:
+        raise HTTPException(400, "This code has expired. Please request a new one.")
+    if (user.otp_attempts or 0) >= settings.otp_max_attempts:
+        raise HTTPException(429, "Too many incorrect attempts. Please request a new code.")
+    if not verify_password(data.code.strip(), user.otp_hash):
+        user.otp_attempts = (user.otp_attempts or 0) + 1
+        await db.commit()
+        raise HTTPException(400, "Incorrect code. Please try again.")
+
+    user.password_hash = hash_password(data.new_password)
+    user.otp_hash = None
+    user.otp_expires_at = None
+    user.otp_attempts = 0
+    user.is_verified = True  # a successful reset also proves email ownership
+    user.last_active = datetime.utcnow()
+    await db.commit()
+    await db.refresh(user)
+    return {"access_token": create_token(user.id), "token_type": "bearer", "user": _user_dict(user)}
 
 
 @router.post("/login")

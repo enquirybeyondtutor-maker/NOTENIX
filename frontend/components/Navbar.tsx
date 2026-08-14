@@ -54,7 +54,7 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email") return null;
+  if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password") return null;
 
   const isAuthed = !!user;
   const isTeacher = user?.role === "teacher" || user?.role === "admin";
