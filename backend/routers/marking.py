@@ -13,6 +13,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import require_teacher, is_admin, can_mark_written
 from services.grading import finalize_written_marks, estimate_grade
+from services.email import send_marked_email
 
 router = APIRouter(prefix="/marking", tags=["marking"])
 
@@ -118,4 +119,12 @@ async def submit_marks(attempt_id: int, data: SubmitMarksIn, marker: User = Depe
         student.xp += int(score / 10) + (5 if score >= 80 else 0)
 
     await db.commit()
+
+    # Notify the student their work has been marked (best-effort).
+    if student:
+        try:
+            await send_marked_email(student.email, student.full_name, test.title, score, grade)
+        except Exception:
+            pass
+
     return {"attempt_id": attempt.id, "status": "graded", "score": score, "grade": grade}

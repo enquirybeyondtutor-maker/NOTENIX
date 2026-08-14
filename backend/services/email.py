@@ -113,6 +113,67 @@ def _send_smtp_sync(to_email: str, subject: str, html: str, text: str) -> None:
         server.send_message(msg)
 
 
+async def _deliver(to_email: str, subject: str, html: str, text: str) -> bool:
+    """Best-effort send via the first configured provider. Never raises — used for
+    notification emails that must not block or fail the originating request."""
+    provider = None
+    try:
+        if settings.resend_api_key:
+            provider = "resend"; await _send_resend(to_email, subject, html, text)
+        elif settings.brevo_api_key:
+            provider = "brevo"; await _send_brevo(to_email, subject, html, text)
+        elif settings.smtp_user and settings.smtp_password:
+            provider = "smtp"; await run_in_threadpool(_send_smtp_sync, to_email, subject, html, text)
+        else:
+            print(f"[DEV] email to {to_email}: {subject}")
+            return False
+        return True
+    except Exception as e:
+        print(f"[WARN] {provider} notification email failed for {to_email}: {e}")
+        return False
+
+
+def _shell(heading: str, body_html: str, cta_url: str, cta_label: str) -> str:
+    return f"""\
+<div style="font-family:Inter,system-ui,sans-serif;max-width:460px;margin:0 auto;color:#0f172a">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
+    <span style="display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#4F46E5;color:#fff;font-weight:700">N</span>
+    <span style="font-size:17px;font-weight:700">Notenix</span>
+  </div>
+  <h1 style="font-size:20px;margin:0 0 12px">{heading}</h1>
+  <div style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px">{body_html}</div>
+  <a href="{cta_url}" style="display:inline-block;background:#4F46E5;color:#fff;text-decoration:none;
+     font-weight:600;font-size:14px;padding:11px 20px;border-radius:10px">{cta_label}</a>
+  <p style="color:#94a3b8;font-size:12px;margin:28px 0 0">You're receiving this because you have a Notenix account.</p>
+</div>"""
+
+
+async def send_assignment_email(to_email: str, student_name: str, test_title: str,
+                                subject: str, teacher_name: str, due_at) -> None:
+    name = (student_name or "there").split(" ")[0]
+    url = settings.public_url.rstrip("/") + "/tests"
+    due = f" It's due {due_at.strftime('%d %b %Y')}." if due_at else ""
+    subj = f"New test assigned: {test_title}"
+    body = (f"Hi {name}, <b>{teacher_name}</b> has assigned you a new {subject} test — "
+            f"<b>{test_title}</b>.{due} Sign in to sit it whenever you're ready.")
+    text = (f"Hi {name},\n\n{teacher_name} assigned you a new {subject} test: {test_title}.{due}\n\n"
+            f"Sit it here: {url}\n\n— Notenix")
+    await _deliver(to_email, subj, _shell("You've got a new test", body, url, "Open my tests"), text)
+
+
+async def send_marked_email(to_email: str, student_name: str, test_title: str,
+                            score, grade) -> None:
+    name = (student_name or "there").split(" ")[0]
+    url = settings.public_url.rstrip("/") + "/tests"
+    subj = f"Your test has been marked: {test_title}"
+    grade_bit = f" — grade {grade}" if grade else ""
+    body = (f"Hi {name}, your test <b>{test_title}</b> has been marked. "
+            f"You scored <b>{score}%</b>{grade_bit}. Sign in to see the feedback.")
+    text = (f"Hi {name},\n\nYour test '{test_title}' has been marked. You scored {score}%{grade_bit}.\n\n"
+            f"See feedback: {url}\n\n— Notenix")
+    await _deliver(to_email, subj, _shell("Your test has been marked", body, url, "See my result"), text)
+
+
 async def send_otp_email(to_email: str, full_name: str, code: str, kind: str = "verify") -> None:
     """Email the OTP via the first configured provider. Providers (Resend/Brevo)
     raise EmailSendError on failure so signup can report it; SMTP/no-provider

@@ -5,11 +5,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from datetime import datetime
 import secrets
+import asyncio
 
 from database import get_db
 from models import User, Question, Test, TestAssignment, TestAttempt
 from security import require_teacher, is_admin
 from services import ai
+from services.email import send_assignment_email
 from services.pdf_extract import extract_text, render_pages_to_png, crop_figures, read_uploads
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
@@ -392,6 +394,7 @@ async def assign_test(test_id: int, data: AssignIn, teacher: User = Depends(requ
     found_by_email = {s.email: s for s in students}
 
     created, skipped, not_found = 0, 0, []
+    newly_assigned: list[User] = []
     for email in emails:
         s = found_by_email.get(email)
         if not s:
@@ -409,8 +412,17 @@ async def assign_test(test_id: int, data: AssignIn, teacher: User = Depends(requ
             test_id=test_id, student_id=s.id, assigned_by=teacher.id,
             class_label=data.class_label, due_at=data.due_at,
         ))
+        newly_assigned.append(s)
         created += 1
     await db.commit()
+
+    # Notify newly-assigned students (best-effort; never blocks the response on failure).
+    if newly_assigned:
+        await asyncio.gather(*[
+            send_assignment_email(s.email, s.full_name, test.title, test.subject, teacher.full_name, data.due_at)
+            for s in newly_assigned
+        ], return_exceptions=True)
+
     return {"assigned": created, "skipped_already_assigned": skipped, "not_found": not_found}
 
 

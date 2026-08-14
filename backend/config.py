@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     # URLs
     frontend_url: str = "http://localhost:3000"
     app_url: str = "http://localhost:8000"
+    public_url: str = "https://www.notenix.com"  # used in notification email links
 
     # Stripe (freemium)
     stripe_secret_key: str = ""

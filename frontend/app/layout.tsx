@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
 import Shell from "@/components/Shell";
+import CookieConsent from "@/components/CookieConsent";
 
 const SITE = "https://notenix.com";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-6NVHXT86PC"; // GA4 Measurement ID (env var overrides)
@@ -91,7 +92,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-canvas text-ink antialiased">
         <Shell>{children}</Shell>
 
-        {/* Google Analytics 4 — loads only when NEXT_PUBLIC_GA_ID is set */}
+        {/* Google Analytics 4 with Consent Mode — analytics cookies stay OFF until
+            the visitor accepts (GDPR/PECR). Consent defaults to denied; the banner
+            grants it, and returning visitors' saved choice is re-applied here. */}
         {GA_ID && (
           <>
             <Script
@@ -106,12 +109,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
+                  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', wait_for_update: 500 });
+                  try { if (localStorage.getItem('notenix_consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
                   gtag('config', '${GA_ID}', { anonymize_ip: true });
                 `,
               }}
             />
           </>
         )}
+        <CookieConsent />
       </body>
     </html>
   );
