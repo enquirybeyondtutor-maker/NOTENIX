@@ -18,6 +18,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     pathname.startsWith("/progress") ||
     pathname.startsWith("/practice") ||
     pathname.startsWith("/marking") ||
+    pathname.startsWith("/settings") ||
     pathname.startsWith("/leaderboard");
 
   return (

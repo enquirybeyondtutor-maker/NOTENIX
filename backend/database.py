@@ -82,6 +82,7 @@ async def run_migrations():
             # Written-answer practice (extended-response). All additive.
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS can_write BOOLEAN DEFAULT FALSE"))
             await conn.execute(text("UPDATE users SET can_write = FALSE WHERE can_write IS NULL"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS name_changed_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS mode VARCHAR(20) DEFAULT 'mcq'"))
             await conn.execute(text("UPDATE tests SET mode = 'mcq' WHERE mode IS NULL"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS is_library BOOLEAN DEFAULT FALSE"))
@@ -120,6 +121,8 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE users ADD COLUMN otp_attempts INTEGER DEFAULT 0"))
             if "can_write" not in cols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN can_write BOOLEAN DEFAULT 0"))
+            if "name_changed_at" not in cols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN name_changed_at TIMESTAMP"))
             tcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(tests)"))).all()}
             if tcols and "share_token" not in tcols:
                 await conn.execute(text("ALTER TABLE tests ADD COLUMN share_token VARCHAR(64)"))

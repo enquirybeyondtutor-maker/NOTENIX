@@ -37,6 +37,7 @@ export const authAPI = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }),
   me: () => api.get("/auth/me"),
+  updateProfile: (full_name: string) => api.patch("/auth/profile", { full_name }),
 };
 
 export const quizAPI = {

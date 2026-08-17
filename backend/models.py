@@ -22,6 +22,8 @@ class User(Base):
     # Written-practice whitelist: admin-granted access for non-Pro accounts. Their
     # written answers are marked by hand (teacher/admin), not by AI (Pro-only).
     can_write: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
+    # Rate-limits display-name changes (once per cooldown window).
+    name_changed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     plan: Mapped[str] = mapped_column(String(20), default="free")  # free | pro
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)

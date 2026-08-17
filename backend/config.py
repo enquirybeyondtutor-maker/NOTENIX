@@ -47,6 +47,9 @@ class Settings(BaseSettings):
     smtp_from: str = ""          # falls back to smtp_user
     smtp_from_name: str = "Notenix"
 
+    # How often a user may change their display name.
+    name_change_cooldown_days: int = 60
+
     # OTP policy
     otp_expiry_minutes: int = 10
     otp_max_attempts: int = 5

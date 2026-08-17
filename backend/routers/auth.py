@@ -44,11 +44,21 @@ class ResetPasswordIn(BaseModel):
     new_password: str
 
 
+def _name_change_available_at(u: User) -> str | None:
+    """ISO timestamp when the user may next change their name, or None if allowed now."""
+    changed = getattr(u, "name_changed_at", None)
+    if not changed:
+        return None
+    nxt = changed + timedelta(days=settings.name_change_cooldown_days)
+    return nxt.isoformat() if datetime.utcnow() < nxt else None
+
+
 def _user_dict(u: User) -> dict:
     role = getattr(u, "role", None) or "student"
     return {
         "id": u.id, "email": u.email, "full_name": u.full_name,
         "role": role,
+        "name_change_available_at": _name_change_available_at(u),
         "is_admin": is_admin(u),
         "is_active": getattr(u, "is_active", True),
         "is_verified": getattr(u, "is_verified", True),
@@ -232,4 +242,28 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = 
 
 @router.get("/me")
 async def me(user: User = Depends(get_current_user)):
+    return _user_dict(user)
+
+
+class UpdateProfileIn(BaseModel):
+    full_name: str
+
+
+@router.patch("/profile")
+async def update_profile(data: UpdateProfileIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """Change the display name — allowed once per `name_change_cooldown_days`."""
+    name = (data.full_name or "").strip()[:120]
+    if len(name) < 2:
+        raise HTTPException(400, "Please enter a name with at least 2 characters.")
+    if name == user.full_name:
+        return _user_dict(user)  # no change — don't consume the cooldown
+    changed = getattr(user, "name_changed_at", None)
+    if changed:
+        nxt = changed + timedelta(days=settings.name_change_cooldown_days)
+        if datetime.utcnow() < nxt:
+            raise HTTPException(429, f"You can change your name again on {nxt.strftime('%d %b %Y')}.")
+    user.full_name = name
+    user.name_changed_at = datetime.utcnow()
+    await db.commit()
+    await db.refresh(user)
     return _user_dict(user)

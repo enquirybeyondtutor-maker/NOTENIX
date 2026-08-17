@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, UserCog, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -99,7 +99,8 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           {isAuthed ? (
             <div className="hidden items-center gap-3 md:flex">
-              <div className="flex items-center gap-2.5 rounded-lg border border-line py-1.5 pl-1.5 pr-3">
+              <Link href="/settings" title="Account settings"
+                className="flex items-center gap-2.5 rounded-lg border border-line py-1.5 pl-1.5 pr-3 transition-colors hover:bg-slate-50">
                 <span className="grid h-7 w-7 place-items-center rounded-md bg-brand-600 text-xs font-semibold text-white">
                   {(user.full_name?.[0] || "U").toUpperCase()}
                 </span>
@@ -107,7 +108,7 @@ export default function Navbar() {
                   <div className="text-xs font-semibold text-ink">{user.full_name?.split(" ")[0] || "Account"}</div>
                   <div className="text-[10px] uppercase tracking-wide text-ink-subtle">{user.role || "student"}</div>
                 </div>
-              </div>
+              </Link>
               <button
                 onClick={logout}
                 className="grid h-9 w-9 place-items-center rounded-lg text-ink-subtle transition-colors hover:bg-slate-100 hover:text-ink"
@@ -148,12 +149,20 @@ export default function Navbar() {
           </nav>
           <div className="mt-3 border-t border-line pt-3">
             {isAuthed ? (
-              <button
-                onClick={logout}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50"
-              >
-                <LogOut size={16} /> Sign out
-              </button>
+              <>
+                <Link
+                  href="/settings"
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-ink-muted hover:bg-slate-100 hover:text-ink"
+                >
+                  <UserCog size={16} /> Account settings
+                </Link>
+                <button
+                  onClick={logout}
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50"
+                >
+                  <LogOut size={16} /> Sign out
+                </button>
+              </>
             ) : (
               <div className="flex flex-col gap-2">
                 <Button href="/login" variant="secondary">Sign in</Button>
