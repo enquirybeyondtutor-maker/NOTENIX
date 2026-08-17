@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ClipboardList, FilePlus2, Users, CheckCircle2, ArrowRight } from "lucide-react";
+import { ClipboardList, FilePlus2, Users, CheckCircle2, ArrowRight, BookOpen, PenLine } from "lucide-react";
 import { teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
-import { humanize, formatDate } from "@/lib/utils";
+import { cn, humanize, formatDate } from "@/lib/utils";
 
 interface TestRow {
   id: number;
@@ -15,6 +15,9 @@ interface TestRow {
   topic: string;
   level: string;
   exam_board: string;
+  mode?: "mcq" | "written";
+  kind?: "test" | "homework";
+  is_library?: boolean;
   num_questions: number;
   duration_minutes: number | null;
   created_at: string;
@@ -27,6 +30,7 @@ export default function TeacherTestsPage() {
   const { ready } = useAuthGuard("teacher");
   const [tests, setTests] = useState<TestRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<"all" | "test" | "homework">("all");
 
   useEffect(() => {
     if (!ready) return;
@@ -38,6 +42,9 @@ export default function TeacherTestsPage() {
   }, [ready]);
 
   if (!ready || loading) return <Spinner label="Loading tests…" />;
+
+  const hwCount = tests.filter((t) => t.kind === "homework").length;
+  const shown = tests.filter((t) => filter === "all" || (t.kind || "test") === filter);
 
   return (
     <PageContainer>
@@ -56,17 +63,37 @@ export default function TeacherTestsPage() {
         <EmptyState
           icon={ClipboardList}
           title="No tests yet"
-          desc="Create your first assessment — build it by hand or let AI generate board-aligned questions in seconds."
+          desc="Create your first assessment — build it by hand or let AI generate board-aligned questions in seconds. Use the Test / Homework toggle on the Create page to set homework."
           action={<Button href="/teacher/tests/new"><FilePlus2 size={16} /> Create your first test</Button>}
         />
       ) : (
+        <>
+        {/* Filter: tests vs homework */}
+        <div className="mb-5 inline-flex rounded-xl border border-line bg-white p-1">
+          {([["all", "All"], ["test", "Tests"], ["homework", `Homework${hwCount ? ` · ${hwCount}` : ""}`]] as const).map(([k, label]) => (
+            <button key={k} type="button" onClick={() => setFilter(k)}
+              className={cn("rounded-lg px-3.5 py-1.5 text-sm font-medium transition-colors",
+                filter === k ? "bg-brand-600 text-white" : "text-ink-muted hover:bg-slate-50")}>
+              {label}
+            </button>
+          ))}
+        </div>
+        {shown.length === 0 ? (
+          <div className="card p-6 text-sm text-ink-muted">
+            No {filter === "homework" ? "homework" : "tests"} yet. Create one via the <b>Create</b> tab — pick <b>Homework</b> at the top for homework.
+          </div>
+        ) : (
         <div className="grid gap-4 sm:grid-cols-2">
-          {tests.map((t) => (
+          {shown.map((t) => (
             <Link key={t.id} href={`/teacher/tests/${t.id}`} className="card card-hover flex flex-col p-5">
               <div className="flex flex-wrap items-center gap-2">
+                {t.kind === "homework"
+                  ? <span className="inline-flex items-center gap-1 rounded-md bg-violet-100 px-2 py-0.5 text-xs font-semibold text-violet-700"><BookOpen size={11} /> Homework</span>
+                  : <span className="inline-flex items-center gap-1 rounded-md bg-brand-50 px-2 py-0.5 text-xs font-semibold text-brand-700"><ClipboardList size={11} /> Test</span>}
                 <span className="badge-brand">{humanize(t.subject)}</span>
                 <span className="badge-neutral">{t.level}</span>
-                <span className="badge-neutral">{t.exam_board}</span>
+                {t.exam_board && <span className="badge-neutral">{t.exam_board}</span>}
+                {t.mode === "written" && <span className="inline-flex items-center gap-1 badge-neutral"><PenLine size={11} /> Written</span>}
               </div>
               <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
               <p className="mt-0.5 text-sm text-ink-muted">{humanize(t.topic)} · {t.num_questions} questions</p>
@@ -96,6 +123,8 @@ export default function TeacherTestsPage() {
             </Link>
           ))}
         </div>
+        )}
+        </>
       )}
     </PageContainer>
   );
