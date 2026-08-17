@@ -21,6 +21,7 @@ const STUDENT_LINKS: NavItem[] = [
 const TEACHER_LINKS: NavItem[] = [
   { href: "/teacher", label: "Overview", icon: LayoutDashboard },
   { href: "/teacher/tests", label: "Tests", icon: ClipboardList },
+  { href: "/teacher/homework", label: "Homework", icon: BookOpen },
   { href: "/teacher/tests/new", label: "Create", icon: FilePlus2 },
   { href: "/teacher/students", label: "Students", icon: Users },
 ];

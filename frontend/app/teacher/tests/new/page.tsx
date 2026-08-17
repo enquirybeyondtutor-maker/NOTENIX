@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -73,6 +73,11 @@ export default function NewTestPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const isAdmin = !!getUser()?.is_admin;
+
+  // Preselect Homework when arriving from the "Set homework" button.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("kind") === "homework") setKind("homework");
+  }, []);
 
   const set = (k: string, v: any) => setMeta((m) => ({ ...m, [k]: v }));
   const setQ = (i: number, patch: Partial<ManualQ>) =>
@@ -234,7 +239,7 @@ export default function NewTestPage() {
           <FilePlus2 size={20} />
         </span>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-ink">Create a test</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-ink">{kind === "homework" ? "Set homework" : "Create a test"}</h1>
           <p className="mt-1 text-sm text-ink-muted">Generate with AI, write questions by hand, or upload a PDF or image — as multiple-choice or written-answer.</p>
         </div>
       </div>
