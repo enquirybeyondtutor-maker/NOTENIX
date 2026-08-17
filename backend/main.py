@@ -71,6 +71,22 @@ async def health():
     return {"status": "healthy", "version": "2.0"}
 
 
+@app.get("/ping")
+async def ping():
+    """Keep-warm target: also runs a trivial query so the ping wakes the database
+    (Neon), not just the web service. Point an uptime pinger here every ~10 min."""
+    from sqlalchemy import text
+    from database import engine
+    db_ok = False
+    try:
+        async with engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        db_ok = True
+    except Exception:
+        pass
+    return {"ok": True, "db": db_ok}
+
+
 @app.get("/")
 async def root():
     return {"name": "Notenix API", "docs": "/docs"}

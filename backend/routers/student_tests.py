@@ -124,6 +124,7 @@ async def my_assignments(user: User = Depends(get_current_user), db: AsyncSessio
             "level": t.level,
             "exam_board": t.exam_board,
             "mode": getattr(t, "mode", "mcq"),
+            "kind": getattr(t, "kind", "test"),
             "num_questions": t.num_questions,
             "duration_minutes": t.duration_minutes,
             "class_label": a.class_label,
@@ -182,6 +183,7 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
         "level": test.level,
         "exam_board": test.exam_board,
         "mode": mode,
+        "kind": getattr(test, "kind", "test"),
         "duration_minutes": test.duration_minutes,
         "due_at": assignment.due_at.isoformat() if assignment.due_at else None,
         # server-anchored timer: client computes remaining = duration - (server_now - started_at)

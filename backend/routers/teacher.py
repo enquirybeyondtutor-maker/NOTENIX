@@ -34,6 +34,7 @@ class CreateTestIn(BaseModel):
     level: str = "GCSE"
     exam_board: str = "AQA"
     difficulty: str = "medium"
+    kind: str = "test"          # test | homework
     duration_minutes: int | None = None
     # Either provide questions manually, or ask AI to generate `num_questions`.
     generate: bool = True
@@ -55,6 +56,7 @@ class PhotoQuestionsIn(BaseModel):
     exam_board: str = ""
     marks_per_question: int = 10
     images: list[str] = []          # compressed image data URIs, one per question
+    kind: str = "test"              # test | homework
     is_library: bool = False
 
 
@@ -71,6 +73,7 @@ def _test_summary(t: Test, assigned: int = 0, completed: int = 0, avg: float | N
         "id": t.id, "title": t.title, "subject": t.subject, "topic": t.topic,
         "level": t.level, "exam_board": t.exam_board, "difficulty": t.difficulty,
         "mode": getattr(t, "mode", "mcq"), "is_library": getattr(t, "is_library", False),
+        "kind": getattr(t, "kind", "test"),
         "num_questions": t.num_questions, "duration_minutes": t.duration_minutes,
         "created_at": t.created_at.isoformat() if t.created_at else None,
         "assigned_count": assigned, "completed_count": completed,
@@ -129,19 +132,22 @@ async def list_tests(teacher: User = Depends(require_teacher), db: AsyncSession 
         .order_by(Test.created_at.desc())
     )).scalars().all()
 
-    out = []
-    for t in tests:
-        assigned = (await db.execute(
-            select(func.count()).select_from(TestAssignment).where(TestAssignment.test_id == t.id)
-        )).scalar() or 0
-        completed = (await db.execute(
-            select(func.count()).select_from(TestAttempt).where(TestAttempt.test_id == t.id)
-        )).scalar() or 0
-        avg = (await db.execute(
-            select(func.avg(TestAttempt.score)).where(TestAttempt.test_id == t.id)
-        )).scalar()
-        out.append(_test_summary(t, assigned, completed, avg))
-    return out
+    # Aggregate counts in two grouped queries instead of 3 per test (avoids N+1).
+    ids = [t.id for t in tests]
+    assigned_map: dict[int, int] = {}
+    completed_map: dict[int, int] = {}
+    avg_map: dict[int, float] = {}
+    if ids:
+        for tid, cnt in (await db.execute(
+            select(TestAssignment.test_id, func.count()).where(TestAssignment.test_id.in_(ids)).group_by(TestAssignment.test_id)
+        )).all():
+            assigned_map[tid] = cnt
+        for tid, cnt, avg in (await db.execute(
+            select(TestAttempt.test_id, func.count(), func.avg(TestAttempt.score)).where(TestAttempt.test_id.in_(ids)).group_by(TestAttempt.test_id)
+        )).all():
+            completed_map[tid] = cnt
+            avg_map[tid] = avg
+    return [_test_summary(t, assigned_map.get(t.id, 0), completed_map.get(t.id, 0), avg_map.get(t.id)) for t in tests]
 
 
 @router.post("/tests")
@@ -166,13 +172,14 @@ async def create_test(data: CreateTestIn, teacher: User = Depends(require_teache
             raise HTTPException(400, "Provide questions or enable AI generation.")
         questions = [q.model_dump() for q in data.questions]
 
+    kind = "homework" if data.kind == "homework" else "test"
     test = Test(
         owner_id=teacher.id,
         title=data.title.strip()[:200] or f"{data.topic} test",
         subject=data.subject, topic=data.topic, level=data.level,
-        exam_board=data.exam_board, difficulty=data.difficulty,
+        exam_board=data.exam_board, difficulty=data.difficulty, kind=kind,
         questions=questions, num_questions=len(questions),
-        duration_minutes=data.duration_minutes,
+        duration_minutes=None if kind == "homework" else data.duration_minutes,
     )
     db.add(test)
     await db.commit()
@@ -192,6 +199,7 @@ async def create_test_from_pdf(
     duration_minutes: int | None = Form(None),
     faithful: bool = Form(True),  # True = transcribe existing questions verbatim (vision)
     mode: str = Form("mcq"),      # mcq | written
+    kind: str = Form("test"),     # test | homework
     is_library: bool = Form(False),  # admin only: publish to shared practice library
     teacher: User = Depends(require_teacher),
     db: AsyncSession = Depends(get_db),
@@ -241,14 +249,15 @@ async def create_test_from_pdf(
     # Crop any figures/diagrams the vision model located and embed them in the questions.
     generated = crop_figures(data, generated)
 
+    hw = "homework" if kind == "homework" else "test"
     test = Test(
         owner_id=teacher.id,
         title=(title.strip() or first_name.rsplit(".", 1)[0])[:200],
         subject=subject, topic=topic.strip() or "From document", level=level,
         exam_board=exam_board, difficulty="medium",
-        mode=mode, is_library=library,
+        mode=mode, kind=hw, is_library=library,
         questions=generated, num_questions=len(generated),
-        duration_minutes=duration_minutes,
+        duration_minutes=None if hw == "homework" else duration_minutes,
     )
     db.add(test)
     await db.commit()
@@ -282,7 +291,7 @@ async def create_photo_questions(data: PhotoQuestionsIn, teacher: User = Depends
         title=(data.title.strip() or "Photo questions")[:200],
         subject=data.subject, topic=data.topic.strip() or "From screenshots", level=data.level,
         exam_board=(data.exam_board or "").strip(), difficulty="medium",
-        mode="written", is_library=library,
+        mode="written", kind=("homework" if data.kind == "homework" else "test"), is_library=library,
         questions=questions, num_questions=len(questions),
     )
     db.add(test)
@@ -529,17 +538,24 @@ async def students(teacher: User = Depends(require_teacher), db: AsyncSession = 
         .distinct()
     )).scalars().all()
 
-    out = []
-    for s in rows:
-        assigned = (await db.execute(
-            select(func.count()).select_from(TestAssignment)
-            .where(TestAssignment.student_id == s.id, TestAssignment.assigned_by == teacher.id)
-        )).scalar() or 0
-        avg = (await db.execute(
-            select(func.avg(TestAttempt.score)).where(TestAttempt.student_id == s.id)
-        )).scalar()
-        out.append({
-            "id": s.id, "full_name": s.full_name, "email": s.email,
-            "assigned": assigned, "avg_score": round(avg, 1) if avg is not None else None,
-        })
-    return out
+    ids = [s.id for s in rows]
+    assigned_map: dict[int, int] = {}
+    avg_map: dict[int, float] = {}
+    if ids:
+        for sid, cnt in (await db.execute(
+            select(TestAssignment.student_id, func.count()).where(
+                TestAssignment.student_id.in_(ids), TestAssignment.assigned_by == teacher.id
+            ).group_by(TestAssignment.student_id)
+        )).all():
+            assigned_map[sid] = cnt
+        for sid, avg in (await db.execute(
+            select(TestAttempt.student_id, func.avg(TestAttempt.score)).where(
+                TestAttempt.student_id.in_(ids)
+            ).group_by(TestAttempt.student_id)
+        )).all():
+            avg_map[sid] = avg
+    return [{
+        "id": s.id, "full_name": s.full_name, "email": s.email,
+        "assigned": assigned_map.get(s.id, 0),
+        "avg_score": round(avg_map[s.id], 1) if avg_map.get(s.id) is not None else None,
+    } for s in rows]

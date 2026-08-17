@@ -86,6 +86,8 @@ async def run_migrations():
             await conn.execute(text("UPDATE tests SET mode = 'mcq' WHERE mode IS NULL"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS is_library BOOLEAN DEFAULT FALSE"))
             await conn.execute(text("UPDATE tests SET is_library = FALSE WHERE is_library IS NULL"))
+            await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS kind VARCHAR(20) DEFAULT 'test'"))
+            await conn.execute(text("UPDATE tests SET kind = 'test' WHERE kind IS NULL"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'graded'"))
             await conn.execute(text("UPDATE test_attempts SET status = 'graded' WHERE status IS NULL"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS marked_by INTEGER"))
@@ -125,6 +127,8 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE tests ADD COLUMN mode VARCHAR(20) DEFAULT 'mcq'"))
             if tcols and "is_library" not in tcols:
                 await conn.execute(text("ALTER TABLE tests ADD COLUMN is_library BOOLEAN DEFAULT 0"))
+            if tcols and "kind" not in tcols:
+                await conn.execute(text("ALTER TABLE tests ADD COLUMN kind VARCHAR(20) DEFAULT 'test'"))
             acols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(test_attempts)"))).all()}
             if acols and "status" not in acols:
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN status VARCHAR(20) DEFAULT 'graded'"))

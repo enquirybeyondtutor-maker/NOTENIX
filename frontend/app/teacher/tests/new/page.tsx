@@ -69,6 +69,7 @@ export default function NewTestPage() {
   const [photoImgs, setPhotoImgs] = useState<string[]>([]);   // compressed data URIs
   const [photoMarks, setPhotoMarks] = useState(10);
   const [photoBusy, setPhotoBusy] = useState(false);
+  const [kind, setKind] = useState<"test" | "homework">("test");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const isAdmin = !!getUser()?.is_admin;
@@ -108,7 +109,7 @@ export default function NewTestPage() {
         const { data } = await teacherAPI.createPhotoQuestions({
           title: meta.title.trim(),
           subject: meta.subject, topic: meta.topic.trim(), level: meta.level, exam_board: meta.exam_board,
-          marks_per_question: photoMarks, images: photoImgs,
+          marks_per_question: photoMarks, images: photoImgs, kind,
           is_library: isAdmin && isLibrary,
         });
         router.replace(`/teacher/tests/${data.id}`);
@@ -134,7 +135,7 @@ export default function NewTestPage() {
         const { data } = await teacherAPI.createTest({
           title: meta.title.trim() || `${meta.topic || meta.subject} test`,
           subject: meta.subject, topic: meta.topic.trim() || "Custom", level: meta.level,
-          exam_board: meta.exam_board, difficulty: meta.difficulty,
+          exam_board: meta.exam_board, difficulty: meta.difficulty, kind,
           duration_minutes: meta.duration_minutes || null,
           generate: false,
           questions: cleaned.map((q) => ({
@@ -169,6 +170,7 @@ export default function NewTestPage() {
         fd.append("num_questions", String(meta.num_questions));
         fd.append("faithful", String(faithful));
         fd.append("mode", pdfMode);
+        fd.append("kind", kind);
         if (isAdmin && isLibrary) fd.append("is_library", "true");
         if (meta.duration_minutes) fd.append("duration_minutes", String(meta.duration_minutes));
         const { data } = await teacherAPI.createFromPdf(fd);
@@ -190,7 +192,7 @@ export default function NewTestPage() {
     try {
       const { data } = await teacherAPI.createTest({
         ...meta, title: meta.title.trim() || `${meta.topic} test`,
-        generate: true, duration_minutes: meta.duration_minutes || null,
+        kind, generate: true, duration_minutes: meta.duration_minutes || null,
       });
       router.replace(`/teacher/tests/${data.id}`);
     } catch (e: any) {
@@ -235,6 +237,30 @@ export default function NewTestPage() {
           <h1 className="text-2xl font-bold tracking-tight text-ink">Create a test</h1>
           <p className="mt-1 text-sm text-ink-muted">Generate with AI, write questions by hand, or upload a PDF or image — as multiple-choice or written-answer.</p>
         </div>
+      </div>
+
+      {/* Test vs Homework */}
+      <div className="mb-6">
+        <div className="inline-flex rounded-xl border border-line bg-white p-1">
+          {(["test", "homework"] as const).map((k) => (
+            <button
+              key={k}
+              type="button"
+              onClick={() => setKind(k)}
+              className={cn(
+                "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                kind === k ? "bg-brand-600 text-white" : "text-ink-muted hover:bg-slate-50"
+              )}
+            >
+              {k === "test" ? "Test" : "Homework"}
+            </button>
+          ))}
+        </div>
+        <p className="mt-1.5 text-xs text-ink-subtle">
+          {kind === "test"
+            ? "A test — sat in exam mode with a timer and integrity checks."
+            : "Homework — untimed, no exam lockdown; students can save and finish later."}
+        </p>
       </div>
 
       {/* Mode selector */}
@@ -287,10 +313,14 @@ export default function NewTestPage() {
             <Field label="Exam board">
               <Select value={meta.exam_board} onChange={(e) => set("exam_board", e.target.value)}>{BOARDS.map((b) => <option key={b}>{b}</option>)}</Select>
             </Field>
-            <Field label="Time limit (min)" hint="0 = untimed">
-              <Input type="number" min={0} max={240} value={meta.duration_minutes}
-                onChange={(e) => set("duration_minutes", Math.max(0, Math.min(240, Number(e.target.value) || 0)))} />
-            </Field>
+            {kind === "test" ? (
+              <Field label="Time limit (min)" hint="0 = untimed">
+                <Input type="number" min={0} max={240} value={meta.duration_minutes}
+                  onChange={(e) => set("duration_minutes", Math.max(0, Math.min(240, Number(e.target.value) || 0)))} />
+              </Field>
+            ) : (
+              <Field label="Type"><Input value="Homework (untimed)" readOnly className="bg-slate-50 text-ink-muted" /></Field>
+            )}
           </div>
         </div>
 

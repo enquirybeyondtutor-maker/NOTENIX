@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -13,6 +13,7 @@ type NavItem = { href: string; label: string; icon?: LucideIcon };
 const STUDENT_LINKS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/tests", label: "My Tests", icon: ClipboardList },
+  { href: "/homework", label: "Homework", icon: BookOpen },
   { href: "/progress", label: "Progress", icon: LineChart },
   { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
 ];

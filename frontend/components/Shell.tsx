@@ -11,6 +11,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   const isAppSurface =
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/tests") ||
+    pathname.startsWith("/homework") ||
     pathname.startsWith("/teacher") ||
     pathname.startsWith("/admin") ||
     pathname.startsWith("/quiz") ||

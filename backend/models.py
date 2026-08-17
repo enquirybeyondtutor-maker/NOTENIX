@@ -90,6 +90,7 @@ class Test(Base):
     exam_board: Mapped[str] = mapped_column(String(40), default="AQA")
     difficulty: Mapped[str] = mapped_column(String(20), default="medium")
     mode: Mapped[str] = mapped_column(String(20), default="mcq", server_default="mcq")  # mcq | written
+    kind: Mapped[str] = mapped_column(String(20), default="test", server_default="test")  # test | homework
     is_library: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")  # shared self-practice library
     questions: Mapped[list] = mapped_column(JSON)                        # full snapshot w/ answers
     num_questions: Mapped[int] = mapped_column(Integer, default=0)

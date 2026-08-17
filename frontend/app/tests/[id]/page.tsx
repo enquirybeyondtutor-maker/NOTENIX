@@ -23,6 +23,7 @@ interface TestData {
   level: string;
   exam_board: string;
   mode?: "mcq" | "written";
+  kind?: "test" | "homework";
   duration_minutes: number | null;
   started_at?: string | null;
   server_now?: string | null;
@@ -190,7 +191,7 @@ export default function AttemptTestPage() {
 
   // Integrity: count tab/window switches and time spent away from the exam.
   useEffect(() => {
-    if (!test) return;
+    if (!test || test.kind === "homework") return;  // homework isn't proctored
     const onVis = () => (document.hidden ? markAway() : markBack());
     document.addEventListener("visibilitychange", onVis);
     window.addEventListener("blur", markAway);
@@ -214,6 +215,14 @@ export default function AttemptTestPage() {
 
   const blockPaste = (e: React.ClipboardEvent) => { e.preventDefault(); pasteAttempts.current += 1; };
 
+  const saveExit = async () => {
+    if (test) {
+      const ordered = test.questions.map((_, i) => answers[i] ?? "");
+      try { await testsAPI.saveDraft(id, ordered); } catch {}
+    }
+    router.push("/homework");
+  };
+
   const isAnswered = useCallback(
     (i: number) => Boolean((answers[i] ?? "").trim()) || (photos[i]?.length ?? 0) > 0,
     [answers, photos]
@@ -225,6 +234,7 @@ export default function AttemptTestPage() {
   const anyPhotos = useMemo(() => Object.values(photos).some((p) => p.length > 0), [photos]);
 
   const isWritten = test?.mode === "written";
+  const isHomework = test?.kind === "homework";
   const aiMarking = !!getUser()?.ai_marking;
 
   if (!ready || loading) return <Spinner label="Preparing your test…" />;
@@ -250,8 +260,8 @@ export default function AttemptTestPage() {
   return (
     <div
       className="fixed inset-0 z-[60] flex flex-col bg-canvas"
-      onCopy={(e) => e.preventDefault()}
-      onContextMenu={(e) => e.preventDefault()}
+      onCopy={isHomework ? undefined : (e) => e.preventDefault()}
+      onContextMenu={isHomework ? undefined : (e) => e.preventDefault()}
     >
       {/* Exam top bar */}
       <header className="flex items-center justify-between border-b border-line bg-white px-4 py-3 sm:px-6">
@@ -261,7 +271,7 @@ export default function AttemptTestPage() {
             <div className="text-sm font-semibold text-ink">{test.title}</div>
             <div className="text-xs text-ink-subtle">
               {humanize(test.subject)}{test.exam_board ? ` · ${test.exam_board}` : ""}
-              {isWritten ? " · Written" : ""}
+              {isWritten ? " · Written" : ""}{isHomework ? " · Homework" : ""}
             </div>
           </div>
         </div>
@@ -272,8 +282,13 @@ export default function AttemptTestPage() {
               <Clock size={15} /> {fmtTime(remaining)}
             </div>
           )}
+          {isHomework && (
+            <Button size="sm" variant="secondary" onClick={saveExit}>
+              Save &amp; exit
+            </Button>
+          )}
           <Button size="sm" onClick={() => setReviewOpen(true)}>
-            <Flag size={14} /> Finish
+            <Flag size={14} /> {isHomework ? "Submit" : "Finish"}
           </Button>
         </div>
       </header>
@@ -334,7 +349,7 @@ export default function AttemptTestPage() {
                 <textarea
                   value={answers[current] ?? ""}
                   onChange={(e) => setAnswers((a) => ({ ...a, [current]: e.target.value }))}
-                  onPaste={blockPaste}
+                  onPaste={isHomework ? undefined : blockPaste}
                   placeholder="Write your answer here…"
                   rows={12}
                   className="w-full resize-y rounded-xl border border-line bg-white p-4 text-sm leading-relaxed text-ink shadow-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
