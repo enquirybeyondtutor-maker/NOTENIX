@@ -90,6 +90,10 @@ export default function AttemptTestPage() {
   const timeAwayMs = useRef(0);
   const pasteAttempts = useRef(0);
   const awayStart = useRef<number | null>(null);
+  // per-question timing: accrue ms on each question as the student moves through
+  const qEnterRef = useRef(Date.now());
+  const qTimeRef = useRef<Record<number, number>>({});
+  const prevQRef = useRef(0);
 
   const markAway = useCallback(() => {
     if (awayStart.current == null) {
@@ -132,6 +136,9 @@ export default function AttemptTestPage() {
     if (!test || submitting) return;
     setSubmitting(true);
     markBack(); // flush any in-progress away time
+    // flush the current question's time and build per-question seconds
+    qTimeRef.current[current] = (qTimeRef.current[current] || 0) + (Date.now() - qEnterRef.current);
+    const questionTimes = test.questions.map((_, i) => Math.round((qTimeRef.current[i] || 0) / 1000));
     const ordered = test.questions.map((_, i) => answers[i] ?? "");
     const orderedImages = test.questions.map((_, i) => photos[i] ?? []);
     const hasAnyPhotos = orderedImages.some((imgs) => imgs.length > 0);
@@ -140,6 +147,7 @@ export default function AttemptTestPage() {
         answers: ordered,
         answer_images: hasAnyPhotos ? orderedImages : undefined,
         time_taken_seconds: Math.round((Date.now() - startedAt) / 1000),
+        question_times: questionTimes,
         focus_lost_count: focusLost.current,
         time_away_seconds: Math.round(timeAwayMs.current / 1000),
         paste_attempts: pasteAttempts.current,
@@ -212,6 +220,14 @@ export default function AttemptTestPage() {
     }, 1500);
     return () => clearTimeout(t);
   }, [answers, test, id, submitting]);
+
+  // When the student navigates to another question, credit elapsed time to the one they left.
+  useEffect(() => {
+    const now = Date.now();
+    qTimeRef.current[prevQRef.current] = (qTimeRef.current[prevQRef.current] || 0) + (now - qEnterRef.current);
+    qEnterRef.current = now;
+    prevQRef.current = current;
+  }, [current]);
 
   const blockPaste = (e: React.ClipboardEvent) => { e.preventDefault(); pasteAttempts.current += 1; };
 

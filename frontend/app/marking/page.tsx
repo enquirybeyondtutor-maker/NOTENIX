@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import { CheckSquare, ArrowLeft, User as UserIcon, ClipboardList, Send, AlertCircle, ShieldAlert, Bot, Eye } from "lucide-react";
+import { CheckSquare, ArrowLeft, User as UserIcon, ClipboardList, Send, AlertCircle, ShieldAlert, Bot, Eye, Clock } from "lucide-react";
 import { markingAPI, teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
@@ -24,6 +24,7 @@ interface MarkQ {
   image?: string | null;
   answer_images?: string[] | null;
   your_answer: string;
+  time_seconds?: number | null;
 }
 interface Integrity {
   focus_lost: number;
@@ -39,6 +40,7 @@ interface Detail {
   test_title: string;
   subject: string;
   level: string;
+  time_taken_seconds?: number | null;
   questions: MarkQ[];
   integrity?: Integrity;
 }
@@ -136,7 +138,12 @@ export default function MarkingPage() {
           <div>
             <div className="badge-brand mb-1">{humanize(detail.subject)} · {detail.level}</div>
             <h1 className="text-lg font-bold text-ink">{detail.test_title}</h1>
-            <p className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-ink-muted"><UserIcon size={13} /> {detail.student}</p>
+            <p className="mt-0.5 inline-flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-muted">
+              <span className="inline-flex items-center gap-1.5"><UserIcon size={13} /> {detail.student}</span>
+              {detail.time_taken_seconds != null && (
+                <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {fmtAway(detail.time_taken_seconds)} total</span>
+              )}
+            </p>
           </div>
           <div className="text-right">
             <div className="text-xs uppercase tracking-wide text-ink-subtle">Total awarded</div>
@@ -192,7 +199,14 @@ export default function MarkingPage() {
             <div key={i} className="card p-5">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold text-ink">Question {i + 1}</span>
-                <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-ink-muted">{q.marks} marks</span>
+                <div className="flex items-center gap-2">
+                  {q.time_seconds != null && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-ink-muted">
+                      <Clock size={11} /> {fmtAway(q.time_seconds)}
+                    </span>
+                  )}
+                  <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-ink-muted">{q.marks} marks</span>
+                </div>
               </div>
               {q.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{q.question}</p>}
               {q.image && <img src={q.image} alt="Question" className="mt-3 max-h-96 w-auto max-w-full rounded-lg border border-line" />}

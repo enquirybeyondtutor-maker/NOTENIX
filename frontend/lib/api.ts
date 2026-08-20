@@ -51,7 +51,7 @@ export const testsAPI = {
   mine: () => api.get("/tests"),
   get: (assignmentId: number | string) => api.get(`/tests/${assignmentId}`),
   submit: (assignmentId: number | string, data: {
-    answers: any[]; answer_images?: string[][]; time_taken_seconds?: number;
+    answers: any[]; answer_images?: string[][]; time_taken_seconds?: number; question_times?: number[];
     focus_lost_count?: number; time_away_seconds?: number; paste_attempts?: number;
   }) => api.post(`/tests/${assignmentId}/submit`, data),
   saveDraft: (assignmentId: number | string, answers: any[]) =>

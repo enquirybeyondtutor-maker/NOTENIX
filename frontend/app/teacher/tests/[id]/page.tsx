@@ -27,8 +27,22 @@ interface Assignment {
   status: string;
   score: number | null;
   grade: string | null;
+  time_taken_seconds: number | null;
   completed_at: string | null;
   integrity: Integrity | null;
+}
+interface Timing {
+  responses: number;
+  avg_total_seconds: number | null;
+  per_question: (number | null)[];
+}
+
+function fmtSecs(s: number | null | undefined): string {
+  if (s == null) return "—";
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  const sec = Math.round(s % 60);
+  return sec ? `${m}m ${sec}s` : `${m}m`;
 }
 
 function IntegrityFlags({ i }: { i: Integrity | null }) {
@@ -56,6 +70,7 @@ interface Detail {
     questions: { question: string; options?: string[]; marks?: number; mark_scheme?: string; image?: string | null }[];
   };
   assignments: Assignment[];
+  timing?: Timing;
 }
 
 export default function TeacherTestDetailPage() {
@@ -173,7 +188,7 @@ export default function TeacherTestDetailPage() {
     );
   }
 
-  const { test, assignments } = data;
+  const { test, assignments, timing } = data;
   const isWritten = test.mode === "written";
   const completed = assignments.filter((a) => a.status === "completed");
 
@@ -227,6 +242,7 @@ export default function TeacherTestDetailPage() {
                       <th className="px-4 py-3 font-medium">Student</th>
                       <th className="px-4 py-3 font-medium">Status</th>
                       <th className="px-4 py-3 font-medium">Integrity</th>
+                      <th className="px-4 py-3 font-medium text-right">Time</th>
                       <th className="px-4 py-3 font-medium text-right">Score</th>
                       <th className="px-4 py-3 font-medium text-right">Grade</th>
                     </tr>
@@ -248,6 +264,7 @@ export default function TeacherTestDetailPage() {
                           )}
                         </td>
                         <td className="px-4 py-3"><IntegrityFlags i={a.integrity} /></td>
+                        <td className="px-4 py-3 text-right text-ink-muted tabular-nums">{fmtSecs(a.time_taken_seconds)}</td>
                         <td className="px-4 py-3 text-right font-semibold text-ink">
                           {a.score != null ? `${a.score}%` : "—"}
                         </td>
@@ -260,6 +277,41 @@ export default function TeacherTestDetailPage() {
                 </table>
               </div>
             </div>
+          )}
+
+          {/* Timing analytics */}
+          {timing && timing.responses > 0 && (
+            <>
+              <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
+                Timing · {timing.responses} response{timing.responses === 1 ? "" : "s"}
+              </h2>
+              <div className="card p-5">
+                <div className="mb-4 flex items-center gap-2 text-sm">
+                  <Clock size={15} className="text-ink-subtle" />
+                  <span className="text-ink-muted">Average time to complete:</span>
+                  <span className="font-semibold text-ink">{fmtSecs(timing.avg_total_seconds)}</span>
+                </div>
+                {timing.per_question.some((v) => v != null) && (
+                  <div className="space-y-2">
+                    {timing.per_question.map((v, i) => {
+                      const max = Math.max(...timing.per_question.map((x) => x || 0), 1);
+                      return (
+                        <div key={i} className="flex items-center gap-3">
+                          <span className="w-8 shrink-0 text-xs text-ink-subtle">Q{i + 1}</span>
+                          <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
+                            <div className="h-full rounded-full bg-brand-500" style={{ width: `${((v || 0) / max) * 100}%` }} />
+                          </div>
+                          <span className="w-16 shrink-0 text-right text-xs font-medium text-ink tabular-nums">
+                            {v == null ? "—" : fmtSecs(Math.round(v))}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                <p className="mt-3 text-xs text-ink-subtle">Average time spent per question across everyone who sat this test.</p>
+              </div>
+            </>
           )}
 
           {/* Question preview */}

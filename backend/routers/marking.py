@@ -71,6 +71,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
     student = (await db.execute(select(User).where(User.id == attempt.student_id))).scalar_one_or_none()
     answers = attempt.answers or []
     answer_images = attempt.answer_images or []
+    qtimes = attempt.question_times or []
     questions = []
     for i, q in enumerate(test.questions):
         questions.append({
@@ -80,6 +81,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
             "image": q.get("image"),
             "your_answer": answers[i] if i < len(answers) else "",
             "answer_images": answer_images[i] if i < len(answer_images) else [],
+            "time_seconds": qtimes[i] if i < len(qtimes) else None,
         })
     return {
         "attempt_id": attempt.id,
@@ -88,6 +90,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
         "test_title": test.title,
         "subject": test.subject,
         "level": test.level,
+        "time_taken_seconds": attempt.time_taken_seconds,
         "questions": questions,
         "integrity": {
             "focus_lost": getattr(attempt, "focus_lost_count", 0) or 0,

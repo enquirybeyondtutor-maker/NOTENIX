@@ -19,6 +19,8 @@ class SubmitIn(BaseModel):
     # written only: per-question list of uploaded answer photos (compressed JPEG data URIs)
     answer_images: list[list[str]] | None = None
     time_taken_seconds: int | None = None
+    # seconds spent on each question (aligned to question order)
+    question_times: list[int] | None = None
     # integrity signals gathered client-side during the sitting
     focus_lost_count: int = 0
     time_away_seconds: int = 0
@@ -55,6 +57,19 @@ def _sanitize_answer_images(answer_images, n_questions: int) -> list[list[str]]:
                 raise HTTPException(400, "Your uploaded photos are too large in total. Please remove some and try again.")
             kept.append(img)
         out[i] = kept
+    return out
+
+
+def _sanitize_question_times(times, n_questions: int) -> list[int]:
+    """Non-negative integer seconds per question, aligned to the questions (0 if missing)."""
+    out = [0] * n_questions
+    if not times:
+        return out
+    for i in range(min(len(times), n_questions)):
+        try:
+            out[i] = max(0, min(int(times[i]), 86400))  # cap at 24h to reject garbage
+        except (TypeError, ValueError):
+            out[i] = 0
     return out
 
 
@@ -224,6 +239,8 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
     # reliably grade handwriting — even for Pro students.
     answer_images = _sanitize_answer_images(data.answer_images, len(test.questions)) if mode == "written" else []
     has_photos = any(imgs for imgs in answer_images)
+    qtimes = _sanitize_question_times(data.question_times, len(test.questions))
+
     # Image-only questions (a screenshot IS the question, no transcribed text/mark scheme)
     # can't be AI-graded — always route to a human.
     image_only = any(q.get("image") and not (q.get("question") or "").strip() for q in test.questions)
@@ -238,6 +255,7 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
             answers=data.answers, answer_images=answer_images, results=results,
             score=0.0, grade=None,
             status="awaiting_marking", time_taken_seconds=data.time_taken_seconds,
+            question_times=qtimes,
             focus_lost_count=max(0, data.focus_lost_count), time_away_seconds=max(0, data.time_away_seconds),
             paste_attempts=max(0, data.paste_attempts),
         )
@@ -265,6 +283,7 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
         assignment_id=assignment.id, test_id=test.id, student_id=user.id,
         answers=data.answers, results=results, score=score, grade=grade,
         status="graded", time_taken_seconds=data.time_taken_seconds,
+        question_times=qtimes,
         focus_lost_count=max(0, data.focus_lost_count), time_away_seconds=max(0, data.time_away_seconds),
         paste_attempts=max(0, data.paste_attempts),
     )

@@ -368,6 +368,7 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
             "status": status,
             "score": None if (not at or pending) else at.score,
             "grade": None if (not at or pending) else at.grade,
+            "time_taken_seconds": (at.time_taken_seconds if at else None),
             "completed_at": at.completed_at.isoformat() if at and at.completed_at else None,
             # integrity signals (null when not yet attempted)
             "integrity": None if not at else {
@@ -386,6 +387,22 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
         # question text + options only (no answers) for teacher preview
         preview = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
 
+    # ── Class timing analytics (averages across everyone who sat it) ──
+    attempt_list = list(attempts_by_assignment.values())
+    n = test.num_questions or len(test.questions)
+    tlists = [a.question_times for a in attempt_list if getattr(a, "question_times", None)]
+    per_question_avg = []
+    if tlists and n:
+        for i in range(n):
+            vals = [t[i] for t in tlists if i < len(t) and isinstance(t[i], (int, float))]
+            per_question_avg.append(round(sum(vals) / len(vals), 1) if vals else None)
+    totals = [a.time_taken_seconds for a in attempt_list if a.time_taken_seconds]
+    timing = {
+        "responses": len(tlists),
+        "avg_total_seconds": round(sum(totals) / len(totals)) if totals else None,
+        "per_question": per_question_avg,
+    }
+
     return {
         "test": {
             **_test_summary(test),
@@ -393,6 +410,7 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
             "questions": preview,
         },
         "assignments": assignments,
+        "timing": timing,
     }
 
 

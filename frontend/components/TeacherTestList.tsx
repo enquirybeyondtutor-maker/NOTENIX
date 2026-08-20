@@ -25,6 +25,44 @@ interface TestRow {
   avg_score: number | null;
 }
 
+function Card({ t }: { t: TestRow }) {
+  return (
+    <Link href={`/teacher/tests/${t.id}`} className="card card-hover flex flex-col p-5">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="badge-brand">{humanize(t.subject)}</span>
+        <span className="badge-neutral">{t.level}</span>
+        {t.exam_board && <span className="badge-neutral">{t.exam_board}</span>}
+        {t.mode === "written" && <span className="inline-flex items-center gap-1 badge-neutral"><PenLine size={11} /> Written</span>}
+      </div>
+      <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
+      <p className="mt-0.5 text-sm text-ink-muted">{humanize(t.topic)} · {t.num_questions} questions</p>
+
+      <div className="mt-4 grid grid-cols-3 gap-2 border-t border-line pt-4 text-center">
+        <div>
+          <div className="flex items-center justify-center gap-1 text-sm font-semibold text-ink">
+            <Users size={13} className="text-ink-subtle" /> {t.assigned_count}
+          </div>
+          <div className="text-[11px] text-ink-subtle">assigned</div>
+        </div>
+        <div>
+          <div className="flex items-center justify-center gap-1 text-sm font-semibold text-ink">
+            <CheckCircle2 size={13} className="text-ink-subtle" /> {t.completed_count}
+          </div>
+          <div className="text-[11px] text-ink-subtle">completed</div>
+        </div>
+        <div>
+          <div className="text-sm font-semibold text-ink">{t.avg_score != null ? `${t.avg_score}%` : "—"}</div>
+          <div className="text-[11px] text-ink-subtle">avg score</div>
+        </div>
+      </div>
+      <div className="mt-4 flex items-center justify-between text-xs text-ink-subtle">
+        <span>Created {formatDate(t.created_at)}</span>
+        <span className="inline-flex items-center gap-1 text-brand-600">Manage <ArrowRight size={12} /></span>
+      </div>
+    </Link>
+  );
+}
+
 export default function TeacherTestList({ kind }: { kind: "test" | "homework" }) {
   const { ready } = useAuthGuard("teacher");
   const [tests, setTests] = useState<TestRow[]>([]);
@@ -44,6 +82,14 @@ export default function TeacherTestList({ kind }: { kind: "test" | "homework" })
   }, [ready, kind]);
 
   if (!ready || loading) return <Spinner label={homework ? "Loading homework…" : "Loading tests…"} />;
+
+  // Group by test type: multiple-choice vs written.
+  const written = tests.filter((t) => t.mode === "written");
+  const mcq = tests.filter((t) => t.mode !== "written");
+  const groups = [
+    { label: "Multiple choice", items: mcq },
+    { label: "Written answers", items: written },
+  ].filter((g) => g.items.length > 0);
 
   return (
     <PageContainer>
@@ -68,41 +114,16 @@ export default function TeacherTestList({ kind }: { kind: "test" | "homework" })
           action={<Button href={createHref}><FilePlus2 size={16} /> {homework ? "Set your first homework" : "Create your first test"}</Button>}
         />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
-          {tests.map((t) => (
-            <Link key={t.id} href={`/teacher/tests/${t.id}`} className="card card-hover flex flex-col p-5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="badge-brand">{humanize(t.subject)}</span>
-                <span className="badge-neutral">{t.level}</span>
-                {t.exam_board && <span className="badge-neutral">{t.exam_board}</span>}
-                {t.mode === "written" && <span className="inline-flex items-center gap-1 badge-neutral"><PenLine size={11} /> Written</span>}
+        <div className="space-y-8">
+          {groups.map((g) => (
+            <section key={g.label}>
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
+                {g.label} · {g.items.length}
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {g.items.map((t) => <Card key={t.id} t={t} />)}
               </div>
-              <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
-              <p className="mt-0.5 text-sm text-ink-muted">{humanize(t.topic)} · {t.num_questions} questions</p>
-
-              <div className="mt-4 grid grid-cols-3 gap-2 border-t border-line pt-4 text-center">
-                <div>
-                  <div className="flex items-center justify-center gap-1 text-sm font-semibold text-ink">
-                    <Users size={13} className="text-ink-subtle" /> {t.assigned_count}
-                  </div>
-                  <div className="text-[11px] text-ink-subtle">assigned</div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-center gap-1 text-sm font-semibold text-ink">
-                    <CheckCircle2 size={13} className="text-ink-subtle" /> {t.completed_count}
-                  </div>
-                  <div className="text-[11px] text-ink-subtle">completed</div>
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-ink">{t.avg_score != null ? `${t.avg_score}%` : "—"}</div>
-                  <div className="text-[11px] text-ink-subtle">avg score</div>
-                </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between text-xs text-ink-subtle">
-                <span>Created {formatDate(t.created_at)}</span>
-                <span className="inline-flex items-center gap-1 text-brand-600">Manage <ArrowRight size={12} /></span>
-              </div>
-            </Link>
+            </section>
           ))}
         </div>
       )}

@@ -93,6 +93,7 @@ async def run_migrations():
             await conn.execute(text("UPDATE test_attempts SET status = 'graded' WHERE status IS NULL"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS marked_by INTEGER"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS answer_images JSON"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS question_times JSON"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS purged_at TIMESTAMP"))
             # Server-anchored timer + draft autosave
             await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS started_at TIMESTAMP"))
@@ -139,6 +140,8 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN marked_by INTEGER"))
             if acols and "answer_images" not in acols:
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN answer_images JSON"))
+            if acols and "question_times" not in acols:
+                await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN question_times JSON"))
             if acols and "purged_at" not in acols:
                 await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN purged_at TIMESTAMP"))
             for col, ddl in [
