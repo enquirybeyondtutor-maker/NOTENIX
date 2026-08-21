@@ -30,6 +30,9 @@ interface Integrity {
   focus_lost: number;
   time_away_seconds: number;
   paste_attempts: number;
+  copy_attempts: number;
+  fullscreen_exits: number;
+  burst_flags: number;
   auto_submitted: boolean;
   ai_flag: string | null;
   ai_notes: string | null;
@@ -169,6 +172,19 @@ export default function MarkingPage() {
               <span className={`rounded-lg px-2.5 py-1 font-medium ${detail.integrity.paste_attempts > 0 ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-ink-muted"}`}>
                 {detail.integrity.paste_attempts} paste attempt{detail.integrity.paste_attempts === 1 ? "" : "s"}
               </span>
+              <span className={`rounded-lg px-2.5 py-1 font-medium ${detail.integrity.copy_attempts > 0 ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-ink-muted"}`}>
+                {detail.integrity.copy_attempts} copy attempt{detail.integrity.copy_attempts === 1 ? "" : "s"}
+              </span>
+              {detail.integrity.fullscreen_exits > 0 && (
+                <span className="rounded-lg bg-amber-50 px-2.5 py-1 font-medium text-amber-700">
+                  Left fullscreen {detail.integrity.fullscreen_exits}×
+                </span>
+              )}
+              {detail.integrity.burst_flags > 0 && (
+                <span className="rounded-lg bg-red-50 px-2.5 py-1 font-medium text-red-700">
+                  Paste-like burst after returning
+                </span>
+              )}
               {detail.integrity.auto_submitted && (
                 <span className="rounded-lg bg-slate-100 px-2.5 py-1 font-medium text-ink-muted">Auto-submitted (time ran out)</span>
               )}

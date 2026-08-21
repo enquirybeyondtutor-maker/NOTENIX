@@ -144,6 +144,9 @@ class TestAttempt(Base):
     focus_lost_count: Mapped[int] = mapped_column(Integer, default=0, server_default="0")   # tab/window switches
     time_away_seconds: Mapped[int] = mapped_column(Integer, default=0, server_default="0")   # total time off-tab
     paste_attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")       # blocked paste events
+    copy_attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")        # blocked copy events
+    fullscreen_exits: Mapped[int] = mapped_column(Integer, default=0, server_default="0")     # left fullscreen mid-exam
+    burst_flags: Mapped[int] = mapped_column(Integer, default=0, server_default="0")          # returned then dumped a big answer
     auto_submitted: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")  # finalized by the sweep
     ai_flag: Mapped[str | None] = mapped_column(String(20), nullable=True)   # likely_ai | likely_human | uncertain
     ai_notes: Mapped[str | None] = mapped_column(Text, nullable=True)        # examiner-facing AI-check reasoning

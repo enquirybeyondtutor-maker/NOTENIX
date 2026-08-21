@@ -53,6 +53,7 @@ export const testsAPI = {
   submit: (assignmentId: number | string, data: {
     answers: any[]; answer_images?: string[][]; time_taken_seconds?: number; question_times?: number[];
     focus_lost_count?: number; time_away_seconds?: number; paste_attempts?: number;
+    copy_attempts?: number; fullscreen_exits?: number; burst_flags?: number;
   }) => api.post(`/tests/${assignmentId}/submit`, data),
   saveDraft: (assignmentId: number | string, answers: any[]) =>
     api.post(`/tests/${assignmentId}/draft`, { answers }),

@@ -14,6 +14,9 @@ interface Integrity {
   focus_lost: number;
   time_away_seconds: number;
   paste_attempts: number;
+  copy_attempts: number;
+  fullscreen_exits: number;
+  burst_flags: number;
   auto_submitted: boolean;
   ai_flag: string | null;
 }
@@ -49,8 +52,11 @@ function IntegrityFlags({ i }: { i: Integrity | null }) {
   if (!i) return <span className="text-ink-subtle">—</span>;
   const flags: { label: string; tone: string }[] = [];
   if (i.ai_flag === "likely_ai") flags.push({ label: "AI?", tone: "bg-red-50 text-red-700" });
+  if (i.burst_flags > 0) flags.push({ label: "paste burst", tone: "bg-red-50 text-red-700" });
   if (i.focus_lost > 0) flags.push({ label: `${i.focus_lost}× left tab`, tone: i.focus_lost >= 3 ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-ink-muted" });
+  if (i.fullscreen_exits > 0) flags.push({ label: `${i.fullscreen_exits}× exit FS`, tone: "bg-amber-50 text-amber-700" });
   if (i.paste_attempts > 0) flags.push({ label: `${i.paste_attempts} paste`, tone: "bg-amber-50 text-amber-700" });
+  if (i.copy_attempts > 0) flags.push({ label: `${i.copy_attempts} copy`, tone: "bg-amber-50 text-amber-700" });
   if (i.auto_submitted) flags.push({ label: "auto-submitted", tone: "bg-slate-100 text-ink-muted" });
   if (flags.length === 0) return <span className="inline-flex items-center gap-1 text-xs text-emerald-600"><ShieldCheck size={12} /> Clean</span>;
   return (

@@ -25,6 +25,9 @@ class SubmitIn(BaseModel):
     focus_lost_count: int = 0
     time_away_seconds: int = 0
     paste_attempts: int = 0
+    copy_attempts: int = 0
+    fullscreen_exits: int = 0
+    burst_flags: int = 0
 
 
 class DraftIn(BaseModel):
@@ -257,7 +260,8 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
             status="awaiting_marking", time_taken_seconds=data.time_taken_seconds,
             question_times=qtimes,
             focus_lost_count=max(0, data.focus_lost_count), time_away_seconds=max(0, data.time_away_seconds),
-            paste_attempts=max(0, data.paste_attempts),
+            paste_attempts=max(0, data.paste_attempts), copy_attempts=max(0, data.copy_attempts),
+            fullscreen_exits=max(0, data.fullscreen_exits), burst_flags=max(0, data.burst_flags),
         )
         db.add(attempt)
         assignment.status = "completed"
@@ -285,7 +289,8 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
         status="graded", time_taken_seconds=data.time_taken_seconds,
         question_times=qtimes,
         focus_lost_count=max(0, data.focus_lost_count), time_away_seconds=max(0, data.time_away_seconds),
-        paste_attempts=max(0, data.paste_attempts),
+        paste_attempts=max(0, data.paste_attempts), copy_attempts=max(0, data.copy_attempts),
+        fullscreen_exits=max(0, data.fullscreen_exits), burst_flags=max(0, data.burst_flags),
     )
     db.add(attempt)
     assignment.status = "completed"

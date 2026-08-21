@@ -94,6 +94,12 @@ export default function AttemptTestPage() {
   const qEnterRef = useRef(Date.now());
   const qTimeRef = useRef<Record<number, number>>({});
   const prevQRef = useRef(0);
+  // extra integrity signals
+  const copyAttempts = useRef(0);
+  const fullscreenExits = useRef(0);
+  const burstFlags = useRef(0);
+  const justReturnedAt = useRef<number | null>(null);
+  const [examStarted, setExamStarted] = useState(false);
 
   const markAway = useCallback(() => {
     if (awayStart.current == null) {
@@ -105,6 +111,7 @@ export default function AttemptTestPage() {
     if (awayStart.current != null) {
       timeAwayMs.current += Date.now() - awayStart.current;
       awayStart.current = null;
+      justReturnedAt.current = Date.now();  // watch for a paste-like burst right after returning
     }
   }, []);
 
@@ -151,7 +158,11 @@ export default function AttemptTestPage() {
         focus_lost_count: focusLost.current,
         time_away_seconds: Math.round(timeAwayMs.current / 1000),
         paste_attempts: pasteAttempts.current,
+        copy_attempts: copyAttempts.current,
+        fullscreen_exits: fullscreenExits.current,
+        burst_flags: burstFlags.current,
       });
+      try { if (document.fullscreenElement) await document.exitFullscreen(); } catch { /* ignore */ }
       router.replace(`/tests/${id}/result`);
     } catch (e: any) {
       setError(e.response?.data?.detail || "Submission failed. Please try again.");
@@ -221,6 +232,14 @@ export default function AttemptTestPage() {
     return () => clearTimeout(t);
   }, [answers, test, id, submitting]);
 
+  // Count times the student leaves fullscreen during a (non-homework) exam.
+  useEffect(() => {
+    if (!test || test.kind === "homework" || !examStarted) return;
+    const onFs = () => { if (!document.fullscreenElement) fullscreenExits.current += 1; };
+    document.addEventListener("fullscreenchange", onFs);
+    return () => document.removeEventListener("fullscreenchange", onFs);
+  }, [test, examStarted]);
+
   // When the student navigates to another question, credit elapsed time to the one they left.
   useEffect(() => {
     const now = Date.now();
@@ -230,6 +249,12 @@ export default function AttemptTestPage() {
   }, [current]);
 
   const blockPaste = (e: React.ClipboardEvent) => { e.preventDefault(); pasteAttempts.current += 1; };
+
+  const beginExam = async () => {
+    try { await document.documentElement.requestFullscreen(); } catch { /* fullscreen may be blocked */ }
+    qEnterRef.current = Date.now();  // start the per-question clock at the real start
+    setExamStarted(true);
+  };
 
   const saveExit = async () => {
     if (test) {
@@ -269,6 +294,27 @@ export default function AttemptTestPage() {
   }
   if (!test) return null;
 
+  // Exam start gate (tests only) — a click lets us enter fullscreen, and sets a clear start.
+  if (!isHomework && !examStarted) {
+    return (
+      <div className="fixed inset-0 z-[60] flex items-center justify-center bg-canvas p-4">
+        <div className="w-full max-w-md rounded-2xl border border-line bg-white p-8 text-center shadow-xl">
+          <span className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600">
+            <Flag size={22} />
+          </span>
+          <h1 className="mt-4 text-lg font-semibold text-ink">{test.title}</h1>
+          <p className="mt-2 text-sm text-ink-muted">
+            This is an exam{test.duration_minutes ? ` with a ${test.duration_minutes}-minute limit` : ""}. Please stay in
+            fullscreen. Leaving fullscreen, switching tabs, and copy/paste are recorded for your teacher.
+          </p>
+          <Button size="lg" className="mt-6 w-full" onClick={beginExam}>
+            <Flag size={16} /> Begin exam
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   const q = test.questions[current];
   const total = test.questions.length;
   const lowTime = remaining !== null && remaining <= 60;
@@ -276,7 +322,7 @@ export default function AttemptTestPage() {
   return (
     <div
       className="fixed inset-0 z-[60] flex flex-col bg-canvas"
-      onCopy={isHomework ? undefined : (e) => e.preventDefault()}
+      onCopy={isHomework ? undefined : (e) => { e.preventDefault(); copyAttempts.current += 1; }}
       onContextMenu={isHomework ? undefined : (e) => e.preventDefault()}
     >
       {/* Exam top bar */}
@@ -364,7 +410,16 @@ export default function AttemptTestPage() {
               <div className="mt-6">
                 <textarea
                   value={answers[current] ?? ""}
-                  onChange={(e) => setAnswers((a) => ({ ...a, [current]: e.target.value }))}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    // flag a large text jump right after returning from being away
+                    if (!isHomework && justReturnedAt.current && Date.now() - justReturnedAt.current < 8000
+                        && val.length - (answers[current] ?? "").length > 120) {
+                      burstFlags.current += 1;
+                      justReturnedAt.current = null;
+                    }
+                    setAnswers((a) => ({ ...a, [current]: val }));
+                  }}
                   onPaste={isHomework ? undefined : blockPaste}
                   placeholder="Write your answer here…"
                   rows={12}
