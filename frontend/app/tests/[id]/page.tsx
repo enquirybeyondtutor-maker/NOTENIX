@@ -8,6 +8,7 @@ import { Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { cn, humanize } from "@/lib/utils";
+import { MathText } from "@/components/MathText";
 
 interface Question {
   question: string;
@@ -399,7 +400,7 @@ export default function AttemptTestPage() {
               )}
             </div>
             {q.question && (
-              <h2 className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed text-ink sm:text-xl">{q.question}</h2>
+              <h2 className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed text-ink sm:text-xl"><MathText text={q.question} /></h2>
             )}
 
             {q.image && (
@@ -477,7 +478,7 @@ export default function AttemptTestPage() {
                         selected ? "border-brand-600 bg-brand-600 text-white" : "border-line-strong")}>
                         {selected && <CheckCircle2 size={14} />}
                       </span>
-                      <span>{opt}</span>
+                      <span><MathText text={opt} /></span>
                     </button>
                   );
                 })}

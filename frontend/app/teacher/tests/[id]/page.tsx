@@ -9,6 +9,7 @@ import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Field } from "@/components/ui/Input";
 import { cn, humanize, formatDate } from "@/lib/utils";
+import { MathText } from "@/components/MathText";
 
 interface Integrity {
   focus_lost: number;
@@ -333,18 +334,18 @@ export default function TeacherTestDetailPage() {
                     <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-ink-muted">{q.marks} marks</span>
                   )}
                 </div>
-                <p className="mt-1 whitespace-pre-line text-sm font-medium text-ink">{q.question}</p>
+                <p className="mt-1 whitespace-pre-line text-sm font-medium text-ink"><MathText text={q.question} /></p>
                 {q.image && <img src={q.image} alt="Question figure" className="mt-2 max-h-72 w-auto max-w-full rounded-lg border border-line" />}
                 {isWritten ? (
                   q.mark_scheme && (
                     <div className="mt-2 whitespace-pre-line rounded-lg bg-slate-50 p-2.5 text-xs text-ink-muted">
-                      <span className="font-medium text-ink">Mark scheme: </span>{q.mark_scheme}
+                      <span className="font-medium text-ink">Mark scheme: </span><MathText text={q.mark_scheme} />
                     </div>
                   )
                 ) : (
                   <ul className="mt-2 grid gap-1 sm:grid-cols-2">
                     {q.options?.map((o, j) => (
-                      <li key={j} className="text-xs text-ink-muted">{o}</li>
+                      <li key={j} className="text-xs text-ink-muted"><MathText text={o} /></li>
                     ))}
                   </ul>
                 )}

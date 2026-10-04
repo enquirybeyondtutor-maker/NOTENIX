@@ -7,6 +7,7 @@ import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Input";
 import { humanize } from "@/lib/utils";
+import { MathText } from "@/components/MathText";
 
 interface QueueItem {
   attempt_id: number;
@@ -224,12 +225,12 @@ export default function MarkingPage() {
                   <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-ink-muted">{q.marks} marks</span>
                 </div>
               </div>
-              {q.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{q.question}</p>}
+              {q.question && <p className="mt-1 whitespace-pre-line font-medium text-ink"><MathText text={q.question} /></p>}
               {q.image && <img src={q.image} alt="Question" className="mt-3 max-h-96 w-auto max-w-full rounded-lg border border-line" />}
 
               {q.mark_scheme && (
                 <div className="mt-3 whitespace-pre-line rounded-lg border border-brand-100 bg-brand-50/50 p-3 text-sm text-ink-muted">
-                  <span className="font-medium text-ink">Mark scheme: </span>{q.mark_scheme}
+                  <span className="font-medium text-ink">Mark scheme: </span><MathText text={q.mark_scheme} />
                 </div>
               )}
 

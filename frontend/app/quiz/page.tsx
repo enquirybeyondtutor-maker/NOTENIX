@@ -8,6 +8,7 @@ import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { cn, humanize } from "@/lib/utils";
+import { MathText } from "@/components/MathText";
 
 type Stage = "setup" | "loading" | "taking" | "results";
 const GEN_STEPS = [
@@ -237,7 +238,7 @@ export default function QuizPage() {
         <AnimatePresence mode="wait">
           <motion.div key={current} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="card mb-5 p-6">
             {mode === "exam" && <div className="mb-2 text-xs font-semibold text-brand-600">{q.marks} marks</div>}
-            <h3 className="mb-5 whitespace-pre-line font-semibold leading-relaxed text-ink">{q.question}</h3>
+            <h3 className="mb-5 whitespace-pre-line font-semibold leading-relaxed text-ink"><MathText text={q.question} /></h3>
             {mode === "quiz" ? (
               <div className="space-y-2">
                 {q.options.map((opt: string) => (
@@ -246,7 +247,7 @@ export default function QuizPage() {
                     onClick={() => { const a = [...answers]; a[current] = opt; setAnswers(a); }}
                     className={cn("option-btn", answers[current] === opt && "selected")}
                   >
-                    {opt}
+                    <MathText text={opt} />
                   </button>
                 ))}
               </div>
@@ -289,12 +290,12 @@ export default function QuizPage() {
       <div className="mb-6 space-y-4">
         {results.results.map((r: any, i: number) => (
           <div key={i} className="card p-5">
-            <div className="mb-3 whitespace-pre-line font-medium text-ink">{r.question}</div>
+            <div className="mb-3 whitespace-pre-line font-medium text-ink"><MathText text={r.question} /></div>
             {mode === "quiz" ? (
               <div className="space-y-1.5 text-sm">
                 <div className={r.is_correct ? "font-medium text-emerald-600" : "text-red-600"}>Your answer: {r.your_answer || "—"}</div>
-                {!r.is_correct && <div className="text-emerald-600">Correct: {r.correct_answer}</div>}
-                {r.explanation && <div className="mt-2 text-ink-muted">{r.explanation}</div>}
+                {!r.is_correct && <div className="text-emerald-600">Correct: <MathText text={r.correct_answer} /></div>}
+                {r.explanation && <div className="mt-2 text-ink-muted"><MathText text={r.explanation} /></div>}
               </div>
             ) : (
               <div className="space-y-2 text-sm">
@@ -302,7 +303,7 @@ export default function QuizPage() {
                 <div className="text-ink-muted"><span className="font-medium text-ink">Feedback:</span> {r.feedback}</div>
                 {r.model_answer && (
                   <div className="rounded-lg bg-slate-50 p-3 text-ink-muted">
-                    <span className="font-medium text-ink">Model answer:</span> {r.model_answer}
+                    <span className="font-medium text-ink">Model answer:</span> <MathText text={r.model_answer} />
                   </div>
                 )}
               </div>

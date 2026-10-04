@@ -8,6 +8,7 @@ import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { cn, humanize } from "@/lib/utils";
+import { MathText } from "@/components/MathText";
 
 interface QResult {
   question: string;
@@ -114,7 +115,7 @@ export default function TestResultPage() {
                   </span>
                 )}
               </div>
-              {r.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>}
+              {r.question && <p className="mt-1 whitespace-pre-line font-medium text-ink"><MathText text={r.question} /></p>}
               {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
               {(r.your_answer || !(r.answer_images?.length)) && (
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
@@ -185,7 +186,7 @@ export default function TestResultPage() {
                     {r.marks_awarded ?? 0} / {r.marks ?? 0} marks
                   </span>
                 </div>
-                {r.question && <p className="mt-1 whitespace-pre-line font-medium text-ink">{r.question}</p>}
+                {r.question && <p className="mt-1 whitespace-pre-line font-medium text-ink"><MathText text={r.question} /></p>}
                 {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
 
                 <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
@@ -207,7 +208,7 @@ export default function TestResultPage() {
                 )}
                 {r.model_answer && (
                   <div className="mt-3 whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
-                    <span className="font-medium text-ink">Model answer: </span>{r.model_answer}
+                    <span className="font-medium text-ink">Model answer: </span><MathText text={r.model_answer} />
                   </div>
                 )}
               </div>
@@ -273,23 +274,23 @@ export default function TestResultPage() {
               </span>
               <div className="flex-1">
                 <div className="text-xs font-medium text-ink-subtle">Question {i + 1}</div>
-                <p className="mt-1 font-medium text-ink">{r.question}</p>
+                <p className="mt-1 whitespace-pre-line font-medium text-ink"><MathText text={r.question} /></p>
                 {r.image && <img src={r.image} alt="Question figure" className="mt-3 max-h-80 w-auto max-w-full rounded-lg border border-line" />}
 
                 <div className="mt-3 space-y-1.5 text-sm">
                   {!r.is_correct && (
                     <div className="text-red-600">
-                      <span className="text-ink-subtle">Your answer:</span> {r.your_answer || (data.purged ? "(removed for privacy)" : "— (not answered)")}
+                      <span className="text-ink-subtle">Your answer:</span> {r.your_answer ? <MathText text={r.your_answer} /> : (data.purged ? "(removed for privacy)" : "— (not answered)")}
                     </div>
                   )}
                   <div className="text-emerald-700">
-                    <span className="text-ink-subtle">Correct answer:</span> {r.correct_answer}
+                    <span className="text-ink-subtle">Correct answer:</span> <MathText text={r.correct_answer} />
                   </div>
                 </div>
 
                 {r.explanation && (
                   <div className="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-ink-muted">
-                    <span className="font-medium text-ink">Why: </span>{r.explanation}
+                    <span className="font-medium text-ink">Why: </span><MathText text={r.explanation} />
                   </div>
                 )}
               </div>
