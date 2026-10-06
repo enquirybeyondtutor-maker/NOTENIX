@@ -22,6 +22,8 @@ def grade_mcq(questions: list[dict], answers: list) -> tuple[float, list[dict]]:
             "your_answer": given,
             "correct_answer": right,
             "is_correct": is_correct,
+            # kept after the retention purge drops `your_answer`, so reports can still tell blanks apart
+            "skipped": given is None or not str(given).strip(),
             "explanation": q.get("explanation"),
         })
     score = round(100 * correct / len(questions), 1) if questions else 0.0

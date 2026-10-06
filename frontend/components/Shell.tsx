@@ -24,7 +24,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
-      <main className={isAuthPage ? "min-h-screen" : "min-h-screen pt-16"}>{children}</main>
+      <main className={isAuthPage ? "min-h-screen" : "min-h-screen pt-16 print:min-h-0 print:pt-0"}>{children}</main>
       {!isAuthPage && !isAppSurface && <Footer />}
     </>
   );

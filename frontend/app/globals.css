@@ -103,3 +103,25 @@ h1, h2, h3, h4 { letter-spacing: -0.022em; font-weight: 700; }
 .badge-pill { @apply inline-flex items-center gap-2 rounded-full bg-white border border-line px-3.5 py-1.5 text-sm font-medium text-ink-muted shadow-xs; }
 .stat-card { @apply bg-white rounded-xl border border-line shadow-md px-4 py-3; }
 .progress-bar { @apply bg-brand-600 rounded-full; }
+
+/* ─────────────────────────────────────────────────────────────
+   Performance report (components/report/ReportView) — A4 print-to-PDF
+   ───────────────────────────────────────────────────────────── */
+.report-sheet { width: 210mm; padding: 12mm 12mm 0; box-shadow: 0 10px 40px rgba(15, 23, 42, .12); border-radius: 6px; }
+.report-sheet, .report-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.report-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 10mm; padding: 3mm 0 6mm; border-top: 1px solid #E7E5F0; background: #fff;
+}
+.report-foot-spacer div { height: 0; }
+.avoid-break { break-inside: avoid; page-break-inside: avoid; }
+.break-after-avoid { break-after: avoid; page-break-after: avoid; }
+
+@media print {
+  @page { size: A4; margin: 10mm 12mm 0; }
+  html, body { background: #fff !important; }
+  .report-sheet { width: auto; padding: 0; box-shadow: none; border-radius: 0; }
+  /* Footer repeats on every page; the tfoot spacer reserves its height on each page. */
+  .report-foot-spacer div { height: 15mm; }
+  .report-footer { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; padding: 2.5mm 0 4mm; height: 14mm; }
+}

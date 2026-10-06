@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from services.retention import purge_old_responses
 from services.sittings import auto_submit_expired
-from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking
+from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports
 
 
 async def _retention_loop():
@@ -64,6 +64,7 @@ app.include_router(student_tests.router)
 app.include_router(admin.router)
 app.include_router(practice.router)
 app.include_router(marking.router)
+app.include_router(reports.router)
 
 
 @app.get("/health")

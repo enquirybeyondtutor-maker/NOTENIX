@@ -83,6 +83,14 @@ export const teacherAPI = {
   aiCheck: (attemptId: number | string) => api.post(`/teacher/attempts/${attemptId}/ai-check`),
 };
 
+export const reportsAPI = {
+  candidates: () => api.get("/reports/candidates"),
+  // Building runs as a background job (topic tagging + commentary take longer than the proxy allows).
+  startBuild: (data: { student_id: number; exam: string; attempt_ids?: number[]; target?: string; pronouns?: string; commentary?: boolean }) =>
+    api.post("/reports/jobs", data),
+  job: (jobId: string) => api.get(`/reports/jobs/${jobId}`),
+};
+
 export const adminAPI = {
   overview: () => api.get("/admin/overview"),
   users: () => api.get("/admin/users"),

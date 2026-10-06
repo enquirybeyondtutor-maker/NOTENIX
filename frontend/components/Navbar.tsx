@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, UserCog, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, UserCog, FileBarChart, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -24,6 +24,7 @@ const TEACHER_LINKS: NavItem[] = [
   { href: "/teacher/homework", label: "Homework", icon: BookOpen },
   { href: "/teacher/tests/new", label: "Create", icon: FilePlus2 },
   { href: "/teacher/students", label: "Students", icon: Users },
+  { href: "/teacher/reports", label: "Reports", icon: FileBarChart },
 ];
 
 const PUBLIC_LINKS: NavItem[] = [
@@ -73,7 +74,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-white/80 backdrop-blur-xl">
+    <header className="print:hidden fixed inset-x-0 top-0 z-50 border-b border-line bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-8">
           <Logo />
