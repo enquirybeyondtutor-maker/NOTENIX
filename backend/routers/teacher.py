@@ -25,6 +25,7 @@ class QuestionIn(BaseModel):
     options: list[str]
     answer: str
     explanation: str | None = None
+    image: str | None = None    # optional figure (data URI), e.g. a graph
 
 
 class CreateTestIn(BaseModel):
