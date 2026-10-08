@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Users, Send, AlertCircle, CheckCircle2, Clock, UserPlus, Link2, Copy, Check, Pencil, Trash2, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Users, Send, AlertCircle, CheckCircle2, Clock, UserPlus, Link2, Copy, Check, Pencil, Trash2, ShieldCheck, RotateCcw, EyeOff, Eye } from "lucide-react";
 import { teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, Spinner } from "@/components/ui/Page";
@@ -33,6 +33,8 @@ interface Assignment {
   grade: string | null;
   time_taken_seconds: number | null;
   completed_at: string | null;
+  started_at: string | null;
+  excluded_from_analysis: boolean;
   integrity: Integrity | null;
 }
 interface Timing {
@@ -158,6 +160,39 @@ export default function TeacherTestDetailPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, id]);
 
+  const [rowBusy, setRowBusy] = useState<number | null>(null);
+
+  const resetTimer = async (a: Assignment) => {
+    const msg = a.attempt_id
+      ? `Reopen this test for ${a.student} with a fresh ${data?.test.duration_minutes ?? ""} minute clock?
+
+Their current submission and score will be withdrawn. Typed answers are kept as a draft (uploaded photos are not).`
+      : `Restart ${a.student}'s clock? They'll get the full time again from when they next click Begin.`;
+    if (!confirm(msg)) return;
+    setRowBusy(a.assignment_id);
+    try {
+      await teacherAPI.resetTimer(a.assignment_id);
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Could not reset the timer.");
+    } finally {
+      setRowBusy(null);
+    }
+  };
+
+  const toggleExcluded = async (a: Assignment) => {
+    if (!a.attempt_id) return;
+    setRowBusy(a.assignment_id);
+    try {
+      await teacherAPI.setExcluded(a.attempt_id, !a.excluded_from_analysis);
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Could not update this result.");
+    } finally {
+      setRowBusy(null);
+    }
+  };
+
   const assign = async (e: React.FormEvent) => {
     e.preventDefault();
     const list = emails.split(/[\s,;]+/).map((s) => s.trim()).filter(Boolean);
@@ -198,6 +233,7 @@ export default function TeacherTestDetailPage() {
   const { test, assignments, timing } = data;
   const isWritten = test.mode === "written";
   const completed = assignments.filter((a) => a.status === "completed");
+  const excludedCount = assignments.filter((a) => a.excluded_from_analysis).length;
 
   return (
     <PageContainer>
@@ -252,13 +288,17 @@ export default function TeacherTestDetailPage() {
                       <th className="px-4 py-3 font-medium text-right">Time</th>
                       <th className="px-4 py-3 font-medium text-right">Score</th>
                       <th className="px-4 py-3 font-medium text-right">Grade</th>
+                      <th className="px-4 py-3 font-medium text-right">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-line">
                     {assignments.map((a) => (
-                      <tr key={a.assignment_id}>
+                      <tr key={a.assignment_id} className={cn(a.excluded_from_analysis && "bg-slate-50 text-ink-subtle")}>
                         <td className="px-4 py-3">
                           <div className="font-medium text-ink">{a.student}</div>
+                          {a.excluded_from_analysis && (
+                            <span className="mt-0.5 inline-block rounded bg-slate-200 px-1.5 py-0.5 text-[11px] font-medium text-ink-muted">Excluded from analysis</span>
+                          )}
                           <div className="text-xs text-ink-subtle">{a.email}</div>
                         </td>
                         <td className="px-4 py-3">
@@ -266,6 +306,8 @@ export default function TeacherTestDetailPage() {
                             <span className="badge-success"><CheckCircle2 size={12} /> Completed</span>
                           ) : a.status === "awaiting_marking" ? (
                             <Link href="/marking" className="badge-warning hover:underline"><Clock size={12} /> Awaiting marking</Link>
+                          ) : a.started_at ? (
+                            <span className="badge-warning"><Clock size={12} /> In progress</span>
                           ) : (
                             <span className="badge-warning"><Clock size={12} /> Assigned</span>
                           )}
@@ -277,6 +319,30 @@ export default function TeacherTestDetailPage() {
                         </td>
                         <td className="px-4 py-3 text-right">
                           {a.grade ? <span className="font-semibold text-brand-600">{a.grade}</span> : "—"}
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex justify-end gap-1">
+                            {(a.started_at || a.attempt_id) && (
+                              <button
+                                onClick={() => resetTimer(a)}
+                                disabled={rowBusy === a.assignment_id}
+                                title={a.attempt_id ? "Reopen the test with a fresh clock" : "Restart this student's clock"}
+                                className="inline-flex items-center gap-1 whitespace-nowrap rounded-md border border-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-slate-50 hover:text-ink disabled:opacity-50"
+                              >
+                                <RotateCcw size={12} /> Reset timer
+                              </button>
+                            )}
+                            {a.attempt_id && (
+                              <button
+                                onClick={() => toggleExcluded(a)}
+                                disabled={rowBusy === a.assignment_id}
+                                title={a.excluded_from_analysis ? "Count this result in averages and reports again" : "Leave this result out of averages, timing and reports"}
+                                className="inline-flex items-center gap-1 whitespace-nowrap rounded-md border border-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-slate-50 hover:text-ink disabled:opacity-50"
+                              >
+                                {a.excluded_from_analysis ? <><Eye size={12} /> Include</> : <><EyeOff size={12} /> Exclude</>}
+                              </button>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -291,6 +357,7 @@ export default function TeacherTestDetailPage() {
             <>
               <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
                 Timing · {timing.responses} response{timing.responses === 1 ? "" : "s"}
+                {excludedCount > 0 && <span className="normal-case tracking-normal"> · {excludedCount} excluded</span>}
               </h2>
               <div className="card p-5">
                 <div className="mb-4 flex items-center gap-2 text-sm">

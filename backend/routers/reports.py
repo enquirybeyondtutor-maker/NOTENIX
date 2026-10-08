@@ -29,7 +29,8 @@ class BuildIn(BaseModel):
 async def _visible_attempts(staff: User, db: AsyncSession, student_id: int | None = None):
     """(attempt, test) pairs this staff member may report on: admins see all, teachers their own tests."""
     q = (select(TestAttempt, Test).join(Test, Test.id == TestAttempt.test_id)
-         .where(TestAttempt.status == "graded", Test.mode == "mcq"))
+         .where(TestAttempt.status == "graded", Test.mode == "mcq",
+                TestAttempt.excluded_from_analysis == False))  # noqa: E712
     if student_id is not None:
         q = q.where(TestAttempt.student_id == student_id)
     if not is_admin(staff):
@@ -82,7 +83,8 @@ async def _build(data: BuildIn, staff: User, db: AsyncSession) -> dict:
     cohort = {}
     for tid, t in tests.items():
         everyone = (await db.execute(select(TestAttempt).where(
-            TestAttempt.test_id == tid, TestAttempt.status == "graded"))).scalars().all()
+            TestAttempt.test_id == tid, TestAttempt.status == "graded",
+            TestAttempt.excluded_from_analysis == False))).scalars().all()  # noqa: E712
         cohort[tid] = rpt.class_accuracy(t, everyone)
 
     analyses, all_rows = [], []

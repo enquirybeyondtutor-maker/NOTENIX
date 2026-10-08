@@ -186,11 +186,9 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
         # MCQ questions WITHOUT answers/explanations
         safe = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
 
-    # Anchor the exam clock on first open so it can't be reset by closing the tab.
+    # The exam clock is anchored by POST /start (when the student clicks "Begin"),
+    # not here — merely opening the start screen must not burn their time.
     now = datetime.utcnow()
-    if getattr(assignment, "started_at", None) is None:
-        assignment.started_at = now
-        await db.commit()
 
     return {
         "assignment_id": assignment.id,
@@ -210,6 +208,23 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
         "draft_answers": getattr(assignment, "draft_answers", None),
         "questions": safe,
     }
+
+
+@router.post("/{assignment_id}/start")
+async def start_sitting(assignment_id: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """Anchor the exam clock when the student actually begins. Idempotent: a resumed
+    sitting keeps its original start so the countdown can't be reset by reopening."""
+    assignment, _ = await _load_assignment(assignment_id, user, db)
+    existing = (await db.execute(
+        select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)
+    )).scalar_one_or_none()
+    if existing:
+        raise HTTPException(400, "You have already completed this test.")
+    now = datetime.utcnow()
+    if assignment.started_at is None:
+        assignment.started_at = now
+        await db.commit()
+    return {"started_at": assignment.started_at.isoformat(), "server_now": now.isoformat()}
 
 
 @router.post("/{assignment_id}/draft")

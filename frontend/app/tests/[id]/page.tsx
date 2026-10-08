@@ -101,6 +101,7 @@ export default function AttemptTestPage() {
   const burstFlags = useRef(0);
   const justReturnedAt = useRef<number | null>(null);
   const [examStarted, setExamStarted] = useState(false);
+  const [clockStarted, setClockStarted] = useState(false);
 
   const markAway = useCallback(() => {
     if (awayStart.current == null) {
@@ -116,6 +117,23 @@ export default function AttemptTestPage() {
     }
   }, []);
 
+  // Anchor the clock server-side (idempotent: a resumed sitting keeps its original start),
+  // then run the countdown: deadline = started_at + duration, in the local clock.
+  const startClock = useCallback(async (durationMinutes: number | null) => {
+    try {
+      const { data } = await testsAPI.start(id);
+      if (durationMinutes && data.started_at && data.server_now) {
+        const skew = Date.now() - Date.parse(data.server_now); // localNow - serverNow
+        const deadline = Date.parse(data.started_at) + skew + durationMinutes * 60000;
+        deadlineRef.current = deadline;
+        setRemaining(Math.max(0, Math.round((deadline - Date.now()) / 1000)));
+        setClockStarted(true);
+      }
+    } catch (e: any) {
+      setError(e.response?.data?.detail || "Could not start the timer. Please refresh.");
+    }
+  }, [id]);
+
   useEffect(() => {
     if (!ready) return;
     testsAPI
@@ -128,17 +146,12 @@ export default function AttemptTestPage() {
           data.draft_answers.forEach((a: string | null, i: number) => { if (a) restored[i] = a; });
           if (Object.keys(restored).length) setAnswers(restored);
         }
-        // server-anchored countdown: deadline = started_at + duration, in the local clock
-        if (data.duration_minutes && data.started_at && data.server_now) {
-          const skew = Date.now() - Date.parse(data.server_now); // localNow - serverNow
-          const deadline = Date.parse(data.started_at) + skew + data.duration_minutes * 60000;
-          deadlineRef.current = deadline;
-          setRemaining(Math.max(0, Math.round((deadline - Date.now()) / 1000)));
-        }
+        // Homework has no Begin gate, so its clock starts on open; tests start on "Begin exam".
+        if (data.kind === "homework") startClock(data.duration_minutes);
       })
       .catch((e) => setError(e.response?.data?.detail || "Could not load this test."))
       .finally(() => setLoading(false));
-  }, [ready, id]);
+  }, [ready, id, startClock]);
 
   const handleSubmit = useCallback(async () => {
     if (!test || submitting) return;
@@ -207,7 +220,7 @@ export default function AttemptTestPage() {
     tick();
     const t = setInterval(tick, 1000);
     return () => clearInterval(t);
-  }, [test, handleSubmit]);
+  }, [test, handleSubmit, clockStarted]);
 
   // Integrity: count tab/window switches and time spent away from the exam.
   useEffect(() => {
@@ -255,6 +268,7 @@ export default function AttemptTestPage() {
     try { await document.documentElement.requestFullscreen(); } catch { /* fullscreen may be blocked */ }
     qEnterRef.current = Date.now();  // start the per-question clock at the real start
     setExamStarted(true);
+    await startClock(test?.duration_minutes ?? null);
   };
 
   const saveExit = async () => {

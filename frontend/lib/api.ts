@@ -55,6 +55,7 @@ export const testsAPI = {
     focus_lost_count?: number; time_away_seconds?: number; paste_attempts?: number;
     copy_attempts?: number; fullscreen_exits?: number; burst_flags?: number;
   }) => api.post(`/tests/${assignmentId}/submit`, data),
+  start: (assignmentId: number | string) => api.post(`/tests/${assignmentId}/start`),
   saveDraft: (assignmentId: number | string, answers: any[]) =>
     api.post(`/tests/${assignmentId}/draft`, { answers }),
   result: (assignmentId: number | string) => api.get(`/tests/${assignmentId}/result`),
@@ -81,6 +82,9 @@ export const teacherAPI = {
   unshare: (id: number | string) => api.delete(`/teacher/tests/${id}/share`),
   students: () => api.get("/teacher/students"),
   aiCheck: (attemptId: number | string) => api.post(`/teacher/attempts/${attemptId}/ai-check`),
+  resetTimer: (assignmentId: number | string) => api.post(`/teacher/assignments/${assignmentId}/reset-timer`),
+  setExcluded: (attemptId: number | string, excluded: boolean) =>
+    api.post(`/teacher/attempts/${attemptId}/exclude`, { excluded }),
 };
 
 export const reportsAPI = {

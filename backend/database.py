@@ -108,6 +108,7 @@ async def run_migrations():
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS copy_attempts INTEGER DEFAULT 0"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS fullscreen_exits INTEGER DEFAULT 0"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS burst_flags INTEGER DEFAULT 0"))
+            await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS excluded_from_analysis BOOLEAN DEFAULT FALSE"))
         elif dialect == "sqlite":
             # SQLite lacks ADD COLUMN IF NOT EXISTS — check PRAGMA first.
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
@@ -152,7 +153,7 @@ async def run_migrations():
                 ("paste_attempts", "INTEGER DEFAULT 0"), ("auto_submitted", "BOOLEAN DEFAULT 0"),
                 ("ai_flag", "VARCHAR(20)"), ("ai_notes", "TEXT"),
                 ("copy_attempts", "INTEGER DEFAULT 0"), ("fullscreen_exits", "INTEGER DEFAULT 0"),
-                ("burst_flags", "INTEGER DEFAULT 0"),
+                ("burst_flags", "INTEGER DEFAULT 0"), ("excluded_from_analysis", "BOOLEAN DEFAULT 0"),
             ]:
                 if acols and col not in acols:
                     await conn.execute(text(f"ALTER TABLE test_attempts ADD COLUMN {col} {ddl}"))

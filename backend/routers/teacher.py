@@ -61,6 +61,10 @@ class PhotoQuestionsIn(BaseModel):
     is_library: bool = False
 
 
+class ExcludeIn(BaseModel):
+    excluded: bool
+
+
 class UpdateTestIn(BaseModel):
     title: str | None = None
     duration_minutes: int | None = None
@@ -99,7 +103,9 @@ async def overview(teacher: User = Depends(require_teacher), db: AsyncSession = 
             select(func.count()).select_from(TestAttempt).where(TestAttempt.test_id.in_(test_ids))
         )).scalar() or 0
         avg_score = (await db.execute(
-            select(func.avg(TestAttempt.score)).where(TestAttempt.test_id.in_(test_ids))
+            select(func.avg(TestAttempt.score)).where(
+                TestAttempt.test_id.in_(test_ids), TestAttempt.excluded_from_analysis == False  # noqa: E712
+            )
         )).scalar()
 
     # recent attempts across this teacher's tests
@@ -143,10 +149,15 @@ async def list_tests(teacher: User = Depends(require_teacher), db: AsyncSession 
             select(TestAssignment.test_id, func.count()).where(TestAssignment.test_id.in_(ids)).group_by(TestAssignment.test_id)
         )).all():
             assigned_map[tid] = cnt
-        for tid, cnt, avg in (await db.execute(
-            select(TestAttempt.test_id, func.count(), func.avg(TestAttempt.score)).where(TestAttempt.test_id.in_(ids)).group_by(TestAttempt.test_id)
+        for tid, cnt in (await db.execute(
+            select(TestAttempt.test_id, func.count()).where(TestAttempt.test_id.in_(ids)).group_by(TestAttempt.test_id)
         )).all():
             completed_map[tid] = cnt
+        for tid, avg in (await db.execute(
+            select(TestAttempt.test_id, func.avg(TestAttempt.score)).where(
+                TestAttempt.test_id.in_(ids), TestAttempt.excluded_from_analysis == False  # noqa: E712
+            ).group_by(TestAttempt.test_id)
+        )).all():
             avg_map[tid] = avg
     return [_test_summary(t, assigned_map.get(t.id, 0), completed_map.get(t.id, 0), avg_map.get(t.id)) for t in tests]
 
@@ -371,6 +382,8 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
             "grade": None if (not at or pending) else at.grade,
             "time_taken_seconds": (at.time_taken_seconds if at else None),
             "completed_at": at.completed_at.isoformat() if at and at.completed_at else None,
+            "started_at": a.started_at.isoformat() if a.started_at else None,
+            "excluded_from_analysis": bool(at and getattr(at, "excluded_from_analysis", False)),
             # integrity signals (null when not yet attempted)
             "integrity": None if not at else {
                 "focus_lost": getattr(at, "focus_lost_count", 0) or 0,
@@ -391,8 +404,8 @@ async def test_detail(test_id: int, teacher: User = Depends(require_teacher), db
         # question text + options only (no answers) for teacher preview
         preview = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
 
-    # ── Class timing analytics (averages across everyone who sat it) ──
-    attempt_list = list(attempts_by_assignment.values())
+    # ── Class timing analytics (averages across everyone who sat it, minus excluded sittings) ──
+    attempt_list = [a for a in attempts_by_assignment.values() if not getattr(a, "excluded_from_analysis", False)]
     n = test.num_questions or len(test.questions)
     tlists = [a.question_times for a in attempt_list if getattr(a, "question_times", None)]
     per_question_avg = []
@@ -550,6 +563,56 @@ async def ai_check(attempt_id: int, teacher: User = Depends(require_teacher), db
     return result
 
 
+async def _owned_assignment(assignment_id: int, teacher: User, db: AsyncSession):
+    row = (await db.execute(
+        select(TestAssignment, Test).join(Test, Test.id == TestAssignment.test_id)
+        .where(TestAssignment.id == assignment_id)
+    )).first()
+    if not row:
+        raise HTTPException(404, "Assignment not found")
+    if not (is_admin(teacher) or row[1].owner_id == teacher.id):
+        raise HTTPException(403, "You don't have access to this assignment.")
+    return row  # (assignment, test)
+
+
+@router.post("/assignments/{assignment_id}/reset-timer")
+async def reset_timer(assignment_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Give a student a fresh, full-length clock (e.g. after a timing glitch).
+    In progress: the countdown restarts when they next click Begin.
+    Already submitted (incl. auto-submitted): the attempt is withdrawn and the test
+    reopened, with their typed answers carried over as a draft."""
+    assignment, _ = await _owned_assignment(assignment_id, teacher, db)
+    attempt = (await db.execute(
+        select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)
+    )).scalar_one_or_none()
+    reopened = attempt is not None
+    if attempt:
+        answers = attempt.answers or []
+        assignment.draft_answers = answers if any(answers) else None
+        await db.delete(attempt)
+    assignment.started_at = None
+    assignment.status = "assigned"
+    await db.commit()
+    return {"assignment_id": assignment_id, "reopened": reopened}
+
+
+@router.post("/attempts/{attempt_id}/exclude")
+async def set_excluded(attempt_id: int, data: ExcludeIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Leave an unreliable sitting out of (or put it back into) averages, timing and reports."""
+    row = (await db.execute(
+        select(TestAttempt, Test).join(Test, Test.id == TestAttempt.test_id)
+        .where(TestAttempt.id == attempt_id)
+    )).first()
+    if not row:
+        raise HTTPException(404, "Attempt not found")
+    attempt, test = row
+    if not (is_admin(teacher) or test.owner_id == teacher.id):
+        raise HTTPException(403, "You don't have access to this attempt.")
+    attempt.excluded_from_analysis = data.excluded
+    await db.commit()
+    return {"attempt_id": attempt_id, "excluded_from_analysis": attempt.excluded_from_analysis}
+
+
 @router.get("/students")
 async def students(teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
     """Students this teacher has assigned work to, with attempt stats."""
@@ -572,7 +635,7 @@ async def students(teacher: User = Depends(require_teacher), db: AsyncSession = 
             assigned_map[sid] = cnt
         for sid, avg in (await db.execute(
             select(TestAttempt.student_id, func.avg(TestAttempt.score)).where(
-                TestAttempt.student_id.in_(ids)
+                TestAttempt.student_id.in_(ids), TestAttempt.excluded_from_analysis == False  # noqa: E712
             ).group_by(TestAttempt.student_id)
         )).all():
             avg_map[sid] = avg

@@ -148,6 +148,8 @@ class TestAttempt(Base):
     fullscreen_exits: Mapped[int] = mapped_column(Integer, default=0, server_default="0")     # left fullscreen mid-exam
     burst_flags: Mapped[int] = mapped_column(Integer, default=0, server_default="0")          # returned then dumped a big answer
     auto_submitted: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")  # finalized by the sweep
+    # Teacher-flagged as unreliable (e.g. a timing glitch) — left out of averages, timing and reports.
+    excluded_from_analysis: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     ai_flag: Mapped[str | None] = mapped_column(String(20), nullable=True)   # likely_ai | likely_human | uncertain
     ai_notes: Mapped[str | None] = mapped_column(Text, nullable=True)        # examiner-facing AI-check reasoning
     time_taken_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
