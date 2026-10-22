@@ -5,11 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from services.retention import purge_old_responses
 from services.sittings import auto_submit_expired
-from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports
+from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests
+from routers.payments import expire_pro_plans
 
 
 async def _retention_loop():
-    """Purge expired student responses on boot, then once a day."""
+    """Purge expired student responses and lapsed bank-transfer Pro plans on boot, then once a day."""
     while True:
         try:
             n = await purge_old_responses()
@@ -17,6 +18,12 @@ async def _retention_loop():
                 print(f"[retention] purged responses from {n} record(s)")
         except Exception as e:  # never let the loop die
             print(f"[retention] purge failed: {e}")
+        try:
+            n = await expire_pro_plans()
+            if n:
+                print(f"[plans] {n} Pro plan(s) expired")
+        except Exception as e:
+            print(f"[plans] expiry sweep failed: {e}")
         await asyncio.sleep(24 * 3600)
 
 
@@ -65,6 +72,7 @@ app.include_router(admin.router)
 app.include_router(practice.router)
 app.include_router(marking.router)
 app.include_router(reports.router)
+app.include_router(requests.router)
 
 
 @app.get("/health")

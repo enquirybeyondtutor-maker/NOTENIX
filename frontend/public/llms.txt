@@ -1,0 +1,23 @@
+# Notenix
+
+> Notenix (www.notenix.com) is an online practice-test platform for students worldwide. Students sit timed, exam-style tests with instant marking, and can request full mock tests that are marked by real tutors from Beyond Tutors. All questions are original, written by tutors.
+
+## Exams covered
+- [SAT practice](https://www.notenix.com/sat): Digital SAT Math and Reading & Writing practice, type-in and multiple-choice questions, free sample questions.
+- [ESAT practice](https://www.notenix.com/esat): Engineering and Science Admissions Test mocks (Maths 1 & 2, Physics, Chemistry, Biology).
+- [TMUA practice](https://www.notenix.com/tmua): Test of Mathematics for University Admission, Paper 1 and Paper 2 mocks.
+- [GCSE Maths practice](https://www.notenix.com/gcse-maths): AQA, Edexcel and OCR tests with a 9–1 grade estimate.
+- [A-Level Maths practice](https://www.notenix.com/a-level-maths): Pure, Statistics and Mechanics tests with an A*–E estimate.
+- [IGCSE practice](https://www.notenix.com/igcse): Cambridge and Pearson Edexcel International GCSE.
+- [CBSE practice](https://www.notenix.com/cbse): NCERT-based Class 10 and 12 tests.
+- [ICSE practice](https://www.notenix.com/icse): ICSE Class 10 and ISC Class 12 tests.
+- [JEE practice](https://www.notenix.com/jee): JEE Main style Physics, Chemistry and Maths mocks with numerical questions.
+- [NEET practice](https://www.notenix.com/neet): NEET-UG style Physics, Chemistry and Biology MCQs.
+
+## How it works
+- [Request a tutor-marked test](https://www.notenix.com/request): a student requests a test, the Notenix team assigns it, the student sits it online, and a tutor marks it with feedback.
+- [Pricing](https://www.notenix.com/pricing): free practice; Pro plan and tutor-marked mocks can be paid by bank transfer from any country.
+
+## About
+- Built by Beyond Imagination. Tests are marked by tutors from Beyond Tutors (https://www.thebeyondtutors.com).
+- Contact: hello@notenix.com

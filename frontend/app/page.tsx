@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,10 +12,24 @@ import {
   Sparkles,
   GraduationCap,
   PenSquare,
+  Send,
+  UserCheck,
+  Globe2,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { EXAMS } from "@/lib/exams";
+import { SITE } from "@/lib/site";
 
-const BOARDS = ["AQA", "Edexcel", "OCR", "Cambridge", "WJEC", "CCEA"];
+export const metadata: Metadata = {
+  alternates: { canonical: SITE },
+};
+
+const REQUEST_STEPS = [
+  { icon: Send, title: "Request a test", desc: "Pick your exam: SAT, ESAT, TMUA, IGCSE, JEE, NEET, CBSE and more." },
+  { icon: ClipboardList, title: "We send it", desc: "A tutor chooses a full mock that fits and it lands in your account." },
+  { icon: GraduationCap, title: "Sit it online", desc: "Timed, exam-style, on any device, from anywhere." },
+  { icon: UserCheck, title: "A tutor marks it", desc: "Your score, written feedback and exactly what to work on next." },
+];
 
 const FEATURES = [
   { icon: PenSquare, title: "Build tests in minutes", desc: "Assemble board-aligned assessments by hand or let Claude AI draft questions from any topic and specification." },
@@ -33,10 +48,10 @@ const STEPS = [
 ];
 
 const STATS = [
-  { value: "11", label: "Subjects" },
-  { value: "6", label: "Exam boards" },
-  { value: "1–9 / A*–E", label: "Grade estimates" },
-  { value: "AI", label: "Auto-marked" },
+  { value: "10", label: "Exams covered" },
+  { value: "Free", label: "Sample questions" },
+  { value: "Tutor", label: "Marked mocks" },
+  { value: "Global", label: "Pay from anywhere" },
 ];
 
 export default function LandingPage() {
@@ -49,29 +64,32 @@ export default function LandingPage() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
           <div className="animate-slide-up">
             <span className="badge-brand">
-              <Sparkles size={13} /> AI-powered assessment · GCSE &amp; A-Level
+              <Sparkles size={13} /> SAT · ESAT · TMUA · IGCSE · JEE · NEET · CBSE
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
-              Assessment that runs<br className="hidden sm:block" /> itself, end to end.
+              Practice tests,<br className="hidden sm:block" /> marked by real tutors.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-              Notenix lets teachers create board-aligned tests, assign them to students, and track
-              mastery — while AI handles the marking. One portal for setting, sitting and scoring.
+              Sit timed, exam-style mocks online and get instant marks. Want more? Request a full test
+              and our tutors mark it with feedback. For students anywhere in the world.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button href="/register" size="lg">
-                Get started free <ArrowRight size={18} />
+              <Button href="#exams" size="lg">
+                Try free questions <ArrowRight size={18} />
               </Button>
-              <Button href="/pricing" variant="secondary" size="lg">
-                Book a demo
+              <Button href="/request" variant="secondary" size="lg">
+                Request a marked test
               </Button>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink-muted">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-emerald-500" /> Free for individual students
+                <CheckCircle2 size={15} className="text-emerald-500" /> Free to start
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-emerald-500" /> No card required
+                <CheckCircle2 size={15} className="text-emerald-500" /> No sign-up for samples
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Globe2 size={15} className="text-emerald-500" /> Pay from any country
               </span>
             </div>
           </div>
@@ -125,22 +143,57 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Board trust bar ──────────────────────────────────── */}
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-3 px-4 py-6 sm:px-6">
-          <span className="text-sm font-medium text-ink-subtle">Aligned to every major exam board</span>
-          {BOARDS.map((b) => (
-            <span key={b} className="text-sm font-semibold text-ink-muted">{b}</span>
+      {/* ── Exams ──────────────────────────────────────────── */}
+      <section id="exams" className="scroll-mt-20 border-b border-line bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Choose your exam</span>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink">Free practice for every major exam</h2>
+            <p className="mt-3 text-ink-muted">Each page has free sample questions you can answer right now, with worked solutions.</p>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {EXAMS.map((e) => (
+              <Link key={e.slug} href={`/${e.slug}`} className="card card-hover group p-5">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-bold text-ink">{e.name}</h3>
+                  <ArrowRight size={16} className="text-ink-subtle transition-transform group-hover:translate-x-0.5 group-hover:text-brand-600" />
+                </div>
+                <p className="mt-1 text-xs font-medium text-ink-subtle">{e.fullName}</p>
+                <p className="mt-3 text-sm text-ink-muted">{e.tagline}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Request a test ───────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Tutor-marked tests</span>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">Request a test. We mark it.</h2>
+          <p className="mt-4 text-lg text-ink-muted">Real exam conditions and real feedback from experienced tutors, not just a number.</p>
+        </div>
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {REQUEST_STEPS.map((st, i) => (
+            <div key={st.title}>
+              <span className="grid h-11 w-11 place-items-center rounded-lg bg-brand-600 text-white"><st.icon size={18} /></span>
+              <div className="mt-3 text-xs font-bold text-ink-subtle">0{i + 1}</div>
+              <h3 className="mt-1 text-base font-semibold text-ink">{st.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-ink-muted">{st.desc}</p>
+            </div>
           ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Button href="/request" size="lg">Request a test <ArrowRight size={18} /></Button>
         </div>
       </section>
 
       {/* ── Features ─────────────────────────────────────────── */}
       <section id="features" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-24">
         <div className="max-w-2xl">
-          <span className="eyebrow">Platform</span>
+          <span className="eyebrow">For teachers and tutors</span>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            Everything a department needs to assess
+            Run your own classes on Notenix
           </h2>
           <p className="mt-4 text-lg text-ink-muted">
             From setting the paper to reading the analytics — Notenix replaces a stack of tools with
@@ -199,7 +252,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── Audience split ───────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
+      <section id="teachers" className="mx-auto max-w-7xl scroll-mt-20 px-4 pb-20 sm:px-6">
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="card p-8">
             <span className="grid h-11 w-11 place-items-center rounded-lg bg-brand-50 text-brand-600">
@@ -238,17 +291,17 @@ export default function LandingPage() {
       <section className="border-t border-line bg-brand-600">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Bring your assessments into one place
+            Your next mock, marked by a tutor
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-            Join teachers and students across the UK using Notenix to set, sit and score smarter.
+            Start free today, wherever you study: UK, US, India, the Middle East and beyond.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="/register" variant="inverse" size="lg">
-              Get started free <ArrowRight size={18} />
+            <Button href="/request" variant="inverse" size="lg">
+              Request a test <ArrowRight size={18} />
             </Button>
-            <Button href="/login" variant="outline-inverse" size="lg">
-              Sign in
+            <Button href="/register" variant="outline-inverse" size="lg">
+              Create a free account
             </Button>
           </div>
         </div>

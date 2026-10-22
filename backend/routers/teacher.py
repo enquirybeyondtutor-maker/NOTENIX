@@ -22,7 +22,7 @@ router = APIRouter(prefix="/teacher", tags=["teacher"])
 
 class QuestionIn(BaseModel):
     question: str
-    options: list[str]
+    options: list[str] = []     # empty = type-in numeric answer (e.g. SAT grid-in)
     answer: str
     explanation: str | None = None
     image: str | None = None    # optional figure (data URI), e.g. a graph

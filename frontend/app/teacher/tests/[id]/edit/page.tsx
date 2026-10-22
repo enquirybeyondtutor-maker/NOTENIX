@@ -15,13 +15,21 @@ interface EditQ {
   options: string[];
   answerIndex: number;
   explanation: string;
+  image?: string | null;  // figure kept as-is on save
+  numeric?: boolean;      // type-in answer (no options)
+  numericAnswer?: string;
 }
 
 function toEditQ(q: any): EditQ {
-  const options: string[] = (q.options || ["", "", "", ""]).slice(0, 4);
+  const numeric = Array.isArray(q.options) && q.options.length === 0;
+  // Keep every option: ESAT-style questions can have 5–8.
+  const options: string[] = numeric ? ["", "", "", ""] : [...(q.options || [])];
   while (options.length < 4) options.push("");
   const answerIndex = Math.max(0, options.findIndex((o) => o === q.answer));
-  return { question: q.question || "", options, answerIndex, explanation: q.explanation || "" };
+  return {
+    question: q.question || "", options, answerIndex, explanation: q.explanation || "",
+    image: q.image || null, numeric, numericAnswer: numeric ? String(q.answer ?? "") : "",
+  };
 }
 
 export default function EditTestPage() {
@@ -56,14 +64,14 @@ export default function EditTestPage() {
     setQuestions((qs) => qs.map((q, idx) => (idx === i ? { ...q, ...patch } : q)));
   const setOpt = (qi: number, oi: number, val: string) =>
     setQuestions((qs) => qs.map((q, idx) => (idx === qi ? { ...q, options: q.options.map((o, j) => (j === oi ? val : o)) } : q)));
-  const blankQ = (): EditQ => ({ question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "" });
+  const blankQ = (): EditQ => ({ question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "", numeric: false, numericAnswer: "" });
 
   const save = async () => {
     const cleaned = questions
-      .map((q) => ({ ...q, question: q.question.trim(), options: q.options.map((o) => o.trim()) }))
-      .filter((q) => q.question && q.options.every(Boolean));
+      .map((q) => ({ ...q, question: q.question.trim(), options: q.options.map((o) => o.trim()), numericAnswer: (q.numericAnswer || "").trim() }))
+      .filter((q) => q.question && (q.numeric ? q.numericAnswer : q.options.every(Boolean)));
     if (cleaned.length === 0) {
-      setError("Add at least one complete question (text + all four options).");
+      setError("Add at least one complete question (text + all options filled, or a type-in answer).");
       return;
     }
     setError("");
@@ -74,9 +82,10 @@ export default function EditTestPage() {
         duration_minutes: duration || null,
         questions: cleaned.map((q) => ({
           question: q.question,
-          options: q.options,
-          answer: q.options[q.answerIndex],
+          options: q.numeric ? [] : q.options,
+          answer: q.numeric ? q.numericAnswer : q.options[q.answerIndex],
           explanation: q.explanation.trim() || undefined,
+          image: q.image || undefined,
         })),
       });
       router.replace(`/teacher/tests/${id}`);
@@ -135,6 +144,21 @@ export default function EditTestPage() {
             <Field label="Question">
               <Input value={q.question} onChange={(e) => setQ(i, { question: e.target.value })} placeholder="Enter the question" />
             </Field>
+            {q.image && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={q.image} alt={`Figure for question ${i + 1}`} className="mt-3 max-h-48 rounded-lg border border-line" />
+            )}
+            <label className="mt-3 flex items-center gap-2 text-xs font-medium text-ink-muted">
+              <input type="checkbox" checked={!!q.numeric} onChange={(e) => setQ(i, { numeric: e.target.checked })} />
+              Type-in answer (no options)
+            </label>
+            {q.numeric ? (
+              <div className="mt-3 max-w-xs">
+                <Field label="Correct answer" hint="A number or fraction. 0.5, .5 and 1/2 are treated as equal.">
+                  <Input value={q.numericAnswer || ""} onChange={(e) => setQ(i, { numericAnswer: e.target.value })} />
+                </Field>
+              </div>
+            ) : (
             <div className="mt-3 space-y-2">
               <div className="text-xs font-medium text-ink-muted">Options — select the correct one</div>
               {q.options.map((opt, oi) => (
@@ -146,9 +170,23 @@ export default function EditTestPage() {
                     <CheckCircle2 size={13} />
                   </button>
                   <Input value={opt} onChange={(e) => setOpt(i, oi, e.target.value)} placeholder={`Option ${String.fromCharCode(65 + oi)}`} />
+                  {q.options.length > 2 && (
+                    <button type="button" title="Remove option" className="text-ink-subtle hover:text-red-600"
+                      onClick={() => setQ(i, {
+                        options: q.options.filter((_, j) => j !== oi),
+                        answerIndex: oi < q.answerIndex ? q.answerIndex - 1 : oi === q.answerIndex ? 0 : q.answerIndex,
+                      })}>
+                      <Trash2 size={14} />
+                    </button>
+                  )}
                 </div>
               ))}
+              {q.options.length < 8 && (
+                <button type="button" className="text-xs font-medium text-brand-600 hover:underline"
+                  onClick={() => setQ(i, { options: [...q.options, ""] })}>+ Add option</button>
+              )}
             </div>
+            )}
             <Field label="Explanation (optional)">
               <Input value={q.explanation} onChange={(e) => setQ(i, { explanation: e.target.value })} placeholder="Why the answer is correct" />
             </Field>

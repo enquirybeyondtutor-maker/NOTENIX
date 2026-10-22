@@ -174,6 +174,24 @@ async def send_marked_email(to_email: str, student_name: str, test_title: str,
     await _deliver(to_email, subj, _shell("Your test has been marked", body, url, "See my result"), text)
 
 
+async def send_notice(to_email: str, subject: str, heading: str, body_html: str, text: str,
+                      path: str, cta_label: str) -> None:
+    """Generic notification (test requests, payments). `path` is relative to the site."""
+    url = settings.public_url.rstrip("/") + path
+    await _deliver(to_email, subject, _shell(heading, body_html, url, cta_label), f"{text}\n\n{url}\n\n— Notenix")
+
+
+async def notify_admins(subject: str, text: str, path: str) -> None:
+    """Best-effort heads-up to everyone in ADMIN_EMAILS."""
+    from html import escape
+    emails = [e.strip() for e in (settings.admin_emails or "").split(",") if e.strip()]
+    for e in emails:
+        try:
+            await send_notice(e, subject, subject, escape(text), text, path, "Open admin")
+        except Exception as ex:  # never fail the request because an email bounced
+            print(f"[email] admin notice to {e} failed: {ex}")
+
+
 async def send_otp_email(to_email: str, full_name: str, code: str, kind: str = "verify") -> None:
     """Email the OTP via the first configured provider. Providers (Resend/Brevo)
     raise EmailSendError on failure so signup can report it; SMTP/no-provider

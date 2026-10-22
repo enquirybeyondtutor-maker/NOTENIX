@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 
 const SUBJECTS = ["maths", "biology", "chemistry", "physics", "computer_science", "economics", "english_literature", "geography", "history", "psychology", "business"];
 const BOARDS = ["AQA", "Edexcel", "OCR", "Cambridge", "WJEC", "CCEA"];
-const LEVELS = ["GCSE", "A-Level"];
+const LEVELS = ["GCSE", "A-Level", "IGCSE", "SAT", "ESAT", "TMUA", "TARA", "CBSE", "ICSE", "JEE", "NEET"];
 const DIFFICULTIES = ["easy", "medium", "hard"];
 
 type Mode = "ai" | "manual" | "pdf" | "photo";
@@ -24,8 +24,10 @@ interface ManualQ {
   options: string[];
   answerIndex: number;
   explanation: string;
+  numeric?: boolean;      // type-in answer (SAT grid-in, JEE numerical) instead of options
+  numericAnswer?: string;
 }
-const blankQ = (): ManualQ => ({ question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "" });
+const blankQ = (): ManualQ => ({ question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "", numeric: false, numericAnswer: "" });
 
 const MAX_PHOTO_QS = 20;
 
@@ -129,10 +131,10 @@ export default function NewTestPage() {
     // ---- Manual ----
     if (mode === "manual") {
       const cleaned = questions
-        .map((q) => ({ ...q, question: q.question.trim(), options: q.options.map((o) => o.trim()) }))
-        .filter((q) => q.question && q.options.every(Boolean));
+        .map((q) => ({ ...q, question: q.question.trim(), options: q.options.map((o) => o.trim()), numericAnswer: (q.numericAnswer || "").trim() }))
+        .filter((q) => q.question && (q.numeric ? q.numericAnswer : q.options.every(Boolean)));
       if (cleaned.length === 0) {
-        setError("Add at least one complete question (text + all four options).");
+        setError("Add at least one complete question (text + all four options, or a type-in answer).");
         return;
       }
       setBusy(true);
@@ -144,8 +146,8 @@ export default function NewTestPage() {
           duration_minutes: meta.duration_minutes || null,
           generate: false,
           questions: cleaned.map((q) => ({
-            question: q.question, options: q.options,
-            answer: q.options[q.answerIndex], explanation: q.explanation.trim() || undefined,
+            question: q.question, options: q.numeric ? [] : q.options,
+            answer: q.numeric ? q.numericAnswer : q.options[q.answerIndex], explanation: q.explanation.trim() || undefined,
           })),
         });
         router.replace(`/teacher/tests/${data.id}`);
@@ -512,6 +514,17 @@ export default function NewTestPage() {
                 <Field label="Question">
                   <Input value={q.question} onChange={(e) => setQ(i, { question: e.target.value })} placeholder="Enter the question" />
                 </Field>
+                <label className="mt-3 flex items-center gap-2 text-xs font-medium text-ink-muted">
+                  <input type="checkbox" checked={!!q.numeric} onChange={(e) => setQ(i, { numeric: e.target.checked })} />
+                  Type-in answer (no options), e.g. SAT grid-in or JEE numerical
+                </label>
+                {q.numeric ? (
+                  <div className="mt-3 max-w-xs">
+                    <Field label="Correct answer" hint="A number or fraction. 0.5, .5 and 1/2 are treated as equal.">
+                      <Input value={q.numericAnswer || ""} onChange={(e) => setQ(i, { numericAnswer: e.target.value })} placeholder="e.g. 12 or 7/2" />
+                    </Field>
+                  </div>
+                ) : (
                 <div className="mt-3 space-y-2">
                   <div className="text-xs font-medium text-ink-muted">Options — select the correct one</div>
                   {q.options.map((opt, oi) => (
@@ -526,6 +539,7 @@ export default function NewTestPage() {
                     </div>
                   ))}
                 </div>
+                )}
                 <Field label="Explanation (optional)"><Input value={q.explanation} onChange={(e) => setQ(i, { explanation: e.target.value })} placeholder="Why the answer is correct" /></Field>
               </div>
             ))}

@@ -3,26 +3,32 @@ import { Logo } from "./ui/Logo";
 
 const COLS = [
   {
-    title: "Product",
+    title: "International",
     links: [
-      { label: "Features", href: "/#features" },
-      { label: "How it works", href: "/#how" },
-      { label: "Pricing", href: "/pricing" },
+      { label: "SAT practice", href: "/sat" },
+      { label: "ESAT practice", href: "/esat" },
+      { label: "TMUA practice", href: "/tmua" },
+      { label: "IGCSE practice", href: "/igcse" },
+      { label: "GCSE Maths", href: "/gcse-maths" },
+      { label: "A-Level Maths", href: "/a-level-maths" },
     ],
   },
   {
-    title: "For educators",
+    title: "India",
     links: [
-      { label: "Create tests", href: "/register" },
-      { label: "Assign & track", href: "/register" },
-      { label: "Book a demo", href: "/pricing" },
+      { label: "JEE practice", href: "/jee" },
+      { label: "NEET practice", href: "/neet" },
+      { label: "CBSE practice", href: "/cbse" },
+      { label: "ICSE practice", href: "/icse" },
     ],
   },
   {
     title: "Company",
     links: [
+      { label: "Request a test", href: "/request" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "For teachers", href: "/#teachers" },
       { label: "Sign in", href: "/login" },
-      { label: "Get started", href: "/register" },
       { label: "Contact", href: "mailto:hello@notenix.com" },
     ],
   },
@@ -36,8 +42,8 @@ export default function Footer() {
           <div className="max-w-xs">
             <Logo />
             <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-              The assessment platform for UK schools. Create board-aligned tests, assign them to
-              students, and track mastery — powered by AI.
+              Practice tests for students anywhere: sit timed mocks online, get instant marks,
+              and have full papers marked by tutors from Beyond Tutors.
             </p>
           </div>
           {COLS.map((col) => (

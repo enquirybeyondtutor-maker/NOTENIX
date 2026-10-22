@@ -4,20 +4,22 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Shell from "@/components/Shell";
 import CookieConsent from "@/components/CookieConsent";
+import { SITE } from "@/lib/site";
 
-const SITE = "https://notenix.com";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-6NVHXT86PC"; // GA4 Measurement ID (env var overrides)
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Notenix — Smart GCSE & A-Level Quiz & Past Paper Practice",
+    default: "Notenix: Free Practice Tests Marked by Tutors (SAT, ESAT, TMUA, IGCSE, JEE, NEET)",
     template: "%s | Notenix",
   },
   description:
-    "Notenix helps UK students ace GCSE & A-Level exams with smart quizzes built on real past papers, instant marking, progress tracking and leaderboards. Start free.",
+    "Free practice tests for SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, CBSE, ICSE, JEE and NEET. Sit timed mocks online, get instant marking, or request a full mock marked by real tutors. Students anywhere can start free.",
   keywords: [
-    "Notenix", "notenix", "GCSE quiz", "A-Level quiz", "past papers", "GCSE revision",
+    "Notenix", "notenix", "SAT practice test", "digital SAT practice", "free SAT mock", "ESAT practice",
+    "ESAT mock test", "TMUA practice", "TMUA mock", "IGCSE practice test", "JEE Main mock test",
+    "NEET mock test", "CBSE practice test", "ICSE practice test", "GCSE quiz", "A-Level quiz", "past papers", "GCSE revision",
     "A-Level revision", "exam practice", "AQA", "Edexcel", "OCR", "GCSE past papers",
     "A-Level past papers", "online quiz platform", "Beyond Imagination", "Beyond Tutors",
   ],
@@ -25,20 +27,19 @@ export const metadata: Metadata = {
   creator: "Beyond Imagination",
   publisher: "Beyond Imagination",
   applicationName: "Notenix",
-  alternates: { canonical: SITE },
   openGraph: {
     type: "website",
     url: SITE,
     siteName: "Notenix",
-    title: "Notenix — Smart GCSE & A-Level Quiz & Past Paper Practice",
+    title: "Notenix — SAT, ESAT, TMUA, GCSE & A-Level Practice Tests",
     description:
-      "Ace GCSE & A-Level exams with smart quizzes built on real past papers, instant marking and progress tracking. Start free.",
+      "Timed practice tests with instant marking, plus full mocks marked by real tutors. SAT, ESAT, TMUA, GCSE and A-Level. Start free.",
     locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Notenix — Smart GCSE & A-Level Quiz & Past Paper Practice",
-    description: "Ace GCSE & A-Level exams with smart quizzes built on real past papers. Start free.",
+    title: "Notenix — SAT, ESAT, TMUA, GCSE & A-Level Practice Tests",
+    description: "Timed practice tests with instant marking, plus full mocks marked by real tutors. Start free.",
   },
   robots: {
     index: true,
@@ -56,7 +57,7 @@ const jsonLd = {
       "@id": `${SITE}/#org`,
       name: "Notenix",
       url: SITE,
-      description: "Smart GCSE & A-Level quiz and past-paper practice platform by Beyond Imagination.",
+      description: "Online practice-test platform for SAT, ESAT, TMUA, GCSE and A-Level, with mocks marked by tutors from Beyond Tutors.",
       parentOrganization: { "@type": "Organization", name: "Beyond Imagination" },
     },
     {
@@ -65,7 +66,7 @@ const jsonLd = {
       url: SITE,
       name: "Notenix",
       publisher: { "@id": `${SITE}/#org` },
-      inLanguage: "en-GB",
+      inLanguage: "en",
     },
     {
       "@type": "WebApplication",

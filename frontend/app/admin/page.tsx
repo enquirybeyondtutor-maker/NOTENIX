@@ -5,6 +5,7 @@ import { Shield, Users, GraduationCap, PenSquare, Ban, CheckCircle2, UserX, PenL
 import { adminAPI, getUser, authAPI } from "@/lib/api";
 import { PageContainer, PageHeader, StatCard, Spinner, EmptyState } from "@/components/ui/Page";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { formatDate, relativeTime, cn } from "@/lib/utils";
 
 interface Row {
@@ -96,7 +97,8 @@ export default function AdminPage() {
 
   return (
     <PageContainer>
-      <PageHeader icon={Shield} title="Admin" subtitle="Manage users, roles and access." />
+      <PageHeader icon={Shield} title="Admin" subtitle="Manage users, roles and access."
+        actions={<Button href="/admin/requests" size="sm">Test requests &amp; payments</Button>} />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Total users" value={overview?.users ?? 0} icon={Users} />

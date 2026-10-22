@@ -15,18 +15,11 @@ export default function Pricing() {
     paymentsAPI.plans().then((r) => setPlans(r.data)).catch(() => {});
   }, []);
 
-  const upgrade = async () => {
-    if (!getUser()) {
-      window.location.href = "/register";
-      return;
-    }
-    try {
-      const res = await paymentsAPI.checkout();
-      window.location.href = res.data.url;
-    } catch (err: any) {
-      setMsg(err.response?.data?.detail || "Payments aren't enabled yet — coming soon!");
-    }
+  // Pro is paid by bank transfer (Wise etc.) on /pay; an admin then switches it on.
+  const upgrade = () => {
+    window.location.href = getUser() ? "/pay" : "/register?returnTo=/pay";
   };
+  const sym = (c?: string) => ({ GBP: "£", USD: "$", EUR: "€", INR: "₹" } as Record<string, string>)[c || "GBP"] ?? `${c} `;
 
   const freeFeatures: string[] = plans?.free?.features || [
     "3 AI quizzes to start",
@@ -49,7 +42,8 @@ export default function Pricing() {
           Simple pricing for students and schools
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Start free. Upgrade when you're ready. Schools get bulk pricing and admin tools.
+          Start free. Upgrade when you're ready, or request a test marked by our tutors.
+          Pay by bank transfer from any country.
         </p>
       </div>
 
@@ -64,7 +58,7 @@ export default function Pricing() {
         <div className="card flex flex-col p-8">
           <h3 className="text-lg font-semibold text-ink">Free</h3>
           <div className="mt-2 flex items-baseline gap-1">
-            <span className="text-4xl font-bold text-ink">£0</span>
+            <span className="text-4xl font-bold text-ink">{sym(plans?.currency)}0</span>
             <span className="text-sm text-ink-subtle">/ forever</span>
           </div>
           <p className="mt-1 text-sm text-ink-muted">For individual students getting started.</p>
@@ -85,8 +79,8 @@ export default function Pricing() {
           </span>
           <h3 className="text-lg font-semibold text-ink">Pro</h3>
           <div className="mt-2 flex items-baseline gap-1">
-            <span className="text-4xl font-bold text-ink">£{plans?.pro?.price ?? "9.99"}</span>
-            <span className="text-sm text-ink-subtle">/ month</span>
+            <span className="text-4xl font-bold text-ink">{sym(plans?.currency)}{plans?.pro?.price ?? "9.99"}</span>
+            <span className="text-sm text-ink-subtle">/ 30 days</span>
           </div>
           <p className="mt-1 text-sm text-ink-muted">Everything you need to excel.</p>
           <ul className="mt-6 flex-1 space-y-3">
@@ -100,6 +94,20 @@ export default function Pricing() {
             {user?.plan === "pro" ? "You're Pro ✓" : "Upgrade to Pro"}
           </Button>
         </div>
+      </div>
+
+      {/* Tutor-marked tests */}
+      <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 p-6 sm:flex-row sm:p-8">
+        <div>
+          <h3 className="font-semibold text-ink">Tutor-marked mock tests</h3>
+          <p className="mt-1 text-sm text-ink-muted">
+            SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, CBSE, ICSE, JEE and NEET. We send the test, you sit it, a tutor marks it.{" "}
+            {plans?.request && (plans.request.price > 0
+              ? <b className="text-ink">{sym(plans.currency)}{plans.request.price} per test.</b>
+              : <b className="text-emerald-700">Free right now.</b>)}
+          </p>
+        </div>
+        <Button href="/request" className="shrink-0">Request a test <ArrowRight size={15} /></Button>
       </div>
 
       {/* Schools tier */}

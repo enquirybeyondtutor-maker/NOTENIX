@@ -1,19 +1,50 @@
 """MCQ auto-grading + estimated-grade mapping for assigned tests."""
 import asyncio
+import math
+import re
 from fastapi.concurrency import run_in_threadpool
 
 from services import ai
 
 
+def _parse_number(raw) -> float | None:
+    s = re.sub(r"[,\s£$€₹]", "", str(raw or ""))
+    if not s:
+        return None
+    m = re.fullmatch(r"(-?\d+(?:\.\d+)?)/(-?\d+(?:\.\d+)?)", s)
+    if m:
+        d = float(m.group(2))
+        return None if d == 0 else float(m.group(1)) / d
+    try:
+        n = float(s)
+    except ValueError:
+        return None
+    return n if math.isfinite(n) else None
+
+
+def _numeric_equal(given, expected) -> bool:
+    """Type-in answers (no options, e.g. SAT grid-ins): 0.5, .5 and 1/2 all match "1/2".
+    Mirrors frontend lib/answers.ts."""
+    a, b = _parse_number(given), _parse_number(expected)
+    if a is None or b is None:
+        return str(given).strip().lower() == str(expected).strip().lower()
+    return abs(a - b) <= 1e-6 * max(1.0, abs(b)) or abs(a - b) < 5e-4
+
+
 def grade_mcq(questions: list[dict], answers: list) -> tuple[float, list[dict]]:
-    """Compare answers against the stored question snapshot.
-    Returns (score_percent, per-question results with correctness + explanation)."""
+    """Compare answers against the stored question snapshot. A question with no options is a
+    type-in numeric answer. Returns (score_percent, per-question results with correctness + explanation)."""
     results: list[dict] = []
     correct = 0
     for i, q in enumerate(questions):
         given = answers[i] if i < len(answers) else None
         right = q.get("answer")
-        is_correct = str(given).strip() == str(right).strip() if given is not None else False
+        if given is None or not str(given).strip():
+            is_correct = False
+        elif q.get("options"):
+            is_correct = str(given).strip() == str(right).strip()
+        else:
+            is_correct = _numeric_equal(given, right)
         correct += int(is_correct)
         results.append({
             "question": q.get("question"),
@@ -100,9 +131,18 @@ def finalize_written_marks(questions: list[dict], per_q: list[dict], answers: li
     return score, results
 
 
-def estimate_grade(score: float, level: str) -> str:
-    """Map a percentage to an indicative GCSE (1–9) or A-Level (A*–E) grade."""
-    if (level or "").upper().startswith("A"):  # A-Level
+def estimate_grade(score: float, level: str) -> str | None:
+    """Map a percentage to an indicative grade for the exam. None where a percentage
+    can't honestly be turned into a grade (scaled 1.0–9.0 tests, rank-based entrance exams)."""
+    lv = (level or "").strip().upper()
+    if lv == "SAT":
+        # Indicative section score on the 200–800 scale, to the nearest 10.
+        return str(int(round((200 + 6 * score) / 10.0) * 10))
+    if lv in ("CBSE", "ICSE"):
+        return f"{round(score)}%"
+    if lv in ("ESAT", "TMUA", "TARA", "JEE", "NEET", "OTHER"):
+        return None
+    if lv.startswith("A"):  # A-Level
         bands = [(90, "A*"), (80, "A"), (70, "B"), (60, "C"), (50, "D"), (40, "E")]
         for cutoff, g in bands:
             if score >= cutoff:

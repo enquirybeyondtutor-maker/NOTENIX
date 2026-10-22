@@ -478,6 +478,21 @@ export default function AttemptTestPage() {
                   )}
                 </div>
               </div>
+            ) : !(q.options?.length) ? (
+              // Type-in answer (e.g. SAT grid-in, JEE numerical): no options to pick from.
+              <div className="mt-6 max-w-xs">
+                <label className="text-sm font-medium text-ink" htmlFor={`typein-${current}`}>Your answer</label>
+                <input
+                  id={`typein-${current}`}
+                  inputMode="decimal"
+                  autoComplete="off"
+                  value={answers[current] ?? ""}
+                  onChange={(e) => setAnswers((a) => ({ ...a, [current]: e.target.value.slice(0, 40) }))}
+                  placeholder="e.g. 12, 3.5 or 7/2"
+                  className="mt-2 w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-base text-ink outline-none transition-all focus:border-brand-500 focus:ring-4 focus:ring-brand-600/10"
+                />
+                <p className="mt-2 text-xs text-ink-subtle">Type a number. Fractions like 7/2 and decimals like 3.5 are both accepted.</p>
+              </div>
             ) : (
               <div className="mt-6 space-y-3">
                 {(q.options ?? []).map((opt) => {

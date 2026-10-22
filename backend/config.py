@@ -18,11 +18,17 @@ class Settings(BaseSettings):
     app_url: str = "http://localhost:8000"
     public_url: str = "https://www.notenix.com"  # used in notification email links
 
-    # Stripe (freemium)
-    stripe_secret_key: str = ""
-    stripe_publishable_key: str = ""
-    stripe_webhook_secret: str = ""
-    stripe_price_id: str = ""
+    # Manual payments (bank transfer / Wise). Nothing is charged automatically: students
+    # transfer money, then an admin confirms it in /admin/requests.
+    # PAYMENT_ACCOUNTS is a JSON list shown on the pay page, e.g.
+    #   [{"label": "UK bank transfer (GBP)", "currency": "GBP",
+    #     "details": {"Account holder": "...", "Sort code": "...", "Account number": "..."}},
+    #    {"label": "India (UPI / bank)", "currency": "INR", "details": {"UPI ID": "..."}}]
+    # Keep real details in the Render env, never in this public repo.
+    payment_accounts: str = "[]"
+    price_currency: str = "GBP"
+    pro_price: float = 9.99           # per 30 days
+    request_price: float = 0.0        # per requested test; 0 = free
 
     # Freemium limits
     free_quiz_limit: int = 3

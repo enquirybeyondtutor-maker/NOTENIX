@@ -25,6 +25,9 @@ class User(Base):
     # Rate-limits display-name changes (once per cooldown window).
     name_changed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     plan: Mapped[str] = mapped_column(String(20), default="free")  # free | pro
+    # Set when Pro is bought by bank transfer; the plan drops back to free after this.
+    # NULL = no expiry (e.g. Pro granted by hand).
+    pro_until: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
     quiz_count: Mapped[int] = mapped_column(Integer, default=0)
@@ -88,7 +91,7 @@ class Test(Base):
     title: Mapped[str] = mapped_column(String(200))
     subject: Mapped[str] = mapped_column(String(80), index=True)
     topic: Mapped[str] = mapped_column(String(160))
-    level: Mapped[str] = mapped_column(String(20), default="GCSE")       # GCSE | A-Level
+    level: Mapped[str] = mapped_column(String(20), default="GCSE")       # GCSE | A-Level | SAT | ESAT | CBSE | …
     exam_board: Mapped[str] = mapped_column(String(40), default="AQA")
     difficulty: Mapped[str] = mapped_column(String(20), default="medium")
     mode: Mapped[str] = mapped_column(String(20), default="mcq", server_default="mcq")  # mcq | written
@@ -156,3 +159,49 @@ class TestAttempt(Base):
     completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     # set when the student's raw response (answers + photos) is purged by retention policy
     purged_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Request-a-test service + manual (bank transfer / Wise) payments
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestRequest(Base):
+    """A student asks the team for a test; an admin assigns one and the team marks it.
+    status: awaiting_payment → payment_claimed → open → assigned (or cancelled).
+    Free requests (request_price = 0) start at `open`."""
+    __tablename__ = "test_requests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    exam: Mapped[str] = mapped_column(String(40))                     # SAT | ESAT | CBSE | …
+    subject: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    details: Mapped[str | None] = mapped_column(Text, nullable=True)  # topics, tier, target score…
+    preferred_date: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default="open", index=True)
+    price: Mapped[float] = mapped_column(Float, default=0.0)
+    currency: Mapped[str] = mapped_column(String(3), default="GBP")
+    assignment_id: Mapped[int | None] = mapped_column(ForeignKey("test_assignments.id"), nullable=True)
+    admin_note: Mapped[str | None] = mapped_column(Text, nullable=True)  # shown to the student
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class Payment(Base):
+    """A student's claim that they paid by bank transfer (Wise etc.). Nothing is charged
+    automatically: an admin checks the bank account and confirms or rejects."""
+    __tablename__ = "payments"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    purpose: Mapped[str] = mapped_column(String(20))                   # pro | test_request
+    request_id: Mapped[int | None] = mapped_column(ForeignKey("test_requests.id"), nullable=True)
+    reference: Mapped[str] = mapped_column(String(40), index=True)     # what the payer puts on the transfer
+    amount: Mapped[float] = mapped_column(Float)
+    currency: Mapped[str] = mapped_column(String(3))
+    paid_via: Mapped[str | None] = mapped_column(String(80), nullable=True)   # which account they used
+    payer_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    payer_note: Mapped[str | None] = mapped_column(Text, nullable=True)       # transfer id, amount sent…
+    status: Mapped[str] = mapped_column(String(20), default="claimed", index=True)  # claimed | confirmed | rejected
+    reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    reviewed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

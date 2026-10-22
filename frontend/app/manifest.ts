@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Notenix — Smart GCSE & A-Level Quiz Platform",
+    name: "Notenix: Practice Tests Marked by Tutors",
     short_name: "Notenix",
-    description: "Smart quizzes built on real GCSE & A-Level past papers. By Beyond Imagination.",
+    description: "SAT, ESAT, TMUA, IGCSE, GCSE, A-Level, CBSE, ICSE, JEE and NEET practice tests. By Beyond Imagination.",
     start_url: "/",
     display: "standalone",
     background_color: "#F5F3FF",

@@ -126,9 +126,30 @@ export const leaderboardAPI = {
   global: () => api.get("/leaderboard/global"),
   weekly: () => api.get("/leaderboard/weekly"),
 };
+// Manual bank-transfer payments (Wise etc.): the student pays, then an admin confirms.
 export const paymentsAPI = {
   plans: () => api.get("/payments/plans"),
-  checkout: () => api.post("/payments/create-checkout"),
+  accounts: () => api.get("/payments/accounts"),
+  claim: (data: { purpose: "pro" | "test_request"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+    api.post("/payments/claim", data),
+  mine: () => api.get("/payments/mine"),
+  adminList: (status?: string) => api.get("/payments/admin", { params: status ? { status } : {} }),
+  review: (id: number, approve: boolean) => api.post(`/payments/admin/${id}/review`, { approve }),
+};
+
+// Request-a-test service: student requests → team assigns a test → team marks it.
+export const requestsAPI = {
+  config: () => api.get("/requests/config"),
+  create: (data: { exam: string; subject?: string; details?: string; preferred_date?: string | null }) =>
+    api.post("/requests", data),
+  mine: () => api.get("/requests/mine"),
+  cancel: (id: number) => api.post(`/requests/${id}/cancel`),
+  adminList: () => api.get("/requests/admin"),
+  adminTests: () => api.get("/requests/admin/tests"),
+  assign: (id: number, data: { test_id: number; due_at?: string | null; note?: string }) =>
+    api.post(`/requests/admin/${id}/assign`, data),
+  update: (id: number, data: { status?: "open" | "cancelled"; note?: string }) =>
+    api.post(`/requests/admin/${id}`, data),
 };
 
 export function saveAuth(token: string, user: object) {
