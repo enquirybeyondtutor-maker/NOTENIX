@@ -32,7 +32,7 @@ const REQUEST_STEPS = [
 ];
 
 const FEATURES = [
-  { icon: PenSquare, title: "Build tests in minutes", desc: "Assemble board-aligned assessments by hand or let Claude AI draft questions from any topic and specification." },
+  { icon: PenSquare, title: "Build tests in minutes", desc: "Assemble board-aligned assessments by hand or let AI draft questions from any topic and specification." },
   { icon: Users, title: "Assign to classes", desc: "Push a test to a whole class or individual students with a deadline. Everyone sees exactly what's due." },
   { icon: ShieldCheck, title: "Controlled conditions", desc: "Timed sittings, single-attempt locks and randomised order keep assessments fair and exam-realistic." },
   { icon: Brain, title: "Automatic marking", desc: "Responses are graded the moment a student submits, with a GCSE 1–9 or A-Level A*–E estimate." },

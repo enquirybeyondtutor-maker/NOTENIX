@@ -346,7 +346,7 @@ export default function NewTestPage() {
               </Field>
             </div>
             <div className="flex items-center justify-between border-t border-line pt-5">
-              <span className="inline-flex items-center gap-1.5 text-xs text-ink-subtle"><Sparkles size={13} className="text-brand-600" /> Powered by Claude AI</span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-ink-subtle"><Sparkles size={13} className="text-brand-600" /> AI-drafted questions, review before assigning</span>
               <Button type="submit" size="lg"><Wand2 size={16} /> Generate test</Button>
             </div>
           </div>

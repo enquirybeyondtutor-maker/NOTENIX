@@ -66,7 +66,6 @@ export default function Footer() {
           <div className="flex items-center gap-5 text-xs text-ink-subtle">
             <Link href="/pricing" className="hover:text-ink">Terms</Link>
             <Link href="/pricing" className="hover:text-ink">Privacy</Link>
-            <span>Powered by Claude AI</span>
           </div>
         </div>
       </div>
