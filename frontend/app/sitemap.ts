@@ -9,5 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...EXAMS.map((e) => ({ url: `${SITE}/${e.slug}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 })),
     { url: `${SITE}/request`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    ...["terms", "privacy", "refunds"].map((p) => ({ url: `${SITE}/${p}`, lastModified: now, changeFrequency: "yearly" as const, priority: 0.2 })),
   ];
 }

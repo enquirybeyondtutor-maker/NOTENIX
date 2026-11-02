@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, UserCog, FileBarChart, Inbox, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -14,6 +14,7 @@ const STUDENT_LINKS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/tests", label: "My Tests", icon: ClipboardList },
   { href: "/homework", label: "Homework", icon: BookOpen },
+  { href: "/notes", label: "Notes", icon: NotebookText },
   { href: "/requests", label: "Requests", icon: Inbox },
   { href: "/progress", label: "Progress", icon: LineChart },
   { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
@@ -23,6 +24,7 @@ const TEACHER_LINKS: NavItem[] = [
   { href: "/teacher", label: "Overview", icon: LayoutDashboard },
   { href: "/teacher/tests", label: "Tests", icon: ClipboardList },
   { href: "/teacher/homework", label: "Homework", icon: BookOpen },
+  { href: "/teacher/notes", label: "Notes", icon: NotebookText },
   { href: "/teacher/tests/new", label: "Create", icon: FilePlus2 },
   { href: "/teacher/students", label: "Students", icon: Users },
   { href: "/teacher/reports", label: "Reports", icon: FileBarChart },
@@ -123,7 +125,7 @@ export default function Navbar() {
           ) : (
             <div className="hidden items-center gap-2 lg:flex">
               <Button href="/login" variant="ghost" size="sm">Sign in</Button>
-              <Button href="/register" size="sm">Get started</Button>
+              <Button href="https://www.thebeyondtutors.com/book" size="sm">Book a free trial</Button>
             </div>
           )}
 
@@ -169,7 +171,7 @@ export default function Navbar() {
             ) : (
               <div className="flex flex-col gap-2">
                 <Button href="/login" variant="secondary">Sign in</Button>
-                <Button href="/register">Get started</Button>
+                <Button href="https://www.thebeyondtutors.com/book">Book a free trial</Button>
               </div>
             )}
           </div>

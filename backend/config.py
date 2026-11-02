@@ -53,6 +53,13 @@ class Settings(BaseSettings):
     smtp_from: str = ""          # falls back to smtp_user
     smtp_from_name: str = "Notenix"
 
+    # Accounts are issued by Beyond Tutors (admin panel). Public sign-up and
+    # self-service password reset stay off unless OPEN_SIGNUP=true.
+    open_signup: bool = False
+    student_id_domain: str = "thebeyondtutors.com"   # musa@thebeyondtutors.com
+    subscription_days: int = 365                     # £49 per year
+    trial_days: int = 7                              # free access around the trial class
+
     # How often a user may change their display name.
     name_change_cooldown_days: int = 60
 

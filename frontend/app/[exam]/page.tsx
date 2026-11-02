@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, ClipboardCheck, Send, PenLine, UserCheck } from "lucide-react";
-import { EXAMS, EXAM_BY_SLUG } from "@/lib/exams";
+import { EXAMS, EXAM_BY_SLUG, requestHref } from "@/lib/exams";
 import { SITE } from "@/lib/site";
 import SampleQuiz from "@/components/SampleQuiz";
 import { Button } from "@/components/ui/Button";
@@ -39,6 +39,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
   const exam = EXAM_BY_SLUG[(await params).exam];
   if (!exam) notFound();
   const url = `${SITE}/${exam.slug}`;
+  const request = requestHref(exam.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -91,7 +92,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
           <p className="mt-5 max-w-2xl text-lg text-ink-muted">{exam.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#try" size="lg">Try free questions <ArrowRight size={18} /></Button>
-            <Button href={`/request?exam=${encodeURIComponent(exam.name)}`} variant="secondary" size="lg">
+            <Button href={request} variant="secondary" size="lg">
               Request a marked mock
             </Button>
           </div>
@@ -109,7 +110,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
       {/* About + format */}
       <section className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
         <div>
-          <h2 className="text-2xl font-bold text-ink">What is the {exam.fullName}?</h2>
+          <h2 className="text-2xl font-bold text-ink">{exam.fullName}: an overview</h2>
           <p className="mt-4 leading-relaxed text-ink-muted">{exam.intro}</p>
           <h3 className="mt-8 text-lg font-semibold text-ink">{exam.name} format</h3>
           <ul className="mt-3 space-y-2">
@@ -129,7 +130,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
               </li>
             ))}
           </ul>
-          <Button href="/register?returnTo=/request" className="mt-6 w-full">Create a free account</Button>
+          <Button href={`/register?returnTo=${encodeURIComponent(request)}`} className="mt-6 w-full">Create a free account</Button>
         </div>
       </section>
 
@@ -140,7 +141,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
           <h2 className="mt-2 text-2xl font-bold text-ink">Free {exam.name} practice questions</h2>
           <p className="mt-2 text-ink-muted">Answer each question and check it instantly. Worked solutions included.</p>
           <div className="mt-8">
-            <SampleQuiz examName={exam.name} questions={exam.samples} />
+            <SampleQuiz examName={exam.name} questions={exam.samples} requestHref={request} />
           </div>
         </div>
       </section>
@@ -158,8 +159,8 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
             </div>
           ))}
         </div>
-        <Button href={`/request?exam=${encodeURIComponent(exam.name)}`} className="mt-8">
-          Request a {exam.name} test <ArrowRight size={16} />
+        <Button href={request} className="mt-8">
+          Request your {exam.name} mock <ArrowRight size={16} />
         </Button>
       </section>
 

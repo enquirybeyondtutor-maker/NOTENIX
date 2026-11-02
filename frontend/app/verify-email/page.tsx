@@ -7,6 +7,7 @@ import { authAPI, saveAuth } from "@/lib/api";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Input";
+import { safeReturnTo } from "@/lib/utils";
 
 export default function VerifyEmailPage() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function VerifyEmailPage() {
     const qs = new URLSearchParams(window.location.search);
     const e = (qs.get("email") || "").toLowerCase();
     setEmail(e);
-    setReturnTo(qs.get("returnTo"));
+    setReturnTo(safeReturnTo(qs.get("returnTo")));
     if (!e) {
       setError("Missing email — please sign up again.");
       return;
@@ -100,7 +101,7 @@ export default function VerifyEmailPage() {
               We verify every email so teachers and students can trust who's on the platform.
             </p>
           </div>
-          <p className="text-sm text-brand-200">© {new Date().getFullYear()} Notenix · Beyond Imagination</p>
+          <p className="text-sm text-brand-200">© {new Date().getFullYear()} Notenix · A unit of Beyond Groups</p>
         </div>
       </aside>
 

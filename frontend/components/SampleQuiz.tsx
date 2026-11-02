@@ -9,7 +9,7 @@ import { numericEqual } from "@/lib/answers";
 import type { SampleQuestion } from "@/lib/exams";
 
 // Free, no-account sample questions on the public exam pages. Answers are checked in the browser.
-export default function SampleQuiz({ examName, questions }: { examName: string; questions: SampleQuestion[] }) {
+export default function SampleQuiz({ examName, questions, requestHref = "/request" }: { examName: string; questions: SampleQuestion[]; requestHref?: string }) {
   const [picked, setPicked] = useState<Record<number, string>>({});
   const [typed, setTyped] = useState<Record<number, string>>({});
   const [checked, setChecked] = useState<Record<number, boolean>>({});
@@ -97,7 +97,7 @@ export default function SampleQuiz({ examName, questions }: { examName: string; 
             <p className="text-sm text-ink-muted">Ready for a full timed {examName} mock? Create a free account or request a tutor-marked test.</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button href="/request" size="sm">Request a full mock <ArrowRight size={14} /></Button>
+            <Button href={requestHref} size="sm">Request a full mock <ArrowRight size={14} /></Button>
             <Button variant="secondary" size="sm" onClick={reset}><RotateCcw size={14} /> Try again</Button>
           </div>
         </div>

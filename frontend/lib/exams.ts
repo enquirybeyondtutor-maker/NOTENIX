@@ -253,11 +253,11 @@ export const EXAMS: Exam[] = [
     facts: [
       { label: "Tiers", value: "Foundation (1–5) · Higher (4–9)" },
       { label: "Papers", value: "3 × 1 h 30 min" },
-      { label: "Calculator", value: "Paper 1 non-calculator" },
+      { label: "Calculator", value: "1 of 3 papers non-calculator" },
       { label: "Boards", value: "AQA · Edexcel · OCR" },
     ],
     format: [
-      "Three papers of 1 hour 30 minutes each; Paper 1 is non-calculator.",
+      "Three papers of 1 hour 30 minutes each, one of them non-calculator: Paper 1 for AQA and Edexcel; Paper 2 (Foundation) or Paper 5 (Higher) for OCR.",
       "Foundation tier covers grades 1–5; Higher tier covers grades 4–9.",
       "Topics: number, algebra, ratio, geometry, probability and statistics.",
     ],
@@ -297,7 +297,7 @@ export const EXAMS: Exam[] = [
       },
     ],
     faqs: [
-      { q: "Does Notenix cover my exam board?", a: "Yes. Tests are aligned to AQA, Edexcel and OCR, and you can filter by board." },
+      { q: "Does Notenix cover my exam board?", a: "Questions are written for the AQA, Edexcel and OCR specifications. Tell us your board and tier when you request a mock and we'll match the paper format, including which paper is non-calculator." },
       { q: "How is the grade estimate worked out?", a: "Your percentage is mapped to an indicative 9–1 grade. Real grade boundaries change every year, so treat it as a guide." },
       { q: "Can a tutor mark my GCSE mock paper?", a: "Yes. Request a mock from your dashboard and our team will mark your written answers with feedback." },
     ],
@@ -687,3 +687,26 @@ export const EXAMS: Exam[] = [
 ];
 
 export const EXAM_BY_SLUG: Record<string, Exam> = Object.fromEntries(EXAMS.map((e) => [e.slug, e]));
+
+// Landing page → request form. The request form's exam list uses the backend's canonical
+// values (lib/requestExams.ts), which differ from display names like "GCSE Maths".
+const REQUEST_FOR_SLUG: Record<string, { exam: string; subject?: string }> = {
+  sat: { exam: "SAT" },
+  esat: { exam: "ESAT" },
+  tmua: { exam: "TMUA" },
+  "gcse-maths": { exam: "GCSE", subject: "Maths" },
+  "a-level-maths": { exam: "A-Level", subject: "Maths" },
+  igcse: { exam: "IGCSE" },
+  cbse: { exam: "CBSE" },
+  icse: { exam: "ICSE" },
+  jee: { exam: "JEE" },
+  neet: { exam: "NEET" },
+};
+
+export function requestHref(slug: string): string {
+  const r = REQUEST_FOR_SLUG[slug];
+  if (!r) return "/request";
+  const qs = new URLSearchParams({ exam: r.exam });
+  if (r.subject) qs.set("subject", r.subject);
+  return `/request?${qs.toString()}`;
+}

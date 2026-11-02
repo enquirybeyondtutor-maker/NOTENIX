@@ -7,8 +7,29 @@ import { authAPI, saveAuth } from "@/lib/api";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Input, Field } from "@/components/ui/Input";
+import { safeReturnTo } from "@/lib/utils";
+
+const OPEN_SIGNUP = process.env.NEXT_PUBLIC_OPEN_SIGNUP === "true";
 
 export default function ResetPasswordPage() {
+  if (!OPEN_SIGNUP) {
+    return (
+      <main className="flex min-h-screen items-center justify-center px-4 py-12">
+        <div className="w-full max-w-sm text-center">
+          <h1 className="text-2xl font-bold text-ink">Forgot your password?</h1>
+          <p className="mt-3 text-sm text-ink-muted">
+            Notenix passwords are managed by Beyond Tutors. Message your tutor or email
+            hello@thebeyondtutors.com and we&apos;ll reset it for you.
+          </p>
+          <a href="/login" className="mt-6 inline-block text-sm font-semibold text-brand-600 hover:text-brand-700">Back to sign in</a>
+        </div>
+      </main>
+    );
+  }
+  return <ResetPasswordForm />;
+}
+
+function ResetPasswordForm() {
   const router = useRouter();
   const [step, setStep] = useState<"email" | "reset">("email");
   const [email, setEmail] = useState("");
@@ -18,11 +39,14 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [cooldown, setCooldown] = useState(0);
+  const [returnTo, setReturnTo] = useState<string | null>(null);
 
   // Prefill email if passed from the login page.
   useEffect(() => {
-    const e = (new URLSearchParams(window.location.search).get("email") || "").toLowerCase();
+    const qs = new URLSearchParams(window.location.search);
+    const e = (qs.get("email") || "").toLowerCase();
     if (e) setEmail(e);
+    setReturnTo(safeReturnTo(qs.get("returnTo")));
   }, []);
 
   useEffect(() => {
@@ -70,7 +94,7 @@ export default function ResetPasswordPage() {
       const res = await authAPI.resetPassword(email.trim().toLowerCase(), code.trim(), password);
       saveAuth(res.data.access_token, res.data.user);
       const role = res.data.user?.role;
-      router.push(role === "teacher" || role === "admin" ? "/teacher" : "/dashboard");
+      router.push(returnTo || (role === "teacher" || role === "admin" ? "/teacher" : "/dashboard"));
     } catch (err: any) {
       setError(err.response?.data?.detail || "Couldn't reset your password. Please try again.");
       setLoading(false);
@@ -92,7 +116,7 @@ export default function ResetPasswordPage() {
               We'll email you a one-time code so you can set a new password securely.
             </p>
           </div>
-          <p className="text-sm text-brand-200">© {new Date().getFullYear()} Notenix · Beyond Imagination</p>
+          <p className="text-sm text-brand-200">© {new Date().getFullYear()} Notenix · A unit of Beyond Groups</p>
         </div>
       </aside>
 
@@ -170,7 +194,7 @@ export default function ResetPasswordPage() {
 
           <p className="mt-6 text-center text-sm text-ink-muted">
             Remembered it?{" "}
-            <Link href="/login" className="font-semibold text-brand-600 hover:text-brand-700">
+            <Link href={returnTo ? `/login?returnTo=${encodeURIComponent(returnTo)}` : "/login"} className="font-semibold text-brand-600 hover:text-brand-700">
               Back to sign in
             </Link>
           </p>

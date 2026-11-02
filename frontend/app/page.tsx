@@ -267,7 +267,7 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
-            <Button href="/register" variant="secondary" className="mt-6">Create a teacher account</Button>
+            <Button href="/login" variant="secondary" className="mt-6">Tutor sign in</Button>
           </div>
           <div className="card p-8">
             <span className="grid h-11 w-11 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
@@ -282,7 +282,7 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
-            <Button href="/register" variant="secondary" className="mt-6">Start as a student</Button>
+            <Button href="https://www.thebeyondtutors.com/book" variant="secondary" className="mt-6">Book a free trial class</Button>
           </div>
         </div>
       </section>
@@ -294,14 +294,14 @@ export default function LandingPage() {
             Your next mock, marked by a tutor
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-            Start free today, wherever you study: UK, US, India, the Middle East and beyond.
+            Join Beyond Tutors and get Notenix included, wherever you study: UK, US, India, the Middle East and beyond.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button href="/request" variant="inverse" size="lg">
               Request a test <ArrowRight size={18} />
             </Button>
-            <Button href="/register" variant="outline-inverse" size="lg">
-              Create a free account
+            <Button href="https://www.thebeyondtutors.com/book" variant="outline-inverse" size="lg">
+              Book a free trial class
             </Button>
           </div>
         </div>

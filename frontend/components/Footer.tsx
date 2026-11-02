@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./ui/Logo";
+import { LEGAL_LINKS } from "./LegalPage";
 
 const COLS = [
   {
@@ -62,10 +63,11 @@ export default function Footer() {
           ))}
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 sm:flex-row">
-          <p className="text-xs text-ink-subtle">© {new Date().getFullYear()} Notenix · Beyond Imagination. All rights reserved.</p>
+          <p className="text-xs text-ink-subtle">© {new Date().getFullYear()} Notenix, a unit of Beyond Groups. All rights reserved.</p>
           <div className="flex items-center gap-5 text-xs text-ink-subtle">
-            <Link href="/pricing" className="hover:text-ink">Terms</Link>
-            <Link href="/pricing" className="hover:text-ink">Privacy</Link>
+            {LEGAL_LINKS.map((l) => (
+              <Link key={l.href} href={l.href} className="hover:text-ink">{l.label}</Link>
+            ))}
           </div>
         </div>
       </div>

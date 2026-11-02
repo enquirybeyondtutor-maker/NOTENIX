@@ -103,6 +103,25 @@ export const adminAPI = {
   setRole: (id: number | string, role: string) => api.post(`/admin/users/${id}/role`, { role }),
   setWriteAccess: (id: number | string, enabled: boolean) =>
     api.post(`/admin/users/${id}/write-access`, { enabled }),
+  // Beyond Tutors-issued accounts: the password comes back once, in the response.
+  suggestId: (name: string) => api.get("/admin/suggest-id", { params: { name } }),
+  createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none" }) =>
+    api.post("/admin/users", data),
+  resetPassword: (id: number | string) => api.post(`/admin/users/${id}/reset-password`),
+  setAccess: (id: number | string, access: "trial" | "year" | "none") =>
+    api.post(`/admin/users/${id}/access`, { access }),
+};
+
+// Class notes: teachers share text and/or a PDF/image with students.
+export const notesAPI = {
+  mine: () => api.get("/notes"),
+  get: (id: number | string) => api.get(`/notes/${id}`),
+  teacherList: () => api.get("/teacher/notes"),
+  create: (data: { title: string; subject?: string; body?: string; file_name?: string; file_data?: string; student_emails: string[] }) =>
+    api.post("/teacher/notes", data),
+  share: (id: number, student_emails: string[]) => api.post(`/teacher/notes/${id}/share`, { student_emails }),
+  unshare: (id: number, studentId: number) => api.delete(`/teacher/notes/${id}/share/${studentId}`),
+  remove: (id: number) => api.delete(`/teacher/notes/${id}`),
 };
 
 // Student written-answer practice (library + upload your own past paper).

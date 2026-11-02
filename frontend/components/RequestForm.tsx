@@ -15,7 +15,7 @@ export default function RequestForm() {
   const router = useRouter();
   const [signedIn, setSignedIn] = useState(false);
   const [price, setPrice] = useState<{ price: number; currency: string } | null>(null);
-  const [exam, setExam] = useState("SAT");
+  const [exam, setExam] = useState("");  // blank = "Choose your exam", never a silent default
   const [subject, setSubject] = useState("");
   const [details, setDetails] = useState("");
   const [date, setDate] = useState("");
@@ -24,12 +24,19 @@ export default function RequestForm() {
 
   useEffect(() => {
     setSignedIn(!!getUser());
-    const qsExam = new URLSearchParams(window.location.search).get("exam");
+    const qs = new URLSearchParams(window.location.search);
+    const qsExam = qs.get("exam");
+    const qsSubject = qs.get("subject");
+    let d: any = null;
     try {
-      const d = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || "null");
+      d = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || "null");
       if (d) { setExam(d.exam); setSubject(d.subject); setDetails(d.details); setDate(d.date); }
     } catch {}
-    if (qsExam && REQUEST_EXAMS.includes(qsExam)) setExam(qsExam);
+    // A course link's exam/subject wins over a draft written for a different exam.
+    if (qsExam && REQUEST_EXAMS.includes(qsExam) && d?.exam !== qsExam) {
+      setExam(qsExam);
+      setSubject((qsSubject || "").slice(0, 120));
+    }
     requestsAPI.config().then((r) => setPrice({ price: r.data.price, currency: r.data.currency })).catch(() => {});
   }, []);
 
@@ -38,7 +45,7 @@ export default function RequestForm() {
     setError("");
     if (!signedIn) {
       try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ exam, subject, details, date })); } catch {}
-      router.push("/register?returnTo=/request");
+      router.push(`/register?returnTo=${encodeURIComponent(window.location.pathname + window.location.search)}`);
       return;
     }
     setBusy(true);
@@ -56,7 +63,8 @@ export default function RequestForm() {
     <form onSubmit={submit} className="card space-y-5 p-6 sm:p-8">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Exam">
-          <Select value={exam} onChange={(e) => setExam(e.target.value)}>
+          <Select value={exam} onChange={(e) => setExam(e.target.value)} required>
+            <option value="" disabled>Choose your exam</option>
             {REQUEST_EXAMS.map((x) => <option key={x}>{x}</option>)}
           </Select>
         </Field>
@@ -81,13 +89,25 @@ export default function RequestForm() {
         <p className="text-sm text-ink-muted">
           {price.price > 0
             ? <>Price: <b className="text-ink">{price.currency} {price.price.toFixed(2)}</b> per test, paid by bank transfer from any country.</>
-            : <>Requests are <b className="text-emerald-600">free</b> right now.</>}
+            : <>Free right now: we assign the mock, you sit it online, and a tutor marks your written answers with
+                feedback. No payment and no Pro needed. You can have up to 5 open requests at a time.</>}
         </p>
       )}
       {error && <p className="text-sm text-red-600">{error}</p>}
       <Button type="submit" size="lg" loading={busy} className="w-full sm:w-auto">
         {signedIn ? <><Send size={16} /> Send request</> : <><LogIn size={16} /> Create a free account to send</>}
       </Button>
+      {!signedIn && (
+        <p className="text-xs text-ink-subtle">
+          Already have an account?{" "}
+          <button type="button" onClick={() => {
+            try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ exam, subject, details, date })); } catch {}
+            router.push(`/login?returnTo=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+          }} className="font-semibold text-brand-600 hover:underline">Sign in</button>{" "}
+          · By sending a request you agree to our <a href="/terms" className="underline">terms</a> and{" "}
+          <a href="/privacy" className="underline">privacy policy</a>.
+        </p>
+      )}
     </form>
   );
 }

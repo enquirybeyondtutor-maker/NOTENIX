@@ -1,132 +1,70 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Check, Sparkles, Building2, ArrowRight } from "lucide-react";
-import { paymentsAPI, getUser } from "@/lib/api";
+import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+
+const BOOK = "https://www.thebeyondtutors.com/book";
+
+const FEATURES = [
+  "Your own Notenix login (name@thebeyondtutors.com)",
+  "Homework and timed tests set by your tutor",
+  "Class notes from every lesson",
+  "Instant marking, grade estimates and progress reports",
+  "TMUA, ESAT, TARA, HSC, GCSE, A-Level and more",
+];
 
 export default function Pricing() {
-  const [plans, setPlans] = useState<any>(null);
-  const [user, setUser] = useState<any>(null);
-  const [msg, setMsg] = useState("");
-
-  useEffect(() => {
-    setUser(getUser());
-    paymentsAPI.plans().then((r) => setPlans(r.data)).catch(() => {});
-  }, []);
-
-  // Pro is paid by bank transfer (Wise etc.) on /pay; an admin then switches it on.
-  const upgrade = () => {
-    window.location.href = getUser() ? "/pay" : "/register?returnTo=/pay";
-  };
-  const sym = (c?: string) => ({ GBP: "£", USD: "$", EUR: "€", INR: "₹" } as Record<string, string>)[c || "GBP"] ?? `${c} `;
-
-  const freeFeatures: string[] = plans?.free?.features || [
-    "3 AI quizzes to start",
-    "Assigned tests from teachers",
-    "Instant marking & grade estimates",
-    "Progress tracking",
-  ];
-  const proFeatures: string[] = plans?.pro?.features || [
-    "Unlimited AI quizzes",
-    "Exam mode with written marking",
-    "Full analytics & feedback",
-    "Priority support",
-  ];
-
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-2xl text-center">
         <span className="eyebrow">Pricing</span>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-          Simple pricing for students and schools
+          One plan for every Beyond Tutors student
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Start free. Upgrade when you're ready, or request a test marked by our tutors.
-          Pay by bank transfer from any country.
+          Notenix comes with your Beyond Tutors classes. Try it free during your trial class,
+          then £49 a year when you join.
         </p>
       </div>
 
-      {msg && (
-        <div className="mx-auto mt-6 max-w-md rounded-lg border border-brand-200 bg-brand-50 p-3 text-center text-sm text-brand-700">
-          {msg}
-        </div>
-      )}
-
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
-        {/* Free */}
+      <div className="mx-auto mt-12 grid max-w-3xl gap-6 md:grid-cols-2">
         <div className="card flex flex-col p-8">
-          <h3 className="text-lg font-semibold text-ink">Free</h3>
+          <h3 className="text-lg font-semibold text-ink">Trial class</h3>
           <div className="mt-2 flex items-baseline gap-1">
-            <span className="text-4xl font-bold text-ink">{sym(plans?.currency)}0</span>
-            <span className="text-sm text-ink-subtle">/ forever</span>
+            <span className="text-4xl font-bold text-ink">£0</span>
           </div>
-          <p className="mt-1 text-sm text-ink-muted">For individual students getting started.</p>
+          <p className="mt-1 text-sm text-ink-muted">Full access while you try a class with us.</p>
           <ul className="mt-6 flex-1 space-y-3">
-            {freeFeatures.map((f) => (
+            {FEATURES.slice(0, 3).map((f) => (
               <li key={f} className="flex items-center gap-2 text-sm text-ink-muted">
                 <Check size={16} className="text-emerald-500" /> {f}
               </li>
             ))}
           </ul>
-          <Button href="/register" variant="secondary" className="mt-8 w-full">Get started free</Button>
+          <Button href={BOOK} variant="secondary" className="mt-8 w-full">Book a free trial class</Button>
         </div>
 
-        {/* Pro */}
-        <div className="card relative flex flex-col border-brand-300 p-8 ring-1 ring-brand-200">
-          <span className="badge-brand absolute -top-3 left-8">
-            <Sparkles size={12} /> Most popular
-          </span>
-          <h3 className="text-lg font-semibold text-ink">Pro</h3>
+        <div className="card flex flex-col border-brand-300 p-8 ring-1 ring-brand-200">
+          <h3 className="text-lg font-semibold text-ink">Notenix subscription</h3>
           <div className="mt-2 flex items-baseline gap-1">
-            <span className="text-4xl font-bold text-ink">{sym(plans?.currency)}{plans?.pro?.price ?? "9.99"}</span>
-            <span className="text-sm text-ink-subtle">/ 30 days</span>
+            <span className="text-4xl font-bold text-ink">£49</span>
+            <span className="text-sm text-ink-subtle">/ year</span>
           </div>
-          <p className="mt-1 text-sm text-ink-muted">Everything you need to excel.</p>
+          <p className="mt-1 text-sm text-ink-muted">
+            Paid once when you join Beyond Tutors, renewed each year. Your login is issued by our team.
+          </p>
           <ul className="mt-6 flex-1 space-y-3">
-            {proFeatures.map((f) => (
+            {FEATURES.map((f) => (
               <li key={f} className="flex items-center gap-2 text-sm text-ink-muted">
                 <Check size={16} className="text-brand-600" /> {f}
               </li>
             ))}
           </ul>
-          <Button onClick={upgrade} disabled={user?.plan === "pro"} className="mt-8 w-full">
-            {user?.plan === "pro" ? "You're Pro ✓" : "Upgrade to Pro"}
-          </Button>
+          <Button href={BOOK} className="mt-8 w-full">Join Beyond Tutors <ArrowRight size={16} /></Button>
         </div>
       </div>
 
-      {/* Tutor-marked tests */}
-      <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 p-6 sm:flex-row sm:p-8">
-        <div>
-          <h3 className="font-semibold text-ink">Tutor-marked mock tests</h3>
-          <p className="mt-1 text-sm text-ink-muted">
-            SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, CBSE, ICSE, JEE and NEET. We send the test, you sit it, a tutor marks it.{" "}
-            {plans?.request && (plans.request.price > 0
-              ? <b className="text-ink">{sym(plans.currency)}{plans.request.price} per test.</b>
-              : <b className="text-emerald-700">Free right now.</b>)}
-          </p>
-        </div>
-        <Button href="/request" className="shrink-0">Request a test <ArrowRight size={15} /></Button>
-      </div>
-
-      {/* Schools tier */}
-      <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-line bg-white p-6 sm:flex-row sm:p-8">
-        <div className="flex items-start gap-4">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-slate-100 text-ink-muted">
-            <Building2 size={20} />
-          </span>
-          <div>
-            <h3 className="font-semibold text-ink">Schools &amp; departments</h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Teacher accounts, class assignment, cohort analytics and admin controls. Bulk pricing per seat.
-            </p>
-          </div>
-        </div>
-        <Button href="mailto:hello@notenix.com" variant="secondary" className="shrink-0">
-          Talk to us <ArrowRight size={15} />
-        </Button>
-      </div>
+      <p className="mt-8 text-center text-sm text-ink-muted">
+        Already have a login? <a href="/login" className="font-semibold text-brand-600 hover:text-brand-700">Sign in</a>
+      </p>
     </div>
   );
 }

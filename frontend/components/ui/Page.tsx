@@ -1,4 +1,4 @@
-import { Loader2, type LucideIcon } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function PageContainer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -82,11 +82,16 @@ export function EmptyState({
   );
 }
 
+/** Page loader: the Notenix "N" draws itself, then fades and redraws. */
 export function Spinner({ label, className }: { label?: string; className?: string }) {
   return (
-    <div className={cn("flex items-center justify-center gap-2 py-16 text-ink-muted", className)}>
-      <Loader2 className="animate-spin" size={18} />
-      {label && <span className="text-sm">{label}</span>}
+    <div role="status" aria-live="polite" className={cn("flex flex-col items-center justify-center gap-3 py-16 text-ink-muted", className)}>
+      <span className="nx-loader grid h-12 w-12 place-items-center rounded-xl bg-brand-600 text-white shadow-xs">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path d="M5 19V5l14 14V5" pathLength={1} stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </span>
+      <span className="text-sm">{label || "Loading…"}</span>
     </div>
   );
 }

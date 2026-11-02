@@ -23,9 +23,21 @@ def verify_password(plain: str, hashed: str) -> bool:
     return pwd_context.verify(plain, hashed)
 
 
-def create_token(user_id: int) -> str:
+def create_token(user_id: int, version: int = 0) -> str:
     expire = datetime.utcnow() + timedelta(minutes=settings.access_token_expire_minutes)
-    return jwt.encode({"sub": str(user_id), "exp": expire}, settings.secret_key, algorithm=ALGORITHM)
+    return jwt.encode({"sub": str(user_id), "v": version, "exp": expire}, settings.secret_key, algorithm=ALGORITHM)
+
+
+def access_ended_message(user: User) -> str | None:
+    """Why a student can no longer use Notenix, or None while their access is live.
+    Staff and accounts with no access_until are never blocked."""
+    until = getattr(user, "access_until", None)
+    if until is None or _role(user) != "student" or is_admin(user):
+        return None
+    if datetime.utcnow() <= until:
+        return None
+    what = "free trial" if getattr(user, "access_kind", None) == "trial" else "Notenix subscription"
+    return f"Your {what} ended on {until.strftime('%d %b %Y')}. Please contact Beyond Tutors to renew."
 
 
 async def get_current_user(
@@ -40,13 +52,18 @@ async def get_current_user(
     try:
         payload = jwt.decode(token, settings.secret_key, algorithms=[ALGORITHM])
         user_id = int(payload.get("sub"))
+        version = int(payload.get("v", 0))
     except (JWTError, TypeError, ValueError):
         raise creds_exc
     user = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
-    if user is None:
+    if user is None or version != (getattr(user, "token_version", 0) or 0):
+        # Older token: someone signed in elsewhere or the password was reset.
         raise creds_exc
     if getattr(user, "is_active", True) is False:
         raise HTTPException(status_code=403, detail="Your account has been suspended. Contact support.")
+    ended = access_ended_message(user)
+    if ended:
+        raise HTTPException(status_code=403, detail=ended)
     return user
 
 

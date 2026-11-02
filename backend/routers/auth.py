@@ -8,10 +8,18 @@ from database import get_db
 from models import User
 from security import (
     hash_password, verify_password, create_token, get_current_user, is_admin,
-    can_write_practice, ai_marks_for,
+    can_write_practice, ai_marks_for, access_ended_message,
 )
 from services.email import generate_otp, send_otp_email, EmailSendError
 from config import settings
+
+CLOSED_MSG = "Notenix accounts are issued by Beyond Tutors. Please contact your tutor or hello@thebeyondtutors.com."
+
+
+def _require_open_signup():
+    if not settings.open_signup:
+        raise HTTPException(403, CLOSED_MSG)
+
 
 EMAIL_FAIL_MSG = "We couldn't send the verification email right now. Please try again in a moment."
 
@@ -66,6 +74,8 @@ def _user_dict(u: User) -> dict:
         "can_write_practice": can_write_practice(u),  # may access written practice
         "ai_marking": ai_marks_for(u),                # Pro → instant AI marking
         "can_mark": role in ("teacher", "admin") or is_admin(u),  # may manually mark
+        "access_until": u.access_until.isoformat() if getattr(u, "access_until", None) else None,
+        "access_kind": getattr(u, "access_kind", None),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 
@@ -103,6 +113,7 @@ def _otp_sent_response(email: str, code: str) -> dict:
 
 @router.post("/register")
 async def register(data: RegisterIn, db: AsyncSession = Depends(get_db)):
+    _require_open_signup()
     if len(data.password) < 8:
         raise HTTPException(400, "Password must be at least 8 characters")
     email = data.email.lower()
@@ -137,7 +148,7 @@ async def verify_otp(data: VerifyOtpIn, db: AsyncSession = Depends(get_db)):
         raise HTTPException(404, "No account found for this email")
     if getattr(user, "is_verified", True):
         # Already verified — just log them in.
-        return {"access_token": create_token(user.id), "token_type": "bearer", "user": _user_dict(user)}
+        return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}
     if not user.otp_hash or not user.otp_expires_at:
         raise HTTPException(400, "No verification code pending. Please request a new one.")
     if datetime.utcnow() > user.otp_expires_at:
@@ -157,11 +168,12 @@ async def verify_otp(data: VerifyOtpIn, db: AsyncSession = Depends(get_db)):
     user.last_active = datetime.utcnow()
     await db.commit()
     await db.refresh(user)
-    return {"access_token": create_token(user.id), "token_type": "bearer", "user": _user_dict(user)}
+    return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}
 
 
 @router.post("/resend-otp")
 async def resend_otp(data: ResendOtpIn, db: AsyncSession = Depends(get_db)):
+    _require_open_signup()
     user = (await db.execute(select(User).where(User.email == data.email.lower()))).scalar_one_or_none()
     if not user:
         raise HTTPException(404, "No account found for this email")
@@ -182,6 +194,7 @@ async def resend_otp(data: ResendOtpIn, db: AsyncSession = Depends(get_db)):
 async def forgot_password(data: ForgotPasswordIn, db: AsyncSession = Depends(get_db)):
     """Email a password-reset code. Always returns the same response whether or not the
     account exists, to avoid revealing which emails are registered."""
+    _require_open_signup()
     email = data.email.lower()
     generic = {"status": "reset_sent", "email": email}
     user = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
@@ -200,6 +213,7 @@ async def forgot_password(data: ForgotPasswordIn, db: AsyncSession = Depends(get
 
 @router.post("/reset-password")
 async def reset_password(data: ResetPasswordIn, db: AsyncSession = Depends(get_db)):
+    _require_open_signup()
     """Verify the reset code and set a new password; logs the user in on success."""
     if len(data.new_password) < 8:
         raise HTTPException(400, "Password must be at least 8 characters")
@@ -223,21 +237,27 @@ async def reset_password(data: ResetPasswordIn, db: AsyncSession = Depends(get_d
     user.last_active = datetime.utcnow()
     await db.commit()
     await db.refresh(user)
-    return {"access_token": create_token(user.id), "token_type": "bearer", "user": _user_dict(user)}
+    return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}
 
 
 @router.post("/login")
 async def login(form: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
     user = (await db.execute(select(User).where(User.email == form.username.lower()))).scalar_one_or_none()
     if not user or not verify_password(form.password, user.password_hash):
-        raise HTTPException(401, "Incorrect email or password")
+        raise HTTPException(401, "Incorrect user ID or password")
     if getattr(user, "is_active", True) is False:
         raise HTTPException(403, "Your account has been suspended. Please contact support.")
     if getattr(user, "is_verified", True) is False:
         raise HTTPException(403, "Please verify your email before signing in.")
+    ended = access_ended_message(user)
+    if ended:
+        raise HTTPException(403, ended)
+    if (user.role or "student") == "student" and not is_admin(user):
+        # One active sign-in per student: this login signs out any other device.
+        user.token_version = (user.token_version or 0) + 1
     user.last_active = datetime.utcnow()
     await db.commit()
-    return {"access_token": create_token(user.id), "token_type": "bearer", "user": _user_dict(user)}
+    return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}
 
 
 @router.get("/me")

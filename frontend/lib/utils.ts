@@ -42,3 +42,9 @@ export function relativeTime(iso?: string | null): string {
   if (days < 30) return `${days}d ago`;
   return formatDate(iso);
 }
+
+/** Only allow same-site paths as post-login destinations (no "//evil.com" or "/\evil.com"). */
+export function safeReturnTo(raw?: string | null): string | null {
+  if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/\\")) return null;
+  return raw;
+}

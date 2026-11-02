@@ -28,6 +28,13 @@ class User(Base):
     # Set when Pro is bought by bank transfer; the plan drops back to free after this.
     # NULL = no expiry (e.g. Pro granted by hand).
     pro_until: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # Beyond Tutors-issued access. NULL = no expiry (older self-signup accounts, staff).
+    # access_kind: trial (free during the trial class) | paid (£49/year subscription).
+    access_until: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    access_kind: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    # Bumped on student login and on admin password reset; tokens carrying an older
+    # version stop working, so one student account = one active sign-in.
+    token_version: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
     quiz_count: Mapped[int] = mapped_column(Integer, default=0)
@@ -204,4 +211,31 @@ class Payment(Base):
     status: Mapped[str] = mapped_column(String(20), default="claimed", index=True)  # claimed | confirmed | rejected
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     reviewed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Class notes: a teacher uploads notes (text and/or one file) and shares them
+# with specific students.
+# ─────────────────────────────────────────────────────────────────────────────
+
+class ClassNote(Base):
+    __tablename__ = "class_notes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    title: Mapped[str] = mapped_column(String(200))
+    subject: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    body: Mapped[str | None] = mapped_column(Text, nullable=True)
+    file_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    file_data: Mapped[str | None] = mapped_column(Text, nullable=True)  # data URI (PDF/image)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class NoteShare(Base):
+    __tablename__ = "note_shares"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    note_id: Mapped[int] = mapped_column(ForeignKey("class_notes.id"), index=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
