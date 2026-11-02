@@ -56,6 +56,10 @@ class Settings(BaseSettings):
     # Accounts are issued by Beyond Tutors (admin panel). Public sign-up and
     # self-service password reset stay off unless OPEN_SIGNUP=true.
     open_signup: bool = False
+    # One-off admin recovery: on boot, create/reset this account as admin with this password.
+    # Set both in Render, sign in, then delete BOOTSTRAP_ADMIN_PASSWORD.
+    bootstrap_admin_email: str = ""
+    bootstrap_admin_password: str = ""
     student_id_domain: str = "thebeyondtutors.com"   # musa@thebeyondtutors.com
     subscription_days: int = 365                     # £49 per year
     trial_days: int = 7                              # free access around the trial class

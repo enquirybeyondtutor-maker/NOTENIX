@@ -43,6 +43,32 @@ async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     await run_migrations()
+    await bootstrap_admin()
+
+
+async def bootstrap_admin():
+    """Create or reset BOOTSTRAP_ADMIN_EMAIL as an admin with BOOTSTRAP_ADMIN_PASSWORD."""
+    from sqlalchemy import select
+    from models import User
+    from security import hash_password
+
+    email = settings.bootstrap_admin_email.strip().lower()
+    password = settings.bootstrap_admin_password
+    if not email or not password:
+        return
+    if len(password) < 10:
+        print("[bootstrap] BOOTSTRAP_ADMIN_PASSWORD must be at least 10 characters; skipped")
+        return
+    async with SessionLocal() as db:
+        u = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
+        if not u:
+            u = User(email=email, full_name="Beyond Tutors", password_hash="")
+            db.add(u)
+        u.password_hash = hash_password(password)
+        u.role, u.is_active, u.is_verified = "admin", True, True
+        u.token_version = (u.token_version or 0) + 1
+        await db.commit()
+    print(f"[bootstrap] admin ready: {email}")
 
 
 async def run_migrations():
