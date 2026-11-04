@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     price_currency: str = "GBP"
     pro_price: float = 9.99           # per 30 days
     request_price: float = 0.0        # per requested test; 0 = free
+    revision_price: float = 149.0     # full revision access for non-Beyond Tutors students, per year
 
     # Freemium limits
     free_quiz_limit: int = 3

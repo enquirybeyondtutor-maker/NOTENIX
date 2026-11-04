@@ -12,7 +12,7 @@ from sqlalchemy import select
 from config import settings
 from database import get_db
 from models import User, Payment, TestRequest
-from security import get_current_user, require_admin
+from security import get_current_user, require_admin, hash_password
 from services.email import send_notice, notify_admins
 
 router = APIRouter(prefix="/payments", tags=["payments"])
@@ -143,6 +143,57 @@ async def mine(user: User = Depends(get_current_user), db: AsyncSession = Depend
     return [_payment_row(p) for p in rows]
 
 
+# ── Revision access for students outside Beyond Tutors (£149/year) ─────────
+# No account exists yet (public signup is off), so checkout creates one with access
+# switched off. The admin confirms the transfer, which turns on a paid year.
+
+@router.get("/revision-checkout")
+async def revision_checkout_info():
+    return {"accounts": payment_accounts(), "price": settings.revision_price,
+            "currency": settings.price_currency, "days": settings.subscription_days}
+
+
+class RevisionCheckoutIn(BaseModel):
+    full_name: str
+    email: str
+    password: str
+    paid_via: str | None = None
+    payer_name: str | None = None
+    payer_note: str | None = None
+
+
+@router.post("/revision-checkout")
+async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends(get_db)):
+    email = data.email.strip().lower()
+    if "@" not in email or len(data.password) < 8 or not data.full_name.strip():
+        raise HTTPException(400, "Enter your name, a valid email and a password of at least 8 characters.")
+    if (await db.execute(select(User).where(User.email == email))).scalar_one_or_none():
+        raise HTTPException(400, "That email already has a Notenix account. Sign in instead.")
+    now = datetime.utcnow()
+    user = User(email=email, full_name=data.full_name.strip()[:120], password_hash=hash_password(data.password),
+                role="student", is_verified=True)
+    user.access_kind, user.access_until = "pending", now  # locked until the payment is confirmed
+    db.add(user)
+    await db.flush()
+    p = Payment(
+        user_id=user.id, purpose="revision", reference=f"NX-V{user.id}",
+        amount=settings.revision_price, currency=settings.price_currency,
+        paid_via=(data.paid_via or "")[:80] or None,
+        payer_name=(data.payer_name or "")[:120] or None,
+        payer_note=(data.payer_note or "")[:1000] or None,
+    )
+    db.add(p)
+    await db.commit()
+    await db.refresh(p)
+    await notify_admins(
+        f"Payment to check: {p.reference}",
+        f"{user.full_name} ({user.email}) says they paid {p.amount:g} {p.currency} for revision access "
+        f"via {p.paid_via or 'bank transfer'}. Note: {p.payer_note or '-'}",
+        "/admin/requests",
+    )
+    return _payment_row(p)
+
+
 # ── Admin ────────────────────────────────────────────────────────────────────
 
 @router.get("/admin")
@@ -174,19 +225,22 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
     if data.approve and p.purpose == "pro":
         start = max(datetime.utcnow(), user.pro_until or datetime.utcnow())
         user.plan, user.pro_until = "pro", start + timedelta(days=PRO_DAYS)
+    if data.approve and p.purpose == "revision":
+        user.access_kind, user.access_until = "paid", datetime.utcnow() + timedelta(days=settings.subscription_days)
     if req and req.status == "payment_claimed":
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
 
     name = escape((user.full_name or "there").split(" ")[0])
-    what = "Notenix Pro" if p.purpose == "pro" else f"your test request #{p.request_id}"
+    what = {"pro": "Notenix Pro", "revision": "Notenix revision access"}.get(p.purpose, f"your test request #{p.request_id}")
     try:
         if data.approve:
             body = (f"Hi {name}, we've received your payment of {p.amount:g} {p.currency} for {what}."
                     + (f" Pro is active for the next {PRO_DAYS} days." if p.purpose == "pro"
+                       else " Your full revision access is now on for a year. Sign in to start." if p.purpose == "revision"
                        else " Our team will send your test shortly."))
             await send_notice(user.email, "Payment received", "Payment received", body, body,
-                              "/dashboard" if p.purpose == "pro" else "/requests", "Open Notenix")
+                              "/requests" if p.purpose == "test_request" else "/dashboard", "Open Notenix")
         else:
             body = (f"Hi {name}, we couldn't find your payment for {what} (reference {p.reference}). "
                     "Please check the transfer and reference, then tell us again from the pay page, or reply to this email.")

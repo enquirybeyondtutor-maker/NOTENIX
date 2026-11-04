@@ -124,6 +124,11 @@ export const notesAPI = {
   remove: (id: number) => api.delete(`/teacher/notes/${id}`),
 };
 
+// Revision papers: page 1 public, full paper needs live access (app/papers/[slug]).
+export const papersAPI = {
+  info: (slug: string) => api.get(`/papers/${slug}`),
+};
+
 // Student written-answer practice (library + upload your own past paper).
 export const practiceAPI = {
   library: () => api.get("/practice/library"),
@@ -152,6 +157,9 @@ export const paymentsAPI = {
   claim: (data: { purpose: "pro" | "test_request"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/claim", data),
   mine: () => api.get("/payments/mine"),
+  revisionInfo: () => api.get("/payments/revision-checkout"),
+  revisionCheckout: (data: { full_name: string; email: string; password: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+    api.post("/payments/revision-checkout", data),
   adminList: (status?: string) => api.get("/payments/admin", { params: status ? { status } : {} }),
   review: (id: number, approve: boolean) => api.post(`/payments/admin/${id}/review`, { approve }),
 };

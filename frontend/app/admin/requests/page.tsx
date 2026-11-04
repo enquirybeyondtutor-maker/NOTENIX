@@ -78,7 +78,7 @@ export default function AdminRequestsPage() {
   const load = () => {
     requestsAPI.adminList().then((r) => setRows(r.data)).catch(() => setRows([]));
     requestsAPI.adminTests().then((r) => setTests(r.data)).catch(() => {});
-    paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro"))).catch(() => {});
+    paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro" || p.purpose === "revision"))).catch(() => {});
   };
 
   useEffect(() => {
@@ -117,12 +117,13 @@ export default function AdminRequestsPage() {
 
       {proPayments.length > 0 && (
         <div className="card mb-6 p-5">
-          <h2 className="flex items-center gap-2 font-semibold text-ink"><Wallet size={16} /> Pro payments to check</h2>
+          <h2 className="flex items-center gap-2 font-semibold text-ink"><Wallet size={16} /> Payments to check</h2>
           <div className="mt-3 divide-y divide-line">
             {proPayments.map((p) => (
               <div key={p.id} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
                 <div>
-                  <b>{p.user?.full_name}</b> <span className="text-ink-subtle">{p.user?.email}</span>
+                  <b>{p.user?.full_name}</b> <span className="text-ink-subtle">{p.user?.email}</span>{" "}
+                  <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{p.purpose === "revision" ? "Revision access" : "Pro"}</span>
                   <div className="text-ink-muted">
                     {p.currency} {p.amount} · ref <span className="font-mono">{p.reference}</span> · via {p.paid_via || "?"} · payer {p.payer_name || "?"}
                     {p.payer_note ? ` · "${p.payer_note}"` : ""} · {relativeTime(p.created_at)}

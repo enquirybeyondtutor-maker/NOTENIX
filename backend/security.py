@@ -36,6 +36,8 @@ def access_ended_message(user: User) -> str | None:
         return None
     if datetime.utcnow() <= until:
         return None
+    if getattr(user, "access_kind", None) == "pending":
+        return "We're confirming your payment. Your access will switch on as soon as it arrives, and we'll email you."
     what = "free trial" if getattr(user, "access_kind", None) == "trial" else "Notenix subscription"
     return f"Your {what} ended on {until.strftime('%d %b %Y')}. Please contact Beyond Tutors to renew."
 
