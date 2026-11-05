@@ -147,6 +147,37 @@ async def mine(user: User = Depends(get_current_user), db: AsyncSession = Depend
 # No account exists yet (public signup is off), so checkout creates one with access
 # switched off. The admin confirms the transfer, which turns on a paid year.
 
+# ── Exchange rates (display only) ───────────────────────────────────────────
+# Prices are set in GBP. For visitors elsewhere we show a rounded local equivalent.
+# Rates come from open.er-api.com (free, daily) and are cached for 12 hours; if that
+# fails we fall back to these rates (5 Nov 2026) so the page never breaks.
+FX_CURRENCIES = ["AUD", "NZD", "SGD", "CAD", "EUR", "USD", "AED", "INR"]
+_FX_FALLBACK = {"AUD": 1.92, "NZD": 2.39, "SGD": 1.72, "CAD": 1.88, "EUR": 1.20, "USD": 1.35, "AED": 4.95, "INR": 127.5}
+_fx_cache: dict = {"at": None, "rates": None}
+
+
+async def gbp_rates() -> dict[str, float]:
+    import httpx
+    now = datetime.utcnow()
+    if _fx_cache["rates"] and _fx_cache["at"] and now - _fx_cache["at"] < timedelta(hours=12):
+        return _fx_cache["rates"]
+    rates = dict(_FX_FALLBACK)
+    try:
+        async with httpx.AsyncClient(timeout=6) as client:
+            data = (await client.get("https://open.er-api.com/v6/latest/GBP")).json()
+        if data.get("result") == "success":
+            rates.update({c: float(data["rates"][c]) for c in FX_CURRENCIES if c in data.get("rates", {})})
+            _fx_cache.update(at=now, rates=rates)
+    except Exception as ex:
+        print(f"[payments] exchange rates unavailable, using fallback: {ex}")
+    return rates
+
+
+@router.get("/fx")
+async def fx():
+    return {"base": "GBP", "rates": await gbp_rates()}
+
+
 @router.get("/revision-checkout")
 async def revision_checkout_info():
     return {"accounts": payment_accounts(), "price": settings.revision_price,

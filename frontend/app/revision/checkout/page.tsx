@@ -7,12 +7,11 @@ import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
+import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
 
 // £149/year revision access for students outside Beyond Tutors. Payment is a bank
 // transfer: the student makes it from their own bank, tells us here, and an admin
 // confirms it in /admin/requests, which switches access on for a year.
-
-type Account = { label: string; currency?: string; details: Record<string, string>; note?: string; pay_link?: string };
 
 export default function RevisionCheckout() {
   const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string } | null>(null);
@@ -21,6 +20,8 @@ export default function RevisionCheckout() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState<{ reference: string } | null>(null);
+  const country = useCountry();
+  const rates = useRates();
 
   useEffect(() => {
     setReturnTo(safeReturnTo(new URLSearchParams(window.location.search).get("returnTo")));
@@ -45,8 +46,18 @@ export default function RevisionCheckout() {
     }
   };
 
+  // Once the country is known, preselect its local account in "Account you paid into".
+  useEffect(() => {
+    if (!info) return;
+    const { shown } = pickAccounts(info.accounts, country);
+    if (shown[0]) setForm((f) => ({ ...f, paid_via: shown[0].label }));
+  }, [info, country]);
+
   if (!info) return <Spinner label="Loading checkout…" />;
-  const price = `${info.currency === "GBP" ? "£" : info.currency + " "}${info.price}`;
+  const gbpPrice = `${info.currency === "GBP" ? "£" : info.currency + " "}${info.price}`;
+  // Only the visitor's own country's account (else the GBP ones), priced in its currency.
+  const { shown, local } = pickAccounts(info.accounts, country);
+  const price = local ? priceFor(info.price, shown[0], rates) : gbpPrice;
 
   if (done) {
     return (
@@ -82,31 +93,37 @@ export default function RevisionCheckout() {
 
         <div className="card space-y-4 p-6">
           <h2 className="flex items-center gap-2 font-semibold text-ink"><Landmark size={16} /> 2. Pay {price}</h2>
-          {info.pay_link && <PayLink href={info.pay_link} label={`Pay ${price} now`} />}
-          {info.pay_link && info.accounts.length > 0 && (
+          {info.pay_link && <PayLink href={info.pay_link} label={`Pay ${local ? "by card" : `${price} now`}`}
+            hint={local ? `Card or Apple/Google Pay through Wise. Charged as ${gbpPrice}; your bank converts it.` : undefined} />}
+          {info.pay_link && shown.length > 0 && (
             <p className="text-xs font-medium uppercase tracking-wide text-ink-subtle">Or pay by bank transfer</p>
           )}
           {info.accounts.length === 0 ? (info.pay_link ? null :
             <p className="rounded-lg bg-slate-50 p-4 text-sm text-ink-muted">Bank details aren&apos;t set up yet. Email support@notenix.com and we&apos;ll send them.</p>
           ) : (
-            info.accounts.map((a) => (
-              <div key={a.label} className="space-y-3 rounded-lg border border-line p-4">
-                <p className="text-sm font-semibold text-ink">{a.label}</p>
-                {a.pay_link && <PayLink href={a.pay_link} label={`Pay ${price} now`} />}
+            shown.map((a) => (
+              <div key={a.label} className={`space-y-3 rounded-lg border p-4 ${local ? "border-brand-300 bg-brand-50/40" : "border-line"}`}>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-sm font-semibold text-ink">{a.label}</p>
+                  {local && <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-[11px] font-semibold text-white">For {countryName(country)}</span>}
+                </div>
+                {local && <p className="text-sm text-ink">Send <b>{priceFor(info.price, a, rates)}</b></p>}
+                {a.pay_link && <PayLink href={a.pay_link} label={`Pay ${priceFor(info.price, a, rates)} now`} />}
                 <dl className="mt-2 grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-sm">
                   {Object.entries(a.details).map(([k, v]) => (
                     <div key={k} className="contents"><dt className="text-ink-muted">{k}</dt><dd className="font-mono text-ink">{v}</dd></div>
                   ))}
                 </dl>
+                {a.note && <p className="text-xs text-ink-subtle">{a.note}</p>}
               </div>
             ))
           )}
           <p className="text-xs text-ink-muted">Pay exactly {price}, then fill in the details below so we can match your payment.</p>
           <div className="grid gap-4 sm:grid-cols-2">
-            {info.accounts.length > 1 && (
+            {shown.length > 1 && (
               <Field label="Account you paid into">
                 <Select value={form.paid_via} onChange={set("paid_via")}>
-                  {info.accounts.map((a) => <option key={a.label}>{a.label}</option>)}
+                  {shown.map((a) => <option key={a.label}>{a.label}</option>)}
                 </Select>
               </Field>
             )}

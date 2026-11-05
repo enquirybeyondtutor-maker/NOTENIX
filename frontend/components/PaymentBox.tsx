@@ -5,8 +5,8 @@ import { paymentsAPI } from "@/lib/api";
 import { Button } from "./ui/Button";
 import { Input, Select, Field } from "./ui/Input";
 import PayLink from "./PayLink";
+import { type Account, useCountry, pickAccounts, countryName } from "@/lib/country";
 
-type Account = { label: string; currency?: string; details: Record<string, string>; note?: string; pay_link?: string };
 
 function CopyValue({ value }: { value: string }) {
   const [done, setDone] = useState(false);
@@ -40,12 +40,18 @@ export default function PaymentBox({
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
+  const country = useCountry();
 
   useEffect(() => {
     paymentsAPI.accounts()
-      .then((r) => { setAccounts(r.data.accounts || []); setVia(r.data.accounts?.[0]?.label || ""); })
+      .then((r) => setAccounts(r.data.accounts || []))
       .catch(() => setAccounts([]));
   }, []);
+
+  // Visitor's local account first; preselect it in "Paid to".
+  const { shown: ordered, local: isLocal } = pickAccounts(accounts || [], country);
+  const local = isLocal ? ordered : [];
+  useEffect(() => { if (ordered[0]) setVia(ordered[0].label); }, [accounts, country]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,11 +93,13 @@ export default function PaymentBox({
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        {accounts.map((a) => (
-          <div key={a.label} className="card p-4">
+        {ordered.map((a) => (
+          <div key={a.label} className={`card p-4 ${local.includes(a) ? "border-brand-300 ring-1 ring-brand-200" : ""}`}>
             <div className="flex items-center gap-2 text-sm font-semibold text-ink">
               <Landmark size={15} className="text-brand-600" /> {a.label}
             </div>
+            {local.includes(a) && <span className="mt-2 inline-block rounded-full bg-brand-600 px-2.5 py-0.5 text-[11px] font-semibold text-white">For {countryName(country)}</span>}
+            {a.amount && <p className="mt-2 text-sm text-ink">Send <b>{a.amount}</b></p>}
             <dl className="mt-3 space-y-2">
               {Object.entries(a.details).map(([k, v]) => (
                 <div key={k}>
@@ -114,7 +122,7 @@ export default function PaymentBox({
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Paid to">
               <Select value={via} onChange={(e) => setVia(e.target.value)}>
-                {accounts.map((a) => <option key={a.label}>{a.label}</option>)}
+                {ordered.map((a) => <option key={a.label}>{a.label}</option>)}
               </Select>
             </Field>
             <Field label="Name on the paying account">
