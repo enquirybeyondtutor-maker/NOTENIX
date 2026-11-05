@@ -67,7 +67,7 @@ export default function PaymentBox({
     return (
       <div className="rounded-lg border border-line bg-slate-50 p-4 text-sm text-ink-muted">
         Online payment details aren't set up yet. Email{" "}
-        <a href={`mailto:hello@notenix.com?subject=${encodeURIComponent("Payment " + reference)}`} className="font-medium text-brand-600">hello@notenix.com</a>{" "}
+        <a href={`mailto:support@notenix.com?subject=${encodeURIComponent("Payment " + reference)}`} className="font-medium text-brand-600">support@notenix.com</a>{" "}
         with reference <b>{reference}</b> and we'll send you the details.
       </div>
     );

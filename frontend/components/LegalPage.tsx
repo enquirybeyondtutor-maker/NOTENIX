@@ -24,7 +24,7 @@ export default function LegalPage({ title, intro, children }: { title: string; i
         {LEGAL_LINKS.map((l) => (
           <Link key={l.href} href={l.href} className="font-medium text-brand-600 hover:underline">{l.label}</Link>
         ))}
-        <a href="mailto:hello@notenix.com" className="font-medium text-brand-600 hover:underline">hello@notenix.com</a>
+        <a href="mailto:support@notenix.com" className="font-medium text-brand-600 hover:underline">support@notenix.com</a>
       </nav>
     </div>
   );

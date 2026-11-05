@@ -93,7 +93,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#try" size="lg">Try free questions <ArrowRight size={18} /></Button>
             <Button href={request} variant="secondary" size="lg">
-              Request a marked mock
+              Get a free marked mock
             </Button>
           </div>
           <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -130,7 +130,8 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
               </li>
             ))}
           </ul>
-          <Button href={`/register?returnTo=${encodeURIComponent(request)}`} className="mt-6 w-full">Create a free account</Button>
+          <Button href={request} className="mt-6 w-full">Get your first test free</Button>
+          <p className="mt-2 text-center text-xs text-ink-subtle">One free tutor-marked test per student. More tests with a Notenix subscription.</p>
         </div>
       </section>
 

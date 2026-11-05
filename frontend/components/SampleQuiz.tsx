@@ -94,7 +94,7 @@ export default function SampleQuiz({ examName, questions, requestHref = "/reques
         <div className="card flex flex-col items-start gap-4 border-brand-200 bg-brand-50 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-lg font-bold text-ink">You scored {score} / {questions.length}</div>
-            <p className="text-sm text-ink-muted">Ready for a full timed {examName} mock? Create a free account or request a tutor-marked test.</p>
+            <p className="text-sm text-ink-muted">Ready for a full timed {examName} mock? Your first tutor-marked test is free.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <Button href={requestHref} size="sm">Request a full mock <ArrowRight size={14} /></Button>

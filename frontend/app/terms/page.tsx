@@ -20,7 +20,7 @@ export default function TermsPage() {
         <h2>Who runs Notenix</h2>
         <p>
           Notenix is operated by {operatorLine}. Tutor-marked tests are marked by tutors from Beyond Tutors, which
-          is also run by {legalEntity.operator}. Contact us at <a href="mailto:hello@notenix.com" className="text-brand-600 hover:underline">hello@notenix.com</a>.
+          is also run by {legalEntity.operator}. Contact us at <a href="mailto:support@notenix.com" className="text-brand-600 hover:underline">support@notenix.com</a>.
         </p>
         <p>GSTIN {legalEntity.gstin} · Udyam {legalEntity.udyam}</p>
         <p>Notenix is an independent practice service. It is not affiliated with or endorsed by any exam board or test provider.</p>

@@ -61,8 +61,8 @@ const jsonLd = {
       url: SITE,
       description: "Online practice-test platform for SAT, ESAT, TMUA, GCSE, A-Level, IGCSE, HSC, VCE, QCE, WACE and NCEA, with mocks marked by tutors from Beyond Tutors.",
       logo: `${SITE}/icon.svg`,
-      email: "hello@notenix.com",
-      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: "hello@notenix.com" },
+      email: "support@notenix.com",
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: "support@notenix.com" },
       parentOrganization: { "@type": "Organization", name: "Beyond Groups" },
       sameAs: [
         "https://www.thebeyondtutors.com",

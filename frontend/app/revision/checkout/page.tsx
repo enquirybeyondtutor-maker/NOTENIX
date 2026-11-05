@@ -87,7 +87,7 @@ export default function RevisionCheckout() {
             <p className="text-xs font-medium uppercase tracking-wide text-ink-subtle">Or pay by bank transfer</p>
           )}
           {info.accounts.length === 0 ? (info.pay_link ? null :
-            <p className="rounded-lg bg-slate-50 p-4 text-sm text-ink-muted">Bank details aren&apos;t set up yet. Email hello@notenix.com and we&apos;ll send them.</p>
+            <p className="rounded-lg bg-slate-50 p-4 text-sm text-ink-muted">Bank details aren&apos;t set up yet. Email support@notenix.com and we&apos;ll send them.</p>
           ) : (
             info.accounts.map((a) => (
               <div key={a.label} className="space-y-3 rounded-lg border border-line p-4">

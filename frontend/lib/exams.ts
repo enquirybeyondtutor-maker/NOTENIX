@@ -94,7 +94,7 @@ export const EXAMS: Exam[] = [
       },
     ],
     faqs: [
-      { q: "Is the Notenix SAT practice free?", a: "Yes. You can try sample SAT questions on this page without an account, and create a free account to sit practice tests. Tutor-marked mocks can be requested from your dashboard." },
+      { q: "Is the Notenix SAT practice free?", a: "Yes. You can try sample SAT questions on this page without an account, and request one full tutor-marked mock free. After that, more tests come with a Notenix subscription." },
       { q: "Are these official College Board questions?", a: "No. Every Notenix question is written by our tutors to match the style and difficulty of the Digital SAT. For official practice, also use the College Board's Bluebook app." },
       { q: "Can I practise SAT Math with a calculator?", a: "Yes. The Digital SAT allows a calculator on the whole Math section, and our Math mocks are written with that in mind." },
       { q: "Can students outside the US use Notenix?", a: "Yes. Notenix works in any modern browser, anywhere in the world, and payments for tutor-marked mocks can be made from any country." },

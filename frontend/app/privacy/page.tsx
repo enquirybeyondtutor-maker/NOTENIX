@@ -63,7 +63,7 @@ export default function PrivacyPage() {
         <h2>Your choices</h2>
         <p>
           You can ask for a copy of your data, ask us to correct it, or ask us to delete your account by emailing{" "}
-          <a href="mailto:hello@notenix.com" className="text-brand-600 hover:underline">hello@notenix.com</a>. If you are under 13,
+          <a href="mailto:support@notenix.com" className="text-brand-600 hover:underline">support@notenix.com</a>. If you are under 13,
           a parent or guardian can make these requests for you. We respond within one month.
         </p>
         <p>

@@ -34,7 +34,7 @@ export default function RefundsPage() {
       <section>
         <h2>How refunds are paid</h2>
         <p>
-          Email <a href="mailto:hello@notenix.com" className="text-brand-600 hover:underline">hello@notenix.com</a> with your payment
+          Email <a href="mailto:support@notenix.com" className="text-brand-600 hover:underline">support@notenix.com</a> with your payment
           reference (it starts with NX-). We refund to the account you paid from, usually within 5 working days. We
           cannot refund fees your bank charged for the original transfer.
         </p>

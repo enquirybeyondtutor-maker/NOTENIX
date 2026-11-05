@@ -30,7 +30,7 @@ const COLS = [
       { label: "Request a test", href: "/request" },
       { label: "Pricing", href: "/pricing" },
       { label: "Sign in", href: "/login" },
-      { label: "Contact", href: "mailto:hello@notenix.com" },
+      { label: "Contact", href: "mailto:support@notenix.com" },
     ],
   },
 ];
