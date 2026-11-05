@@ -1,19 +1,60 @@
 """Class notes: teachers upload notes (text and/or one PDF/image) and share them with students."""
+import asyncio
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import Response
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, delete
-from database import get_db
-from models import User, ClassNote, NoteShare, HomeworkSubmission
+from sqlalchemy import select, delete, func
+from database import get_db, SessionLocal
+from models import User, ClassNote, NoteShare, HomeworkSubmission, NotePage
 from services import note_pages
 from security import require_teacher, get_current_user, is_admin
 
 router = APIRouter(tags=["notes"])
 
 MAX_FILE_CHARS = 12_000_000  # ~9 MB file once base64-encoded
+
+
+# ── Page images for students: rendered once per note in the background ──────────
+_rendering: dict[int, asyncio.Task] = {}
+
+
+async def _render_pages(note_id: int) -> None:
+    async with SessionLocal() as db:
+        if (await db.execute(select(NotePage.id).where(NotePage.note_id == note_id).limit(1))).first():
+            return
+        data = await db.scalar(select(ClassNote.file_data).where(ClassNote.id == note_id))
+        if not data:
+            return
+        try:
+            images = await run_in_threadpool(note_pages.render_all, data)
+        except Exception as e:
+            print(f"[notes] could not render note {note_id}: {e}")
+            return
+        del data
+        for i, img in enumerate(images, 1):
+            db.add(NotePage(note_id=note_id, page=i, data=img))
+        await db.commit()
+
+
+def start_render(note_id: int) -> None:
+    t = _rendering.get(note_id)
+    if t and not t.done():
+        return
+    task = asyncio.create_task(_render_pages(note_id))
+    _rendering[note_id] = task
+    task.add_done_callback(lambda _t: _rendering.pop(note_id, None))
+
+
+async def _page_count(note_id: int, db: AsyncSession) -> int | None:
+    """Number of ready pages, or None while they are still being made."""
+    n = await db.scalar(select(func.count()).select_from(NotePage).where(NotePage.note_id == note_id))
+    if n:
+        return n
+    start_render(note_id)
+    return None
 
 
 class NoteIn(BaseModel):
@@ -32,7 +73,7 @@ class ShareIn(BaseModel):
 def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
     row = {
         "id": n.id, "title": n.title, "subject": n.subject, "body": n.body,
-        "file_name": n.file_name, "has_file": bool(n.file_data),
+        "file_name": n.file_name, "has_file": bool(n.has_file),
         "kind": getattr(n, "kind", None) or "notes",
         "due_at": n.due_at.isoformat() if getattr(n, "due_at", None) else None,
         "class_date": getattr(n, "class_date", None),
@@ -79,6 +120,9 @@ async def create_note(data: NoteIn, teacher: User = Depends(require_teacher), db
     await db.flush()
     missing = await _share(n, data.student_emails, db)
     await db.commit()
+    await db.refresh(n)
+    if n.has_file:
+        start_render(n.id)
     return {"note": _note_row(n), "not_found": missing}
 
 
@@ -120,6 +164,7 @@ async def delete_note(note_id: int, teacher: User = Depends(require_teacher), db
     n = await _owned(note_id, teacher, db)
     await db.execute(delete(NoteShare).where(NoteShare.note_id == n.id))
     await db.execute(delete(HomeworkSubmission).where(HomeworkSubmission.note_id == n.id))
+    await db.execute(delete(NotePage).where(NotePage.note_id == n.id))
     await db.delete(n)
     await db.commit()
     return {"ok": True}
@@ -166,13 +211,12 @@ async def get_note(note_id: int, user: User = Depends(get_current_user), db: Asy
     n, staff = await _visible(note_id, user, db)
     row = _note_row(n)
     if staff:
-        row["file_data"] = n.file_data  # tutors keep the original file
-    elif n.file_data:
+        # tutors keep the original file
+        row["file_data"] = await db.scalar(select(ClassNote.file_data).where(ClassNote.id == n.id))
+    elif n.has_file:
         # Students get watermarked page images only (/pages/{n}), never the raw file.
-        try:
-            row["pages"] = await run_in_threadpool(note_pages.page_count, n.id, n.file_data)
-        except Exception:
-            row["pages"] = 0
+        row["pages"] = await _page_count(n.id, db)
+        row["rendering"] = row["pages"] is None
     if not staff and (n.kind or "notes") == "homework":
         sub = (await db.execute(select(HomeworkSubmission).where(
             HomeworkSubmission.note_id == n.id, HomeworkSubmission.student_id == user.id))).scalar_one_or_none()
@@ -183,14 +227,15 @@ async def get_note(note_id: int, user: User = Depends(get_current_user), db: Asy
 @router.get("/notes/{note_id}/pages/{page}")
 async def note_page(note_id: int, page: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     n, _ = await _visible(note_id, user, db)
-    if not n.file_data:
+    if not n.has_file:
         raise HTTPException(404, "No file")
-    mark = f"{user.full_name} - {user.email}"
-    try:
-        png = await run_in_threadpool(note_pages.render_page, n.file_data, page, mark)
-    except IndexError:
+    img = await db.scalar(select(NotePage.data).where(NotePage.note_id == n.id, NotePage.page == page))
+    if img is None:
+        if await _page_count(n.id, db) is None:
+            return Response(status_code=202, headers={"Retry-After": "3"})  # still being prepared
         raise HTTPException(404, "No such page")
-    return Response(png, media_type="image/png", headers={"Cache-Control": "no-store, private"})
+    jpg = await run_in_threadpool(note_pages.watermark, img, f"{user.full_name} - {user.email}")
+    return Response(jpg, media_type="image/jpeg", headers={"Cache-Control": "no-store, private"})
 
 
 MAX_PHOTOS = 10
@@ -248,7 +293,7 @@ async def get_submission(sub_id: int, teacher: User = Depends(require_teacher), 
         raise HTTPException(404, "Not found")
     n = await _owned(s.note_id, teacher, db)
     u = (await db.execute(select(User).where(User.id == s.student_id))).scalar_one()
-    return {**_sub_row(s, images=True), "title": n.title, "body": n.body, "has_file": bool(n.file_data),
+    return {**_sub_row(s, images=True), "title": n.title, "body": n.body, "has_file": bool(n.has_file),
             "due_at": n.due_at.isoformat() if n.due_at else None,
             "student": {"id": u.id, "full_name": u.full_name, "email": u.email}}
 

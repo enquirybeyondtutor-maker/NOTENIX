@@ -1,6 +1,6 @@
 from datetime import datetime
-from sqlalchemy import String, Integer, Float, Boolean, DateTime, Text, ForeignKey, JSON
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, Integer, Float, Boolean, DateTime, Text, ForeignKey, JSON, LargeBinary
+from sqlalchemy.orm import Mapped, mapped_column, relationship, column_property
 from database import Base
 
 
@@ -238,7 +238,9 @@ class ClassNote(Base):
     subject: Mapped[str | None] = mapped_column(String(80), nullable=True)
     body: Mapped[str | None] = mapped_column(Text, nullable=True)
     file_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    file_data: Mapped[str | None] = mapped_column(Text, nullable=True)  # data URI (PDF/image)
+    # data URI (PDF/image). Deferred: it can be ~12 MB, so it is only loaded on purpose.
+    file_data: Mapped[str | None] = mapped_column(Text, nullable=True, deferred=True)
+    has_file: Mapped[bool] = column_property(file_data.isnot(None))
     # notes | homework. Homework carries a due date; class_date links it to a lesson.
     kind: Mapped[str] = mapped_column(String(20), default="notes", server_default="notes")
     due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
@@ -270,3 +272,14 @@ class HomeworkSubmission(Base):
     feedback: Mapped[str | None] = mapped_column(Text, nullable=True)
     marked_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     marked_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+
+
+class NotePage(Base):
+    """A note's file pre-rendered to one plain JPEG per page (students see these,
+    watermarked per request). Built once, in the background, after upload."""
+    __tablename__ = "note_pages"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    note_id: Mapped[int] = mapped_column(ForeignKey("class_notes.id"), index=True)
+    page: Mapped[int] = mapped_column(Integer)
+    data: Mapped[bytes] = mapped_column(LargeBinary)

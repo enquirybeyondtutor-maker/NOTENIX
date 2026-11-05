@@ -135,6 +135,9 @@ async def upload(data: UploadIn, db: AsyncSession = Depends(get_db)):
     await db.flush()
     db.add(NoteShare(note_id=n.id, student_id=s.id))
     await db.commit()
+    if data.file_data:
+        from routers.notes import start_render
+        start_render(n.id)  # prepare the student page images now, not on first view
     return {"id": n.id}
 
 

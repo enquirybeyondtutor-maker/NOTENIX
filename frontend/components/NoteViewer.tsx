@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Download, FileText, ChevronDown, ChevronUp, Camera, X, CheckCircle2 } from "lucide-react";
 import { notesAPI } from "@/lib/api";
 import { MathText } from "@/components/MathText";
@@ -17,28 +17,63 @@ const noSave = {
 export default function NoteViewer({ note, footer }: { note: any; footer?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const [detail, setDetail] = useState<any>(null);
+  // One slot per page: blob URL when loaded, "" while loading, "x" if it failed.
   const [pages, setPages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const urls = useRef<string[]>([]);
 
-  useEffect(() => () => pages.forEach((u) => URL.revokeObjectURL(u)), [pages]);
+  useEffect(() => () => urls.current.forEach((u) => URL.revokeObjectURL(u)), []);
+
+  const fetchPage = async (n: number): Promise<string> => {
+    const token = localStorage.getItem("notenix_token");
+    for (let attempt = 0; attempt < 6; attempt++) {
+      try {
+        const res = await fetch(`/api/notes/${note.id}/pages/${n}`, { headers: { Authorization: `Bearer ${token}` } });
+        if (res.status === 200) {
+          const u = URL.createObjectURL(await res.blob());
+          urls.current.push(u);
+          return u;
+        }
+        if (res.status === 404 || res.status === 401 || res.status === 403) break;
+      } catch { /* network hiccup: retry */ }
+      await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
+    }
+    return "x";
+  };
+
+  const loadPages = async (count: number, only?: number[]) => {
+    const todo = only ?? Array.from({ length: count }, (_, i) => i + 1);
+    setPages((p) => {
+      const next = p.length === count ? [...p] : Array(count).fill("");
+      todo.forEach((n) => (next[n - 1] = ""));
+      return next;
+    });
+    let i = 0;
+    const worker = async () => {
+      while (i < todo.length) {
+        const n = todo[i++];
+        const u = await fetchPage(n);
+        setPages((p) => { const next = [...p]; next[n - 1] = u; return next; });
+      }
+    };
+    await Promise.all([worker(), worker(), worker()]);
+  };
 
   const load = async () => {
     setLoading(true);
     setError("");
     try {
-      const d = (await notesAPI.get(note.id)).data;
+      let d = (await notesAPI.get(note.id)).data;
       setDetail(d);
-      if (!d.file_data && d.pages) {
-        const token = localStorage.getItem("notenix_token");
-        const urls: string[] = [];
-        for (let n = 1; n <= d.pages; n++) {
-          const res = await fetch(`/api/notes/${note.id}/pages/${n}`, { headers: { Authorization: `Bearer ${token}` } });
-          if (!res.ok) throw new Error();
-          urls.push(URL.createObjectURL(await res.blob()));
-          setPages([...urls]);
-        }
+      // A new upload is turned into pages in the background: wait for it (up to ~3 min).
+      for (let t = 0; d.rendering && t < 60; t++) {
+        await new Promise((r) => setTimeout(r, 3000));
+        d = (await notesAPI.get(note.id)).data;
+        setDetail(d);
       }
+      if (d.rendering) setError("This file is still being prepared. Please try again in a minute.");
+      else if (!d.file_data && d.pages) await loadPages(d.pages);
     } catch {
       setError("Couldn't load this file. Please try again.");
     } finally {
@@ -80,8 +115,14 @@ export default function NoteViewer({ note, footer }: { note: any; footer?: React
               <MathText text={note.body} />
             </div>
           )}
-          {loading && <p className="text-sm text-ink-muted">Loading{pages.length ? ` page ${pages.length + 1}…` : "…"}</p>}
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {loading && detail?.rendering && <p className="text-sm text-ink-muted">Preparing pages… this takes a moment the first time.</p>}
+          {loading && !detail?.rendering && !pages.length && <p className="text-sm text-ink-muted">Loading…</p>}
+          {pages.length > 0 && pages.some((u) => !u) && <p className="text-sm text-ink-muted">Loading pages ({pages.filter((u) => u && u !== "x").length}/{pages.length})…</p>}
+          {error && (
+            <p className="text-sm text-red-600">
+              {error} <button onClick={load} className="font-medium underline">Try again</button>
+            </p>
+          )}
           {file && (
             <>
               {isPdf ? (
@@ -97,11 +138,22 @@ export default function NoteViewer({ note, footer }: { note: any; footer?: React
           )}
           {pages.length > 0 && (
             <div className="select-none space-y-3" {...noSave}>
-              {pages.map((u, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={u} src={u} alt={`Page ${i + 1}`} draggable={false} {...noSave}
-                  className="pointer-events-auto w-full rounded-lg border border-line" />
-              ))}
+              {pages.map((u, i) =>
+                u === "x" ? (
+                  <div key={i} className="rounded-lg border border-line p-6 text-center text-sm text-ink-muted">
+                    Page {i + 1} didn&apos;t load.{" "}
+                    <button onClick={() => loadPages(pages.length, [i + 1])} className="font-medium text-brand-600 underline">Retry</button>
+                  </div>
+                ) : u ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={i} src={u} alt={`Page ${i + 1}`} draggable={false} {...noSave}
+                    className="pointer-events-auto w-full rounded-lg border border-line" />
+                ) : (
+                  <div key={i} className="flex aspect-[1/1.41] w-full items-center justify-center rounded-lg border border-line text-sm text-ink-subtle">
+                    Page {i + 1}…
+                  </div>
+                ),
+              )}
             </div>
           )}
           {!note.body && !note.has_file && <p className="flex items-center gap-1 text-sm text-ink-muted"><FileText size={14} /> Empty note</p>}
