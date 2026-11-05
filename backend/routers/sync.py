@@ -10,7 +10,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from config import settings
 from database import get_db
-from models import User, ClassNote, NoteShare, Test, TestAssignment, TestAttempt
+from models import User, ClassNote, NoteShare, Test, TestAssignment, TestAttempt, HomeworkSubmission
 from routers.notes import MAX_FILE_CHARS
 
 router = APIRouter(prefix="/sync", tags=["sync"])
@@ -58,6 +58,8 @@ async def summary(data: SummaryIn, db: AsyncSession = Depends(get_db)):
     if not users:
         return out
     ids = [u.id for u in users]
+    subs = {(x.note_id, x.student_id): x for x in (await db.execute(
+        select(HomeworkSubmission).where(HomeworkSubmission.student_id.in_(ids)))).scalars().all()}
     notes: dict[int, list] = {}
     for sid, n in (await db.execute(
         select(NoteShare.student_id, ClassNote).join(ClassNote, ClassNote.id == NoteShare.note_id)
@@ -66,6 +68,9 @@ async def summary(data: SummaryIn, db: AsyncSession = Depends(get_db)):
         notes.setdefault(sid, []).append({
             "id": n.id, "title": n.title, "kind": n.kind or "notes", "file_name": n.file_name,
             "class_date": n.class_date, "due_at": _iso(n.due_at), "created_at": _iso(n.created_at),
+            "handed_in": _iso(subs[(n.id, sid)].submitted_at) if (n.id, sid) in subs else None,
+            "mark": subs[(n.id, sid)].mark if (n.id, sid) in subs else None,
+            "marked": bool(subs[(n.id, sid)].marked_at) if (n.id, sid) in subs else False,
         })
     attempts = {}
     for at in (await db.execute(select(TestAttempt).where(TestAttempt.student_id.in_(ids)))).scalars().all():

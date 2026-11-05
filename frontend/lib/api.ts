@@ -133,6 +133,10 @@ export const notesAPI = {
   share: (id: number, student_emails: string[]) => api.post(`/teacher/notes/${id}/share`, { student_emails }),
   unshare: (id: number, studentId: number) => api.delete(`/teacher/notes/${id}/share/${studentId}`),
   remove: (id: number) => api.delete(`/teacher/notes/${id}`),
+  submit: (id: number, data: { images: string[]; comment?: string }) => api.post(`/notes/${id}/submission`, data),
+  submissions: () => api.get("/teacher/homework-submissions"),
+  submission: (id: number) => api.get(`/teacher/homework-submissions/${id}`),
+  markSubmission: (id: number, data: { mark?: string; feedback?: string }) => api.post(`/teacher/homework-submissions/${id}/mark`, data),
 };
 
 // Revision papers: page 1 public, full paper needs live access (app/papers/[slug]).

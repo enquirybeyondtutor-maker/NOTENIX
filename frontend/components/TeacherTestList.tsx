@@ -5,6 +5,7 @@ import { ClipboardList, BookOpen, FilePlus2, Users, CheckCircle2, ArrowRight, Pe
 import { teacherAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
+import HomeworkHandins from "@/components/HomeworkHandins";
 import { Button } from "@/components/ui/Button";
 import { humanize, formatDate } from "@/lib/utils";
 
@@ -103,6 +104,7 @@ export default function TeacherTestList({ kind }: { kind: "test" | "homework" })
           </Button>
         }
       />
+      {homework && <HomeworkHandins />}
 
       {tests.length === 0 ? (
         <EmptyState

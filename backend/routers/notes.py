@@ -1,10 +1,14 @@
 """Class notes: teachers upload notes (text and/or one PDF/image) and share them with students."""
+from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import Response
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, delete
 from database import get_db
-from models import User, ClassNote, NoteShare
+from models import User, ClassNote, NoteShare, HomeworkSubmission
+from services import note_pages
 from security import require_teacher, get_current_user, is_admin
 
 router = APIRouter(tags=["notes"])
@@ -115,6 +119,7 @@ async def unshare_note(note_id: int, student_id: int, teacher: User = Depends(re
 async def delete_note(note_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
     n = await _owned(note_id, teacher, db)
     await db.execute(delete(NoteShare).where(NoteShare.note_id == n.id))
+    await db.execute(delete(HomeworkSubmission).where(HomeworkSubmission.note_id == n.id))
     await db.delete(n)
     await db.commit()
     return {"ok": True}
@@ -126,14 +131,143 @@ async def student_notes(user: User = Depends(get_current_user), db: AsyncSession
         select(ClassNote).join(NoteShare, NoteShare.note_id == ClassNote.id)
         .where(NoteShare.student_id == user.id).order_by(ClassNote.created_at.desc())
     )).scalars().all()
-    return [_note_row(n) for n in notes]
+    subs = {}
+    if notes:
+        for sub in (await db.execute(select(HomeworkSubmission).where(
+                HomeworkSubmission.student_id == user.id,
+                HomeworkSubmission.note_id.in_([n.id for n in notes])))).scalars().all():
+            subs[sub.note_id] = _sub_row(sub)
+    return [{**_note_row(n), "submission": subs.get(n.id)} for n in notes]
+
+
+async def _visible(note_id: int, user: User, db: AsyncSession) -> tuple[ClassNote, bool]:
+    """(note, is_staff). Students only see notes shared with them."""
+    n = (await db.execute(select(ClassNote).where(ClassNote.id == note_id))).scalar_one_or_none()
+    staff = bool(n) and (n.owner_id == user.id or is_admin(user))
+    shared = n and (await db.execute(select(NoteShare.id).where(
+        NoteShare.note_id == note_id, NoteShare.student_id == user.id))).first()
+    if not n or not (shared or staff):
+        raise HTTPException(404, "Note not found")
+    return n, staff
+
+
+def _sub_row(s: HomeworkSubmission, images: bool = False) -> dict:
+    row = {"id": s.id, "note_id": s.note_id, "student_id": s.student_id, "comment": s.comment,
+           "submitted_at": s.submitted_at.isoformat() if s.submitted_at else None,
+           "mark": s.mark, "feedback": s.feedback, "photos": len(s.images or []),
+           "marked_at": s.marked_at.isoformat() if s.marked_at else None}
+    if images:
+        row["images"] = s.images or []
+    return row
 
 
 @router.get("/notes/{note_id}")
 async def get_note(note_id: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
-    n = (await db.execute(select(ClassNote).where(ClassNote.id == note_id))).scalar_one_or_none()
-    shared = n and (await db.execute(select(NoteShare.id).where(
-        NoteShare.note_id == note_id, NoteShare.student_id == user.id))).first()
-    if not n or not (shared or n.owner_id == user.id or is_admin(user)):
-        raise HTTPException(404, "Note not found")
-    return {**_note_row(n), "file_data": n.file_data}
+    n, staff = await _visible(note_id, user, db)
+    row = _note_row(n)
+    if staff:
+        row["file_data"] = n.file_data  # tutors keep the original file
+    elif n.file_data:
+        # Students get watermarked page images only (/pages/{n}), never the raw file.
+        try:
+            row["pages"] = await run_in_threadpool(note_pages.page_count, n.id, n.file_data)
+        except Exception:
+            row["pages"] = 0
+    if not staff and (n.kind or "notes") == "homework":
+        sub = (await db.execute(select(HomeworkSubmission).where(
+            HomeworkSubmission.note_id == n.id, HomeworkSubmission.student_id == user.id))).scalar_one_or_none()
+        row["submission"] = _sub_row(sub, images=True) if sub else None
+    return row
+
+
+@router.get("/notes/{note_id}/pages/{page}")
+async def note_page(note_id: int, page: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    n, _ = await _visible(note_id, user, db)
+    if not n.file_data:
+        raise HTTPException(404, "No file")
+    mark = f"{user.full_name} - {user.email}"
+    try:
+        png = await run_in_threadpool(note_pages.render_page, n.file_data, page, mark)
+    except IndexError:
+        raise HTTPException(404, "No such page")
+    return Response(png, media_type="image/png", headers={"Cache-Control": "no-store, private"})
+
+
+MAX_PHOTOS = 10
+MAX_PHOTO_CHARS = 2_000_000
+
+
+class SubmitIn(BaseModel):
+    images: list[str]
+    comment: str | None = None
+
+
+@router.post("/notes/{note_id}/submission")
+async def submit_homework(note_id: int, data: SubmitIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    n, _ = await _visible(note_id, user, db)
+    if (n.kind or "notes") != "homework":
+        raise HTTPException(400, "This is not homework.")
+    imgs = [i for i in data.images if i]
+    if not imgs:
+        raise HTTPException(400, "Add at least one photo of your work.")
+    if len(imgs) > MAX_PHOTOS:
+        raise HTTPException(400, f"Up to {MAX_PHOTOS} photos.")
+    if any(not i.startswith("data:image/") or len(i) > MAX_PHOTO_CHARS for i in imgs):
+        raise HTTPException(400, "Each photo must be an image under 1.5 MB.")
+    sub = (await db.execute(select(HomeworkSubmission).where(
+        HomeworkSubmission.note_id == n.id, HomeworkSubmission.student_id == user.id))).scalar_one_or_none()
+    if sub and sub.marked_at:
+        raise HTTPException(400, "Your tutor has already marked this homework.")
+    if not sub:
+        sub = HomeworkSubmission(note_id=n.id, student_id=user.id, images=imgs)
+        db.add(sub)
+    sub.images, sub.comment, sub.submitted_at = imgs, (data.comment or "").strip()[:2000] or None, datetime.utcnow()
+    await db.commit()
+    return _sub_row(sub)
+
+
+@router.get("/teacher/homework-submissions")
+async def list_submissions(teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    q = (select(HomeworkSubmission, ClassNote, User)
+         .join(ClassNote, ClassNote.id == HomeworkSubmission.note_id)
+         .join(User, User.id == HomeworkSubmission.student_id)
+         .order_by(HomeworkSubmission.submitted_at.desc()))
+    if not is_admin(teacher):
+        q = q.where(ClassNote.owner_id == teacher.id)
+    rows = [{**_sub_row(s), "title": n.title, "due_at": n.due_at.isoformat() if n.due_at else None,
+             "student": {"id": u.id, "full_name": u.full_name, "email": u.email}}
+            for s, n, u in (await db.execute(q)).all()]
+    rows.sort(key=lambda r: r["marked_at"] is not None)  # unmarked first, newest first within each
+    return rows
+
+
+@router.get("/teacher/homework-submissions/{sub_id}")
+async def get_submission(sub_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    s = (await db.execute(select(HomeworkSubmission).where(HomeworkSubmission.id == sub_id))).scalar_one_or_none()
+    if not s:
+        raise HTTPException(404, "Not found")
+    n = await _owned(s.note_id, teacher, db)
+    u = (await db.execute(select(User).where(User.id == s.student_id))).scalar_one()
+    return {**_sub_row(s, images=True), "title": n.title, "body": n.body, "has_file": bool(n.file_data),
+            "due_at": n.due_at.isoformat() if n.due_at else None,
+            "student": {"id": u.id, "full_name": u.full_name, "email": u.email}}
+
+
+class MarkIn(BaseModel):
+    mark: str | None = None
+    feedback: str | None = None
+
+
+@router.post("/teacher/homework-submissions/{sub_id}/mark")
+async def mark_submission(sub_id: int, data: MarkIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    s = (await db.execute(select(HomeworkSubmission).where(HomeworkSubmission.id == sub_id))).scalar_one_or_none()
+    if not s:
+        raise HTTPException(404, "Not found")
+    await _owned(s.note_id, teacher, db)
+    if not (data.mark or "").strip() and not (data.feedback or "").strip():
+        raise HTTPException(400, "Add a mark or some feedback.")
+    s.mark = (data.mark or "").strip()[:40] or None
+    s.feedback = (data.feedback or "").strip() or None
+    s.marked_at, s.marked_by = datetime.utcnow(), teacher.id
+    await db.commit()
+    return _sub_row(s)

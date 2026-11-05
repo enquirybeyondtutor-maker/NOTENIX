@@ -253,3 +253,20 @@ class NoteShare(Base):
     note_id: Mapped[int] = mapped_column(ForeignKey("class_notes.id"), index=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class HomeworkSubmission(Base):
+    """A student's hand-in for worksheet homework (a ClassNote with kind="homework"):
+    photos of their working, then the tutor's mark and feedback."""
+    __tablename__ = "homework_submissions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    note_id: Mapped[int] = mapped_column(ForeignKey("class_notes.id"), index=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    images: Mapped[list] = mapped_column(JSON)                         # compressed JPEG data URIs
+    comment: Mapped[str | None] = mapped_column(Text, nullable=True)
+    submitted_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    mark: Mapped[str | None] = mapped_column(String(40), nullable=True)  # e.g. "7/10" or "Good"
+    feedback: Mapped[str | None] = mapped_column(Text, nullable=True)
+    marked_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    marked_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
