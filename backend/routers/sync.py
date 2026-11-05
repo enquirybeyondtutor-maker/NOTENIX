@@ -17,8 +17,11 @@ router = APIRouter(prefix="/sync", tags=["sync"])
 
 
 def require_sync(x_sync_key: str = Header(default="")):
-    if not settings.sync_key or not hmac.compare_digest(x_sync_key, settings.sync_key):
-        raise HTTPException(401, "Bad sync key")
+    want = (settings.sync_key or "").strip().strip('"').strip("'")
+    if not want:
+        raise HTTPException(401, "SYNC_KEY is not set on the server")
+    if not hmac.compare_digest(x_sync_key.strip(), want):
+        raise HTTPException(401, f"Bad sync key (server key has {len(want)} characters)")
 
 
 def _iso(d):
