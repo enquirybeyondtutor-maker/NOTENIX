@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from database import get_db
 from models import User
 from security import (
-    hash_password, verify_password, create_token, get_current_user, is_admin,
+    hash_password, verify_password, password_needs_rehash, create_token, get_current_user, is_admin,
     can_write_practice, ai_marks_for, access_ended_message,
 )
 from services.email import generate_otp, send_otp_email, EmailSendError
@@ -258,6 +258,8 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = 
     if (user.role or "student") == "student" and not is_admin(user):
         # One active sign-in per student: this login signs out any other device.
         user.token_version = (user.token_version or 0) + 1
+    if password_needs_rehash(user.password_hash):
+        user.password_hash = hash_password(form.password)  # faster checks from next sign-in
     user.last_active = datetime.utcnow()
     await db.commit()
     return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}

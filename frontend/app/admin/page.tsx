@@ -219,6 +219,21 @@ export default function AdminPage() {
     }
   };
 
+  const requireActivation = async (row: Row) => {
+    if (!confirm(`Send ${row.full_name} back to "Pending activation"? They get a new temporary password, the saved parent email and phone are cleared, and the parent activates again on next sign-in.`)) return;
+    setBusy(row.id);
+    try {
+      const { data } = await adminAPI.requireActivation(row.id);
+      setIssued({ name: row.full_name, email: data.email, password: data.password, role: row.role });
+      load();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Action failed");
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const changeAccess = async (row: Row, access: string) => {
     if (!access) return;
     setBusy(row.id);
@@ -322,7 +337,13 @@ export default function AdminPage() {
                           )}
                         </div>
                       ) : (
-                        <span className="text-xs text-ink-subtle">Not needed (older account)</span>
+                        <span className="text-xs text-ink-subtle">Not activated by a parent</span>
+                      )}
+                      {u.role === "student" && !u.is_admin && !u.needs_activation && (
+                        <button onClick={() => requireActivation(u)} disabled={busy === u.id}
+                          className="mt-1 block text-xs font-medium text-brand-600 hover:underline disabled:opacity-50">
+                          Ask parent to activate
+                        </button>
                       )}
                     </td>
                     <td className="px-4 py-3">

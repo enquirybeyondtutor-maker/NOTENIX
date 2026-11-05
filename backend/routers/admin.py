@@ -205,6 +205,27 @@ async def reset_password(user_id: int, admin: User = Depends(require_admin), db:
     return {"id": u.id, "email": u.email, "password": password}
 
 
+@router.post("/users/{user_id}/require-activation")
+async def require_activation(user_id: int, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
+    """Send a student back to 'Pending activation' with a fresh temporary password, so the
+    parent goes through activation (email, phone, terms, OTP) on their next sign-in.
+    Clears the previously saved parent details."""
+    u = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
+    if not u:
+        raise HTTPException(404, "User not found")
+    if (u.role or "student") != "student" or is_admin(u):
+        raise HTTPException(400, "Only student accounts need parent activation.")
+    password = _new_password()
+    u.password_hash = hash_password(password)
+    u.needs_activation = True
+    u.parent_email = u.parent_phone = None
+    u.activated_at = u.terms_accepted_at = None
+    u.otp_hash, u.otp_expires_at, u.otp_attempts = None, None, 0
+    u.token_version = (u.token_version or 0) + 1
+    await db.commit()
+    return {"id": u.id, "email": u.email, "password": password}
+
+
 @router.post("/users/{user_id}/access")
 async def set_access(user_id: int, data: AccessIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
     u = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()

@@ -118,6 +118,7 @@ export const adminAPI = {
   createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none" }) =>
     api.post("/admin/users", data),
   resetPassword: (id: number | string) => api.post(`/admin/users/${id}/reset-password`),
+  requireActivation: (id: number | string) => api.post(`/admin/users/${id}/require-activation`),
   setAccess: (id: number | string, access: "trial" | "year" | "none") =>
     api.post(`/admin/users/${id}/access`, { access }),
 };
