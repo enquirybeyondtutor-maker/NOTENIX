@@ -10,6 +10,7 @@ from config import settings
 from database import get_db
 from models import User, Test, TestAttempt, QuizSession
 from security import require_admin, is_admin, hash_password
+from services import pricing
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -37,6 +38,9 @@ def _user_row(u: User) -> dict:
         "parent_phone": getattr(u, "parent_phone", None),
         "activated_at": u.activated_at.isoformat() if getattr(u, "activated_at", None) else None,
         "terms_accepted_at": u.terms_accepted_at.isoformat() if getattr(u, "terms_accepted_at", None) else None,
+        "terms_price": getattr(u, "terms_price", None),
+        "billing_currency": pricing.for_currency(getattr(u, "billing_currency", None))["currency"],
+        "subscription_label": pricing.for_currency(getattr(u, "billing_currency", None))["label"],
         "created_at": u.created_at.isoformat() if u.created_at else None,
         "last_active": u.last_active.isoformat() if u.last_active else None,
     }
@@ -141,10 +145,33 @@ class CreateUserIn(BaseModel):
     email: str | None = None   # blank → firstname@<student_id_domain>
     role: str = "student"      # student | teacher
     access: str = "trial"      # trial | year | none (students only)
+    currency: str = "GBP"      # billing currency for the £49-equivalent subscription
 
 
 class AccessIn(BaseModel):
     access: str                # trial | year | none
+
+
+class CurrencyIn(BaseModel):
+    currency: str
+
+
+@router.get("/prices")
+async def list_prices(admin: User = Depends(require_admin)):
+    return pricing.options()
+
+
+@router.post("/users/{user_id}/currency")
+async def set_currency(user_id: int, data: CurrencyIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
+    cur = data.currency.strip().upper()
+    if cur not in pricing.prices():
+        raise HTTPException(400, "Unknown currency")
+    u = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
+    if not u:
+        raise HTTPException(404, "User not found")
+    u.billing_currency = cur
+    await db.commit()
+    return _user_row(u)
 
 
 @router.get("/suggest-id")
@@ -184,6 +211,8 @@ async def create_user(data: CreateUserIn, admin: User = Depends(require_admin), 
              is_verified=True, token_version=0, needs_activation=(data.role == "student"))
     if data.role == "student":
         _apply_access(u, data.access)
+        cur = (data.currency or "GBP").strip().upper()
+        u.billing_currency = cur if cur in pricing.prices() else "GBP"
     db.add(u)
     await db.commit()
     await db.refresh(u)
@@ -220,6 +249,7 @@ async def require_activation(user_id: int, admin: User = Depends(require_admin),
     u.needs_activation = True
     u.parent_email = u.parent_phone = None
     u.activated_at = u.terms_accepted_at = None
+    u.terms_price = None
     u.otp_hash, u.otp_expires_at, u.otp_attempts = None, None, 0
     u.token_version = (u.token_version or 0) + 1
     await db.commit()

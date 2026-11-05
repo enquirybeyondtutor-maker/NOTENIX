@@ -24,6 +24,9 @@ interface Row {
   parent_phone: string | null;
   activated_at: string | null;
   terms_accepted_at: string | null;
+  terms_price?: string | null;
+  billing_currency?: string;
+  subscription_label?: string;
   created_at: string;
   last_active: string | null;
 }
@@ -53,7 +56,12 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
   const [touched, setTouched] = useState(false);
   const [role, setRole] = useState<"student" | "teacher">("student");
   const [access, setAccess] = useState<"trial" | "year">("trial");
+  const [currency, setCurrency] = useState("GBP");
+  const [prices, setPrices] = useState<{ currency: string; label: string; region: string }[]>([]);
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => { adminAPI.prices().then((r) => setPrices(r.data)).catch(() => {}); }, []);
+  const priceLabel = prices.find((p) => p.currency === currency)?.label || "£49";
   const [error, setError] = useState("");
 
   // Suggest musa@thebeyondtutors.com from the name until the ID is edited by hand.
@@ -68,7 +76,7 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
     setSaving(true);
     setError("");
     try {
-      const { data } = await adminAPI.createUser({ full_name: name, email, role, access });
+      const { data } = await adminAPI.createUser({ full_name: name, email, role, access, currency });
       onIssued({ name: data.user.full_name, email: data.user.email, password: data.password, role });
       setName("");
       setEmail("");
@@ -85,7 +93,7 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
     <form onSubmit={submit} className="card mt-8 p-6">
       <h2 className="flex items-center gap-2 font-semibold text-ink"><UserPlus size={18} /> Issue a Notenix account</h2>
       <p className="mt-1 text-sm text-ink-muted">Send the parent the ID and temporary password shown after you create the account. On first sign-in they enter their email and mobile, confirm an emailed code and set their own password.</p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name (e.g. Musa Khan)" required />
         <input className={field} value={email} onChange={(e) => { setEmail(e.target.value); setTouched(true); }} placeholder="musa@thebeyondtutors.com" />
         <select className={field} value={role} onChange={(e) => setRole(e.target.value as any)}>
@@ -94,7 +102,13 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
         </select>
         <select className={field} value={access} onChange={(e) => setAccess(e.target.value as any)} disabled={role !== "student"}>
           <option value="trial">Free trial access</option>
-          <option value="year">Paid: 1 year (£49)</option>
+          <option value="year">Paid: 1 year ({priceLabel})</option>
+        </select>
+        <select className={field} value={currency} onChange={(e) => setCurrency(e.target.value)} disabled={role !== "student"}
+          title="Currency Beyond Tutors bills this student in; shown in the parent's terms">
+          {(prices.length ? prices : [{ currency: "GBP", label: "£49", region: "UK" }]).map((p) => (
+            <option key={p.currency} value={p.currency}>{p.region}: {p.label} / year</option>
+          ))}
         </select>
       </div>
       <div className="mt-4 flex items-center gap-3">
@@ -219,6 +233,20 @@ export default function AdminPage() {
     }
   };
 
+  const [priceList, setPriceList] = useState<{ currency: string; label: string; region: string }[]>([]);
+  useEffect(() => { adminAPI.prices().then((r) => setPriceList(r.data)).catch(() => {}); }, []);
+  const changeCurrency = async (row: Row, currency: string) => {
+    setBusy(row.id);
+    try {
+      await adminAPI.setCurrency(row.id, currency);
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Couldn't change the currency");
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const requireActivation = async (row: Row) => {
     if (!confirm(`Send ${row.full_name} back to "Pending activation"? They get a new temporary password, the saved parent email and phone are cleared, and the parent activates again on next sign-in.`)) return;
     setBusy(row.id);
@@ -333,11 +361,18 @@ export default function AdminPage() {
                           <div className="mt-1 text-ink">{u.parent_email}</div>
                           <div className="text-ink-subtle">{u.parent_phone}</div>
                           {u.terms_accepted_at && (
-                            <div className="text-ink-subtle">Agreed to £49/yr terms {formatDate(u.terms_accepted_at)}</div>
+                            <div className="text-ink-subtle">Agreed to {u.terms_price || "£49 per year"} terms {formatDate(u.terms_accepted_at)}</div>
                           )}
                         </div>
                       ) : (
                         <span className="text-xs text-ink-subtle">Not activated by a parent</span>
+                      )}
+                      {u.role === "student" && !u.is_admin && priceList.length > 0 && (
+                        <select value={u.billing_currency || "GBP"} disabled={busy === u.id}
+                          onChange={(e) => changeCurrency(u, e.target.value)} title="Billing currency shown in the parent's terms"
+                          className="mt-1 block rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">
+                          {priceList.map((p) => <option key={p.currency} value={p.currency}>{p.label}/yr ({p.region})</option>)}
+                        </select>
                       )}
                       {u.role === "student" && !u.is_admin && !u.needs_activation && (
                         <button onClick={() => requireActivation(u)} disabled={busy === u.id}

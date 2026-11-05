@@ -250,15 +250,22 @@ async def run_migrations():
 
 
 async def migrate_note_kinds():
-    """class_notes.kind / due_at / class_date (homework + lesson link)."""
+    """class_notes.kind / due_at / class_date (homework + lesson link); users billing currency."""
     from sqlalchemy import text
     async with engine.begin() as raw:
         conn = _SafeConn(raw)
         if engine.dialect.name == "postgresql":
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS billing_currency VARCHAR(3)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS terms_price VARCHAR(40)"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS kind VARCHAR(20) DEFAULT 'notes'"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS due_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS class_date VARCHAR(10)"))
         else:
+            ucols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
+            if "billing_currency" not in ucols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN billing_currency VARCHAR(3)"))
+            if "terms_price" not in ucols:
+                await conn.execute(text("ALTER TABLE users ADD COLUMN terms_price VARCHAR(40)"))
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(class_notes)"))).all()}
             if "kind" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN kind VARCHAR(20) DEFAULT 'notes'"))

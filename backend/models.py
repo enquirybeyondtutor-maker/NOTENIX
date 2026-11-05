@@ -45,6 +45,10 @@ class User(Base):
     activated_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     # When the parent ticked "I agree" (£49/yr billed by Beyond Tutors on their next invoice).
     terms_accepted_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # Currency Beyond Tutors bills this student in (GBP, AED, USD…), and the exact price
+    # shown in the terms the parent agreed to, e.g. "AED 229 per year".
+    billing_currency: Mapped[str | None] = mapped_column(String(3), nullable=True)
+    terms_price: Mapped[str | None] = mapped_column(String(40), nullable=True)
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
     quiz_count: Mapped[int] = mapped_column(Integer, default=0)

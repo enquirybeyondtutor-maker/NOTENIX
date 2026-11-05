@@ -24,6 +24,8 @@ def _require_open_signup():
 
 EMAIL_FAIL_MSG = "We couldn't send the verification email right now. Please try again in a moment."
 
+from services import pricing
+
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
@@ -79,6 +81,7 @@ def _user_dict(u: User) -> dict:
         "access_kind": getattr(u, "access_kind", None),
         "needs_activation": bool(getattr(u, "needs_activation", False)),
         "parent_email": getattr(u, "parent_email", None),
+        "subscription": pricing.for_currency(getattr(u, "billing_currency", None)),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 
@@ -333,6 +336,7 @@ async def activation_send_code(data: ActivationStartIn, user: User = Depends(get
         raise HTTPException(429, "Please wait a minute before asking for another code.")
     user.parent_email, user.parent_phone = email, phone
     user.terms_accepted_at = datetime.utcnow()
+    user.terms_price = pricing.for_currency(user.billing_currency)["label"] + " per year"
     code = generate_otp()
     user.otp_hash = hash_password(code)
     user.otp_expires_at = datetime.utcnow() + timedelta(minutes=settings.otp_expiry_minutes)

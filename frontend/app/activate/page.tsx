@@ -27,6 +27,7 @@ export default function ActivatePage() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [cooldown, setCooldown] = useState(0);
+  const price: string = student?.subscription?.label || "£49";
 
   useEffect(() => {
     if (!localStorage.getItem("notenix_token")) {
@@ -218,9 +219,9 @@ export default function ActivatePage() {
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
               <li>This Notenix subscription is purchased through <b className="text-ink">Beyond Tutors</b>. Beyond Tutors
                 provides Notenix to its students as part of its tuition.</li>
-              <li>The subscription costs <b className="text-ink">£49 per year</b>. This payment is made to Beyond Tutors,
+              <li>The subscription costs <b className="text-ink">{price} per year</b>. This payment is made to Beyond Tutors,
                 not to Notenix.</li>
-              <li>The £49 will be included in the <b className="text-ink">next invoice issued by Beyond Tutors</b>. No card
+              <li>The {price} will be included in the <b className="text-ink">next invoice issued by Beyond Tutors</b>. No card
                 details are taken here.</li>
             </ul>
             <p className="mt-3 text-xs text-ink-subtle">

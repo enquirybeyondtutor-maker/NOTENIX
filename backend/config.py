@@ -66,6 +66,9 @@ class Settings(BaseSettings):
     bootstrap_admin_password: str = ""
     student_id_domain: str = "thebeyondtutors.com"   # musa@thebeyondtutors.com
     subscription_days: int = 365                     # £49 per year
+    # Student subscription price per billing currency, JSON, e.g. {"GBP": 49, "AED": 229}.
+    # Empty = the defaults in services/pricing.py.
+    subscription_prices: str = ""
     trial_days: int = 7                              # free access around the trial class
 
     # Private key for the BT Sessions desktop app (/sync/*). Empty = sync disabled.

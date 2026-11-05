@@ -115,7 +115,9 @@ export const adminAPI = {
     api.post(`/admin/users/${id}/write-access`, { enabled }),
   // Beyond Tutors-issued accounts: the password comes back once, in the response.
   suggestId: (name: string) => api.get("/admin/suggest-id", { params: { name } }),
-  createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none" }) =>
+  prices: () => api.get("/admin/prices"),
+  setCurrency: (id: number | string, currency: string) => api.post(`/admin/users/${id}/currency`, { currency }),
+  createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string }) =>
     api.post("/admin/users", data),
   resetPassword: (id: number | string) => api.post(`/admin/users/${id}/reset-password`),
   requireActivation: (id: number | string) => api.post(`/admin/users/${id}/require-activation`),
