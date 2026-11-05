@@ -29,6 +29,9 @@ def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
     row = {
         "id": n.id, "title": n.title, "subject": n.subject, "body": n.body,
         "file_name": n.file_name, "has_file": bool(n.file_data),
+        "kind": getattr(n, "kind", None) or "notes",
+        "due_at": n.due_at.isoformat() if getattr(n, "due_at", None) else None,
+        "class_date": getattr(n, "class_date", None),
         "created_at": n.created_at.isoformat() if n.created_at else None,
     }
     if students is not None:

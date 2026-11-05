@@ -239,6 +239,10 @@ class ClassNote(Base):
     body: Mapped[str | None] = mapped_column(Text, nullable=True)
     file_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     file_data: Mapped[str | None] = mapped_column(Text, nullable=True)  # data URI (PDF/image)
+    # notes | homework. Homework carries a due date; class_date links it to a lesson.
+    kind: Mapped[str] = mapped_column(String(20), default="notes", server_default="notes")
+    due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    class_date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 

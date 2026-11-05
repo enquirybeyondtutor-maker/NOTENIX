@@ -43,6 +43,7 @@ async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     await run_migrations()
+    await migrate_note_kinds()
     await bootstrap_admin()
 
 
@@ -207,3 +208,21 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN started_at TIMESTAMP"))
             if ascols and "draft_answers" not in ascols:
                 await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN draft_answers JSON"))
+
+
+async def migrate_note_kinds():
+    """class_notes.kind / due_at / class_date (homework + lesson link)."""
+    from sqlalchemy import text
+    async with engine.begin() as conn:
+        if engine.dialect.name == "postgresql":
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS kind VARCHAR(20) DEFAULT 'notes'"))
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS due_at TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS class_date VARCHAR(10)"))
+        else:
+            cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(class_notes)"))).all()}
+            if "kind" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN kind VARCHAR(20) DEFAULT 'notes'"))
+            if "due_at" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN due_at TIMESTAMP"))
+            if "class_date" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN class_date VARCHAR(10)"))

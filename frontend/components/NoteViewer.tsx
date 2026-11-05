@@ -29,9 +29,9 @@ export default function NoteViewer({ note, footer }: { note: any; footer?: React
     <div className="card p-5">
       <button onClick={toggle} className="flex w-full items-start justify-between gap-3 text-left">
         <div>
-          <div className="font-semibold text-ink">{note.title}</div>
+          <div className="font-semibold text-ink">{note.kind === "homework" && <span className="mr-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">Homework</span>}{note.title}</div>
           <div className="mt-0.5 text-xs text-ink-subtle">
-            {[note.subject, formatDate(note.created_at), note.file_name].filter(Boolean).join(" · ")}
+            {[note.subject, formatDate(note.created_at), note.due_at ? `due ${formatDate(note.due_at)}` : null, note.file_name].filter(Boolean).join(" · ")}
           </div>
         </div>
         {open ? <ChevronUp size={18} className="text-ink-subtle" /> : <ChevronDown size={18} className="text-ink-subtle" />}

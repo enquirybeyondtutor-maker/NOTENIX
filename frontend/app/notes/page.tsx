@@ -17,7 +17,7 @@ export default function NotesPage() {
   if (!ready || notes === null) return <Spinner label="Loading notes…" />;
   return (
     <PageContainer>
-      <PageHeader icon={NotebookText} title="Class notes" subtitle="Notes your tutor has shared with you." />
+      <PageHeader icon={NotebookText} title="Notes & homework" subtitle="Class notes and homework from your tutor." />
       {notes.length === 0 ? (
         <EmptyState icon={NotebookText} title="No notes yet" desc="When your tutor shares class notes, they will appear here." />
       ) : (

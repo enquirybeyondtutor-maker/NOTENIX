@@ -68,6 +68,10 @@ class Settings(BaseSettings):
     subscription_days: int = 365                     # £49 per year
     trial_days: int = 7                              # free access around the trial class
 
+    # Private key for the BT Sessions desktop app (/sync/*). Empty = sync disabled.
+    sync_key: str = ""
+    sync_owner_email: str = "hello@thebeyondtutors.com"  # uploads from the app are owned by this account
+
     # How often a user may change their display name.
     name_change_cooldown_days: int = 60
 
