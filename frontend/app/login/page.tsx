@@ -36,6 +36,10 @@ export default function LoginPage() {
       const res = await authAPI.login(email, password);
       saveAuth(res.data.access_token, res.data.user);
       const role = res.data.user?.role;
+      if (res.data.user?.needs_activation) {
+        router.push("/activate");
+        return;
+      }
       router.push(returnTo || (role === "teacher" || role === "admin" ? "/teacher" : "/dashboard"));
     } catch (err: any) {
       const status = err.response?.status;

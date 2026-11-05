@@ -115,6 +115,11 @@ async def run_migrations():
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS token_version INTEGER DEFAULT 0"))
             await conn.execute(text("UPDATE users SET token_version = 0 WHERE token_version IS NULL"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS needs_activation BOOLEAN DEFAULT FALSE"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS parent_email VARCHAR(255)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS parent_phone VARCHAR(30)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS activated_at TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS terms_accepted_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS mode VARCHAR(20) DEFAULT 'mcq'"))
             await conn.execute(text("UPDATE tests SET mode = 'mcq' WHERE mode IS NULL"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS is_library BOOLEAN DEFAULT FALSE"))
@@ -163,7 +168,9 @@ async def run_migrations():
             if "pro_until" not in cols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN pro_until TIMESTAMP"))
             for col, ddl in [("access_until", "TIMESTAMP"), ("access_kind", "VARCHAR(20)"), ("phone", "VARCHAR(20)"),
-                             ("token_version", "INTEGER DEFAULT 0")]:
+                             ("token_version", "INTEGER DEFAULT 0"), ("needs_activation", "BOOLEAN DEFAULT 0"),
+                             ("parent_email", "VARCHAR(255)"), ("parent_phone", "VARCHAR(30)"),
+                             ("activated_at", "TIMESTAMP"), ("terms_accepted_at", "TIMESTAMP")]:
                 if col not in cols:
                     await conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {ddl}"))
             tcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(tests)"))).all()}

@@ -30,7 +30,19 @@ def _content(full_name: str, code: str, kind: str = "verify") -> tuple[str, str,
     """Returns (subject, html, plaintext). kind = 'verify' | 'reset'."""
     mins = settings.otp_expiry_minutes
     name = (full_name or "there").split(" ")[0]
-    if kind == "reset":
+    if kind == "activate":
+        subject = f"{code} is your Notenix activation code"
+        heading = "Activate the Notenix account"
+        lead = f"enter this code to activate the Beyond Tutors account for {full_name}."
+        name = "there"
+        text = (
+            f"Hi,\n\n"
+            f"Your code to activate the Notenix account for {full_name} is: {code}\n\n"
+            f"It expires in {mins} minutes. If you didn't ask for this, you can ignore this email.\n\n"
+            f"— Notenix · Beyond Tutors"
+        )
+        ignore = "If you didn't ask for this, you can safely ignore this email."
+    elif kind == "reset":
         subject = f"{code} is your Notenix password reset code"
         heading = "Reset your password"
         lead = "enter this code to set a new password."

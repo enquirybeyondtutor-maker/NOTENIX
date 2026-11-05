@@ -1,3 +1,4 @@
+import re
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
@@ -76,6 +77,8 @@ def _user_dict(u: User) -> dict:
         "can_mark": role in ("teacher", "admin") or is_admin(u),  # may manually mark
         "access_until": u.access_until.isoformat() if getattr(u, "access_until", None) else None,
         "access_kind": getattr(u, "access_kind", None),
+        "needs_activation": bool(getattr(u, "needs_activation", False)),
+        "parent_email": getattr(u, "parent_email", None),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 
@@ -287,3 +290,82 @@ async def update_profile(data: UpdateProfileIn, user: User = Depends(get_current
     await db.commit()
     await db.refresh(user)
     return _user_dict(user)
+
+
+# ── Parent activation ──────────────────────────────────────────────────────────
+# A Beyond Tutors-issued student account starts with needs_activation=True. The parent
+# signs in with the issued ID + temporary password, enters their own email and phone,
+# then confirms the 6-digit code emailed to them and sets a new password. Until then
+# every other API call is refused (see security.get_current_user).
+
+class ActivationStartIn(BaseModel):
+    parent_email: EmailStr
+    phone: str
+    agree_terms: bool = False
+
+
+class ActivationVerifyIn(BaseModel):
+    code: str
+    new_password: str
+
+
+def _clean_phone(raw: str) -> str:
+    digits = re.sub(r"\D", "", raw or "")
+    if not 8 <= len(digits) <= 15:
+        raise HTTPException(400, "Please enter a valid mobile number with country code, e.g. +44 7700 900123.")
+    return "+" + digits
+
+
+@router.post("/activation/send-code")
+async def activation_send_code(data: ActivationStartIn, user: User = Depends(get_current_user),
+                               db: AsyncSession = Depends(get_db)):
+    if not getattr(user, "needs_activation", False):
+        raise HTTPException(400, "This account is already activated.")
+    if not data.agree_terms:
+        raise HTTPException(400, "Please agree to the Terms and Conditions to continue.")
+    email = data.parent_email.lower()
+    if email.endswith("@" + settings.student_id_domain.lower()):
+        raise HTTPException(400, "Please enter your own email address, not the Notenix user ID.")
+    phone = _clean_phone(data.phone)
+    if _within_cooldown(user):
+        raise HTTPException(429, "Please wait a minute before asking for another code.")
+    user.parent_email, user.parent_phone = email, phone
+    user.terms_accepted_at = datetime.utcnow()
+    code = generate_otp()
+    user.otp_hash = hash_password(code)
+    user.otp_expires_at = datetime.utcnow() + timedelta(minutes=settings.otp_expiry_minutes)
+    user.otp_attempts = 0
+    await db.commit()
+    try:
+        await send_otp_email(email, user.full_name, code, kind="activate")
+    except EmailSendError:
+        raise HTTPException(502, EMAIL_FAIL_MSG)
+    return _otp_sent_response(email, code)
+
+
+@router.post("/activation/verify")
+async def activation_verify(data: ActivationVerifyIn, user: User = Depends(get_current_user),
+                            db: AsyncSession = Depends(get_db)):
+    if not getattr(user, "needs_activation", False):
+        raise HTTPException(400, "This account is already activated.")
+    if len(data.new_password) < 8:
+        raise HTTPException(400, "Your new password must be at least 8 characters.")
+    if not user.otp_hash or not user.otp_expires_at or not user.parent_email:
+        raise HTTPException(400, "Please ask for a code first.")
+    if datetime.utcnow() > user.otp_expires_at:
+        raise HTTPException(400, "That code has expired. Please ask for a new one.")
+    if (user.otp_attempts or 0) >= settings.otp_max_attempts:
+        raise HTTPException(429, "Too many wrong codes. Please ask for a new one.")
+    if not verify_password(data.code.strip(), user.otp_hash):
+        user.otp_attempts = (user.otp_attempts or 0) + 1
+        await db.commit()
+        raise HTTPException(400, "That code isn't right. Please check the email and try again.")
+    user.password_hash = hash_password(data.new_password)
+    user.needs_activation = False
+    user.activated_at = datetime.utcnow()
+    user.otp_hash, user.otp_expires_at, user.otp_attempts = None, None, 0
+    user.token_version = (user.token_version or 0) + 1  # sessions on the WhatsApp password end here
+    user.last_active = datetime.utcnow()
+    await db.commit()
+    await db.refresh(user)
+    return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}

@@ -19,6 +19,11 @@ interface Row {
   plan: string;
   access_until: string | null;
   access_kind: string | null;
+  needs_activation: boolean;
+  parent_email: string | null;
+  parent_phone: string | null;
+  activated_at: string | null;
+  terms_accepted_at: string | null;
   created_at: string;
   last_active: string | null;
 }
@@ -79,7 +84,7 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
   return (
     <form onSubmit={submit} className="card mt-8 p-6">
       <h2 className="flex items-center gap-2 font-semibold text-ink"><UserPlus size={18} /> Issue a Notenix account</h2>
-      <p className="mt-1 text-sm text-ink-muted">Students can't sign up or change their password. Give them the ID and password shown after you create the account.</p>
+      <p className="mt-1 text-sm text-ink-muted">Send the parent the ID and temporary password shown after you create the account. On first sign-in they enter their email and mobile, confirm an emailed code and set their own password.</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name (e.g. Musa Khan)" required />
         <input className={field} value={email} onChange={(e) => { setEmail(e.target.value); setTouched(true); }} placeholder="musa@thebeyondtutors.com" />
@@ -105,6 +110,9 @@ function IssuedCard({ issued, onClose }: { issued: Issued; onClose: () => void }
   const message =
     `Hi ${issued.name.split(" ")[0]}, your Notenix account from Beyond Tutors is ready.\n\n` +
     `Sign in: https://www.notenix.com/login\nUser ID: ${issued.email}\nPassword: ${issued.password}\n\n` +
+    `When you first sign in, you'll be asked for a parent's email and mobile number. We'll email a 6-digit code to confirm it, and you'll choose your own password.
+
+` +
     `Your homework, tests and class notes will all be there. Please keep these details private.`;
   return (
     <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-5">
@@ -254,6 +262,7 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-medium">User</th>
                   <th className="px-4 py-3 font-medium">Role</th>
                   <th className="px-4 py-3 font-medium">Status</th>
+                  <th className="px-4 py-3 font-medium">Parent activation</th>
                   <th className="px-4 py-3 font-medium">Access</th>
                   <th className="px-4 py-3 font-medium">Written</th>
                   <th className="px-4 py-3 font-medium">Joined</th>
@@ -293,6 +302,27 @@ export default function AdminPage() {
                         <span className="badge-success"><CheckCircle2 size={12} /> Active</span>
                       ) : (
                         <span className="badge-danger"><Ban size={12} /> Suspended</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      {u.role !== "student" || u.is_admin ? (
+                        <span className="text-xs text-ink-subtle">—</span>
+                      ) : u.needs_activation ? (
+                        <div>
+                          <span className="inline-flex rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">Pending</span>
+                          {u.parent_email && <div className="mt-1 text-xs text-ink-subtle">Code sent to {u.parent_email}</div>}
+                        </div>
+                      ) : u.activated_at ? (
+                        <div className="text-xs">
+                          <span className="inline-flex rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">Activated {formatDate(u.activated_at)}</span>
+                          <div className="mt-1 text-ink">{u.parent_email}</div>
+                          <div className="text-ink-subtle">{u.parent_phone}</div>
+                          {u.terms_accepted_at && (
+                            <div className="text-ink-subtle">Agreed to £49/yr terms {formatDate(u.terms_accepted_at)}</div>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-ink-subtle">Not needed (older account)</span>
                       )}
                     </td>
                     <td className="px-4 py-3">

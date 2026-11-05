@@ -37,6 +37,14 @@ class User(Base):
     # Bumped on student login and on admin password reset; tokens carrying an older
     # version stop working, so one student account = one active sign-in.
     token_version: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    # Parent activation for Beyond Tutors-issued student accounts. True until the parent
+    # signs in with the issued ID, enters their email + phone and confirms the email OTP.
+    needs_activation: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
+    parent_email: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    parent_phone: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    activated_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # When the parent ticked "I agree" (£49/yr billed by Beyond Tutors on their next invoice).
+    terms_accepted_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
     quiz_count: Mapped[int] = mapped_column(Integer, default=0)

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from passlib.context import CryptContext
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -48,7 +48,12 @@ def access_ended_message(user: User) -> str | None:
     return f"Your {what} ended on {until.strftime('%d %b %Y')}. Please contact Beyond Tutors to renew."
 
 
+# Paths a not-yet-activated student may still call (the activation screen itself).
+_ACTIVATION_OK = ("/auth/me", "/auth/activation/send-code", "/auth/activation/verify")
+
+
 async def get_current_user(
+    request: Request,
     token: str = Depends(oauth2_scheme),
     db: AsyncSession = Depends(get_db),
 ) -> User:
@@ -72,6 +77,8 @@ async def get_current_user(
     ended = access_ended_message(user)
     if ended:
         raise HTTPException(status_code=403, detail=ended)
+    if getattr(user, "needs_activation", False) and not request.url.path.rstrip("/").endswith(_ACTIVATION_OK):
+        raise HTTPException(status_code=403, detail="activation_required")
     return user
 
 

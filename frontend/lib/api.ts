@@ -19,6 +19,11 @@ api.interceptors.response.use(
       localStorage.removeItem("notenix_user");
       if (!window.location.pathname.startsWith("/login")) window.location.href = "/login";
     }
+    // Beyond Tutors-issued student account the parent hasn't activated yet.
+    if (err.response?.status === 403 && err.response?.data?.detail === "activation_required" &&
+        typeof window !== "undefined" && !window.location.pathname.startsWith("/activate")) {
+      window.location.href = "/activate";
+    }
     return Promise.reject(err);
   }
 );
@@ -38,6 +43,11 @@ export const authAPI = {
     }),
   me: () => api.get("/auth/me"),
   updateProfile: (full_name: string) => api.patch("/auth/profile", { full_name }),
+  // Parent activation: email + phone → code emailed to the parent → code + new password.
+  activationSendCode: (parent_email: string, phone: string, agree_terms: boolean) =>
+    api.post("/auth/activation/send-code", { parent_email, phone, agree_terms }),
+  activationVerify: (code: string, new_password: string) =>
+    api.post("/auth/activation/verify", { code, new_password }),
 };
 
 export const quizAPI = {

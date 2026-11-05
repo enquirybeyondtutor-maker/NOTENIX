@@ -32,6 +32,11 @@ def _user_row(u: User) -> dict:
         "plan": u.plan, "xp": u.xp,
         "access_until": u.access_until.isoformat() if getattr(u, "access_until", None) else None,
         "access_kind": getattr(u, "access_kind", None),
+        "needs_activation": bool(getattr(u, "needs_activation", False)),
+        "parent_email": getattr(u, "parent_email", None),
+        "parent_phone": getattr(u, "parent_phone", None),
+        "activated_at": u.activated_at.isoformat() if getattr(u, "activated_at", None) else None,
+        "terms_accepted_at": u.terms_accepted_at.isoformat() if getattr(u, "terms_accepted_at", None) else None,
         "created_at": u.created_at.isoformat() if u.created_at else None,
         "last_active": u.last_active.isoformat() if u.last_active else None,
     }
@@ -176,7 +181,7 @@ async def create_user(data: CreateUserIn, admin: User = Depends(require_admin), 
         raise HTTPException(400, f"{email} is already taken.")
     password = _new_password()
     u = User(email=email, full_name=name, role=data.role, password_hash=hash_password(password),
-             is_verified=True, token_version=0)
+             is_verified=True, token_version=0, needs_activation=(data.role == "student"))
     if data.role == "student":
         _apply_access(u, data.access)
     db.add(u)

@@ -31,6 +31,10 @@ export function useAuthGuard(requireRole?: "student" | "teacher") {
           localStorage.setItem("notenix_user", JSON.stringify(data));
         } catch {}
         setUser(data);
+        if (data.needs_activation) {
+          router.replace("/activate");
+          return;
+        }
         const role: Role = data.role || "student";
         if (requireRole === "teacher" && role === "student") {
           router.replace("/dashboard");
