@@ -29,6 +29,37 @@ engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True, conne
 SessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 
+import re as _re
+
+_ADD_COL = _re.compile(r"ALTER TABLE (\w+) ADD COLUMN IF NOT EXISTS (\w+)", _re.I)
+
+
+class _SafeConn:
+    """Skips `ADD COLUMN IF NOT EXISTS` when the column is already there. Even a no-op
+    ALTER takes an exclusive table lock on Postgres, which deadlocked against the
+    still-running old instance during a zero-downtime deploy."""
+
+    def __init__(self, conn):
+        self._c = conn
+        self._cols = None
+
+    async def execute(self, stmt, *a, **kw):
+        m = _ADD_COL.search(str(stmt))
+        if m and self._c.dialect.name == "postgresql":
+            from sqlalchemy import text
+            if self._cols is None:
+                rows = (await self._c.execute(text(
+                    "SELECT table_name, column_name FROM information_schema.columns WHERE table_schema = current_schema()"
+                ))).all()
+                self._cols = {(t.lower(), c.lower()) for t, c in rows}
+            if (m.group(1).lower(), m.group(2).lower()) in self._cols:
+                return None
+        return await self._c.execute(stmt, *a, **kw)
+
+    def __getattr__(self, name):
+        return getattr(self._c, name)
+
+
 class Base(DeclarativeBase):
     pass
 
@@ -42,8 +73,15 @@ async def init_db():
     import models  # noqa: F401  (register models)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    await run_migrations()
-    await migrate_note_kinds()
+    import asyncio
+    for step in (run_migrations, migrate_note_kinds):
+        for attempt in range(3):  # a deploy can briefly overlap the old instance
+            try:
+                await step()
+                break
+            except Exception as e:
+                print(f"[migrate] {step.__name__} attempt {attempt + 1} failed: {e}")
+                await asyncio.sleep(3)
     await bootstrap_admin()
 
 
@@ -78,7 +116,8 @@ async def run_migrations():
     from sqlalchemy import text
 
     dialect = engine.dialect.name  # 'postgresql' | 'sqlite'
-    async with engine.begin() as conn:
+    async with engine.begin() as raw:
+        conn = _SafeConn(raw)
         if dialect == "postgresql":
             await conn.execute(text(
                 "ALTER TABLE users ADD COLUMN IF NOT EXISTS role VARCHAR(20) DEFAULT 'student'"
@@ -213,7 +252,8 @@ async def run_migrations():
 async def migrate_note_kinds():
     """class_notes.kind / due_at / class_date (homework + lesson link)."""
     from sqlalchemy import text
-    async with engine.begin() as conn:
+    async with engine.begin() as raw:
+        conn = _SafeConn(raw)
         if engine.dialect.name == "postgresql":
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS kind VARCHAR(20) DEFAULT 'notes'"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS due_at TIMESTAMP"))
