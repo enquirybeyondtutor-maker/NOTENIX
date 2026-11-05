@@ -47,8 +47,10 @@ export default function RevisionResourcePage() {
     const auth = { headers: { Authorization: `Bearer ${token}` } };
     fetch("/api/auth/me", auth)
       .then(async (r) => {
-        setAccess(r.ok ? "live" : r.status === 403 ? "ended" : "none");
-        if (!r.ok) return;
+        // Free test-request accounts can sit their free test but don't get the revision library.
+        const free = r.ok && (await r.clone().json().catch(() => ({})))?.access_kind === "free";
+        setAccess(r.ok ? (free ? "none" : "live") : r.status === 403 ? "ended" : "none");
+        if (!r.ok || free) return;
         const slug = `${subject}-${course}-${topic}-${type}`;
         const meta = await fetch(`/api/papers/${slug}`);
         if (!meta.ok) return setPages([]);

@@ -23,33 +23,16 @@ export default function Pricing() {
       <div className="mx-auto max-w-2xl text-center">
         <span className="eyebrow">Pricing</span>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-          One plan for every Beyond Tutors student
+          Simple yearly pricing
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Notenix comes with your Beyond Tutors classes. Try it free during your trial class,
-          then £49 a year when you join. Not with Beyond Tutors? Full access is £149 a year.
+          £49 a year for Beyond Tutors students. Not with Beyond Tutors? Full access is £149 a year.
         </p>
       </div>
 
-      <div className="mx-auto mt-12 grid max-w-3xl gap-6 md:grid-cols-2">
-        <div className="card flex flex-col p-8">
-          <h3 className="text-lg font-semibold text-ink">Trial class</h3>
-          <div className="mt-2 flex items-baseline gap-1">
-            <span className="text-4xl font-bold text-ink">£0</span>
-          </div>
-          <p className="mt-1 text-sm text-ink-muted">Full access while you try a class with us.</p>
-          <ul className="mt-6 flex-1 space-y-3">
-            {FEATURES.slice(0, 3).map((f) => (
-              <li key={f} className="flex items-center gap-2 text-sm text-ink-muted">
-                <Check size={16} className="text-emerald-500" /> {f}
-              </li>
-            ))}
-          </ul>
-          <Button href={BOOK} variant="secondary" className="mt-8 w-full">Book a free trial class</Button>
-        </div>
-
+      <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
         <div className="card flex flex-col border-brand-300 p-8 ring-1 ring-brand-200">
-          <h3 className="text-lg font-semibold text-ink">Notenix subscription</h3>
+          <h3 className="text-lg font-semibold text-ink">Beyond Tutors students</h3>
           <div className="mt-2 flex items-baseline gap-1">
             <span className="text-4xl font-bold text-ink">£49</span>
             <span className="text-sm text-ink-subtle">/ year</span>
@@ -66,28 +49,24 @@ export default function Pricing() {
           </ul>
           <Button href={BOOK} className="mt-8 w-full">Join Beyond Tutors <ArrowRight size={16} /></Button>
         </div>
-      </div>
 
-      <div className="mx-auto mt-10 max-w-3xl">
-        <div className="card flex flex-col gap-6 p-8 md:flex-row md:items-center">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-ink">Not a Beyond Tutors student?</h3>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-4xl font-bold text-ink">£149</span>
-              <span className="text-sm text-ink-subtle">/ year</span>
-            </div>
-            <p className="mt-1 text-sm text-ink-muted">
-              Notenix full access for any student, anywhere. Pay by bank transfer from any country.
-            </p>
-            <ul className="mt-5 space-y-3">
-              {OPEN_FEATURES.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-sm text-ink-muted">
-                  <Check size={16} className="text-brand-600" /> {f}
-                </li>
-              ))}
-            </ul>
+        <div className="card flex flex-col p-8">
+          <h3 className="text-lg font-semibold text-ink">Everyone else</h3>
+          <div className="mt-2 flex items-baseline gap-1">
+            <span className="text-4xl font-bold text-ink">£149</span>
+            <span className="text-sm text-ink-subtle">/ year</span>
           </div>
-          <Button href="/revision/checkout" variant="secondary" className="md:w-48">Pay £149</Button>
+          <p className="mt-1 text-sm text-ink-muted">
+            Notenix full access for any student, anywhere. Pay online by card or bank transfer from any country.
+          </p>
+          <ul className="mt-6 flex-1 space-y-3">
+            {OPEN_FEATURES.map((f) => (
+              <li key={f} className="flex items-center gap-2 text-sm text-ink-muted">
+                <Check size={16} className="text-brand-600" /> {f}
+              </li>
+            ))}
+          </ul>
+          <Button href="/revision/checkout" variant="secondary" className="mt-8 w-full">Pay £149</Button>
         </div>
       </div>
 

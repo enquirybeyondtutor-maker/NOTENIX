@@ -165,6 +165,8 @@ export default function AdminRequestsPage() {
                     </div>
                     <p className="mt-1 text-sm text-ink-muted">
                       {r.student?.full_name} · <a href={`mailto:${r.student?.email}`} className="text-brand-600">{r.student?.email}</a>
+                      {r.student?.whatsapp && <> · <a href={`https://wa.me/${r.student.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-emerald-600">WhatsApp +{r.student.whatsapp}</a></>}
+                      {r.student?.free && <span className="ml-1.5 rounded bg-amber-50 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">Free test</span>}
                       {" · "}{formatDate(r.created_at)}{r.preferred_date ? ` · wants it by ${formatDate(r.preferred_date)}` : ""}
                     </p>
                     {r.details && <p className="mt-2 text-sm text-ink">{r.details}</p>}

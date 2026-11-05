@@ -125,7 +125,7 @@ async def register(data: RegisterIn, db: AsyncSession = Depends(get_db)):
         code = await _issue_otp(existing, db)
         return _otp_sent_response(email, code)
 
-    role = data.role if data.role in ("student", "teacher") else "student"
+    role = "student"  # self-sign-up is students only; tutor accounts are created by admins
     user = User(
         email=email,
         password_hash=hash_password(data.password),

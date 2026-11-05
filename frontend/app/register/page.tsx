@@ -2,20 +2,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Mail, Lock, User, ArrowRight, AlertCircle, GraduationCap, PenSquare, Check } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, AlertCircle, Check } from "lucide-react";
 import { authAPI, saveAuth } from "@/lib/api";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Input, Field } from "@/components/ui/Input";
 import { cn, safeReturnTo } from "@/lib/utils";
 import ReturnNote from "@/components/ReturnNote";
-
-type Role = "student" | "teacher";
-
-const ROLES: { id: Role; title: string; desc: string; icon: typeof GraduationCap }[] = [
-  { id: "student", title: "Student", desc: "Practise for your exams & track progress", icon: GraduationCap },
-  { id: "teacher", title: "Teacher", desc: "Create, assign & mark assessments", icon: PenSquare },
-];
 
 // Accounts are issued by Beyond Tutors; set NEXT_PUBLIC_OPEN_SIGNUP=true (and OPEN_SIGNUP on the
 // backend) to bring the self-signup form back.
@@ -46,7 +39,6 @@ function IssuedAccountsNotice() {
 
 function RegisterForm() {
   const router = useRouter();
-  const [role, setRole] = useState<Role>("student");
   const [form, setForm] = useState({ full_name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -65,7 +57,7 @@ function RegisterForm() {
     setLoading(true);
     setError("");
     try {
-      await authAPI.register({ ...form, role });
+      await authAPI.register({ ...form, role: "student" }); // Notenix sign-up is for students only
       // Account created but unverified — a code was emailed. Go enter it.
       const qs = new URLSearchParams({ email: form.email.toLowerCase(), sent: "1" });
       if (returnTo) qs.set("returnTo", returnTo);
@@ -78,9 +70,7 @@ function RegisterForm() {
   };
 
   const perks =
-    role === "teacher"
-      ? ["AI-generated, board-aligned questions", "Assign to whole classes in a click", "Automatic marking & cohort analytics", "No credit card required"]
-      : ["Free practice questions for your exam", "Instant marks and worked solutions", "Tests from your tutor or teacher in one place", "No card needed to start"];
+    ["Free practice questions for your exam", "Instant marks and worked solutions", "All your tests from your tutor in one place", "No card needed to start"];
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
@@ -120,33 +110,6 @@ function RegisterForm() {
           <h1 className="text-2xl font-bold text-ink">Create your account</h1>
           <p className="mt-1.5 text-sm text-ink-muted">Free to start — no card required. We&apos;ll email you a code to confirm your address.</p>
           <ReturnNote returnTo={returnTo} />
-
-          {/* Role picker */}
-          <div className="mt-6">
-            <label className="mb-2 block text-sm font-medium text-ink">I am a…</label>
-            <div className="grid grid-cols-2 gap-3">
-              {ROLES.map((r) => {
-                const active = role === r.id;
-                return (
-                  <button
-                    key={r.id}
-                    type="button"
-                    onClick={() => setRole(r.id)}
-                    className={cn(
-                      "rounded-xl border p-3 text-left transition-all",
-                      active ? "border-brand-500 bg-brand-50/60 ring-2 ring-brand-600/15" : "border-line bg-white hover:border-brand-300"
-                    )}
-                  >
-                    <span className={cn("grid h-8 w-8 place-items-center rounded-lg", active ? "bg-brand-600 text-white" : "bg-slate-100 text-ink-muted")}>
-                      <r.icon size={16} />
-                    </span>
-                    <div className="mt-2 text-sm font-semibold text-ink">{r.title}</div>
-                    <div className="text-xs leading-snug text-ink-subtle">{r.desc}</div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
 
           {error && (
             <div className="mt-5 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">

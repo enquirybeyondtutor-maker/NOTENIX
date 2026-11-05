@@ -4,9 +4,9 @@ import { SITE } from "@/lib/site";
 import RequestForm from "@/components/RequestForm";
 
 export const metadata: Metadata = {
-  title: "Request a Tutor-Marked Mock Test (SAT, ESAT, TMUA, JEE, NEET, CBSE…)",
+  title: "Request a Tutor-Marked Mock Test (SAT, ESAT, TMUA, GCSE, A-Level, HSC, NCEA…)",
   description:
-    "Request a full practice test for SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, CBSE, ICSE, JEE or NEET. Sit it online under timed conditions and get it marked by real tutors with feedback.",
+    "Request a full practice test for SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, HSC, VCE, QCE, WACE or NCEA. Sit it online under timed conditions and get it marked by real tutors with feedback.",
   alternates: { canonical: `${SITE}/request` },
 };
 
@@ -44,7 +44,7 @@ export default function RequestPage() {
             ))}
           </ol>
           <ul className="mt-8 space-y-2 border-t border-line pt-6">
-            {["Original questions written by tutors", "Instant marks for multiple-choice", "Written answers marked by hand", "Pay from any country"].map((x) => (
+            {["Original questions written by tutors", "Instant marks for multiple-choice", "Written answers marked by hand", "First test free for every student"].map((x) => (
               <li key={x} className="flex items-center gap-2 text-sm text-ink-muted">
                 <CheckCircle2 size={15} className="text-emerald-600" /> {x}
               </li>

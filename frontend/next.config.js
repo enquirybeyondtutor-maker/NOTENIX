@@ -2,6 +2,10 @@
 const BACKEND = process.env.BACKEND_URL || "https://notenix.onrender.com";
 
 const nextConfig = {
+  async redirects() {
+    // India exam pages were removed (Nov 2026); send old links and search results home.
+    return ["jee", "neet", "cbse", "icse"].map((s) => ({ source: `/${s}`, destination: "/", permanent: true }));
+  },
   async rewrites() {
     // Same-origin proxy: browser calls /api/* on notenix.com, Next forwards to Render.
     // This eliminates CORS entirely.

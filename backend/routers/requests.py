@@ -1,6 +1,7 @@
 """Request-a-test service: a student asks for a test, the team assigns one from the
 library, the student sits it and the team marks it (written answers go to /marking)."""
 import asyncio
+import re
 from datetime import datetime
 from html import escape
 
@@ -12,14 +13,22 @@ from sqlalchemy import select
 from config import settings
 from database import get_db
 from models import User, Test, TestAssignment, TestAttempt, TestRequest, Payment
-from security import get_current_user, require_admin
+from security import get_current_user, require_admin, hash_password, create_token, is_free_account
 from services.email import send_assignment_email, send_notice, notify_admins
 from routers.payments import reference_for
 
 router = APIRouter(prefix="/requests", tags=["requests"])
 
-EXAMS = {"SAT", "ESAT", "TMUA", "TARA", "GCSE", "IGCSE", "A-Level", "CBSE", "ICSE", "JEE", "NEET", "Other"}
+EXAMS = {"SAT", "ESAT", "TMUA", "TARA", "GCSE", "IGCSE", "A-Level", "HSC", "VCE", "QCE", "WACE", "NCEA",
+         "CBSE", "ICSE", "JEE", "NEET", "Other"}  # CBSE…NEET kept for old requests
 OPEN_LIMIT = 5  # unfinished requests a student may have at once
+FREE_LIMIT = 1  # requests a free (non-subscriber) account may make in total
+SUBSCRIBE_MSG = ("You've used your free test. Subscribe to Notenix (£149 a year) to request more "
+                 "tests, or join Beyond Tutors, where Notenix is included.")
+
+
+def _digits(phone: str | None) -> str:
+    return re.sub(r"\D", "", phone or "")[:20]
 
 
 def _progress(assignment: TestAssignment | None, attempt: TestAttempt | None) -> str | None:
@@ -74,7 +83,8 @@ async def _rows(db: AsyncSession, reqs: list[TestRequest], with_student: bool = 
         }
         if with_student and r.student_id in students:
             s = students[r.student_id]
-            row["student"] = {"id": s.id, "email": s.email, "full_name": s.full_name}
+            row["student"] = {"id": s.id, "email": s.email, "full_name": s.full_name,
+                              "whatsapp": getattr(s, "phone", None), "free": is_free_account(s)}
         out.append(row)
     return out
 
@@ -97,6 +107,11 @@ async def config():
 async def create(data: RequestIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     if data.exam not in EXAMS:
         raise HTTPException(400, "Please choose an exam from the list.")
+    if is_free_account(user):
+        used = len((await db.execute(select(TestRequest.id).where(
+            TestRequest.student_id == user.id, TestRequest.status != "cancelled"))).all())
+        if used >= FREE_LIMIT:
+            raise HTTPException(402, SUBSCRIBE_MSG)
     open_count = len((await db.execute(select(TestRequest.id).where(
         TestRequest.student_id == user.id,
         TestRequest.status.in_(["awaiting_payment", "payment_claimed", "open"])))).all())
@@ -123,6 +138,61 @@ async def create(data: RequestIn, user: User = Depends(get_current_user), db: As
         "/admin/requests",
     )
     return (await _rows(db, [req]))[0]
+
+
+class GuestRequestIn(RequestIn):
+    full_name: str
+    email: str
+    whatsapp: str
+    password: str
+
+
+@router.post("/guest")
+async def create_guest(data: GuestRequestIn, db: AsyncSession = Depends(get_db)):
+    """Free test request from a visitor without an account. Creates a free student account
+    (so they can sit the test we send) and the request. One free test per email and per
+    WhatsApp number; after that they need a subscription."""
+    if data.exam not in EXAMS:
+        raise HTTPException(400, "Please choose an exam from the list.")
+    email = data.email.strip().lower()
+    phone = _digits(data.whatsapp)
+    name = data.full_name.strip()[:120]
+    if not name or "@" not in email or "." not in email.split("@")[-1]:
+        raise HTTPException(400, "Enter the student's name and a valid email.")
+    if len(phone) < 8:
+        raise HTTPException(400, "Enter a WhatsApp number with the country code, e.g. +61 412 345 678.")
+    if len(data.password) < 8:
+        raise HTTPException(400, "Choose a password of at least 8 characters.")
+    if (await db.execute(select(User.id).where(User.email == email))).first():
+        raise HTTPException(409, "That email already has a Notenix account. Sign in to request a test.")
+    if (await db.execute(select(User.id).where(User.phone == phone))).first():
+        raise HTTPException(409, "This WhatsApp number has already had a free test. Sign in, or subscribe to request more.")
+
+    user = User(email=email, full_name=name, password_hash=hash_password(data.password),
+                role="student", is_verified=True, phone=phone, last_active=datetime.utcnow())
+    user.access_kind, user.access_until = "free", None
+    db.add(user)
+    await db.flush()
+    req = TestRequest(
+        student_id=user.id, exam=data.exam,
+        subject=(data.subject or "").strip()[:120] or None,
+        details=(data.details or "").strip()[:2000] or None,
+        preferred_date=data.preferred_date, status="open", price=0.0, currency=settings.price_currency,
+    )
+    db.add(req)
+    await db.commit()
+    await db.refresh(user)
+    await db.refresh(req)
+
+    await notify_admins(
+        f"Free test request #{req.id}: {req.exam}",
+        f"{name} ({email}, WhatsApp +{phone}) requested a free {req.exam} test"
+        f"{' in ' + req.subject if req.subject else ''}. Details: {req.details or '-'}",
+        "/admin/requests",
+    )
+    from routers.auth import _user_dict
+    return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer",
+            "user": _user_dict(user), "request": (await _rows(db, [req]))[0]}
 
 
 @router.get("/mine")

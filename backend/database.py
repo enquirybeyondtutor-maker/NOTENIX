@@ -112,6 +112,7 @@ async def run_migrations():
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS pro_until TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS access_until TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS access_kind VARCHAR(20)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS token_version INTEGER DEFAULT 0"))
             await conn.execute(text("UPDATE users SET token_version = 0 WHERE token_version IS NULL"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS mode VARCHAR(20) DEFAULT 'mcq'"))
@@ -161,7 +162,7 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE users ADD COLUMN name_changed_at TIMESTAMP"))
             if "pro_until" not in cols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN pro_until TIMESTAMP"))
-            for col, ddl in [("access_until", "TIMESTAMP"), ("access_kind", "VARCHAR(20)"),
+            for col, ddl in [("access_until", "TIMESTAMP"), ("access_kind", "VARCHAR(20)"), ("phone", "VARCHAR(20)"),
                              ("token_version", "INTEGER DEFAULT 0")]:
                 if col not in cols:
                     await conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {ddl}"))

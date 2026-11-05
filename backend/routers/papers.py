@@ -10,7 +10,8 @@ from pathlib import Path
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse
 from models import User
-from security import get_current_user
+from fastapi import HTTPException
+from security import get_current_user, is_free_account
 
 router = APIRouter(tags=["papers"])
 
@@ -47,5 +48,7 @@ async def paper_preview(slug: str):
 
 @router.get("/papers/{slug}/pages/{n}")
 async def paper_page(slug: str, n: int, user: User = Depends(get_current_user)):
+    if is_free_account(user):
+        raise HTTPException(402, "Revision resources need a Notenix subscription.")
     folder, meta = _paper(slug)
     return _page(folder, meta, n, private=True)

@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 
 const SUBJECTS = ["maths", "biology", "chemistry", "physics", "computer_science", "economics", "english_literature", "geography", "history", "psychology", "business"];
 const BOARDS = ["AQA", "Edexcel", "OCR", "Cambridge", "WJEC", "CCEA"];
-const LEVELS = ["GCSE", "A-Level", "IGCSE", "SAT", "ESAT", "TMUA", "TARA", "CBSE", "ICSE", "JEE", "NEET"];
+const LEVELS = ["GCSE", "A-Level", "IGCSE", "SAT", "ESAT", "TMUA", "TARA", "HSC", "VCE", "QCE", "WACE", "NCEA", "CBSE", "ICSE", "JEE", "NEET"];
 const DIFFICULTIES = ["easy", "medium", "hard"];
 
 type Mode = "ai" | "manual" | "pdf" | "photo";

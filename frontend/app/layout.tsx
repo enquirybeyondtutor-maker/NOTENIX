@@ -13,15 +13,15 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-6NVHXT86PC"; // GA4 Measuremen
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Notenix: Free Practice Tests Marked by Tutors (SAT, ESAT, TMUA, IGCSE, JEE, NEET)",
+    default: "Notenix: Free Practice Tests Marked by Tutors (SAT, ESAT, TMUA, IGCSE, GCSE, A-Level)",
     template: "%s | Notenix",
   },
   description:
-    "Free practice tests for SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, CBSE, ICSE, JEE and NEET. Sit timed mocks online, get instant marking, or request a full mock marked by real tutors. Students anywhere can start free.",
+    "Free practice tests for SAT, ESAT, TMUA, GCSE, IGCSE, A-Level, HSC, VCE, QCE, WACE and NCEA. Sit timed mocks online, get instant marking, or request a full mock marked by real tutors. Students anywhere can start free.",
   keywords: [
     "Notenix", "notenix", "SAT practice test", "digital SAT practice", "free SAT mock", "ESAT practice",
-    "ESAT mock test", "TMUA practice", "TMUA mock", "IGCSE practice test", "JEE Main mock test",
-    "NEET mock test", "CBSE practice test", "ICSE practice test", "GCSE quiz", "A-Level quiz", "past papers", "GCSE revision",
+    "ESAT mock test", "TMUA practice", "TMUA mock", "IGCSE practice test", "HSC practice test", "VCE practice exam", "QCE practice exam", "WACE practice exam", "NCEA practice exam",
+    "GCSE quiz", "A-Level quiz", "past papers", "GCSE revision",
     "A-Level revision", "exam practice", "AQA", "Edexcel", "OCR", "GCSE past papers",
     "A-Level past papers", "online quiz platform", "Beyond Groups", "Beyond Tutors",
   ],
@@ -59,7 +59,7 @@ const jsonLd = {
       "@id": `${SITE}/#org`,
       name: "Notenix",
       url: SITE,
-      description: "Online practice-test platform for SAT, ESAT, TMUA, GCSE, A-Level, IGCSE, CBSE, ICSE, JEE and NEET, with mocks marked by tutors from Beyond Tutors.",
+      description: "Online practice-test platform for SAT, ESAT, TMUA, GCSE, A-Level, IGCSE, HSC, VCE, QCE, WACE and NCEA, with mocks marked by tutors from Beyond Tutors.",
       logo: `${SITE}/icon.svg`,
       email: "hello@notenix.com",
       contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: "hello@notenix.com" },

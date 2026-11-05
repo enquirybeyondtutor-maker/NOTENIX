@@ -12,7 +12,7 @@ from sqlalchemy import select
 from config import settings
 from database import get_db
 from models import User, Payment, TestRequest
-from security import get_current_user, require_admin, hash_password
+from security import get_current_user, require_admin, hash_password, verify_password
 from services.email import send_notice, notify_admins
 
 router = APIRouter(prefix="/payments", tags=["payments"])
@@ -168,13 +168,17 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     email = data.email.strip().lower()
     if "@" not in email or len(data.password) < 8 or not data.full_name.strip():
         raise HTTPException(400, "Enter your name, a valid email and a password of at least 8 characters.")
-    if (await db.execute(select(User).where(User.email == email))).scalar_one_or_none():
-        raise HTTPException(400, "That email already has a Notenix account. Sign in instead.")
     now = datetime.utcnow()
-    user = User(email=email, full_name=data.full_name.strip()[:120], password_hash=hash_password(data.password),
-                role="student", is_verified=True)
+    user = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
+    if user:
+        # A free test-request account upgrading: same email and password, keep their history.
+        if getattr(user, "access_kind", None) != "free" or not verify_password(data.password, user.password_hash):
+            raise HTTPException(400, "That email already has a Notenix account. Use its password, or sign in instead.")
+    else:
+        user = User(email=email, full_name=data.full_name.strip()[:120], password_hash=hash_password(data.password),
+                    role="student", is_verified=True)
+        db.add(user)
     user.access_kind, user.access_until = "pending", now  # locked until the payment is confirmed
-    db.add(user)
     await db.flush()
     p = Payment(
         user_id=user.id, purpose="revision", reference=f"NX-V{user.id}",

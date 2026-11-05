@@ -28,6 +28,12 @@ def create_token(user_id: int, version: int = 0) -> str:
     return jwt.encode({"sub": str(user_id), "v": version, "exp": expire}, settings.secret_key, algorithm=ALGORITHM)
 
 
+def is_free_account(user: User) -> bool:
+    """A visitor who signed up through the free test-request form: they can sit the test
+    we send them, but not use the paid revision library or request more tests."""
+    return getattr(user, "access_kind", None) == "free" and _role(user) == "student" and not is_admin(user)
+
+
 def access_ended_message(user: User) -> str | None:
     """Why a student can no longer use Notenix, or None while their access is live.
     Staff and accounts with no access_until are never blocked."""

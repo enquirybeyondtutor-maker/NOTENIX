@@ -9,10 +9,11 @@
 - [GCSE Maths practice](https://www.notenix.com/gcse-maths): AQA, Edexcel and OCR tests with a 9–1 grade estimate.
 - [A-Level Maths practice](https://www.notenix.com/a-level-maths): Pure, Statistics and Mechanics tests with an A*–E estimate.
 - [IGCSE practice](https://www.notenix.com/igcse): Cambridge and Pearson Edexcel International GCSE.
-- [CBSE practice](https://www.notenix.com/cbse): NCERT-based Class 10 and 12 tests.
-- [ICSE practice](https://www.notenix.com/icse): ICSE Class 10 and ISC Class 12 tests.
-- [JEE practice](https://www.notenix.com/jee): JEE Main style Physics, Chemistry and Maths mocks with numerical questions.
-- [NEET practice](https://www.notenix.com/neet): NEET-UG style Physics, Chemistry and Biology MCQs.
+- [HSC practice](https://www.notenix.com/hsc): NSW HSC Mathematics Advanced, Extension 1 and 2 practice.
+- [VCE practice](https://www.notenix.com/vce): Victorian VCE Methods and Specialist, tech-free and CAS-style.
+- [QCE practice](https://www.notenix.com/qce): Queensland QCE Methods and Specialist, internal and external assessment.
+- [WACE practice](https://www.notenix.com/wace): WA ATAR Methods and Specialist, calculator-free and calculator-assumed.
+- [NCEA practice](https://www.notenix.com/ncea): New Zealand NCEA Level 2 Maths and Level 3 Calculus.
 
 ## How it works
 - [Request a tutor-marked test](https://www.notenix.com/request): a student requests a test, the Notenix team assigns it, the student sits it online, and a tutor marks it with feedback.

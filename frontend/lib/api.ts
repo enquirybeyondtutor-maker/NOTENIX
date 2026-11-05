@@ -169,6 +169,9 @@ export const requestsAPI = {
   config: () => api.get("/requests/config"),
   create: (data: { exam: string; subject?: string; details?: string; preferred_date?: string | null }) =>
     api.post("/requests", data),
+  guest: (data: { full_name: string; email: string; whatsapp: string; password: string; exam: string;
+                  subject?: string; details?: string; preferred_date?: string | null }) =>
+    api.post("/requests/guest", data),
   mine: () => api.get("/requests/mine"),
   cancel: (id: number) => api.post(`/requests/${id}/cancel`),
   adminList: () => api.get("/requests/admin"),

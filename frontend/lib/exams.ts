@@ -2,6 +2,8 @@
 // free sample questions students can try without an account. All questions are
 // original — never copy College Board / UAT-UK / exam-board papers.
 
+import { AU_NZ_EXAMS } from "./examsAuNz";
+
 export interface SampleQuestion {
   question: string;
   options?: string[];     // omitted = type-in numeric answer (SAT-style grid-in)
@@ -428,262 +430,7 @@ export const EXAMS: Exam[] = [
       { q: "Can students in India, the Middle East or Asia use Notenix?", a: "Yes. Notenix works anywhere, and you can pay for tutor-marked mocks from any country." },
     ],
   },
-  {
-    slug: "cbse",
-    name: "CBSE",
-    fullName: "CBSE Class 10 & 12 Board Exams",
-    title: "CBSE Class 10 & 12 Practice Tests & Sample Papers Online",
-    description:
-      "CBSE board exam practice for Class 10 and Class 12: NCERT-based Maths and Science tests, competency-based questions, instant marking and tutor-marked sample papers.",
-    keywords: ["CBSE practice test", "CBSE class 10 sample paper", "CBSE class 12 practice", "CBSE maths test online", "CBSE science MCQ", "NCERT practice questions"],
-    tagline: "NCERT-based CBSE practice with instant marking and tutor feedback.",
-    intro:
-      "CBSE board exams in Class 10 and Class 12 follow the NCERT syllabus and increasingly include competency-based questions such as case studies and assertion–reason. Notenix lets you sit timed CBSE-style tests and get long answers marked by tutors.",
-    facts: [
-      { label: "Classes", value: "10 · 12" },
-      { label: "Syllabus", value: "NCERT-based" },
-      { label: "Typical paper", value: "80 marks · 3 hours" },
-      { label: "Internal", value: "20 marks (most subjects)" },
-    ],
-    format: [
-      "Most subjects have an 80-mark theory paper plus 20 marks of internal assessment.",
-      "Papers mix MCQs, assertion–reason, case-based and long-answer questions.",
-      "Questions follow the NCERT textbooks closely.",
-    ],
-    howWeHelp: [
-      "Chapter-wise tests and full sample papers for Maths and Science.",
-      "Instant marking for MCQs and numeric answers.",
-      "Long answers marked by tutors, step marking included.",
-    ],
-    samples: [
-      {
-        question: "What is the HCF of 12 and 18?",
-        answer: "6",
-        explanation: "$12 = 2^2 \\times 3$ and $18 = 2 \\times 3^2$, so HCF $= 2 \\times 3 = 6$.",
-      },
-      {
-        question: "Which of the following is a chemical change?",
-        options: ["Melting of ice", "Rusting of iron", "Dissolving salt in water", "Boiling of water"],
-        answer: "Rusting of iron",
-        explanation: "Rusting forms a new substance (hydrated iron oxide). The others are physical changes.",
-      },
-      {
-        question: "Find the sum of the first 20 natural numbers.",
-        answer: "210",
-        explanation: "$S = \\dfrac{n(n+1)}{2} = \\dfrac{20 \\times 21}{2} = 210$.",
-      },
-      {
-        question: "If $\\sin\\theta = \\tfrac{3}{5}$ and $\\theta$ is acute, what is $\\cos\\theta$?",
-        options: ["$\\tfrac{3}{4}$", "$\\tfrac{4}{5}$", "$\\tfrac{5}{4}$", "$\\tfrac{5}{3}$"],
-        answer: "$\\tfrac{4}{5}$",
-        explanation: "$\\cos\\theta = \\sqrt{1 - \\tfrac{9}{25}} = \\tfrac{4}{5}$.",
-      },
-      {
-        question: "A concave mirror has a radius of curvature of 20 cm. What is its focal length?",
-        options: ["5 cm", "10 cm", "20 cm", "40 cm"],
-        answer: "10 cm",
-        explanation: "$f = \\dfrac{R}{2} = \\dfrac{20}{2} = 10$ cm.",
-      },
-    ],
-    faqs: [
-      { q: "Is Notenix CBSE practice based on NCERT?", a: "Yes. Our CBSE tests follow the NCERT syllabus and the current question styles, including case-based and assertion–reason questions." },
-      { q: "Can a teacher mark my CBSE long answers?", a: "Yes. Request a test and our tutors will mark your written answers with step marks and feedback." },
-      { q: "Is it free?", a: "You can try sample questions on this page for free and create a free account to practise." },
-    ],
-  },
-  {
-    slug: "icse",
-    name: "ICSE",
-    fullName: "ICSE & ISC Board Exams",
-    title: "ICSE Class 10 & ISC Class 12 Practice Tests Online",
-    description:
-      "ICSE and ISC exam practice: Class 10 and Class 12 Maths, Physics, Chemistry and Biology tests, instant marking and tutor-marked mock papers.",
-    keywords: ["ICSE practice test", "ICSE class 10 maths practice", "ISC class 12 practice", "ICSE sample paper online", "ICSE physics questions", "CISCE mock test"],
-    tagline: "ICSE and ISC practice papers with tutor marking.",
-    intro:
-      "The ICSE (Class 10) and ISC (Class 12) exams are run by CISCE and are known for detailed, application-heavy questions. Notenix gives you timed practice and tutor marking so you learn how to present full working.",
-    facts: [
-      { label: "Board", value: "CISCE" },
-      { label: "Classes", value: "ICSE 10 · ISC 12" },
-      { label: "Typical paper", value: "80 marks written" },
-      { label: "Internal", value: "20 marks (most subjects)" },
-    ],
-    format: [
-      "Most subjects have an 80-mark written paper plus 20 marks of internal assessment.",
-      "Papers usually have a compulsory section and a choice of longer questions.",
-      "Clear working is rewarded, especially in Maths and the sciences.",
-    ],
-    howWeHelp: [
-      "Chapter tests and full papers for Maths and the sciences.",
-      "Instant marking for objective and numeric questions.",
-      "Tutors mark your working, not just your final answer.",
-    ],
-    samples: [
-      {
-        question: "Find the simple interest on ₹5000 at 8% per annum for 3 years, in rupees.",
-        answer: "1200",
-        explanation: "$SI = \\dfrac{P \\times R \\times T}{100} = \\dfrac{5000 \\times 8 \\times 3}{100} = 1200$.",
-      },
-      {
-        question: "Factorise $x^2 - 9$.",
-        options: ["$(x - 9)(x + 1)$", "$(x - 3)^2$", "$(x - 3)(x + 3)$", "$(x + 9)(x - 1)$"],
-        answer: "$(x - 3)(x + 3)$",
-        explanation: "Difference of two squares: $a^2 - b^2 = (a - b)(a + b)$.",
-      },
-      {
-        question: "What is the SI unit of force?",
-        options: ["Joule", "Newton", "Watt", "Pascal"],
-        answer: "Newton",
-        explanation: "Force is measured in newtons: $1\\ \\text{N} = 1\\ \\text{kg m s}^{-2}$.",
-      },
-      {
-        question: "What is the valency of oxygen in water, $\\text{H}_2\\text{O}$?",
-        options: ["1", "2", "3", "4"],
-        answer: "2",
-        explanation: "Oxygen forms two bonds, one with each hydrogen atom.",
-      },
-      {
-        question: "Evaluate $(\\sqrt{3})^4$.",
-        answer: "9",
-        explanation: "$(\\sqrt{3})^4 = \\left((\\sqrt{3})^2\\right)^2 = 3^2 = 9$.",
-      },
-    ],
-    faqs: [
-      { q: "Does Notenix cover both ICSE and ISC?", a: "Yes. You can request Class 10 (ICSE) or Class 12 (ISC) tests." },
-      { q: "Will tutors check my working?", a: "Yes. For tutor-marked tests, marks are awarded for method as well as the final answer." },
-      { q: "Can I try it for free?", a: "Yes. Try the sample questions on this page, then create a free account." },
-    ],
-  },
-  {
-    slug: "jee",
-    name: "JEE",
-    fullName: "JEE Main & Advanced",
-    title: "JEE Main Mock Tests & Practice Questions (Physics, Chemistry, Maths)",
-    description:
-      "JEE Main and Advanced practice online: timed Physics, Chemistry and Maths mock tests with MCQ and numerical questions, +4/−1 marking, instant scoring and tutor review.",
-    keywords: ["JEE Main mock test", "JEE practice questions", "JEE Main free mock test", "JEE maths practice", "JEE physics MCQ", "JEE Advanced practice"],
-    tagline: "JEE-style mocks with MCQ and numerical questions under real timing.",
-    intro:
-      "JEE Main is the national engineering entrance exam in India, conducted by NTA, and the route to JEE Advanced for IIT admission. Speed and accuracy under negative marking decide your rank. Notenix mocks train both.",
-    facts: [
-      { label: "Subjects", value: "Physics · Chemistry · Maths" },
-      { label: "JEE Main Paper 1", value: "75 questions · 300 marks" },
-      { label: "Time", value: "3 hours" },
-      { label: "Marking", value: "+4 correct · −1 wrong (MCQ)" },
-    ],
-    format: [
-      "JEE Main Paper 1 (B.E./B.Tech): 25 questions each in Physics, Chemistry and Maths.",
-      "Each subject has multiple-choice questions and numerical-value questions.",
-      "Held in two sessions a year; your best score counts.",
-      "Top JEE Main performers qualify to sit JEE Advanced for the IITs.",
-    ],
-    howWeHelp: [
-      "Chapter tests and full-length JEE Main mocks.",
-      "Numerical-value (type-in) questions, not just MCQs.",
-      "Per-question timing to find where you lose minutes.",
-      "Tutor review with a chapter-wise improvement plan.",
-    ],
-    samples: [
-      {
-        question: "The roots of $x^2 - kx + 9 = 0$ are equal. Find the positive value of $k$.",
-        answer: "6",
-        explanation: "Equal roots need discriminant $k^2 - 36 = 0$, so $k = 6$ (positive value).",
-      },
-      {
-        question: "Evaluate $\\displaystyle\\int_0^{\\pi/2} \\sin^2 x\\,dx$.",
-        options: ["$\\tfrac{1}{2}$", "$\\tfrac{\\pi}{4}$", "$\\tfrac{\\pi}{2}$", "$\\pi$"],
-        answer: "$\\tfrac{\\pi}{4}$",
-        explanation: "$\\sin^2 x = \\tfrac{1 - \\cos 2x}{2}$, so the integral is $\\left[\\tfrac{x}{2} - \\tfrac{\\sin 2x}{4}\\right]_0^{\\pi/2} = \\tfrac{\\pi}{4}$.",
-      },
-      {
-        question: "A ball is thrown vertically upwards at $20\\ \\text{m s}^{-1}$. Taking $g = 10\\ \\text{m s}^{-2}$, what is its maximum height?",
-        options: ["10 m", "20 m", "40 m", "200 m"],
-        answer: "20 m",
-        explanation: "$h = \\dfrac{u^2}{2g} = \\dfrac{400}{20} = 20$ m.",
-      },
-      {
-        question: "What is the hybridisation of each carbon atom in ethyne, $\\text{C}_2\\text{H}_2$?",
-        options: ["$sp$", "$sp^2$", "$sp^3$", "$sp^3d$"],
-        answer: "$sp$",
-        explanation: "Each carbon forms a triple bond and one single bond in a linear arrangement: $sp$ hybridised.",
-      },
-      {
-        question: "In how many distinct ways can the letters of the word LEVEL be arranged?",
-        answer: "30",
-        explanation: "5 letters with L and E each repeated twice: $\\dfrac{5!}{2!\\,2!} = 30$.",
-      },
-    ],
-    faqs: [
-      { q: "Are the Notenix JEE mocks based on the latest pattern?", a: "Yes. Mocks follow the JEE Main Paper 1 structure, with MCQs and numerical-value questions in each subject." },
-      { q: "Does Notenix use negative marking?", a: "Our JEE mocks report your score with +4/−1 marking on MCQs so you can practise exam strategy." },
-      { q: "Can a tutor review my JEE mock?", a: "Yes. Request a mock and a tutor will review your attempt and suggest which chapters to focus on." },
-    ],
-  },
-  {
-    slug: "neet",
-    name: "NEET",
-    fullName: "NEET-UG",
-    title: "NEET Mock Tests & Practice MCQs (Physics, Chemistry, Biology)",
-    description:
-      "NEET-UG practice online: timed Physics, Chemistry and Biology mock tests, NCERT-based MCQs, +4/−1 scoring and tutor review for medical aspirants.",
-    keywords: ["NEET mock test", "NEET practice questions", "NEET free mock test online", "NEET biology MCQ", "NEET physics practice", "NEET chemistry MCQ"],
-    tagline: "NCERT-based NEET MCQs under real exam timing.",
-    intro:
-      "NEET-UG is the national medical entrance exam in India, conducted by NTA, for MBBS, BDS and other medical courses. It is a long, fast MCQ paper where Biology carries half the marks. Notenix helps you build speed and accuracy.",
-    facts: [
-      { label: "Subjects", value: "Physics · Chemistry · Biology" },
-      { label: "Questions", value: "180 · 720 marks" },
-      { label: "Time", value: "3 hours" },
-      { label: "Marking", value: "+4 correct · −1 wrong" },
-    ],
-    format: [
-      "Physics and Chemistry: 45 questions each. Biology (Botany and Zoology): 90 questions.",
-      "All questions are multiple choice, with negative marking.",
-      "The syllabus is closely based on NCERT Class 11 and 12 textbooks.",
-    ],
-    howWeHelp: [
-      "Chapter-wise NCERT-based tests and full-length mocks.",
-      "+4/−1 scoring so you practise guess strategy.",
-      "Per-question timing and topic breakdowns.",
-      "Tutor review with a revision plan.",
-    ],
-    samples: [
-      {
-        question: "Which organelle is known as the powerhouse of the cell?",
-        options: ["Ribosome", "Golgi apparatus", "Mitochondrion", "Lysosome"],
-        answer: "Mitochondrion",
-        explanation: "Mitochondria carry out aerobic respiration and produce most of the cell's ATP.",
-      },
-      {
-        question: "In DNA, adenine always pairs with which base?",
-        options: ["Guanine", "Cytosine", "Uracil", "Thymine"],
-        answer: "Thymine",
-        explanation: "A pairs with T (two hydrogen bonds) and G pairs with C. Uracil replaces thymine only in RNA.",
-      },
-      {
-        question: "What is the pH of a $0.01\\ \\text{M}$ HCl solution?",
-        options: ["1", "2", "12", "0.01"],
-        answer: "2",
-        explanation: "HCl is a strong acid, so $[\\text{H}^+] = 10^{-2}$ M and $\\text{pH} = 2$.",
-      },
-      {
-        question: "A 2 kg body moves at $3\\ \\text{m s}^{-1}$. What is its kinetic energy, in joules?",
-        answer: "9",
-        explanation: "$KE = \\tfrac12 m v^2 = \\tfrac12 \\times 2 \\times 9 = 9$ J.",
-      },
-      {
-        question: "Which blood group is known as the universal donor?",
-        options: ["AB positive", "O negative", "A positive", "B negative"],
-        answer: "O negative",
-        explanation: "O negative red cells carry no A, B or Rh(D) antigens, so they can be given in emergencies to most recipients.",
-      },
-    ],
-    faqs: [
-      { q: "Are Notenix NEET questions NCERT-based?", a: "Yes. Our NEET questions follow the NCERT Class 11 and 12 syllabus that the exam is based on." },
-      { q: "Does Notenix use NEET marking?", a: "Our NEET mocks report your score with +4 for correct and −1 for wrong answers." },
-      { q: "Can I request a full NEET mock?", a: "Yes. Request a test and our team will assign a full mock and review your attempt." },
-    ],
-  },
+  ...AU_NZ_EXAMS,
 ];
 
 export const EXAM_BY_SLUG: Record<string, Exam> = Object.fromEntries(EXAMS.map((e) => [e.slug, e]));
@@ -697,10 +444,11 @@ const REQUEST_FOR_SLUG: Record<string, { exam: string; subject?: string }> = {
   "gcse-maths": { exam: "GCSE", subject: "Maths" },
   "a-level-maths": { exam: "A-Level", subject: "Maths" },
   igcse: { exam: "IGCSE" },
-  cbse: { exam: "CBSE" },
-  icse: { exam: "ICSE" },
-  jee: { exam: "JEE" },
-  neet: { exam: "NEET" },
+  hsc: { exam: "HSC" },
+  vce: { exam: "VCE" },
+  qce: { exam: "QCE" },
+  wace: { exam: "WACE" },
+  ncea: { exam: "NCEA" },
 };
 
 export function requestHref(slug: string): string {

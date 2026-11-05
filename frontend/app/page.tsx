@@ -25,30 +25,21 @@ export const metadata: Metadata = {
 };
 
 const REQUEST_STEPS = [
-  { icon: Send, title: "Request a test", desc: "Pick your exam: SAT, ESAT, TMUA, IGCSE, JEE, NEET, CBSE and more." },
+  { icon: Send, title: "Request a test", desc: "Pick your exam: SAT, ESAT, TMUA, GCSE, A-Level, HSC, VCE, NCEA and more." },
   { icon: ClipboardList, title: "We send it", desc: "A tutor chooses a full mock that fits and it lands in your account." },
   { icon: GraduationCap, title: "Sit it online", desc: "Timed, exam-style, on any device, from anywhere." },
   { icon: UserCheck, title: "A tutor marks it", desc: "Your score, written feedback and exactly what to work on next." },
 ];
 
-const FEATURES = [
-  { icon: PenSquare, title: "Build tests in minutes", desc: "Assemble board-aligned assessments by hand or let AI draft questions from any topic and specification." },
-  { icon: Users, title: "Assign to classes", desc: "Push a test to a whole class or individual students with a deadline. Everyone sees exactly what's due." },
-  { icon: ShieldCheck, title: "Controlled conditions", desc: "Timed sittings, single-attempt locks and randomised order keep assessments fair and exam-realistic." },
-  { icon: Brain, title: "Automatic marking", desc: "Responses are graded the moment a student submits, with a GCSE 1–9 or A-Level A*–E estimate." },
-  { icon: BarChart3, title: "Mastery analytics", desc: "See cohort and per-student breakdowns by topic — spot the weak areas before the real exam does." },
-  { icon: Clock, title: "Save hours every week", desc: "No more writing papers or marking by hand. Reclaim the time and give students faster feedback." },
-];
-
 const STEPS = [
-  { n: "01", title: "Create or generate", desc: "A teacher builds a test from scratch or generates questions with AI, aligned to the board and topic.", icon: PenSquare },
-  { n: "02", title: "Assign to students", desc: "Set a deadline and assign to a class. Students see the test appear in their portal instantly.", icon: ClipboardList },
-  { n: "03", title: "Students attempt", desc: "Learners sit the test under controlled conditions, on any device, within the window.", icon: GraduationCap },
-  { n: "04", title: "Track mastery", desc: "AI grades on submit. Teachers get cohort analytics; students get personalised feedback.", icon: BarChart3 },
+  { n: "01", title: "Get your tests", desc: "Your tutor sets homework and timed tests, or you pick practice for your exam.", icon: ClipboardList },
+  { n: "02", title: "Sit them anywhere", desc: "Exam-style, timed, on any device, from wherever you study.", icon: GraduationCap },
+  { n: "03", title: "Get marked fast", desc: "Instant marks and grade estimates, with tutor feedback on full mocks.", icon: UserCheck },
+  { n: "04", title: "Watch your progress", desc: "See your weak topics, track your scores and know exactly what to revise next.", icon: BarChart3 },
 ];
 
 const STATS = [
-  { value: "10", label: "Exams covered" },
+  { value: String(EXAMS.length), label: "Exams covered" },
   { value: "Free", label: "Sample questions" },
   { value: "Tutor", label: "Marked mocks" },
   { value: "Global", label: "Pay from anywhere" },
@@ -63,10 +54,7 @@ export default function LandingPage() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
           <div className="animate-slide-up">
-            <span className="badge-brand">
-              <Sparkles size={13} /> SAT · ESAT · TMUA · IGCSE · JEE · NEET · CBSE
-            </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
               Practice tests,<br className="hidden sm:block" /> marked by real tutors.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
@@ -188,38 +176,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Features ─────────────────────────────────────────── */}
-      <section id="features" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-24">
-        <div className="max-w-2xl">
-          <span className="eyebrow">For teachers and tutors</span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            Run your own classes on Notenix
-          </h2>
-          <p className="mt-4 text-lg text-ink-muted">
-            From setting the paper to reading the analytics — Notenix replaces a stack of tools with
-            one coherent workflow.
-          </p>
-        </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f) => (
-            <div key={f.title} className="card card-hover p-6">
-              <span className="grid h-11 w-11 place-items-center rounded-lg bg-brand-50 text-brand-600">
-                <f.icon size={20} />
-              </span>
-              <h3 className="mt-4 text-base font-semibold text-ink">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── How it works ─────────────────────────────────────── */}
       <section id="how" className="border-y border-line bg-white">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <span className="eyebrow">How it works</span>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Set, sit and score in four steps
+              From practice to progress in four steps
             </h2>
           </div>
           <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -248,42 +211,6 @@ export default function LandingPage() {
               <div className="mt-1 text-sm text-ink-muted">{s.label}</div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── Audience split ───────────────────────────────────── */}
-      <section id="teachers" className="mx-auto max-w-7xl scroll-mt-20 px-4 pb-20 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="card p-8">
-            <span className="grid h-11 w-11 place-items-center rounded-lg bg-brand-50 text-brand-600">
-              <PenSquare size={20} />
-            </span>
-            <h3 className="mt-4 text-xl font-bold text-ink">For teachers</h3>
-            <p className="mt-2 text-ink-muted">Build once, assign to every class, and let the marking take care of itself.</p>
-            <ul className="mt-5 space-y-2.5">
-              {["AI question generation", "Class & student assignment", "Cohort mastery analytics", "Deadline & attempt controls"].map((x) => (
-                <li key={x} className="flex items-center gap-2 text-sm text-ink-muted">
-                  <CheckCircle2 size={16} className="text-brand-600" /> {x}
-                </li>
-              ))}
-            </ul>
-            <Button href="/login" variant="secondary" className="mt-6">Tutor sign in</Button>
-          </div>
-          <div className="card p-8">
-            <span className="grid h-11 w-11 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
-              <GraduationCap size={20} />
-            </span>
-            <h3 className="mt-4 text-xl font-bold text-ink">For students</h3>
-            <p className="mt-2 text-ink-muted">See what's due, sit it anywhere, and get feedback that actually moves your grade.</p>
-            <ul className="mt-5 space-y-2.5">
-              {["One place for all assigned tests", "Instant grade estimates", "Topic-by-topic feedback", "Progress you can watch climb"].map((x) => (
-                <li key={x} className="flex items-center gap-2 text-sm text-ink-muted">
-                  <CheckCircle2 size={16} className="text-emerald-600" /> {x}
-                </li>
-              ))}
-            </ul>
-            <Button href="https://www.thebeyondtutors.com/book" variant="secondary" className="mt-6">Book a free trial class</Button>
-          </div>
         </div>
       </section>
 

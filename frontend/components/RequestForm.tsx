@@ -1,16 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Send, LogIn } from "lucide-react";
-import { requestsAPI, getUser } from "@/lib/api";
+import { Send, Lock } from "lucide-react";
+import { requestsAPI, getUser, saveAuth } from "@/lib/api";
 import { REQUEST_EXAMS } from "@/lib/requestExams";
 import { Button } from "./ui/Button";
 import { Input, Select, Field } from "./ui/Input";
 
 const DRAFT_KEY = "notenix_request_draft";
 
-// The request form works signed-out too: the draft is kept while the student signs up,
-// then restored when they come back to /request.
+// Signed-out visitors get one free test: they leave the student's name, email, WhatsApp and a
+// password, which creates a free account they use to sit the test. After that, more tests need
+// a subscription (the backend answers 402).
 export default function RequestForm() {
   const router = useRouter();
   const [signedIn, setSignedIn] = useState(false);
@@ -19,6 +20,8 @@ export default function RequestForm() {
   const [subject, setSubject] = useState("");
   const [details, setDetails] = useState("");
   const [date, setDate] = useState("");
+  const [guest, setGuest] = useState({ full_name: "", email: "", whatsapp: "", password: "" });
+  const [needsSub, setNeedsSub] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -40,20 +43,25 @@ export default function RequestForm() {
     requestsAPI.config().then((r) => setPrice({ price: r.data.price, currency: r.data.currency })).catch(() => {});
   }, []);
 
+  const setG = (k: keyof typeof guest) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setGuest((g) => ({ ...g, [k]: e.target.value }));
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    if (!signedIn) {
-      try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ exam, subject, details, date })); } catch {}
-      router.push(`/register?returnTo=${encodeURIComponent(window.location.pathname + window.location.search)}`);
-      return;
-    }
     setBusy(true);
+    const preferred_date = date ? new Date(date).toISOString() : null;
     try {
-      await requestsAPI.create({ exam, subject, details, preferred_date: date ? new Date(date).toISOString() : null });
+      if (signedIn) {
+        await requestsAPI.create({ exam, subject, details, preferred_date });
+      } else {
+        const { data } = await requestsAPI.guest({ ...guest, exam, subject, details, preferred_date });
+        saveAuth(data.access_token, data.user);
+      }
       try { sessionStorage.removeItem(DRAFT_KEY); } catch {}
-      router.push("/requests?new=1");
+      window.location.href = "/requests?new=1";  // full load so the header shows the new sign-in
     } catch (err: any) {
+      if (err.response?.status === 402) setNeedsSub(true);
       setError(err.response?.data?.detail || "Couldn't send your request. Please try again.");
       setBusy(false);
     }
@@ -85,17 +93,49 @@ export default function RequestForm() {
         <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
       </Field>
 
+      {!signedIn && (
+        <div className="space-y-4 border-t border-line pt-5">
+          <div>
+            <h3 className="font-semibold text-ink">Where should we send it?</h3>
+            <p className="mt-1 text-sm text-ink-muted">Our team will message you on WhatsApp and email when your test is ready.</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field label="Student's full name">
+              <Input required value={guest.full_name} onChange={setG("full_name")} maxLength={120} placeholder="e.g. Priya Patel" />
+            </Field>
+            <Field label="Email">
+              <Input required type="email" value={guest.email} onChange={setG("email")} placeholder="you@example.com" />
+            </Field>
+            <Field label="WhatsApp number" hint="With country code, e.g. +61 412 345 678">
+              <Input required type="tel" value={guest.whatsapp} onChange={setG("whatsapp")} placeholder="+44 7700 900123" />
+            </Field>
+            <Field label="Choose a password" hint="At least 8 characters. You'll sign in with it to sit your test.">
+              <Input required type="password" minLength={8} value={guest.password} onChange={setG("password")} />
+            </Field>
+          </div>
+        </div>
+      )}
+
       {price && (
         <p className="text-sm text-ink-muted">
           {price.price > 0
             ? <>Price: <b className="text-ink">{price.currency} {price.price.toFixed(2)}</b> per test, paid by bank transfer from any country.</>
-            : <>Free right now: we assign the mock, you sit it online, and a tutor marks your written answers with
-                feedback. No payment and no Pro needed. You can have up to 5 open requests at a time.</>}
+            : <>Your first test is <b className="text-ink">free</b>: we send the mock, you sit it online, and a tutor marks
+                your written answers with feedback. For more tests, subscribe to Notenix or join Beyond Tutors.</>}
         </p>
       )}
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {needsSub ? (
+        <div className="rounded-xl border border-brand-200 bg-brand-50 p-4 text-sm">
+          <p className="font-semibold text-ink">You&apos;ve used your free test</p>
+          <p className="mt-1 text-ink-muted">Subscribe to keep requesting tests, or join Beyond Tutors, where Notenix is included.</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button href="/revision/checkout" size="sm">Subscribe: £149 / year</Button>
+            <Button href="/pricing" variant="secondary" size="sm">See plans</Button>
+          </div>
+        </div>
+      ) : error && <p className="text-sm text-red-600">{error}</p>}
       <Button type="submit" size="lg" loading={busy} className="w-full sm:w-auto">
-        {signedIn ? <><Send size={16} /> Send request</> : <><LogIn size={16} /> Create a free account to send</>}
+        {signedIn ? <><Send size={16} /> Send request</> : <><Lock size={16} /> Request my free test</>}
       </Button>
       {!signedIn && (
         <p className="text-xs text-ink-subtle">

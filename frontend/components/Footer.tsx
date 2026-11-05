@@ -15,12 +15,13 @@ const COLS = [
     ],
   },
   {
-    title: "India",
+    title: "Australia & NZ",
     links: [
-      { label: "JEE practice", href: "/jee" },
-      { label: "NEET practice", href: "/neet" },
-      { label: "CBSE practice", href: "/cbse" },
-      { label: "ICSE practice", href: "/icse" },
+      { label: "HSC practice (NSW)", href: "/hsc" },
+      { label: "VCE practice (VIC)", href: "/vce" },
+      { label: "QCE practice (QLD)", href: "/qce" },
+      { label: "WACE practice (WA)", href: "/wace" },
+      { label: "NCEA practice (NZ)", href: "/ncea" },
     ],
   },
   {
@@ -28,7 +29,6 @@ const COLS = [
     links: [
       { label: "Request a test", href: "/request" },
       { label: "Pricing", href: "/pricing" },
-      { label: "For teachers", href: "/#teachers" },
       { label: "Sign in", href: "/login" },
       { label: "Contact", href: "mailto:hello@notenix.com" },
     ],

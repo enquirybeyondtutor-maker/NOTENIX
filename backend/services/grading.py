@@ -138,7 +138,8 @@ def estimate_grade(score: float, level: str) -> str | None:
     if lv == "SAT":
         # Indicative section score on the 200–800 scale, to the nearest 10.
         return str(int(round((200 + 6 * score) / 10.0) * 10))
-    if lv in ("CBSE", "ICSE"):
+    # Australian and NZ senior exams scale or band results, so show the raw percentage.
+    if lv in ("CBSE", "ICSE", "HSC", "VCE", "QCE", "WACE", "NCEA"):
         return f"{round(score)}%"
     if lv in ("ESAT", "TMUA", "TARA", "JEE", "NEET", "OTHER"):
         return None

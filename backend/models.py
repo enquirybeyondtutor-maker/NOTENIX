@@ -32,6 +32,8 @@ class User(Base):
     # access_kind: trial (free during the trial class) | paid (£49/year subscription).
     access_until: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     access_kind: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    # WhatsApp number (digits only) from the free test-request form; one free test per number.
+    phone: Mapped[str | None] = mapped_column(String(20), nullable=True, index=True)
     # Bumped on student login and on admin password reset; tokens carrying an older
     # version stop working, so one student account = one active sign-in.
     token_version: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
