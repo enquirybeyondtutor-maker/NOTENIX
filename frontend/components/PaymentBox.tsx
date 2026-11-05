@@ -4,8 +4,9 @@ import { Copy, Check, Landmark, Send } from "lucide-react";
 import { paymentsAPI } from "@/lib/api";
 import { Button } from "./ui/Button";
 import { Input, Select, Field } from "./ui/Input";
+import PayLink from "./PayLink";
 
-type Account = { label: string; currency?: string; details: Record<string, string>; note?: string };
+type Account = { label: string; currency?: string; details: Record<string, string>; note?: string; pay_link?: string };
 
 function CopyValue({ value }: { value: string }) {
   const [done, setDone] = useState(false);
@@ -99,6 +100,7 @@ export default function PaymentBox({
                 </div>
               ))}
             </dl>
+            {a.pay_link && <div className="mt-3"><PayLink href={a.pay_link} label={`Pay ${currency} ${amount.toFixed(2)}`} /></div>}
             {a.note && <p className="mt-3 text-xs text-ink-subtle">{a.note}</p>}
           </div>
         ))}

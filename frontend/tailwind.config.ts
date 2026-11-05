@@ -32,8 +32,8 @@ const config: Config = {
         pink: { 400: "#818CF8", 500: "#6366F1", 600: "#4F46E5" },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Plus Jakarta Sans", "Inter", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        display: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       borderRadius: { lg: "0.625rem", xl: "0.875rem", "2xl": "1.125rem" },
       boxShadow: {

@@ -1,4 +1,5 @@
 import katex from "katex";
+import "katex/dist/katex.min.css"; // only pages that show maths load this
 
 // Renders text containing LaTeX: $$…$$ for display maths, $…$ for inline maths. Everything else is
 // plain text, so existing questions are unaffected. Inline $ follows the pandoc rule (no space just

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
 /* ─────────────────────────────────────────────────────────────
    Design tokens — Clean corporate SaaS (indigo on slate)
@@ -29,7 +28,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 body {
   background: rgb(var(--canvas));
   color: rgb(var(--ink));
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   letter-spacing: -0.011em;
   overflow-x: hidden;
 }

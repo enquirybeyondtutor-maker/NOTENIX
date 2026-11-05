@@ -27,9 +27,7 @@ export default function CookieConsent() {
     } catch {
       /* ignore */
     }
-    if (granted && typeof window.gtag === "function") {
-      window.gtag("consent", "update", { analytics_storage: "granted" });
-    }
+    if (granted) window.dispatchEvent(new Event("notenix-consent-granted"));
     setShow(false);
   };
 

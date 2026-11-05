@@ -1,10 +1,12 @@
-import "katex/dist/katex.min.css";
 import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
+import { Inter } from "next/font/google";
+import Analytics from "@/components/Analytics";
 import Shell from "@/components/Shell";
 import CookieConsent from "@/components/CookieConsent";
 import { SITE } from "@/lib/site";
+
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-6NVHXT86PC"; // GA4 Measurement ID (env var overrides)
 
@@ -57,8 +59,15 @@ const jsonLd = {
       "@id": `${SITE}/#org`,
       name: "Notenix",
       url: SITE,
-      description: "Online practice-test platform for SAT, ESAT, TMUA, GCSE and A-Level, with mocks marked by tutors from Beyond Tutors.",
+      description: "Online practice-test platform for SAT, ESAT, TMUA, GCSE, A-Level, IGCSE, CBSE, ICSE, JEE and NEET, with mocks marked by tutors from Beyond Tutors.",
+      logo: `${SITE}/icon.svg`,
+      email: "hello@notenix.com",
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: "hello@notenix.com" },
       parentOrganization: { "@type": "Organization", name: "Beyond Groups" },
+      sameAs: [
+        "https://www.thebeyondtutors.com",
+        "https://www.youtube.com/@thebeyondtutors",
+      ],
     },
     {
       "@type": "WebSite",
@@ -75,8 +84,9 @@ const jsonLd = {
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web",
       offers: [
-        { "@type": "Offer", price: "0", priceCurrency: "GBP", name: "Free" },
-        { "@type": "Offer", price: "9.99", priceCurrency: "GBP", name: "Pro" },
+        { "@type": "Offer", price: "0", priceCurrency: "GBP", name: "Free practice" },
+        { "@type": "Offer", price: "49", priceCurrency: "GBP", name: "Beyond Tutors students: 1 year", url: `${SITE}/pricing` },
+        { "@type": "Offer", price: "149", priceCurrency: "GBP", name: "Revision access for all other students: 1 year", url: `${SITE}/revision/checkout` },
       ],
     },
   ],
@@ -84,41 +94,15 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={inter.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="min-h-screen bg-canvas text-ink antialiased">
         <Shell>{children}</Shell>
 
-        {/* Google Analytics 4 with Consent Mode — analytics cookies stay OFF until
-            the visitor accepts (GDPR/PECR). Consent defaults to denied; the banner
-            grants it, and returning visitors' saved choice is re-applied here. */}
-        {GA_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script
-              id="ga4-init"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', wait_for_update: 500 });
-                  try { if (localStorage.getItem('notenix_consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
-                  gtag('config', '${GA_ID}', { anonymize_ip: true });
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics 4: the script only downloads after the visitor accepts cookies. */}
+        {GA_ID && <Analytics gaId={GA_ID} />}
         <CookieConsent />
       </body>
     </html>

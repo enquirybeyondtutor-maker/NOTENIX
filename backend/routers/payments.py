@@ -150,7 +150,8 @@ async def mine(user: User = Depends(get_current_user), db: AsyncSession = Depend
 @router.get("/revision-checkout")
 async def revision_checkout_info():
     return {"accounts": payment_accounts(), "price": settings.revision_price,
-            "currency": settings.price_currency, "days": settings.subscription_days}
+            "currency": settings.price_currency, "days": settings.subscription_days,
+            "pay_link": settings.revision_pay_link}
 
 
 class RevisionCheckoutIn(BaseModel):

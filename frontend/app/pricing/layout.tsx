@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing: Notenix for Beyond Tutors Students, £49 a Year",
-  description: "Notenix comes with Beyond Tutors classes: free during your trial class, then £49 a year for homework, tests, class notes and progress reports.",
+  title: "Pricing: £49 a Year for Beyond Tutors Students, £149 for Everyone Else",
+  description: "Notenix is £49 a year for Beyond Tutors students (free during your trial class) and £149 a year full access for any other student: notes, worksheets, topic questions and timed tests with instant marking.",
   alternates: { canonical: `${SITE}/pricing` },
 };
 

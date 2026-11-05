@@ -11,6 +11,12 @@ const FEATURES = [
   "TMUA, ESAT, TARA, HSC, GCSE, A-Level and more",
 ];
 
+const OPEN_FEATURES = [
+  "Notes, worksheets and topic questions for every topic",
+  "GCSE and A-Level, all major boards",
+  "Timed tests with instant marking",
+];
+
 export default function Pricing() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
@@ -21,7 +27,7 @@ export default function Pricing() {
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
           Notenix comes with your Beyond Tutors classes. Try it free during your trial class,
-          then £49 a year when you join.
+          then £49 a year when you join. Not with Beyond Tutors? Full access is £149 a year.
         </p>
       </div>
 
@@ -59,6 +65,29 @@ export default function Pricing() {
             ))}
           </ul>
           <Button href={BOOK} className="mt-8 w-full">Join Beyond Tutors <ArrowRight size={16} /></Button>
+        </div>
+      </div>
+
+      <div className="mx-auto mt-10 max-w-3xl">
+        <div className="card flex flex-col gap-6 p-8 md:flex-row md:items-center">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-ink">Not a Beyond Tutors student?</h3>
+            <div className="mt-2 flex items-baseline gap-1">
+              <span className="text-4xl font-bold text-ink">£149</span>
+              <span className="text-sm text-ink-subtle">/ year</span>
+            </div>
+            <p className="mt-1 text-sm text-ink-muted">
+              Notenix full access for any student, anywhere. Pay by bank transfer from any country.
+            </p>
+            <ul className="mt-5 space-y-3">
+              {OPEN_FEATURES.map((f) => (
+                <li key={f} className="flex items-center gap-2 text-sm text-ink-muted">
+                  <Check size={16} className="text-brand-600" /> {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Button href="/revision/checkout" variant="secondary" className="md:w-48">Pay £149</Button>
         </div>
       </div>
 

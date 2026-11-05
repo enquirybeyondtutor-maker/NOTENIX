@@ -6,15 +6,16 @@ import { safeReturnTo } from "@/lib/utils";
 import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
+import PayLink from "@/components/PayLink";
 
 // £149/year revision access for students outside Beyond Tutors. Payment is a bank
 // transfer: the student makes it from their own bank, tells us here, and an admin
 // confirms it in /admin/requests, which switches access on for a year.
 
-type Account = { label: string; currency?: string; details: Record<string, string>; note?: string };
+type Account = { label: string; currency?: string; details: Record<string, string>; note?: string; pay_link?: string };
 
 export default function RevisionCheckout() {
-  const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string } | null>(null);
+  const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string } | null>(null);
   const [returnTo, setReturnTo] = useState<string | null>(null);
   const [form, setForm] = useState({ full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
   const [busy, setBusy] = useState(false);
@@ -80,13 +81,18 @@ export default function RevisionCheckout() {
         </div>
 
         <div className="card space-y-4 p-6">
-          <h2 className="flex items-center gap-2 font-semibold text-ink"><Landmark size={16} /> 2. Pay {price} by bank transfer</h2>
-          {info.accounts.length === 0 ? (
+          <h2 className="flex items-center gap-2 font-semibold text-ink"><Landmark size={16} /> 2. Pay {price}</h2>
+          {info.pay_link && <PayLink href={info.pay_link} label={`Pay ${price} now`} />}
+          {info.pay_link && info.accounts.length > 0 && (
+            <p className="text-xs font-medium uppercase tracking-wide text-ink-subtle">Or pay by bank transfer</p>
+          )}
+          {info.accounts.length === 0 ? (info.pay_link ? null :
             <p className="rounded-lg bg-slate-50 p-4 text-sm text-ink-muted">Bank details aren&apos;t set up yet. Email hello@notenix.com and we&apos;ll send them.</p>
           ) : (
             info.accounts.map((a) => (
-              <div key={a.label} className="rounded-lg border border-line p-4">
+              <div key={a.label} className="space-y-3 rounded-lg border border-line p-4">
                 <p className="text-sm font-semibold text-ink">{a.label}</p>
+                {a.pay_link && <PayLink href={a.pay_link} label={`Pay ${price} now`} />}
                 <dl className="mt-2 grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-sm">
                   {Object.entries(a.details).map(([k, v]) => (
                     <div key={k} className="contents"><dt className="text-ink-muted">{k}</dt><dd className="font-mono text-ink">{v}</dd></div>
@@ -95,7 +101,7 @@ export default function RevisionCheckout() {
               </div>
             ))
           )}
-          <p className="text-xs text-ink-muted">Send exactly {price} from your own bank app, then fill in the details below so we can match your transfer.</p>
+          <p className="text-xs text-ink-muted">Pay exactly {price}, then fill in the details below so we can match your payment.</p>
           <div className="grid gap-4 sm:grid-cols-2">
             {info.accounts.length > 1 && (
               <Field label="Account you paid into">
@@ -104,17 +110,17 @@ export default function RevisionCheckout() {
                 </Select>
               </Field>
             )}
-            <Field label="Name on the paying bank account"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
-            <Field label="Transfer reference or bank" hint="Optional: helps us find it faster.">
+            <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
+            <Field label="Wise or bank reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. Barclays, ref 48213" />
             </Field>
           </div>
         </div>
 
         {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
-        <Button type="submit" loading={busy} className="w-full"><Lock size={15} /> Pay now · I&apos;ve sent {price}</Button>
+        <Button type="submit" loading={busy} className="w-full"><Lock size={15} /> I&apos;ve paid {price} · create my account</Button>
         <p className="flex items-center justify-center gap-1.5 text-xs text-ink-muted">
-          <ShieldCheck size={13} /> We never ask for card numbers or bank passwords. Access starts once we confirm your transfer.
+          <ShieldCheck size={13} /> We never ask for card numbers or bank passwords. Access starts once we confirm your payment.
         </p>
       </form>
     </PageContainer>
