@@ -137,7 +137,7 @@ async def submit_marks(attempt_id: int, data: SubmitMarksIn, marker: User = Depe
     # Notify the student their work has been marked (best-effort).
     if student:
         try:
-            await send_marked_email(student.email, student.full_name, test.title, score, grade)
+            await send_marked_email(student, test.title, score, grade)
         except Exception:
             pass
 

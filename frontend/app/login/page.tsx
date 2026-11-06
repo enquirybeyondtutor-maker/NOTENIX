@@ -18,7 +18,11 @@ export default function LoginPage() {
   const [returnTo, setReturnTo] = useState<string | null>(null);
 
   useEffect(() => {
-    setReturnTo(safeReturnTo(new URLSearchParams(window.location.search).get("returnTo")));
+    const params = new URLSearchParams(window.location.search);
+    setReturnTo(safeReturnTo(params.get("returnTo")));
+    // Links in Notenix emails fill in the user ID: /login?id=name@notenix.com
+    const id = (params.get("id") || "").trim().toLowerCase();
+    if (/^[^@\s]{1,64}@[^@\s]{1,100}$/.test(id)) setEmail(id);
   }, []);
   // Carries the pending destination (e.g. /pay) through register, verify and reset.
   const withReturn = (path: string, extra: Record<string, string> = {}) => {

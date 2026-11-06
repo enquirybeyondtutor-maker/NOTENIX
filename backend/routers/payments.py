@@ -13,7 +13,7 @@ from config import settings
 from database import get_db
 from models import User, Payment, TestRequest
 from security import get_current_user, require_admin, hash_password, verify_password
-from services.email import send_notice, notify_admins
+from services.email import send_payment_result, notify_admins
 
 router = APIRouter(prefix="/payments", tags=["payments"])
 
@@ -327,24 +327,14 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
 
-    name = escape((user.full_name or "there").split(" ")[0])
     what = {"pro": "Notenix Pro", "revision": "Notenix revision access", "ks3": f"{user.full_name}'s Notenix KS3 year"
-            }.get(p.purpose, f"your test request #{p.request_id}")
-    to = user.parent_email or user.email  # Notenix user IDs are not mailboxes
+            }.get(p.purpose, f"test request #{p.request_id}")
+    extra = {"pro": f"Pro is on for the next {PRO_DAYS} days.",
+             "revision": "Full revision access is now on for a year.",
+             "ks3": "Notenix KS3 is on for a year: a test every half-term, homework help, notes and a progress report every month.",
+             }.get(p.purpose, "Our team will send the test shortly.")
     try:
-        if data.approve:
-            body = (f"Hi {name}, we've received your payment of {p.amount:g} {p.currency} for {what}."
-                    + (f" Pro is active for the next {PRO_DAYS} days." if p.purpose == "pro"
-                       else " Your full revision access is now on for a year. Sign in to start." if p.purpose == "revision"
-                       else " Notenix KS3 is on for a year: half-termly tests, homework help, notes and a monthly progress report." if p.purpose == "ks3"
-                       else " Our team will send your test shortly."))
-            await send_notice(to, "Payment received", "Payment received", body, body,
-                              "/requests" if p.purpose == "test_request" else "/dashboard", "Open Notenix")
-        else:
-            body = (f"Hi {name}, we couldn't find your payment for {what} (reference {p.reference}). "
-                    "Please check the transfer and reference, then tell us again from the pay page, or reply to this email.")
-            await send_notice(to, "We couldn't match your payment", "We couldn't match your payment",
-                              body, body, "/requests" if req else "/pay", "Check payment")
+        await send_payment_result(user, data.approve, what, p.amount, p.currency, p.reference, extra)
     except Exception as ex:
         print(f"[payments] notice failed: {ex}")
     return _payment_row(p, user)

@@ -472,7 +472,7 @@ async def assign_test(test_id: int, data: AssignIn, teacher: User = Depends(requ
     # Notify newly-assigned students (best-effort; never blocks the response on failure).
     if newly_assigned:
         await asyncio.gather(*[
-            send_assignment_email(s.email, s.full_name, test.title, test.subject, teacher.full_name, data.due_at)
+            send_assignment_email(s, test.title, test.subject, teacher.full_name, data.due_at)
             for s in newly_assigned
         ], return_exceptions=True)
 

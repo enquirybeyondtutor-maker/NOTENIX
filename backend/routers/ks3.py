@@ -92,7 +92,7 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
     u.otp_attempts = 0
     await db.commit()
     try:
-        await send_otp_email(email, name, code, kind="activate")
+        await send_otp_email(email, name, code, kind="ks3")
     except EmailSendError:
         raise HTTPException(502, EMAIL_FAIL_MSG)
     return _otp_sent_response(email, code)

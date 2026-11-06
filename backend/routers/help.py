@@ -12,7 +12,7 @@ from config import settings
 from database import get_db
 from models import User, HelpRequest
 from security import get_current_user, require_teacher
-from services.email import notify_admins, send_notice
+from services.email import notify_admins, send_help_answered
 
 router = APIRouter(tags=["help"])
 
@@ -79,8 +79,10 @@ async def ask(data: AskIn, user: User = Depends(get_current_user), db: AsyncSess
     h = HelpRequest(student_id=user.id, subject=data.subject, question=text or None, images=imgs or None)
     db.add(h)
     await db.commit()
-    await notify_admins(f"Homework help: {user.full_name} ({data.subject})",
-                        f"{user.full_name} (Year {user.ks3_year}) asked: {text[:200] or '[photo]'}", "/teacher/help")
+    await notify_admins(f"Homework question from {user.full_name}",
+                        f"{user.full_name} sent a {data.subject} homework question. Please reply within a day.", "/teacher/help",
+                        rows=[("Student", f"{user.full_name} (Year {user.ks3_year})"), ("Subject", data.subject),
+                              ("Question", text[:300] or "(photo only)"), ("Photos", str(len(imgs)))])
     return _row(h)
 
 
@@ -126,15 +128,5 @@ async def reply(help_id: int, data: ReplyIn, teacher: User = Depends(require_tea
     await db.commit()
     if first_reply:
         u = (await db.execute(select(User).where(User.id == h.student_id))).scalar_one()
-        name = escape(u.full_name.split(" ")[0])
-        for to in {e for e in (u.parent_email,) if e}:
-            try:
-                await send_notice(to, f"A tutor answered {u.full_name.split(' ')[0]}'s homework question",
-                                  "Homework question answered",
-                                  f"A Beyond Tutors tutor has replied to {name}'s {escape(h.subject)} homework question. "
-                                  f"{name} can see the worked hint in Notenix under <b>Homework help</b>.",
-                                  f"A tutor replied to {u.full_name}'s {h.subject} homework question.",
-                                  "/help", "Open Notenix")
-            except Exception as e:
-                print(f"[help] reply email failed: {e}")
+        await send_help_answered(u, h.subject)
     return _row(h)

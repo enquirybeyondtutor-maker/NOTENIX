@@ -1,14 +1,22 @@
-"""Email delivery + OTP helpers for signup verification.
+"""Email delivery and every Notenix email except the KS3 parent series (services/ks3.py).
 
-Sends over an HTTPS email API (Resend or Brevo) so it works on hosts that block
-outbound SMTP ports (e.g. Render). Falls back to SMTP, then to console (dev).
+Sends over an HTTPS email API (Resend or Brevo) so it works on hosts that block outbound SMTP
+(e.g. Render). Falls back to SMTP, then to the console (dev). Every email is sent from
+EMAIL_FROM (noreply@notenix.com) with Reply-To SUPPORT_EMAIL (support@notenix.com), and is
+built from services/mail_template.py so they all share one design.
+
+Who receives what: Notenix user IDs (name@thebeyondtutors.com, name@notenix.com) are logins,
+not mailboxes. recipients() sends to the parent's email instead (worded for a parent), and to
+the student as well when their login is a real address.
 """
 import smtplib
 import secrets
+from html import escape
 import httpx
 from email.message import EmailMessage
 from fastapi.concurrency import run_in_threadpool
 from config import settings
+from services import mail_template as T
 
 
 class EmailSendError(Exception):
@@ -26,60 +34,36 @@ def _from() -> tuple[str, str]:
     return name, email
 
 
-def _content(full_name: str, code: str, kind: str = "verify") -> tuple[str, str, str]:
-    """Returns (subject, html, plaintext). kind = 'verify' | 'reset'."""
-    mins = settings.otp_expiry_minutes
-    name = (full_name or "there").split(" ")[0]
-    if kind == "activate":
-        subject = f"{code} is your Notenix activation code"
-        heading = "Activate the Notenix account"
-        lead = f"enter this code to activate the Beyond Tutors account for {full_name}."
-        name = "there"
-        text = (
-            f"Hi,\n\n"
-            f"Your code to activate the Notenix account for {full_name} is: {code}\n\n"
-            f"It expires in {mins} minutes. If you didn't ask for this, you can ignore this email.\n\n"
-            f"— Notenix · Beyond Tutors"
-        )
-        ignore = "If you didn't ask for this, you can safely ignore this email."
-    elif kind == "reset":
-        subject = f"{code} is your Notenix password reset code"
-        heading = "Reset your password"
-        lead = "enter this code to set a new password."
-        text = (
-            f"Hi {name},\n\n"
-            f"Your Notenix password reset code is: {code}\n\n"
-            f"It expires in {mins} minutes. If you didn't request a password reset, you can ignore this email.\n\n"
-            f"— Notenix"
-        )
-        ignore = "If you didn't request a password reset, you can safely ignore this email."
-    else:
-        subject = f"{code} is your Notenix verification code"
-        heading = "Verify your email"
-        lead = "enter this code to finish creating your account."
-        text = (
-            f"Hi {name},\n\n"
-            f"Your Notenix verification code is: {code}\n\n"
-            f"It expires in {mins} minutes. If you didn't sign up, you can ignore this email.\n\n"
-            f"— Notenix"
-        )
-        ignore = "If you didn't sign up for Notenix, you can safely ignore this email."
-    html = f"""\
-<div style="font-family:Inter,system-ui,sans-serif;max-width:440px;margin:0 auto;color:#0f172a">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
-    <span style="display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#4F46E5;color:#fff;font-weight:700">N</span>
-    <span style="font-size:17px;font-weight:700">Notenix</span>
-  </div>
-  <h1 style="font-size:20px;margin:0 0 8px">{heading}</h1>
-  <p style="color:#475569;margin:0 0 24px">Hi {name}, {lead}</p>
-  <div style="font-size:34px;font-weight:800;letter-spacing:10px;background:#EEF2FF;color:#4F46E5;
-              text-align:center;padding:18px;border-radius:14px">{code}</div>
-  <p style="color:#94a3b8;font-size:13px;margin:20px 0 0">
-    This code expires in {mins} minutes. {ignore}
-  </p>
-</div>"""
-    return subject, html, text
+def is_mailbox(address: str | None) -> bool:
+    """False for Notenix login IDs, which look like emails but have no inbox."""
+    if not address or "@" not in address:
+        return False
+    domain = address.rsplit("@", 1)[1].lower()
+    return domain not in {settings.student_id_domain.lower(), settings.ks3_id_domain.lower()}
 
+
+def recipients(user) -> list[tuple[str, str]]:
+    """[(address, "parent" | "student")] for a student account, de-duplicated."""
+    out: list[tuple[str, str]] = []
+    parent = (getattr(user, "parent_email", None) or "").strip().lower()
+    if parent and is_mailbox(parent):
+        out.append((parent, "parent"))
+    own = (getattr(user, "email", None) or "").strip().lower()
+    if is_mailbox(own) and own != parent:
+        out.append((own, "student"))
+    return out
+
+
+def best_address(user) -> str | None:
+    """Single address for one-time codes: the student's own inbox if real, else the parent's."""
+    own = getattr(user, "email", None)
+    if is_mailbox(own):
+        return own
+    parent = getattr(user, "parent_email", None)
+    return parent if is_mailbox(parent) else None
+
+
+# ── Providers ──────────────────────────────────────────────────────────────────
 
 async def _send_resend(to_email: str, subject: str, html: str, text: str) -> None:
     name, email = _from()
@@ -87,7 +71,8 @@ async def _send_resend(to_email: str, subject: str, html: str, text: str) -> Non
         r = await client.post(
             "https://api.resend.com/emails",
             headers={"Authorization": f"Bearer {settings.resend_api_key}"},
-            json={"from": f"{name} <{email}>", "to": [to_email], "subject": subject, "html": html, "text": text},
+            json={"from": f"{name} <{email}>", "to": [to_email], "subject": subject, "html": html, "text": text,
+                  "reply_to": settings.support_email},
         )
     if r.status_code >= 300:
         raise EmailSendError(f"resend {r.status_code}: {r.text[:200]}")
@@ -101,6 +86,7 @@ async def _send_brevo(to_email: str, subject: str, html: str, text: str) -> None
             headers={"api-key": settings.brevo_api_key, "content-type": "application/json"},
             json={
                 "sender": {"name": name, "email": email},
+                "replyTo": {"email": settings.support_email, "name": "Notenix support"},
                 "to": [{"email": to_email}],
                 "subject": subject,
                 "htmlContent": html,
@@ -117,6 +103,7 @@ def _send_smtp_sync(to_email: str, subject: str, html: str, text: str) -> None:
     msg["Subject"] = subject
     msg["From"] = f"{name} <{email}>"
     msg["To"] = to_email
+    msg["Reply-To"] = settings.support_email
     msg.set_content(text)
     msg.add_alternative(html, subtype="html")
     with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=20) as server:
@@ -145,69 +132,50 @@ async def _deliver(to_email: str, subject: str, html: str, text: str) -> bool:
         return False
 
 
-def _shell(heading: str, body_html: str, cta_url: str, cta_label: str) -> str:
-    return f"""\
-<div style="font-family:Inter,system-ui,sans-serif;max-width:460px;margin:0 auto;color:#0f172a">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
-    <span style="display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:#4F46E5;color:#fff;font-weight:700">N</span>
-    <span style="font-size:17px;font-weight:700">Notenix</span>
-  </div>
-  <h1 style="font-size:20px;margin:0 0 12px">{heading}</h1>
-  <div style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px">{body_html}</div>
-  <a href="{cta_url}" style="display:inline-block;background:#4F46E5;color:#fff;text-decoration:none;
-     font-weight:600;font-size:14px;padding:11px 20px;border-radius:10px">{cta_label}</a>
-  <p style="color:#94a3b8;font-size:12px;margin:28px 0 0">You're receiving this because you have a Notenix account.</p>
-</div>"""
-
-
-async def send_assignment_email(to_email: str, student_name: str, test_title: str,
-                                subject: str, teacher_name: str, due_at) -> None:
-    name = (student_name or "there").split(" ")[0]
-    url = settings.public_url.rstrip("/") + "/tests"
-    due = f" It's due {due_at.strftime('%d %b %Y')}." if due_at else ""
-    subj = f"New test assigned: {test_title}"
-    body = (f"Hi {name}, <b>{teacher_name}</b> has assigned you a new {subject} test — "
-            f"<b>{test_title}</b>.{due} Sign in to sit it whenever you're ready.")
-    text = (f"Hi {name},\n\n{teacher_name} assigned you a new {subject} test: {test_title}.{due}\n\n"
-            f"Sit it here: {url}\n\n— Notenix")
-    await _deliver(to_email, subj, _shell("You've got a new test", body, url, "Open my tests"), text)
-
-
-async def send_marked_email(to_email: str, student_name: str, test_title: str,
-                            score, grade) -> None:
-    name = (student_name or "there").split(" ")[0]
-    url = settings.public_url.rstrip("/") + "/tests"
-    subj = f"Your test has been marked: {test_title}"
-    grade_bit = f" — grade {grade}" if grade else ""
-    body = (f"Hi {name}, your test <b>{test_title}</b> has been marked. "
-            f"You scored <b>{score}%</b>{grade_bit}. Sign in to see the feedback.")
-    text = (f"Hi {name},\n\nYour test '{test_title}' has been marked. You scored {score}%{grade_bit}.\n\n"
-            f"See feedback: {url}\n\n— Notenix")
-    await _deliver(to_email, subj, _shell("Your test has been marked", body, url, "See my result"), text)
-
-
-async def send_notice(to_email: str, subject: str, heading: str, body_html: str, text: str,
-                      path: str, cta_label: str) -> None:
-    """Generic notification (test requests, payments). `path` is relative to the site."""
-    url = settings.public_url.rstrip("/") + path
-    await _deliver(to_email, subject, _shell(heading, body_html, url, cta_label), f"{text}\n\n{url}\n\n— Notenix")
-
-
-async def notify_admins(subject: str, text: str, path: str) -> None:
-    """Best-effort heads-up to everyone in ADMIN_EMAILS."""
-    from html import escape
-    emails = [e.strip() for e in (settings.admin_emails or "").split(",") if e.strip()]
-    for e in emails:
+async def _to_family(user, build) -> None:
+    """build(role) -> (subject, html, text); sent to every real inbox for this student."""
+    for address, role in recipients(user):
         try:
-            await send_notice(e, subject, subject, escape(text), text, path, "Open admin")
-        except Exception as ex:  # never fail the request because an email bounced
-            print(f"[email] admin notice to {e} failed: {ex}")
+            await _deliver(address, *build(role))
+        except Exception as e:  # never fail the request because of an email
+            print(f"[email] {address}: {e}")
+
+
+# ── One-time codes ─────────────────────────────────────────────────────────────
+
+def _content(full_name: str, code: str, kind: str = "verify") -> tuple[str, str, str]:
+    """(subject, html, text). kind = verify | reset | activate | ks3."""
+    mins = settings.otp_expiry_minutes
+    child = T.first_name(full_name)
+    if kind == "ks3":
+        subject = f"{code} is your code to start {child}'s free week"
+        heading, pre = f"Start {child}'s free week", "Enter this code on notenix.com to continue."
+        lead = f"Enter this code on notenix.com to confirm your email and start {child}'s free Notenix KS3 week."
+        ignore, audience = "If you didn't ask for this, you can ignore this email; nothing will be set up.", "signup"
+    elif kind == "activate":
+        subject = f"{code} is your Notenix activation code"
+        heading, pre = f"Activate {child}'s Notenix account", "Enter this code to finish setting up the account."
+        lead = f"Enter this code to confirm your email and activate the Notenix account Beyond Tutors set up for {escape(full_name)}."
+        ignore, audience = "If you didn't ask for this, you can ignore this email.", "parent"
+    elif kind == "reset":
+        subject = f"{code} is your Notenix password reset code"
+        heading, pre = "Reset your password", "Enter this code to choose a new password."
+        lead = f"Enter this code to choose a new password for {escape(full_name)}'s Notenix account."
+        ignore, audience = "If you didn't ask to reset the password, you can ignore this email; the password stays the same.", "student"
+    else:
+        subject = f"{code} is your Notenix verification code"
+        heading, pre = "Verify your email", "Enter this code to finish creating your account."
+        lead = "Enter this code to finish creating your Notenix account."
+        ignore, audience = "If you didn't sign up, you can ignore this email.", "signup"
+    body = T.para(lead) + T.code_box(code, mins) + f'<p style="margin:0;font-size:13px;color:{T.FAINT}">{ignore}</p>'
+    html = T.layout(preheader=f"{code} · {pre}", heading=heading, body=body, audience=audience)
+    text = f"{heading}\n\nYour code: {code}\nIt expires in {mins} minutes.\n\n{ignore}" + T.text_footer()
+    return subject, html, text
 
 
 async def send_otp_email(to_email: str, full_name: str, code: str, kind: str = "verify") -> None:
-    """Email the OTP via the first configured provider. Providers (Resend/Brevo)
-    raise EmailSendError on failure so signup can report it; SMTP/no-provider
-    fall back to logging the code so local dev keeps working. kind = 'verify' | 'reset'."""
+    """Email a one-time code via the first configured provider. Resend/Brevo failures raise
+    EmailSendError so the caller can tell the user; with no provider the code is logged (dev)."""
     subject, html, text = _content(full_name, code, kind)
     provider = None
     try:
@@ -227,5 +195,126 @@ async def send_otp_email(to_email: str, full_name: str, code: str, kind: str = "
         print(f"[WARN] {provider} email send failed for {to_email}: {e}")
         if provider in ("resend", "brevo"):
             raise EmailSendError(str(e)) from e
-        # SMTP (blocked on Render) or unexpected — keep signup usable; code is logged.
         print(f"[DEV] OTP for {to_email}: {code}")
+
+
+# ── Tests ──────────────────────────────────────────────────────────────────────
+
+async def send_assignment_email(student, test_title: str, subject: str, teacher_name: str, due_at) -> None:
+    child = T.first_name(student.full_name)
+    due = due_at.strftime("%a %d %b") if due_at else None
+
+    def build(role):
+        if role == "parent":
+            heading = f"{child} has a new test"
+            lead = f"{escape(teacher_name)} has set {child} a new {escape(subject)} test on Notenix."
+            subj = f"{T.first_name(student.full_name)} has a new test: {test_title}"
+        else:
+            heading = "You've got a new test"
+            lead = f"{escape(teacher_name)} has set you a new {escape(subject)} test."
+            subj = f"New test: {test_title}"
+        rows = [("Test", escape(test_title)), ("Subject", escape(subject))] + ([("Due", due)] if due else [])
+        body = T.para(lead) + T.info_table(rows) + (T.login_box(student.email, student.full_name) if role == "parent" else "")
+        html = T.layout(preheader=f"{test_title}" + (f", due {due}" if due else ""), heading=heading, body=body,
+                        buttons=[(T.signin_url(student.email) if role == "parent" else T.site("/tests"), "Open the test")],
+                        audience=role)
+        return subj, html, f"{heading}\n\n{test_title} ({subject})" + (f", due {due}" if due else "") + f"\n{T.site('/tests')}" + T.text_footer()
+    await _to_family(student, build)
+
+
+async def send_marked_email(student, test_title: str, score, grade) -> None:
+    child = T.first_name(student.full_name)
+    score_txt = f"{round(score)}%" if isinstance(score, (int, float)) else str(score)
+
+    def build(role):
+        whose = f"{child}'s" if role == "parent" else "Your"
+        rows = [("Test", escape(test_title)), ("Score", f'<span style="color:{T.color_for(round(score) if isinstance(score, (int, float)) else 0)}">{score_txt}</span>')]
+        if grade:
+            rows.append(("Estimated grade", escape(str(grade))))
+        body = T.para(f"{whose} test has been marked{' by a tutor' if role == 'parent' else ''}. The feedback on each question is in Notenix.") + T.info_table(rows)
+        html = T.layout(preheader=f"{score_txt}" + (f", grade {grade}" if grade else "") + f" on {test_title}",
+                        heading=f"{whose} test has been marked", body=body,
+                        buttons=[(T.site("/tests"), "See the feedback")], audience=role)
+        subj = f"{child}'s test is marked: {score_txt}" if role == "parent" else f"Your test is marked: {test_title}"
+        return subj, html, f"{whose} test '{test_title}' is marked: {score_txt}" + (f", grade {grade}" if grade else "") + T.text_footer()
+    await _to_family(student, build)
+
+
+async def send_request_cancelled(student, exam: str, request_id: int, note: str | None) -> None:
+    child = T.first_name(student.full_name)
+
+    def build(role):
+        lead = (f"{child}'s {escape(exam)} test request (#{request_id}) has been cancelled." if role == "parent"
+                else f"Your {escape(exam)} test request (#{request_id}) has been cancelled.")
+        body = T.para(lead) + (T.callout("Note from the team", escape(note)) if note else "") + T.para(
+            "If this isn't what you expected, just reply and we'll sort it out.")
+        html = T.layout(preheader=f"{exam} request #{request_id}", heading="Test request cancelled", body=body,
+                        buttons=[(T.site("/requests"), "View requests")], audience=role)
+        return "Test request cancelled", html, lead + (f"\nNote: {note}" if note else "") + T.text_footer()
+    await _to_family(student, build)
+
+
+# ── Payments and homework help ─────────────────────────────────────────────────
+
+async def send_payment_result(user, approved: bool, what: str, amount: float, currency: str,
+                              reference: str, extra: str = "") -> None:
+    from services.pricing import label as money
+    amt = money((currency or "GBP").upper(), float(amount))  # £149, AED 699, ₹16,999
+
+    def build(role):
+        if approved:
+            heading, subj = "Payment received", f"Payment received · {what}"
+            body = (T.para(f"Thank you. We've received your payment for {escape(what)}.") +
+                    T.info_table([("Amount", escape(amt)), ("Reference", escape(reference)), ("For", escape(what))]) +
+                    (T.para(escape(extra)) if extra else "") + T.login_box(user.email, user.full_name if role == "parent" else None))
+            btn = [(T.signin_url(user.email), "Open Notenix")]
+        else:
+            heading, subj = "We couldn't match your payment", f"Please check your payment · {reference}"
+            body = (T.para(f"We couldn't find a payment for {escape(what)} in our account yet.") +
+                    T.info_table([("Amount expected", escape(amt)), ("Reference", escape(reference))]) +
+                    T.para("Please check the transfer went through with this reference, then tell us again from the pay page, or just reply to this email."))
+            btn = [(T.site("/pay"), "Check payment")]
+        html = T.layout(preheader=f"{amt} · {reference}", heading=heading, body=body, buttons=btn, audience=role)
+        return subj, html, f"{heading}\n{what}: {amt}, reference {reference}" + T.text_footer()
+    await _to_family(user, build)
+
+
+async def send_help_answered(student, subject: str) -> None:
+    child = T.first_name(student.full_name)
+
+    def build(role):
+        lead = (f"A Beyond Tutors tutor has replied to {child}'s {escape(subject)} homework question with a worked hint."
+                if role == "parent" else f"A tutor has replied to your {escape(subject)} homework question.")
+        body = T.para(lead) + T.para(f"{child if role == 'parent' else 'You'} can see the reply in Notenix under <b>Homework help</b>.")
+        html = T.layout(preheader="The worked hint is waiting in Notenix", heading="Homework question answered",
+                        body=body, buttons=[(T.signin_url(student.email) if role == "parent" else T.site("/help"), "Open Homework help")],
+                        audience="ks3" if role == "parent" else role)
+        subj = f"A tutor answered {child}'s homework question" if role == "parent" else "Your homework question has a reply"
+        return subj, html, lead + T.text_footer()
+    await _to_family(student, build)
+
+
+# ── Generic notice and admin alerts ────────────────────────────────────────────
+
+async def send_notice(to_email: str, subject: str, heading: str, body_html: str, text: str,
+                      path: str, cta_label: str, audience: str = "student") -> None:
+    """Any one-off notice in the standard design. `path` is relative to the site."""
+    if not is_mailbox(to_email):
+        print(f"[email] skipped {subject!r}: {to_email} is a login ID, not a mailbox")
+        return
+    html = T.layout(preheader=text[:90], heading=heading, body=T.para(body_html),
+                    buttons=[(T.site(path), cta_label)], audience=audience)
+    await _deliver(to_email, subject, html, text + T.text_footer())
+
+
+async def notify_admins(subject: str, text: str, path: str, rows: list[tuple[str, str]] | None = None) -> None:
+    """Best-effort alert to everyone in ADMIN_EMAILS, with an optional summary table."""
+    emails = [e.strip() for e in (settings.admin_emails or "").split(",") if e.strip()]
+    body = T.para(escape(text)) + (T.info_table([(k, escape(v)) for k, v in rows]) if rows else "")
+    html = T.layout(preheader=text[:90], heading=subject, body=body, buttons=[(T.site(path), "Open in Notenix")],
+                    audience="admin", tagline="Admin")
+    for e in emails:
+        try:
+            await _deliver(e, f"[Notenix] {subject}", html, f"{text}\n{T.site(path)}")
+        except Exception as ex:  # never fail the request because an email bounced
+            print(f"[email] admin notice to {e} failed: {ex}")

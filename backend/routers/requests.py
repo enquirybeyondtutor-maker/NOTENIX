@@ -14,7 +14,7 @@ from config import settings
 from database import get_db
 from models import User, Test, TestAssignment, TestAttempt, TestRequest, Payment
 from security import get_current_user, require_admin, hash_password, create_token, is_free_account
-from services.email import send_assignment_email, send_notice, notify_admins
+from services.email import send_assignment_email, send_request_cancelled, notify_admins
 from routers.payments import reference_for
 
 router = APIRouter(prefix="/requests", tags=["requests"])
@@ -267,8 +267,7 @@ async def assign(request_id: int, data: AssignIn, admin: User = Depends(require_
     await db.commit()
 
     try:
-        await send_assignment_email(student.email, student.full_name, test.title, test.subject,
-                                    "The Notenix team", data.due_at)
+        await send_assignment_email(student, test.title, test.subject, "The Notenix team", data.due_at)
     except Exception as ex:
         print(f"[requests] assignment email failed: {ex}")
     return (await _rows(db, [req], with_student=True))[0]
@@ -296,9 +295,5 @@ async def update(request_id: int, data: UpdateIn, admin: User = Depends(require_
 
     if data.status == "cancelled":
         student = (await db.execute(select(User).where(User.id == req.student_id))).scalar_one()
-        name = escape((student.full_name or "there").split(" ")[0])
-        body = (f"Hi {name}, your {escape(req.exam)} test request #{req.id} has been cancelled."
-                + (f" Note from the team: {escape(req.admin_note)}" if req.admin_note else ""))
-        await asyncio.gather(send_notice(student.email, "Test request cancelled", "Test request cancelled",
-                                         body, body, "/requests", "My requests"), return_exceptions=True)
+        await asyncio.gather(send_request_cancelled(student, req.exam, req.id, req.admin_note), return_exceptions=True)
     return (await _rows(db, [req], with_student=True))[0]

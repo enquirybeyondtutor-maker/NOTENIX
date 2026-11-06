@@ -11,8 +11,9 @@ from database import SessionLocal
 from models import User, Test, TestAssignment, TestAttempt
 from services import pricing
 from services.email import _deliver
+from services import mail_template as T
 
-BRAND, INK, MUTED, LINE = "#4F46E5", "#0f172a", "#475569", "#e2e8f0"
+BRAND, INK, MUTED, LINE = T.BRAND, T.INK, T.MUTED, T.LINE
 GOOD, OK, WEAK = "#059669", "#d97706", "#dc2626"
 SEQUENCE = (("welcome", 0), ("checkin", 3), ("ending", 5), ("report", 7))
 
@@ -68,74 +69,35 @@ async def progress(db, u: User) -> dict:
 # ── HTML pieces ────────────────────────────────────────────────────────────────
 
 def _first(name: str | None) -> str:
-    return escape((name or "your child").split(" ")[0])
+    return T.first_name(name, "your child")
 
 
 def _btn(url: str, label: str, primary: bool = True) -> str:
-    bg, fg, border = (BRAND, "#fff", BRAND) if primary else ("#fff", BRAND, BRAND)
-    return (f'<a href="{url}" style="display:inline-block;background:{bg};color:{fg};border:1.5px solid {border};'
-            f'text-decoration:none;font-weight:600;font-size:14px;padding:11px 18px;border-radius:10px;'
-            f'margin:0 8px 8px 0">{label}</a>')
+    return T.button(url, label, primary)
 
 
 def _shell(preheader: str, heading: str, body: str) -> str:
-    return f"""\
-<div style="background:#f8fafc;padding:24px 12px">
-<span style="display:none;max-height:0;overflow:hidden">{escape(preheader)}</span>
-<div style="font-family:Inter,Segoe UI,system-ui,sans-serif;max-width:560px;margin:0 auto;background:#fff;
-  border:1px solid {LINE};border-radius:16px;padding:28px;color:{INK}">
-  <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:22px"><tr>
-    <td style="width:32px;height:32px;border-radius:10px;background:{BRAND};color:#fff;font-weight:700;text-align:center">N</td>
-    <td style="padding-left:10px;font-size:16px;font-weight:700">Notenix <span style="color:{MUTED};font-weight:500">· KS3 by Beyond Tutors</span></td>
-  </tr></table>
-  <h1 style="font-size:21px;line-height:1.3;margin:0 0 14px">{heading}</h1>
-  <div style="color:{MUTED};font-size:15px;line-height:1.65">{body}</div>
-  <p style="color:#94a3b8;font-size:12px;margin:26px 0 0;border-top:1px solid {LINE};padding-top:14px">
-    You're receiving this because you started a free Notenix KS3 trial. Notenix is a unit of Beyond Groups,
-    provided with Beyond Tutors. Questions? Just reply to this email.</p>
-</div></div>"""
-
-
-def _bar(pct: int, color: str) -> str:
-    pct = max(0, min(100, pct))
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="height:8px;'
-            f'background:#f1f5f9;border-radius:99px"><tr><td width="{max(pct, 2)}%" style="background:{color};'
-            f'border-radius:99px;height:8px;font-size:0">&nbsp;</td><td style="font-size:0">&nbsp;</td></tr></table>')
+    """The shared Notenix design (services/mail_template.py), tagged KS3, footer for parents."""
+    return T.layout(preheader=preheader, heading=heading, body=body, audience="ks3", tagline="KS3 · Years 7–9")
 
 
 def _color(pct: int) -> str:
-    return GOOD if pct >= 70 else OK if pct >= 50 else WEAK
+    return T.color_for(pct)
 
 
 def _subject_table(p: dict) -> str:
     if not p["subjects"]:
         return ""
-    rows = ""
-    for name, s in p["subjects"].items():
-        change = s["latest"] - s["first"] if s["count"] > 1 else None
-        delta = "" if change is None else (
-            f' <span style="color:{GOOD if change >= 0 else WEAK};font-size:12px">'
-            f'{"▲" if change >= 0 else "▼"} {abs(change)}</span>')
-        rows += (f'<tr><td style="padding:8px 0;width:30%;color:{INK};font-weight:600">{escape(name)}</td>'
-                 f'<td style="padding:8px 10px">{_bar(s["latest"], _color(s["latest"]))}</td>'
-                 f'<td style="padding:8px 0;width:70px;text-align:right;color:{INK};font-weight:700">{s["latest"]}%{delta}</td></tr>')
-    return f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 4px">{rows}</table>'
+    return T.bars([(name, s["latest"], (s["latest"] - s["first"]) if s["count"] > 1 else None)
+                   for name, s in p["subjects"].items()])
 
 
 def _topic_list(items: list[dict], title: str, color: str) -> str:
-    if not items:
-        return ""
-    lis = "".join(f'<li style="margin:3px 0"><b style="color:{INK}">{escape(t["topic"])}</b> '
-                  f'<span style="color:#94a3b8">({escape(t["subject"])}, {t["pct"]}%)</span></li>' for t in items)
-    return (f'<p style="margin:16px 0 4px;color:{color};font-weight:700;font-size:13px;text-transform:uppercase;'
-            f'letter-spacing:.4px">{title}</p><ul style="margin:0;padding-left:18px">{lis}</ul>')
+    return T.topic_list(items, title, color)
 
 
 def _login_box(u: User) -> str:
-    return (f'<div style="background:#eef2ff;border-radius:12px;padding:14px 16px;margin:16px 0;color:{INK}">'
-            f'<div style="font-size:12px;color:{MUTED}">{_first(u.full_name)}\'s Notenix login</div>'
-            f'<div style="font-size:16px;font-weight:700;margin-top:2px">{escape(u.email)}</div>'
-            f'<div style="font-size:12px;color:{MUTED};margin-top:2px">Sign in at notenix.com with the password you chose.</div></div>')
+    return T.login_box(u.email, u.full_name)
 
 
 def _price(u: User) -> str:
@@ -165,7 +127,7 @@ def welcome(u: User, p: dict) -> tuple[str, str, str]:
                   + f'<p style="margin-top:20px">{_btn(_site("/tests"), "Start the baseline tests")}</p>')
     text = (f"{name}'s free Notenix KS3 trial week has started.\nLogin: {u.email}\n"
             f"1) Year {yr} baseline tests 2) homework help 3) KS3 notes 4) day-7 progress report.\n{_site('/tests')}")
-    return subject, html, text
+    return subject, html, text + T.text_footer()
 
 
 def checkin(u: User, p: dict) -> tuple[str, str, str]:

@@ -11,7 +11,7 @@ from security import (
     hash_password, verify_password, password_needs_rehash, create_token, get_current_user, is_admin,
     can_write_practice, ai_marks_for, access_ended_message,
 )
-from services.email import generate_otp, send_otp_email, EmailSendError
+from services.email import generate_otp, send_otp_email, EmailSendError, best_address
 from config import settings
 
 CLOSED_MSG = "Notenix accounts are issued by Beyond Tutors. Please contact your tutor or hello@thebeyondtutors.com."
@@ -96,8 +96,10 @@ async def _issue_otp(user: User, db: AsyncSession, kind: str = "verify") -> str:
     user.otp_expires_at = datetime.utcnow() + timedelta(minutes=settings.otp_expiry_minutes)
     user.otp_attempts = 0
     await db.commit()
+    # Notenix login IDs have no inbox: send the code to the student's real email or the parent's.
+    to = best_address(user) or user.email
     try:
-        await send_otp_email(user.email, user.full_name, code, kind=kind)
+        await send_otp_email(to, user.full_name, code, kind=kind)
     except EmailSendError:
         raise HTTPException(502, EMAIL_FAIL_MSG)
     return code
