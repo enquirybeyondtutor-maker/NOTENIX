@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: Ping /ping (wakes web service + database)
         run: |
-          curl -fsS --max-time 60 https://notenix.onrender.com/ping || echo "ping failed (backend may be cold-starting)"
+          curl -fsS --max-time 60 https://notenix-eu.onrender.com/ping || echo "ping failed (backend may be cold-starting)"
