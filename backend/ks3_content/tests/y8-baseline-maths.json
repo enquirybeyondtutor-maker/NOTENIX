@@ -1,0 +1,249 @@
+{
+  "slot": "y8-baseline",
+  "subject": "Maths",
+  "title": "Year 8 Maths Baseline",
+  "topic": "baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Negative numbers",
+      "question": "Work out $-6 \\times 4 + 15$.",
+      "options": [
+        "$-39$",
+        "39",
+        "9",
+        "$-9$"
+      ],
+      "answer": "$-9$",
+      "explanation": "$-6 \\times 4 = -24$, then $-24 + 15 = -9$."
+    },
+    {
+      "topic": "Fractions",
+      "question": "Work out $\\dfrac{3}{4} \\div \\dfrac{1}{8}$.",
+      "options": [
+        "$\\dfrac{3}{32}$",
+        "$\\dfrac{1}{6}$",
+        "6",
+        "24"
+      ],
+      "answer": "6",
+      "explanation": "Dividing by $\\dfrac{1}{8}$ is multiplying by 8: $\\dfrac{3}{4} \\times 8 = 6$."
+    },
+    {
+      "topic": "Fractions",
+      "question": "Work out $2\\dfrac{1}{3} \\times 1\\dfrac{1}{2}$.",
+      "options": [
+        "$3\\dfrac{1}{2}$",
+        "$2\\dfrac{1}{6}$",
+        "$3\\dfrac{1}{6}$",
+        "4"
+      ],
+      "answer": "$3\\dfrac{1}{2}$",
+      "explanation": "$\\dfrac{7}{3} \\times \\dfrac{3}{2} = \\dfrac{21}{6} = 3\\dfrac{1}{2}$."
+    },
+    {
+      "topic": "Percentage change",
+      "question": "A price rises from £40 to £46. What is the percentage increase?",
+      "options": [
+        "6%",
+        "15%",
+        "13%",
+        "46%"
+      ],
+      "answer": "15%",
+      "explanation": "Increase £6. $\\dfrac{6}{40} = 0.15 = 15\\%$."
+    },
+    {
+      "topic": "Percentages",
+      "question": "Increase £250 by 12%.",
+      "options": [
+        "£280",
+        "£262",
+        "£300",
+        "£220"
+      ],
+      "answer": "£280",
+      "explanation": "12% of 250 = 30, so $250 + 30 = $ £280. (Or $250 \\times 1.12$.)"
+    },
+    {
+      "topic": "Expanding",
+      "question": "Expand and simplify $5(x + 3) - 2(x - 4)$.",
+      "options": [
+        "$3x + 7$",
+        "$7x + 23$",
+        "$3x - 1$",
+        "$3x + 23$"
+      ],
+      "answer": "$3x + 23$",
+      "explanation": "$5x + 15 - 2x + 8 = 3x + 23$. Careful: $-2 \\times -4 = +8$."
+    },
+    {
+      "topic": "Factorising",
+      "question": "Factorise fully $12x + 18$.",
+      "options": [
+        "$2(6x + 9)$",
+        "$6(2x + 3)$",
+        "$3(4x + 6)$",
+        "$12(x + 18)$"
+      ],
+      "answer": "$6(2x + 3)$",
+      "explanation": "The highest common factor of 12 and 18 is 6: $6(2x + 3)$."
+    },
+    {
+      "topic": "Equations",
+      "question": "Solve $7x - 4 = 3x + 20$.",
+      "options": [
+        "$x = 4$",
+        "$x = 6$",
+        "$x = 2.4$",
+        "$x = 16$"
+      ],
+      "answer": "$x = 6$",
+      "explanation": "Subtract $3x$: $4x - 4 = 20$. Add 4: $4x = 24$, so $x = 6$."
+    },
+    {
+      "topic": "Equations",
+      "question": "Solve $4(x - 2) = 2x + 6$.",
+      "options": [
+        "$x = 7$",
+        "$x = 4$",
+        "$x = 1$",
+        "$x = 2$"
+      ],
+      "answer": "$x = 7$",
+      "explanation": "$4x - 8 = 2x + 6$, so $2x = 14$ and $x = 7$."
+    },
+    {
+      "topic": "Sequences",
+      "question": "Find the $n$th term of 11, 8, 5, 2, ...",
+      "options": [
+        "$3n + 8$",
+        "$14 - n$",
+        "$-3n + 14$",
+        "$11 - 3n$"
+      ],
+      "answer": "$-3n + 14$",
+      "explanation": "Difference $-3$, so $-3n$ gives $-3, -6, ...$; add 14 to get 11, 8, 5: $14 - 3n$."
+    },
+    {
+      "topic": "Ratio",
+      "question": "£84 is shared in the ratio 2 : 5. How much more does the larger share get?",
+      "options": [
+        "£24",
+        "£36",
+        "£60",
+        "£12"
+      ],
+      "answer": "£36",
+      "explanation": "7 parts = 84, so 1 part = 12. Shares are 24 and 60; the difference is £36."
+    },
+    {
+      "topic": "Proportion",
+      "question": "6 workers build a wall in 10 days. How long would 4 workers take, at the same rate?",
+      "options": [
+        "6.7 days",
+        "12 days",
+        "15 days",
+        "20 days"
+      ],
+      "answer": "15 days",
+      "explanation": "Total work = $6 \\times 10 = 60$ worker-days; $60 \\div 4 = 15$ days (inverse proportion)."
+    },
+    {
+      "topic": "Angles",
+      "question": "Two parallel lines are crossed by a straight line. One alternate angle is 65°. What is the other?",
+      "options": [
+        "25°",
+        "295°",
+        "115°",
+        "65°"
+      ],
+      "answer": "65°",
+      "explanation": "Alternate angles (Z-angles) are equal."
+    },
+    {
+      "topic": "Angles",
+      "question": "Co-interior angles between parallel lines are $x$ and 110°. Find $x$.",
+      "options": [
+        "250°",
+        "110°",
+        "70°",
+        "20°"
+      ],
+      "answer": "70°",
+      "explanation": "Co-interior angles add to 180°: $180 - 110 = 70$°."
+    },
+    {
+      "topic": "Polygons",
+      "question": "What is each exterior angle of a regular octagon?",
+      "options": [
+        "30°",
+        "135°",
+        "60°",
+        "45°"
+      ],
+      "answer": "45°",
+      "explanation": "Exterior angles add to 360°: $360 \\div 8 = 45$°."
+    },
+    {
+      "topic": "Circles",
+      "question": "Find the area of a circle of radius 5 cm. Use $\\pi \\approx 3.14$.",
+      "options": [
+        "78.5 cm²",
+        "31.4 cm²",
+        "15.7 cm²",
+        "157 cm²"
+      ],
+      "answer": "78.5 cm²",
+      "explanation": "Area $= \\pi r^2 = 3.14 \\times 25 = 78.5$ cm²."
+    },
+    {
+      "topic": "Circles",
+      "question": "Find the circumference of a circle with diameter 10 cm. Use $\\pi \\approx 3.14$.",
+      "options": [
+        "15.7 cm",
+        "314 cm",
+        "78.5 cm",
+        "31.4 cm"
+      ],
+      "answer": "31.4 cm",
+      "explanation": "Circumference $= \\pi d = 3.14 \\times 10 = 31.4$ cm."
+    },
+    {
+      "topic": "Volume",
+      "question": "Find the volume of a cuboid 4 cm by 5 cm by 6 cm.",
+      "options": [
+        "15 cm³",
+        "120 cm³",
+        "74 cm³",
+        "148 cm³"
+      ],
+      "answer": "120 cm³",
+      "explanation": "$4 \\times 5 \\times 6 = 120$ cm³."
+    },
+    {
+      "topic": "Probability",
+      "question": "A spinner has P(red) = 0.3 and P(blue) = 0.45. The only other colour is green. Find P(green).",
+      "options": [
+        "0.15",
+        "0.35",
+        "0.25",
+        "0.75"
+      ],
+      "answer": "0.25",
+      "explanation": "$1 - 0.3 - 0.45 = 0.25$."
+    },
+    {
+      "topic": "Averages",
+      "question": "The mean of 5 numbers is 12. When a sixth number is added the mean becomes 13. What is the sixth number?",
+      "options": [
+        "18",
+        "15",
+        "13",
+        "78"
+      ],
+      "answer": "18",
+      "explanation": "Old total 60, new total $6 \\times 13 = 78$; the new number is 18."
+    }
+  ]
+}

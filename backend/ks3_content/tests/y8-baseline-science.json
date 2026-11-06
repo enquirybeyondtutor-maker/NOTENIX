@@ -1,0 +1,249 @@
+{
+  "slot": "y8-baseline",
+  "subject": "Science",
+  "title": "Year 8 Science Baseline",
+  "topic": "baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Atoms and elements",
+      "question": "What is an element?",
+      "options": [
+        "A mixture of atoms",
+        "A substance made of only one type of atom",
+        "Two atoms bonded together",
+        "A liquid"
+      ],
+      "answer": "A substance made of only one type of atom",
+      "explanation": "An element contains only one type of atom, e.g. oxygen or iron."
+    },
+    {
+      "topic": "Compounds",
+      "question": "Which of these is a compound?",
+      "options": [
+        "Oxygen",
+        "Iron",
+        "Water",
+        "Neon"
+      ],
+      "answer": "Water",
+      "explanation": "Water ($\\text{H}_2\\text{O}$) contains hydrogen and oxygen chemically joined."
+    },
+    {
+      "topic": "Formulae",
+      "question": "How many atoms are in one molecule of $\\text{CO}_2$?",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "answer": "3",
+      "explanation": "One carbon atom and two oxygen atoms: 3 atoms."
+    },
+    {
+      "topic": "Periodic table",
+      "question": "Elements in the same group of the periodic table ...",
+      "options": [
+        "have similar chemical properties",
+        "have the same mass",
+        "are all gases",
+        "were discovered at the same time"
+      ],
+      "answer": "have similar chemical properties",
+      "explanation": "Elements in a group react in similar ways, e.g. the alkali metals."
+    },
+    {
+      "topic": "Periodic table",
+      "question": "Where are the metals found on the periodic table?",
+      "options": [
+        "On the right",
+        "Only at the bottom",
+        "Only at the top",
+        "On the left and in the middle"
+      ],
+      "answer": "On the left and in the middle",
+      "explanation": "Metals are on the left and centre; non-metals are on the right."
+    },
+    {
+      "topic": "Chemical reactions",
+      "question": "Magnesium burns in oxygen. What is the product?",
+      "options": [
+        "Magnesium oxide",
+        "Magnesium oxygenate",
+        "Magnesium carbonate",
+        "Oxygen magnesium"
+      ],
+      "answer": "Magnesium oxide",
+      "explanation": "Magnesium + oxygen → magnesium oxide."
+    },
+    {
+      "topic": "Conservation of mass",
+      "question": "In a sealed flask, 10 g of reactants react. What is the mass of the products?",
+      "options": [
+        "Less than 10 g",
+        "More than 10 g",
+        "10 g",
+        "0 g"
+      ],
+      "answer": "10 g",
+      "explanation": "Atoms are rearranged, not created or destroyed, so mass is conserved."
+    },
+    {
+      "topic": "Digestion",
+      "question": "Where is most water absorbed back into the body?",
+      "options": [
+        "Stomach",
+        "Large intestine",
+        "Small intestine",
+        "Oesophagus"
+      ],
+      "answer": "Large intestine",
+      "explanation": "The large intestine absorbs water from undigested food."
+    },
+    {
+      "topic": "Digestion",
+      "question": "What do enzymes do in digestion?",
+      "options": [
+        "Make food bigger",
+        "Turn food into water",
+        "Break large molecules into small ones the body can absorb",
+        "Kill all bacteria"
+      ],
+      "answer": "Break large molecules into small ones the body can absorb",
+      "explanation": "Enzymes are biological catalysts that break down large food molecules."
+    },
+    {
+      "topic": "Respiration",
+      "question": "What is the word equation for aerobic respiration?",
+      "options": [
+        "glucose → lactic acid",
+        "carbon dioxide + water → glucose + oxygen",
+        "glucose + oxygen → carbon dioxide + water",
+        "oxygen + water → glucose"
+      ],
+      "answer": "glucose + oxygen → carbon dioxide + water",
+      "explanation": "Aerobic respiration uses oxygen to release energy from glucose."
+    },
+    {
+      "topic": "Respiration",
+      "question": "What is produced by anaerobic respiration in human muscles?",
+      "options": [
+        "Carbon dioxide and water",
+        "Alcohol",
+        "Lactic acid",
+        "Oxygen"
+      ],
+      "answer": "Lactic acid",
+      "explanation": "Without enough oxygen, muscles make lactic acid."
+    },
+    {
+      "topic": "Photosynthesis",
+      "question": "Which gas do plants take in for photosynthesis?",
+      "options": [
+        "Carbon dioxide",
+        "Nitrogen",
+        "Oxygen",
+        "Hydrogen"
+      ],
+      "answer": "Carbon dioxide",
+      "explanation": "carbon dioxide + water → glucose + oxygen (using light)."
+    },
+    {
+      "topic": "Breathing",
+      "question": "Where does gas exchange happen in the lungs?",
+      "options": [
+        "Trachea",
+        "Bronchi",
+        "Diaphragm",
+        "Alveoli"
+      ],
+      "answer": "Alveoli",
+      "explanation": "Oxygen and carbon dioxide diffuse across the thin walls of the alveoli."
+    },
+    {
+      "topic": "Electricity",
+      "question": "What is the unit of resistance?",
+      "options": [
+        "Volt",
+        "Amp",
+        "Watt",
+        "Ohm"
+      ],
+      "answer": "Ohm",
+      "explanation": "Resistance is measured in ohms (Ω)."
+    },
+    {
+      "topic": "Electricity",
+      "question": "A bulb has a current of 0.5 A and a potential difference of 6 V. What is its resistance?",
+      "options": [
+        "12 Ω",
+        "6.5 Ω",
+        "3 Ω",
+        "0.08 Ω"
+      ],
+      "answer": "12 Ω",
+      "explanation": "$R = V \\div I = 6 \\div 0.5 = 12$ Ω."
+    },
+    {
+      "topic": "Magnetism",
+      "question": "What happens when two north poles are brought together?",
+      "options": [
+        "They repel",
+        "They attract",
+        "Nothing",
+        "They swap"
+      ],
+      "answer": "They repel",
+      "explanation": "Like poles repel; opposite poles attract."
+    },
+    {
+      "topic": "Pressure",
+      "question": "Why is a sharp knife better at cutting than a blunt one?",
+      "options": [
+        "It is heavier",
+        "The force acts on a smaller area, giving higher pressure",
+        "It has more friction",
+        "It is colder"
+      ],
+      "answer": "The force acts on a smaller area, giving higher pressure",
+      "explanation": "Pressure = force ÷ area; a thin edge means a small area and high pressure."
+    },
+    {
+      "topic": "Speed",
+      "question": "A train travels 180 km in 2 hours. What is its average speed?",
+      "options": [
+        "45 km/h",
+        "182 km/h",
+        "360 km/h",
+        "90 km/h"
+      ],
+      "answer": "90 km/h",
+      "explanation": "$180 \\div 2 = 90$ km/h."
+    },
+    {
+      "topic": "Heating",
+      "question": "How is heat mainly transferred through a metal spoon?",
+      "options": [
+        "Convection",
+        "Evaporation",
+        "Radiation",
+        "Conduction"
+      ],
+      "answer": "Conduction",
+      "explanation": "In solids, vibrating particles pass energy along: conduction."
+    },
+    {
+      "topic": "Working scientifically",
+      "question": "Which of these makes a test fair?",
+      "options": [
+        "Changing several variables at once",
+        "Keeping control variables the same",
+        "Doing it only once",
+        "Using different equipment each time"
+      ],
+      "answer": "Keeping control variables the same",
+      "explanation": "Only change the independent variable; keep everything else the same."
+    }
+  ]
+}

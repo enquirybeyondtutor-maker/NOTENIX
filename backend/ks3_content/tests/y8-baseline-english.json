@@ -1,0 +1,249 @@
+{
+  "slot": "y8-baseline",
+  "subject": "English",
+  "title": "Year 8 English Baseline",
+  "topic": "baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"The storm came in the night. By morning the village had changed: the bridge was gone, the river had swallowed the lower field, and old Mrs Hale's fence lay scattered like matchsticks across the lane. Nobody spoke much. People simply picked up what they could, and started again.\"\n\nWhat is the main mood of the passage?",
+      "options": [
+        "Shocked but determined",
+        "Joyful",
+        "Angry and violent",
+        "Bored"
+      ],
+      "answer": "Shocked but determined",
+      "explanation": "The damage is shocking, but people quietly start rebuilding."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Read the passage.\n\n\"The storm came in the night. By morning the village had changed: the bridge was gone, the river had swallowed the lower field, and old Mrs Hale's fence lay scattered like matchsticks across the lane. Nobody spoke much. People simply picked up what they could, and started again.\"\n\n\"the river had swallowed the lower field\" is an example of ...",
+      "options": [
+        "simile",
+        "personification",
+        "alliteration",
+        "onomatopoeia"
+      ],
+      "answer": "personification",
+      "explanation": "Swallowing is a living action given to the river."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Read the passage.\n\n\"The storm came in the night. By morning the village had changed: the bridge was gone, the river had swallowed the lower field, and old Mrs Hale's fence lay scattered like matchsticks across the lane. Nobody spoke much. People simply picked up what they could, and started again.\"\n\nWhy does the writer compare the fence to \"matchsticks\"?",
+      "options": [
+        "To show it was new",
+        "To show it was on fire",
+        "To show how small and easily broken it now looked",
+        "To show it was expensive"
+      ],
+      "answer": "To show how small and easily broken it now looked",
+      "explanation": "Matchsticks are tiny and fragile, showing the storm's power."
+    },
+    {
+      "topic": "Structure",
+      "question": "Read the passage.\n\n\"The storm came in the night. By morning the village had changed: the bridge was gone, the river had swallowed the lower field, and old Mrs Hale's fence lay scattered like matchsticks across the lane. Nobody spoke much. People simply picked up what they could, and started again.\"\n\nHow does the writer use punctuation in the second sentence?",
+      "options": [
+        "A colon introduces a list of the damage",
+        "Speech marks show dialogue",
+        "A question mark shows confusion",
+        "Brackets add a joke"
+      ],
+      "answer": "A colon introduces a list of the damage",
+      "explanation": "The colon introduces the list of changes."
+    },
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"The storm came in the night. By morning the village had changed: the bridge was gone, the river had swallowed the lower field, and old Mrs Hale's fence lay scattered like matchsticks across the lane. Nobody spoke much. People simply picked up what they could, and started again.\"\n\n\"Nobody spoke much.\" What does this suggest?",
+      "options": [
+        "People were angry with each other",
+        "People were stunned and focused",
+        "People could not hear",
+        "People were asleep"
+      ],
+      "answer": "People were stunned and focused",
+      "explanation": "Silence suggests shock and quiet determination."
+    },
+    {
+      "topic": "Structure",
+      "question": "Read the passage.\n\n\"The storm came in the night. By morning the village had changed: the bridge was gone, the river had swallowed the lower field, and old Mrs Hale's fence lay scattered like matchsticks across the lane. Nobody spoke much. People simply picked up what they could, and started again.\"\n\nWhy is the first sentence short?",
+      "options": [
+        "Because the writer was lazy",
+        "To grab attention and state the key event directly",
+        "To introduce dialogue",
+        "To slow the pace"
+      ],
+      "answer": "To grab attention and state the key event directly",
+      "explanation": "A short opening sentence is punchy and sets up the story."
+    },
+    {
+      "topic": "Grammar",
+      "question": "Identify the subordinate clause: \"Although she was tired, Priya finished her essay.\"",
+      "options": [
+        "Priya finished her essay",
+        "she was",
+        "her essay",
+        "Although she was tired"
+      ],
+      "answer": "Although she was tired",
+      "explanation": "It begins with 'although' and cannot stand alone."
+    },
+    {
+      "topic": "Grammar",
+      "question": "Which sentence uses the passive voice?",
+      "options": [
+        "Break the window!",
+        "The ball broke the window.",
+        "The ball is breaking.",
+        "The window was broken by the ball."
+      ],
+      "answer": "The window was broken by the ball.",
+      "explanation": "The object (window) comes first and the doer follows 'by'."
+    },
+    {
+      "topic": "Punctuation",
+      "question": "Which sentence uses a semicolon correctly?",
+      "options": [
+        "I like tea; and coffee.",
+        "I; like tea.",
+        "I like tea; my brother prefers coffee.",
+        "I like; tea and coffee."
+      ],
+      "answer": "I like tea; my brother prefers coffee.",
+      "explanation": "A semicolon joins two linked main clauses."
+    },
+    {
+      "topic": "Punctuation",
+      "question": "Which uses dashes correctly for a dramatic pause?",
+      "options": [
+        "- The door opened",
+        "The - door opened.",
+        "The door - opened - and.",
+        "The door opened - and there stood the headteacher."
+      ],
+      "answer": "The door opened - and there stood the headteacher.",
+      "explanation": "A dash before the reveal creates suspense."
+    },
+    {
+      "topic": "Vocabulary",
+      "question": "What does \"reluctant\" mean?",
+      "options": [
+        "Eager",
+        "Angry",
+        "Unwilling",
+        "Late"
+      ],
+      "answer": "Unwilling",
+      "explanation": "Reluctant means not wanting to do something."
+    },
+    {
+      "topic": "Vocabulary",
+      "question": "Which word is an antonym (opposite) of \"generous\"?",
+      "options": [
+        "Kind",
+        "Giving",
+        "Selfish",
+        "Friendly"
+      ],
+      "answer": "Selfish",
+      "explanation": "Selfish is the opposite of generous."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "What is pathetic fallacy?",
+      "options": [
+        "A sad character",
+        "A weak argument",
+        "Weather or setting reflecting a character's mood",
+        "A type of rhyme"
+      ],
+      "answer": "Weather or setting reflecting a character's mood",
+      "explanation": "e.g. rain and grey skies when a character is sad."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Which is an oxymoron?",
+      "options": [
+        "Very loud",
+        "Deafening silence",
+        "Silent night",
+        "Loud noise"
+      ],
+      "answer": "Deafening silence",
+      "explanation": "An oxymoron puts opposite ideas together: deafening + silence."
+    },
+    {
+      "topic": "Persuasive writing",
+      "question": "Which is the strongest opening for a persuasive speech about school uniform?",
+      "options": [
+        "Uniform is a thing.",
+        "Uniform. Yes.",
+        "I am going to talk about uniform.",
+        "Imagine walking into school and being judged for your clothes before you even speak."
+      ],
+      "answer": "Imagine walking into school and being judged for your clothes before you even speak.",
+      "explanation": "It hooks the audience with direct address and an emotional scenario."
+    },
+    {
+      "topic": "Writer's purpose",
+      "question": "A travel guide's main purpose is usually to ...",
+      "options": [
+        "entertain with a fictional plot",
+        "instruct how to cook",
+        "argue against travel",
+        "inform and advise"
+      ],
+      "answer": "inform and advise",
+      "explanation": "Travel guides give information and recommendations."
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which is spelt correctly?",
+      "options": [
+        "Accommodation",
+        "Acommodation",
+        "Accomodation",
+        "Acomodation"
+      ],
+      "answer": "Accommodation",
+      "explanation": "Two c's and two m's: accommodation."
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which word is spelt correctly?",
+      "options": [
+        "Beleive",
+        "Receive",
+        "Recieve",
+        "Decieve"
+      ],
+      "answer": "Receive",
+      "explanation": "'i before e except after c': receive."
+    },
+    {
+      "topic": "Shakespeare",
+      "question": "What is a theme?",
+      "options": [
+        "A big idea a text explores, like love or power",
+        "The setting of a story",
+        "The main character",
+        "The ending"
+      ],
+      "answer": "A big idea a text explores, like love or power",
+      "explanation": "Themes are central ideas, e.g. ambition in Macbeth."
+    },
+    {
+      "topic": "Evidence",
+      "question": "What is the best way to support a point about a character?",
+      "options": [
+        "Use a short quotation and explain what it shows",
+        "Give your opinion only",
+        "Retell the whole story",
+        "Describe the cover"
+      ],
+      "answer": "Use a short quotation and explain what it shows",
+      "explanation": "Quote + explanation shows how you know."
+    }
+  ]
+}

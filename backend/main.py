@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from services.retention import purge_old_responses
 from services.sittings import auto_submit_expired
-from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests, notes, papers, sync
+from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests, notes, papers, sync, ks3, help
 from routers.payments import expire_pro_plans
 
 
@@ -27,6 +27,26 @@ async def _retention_loop():
         await asyncio.sleep(24 * 3600)
 
 
+async def _ks3_loop():
+    """KS3 free-trial parent emails (day 0/7/12/14), checked every hour."""
+    from services.ks3 import run_sequence
+    while True:
+        try:
+            n = await run_sequence()
+            if n:
+                print(f"[ks3] sent {n} trial email(s)")
+        except Exception as e:
+            print(f"[ks3] sequence failed: {e}")
+        try:
+            from services.ks3 import run_yearly
+            st = await run_yearly()
+            if any(st.values()):
+                print(f"[ks3] yearly: {st}")
+        except Exception as e:
+            print(f"[ks3] yearly run failed: {e}")
+        await asyncio.sleep(3600)
+
+
 async def _sittings_loop():
     """Finalize timed sittings whose clock has run out, every minute."""
     while True:
@@ -42,7 +62,7 @@ async def _sittings_loop():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    tasks = [asyncio.create_task(_retention_loop()), asyncio.create_task(_sittings_loop())]
+    tasks = [asyncio.create_task(_retention_loop()), asyncio.create_task(_sittings_loop()), asyncio.create_task(_ks3_loop())]
     try:
         yield
     finally:
@@ -76,6 +96,8 @@ app.include_router(requests.router)
 app.include_router(notes.router)
 app.include_router(papers.router)
 app.include_router(sync.router)
+app.include_router(ks3.router)
+app.include_router(help.router)
 
 
 @app.get("/health")

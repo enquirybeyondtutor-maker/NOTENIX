@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht5",
+  "subject": "Maths",
+  "title": "Year 7 Maths: Half-term 5 (Geometry: angles, polygons, area and perimeter)",
+  "topic": "ht5",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Angle facts",
+      "question": "Angles around a point are 95°, 120° and $x$. Find $x$.",
+      "options": [
+        "65°",
+        "215°",
+        "155°",
+        "145°"
+      ],
+      "answer": "145°",
+      "explanation": "Angles around a point add to 360°: $360 - 95 - 120 = 145$°."
+    },
+    {
+      "topic": "Angle facts",
+      "question": "An isosceles triangle has one angle of 40° between its two equal sides. What is each of the other two angles?",
+      "options": [
+        "40°",
+        "100°",
+        "70°",
+        "140°"
+      ],
+      "answer": "70°",
+      "explanation": "$180 - 40 = 140$, shared equally: 70° each."
+    },
+    {
+      "topic": "Angle facts",
+      "question": "Two straight lines cross. One of the angles is 58°. What is the angle vertically opposite it?",
+      "options": [
+        "32°",
+        "122°",
+        "58°",
+        "302°"
+      ],
+      "answer": "58°",
+      "explanation": "Vertically opposite angles are equal: 58°."
+    },
+    {
+      "topic": "Types of angle",
+      "question": "Which of these is a reflex angle?",
+      "options": [
+        "89°",
+        "200°",
+        "179°",
+        "90°"
+      ],
+      "answer": "200°",
+      "explanation": "Reflex angles are between 180° and 360°."
+    },
+    {
+      "topic": "Polygons",
+      "question": "What is the sum of the interior angles of a pentagon?",
+      "options": [
+        "360°",
+        "540°",
+        "450°",
+        "720°"
+      ],
+      "answer": "540°",
+      "explanation": "A pentagon splits into 3 triangles: $3 \\times 180 = 540$°."
+    },
+    {
+      "topic": "Polygons",
+      "question": "How many lines of symmetry does a regular hexagon have?",
+      "options": [
+        "6",
+        "3",
+        "2",
+        "12"
+      ],
+      "answer": "6",
+      "explanation": "A regular polygon has as many lines of symmetry as it has sides: 6."
+    },
+    {
+      "topic": "Perimeter",
+      "question": "A rectangle has perimeter 30 cm and length 9 cm. What is its width?",
+      "options": [
+        "3 cm",
+        "21 cm",
+        "12 cm",
+        "6 cm"
+      ],
+      "answer": "6 cm",
+      "explanation": "$2 \\times 9 = 18$; $30 - 18 = 12$ for both widths, so each width is 6 cm."
+    },
+    {
+      "topic": "Area",
+      "question": "Find the area of a parallelogram with base 12 cm and perpendicular height 5 cm.",
+      "options": [
+        "60 cm²",
+        "34 cm²",
+        "30 cm²",
+        "17 cm²"
+      ],
+      "answer": "60 cm²",
+      "explanation": "Area = base × perpendicular height = $12 \\times 5 = 60$ cm²."
+    },
+    {
+      "topic": "Area",
+      "question": "A trapezium has parallel sides 6 cm and 10 cm, and height 4 cm. What is its area?",
+      "options": [
+        "32 cm²",
+        "40 cm²",
+        "64 cm²",
+        "20 cm²"
+      ],
+      "answer": "32 cm²",
+      "explanation": "$\\dfrac{1}{2}(6 + 10) \\times 4 = 32$ cm²."
+    },
+    {
+      "topic": "Area",
+      "question": "A square has an area of 49 cm². What is its perimeter?",
+      "options": [
+        "7 cm",
+        "14 cm",
+        "28 cm",
+        "196 cm"
+      ],
+      "answer": "28 cm",
+      "explanation": "Each side is 7 cm (because 7 × 7 = 49), so the perimeter is 4 × 7 = 28 cm."
+    },
+    {
+      "topic": "Compound area",
+      "question": "An L-shape is made from a 10 cm × 6 cm rectangle with a 4 cm × 3 cm rectangle cut from one corner. What is its area?",
+      "options": [
+        "36 cm²",
+        "60 cm²",
+        "72 cm²",
+        "48 cm²"
+      ],
+      "answer": "48 cm²",
+      "explanation": "$10 \\times 6 = 60$, minus $4 \\times 3 = 12$, gives 48 cm²."
+    },
+    {
+      "topic": "Units",
+      "question": "How many cm² are in 1 m²?",
+      "options": [
+        "100",
+        "10 000",
+        "1 000",
+        "1 000 000"
+      ],
+      "answer": "10 000",
+      "explanation": "1 m = 100 cm, so 1 m² = $100 \\times 100 = 10\\,000$ cm²."
+    }
+  ]
+}

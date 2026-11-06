@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht5",
+  "subject": "Science",
+  "title": "Year 7 Science: Half-term 5 (Energy and electricity)",
+  "topic": "ht5",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Energy stores",
+      "question": "A stretched elastic band stores energy in which store?",
+      "options": [
+        "Elastic",
+        "Kinetic",
+        "Thermal",
+        "Nuclear"
+      ],
+      "answer": "Elastic",
+      "explanation": "Stretching or squashing an object fills its elastic store."
+    },
+    {
+      "topic": "Energy stores",
+      "question": "As a ball rolls down a hill, which store empties and which fills?",
+      "options": [
+        "Kinetic empties, gravitational fills",
+        "Gravitational empties, kinetic fills",
+        "Chemical empties, elastic fills",
+        "Thermal empties, kinetic fills"
+      ],
+      "answer": "Gravitational empties, kinetic fills",
+      "explanation": "It loses height (gravitational store) and speeds up (kinetic store)."
+    },
+    {
+      "topic": "Conservation",
+      "question": "Which statement is true?",
+      "options": [
+        "Energy can be created",
+        "Energy can be destroyed",
+        "Energy disappears as heat",
+        "Energy is transferred but the total stays the same"
+      ],
+      "answer": "Energy is transferred but the total stays the same",
+      "explanation": "Energy is conserved: it is only transferred between stores."
+    },
+    {
+      "topic": "Wasted energy",
+      "question": "A light bulb transfers 100 J of energy. 20 J is transferred usefully by light. How much is wasted?",
+      "options": [
+        "20 J",
+        "100 J",
+        "80 J",
+        "120 J"
+      ],
+      "answer": "80 J",
+      "explanation": "$100 - 20 = 80$ J is wasted, mostly heating the surroundings."
+    },
+    {
+      "topic": "Food energy",
+      "question": "Food labels show energy in which unit?",
+      "options": [
+        "Newtons",
+        "Metres",
+        "Volts",
+        "Kilojoules (kJ)"
+      ],
+      "answer": "Kilojoules (kJ)",
+      "explanation": "Energy is measured in joules; food uses kilojoules (and kilocalories)."
+    },
+    {
+      "topic": "Circuits",
+      "question": "In a series circuit, one bulb breaks. What happens to the other bulbs?",
+      "options": [
+        "They get brighter",
+        "They stay on",
+        "Only half go out",
+        "They all go out"
+      ],
+      "answer": "They all go out",
+      "explanation": "A series circuit has one loop; a break stops the current everywhere."
+    },
+    {
+      "topic": "Circuits",
+      "question": "What does an ammeter measure?",
+      "options": [
+        "Voltage",
+        "Current",
+        "Resistance",
+        "Power"
+      ],
+      "answer": "Current",
+      "explanation": "An ammeter measures current in amps (A) and is connected in series."
+    },
+    {
+      "topic": "Circuits",
+      "question": "How is a voltmeter connected in a circuit?",
+      "options": [
+        "In series",
+        "It is not connected",
+        "In parallel across the component",
+        "Between two batteries only"
+      ],
+      "answer": "In parallel across the component",
+      "explanation": "A voltmeter measures potential difference across a component, so it goes in parallel."
+    },
+    {
+      "topic": "Circuits",
+      "question": "Two identical bulbs are in parallel. What happens if one is unscrewed?",
+      "options": [
+        "The other stays on",
+        "The other goes out",
+        "Both get dimmer",
+        "The battery stops"
+      ],
+      "answer": "The other stays on",
+      "explanation": "Each parallel branch is its own loop, so the other bulb still has a complete circuit."
+    },
+    {
+      "topic": "Conductors",
+      "question": "Which material is an electrical insulator?",
+      "options": [
+        "Copper",
+        "Plastic",
+        "Iron",
+        "Aluminium"
+      ],
+      "answer": "Plastic",
+      "explanation": "Plastic does not let current flow easily. Metals are conductors."
+    },
+    {
+      "topic": "Resources",
+      "question": "Why are fossil fuels described as non-renewable?",
+      "options": [
+        "They are expensive",
+        "They are clean",
+        "They take millions of years to form and will run out",
+        "They come from the Sun"
+      ],
+      "answer": "They take millions of years to form and will run out",
+      "explanation": "They form over millions of years, far faster than we use them."
+    },
+    {
+      "topic": "Power",
+      "question": "Which uses more energy: a 2000 W kettle for 2 minutes or a 10 W lamp for 2 minutes?",
+      "options": [
+        "The kettle",
+        "The lamp",
+        "They use the same",
+        "Cannot tell"
+      ],
+      "answer": "The kettle",
+      "explanation": "Power is energy per second; the kettle transfers 200 times as much energy each second."
+    }
+  ]
+}

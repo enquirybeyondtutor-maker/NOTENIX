@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht3",
+  "subject": "English",
+  "title": "Year 7 English: Half-term 3 (Poetry and language techniques)",
+  "topic": "ht3",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Language techniques",
+      "question": "Read the passage.\n\n\"The sea at dawn is a grey cat, / stretching its long back on the sand, / purring as the tide comes in, / then, with one lazy paw, / it takes the footprints back.\"\n\nWhat is the main technique used across the whole poem?",
+      "options": [
+        "An extended metaphor",
+        "Onomatopoeia",
+        "A rhetorical question",
+        "Rhyming couplets"
+      ],
+      "answer": "An extended metaphor",
+      "explanation": "The sea is described as a cat all the way through: an extended metaphor."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Read the passage.\n\n\"The sea at dawn is a grey cat, / stretching its long back on the sand, / purring as the tide comes in, / then, with one lazy paw, / it takes the footprints back.\"\n\nWhat does \"purring as the tide comes in\" suggest about the sea?",
+      "options": [
+        "It is calm and gentle",
+        "It is angry",
+        "It is dangerous",
+        "It is frozen"
+      ],
+      "answer": "It is calm and gentle",
+      "explanation": "A purring cat is content and relaxed, so the sea is calm."
+    },
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"The sea at dawn is a grey cat, / stretching its long back on the sand, / purring as the tide comes in, / then, with one lazy paw, / it takes the footprints back.\"\n\nWhat does \"it takes the footprints back\" describe?",
+      "options": [
+        "A cat stealing shoes",
+        "Waves washing away footprints on the beach",
+        "People leaving the beach",
+        "The tide going out"
+      ],
+      "answer": "Waves washing away footprints on the beach",
+      "explanation": "The incoming tide smooths the sand, wiping out footprints."
+    },
+    {
+      "topic": "Poetic form",
+      "question": "Read the passage.\n\n\"The sea at dawn is a grey cat, / stretching its long back on the sand, / purring as the tide comes in, / then, with one lazy paw, / it takes the footprints back.\"\n\nDoes this poem have a regular rhyme scheme?",
+      "options": [
+        "Yes, every line rhymes",
+        "Yes, alternate lines rhyme",
+        "Yes, it is a limerick",
+        "No, it is free verse"
+      ],
+      "answer": "No, it is free verse",
+      "explanation": "None of the line endings rhyme in a pattern: it is free verse."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "\"The bees buzzed busily.\" Which TWO techniques are used?",
+      "options": [
+        "Simile and metaphor",
+        "Personification and rhyme",
+        "Alliteration and onomatopoeia",
+        "Hyperbole and simile"
+      ],
+      "answer": "Alliteration and onomatopoeia",
+      "explanation": "Repeated 'b' sounds (alliteration) and 'buzzed' sounds like the noise (onomatopoeia)."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "r\"I've told you a million times!\" This is an example of ...",
+      "options": [
+        "a simile",
+        "hyperbole",
+        "personification",
+        "a metaphor"
+      ],
+      "answer": "hyperbole",
+      "explanation": "It is a deliberate exaggeration for effect: hyperbole."
+    },
+    {
+      "topic": "Poetic terms",
+      "question": "What is a stanza?",
+      "options": [
+        "A rhyming word",
+        "A group of lines in a poem, like a paragraph",
+        "The title of a poem",
+        "The poet's name"
+      ],
+      "answer": "A group of lines in a poem, like a paragraph",
+      "explanation": "Stanzas are the 'paragraphs' of a poem."
+    },
+    {
+      "topic": "Poetic terms",
+      "question": "What is the 'tone' of a poem?",
+      "options": [
+        "How long it is",
+        "The number of rhymes",
+        "The poet's attitude or the mood created",
+        "The font it is printed in"
+      ],
+      "answer": "The poet's attitude or the mood created",
+      "explanation": "Tone is the feeling or attitude, e.g. joyful, bitter, nostalgic."
+    },
+    {
+      "topic": "Sound techniques",
+      "question": "Repeating vowel sounds in nearby words (e.g. 'the light of the fire is high') is called ...",
+      "options": [
+        "onomatopoeia",
+        "alliteration",
+        "rhyme",
+        "assonance"
+      ],
+      "answer": "assonance",
+      "explanation": "Assonance is the repetition of vowel sounds."
+    },
+    {
+      "topic": "Imagery",
+      "question": "Which of these uses sensory language about smell?",
+      "options": [
+        "The bread was golden brown.",
+        "The bread was soft to touch.",
+        "The oven door creaked.",
+        "The kitchen was filled with the warm scent of baking bread."
+      ],
+      "answer": "The kitchen was filled with the warm scent of baking bread.",
+      "explanation": "'Scent' appeals to the sense of smell."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "\"The classroom was a zoo.\" What does this metaphor suggest?",
+      "options": [
+        "The class had pets",
+        "The class was outside",
+        "The class was noisy and wild",
+        "The class was quiet"
+      ],
+      "answer": "The class was noisy and wild",
+      "explanation": "Comparing the class to a zoo suggests chaos and noise."
+    },
+    {
+      "topic": "Rhyme",
+      "question": "Which pair of words rhyme?",
+      "options": [
+        "Moon / spoon",
+        "Light / late",
+        "Rain / rail",
+        "Bird / bead"
+      ],
+      "answer": "Moon / spoon",
+      "explanation": "Moon and spoon share the same ending sound."
+    }
+  ]
+}

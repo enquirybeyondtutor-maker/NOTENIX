@@ -1,0 +1,7 @@
+{
+  "key": "y7-maths-algebra",
+  "year": 7,
+  "subject": "Maths",
+  "title": "Year 7 Maths: Algebra basics",
+  "body": "WORDS TO KNOW\n• Term: $3a$, $5$, $-2b$\n• Expression: terms added or subtracted, e.g. $3a + 5b - 2$ (no equals sign)\n• Equation: has an equals sign and can be solved, e.g. $2x + 5 = 17$\n\nSIMPLIFYING (collect like terms)\nOnly combine terms with the same letter.\n$3a + 5b - a + 2b = 2a + 7b$\n\nSUBSTITUTION\nSwap the letter for the number, then follow BIDMAS.\nIf $x = 4$: $3x^2 = 3 \\times 16 = 48$  (square first, then multiply)\n\nSOLVING ONE- AND TWO-STEP EQUATIONS\nDo the same thing to both sides, undoing in reverse order.\n$2x + 5 = 17$\nsubtract 5: $2x = 12$\ndivide by 2: $x = 6$\nCheck: $2 \\times 6 + 5 = 17$ ✓\n\nSEQUENCES\n3, 7, 11, 15, … goes up by 4 each time.\n$n$th term: $4n - 1$  (the times-table of the difference, then adjust)"
+}

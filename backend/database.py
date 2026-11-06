@@ -74,7 +74,7 @@ async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     import asyncio
-    for step in (run_migrations, migrate_note_kinds):
+    for step in (run_migrations, migrate_note_kinds, _load_ks3_content):
         for attempt in range(3):  # a deploy can briefly overlap the old instance
             try:
                 await step()
@@ -83,6 +83,13 @@ async def init_db():
                 print(f"[migrate] {step.__name__} attempt {attempt + 1} failed: {e}")
                 await asyncio.sleep(3)
     await bootstrap_admin()
+
+
+async def _load_ks3_content():
+    from services.ks3_content import sync_content
+    stats = await sync_content()
+    if any(stats.values()):
+        print(f"[ks3-content] {stats}")
 
 
 async def bootstrap_admin():
@@ -257,15 +264,27 @@ async def migrate_note_kinds():
         if engine.dialect.name == "postgresql":
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS billing_currency VARCHAR(3)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS terms_price VARCHAR(40)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_year INTEGER"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_trial_started_at TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_emails JSON"))
+            await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS ks3_slot VARCHAR(20)"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS kind VARCHAR(20) DEFAULT 'notes'"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS due_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS class_date VARCHAR(10)"))
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS ks3_year INTEGER"))
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS ks3_key VARCHAR(60)"))
         else:
             ucols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
             if "billing_currency" not in ucols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN billing_currency VARCHAR(3)"))
             if "terms_price" not in ucols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN terms_price VARCHAR(40)"))
+            for col, typ in (("ks3_year", "INTEGER"), ("ks3_trial_started_at", "TIMESTAMP"), ("ks3_emails", "JSON")):
+                if col not in ucols:
+                    await conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {typ}"))
+            tcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(tests)"))).all()}
+            if "ks3_slot" not in tcols:
+                await conn.execute(text("ALTER TABLE tests ADD COLUMN ks3_slot VARCHAR(20)"))
             cols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(class_notes)"))).all()}
             if "kind" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN kind VARCHAR(20) DEFAULT 'notes'"))
@@ -273,3 +292,7 @@ async def migrate_note_kinds():
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN due_at TIMESTAMP"))
             if "class_date" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN class_date VARCHAR(10)"))
+            if "ks3_year" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_year INTEGER"))
+            if "ks3_key" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_key VARCHAR(60)"))

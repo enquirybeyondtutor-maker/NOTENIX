@@ -1,0 +1,249 @@
+{
+  "slot": "y9-baseline",
+  "subject": "Science",
+  "title": "Year 9 Science Baseline",
+  "topic": "baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Atomic structure",
+      "question": "Which particles are found in the nucleus of an atom?",
+      "options": [
+        "Electrons only",
+        "Protons and neutrons",
+        "Protons and electrons",
+        "Neutrons and electrons"
+      ],
+      "answer": "Protons and neutrons",
+      "explanation": "The nucleus holds protons and neutrons; electrons orbit in shells."
+    },
+    {
+      "topic": "Atomic structure",
+      "question": "What is the charge on an electron?",
+      "options": [
+        "+1",
+        "$-1$",
+        "0",
+        "+2"
+      ],
+      "answer": "$-1$",
+      "explanation": "Protons are +1, neutrons 0, electrons −1."
+    },
+    {
+      "topic": "Atomic structure",
+      "question": "An atom has 11 protons. How many electrons does a neutral atom of it have?",
+      "options": [
+        "11",
+        "0",
+        "12",
+        "23"
+      ],
+      "answer": "11",
+      "explanation": "Neutral atoms have equal numbers of protons and electrons."
+    },
+    {
+      "topic": "Periodic table",
+      "question": "Group 1 metals (e.g. sodium) are stored in oil. Why?",
+      "options": [
+        "They are too heavy",
+        "They react quickly with air and water",
+        "They melt easily",
+        "They are radioactive"
+      ],
+      "answer": "They react quickly with air and water",
+      "explanation": "Alkali metals react vigorously with oxygen and water."
+    },
+    {
+      "topic": "Equations",
+      "question": "Which equation is balanced?",
+      "options": [
+        "$\\text{H}_2 + \\text{O}_2 \\rightarrow \\text{H}_2\\text{O}$",
+        "$\\text{H}_2 + 2\\text{O}_2 \\rightarrow \\text{H}_2\\text{O}$",
+        "$2\\text{H}_2 + \\text{O}_2 \\rightarrow 2\\text{H}_2\\text{O}$",
+        "$2\\text{H} + \\text{O} \\rightarrow \\text{H}_2\\text{O}_2$"
+      ],
+      "answer": "$2\\text{H}_2 + \\text{O}_2 \\rightarrow 2\\text{H}_2\\text{O}$",
+      "explanation": "4 hydrogen and 2 oxygen atoms on each side."
+    },
+    {
+      "topic": "Reactivity",
+      "question": "Which metal is most reactive?",
+      "options": [
+        "Potassium",
+        "Copper",
+        "Iron",
+        "Gold"
+      ],
+      "answer": "Potassium",
+      "explanation": "Potassium is near the top of the reactivity series; gold is at the bottom."
+    },
+    {
+      "topic": "Earth and atmosphere",
+      "question": "Which gas makes up about 78% of the air?",
+      "options": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Nitrogen",
+        "Argon"
+      ],
+      "answer": "Nitrogen",
+      "explanation": "Air is about 78% nitrogen and 21% oxygen."
+    },
+    {
+      "topic": "Climate",
+      "question": "Why does increasing carbon dioxide cause global warming?",
+      "options": [
+        "It blocks sunlight",
+        "It absorbs heat radiated from the Earth and traps it",
+        "It makes the Sun hotter",
+        "It destroys ozone"
+      ],
+      "answer": "It absorbs heat radiated from the Earth and traps it",
+      "explanation": "Greenhouse gases absorb infrared radiation from the Earth's surface."
+    },
+    {
+      "topic": "Genetics",
+      "question": "Where is DNA found in a cell?",
+      "options": [
+        "Cell membrane",
+        "Cell wall",
+        "Cytoplasm only",
+        "Nucleus"
+      ],
+      "answer": "Nucleus",
+      "explanation": "DNA is found in the chromosomes inside the nucleus."
+    },
+    {
+      "topic": "Genetics",
+      "question": "How many chromosomes are in a normal human body cell?",
+      "options": [
+        "23",
+        "44",
+        "46",
+        "92"
+      ],
+      "answer": "46",
+      "explanation": "Body cells have 46 chromosomes (23 pairs); sex cells have 23."
+    },
+    {
+      "topic": "Variation",
+      "question": "Which of these is caused only by genes (inherited)?",
+      "options": [
+        "Natural eye colour",
+        "A scar",
+        "Language spoken",
+        "Hair length"
+      ],
+      "answer": "Natural eye colour",
+      "explanation": "Natural eye colour is inherited; the others depend on the environment."
+    },
+    {
+      "topic": "Evolution",
+      "question": "What does 'natural selection' mean?",
+      "options": [
+        "Individuals best suited to their environment survive and pass on their genes",
+        "Animals choose their food",
+        "Humans breed animals",
+        "All organisms survive equally"
+      ],
+      "answer": "Individuals best suited to their environment survive and pass on their genes",
+      "explanation": "Better-adapted individuals are more likely to survive and reproduce."
+    },
+    {
+      "topic": "Health",
+      "question": "What is the job of white blood cells?",
+      "options": [
+        "Carry oxygen",
+        "Carry glucose",
+        "Help blood clot",
+        "Fight infection"
+      ],
+      "answer": "Fight infection",
+      "explanation": "White blood cells defend the body against pathogens."
+    },
+    {
+      "topic": "Energy",
+      "question": "A 2 kW heater is on for 3 hours. How much energy does it transfer in kWh?",
+      "options": [
+        "0.67 kWh",
+        "5 kWh",
+        "1.5 kWh",
+        "6 kWh"
+      ],
+      "answer": "6 kWh",
+      "explanation": "Energy = power × time = $2 \\times 3 = 6$ kWh."
+    },
+    {
+      "topic": "Energy",
+      "question": "A motor is given 500 J and transfers 400 J usefully. What is its efficiency?",
+      "options": [
+        "80%",
+        "40%",
+        "100%",
+        "125%"
+      ],
+      "answer": "80%",
+      "explanation": "Efficiency = useful ÷ total = $400 \\div 500 = 0.8 = 80\\%$."
+    },
+    {
+      "topic": "Waves",
+      "question": "Which type of wave is sound?",
+      "options": [
+        "Transverse",
+        "It is not a wave",
+        "Electromagnetic",
+        "Longitudinal"
+      ],
+      "answer": "Longitudinal",
+      "explanation": "Sound vibrations are parallel to the direction the wave travels: longitudinal."
+    },
+    {
+      "topic": "Waves",
+      "question": "Which part of the electromagnetic spectrum is used for night-vision cameras?",
+      "options": [
+        "Ultraviolet",
+        "Infrared",
+        "X-rays",
+        "Gamma rays"
+      ],
+      "answer": "Infrared",
+      "explanation": "Warm objects give off infrared radiation."
+    },
+    {
+      "topic": "Density",
+      "question": "A block has mass 600 g and volume 200 cm³. What is its density?",
+      "options": [
+        "0.33 g/cm³",
+        "400 g/cm³",
+        "3 g/cm³",
+        "120 000 g/cm³"
+      ],
+      "answer": "3 g/cm³",
+      "explanation": "Density = mass ÷ volume = $600 \\div 200 = 3$ g/cm³."
+    },
+    {
+      "topic": "Forces",
+      "question": "A 1200 kg car accelerates at 2 m/s². What resultant force acts on it?",
+      "options": [
+        "600 N",
+        "1202 N",
+        "2400 N",
+        "24 000 N"
+      ],
+      "answer": "2400 N",
+      "explanation": "$F = m \\times a = 1200 \\times 2 = 2400$ N."
+    },
+    {
+      "topic": "Electricity",
+      "question": "What is the power of a device with current 5 A and potential difference 230 V?",
+      "options": [
+        "46 W",
+        "235 W",
+        "11.5 W",
+        "1150 W"
+      ],
+      "answer": "1150 W",
+      "explanation": "$P = I \\times V = 5 \\times 230 = 1150$ W."
+    }
+  ]
+}

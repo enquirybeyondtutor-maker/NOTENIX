@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht2",
+  "subject": "Science",
+  "title": "Year 7 Science: Half-term 2 (Particles, states of matter and mixtures)",
+  "topic": "ht2",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "States of matter",
+      "question": "Which statement about liquids is true?",
+      "options": [
+        "They have a fixed shape",
+        "Their particles are far apart",
+        "They can be easily squashed",
+        "They take the shape of their container"
+      ],
+      "answer": "They take the shape of their container",
+      "explanation": "Liquid particles touch but can slide past each other, so liquids flow and take their container's shape."
+    },
+    {
+      "topic": "Changes of state",
+      "question": "What is the change from gas to liquid called?",
+      "options": [
+        "Melting",
+        "Evaporating",
+        "Condensing",
+        "Freezing"
+      ],
+      "answer": "Condensing",
+      "explanation": "Gas to liquid is condensing, e.g. water droplets forming on a cold window."
+    },
+    {
+      "topic": "Changes of state",
+      "question": "Ice melts at 0°C. What happens to the particles as the ice melts?",
+      "options": [
+        "They get bigger",
+        "They gain energy and break out of their fixed positions",
+        "They stop moving",
+        "They turn into new particles"
+      ],
+      "answer": "They gain energy and break out of their fixed positions",
+      "explanation": "Heat gives the particles energy; they break free of the fixed pattern and can move past each other."
+    },
+    {
+      "topic": "Changes of state",
+      "question": "What is the difference between evaporation and boiling?",
+      "options": [
+        "There is no difference",
+        "Evaporation happens only at the surface, at any temperature below boiling point",
+        "Boiling happens only at the surface",
+        "Evaporation only happens to solids"
+      ],
+      "answer": "Evaporation happens only at the surface, at any temperature below boiling point",
+      "explanation": "Evaporation happens at the surface at any temperature; boiling happens throughout the liquid at its boiling point."
+    },
+    {
+      "topic": "Diffusion",
+      "question": "Why does the smell of perfume spread across a room?",
+      "options": [
+        "The perfume particles move randomly and spread out",
+        "The air pushes it",
+        "The perfume gets heavier",
+        "The particles stay still"
+      ],
+      "answer": "The perfume particles move randomly and spread out",
+      "explanation": "Gas particles move quickly and randomly, so they diffuse through the air."
+    },
+    {
+      "topic": "Gas pressure",
+      "question": "Why does a balloon get bigger when it is warmed?",
+      "options": [
+        "The rubber melts",
+        "The particles get bigger",
+        "The gas particles move faster and hit the walls harder",
+        "More particles are made"
+      ],
+      "answer": "The gas particles move faster and hit the walls harder",
+      "explanation": "Faster particles collide with the walls more often and harder, increasing pressure inside."
+    },
+    {
+      "topic": "Pure substances",
+      "question": "Which of these is a pure substance?",
+      "options": [
+        "Distilled water",
+        "Air",
+        "Sea water",
+        "Orange juice"
+      ],
+      "answer": "Distilled water",
+      "explanation": "Distilled water contains only water particles. The others are mixtures."
+    },
+    {
+      "topic": "Solutions",
+      "question": "Sugar dissolves in tea. In this solution, what is the solute?",
+      "options": [
+        "Tea",
+        "Water vapour",
+        "The cup",
+        "Sugar"
+      ],
+      "answer": "Sugar",
+      "explanation": "The solute is what dissolves (sugar); the solvent is what it dissolves in (the liquid)."
+    },
+    {
+      "topic": "Separation",
+      "question": "Which method separates the different dyes in a black ink?",
+      "options": [
+        "Filtration",
+        "Evaporation",
+        "Magnetism",
+        "Chromatography"
+      ],
+      "answer": "Chromatography",
+      "explanation": "Chromatography separates dyes because they travel different distances up the paper."
+    },
+    {
+      "topic": "Separation",
+      "question": "Which method gets pure water from sea water?",
+      "options": [
+        "Filtration",
+        "Distillation",
+        "Chromatography",
+        "Sieving"
+      ],
+      "answer": "Distillation",
+      "explanation": "Distillation boils the water and condenses the vapour, leaving the salt behind."
+    },
+    {
+      "topic": "Separation",
+      "question": "Iron filings are mixed with sand. What is the easiest way to separate them?",
+      "options": [
+        "Use a magnet",
+        "Filter",
+        "Evaporate",
+        "Distil"
+      ],
+      "answer": "Use a magnet",
+      "explanation": "Iron is magnetic and sand is not."
+    },
+    {
+      "topic": "Solubility",
+      "question": "Why does more sugar dissolve in hot water than in cold water?",
+      "options": [
+        "Hot water is thicker",
+        "Sugar melts in hot water",
+        "Solubility usually increases with temperature",
+        "Cold water has no particles"
+      ],
+      "answer": "Solubility usually increases with temperature",
+      "explanation": "Most solids are more soluble at higher temperatures."
+    }
+  ]
+}

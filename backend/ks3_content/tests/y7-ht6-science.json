@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht6",
+  "subject": "Science",
+  "title": "Year 7 Science: Half-term 6 (Reproduction, ecosystems, light and sound)",
+  "topic": "ht6",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Reproduction",
+      "question": "Where does fertilisation usually happen in humans?",
+      "options": [
+        "In the ovary",
+        "In the vagina",
+        "In the uterus",
+        "In the oviduct"
+      ],
+      "answer": "In the oviduct",
+      "explanation": "The egg is usually fertilised in the oviduct (fallopian tube)."
+    },
+    {
+      "topic": "Reproduction",
+      "question": "Which part of a flower makes pollen?",
+      "options": [
+        "Stigma",
+        "Ovary",
+        "Anther",
+        "Petal"
+      ],
+      "answer": "Anther",
+      "explanation": "The anther (part of the stamen) makes pollen."
+    },
+    {
+      "topic": "Puberty",
+      "question": "Which of these is a change during puberty for both boys and girls?",
+      "options": [
+        "Growth of pubic hair",
+        "Voice deepens a lot",
+        "Periods start",
+        "Breasts develop"
+      ],
+      "answer": "Growth of pubic hair",
+      "explanation": "Pubic hair grows in both. The others are mainly in one sex."
+    },
+    {
+      "topic": "Food chains",
+      "question": "In the food chain grass → rabbit → fox, what is the rabbit?",
+      "options": [
+        "Primary consumer",
+        "Producer",
+        "Secondary consumer",
+        "Decomposer"
+      ],
+      "answer": "Primary consumer",
+      "explanation": "The rabbit eats the producer (grass), so it is the primary consumer."
+    },
+    {
+      "topic": "Food chains",
+      "question": "What do the arrows in a food chain show?",
+      "options": [
+        "Who eats who",
+        "Where animals live",
+        "The direction energy is transferred",
+        "Which is biggest"
+      ],
+      "answer": "The direction energy is transferred",
+      "explanation": "Arrows point from the food to the feeder: the direction of energy transfer."
+    },
+    {
+      "topic": "Ecosystems",
+      "question": "If all the foxes died, what would most likely happen to the rabbits at first?",
+      "options": [
+        "Rabbits decrease",
+        "No change",
+        "Rabbits increase",
+        "Grass increases"
+      ],
+      "answer": "Rabbits increase",
+      "explanation": "With fewer predators, more rabbits survive, so their numbers rise (then grass falls)."
+    },
+    {
+      "topic": "Adaptation",
+      "question": "Why do polar bears have thick fur and a layer of fat?",
+      "options": [
+        "To swim faster",
+        "To keep warm in the cold",
+        "To hide from prey in forests",
+        "To store water"
+      ],
+      "answer": "To keep warm in the cold",
+      "explanation": "Both insulate the bear against freezing temperatures."
+    },
+    {
+      "topic": "Light",
+      "question": "What happens when light hits a mirror?",
+      "options": [
+        "It is absorbed",
+        "It is reflected",
+        "It stops",
+        "It turns into sound"
+      ],
+      "answer": "It is reflected",
+      "explanation": "Mirrors reflect light; the angle of incidence equals the angle of reflection."
+    },
+    {
+      "topic": "Light",
+      "question": "Why does a straw look bent in a glass of water?",
+      "options": [
+        "The water bends the straw",
+        "Light refracts as it passes from water to air",
+        "Light reflects off the glass",
+        "The straw absorbs light"
+      ],
+      "answer": "Light refracts as it passes from water to air",
+      "explanation": "Light changes speed and direction (refracts) between water and air."
+    },
+    {
+      "topic": "Light",
+      "question": "A red apple is seen in white light. Why does it look red?",
+      "options": [
+        "It reflects red light and absorbs other colours",
+        "It absorbs red light",
+        "It makes red light",
+        "It refracts red light"
+      ],
+      "answer": "It reflects red light and absorbs other colours",
+      "explanation": "Objects look the colour of the light they reflect."
+    },
+    {
+      "topic": "Sound",
+      "question": "A sound has a higher pitch. What has changed?",
+      "options": [
+        "Its amplitude is bigger",
+        "It is quieter",
+        "It travels faster",
+        "Its frequency is higher"
+      ],
+      "answer": "Its frequency is higher",
+      "explanation": "Pitch depends on frequency: more vibrations per second gives a higher pitch."
+    },
+    {
+      "topic": "Sound",
+      "question": "A loud sound and a quiet sound have the same pitch. What is different?",
+      "options": [
+        "The frequency",
+        "The wavelength in a vacuum",
+        "The speed",
+        "The amplitude"
+      ],
+      "answer": "The amplitude",
+      "explanation": "Loudness depends on amplitude (the size of the vibrations)."
+    }
+  ]
+}

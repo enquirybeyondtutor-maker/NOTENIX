@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht1",
+  "subject": "Science",
+  "title": "Year 7 Science: Half-term 1 (Cells and organisation)",
+  "topic": "ht1",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Cells",
+      "question": "Which cell part is the site of respiration?",
+      "options": [
+        "Nucleus",
+        "Chloroplast",
+        "Mitochondria",
+        "Vacuole"
+      ],
+      "answer": "Mitochondria",
+      "explanation": "Mitochondria release energy from glucose by respiration."
+    },
+    {
+      "topic": "Cells",
+      "question": "What is the cell wall of a plant cell made of?",
+      "options": [
+        "Protein",
+        "Starch",
+        "Cellulose",
+        "Fat"
+      ],
+      "answer": "Cellulose",
+      "explanation": "Plant cell walls are made of cellulose, which keeps the cell rigid."
+    },
+    {
+      "topic": "Cells",
+      "question": "Which of these would you NOT find in a human cheek cell?",
+      "options": [
+        "Nucleus",
+        "Chloroplast",
+        "Cell membrane",
+        "Cytoplasm"
+      ],
+      "answer": "Chloroplast",
+      "explanation": "Chloroplasts are only found in plant cells (and some algae)."
+    },
+    {
+      "topic": "Specialised cells",
+      "question": "Why does a red blood cell have no nucleus?",
+      "options": [
+        "So it can divide faster",
+        "To have more room to carry oxygen",
+        "So it can swim",
+        "To make it stronger"
+      ],
+      "answer": "To have more room to carry oxygen",
+      "explanation": "Without a nucleus there is more space for haemoglobin, which carries oxygen."
+    },
+    {
+      "topic": "Specialised cells",
+      "question": "What feature helps a root hair cell absorb water?",
+      "options": [
+        "A long, thin projection that increases surface area",
+        "A tail",
+        "Lots of chloroplasts",
+        "A thick cell wall"
+      ],
+      "answer": "A long, thin projection that increases surface area",
+      "explanation": "The long projection gives a large surface area for absorbing water and minerals."
+    },
+    {
+      "topic": "Organisation",
+      "question": "A group of similar cells working together is called a ...",
+      "options": [
+        "tissue",
+        "organ",
+        "organ system",
+        "organism"
+      ],
+      "answer": "tissue",
+      "explanation": "Similar cells form tissues; tissues form organs."
+    },
+    {
+      "topic": "Organisation",
+      "question": "Which of these is an organ?",
+      "options": [
+        "The heart",
+        "Blood",
+        "A muscle cell",
+        "The circulatory system"
+      ],
+      "answer": "The heart",
+      "explanation": "The heart is an organ made of several tissues. The circulatory system is an organ system."
+    },
+    {
+      "topic": "Microscopes",
+      "question": "A microscope has an eyepiece lens of ×10 and an objective lens of ×40. What is the total magnification?",
+      "options": [
+        "×4",
+        "×50",
+        "×4000",
+        "×400"
+      ],
+      "answer": "×400",
+      "explanation": "Total magnification = eyepiece × objective = $10 \\times 40 = 400$."
+    },
+    {
+      "topic": "Microscopes",
+      "question": "When using a microscope, which objective lens should you start with?",
+      "options": [
+        "The highest power",
+        "No lens",
+        "Any of them",
+        "The lowest power"
+      ],
+      "answer": "The lowest power",
+      "explanation": "Start on the lowest power to find the specimen, then increase."
+    },
+    {
+      "topic": "Diffusion",
+      "question": "Oxygen moves into cells by diffusion. What does diffusion mean?",
+      "options": [
+        "Particles moving from low to high concentration",
+        "Particles moving from high to low concentration",
+        "Water moving into roots",
+        "Particles staying still"
+      ],
+      "answer": "Particles moving from high to low concentration",
+      "explanation": "Diffusion is the spreading of particles from where there are more to where there are fewer."
+    },
+    {
+      "topic": "Unicellular organisms",
+      "question": "Which of these is made of only one cell?",
+      "options": [
+        "Mushroom",
+        "Earthworm",
+        "Oak tree",
+        "Amoeba"
+      ],
+      "answer": "Amoeba",
+      "explanation": "An amoeba is a single-celled organism."
+    },
+    {
+      "topic": "Cells",
+      "question": "What does the nucleus contain?",
+      "options": [
+        "Cell sap",
+        "Chlorophyll",
+        "Genetic material (DNA)",
+        "Air"
+      ],
+      "answer": "Genetic material (DNA)",
+      "explanation": "The nucleus holds DNA, the instructions that control the cell."
+    }
+  ]
+}

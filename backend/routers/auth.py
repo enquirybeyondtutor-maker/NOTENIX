@@ -82,6 +82,7 @@ def _user_dict(u: User) -> dict:
         "needs_activation": bool(getattr(u, "needs_activation", False)),
         "parent_email": getattr(u, "parent_email", None),
         "subscription": pricing.for_currency(getattr(u, "billing_currency", None)),
+        "ks3_year": getattr(u, "ks3_year", None),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 

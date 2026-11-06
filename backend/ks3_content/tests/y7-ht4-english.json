@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht4",
+  "subject": "English",
+  "title": "Year 7 English: Half-term 4 (Punctuation and spelling)",
+  "topic": "ht4",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Apostrophes",
+      "question": "Which is correct?",
+      "options": [
+        "The childrens' toys",
+        "The children's toys",
+        "The childrens toy's",
+        "The children toys'"
+      ],
+      "answer": "The children's toys",
+      "explanation": "'Children' is already plural, so add 's for possession: children's."
+    },
+    {
+      "topic": "Apostrophes",
+      "question": "What does r\"they're\" mean?",
+      "options": [
+        "Belonging to them",
+        "In that place",
+        "They are",
+        "They were"
+      ],
+      "answer": "They are",
+      "explanation": "They're is short for 'they are'."
+    },
+    {
+      "topic": "Commas",
+      "question": "Which sentence uses commas correctly?",
+      "options": [
+        "My sister who is ten, likes swimming.",
+        "My sister, who is ten, likes swimming.",
+        "My, sister who is ten likes swimming.",
+        "My sister who, is ten likes swimming."
+      ],
+      "answer": "My sister, who is ten, likes swimming.",
+      "explanation": "Extra information in the middle of a sentence needs a comma on both sides."
+    },
+    {
+      "topic": "Commas",
+      "question": "What is a comma splice?",
+      "options": [
+        "Two main clauses joined only by a comma",
+        "A list with too many commas",
+        "A comma before 'and'",
+        "Missing speech marks"
+      ],
+      "answer": "Two main clauses joined only by a comma",
+      "explanation": "E.g. 'It was cold, we went inside.' Use a full stop, semicolon or conjunction instead."
+    },
+    {
+      "topic": "Colons",
+      "question": "Which sentence uses a colon correctly?",
+      "options": [
+        "I need: eggs, milk and bread.",
+        "She was: late again.",
+        "Bring three things: a pen, a ruler and a rubber.",
+        "We went to: the park."
+      ],
+      "answer": "Bring three things: a pen, a ruler and a rubber.",
+      "explanation": "A colon follows a complete clause to introduce a list or explanation."
+    },
+    {
+      "topic": "Speech",
+      "question": "Which sentence is correctly punctuated?",
+      "options": [
+        "\"Stop!\" Shouted Mum.",
+        "\"Stop\" shouted Mum!",
+        "Stop! \"shouted Mum.\"",
+        "\"Stop!\" shouted Mum."
+      ],
+      "answer": "\"Stop!\" shouted Mum.",
+      "explanation": "The ! goes inside the speech marks, and 'shouted' stays lower case."
+    },
+    {
+      "topic": "Brackets",
+      "question": "What are brackets (parentheses) used for?",
+      "options": [
+        "To end a sentence",
+        "To join two clauses",
+        "To show speech",
+        "To add extra information that the sentence still makes sense without"
+      ],
+      "answer": "To add extra information that the sentence still makes sense without",
+      "explanation": "Brackets add extra detail, e.g. 'The test (worth 20 marks) is on Friday.'"
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which is spelt correctly?",
+      "options": [
+        "Seperate",
+        "Separete",
+        "Seprate",
+        "Separate"
+      ],
+      "answer": "Separate",
+      "explanation": "There's 'a rat' in sep-a-rat-e."
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which is spelt correctly?",
+      "options": [
+        "Necessary",
+        "Neccessary",
+        "Necesary",
+        "Neccesary"
+      ],
+      "answer": "Necessary",
+      "explanation": "One collar (c), two sleeves (ss): necessary."
+    },
+    {
+      "topic": "Homophones",
+      "question": "Which word completes \"I would like to ___ the end of the film\"?",
+      "options": [
+        "sea",
+        "si",
+        "see",
+        "cee"
+      ],
+      "answer": "see",
+      "explanation": "'See' is to look at; 'sea' is the ocean."
+    },
+    {
+      "topic": "Homophones",
+      "question": "Which sentence is correct?",
+      "options": [
+        "You're going to be late.",
+        "Your going to be late.",
+        "Youre going to be late.",
+        "You are going to be late's."
+      ],
+      "answer": "You're going to be late.",
+      "explanation": "You're = you are."
+    },
+    {
+      "topic": "Plurals",
+      "question": "What is the plural of 'knife'?",
+      "options": [
+        "Knifes",
+        "Knives",
+        "Knifs",
+        "Knivs"
+      ],
+      "answer": "Knives",
+      "explanation": "Many words ending in -f or -fe change to -ves: knife → knives."
+    }
+  ]
+}

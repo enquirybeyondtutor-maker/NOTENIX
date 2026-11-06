@@ -26,6 +26,7 @@ interface Row {
   terms_accepted_at: string | null;
   terms_price?: string | null;
   billing_currency?: string;
+  ks3_year?: number | null;
   subscription_label?: string;
   created_at: string;
   last_active: string | null;
@@ -247,6 +248,19 @@ export default function AdminPage() {
     }
   };
 
+  const changeKs3 = async (row: Row, value: string) => {
+    setBusy(row.id);
+    try {
+      const { data } = await adminAPI.setKs3(row.id, value ? Number(value) : null);
+      if (value && data.tests_assigned) alert(`${row.full_name} is on KS3 Year ${value}: ${data.tests_assigned} test(s) and the notes were added.`);
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Couldn't change KS3");
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const requireActivation = async (row: Row) => {
     if (!confirm(`Send ${row.full_name} back to "Pending activation"? They get a new temporary password, the saved parent email and phone are cleared, and the parent activates again on next sign-in.`)) return;
     setBusy(row.id);
@@ -372,6 +386,16 @@ export default function AdminPage() {
                           onChange={(e) => changeCurrency(u, e.target.value)} title="Billing currency shown in the parent's terms"
                           className="mt-1 block rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">
                           {priceList.map((p) => <option key={p.currency} value={p.currency}>{p.label}/yr ({p.region})</option>)}
+                        </select>
+                      )}
+                      {u.role === "student" && !u.is_admin && (
+                        <select value={u.ks3_year ? String(u.ks3_year) : ""} disabled={busy === u.id}
+                          onChange={(e) => changeKs3(u, e.target.value)} title="Notenix KS3: tests, notes, homework help, monthly parent report"
+                          className="mt-1 block rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">
+                          <option value="">KS3: off</option>
+                          <option value="7">KS3: Year 7</option>
+                          <option value="8">KS3: Year 8</option>
+                          <option value="9">KS3: Year 9</option>
                         </select>
                       )}
                       {u.role === "student" && !u.is_admin && !u.needs_activation && (

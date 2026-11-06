@@ -16,7 +16,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     } catch {}
     fetch("/api/ping", { cache: "no-store" }).catch(() => {});
   }, []);
-  const isAuthPage = pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password";
+  const isAuthPage = pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password" || pathname === "/ks3/trial";
 
   // App surfaces get the nav but not the marketing footer.
   const isAppSurface =

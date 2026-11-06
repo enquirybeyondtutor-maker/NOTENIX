@@ -1,0 +1,7 @@
+{
+  "key": "y9-maths-algebra",
+  "year": 9,
+  "subject": "Maths",
+  "title": "Year 9 Maths: Indices, standard form and algebra",
+  "body": "INDEX LAWS\n$x^a \\times x^b = x^{a+b}$     $x^a \\div x^b = x^{a-b}$     $(x^a)^b = x^{ab}$\n$x^0 = 1$     $x^{-1} = \\dfrac{1}{x}$\n\nSTANDARD FORM: $A \\times 10^n$ with $1 \\le A < 10$\n46 000 000 = $4.6 \\times 10^7$     0.00032 = $3.2 \\times 10^{-4}$\n\nDOUBLE BRACKETS (multiply every term by every term)\n$(x + 3)(x + 5) = x^2 + 5x + 3x + 15 = x^2 + 8x + 15$\n\nFACTORISING QUADRATICS\n$x^2 + 7x + 12$: find two numbers that multiply to 12 and add to 7 → 3 and 4\n$= (x + 3)(x + 4)$\n\nINEQUALITIES\nSolve like equations: $3x - 4 < 11$ → $3x < 15$ → $x < 5$\n(If you multiply or divide by a negative number, flip the sign.)\n\nSIMULTANEOUS EQUATIONS\n$x + y = 10$ and $x - y = 4$: add them → $2x = 14$ → $x = 7$, then $y = 3$"
+}

@@ -69,6 +69,15 @@ class Settings(BaseSettings):
     # Student subscription price per billing currency, JSON, e.g. {"GBP": 49, "AED": 229}.
     # Empty = the defaults in services/pricing.py.
     subscription_prices: str = ""
+    # Notenix KS3 (Year 7-9): yearly price per currency (JSON, empty = defaults) and free trial length.
+    ks3_prices: str = ""
+    ks3_trial_days: int = 7
+    ks3_help_trial_cap: int = 5      # homework-help questions during the free week
+    ks3_help_monthly_cap: int = 30   # fair use for paying KS3 families
+    ks3_id_domain: str = "notenix.com"              # KS3 trial user IDs: zara@notenix.com
+    # Where trial emails send parents to continue, and to book a Beyond Tutors class.
+    ks3_upgrade_url: str = "https://www.notenix.com/ks3/continue"
+    book_class_url: str = "https://www.thebeyondtutors.com/book"
     trial_days: int = 7                              # free access around the trial class
 
     # Private key for the BT Sessions desktop app (/sync/*). Empty = sync disabled.

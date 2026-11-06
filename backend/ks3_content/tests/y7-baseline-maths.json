@@ -1,0 +1,249 @@
+{
+  "slot": "y7-baseline",
+  "subject": "Maths",
+  "title": "Year 7 Maths Baseline",
+  "topic": "Baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Place value & rounding",
+      "question": "What is the value of the digit 7 in 4.073?",
+      "options": [
+        "7 tenths",
+        "7 ones",
+        "7 thousandths",
+        "7 hundredths"
+      ],
+      "answer": "7 hundredths",
+      "explanation": "4.073 = 4 ones, 0 tenths, 7 hundredths, 3 thousandths."
+    },
+    {
+      "topic": "Place value & rounding",
+      "question": "Round 3.465 to 1 decimal place.",
+      "options": [
+        "3.4",
+        "3.47",
+        "3.46",
+        "3.5"
+      ],
+      "answer": "3.5",
+      "explanation": "Look at the hundredths digit: 6 is 5 or more, so 3.4 rounds up to 3.5."
+    },
+    {
+      "topic": "Negative numbers",
+      "question": "The temperature is $-4$°C at night and rises by 9°C by midday. What is the midday temperature?",
+      "options": [
+        "$-13$°C",
+        "5°C",
+        "$-5$°C",
+        "13°C"
+      ],
+      "answer": "5°C",
+      "explanation": "$-4 + 9 = 5$, so it is 5°C."
+    },
+    {
+      "topic": "Negative numbers",
+      "question": "Work out $-3 \\times -6$.",
+      "options": [
+        "$-18$",
+        "9",
+        "$-9$",
+        "18"
+      ],
+      "answer": "18",
+      "explanation": "A negative times a negative is positive: $3 \\times 6 = 18$."
+    },
+    {
+      "topic": "Fractions",
+      "question": "Work out $\\dfrac{2}{3} + \\dfrac{1}{4}$.",
+      "options": [
+        "$\\dfrac{3}{7}$",
+        "$\\dfrac{11}{12}$",
+        "$\\dfrac{3}{12}$",
+        "$\\dfrac{5}{6}$"
+      ],
+      "answer": "$\\dfrac{11}{12}$",
+      "explanation": "Use a common denominator of 12: $\\dfrac{8}{12} + \\dfrac{3}{12} = \\dfrac{11}{12}$."
+    },
+    {
+      "topic": "Fractions",
+      "question": "What is $\\dfrac{3}{5}$ of 40?",
+      "options": [
+        "8",
+        "15",
+        "24",
+        "30"
+      ],
+      "answer": "24",
+      "explanation": "$40 \\div 5 = 8$, then $8 \\times 3 = 24$."
+    },
+    {
+      "topic": "Fractions, decimals & percentages",
+      "question": "Which of these is the largest?",
+      "options": [
+        "$\\dfrac{2}{5}$",
+        "0.45",
+        "42%",
+        "$\\dfrac{3}{8}$"
+      ],
+      "answer": "0.45",
+      "explanation": "Write them all as decimals: $\\dfrac{2}{5} = 0.4$, 42% = 0.42, $\\dfrac{3}{8} = 0.375$. So 0.45 is the largest."
+    },
+    {
+      "topic": "Fractions, decimals & percentages",
+      "question": "Find 15% of 60.",
+      "options": [
+        "4",
+        "9",
+        "6",
+        "15"
+      ],
+      "answer": "9",
+      "explanation": "10% of 60 is 6 and 5% is 3, so 15% is $6 + 3 = 9$."
+    },
+    {
+      "topic": "Algebra basics",
+      "question": "Simplify $3a + 5b - a + 2b$.",
+      "options": [
+        "$2a + 7b$",
+        "$4a + 7b$",
+        "$2a + 3b$",
+        "$9ab$"
+      ],
+      "answer": "$2a + 7b$",
+      "explanation": "Collect like terms: $3a - a = 2a$ and $5b + 2b = 7b$."
+    },
+    {
+      "topic": "Algebra basics",
+      "question": "If $x = 4$, what is the value of $3x^2$?",
+      "options": [
+        "24",
+        "36",
+        "48",
+        "144"
+      ],
+      "answer": "48",
+      "explanation": "Square first: $4^2 = 16$, then $3 \\times 16 = 48$."
+    },
+    {
+      "topic": "Algebra basics",
+      "question": "Solve $2x + 5 = 17$.",
+      "options": [
+        "$x = 12$",
+        "$x = 11$",
+        "$x = 8.5$",
+        "$x = 6$"
+      ],
+      "answer": "$x = 6$",
+      "explanation": "Subtract 5: $2x = 12$. Divide by 2: $x = 6$."
+    },
+    {
+      "topic": "Sequences",
+      "question": "What is the next term in the sequence 3, 7, 11, 15, ...?",
+      "options": [
+        "18",
+        "19",
+        "20",
+        "21"
+      ],
+      "answer": "19",
+      "explanation": "The sequence goes up by 4 each time: $15 + 4 = 19$."
+    },
+    {
+      "topic": "Sequences",
+      "question": "The $n$th term of a sequence is $5n - 2$. What is the 10th term?",
+      "options": [
+        "52",
+        "50",
+        "48",
+        "38"
+      ],
+      "answer": "48",
+      "explanation": "$5 \\times 10 - 2 = 48$."
+    },
+    {
+      "topic": "Angles",
+      "question": "Two angles in a triangle are 48° and 75°. What is the third angle?",
+      "options": [
+        "47°",
+        "67°",
+        "57°",
+        "123°"
+      ],
+      "answer": "57°",
+      "explanation": "Angles in a triangle add up to 180°: $180 - 48 - 75 = 57$°."
+    },
+    {
+      "topic": "Angles",
+      "question": "Angles on a straight line are $x$ and 112°. What is $x$?",
+      "options": [
+        "58°",
+        "248°",
+        "78°",
+        "68°"
+      ],
+      "answer": "68°",
+      "explanation": "Angles on a straight line add up to 180°: $180 - 112 = 68$°."
+    },
+    {
+      "topic": "Area & perimeter",
+      "question": "A rectangle is 8 cm long and 5 cm wide. What is its area?",
+      "options": [
+        "40 cm²",
+        "26 cm²",
+        "13 cm²",
+        "80 cm²"
+      ],
+      "answer": "40 cm²",
+      "explanation": "Area of a rectangle = length × width = $8 \\times 5 = 40$ cm²."
+    },
+    {
+      "topic": "Area & perimeter",
+      "question": "A triangle has base 10 cm and perpendicular height 6 cm. What is its area?",
+      "options": [
+        "30 cm²",
+        "16 cm²",
+        "60 cm²",
+        "32 cm²"
+      ],
+      "answer": "30 cm²",
+      "explanation": "Area of a triangle = $\\dfrac{1}{2} \\times$ base × height = $\\dfrac{1}{2} \\times 10 \\times 6 = 30$ cm²."
+    },
+    {
+      "topic": "Ratio",
+      "question": "Share £35 in the ratio 2 : 5. How much is the smaller share?",
+      "options": [
+        "£10",
+        "£7",
+        "£14",
+        "£25"
+      ],
+      "answer": "£10",
+      "explanation": "There are $2 + 5 = 7$ parts, so 1 part = $35 \\div 7 = 5$. The smaller share is $2 \\times 5 = $ £10."
+    },
+    {
+      "topic": "Statistics",
+      "question": "Find the mean of 4, 7, 9, 10 and 15.",
+      "options": [
+        "9",
+        "7",
+        "10",
+        "11"
+      ],
+      "answer": "9",
+      "explanation": "Total = $4 + 7 + 9 + 10 + 15 = 45$. Mean = $45 \\div 5 = 9$."
+    },
+    {
+      "topic": "Statistics",
+      "question": "Find the median of 12, 5, 8, 20, 3, 9.",
+      "options": [
+        "8",
+        "9",
+        "8.5",
+        "9.5"
+      ],
+      "answer": "8.5",
+      "explanation": "In order: 3, 5, 8, 9, 12, 20. The middle two are 8 and 9, so the median is 8.5."
+    }
+  ]
+}

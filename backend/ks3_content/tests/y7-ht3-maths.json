@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht3",
+  "subject": "Maths",
+  "title": "Year 7 Maths: Half-term 3 (Algebra: expressions, substitution and equations)",
+  "topic": "ht3",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Notation",
+      "question": "Which expression means 'multiply n by 4, then subtract 3'?",
+      "options": [
+        "$4(n - 3)$",
+        "$n - 12$",
+        "$4n - 3$",
+        "$3 - 4n$"
+      ],
+      "answer": "$4n - 3$",
+      "explanation": "Multiplying n by 4 gives $4n$; then subtract 3: $4n - 3$."
+    },
+    {
+      "topic": "Simplifying",
+      "question": "Simplify $5x + 2y - 3x + 7y$.",
+      "options": [
+        "$11xy$",
+        "$8x + 9y$",
+        "$2x + 5y$",
+        "$2x + 9y$"
+      ],
+      "answer": "$2x + 9y$",
+      "explanation": "$5x - 3x = 2x$ and $2y + 7y = 9y$."
+    },
+    {
+      "topic": "Simplifying",
+      "question": "Simplify $3a \\times 4b$.",
+      "options": [
+        "$7ab$",
+        "$34ab$",
+        "$12a + b$",
+        "$12ab$"
+      ],
+      "answer": "$12ab$",
+      "explanation": "Multiply the numbers ($3 \\times 4 = 12$) and write the letters together: $12ab$."
+    },
+    {
+      "topic": "Substitution",
+      "question": "If $a = 5$ and $b = -2$, find $3a + 4b$.",
+      "options": [
+        "23",
+        "7",
+        "$-7$",
+        "13"
+      ],
+      "answer": "7",
+      "explanation": "$3 \\times 5 + 4 \\times (-2) = 15 - 8 = 7$."
+    },
+    {
+      "topic": "Substitution",
+      "question": "Find the value of $\\dfrac{m^2 + 4}{2}$ when $m = 6$.",
+      "options": [
+        "8",
+        "16",
+        "20",
+        "40"
+      ],
+      "answer": "20",
+      "explanation": "$6^2 + 4 = 40$, and $40 \\div 2 = 20$."
+    },
+    {
+      "topic": "Brackets",
+      "question": "Expand $4(2x - 5)$.",
+      "options": [
+        "$8x - 5$",
+        "$2x - 20$",
+        "$6x - 1$",
+        "$8x - 20$"
+      ],
+      "answer": "$8x - 20$",
+      "explanation": "Multiply each term inside by 4: $4 \\times 2x = 8x$ and $4 \\times (-5) = -20$."
+    },
+    {
+      "topic": "Brackets",
+      "question": "Expand and simplify $3(x + 2) + 2(x - 1)$.",
+      "options": [
+        "$5x + 4$",
+        "$5x + 1$",
+        "$5x + 8$",
+        "$6x + 4$"
+      ],
+      "answer": "$5x + 4$",
+      "explanation": "$3x + 6 + 2x - 2 = 5x + 4$."
+    },
+    {
+      "topic": "Equations",
+      "question": "Solve $x - 9 = 14$.",
+      "options": [
+        "$x = 23$",
+        "$x = 5$",
+        "$x = -23$",
+        "$x = 126$"
+      ],
+      "answer": "$x = 23$",
+      "explanation": "Add 9 to both sides: $x = 23$."
+    },
+    {
+      "topic": "Equations",
+      "question": "Solve $\\dfrac{x}{3} = 7$.",
+      "options": [
+        "$x = 4$",
+        "$x = 21$",
+        "$x = \\dfrac{7}{3}$",
+        "$x = 10$"
+      ],
+      "answer": "$x = 21$",
+      "explanation": "Multiply both sides by 3: $x = 21$."
+    },
+    {
+      "topic": "Equations",
+      "question": "Solve $5x - 8 = 22$.",
+      "options": [
+        "$x = 6$",
+        "$x = 2.8$",
+        "$x = 14$",
+        "$x = 30$"
+      ],
+      "answer": "$x = 6$",
+      "explanation": "Add 8: $5x = 30$. Divide by 5: $x = 6$."
+    },
+    {
+      "topic": "Forming equations",
+      "question": "I think of a number, double it and add 7. The answer is 31. What was my number?",
+      "options": [
+        "19",
+        "12",
+        "24",
+        "38"
+      ],
+      "answer": "12",
+      "explanation": "$2n + 7 = 31$, so $2n = 24$ and $n = 12$."
+    },
+    {
+      "topic": "Formulae",
+      "question": "The cost of a taxi is $C = 3 + 2m$ pounds, where $m$ is miles. What does a 9-mile trip cost?",
+      "options": [
+        "£14",
+        "£45",
+        "£21",
+        "£18"
+      ],
+      "answer": "£21",
+      "explanation": "$C = 3 + 2 \\times 9 = 21$, so £21."
+    }
+  ]
+}

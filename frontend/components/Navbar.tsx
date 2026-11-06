@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, LifeBuoy, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -33,6 +33,7 @@ const TEACHER_LINKS: NavItem[] = [
 const PUBLIC_LINKS: NavItem[] = [
   { href: "/#exams", label: "Exams" },
   { href: "/sat", label: "SAT" },
+  { href: "/ks3", label: "KS3" },
   { href: "/request", label: "Request a test" },
   { href: "/pricing", label: "Pricing" },
 ];
@@ -61,7 +62,7 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password") return null;
+  if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password" || pathname === "/ks3/trial") return null;
 
   const isAuthed = !!user;
   const isTeacher = user?.role === "teacher" || user?.role === "admin";
@@ -72,6 +73,12 @@ export default function Navbar() {
   if (isAuthed && !isTeacher && user?.can_write_practice) {
     // insert Practice right after My Tests
     links = [...STUDENT_LINKS.slice(0, 2), { href: "/practice", label: "Practice", icon: PenLine }, ...STUDENT_LINKS.slice(2)];
+  }
+  if (isAuthed && !isTeacher && user?.ks3_year) {
+    links = [...links.slice(0, 3), { href: "/help", label: "Homework help", icon: LifeBuoy }, ...links.slice(3)];
+  }
+  if (isAuthed && isTeacher) {
+    links = [...links, { href: "/teacher/help", label: "Help", icon: LifeBuoy }];
   }
   if (isAuthed && user?.is_admin) {
     links = [...links, { href: "/admin/requests", label: "Requests", icon: Inbox }, { href: "/admin", label: "Admin", icon: Shield }];

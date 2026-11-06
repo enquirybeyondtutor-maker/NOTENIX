@@ -82,7 +82,7 @@ export default function LoginPage() {
             <Logo href="/" />
           </div>
           <h1 className="text-2xl font-bold text-ink">Welcome back</h1>
-          <p className="mt-1.5 text-sm text-ink-muted">Sign in with the user ID and password Beyond Tutors gave you.</p>
+          <p className="mt-1.5 text-sm text-ink-muted">Sign in with your Notenix user ID (e.g. name@notenix.com or name@thebeyondtutors.com) and password.</p>
           <ReturnNote returnTo={returnTo} />
 
           {error && (
@@ -95,7 +95,7 @@ export default function LoginPage() {
             <Field label="User ID">
               <div className="relative">
                 <Mail size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                <Input type="text" autoCapitalize="none" autoCorrect="off" value={email} onChange={(e) => setEmail(e.target.value.trim())} required placeholder="yourname@thebeyondtutors.com" className="pl-9" />
+                <Input type="text" autoCapitalize="none" autoCorrect="off" value={email} onChange={(e) => setEmail(e.target.value.trim())} required placeholder="Your Notenix user ID" className="pl-9" />
               </div>
             </Field>
             <Field label="Password">

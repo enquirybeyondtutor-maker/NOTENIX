@@ -49,6 +49,11 @@ class User(Base):
     # shown in the terms the parent agreed to, e.g. "AED 229 per year".
     billing_currency: Mapped[str | None] = mapped_column(String(3), nullable=True)
     terms_price: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    # Notenix KS3: school year (7/8/9) when the student is on KS3, when their free trial
+    # started, and which parent emails of the trial sequence have gone out.
+    ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    ks3_trial_started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    ks3_emails: Mapped[list | None] = mapped_column(JSON, nullable=True)
     xp: Mapped[int] = mapped_column(Integer, default=0)
     streak: Mapped[int] = mapped_column(Integer, default=0)
     quiz_count: Mapped[int] = mapped_column(Integer, default=0)
@@ -122,6 +127,8 @@ class Test(Base):
     num_questions: Mapped[int] = mapped_column(Integer, default=0)
     duration_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)  # timed sitting
     share_token: Mapped[str | None] = mapped_column(String(64), nullable=True, unique=True, index=True)  # public join link
+    # KS3 programme slot, e.g. "y7-baseline", "y7-ht1"; tests with a slot are handed out automatically.
+    ks3_slot: Mapped[str | None] = mapped_column(String(20), nullable=True, index=True)
     is_archived: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
@@ -249,6 +256,9 @@ class ClassNote(Base):
     kind: Mapped[str] = mapped_column(String(20), default="notes", server_default="notes")
     due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     class_date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
+    # Notenix KS3 notes library: shared automatically with KS3 students of this year.
+    ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    ks3_key: Mapped[str | None] = mapped_column(String(60), nullable=True, unique=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 
@@ -287,3 +297,21 @@ class NotePage(Base):
     note_id: Mapped[int] = mapped_column(ForeignKey("class_notes.id"), index=True)
     page: Mapped[int] = mapped_column(Integer)
     data: Mapped[bytes] = mapped_column(LargeBinary)
+
+
+class HelpRequest(Base):
+    """KS3 homework help: a student sends a school homework question (photos + text)
+    and a Beyond Tutors tutor replies with a worked hint."""
+    __tablename__ = "help_requests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    subject: Mapped[str] = mapped_column(String(40))
+    question: Mapped[str | None] = mapped_column(Text, nullable=True)
+    images: Mapped[list | None] = mapped_column(JSON, nullable=True)        # compressed JPEG data URIs
+    status: Mapped[str] = mapped_column(String(20), default="open", index=True)  # open | answered
+    reply: Mapped[str | None] = mapped_column(Text, nullable=True)
+    reply_images: Mapped[list | None] = mapped_column(JSON, nullable=True)
+    replied_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    replied_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

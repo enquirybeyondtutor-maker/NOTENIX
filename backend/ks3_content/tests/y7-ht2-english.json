@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht2",
+  "subject": "English",
+  "title": "Year 7 English: Half-term 2 (Grammar and sentences)",
+  "topic": "ht2",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Word classes",
+      "question": "Which word is a pronoun? \"Maya gave it to them yesterday.\"",
+      "options": [
+        "them",
+        "gave",
+        "Maya",
+        "yesterday"
+      ],
+      "answer": "them",
+      "explanation": "'Them' replaces a noun, so it is a pronoun (as is 'it')."
+    },
+    {
+      "topic": "Word classes",
+      "question": "Which word is a preposition? \"The cat hid under the table.\"",
+      "options": [
+        "cat",
+        "hid",
+        "under",
+        "table"
+      ],
+      "answer": "under",
+      "explanation": "'Under' shows where the cat is in relation to the table."
+    },
+    {
+      "topic": "Word classes",
+      "question": "What word class is \"happiness\"?",
+      "options": [
+        "Adjective",
+        "Adverb",
+        "Verb",
+        "Abstract noun"
+      ],
+      "answer": "Abstract noun",
+      "explanation": "Happiness is a feeling you cannot touch: an abstract noun."
+    },
+    {
+      "topic": "Verbs",
+      "question": "Which sentence is in the past tense?",
+      "options": [
+        "She runs to school.",
+        "She ran to school.",
+        "She will run to school.",
+        "She is running to school."
+      ],
+      "answer": "She ran to school.",
+      "explanation": "'Ran' is the past tense of 'run'."
+    },
+    {
+      "topic": "Verbs",
+      "question": "Which sentence uses the correct verb agreement?",
+      "options": [
+        "The group of students are late.",
+        "The group of students is late.",
+        "The group of students be late.",
+        "The group of students were be late."
+      ],
+      "answer": "The group of students is late.",
+      "explanation": "The subject is 'the group' (singular), so it takes 'is'."
+    },
+    {
+      "topic": "Clauses",
+      "question": "In \"When the rain stopped, we went outside\", which part is the subordinate clause?",
+      "options": [
+        "we went outside",
+        "When the rain stopped",
+        "outside",
+        "the rain"
+      ],
+      "answer": "When the rain stopped",
+      "explanation": "'When the rain stopped' cannot stand alone; it depends on the main clause."
+    },
+    {
+      "topic": "Sentence types",
+      "question": "What type of sentence is \"Close the window.\"?",
+      "options": [
+        "Statement",
+        "Question",
+        "Command",
+        "Exclamation"
+      ],
+      "answer": "Command",
+      "explanation": "It tells someone to do something: a command (imperative)."
+    },
+    {
+      "topic": "Sentence types",
+      "question": "Which is a compound sentence?",
+      "options": [
+        "The dog barked.",
+        "Barking loudly.",
+        "Because the dog barked, the baby woke up.",
+        "The dog barked and the baby woke up."
+      ],
+      "answer": "The dog barked and the baby woke up.",
+      "explanation": "Two main clauses joined by 'and' make a compound sentence."
+    },
+    {
+      "topic": "Fragments",
+      "question": "Which of these is NOT a complete sentence?",
+      "options": [
+        "The bus was late.",
+        "We missed the bus.",
+        "Running for the bus.",
+        "Is the bus late?"
+      ],
+      "answer": "Running for the bus.",
+      "explanation": "'Running for the bus' has no subject or main verb: it is a fragment."
+    },
+    {
+      "topic": "Standard English",
+      "question": "Which sentence is in Standard English?",
+      "options": [
+        "They were going home.",
+        "I done my homework.",
+        "We was going home.",
+        "He don't like it."
+      ],
+      "answer": "They were going home.",
+      "explanation": "'They were' is the standard form; the others use non-standard verb forms."
+    },
+    {
+      "topic": "Modal verbs",
+      "question": "Which word is a modal verb? \"You should check your answers.\"",
+      "options": [
+        "should",
+        "You",
+        "check",
+        "answers"
+      ],
+      "answer": "should",
+      "explanation": "Modal verbs like should, could, must and might show possibility or necessity."
+    },
+    {
+      "topic": "Adverbials",
+      "question": "What is the fronted adverbial in \"Without a sound, the fox slipped away\"?",
+      "options": [
+        "the fox",
+        "slipped away",
+        "away",
+        "Without a sound"
+      ],
+      "answer": "Without a sound",
+      "explanation": "'Without a sound' comes before the main clause and describes how the fox moved."
+    }
+  ]
+}

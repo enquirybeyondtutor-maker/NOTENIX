@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht3",
+  "subject": "Science",
+  "title": "Year 7 Science: Half-term 3 (Forces)",
+  "topic": "ht3",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Forces",
+      "question": "Which of these is a non-contact force?",
+      "options": [
+        "Friction",
+        "Gravity",
+        "Air resistance",
+        "Tension"
+      ],
+      "answer": "Gravity",
+      "explanation": "Gravity acts without touching. Friction, air resistance and tension are contact forces."
+    },
+    {
+      "topic": "Forces",
+      "question": "What instrument measures force?",
+      "options": [
+        "A thermometer",
+        "A ruler",
+        "A balance in grams",
+        "A newtonmeter"
+      ],
+      "answer": "A newtonmeter",
+      "explanation": "A newtonmeter (force meter) measures force in newtons."
+    },
+    {
+      "topic": "Resultant force",
+      "question": "A car's engine pushes it forward with 900 N. Friction and air resistance total 900 N. What happens?",
+      "options": [
+        "It speeds up",
+        "It keeps moving at a steady speed",
+        "It slows down",
+        "It goes backwards"
+      ],
+      "answer": "It keeps moving at a steady speed",
+      "explanation": "The forces are balanced (resultant 0 N), so the speed does not change."
+    },
+    {
+      "topic": "Resultant force",
+      "question": "Two people push a box the same way with 30 N and 45 N. What is the resultant force?",
+      "options": [
+        "75 N",
+        "45 N",
+        "15 N",
+        "1350 N"
+      ],
+      "answer": "75 N",
+      "explanation": "Forces in the same direction add: $30 + 45 = 75$ N."
+    },
+    {
+      "topic": "Weight",
+      "question": "A bag has a mass of 4 kg. Taking $g = 10$ N/kg, what is its weight?",
+      "options": [
+        "0.4 N",
+        "40 N",
+        "14 N",
+        "4 N"
+      ],
+      "answer": "40 N",
+      "explanation": "Weight = mass × $g$ = $4 \\times 10 = 40$ N."
+    },
+    {
+      "topic": "Weight",
+      "question": "What happens to your mass if you travel to the Moon?",
+      "options": [
+        "It increases",
+        "It decreases",
+        "It stays the same",
+        "It becomes zero"
+      ],
+      "answer": "It stays the same",
+      "explanation": "Mass is the amount of matter and does not change. Your weight is what changes."
+    },
+    {
+      "topic": "Friction",
+      "question": "Why do car tyres have treads?",
+      "options": [
+        "To look good",
+        "To make the car lighter",
+        "To reduce friction",
+        "To increase friction and grip on wet roads"
+      ],
+      "answer": "To increase friction and grip on wet roads",
+      "explanation": "Treads push water away so the tyre keeps contact, giving more friction and grip."
+    },
+    {
+      "topic": "Air resistance",
+      "question": "Why does a parachute slow a skydiver down?",
+      "options": [
+        "It increases air resistance",
+        "It reduces gravity",
+        "It increases mass",
+        "It removes friction"
+      ],
+      "answer": "It increases air resistance",
+      "explanation": "The large area pushes against lots of air, greatly increasing air resistance."
+    },
+    {
+      "topic": "Speed",
+      "question": "A cyclist travels 120 m in 20 s. What is their average speed?",
+      "options": [
+        "2.4 m/s",
+        "100 m/s",
+        "6 m/s",
+        "2400 m/s"
+      ],
+      "answer": "6 m/s",
+      "explanation": "Speed = distance ÷ time = $120 \\div 20 = 6$ m/s."
+    },
+    {
+      "topic": "Speed",
+      "question": "A car travels at 30 m/s for 5 s. How far does it go?",
+      "options": [
+        "150 m",
+        "35 m",
+        "6 m",
+        "25 m"
+      ],
+      "answer": "150 m",
+      "explanation": "Distance = speed × time = $30 \\times 5 = 150$ m."
+    },
+    {
+      "topic": "Springs",
+      "question": "A spring stretches 2 cm with a 4 N load. If it obeys Hooke's law, how far does it stretch with 10 N?",
+      "options": [
+        "4 cm",
+        "8 cm",
+        "5 cm",
+        "20 cm"
+      ],
+      "answer": "5 cm",
+      "explanation": "Extension is proportional to force: 1 N gives 0.5 cm, so 10 N gives 5 cm."
+    },
+    {
+      "topic": "Pressure",
+      "question": "Why do snowshoes stop you sinking into snow?",
+      "options": [
+        "They are lighter",
+        "They melt the snow",
+        "They increase gravity",
+        "They spread your weight over a bigger area, lowering pressure"
+      ],
+      "answer": "They spread your weight over a bigger area, lowering pressure",
+      "explanation": "Pressure = force ÷ area; a bigger area means less pressure on the snow."
+    }
+  ]
+}

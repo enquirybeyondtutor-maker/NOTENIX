@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht4",
+  "subject": "Science",
+  "title": "Year 7 Science: Half-term 4 (Acids, alkalis and chemical reactions)",
+  "topic": "ht4",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "pH",
+      "question": "Which pH is neutral?",
+      "options": [
+        "0",
+        "5",
+        "14",
+        "7"
+      ],
+      "answer": "7",
+      "explanation": "pH 7 is neutral, e.g. pure water."
+    },
+    {
+      "topic": "pH",
+      "question": "Universal indicator turns purple. What does this show?",
+      "options": [
+        "A strong alkali",
+        "A weak acid",
+        "Neutral",
+        "A strong acid"
+      ],
+      "answer": "A strong alkali",
+      "explanation": "Purple means pH 12–14: a strong alkali. Red means a strong acid."
+    },
+    {
+      "topic": "Acids",
+      "question": "Which of these is an acid found in the stomach?",
+      "options": [
+        "Sodium hydroxide",
+        "Water",
+        "Hydrochloric acid",
+        "Ammonia"
+      ],
+      "answer": "Hydrochloric acid",
+      "explanation": "The stomach makes hydrochloric acid to help digest food and kill bacteria."
+    },
+    {
+      "topic": "Neutralisation",
+      "question": "A farmer adds lime (an alkali) to a field. Why?",
+      "options": [
+        "To make the soil more acidic",
+        "To kill insects",
+        "To water the crops",
+        "To neutralise acidic soil"
+      ],
+      "answer": "To neutralise acidic soil",
+      "explanation": "Lime raises the pH of acidic soil so crops grow better."
+    },
+    {
+      "topic": "Neutralisation",
+      "question": "What is the word equation for neutralisation?",
+      "options": [
+        "acid + alkali → salt + water",
+        "acid + water → salt",
+        "alkali + salt → acid",
+        "acid + oxygen → water"
+      ],
+      "answer": "acid + alkali → salt + water",
+      "explanation": "Acid + alkali → salt + water."
+    },
+    {
+      "topic": "Reactions of acids",
+      "question": "What gas is made when an acid reacts with a metal like magnesium?",
+      "options": [
+        "Oxygen",
+        "Hydrogen",
+        "Carbon dioxide",
+        "Nitrogen"
+      ],
+      "answer": "Hydrogen",
+      "explanation": "Metal + acid → salt + hydrogen. Hydrogen gives a squeaky pop with a lit splint."
+    },
+    {
+      "topic": "Reactions of acids",
+      "question": "What gas is made when an acid reacts with a carbonate?",
+      "options": [
+        "Hydrogen",
+        "Carbon dioxide",
+        "Oxygen",
+        "Chlorine"
+      ],
+      "answer": "Carbon dioxide",
+      "explanation": "Acid + carbonate → salt + water + carbon dioxide (turns limewater cloudy)."
+    },
+    {
+      "topic": "Chemical vs physical",
+      "question": "Which of these is a chemical change?",
+      "options": [
+        "Ice melting",
+        "Salt dissolving",
+        "Water boiling",
+        "Wood burning"
+      ],
+      "answer": "Wood burning",
+      "explanation": "Burning makes new substances (ash, carbon dioxide) and cannot easily be reversed."
+    },
+    {
+      "topic": "Signs of reaction",
+      "question": "Which of these is NOT a sign of a chemical reaction?",
+      "options": [
+        "Bubbles of gas",
+        "A colour change",
+        "A change of shape when squashed",
+        "A temperature change"
+      ],
+      "answer": "A change of shape when squashed",
+      "explanation": "Squashing changes shape but makes no new substance."
+    },
+    {
+      "topic": "Combustion",
+      "question": "What does a fuel need to burn, as well as heat?",
+      "options": [
+        "Nitrogen",
+        "Water",
+        "Oxygen",
+        "Carbon dioxide"
+      ],
+      "answer": "Oxygen",
+      "explanation": "The fire triangle: fuel, heat and oxygen."
+    },
+    {
+      "topic": "Safety",
+      "question": "What does this hazard symbol warn about: a liquid dripping onto a hand and a surface?",
+      "options": [
+        "Flammable",
+        "Corrosive",
+        "Toxic",
+        "Explosive"
+      ],
+      "answer": "Corrosive",
+      "explanation": "That symbol means corrosive: it can burn skin and damage surfaces."
+    },
+    {
+      "topic": "Concentration",
+      "question": "What is the difference between a dilute and a concentrated acid?",
+      "options": [
+        "How much acid is dissolved in the same volume of water",
+        "The type of acid",
+        "The colour",
+        "The temperature"
+      ],
+      "answer": "How much acid is dissolved in the same volume of water",
+      "explanation": "A concentrated solution has more acid particles in the same volume."
+    }
+  ]
+}

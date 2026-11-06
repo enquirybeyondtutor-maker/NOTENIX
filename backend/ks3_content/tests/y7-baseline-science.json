@@ -1,0 +1,249 @@
+{
+  "slot": "y7-baseline",
+  "subject": "Science",
+  "title": "Year 7 Science Baseline",
+  "topic": "Baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Cells",
+      "question": "Which part of a cell controls its activities and contains genetic material?",
+      "options": [
+        "Cell membrane",
+        "Cytoplasm",
+        "Cell wall",
+        "Nucleus"
+      ],
+      "answer": "Nucleus",
+      "explanation": "The nucleus contains DNA and controls what the cell does."
+    },
+    {
+      "topic": "Cells",
+      "question": "Which of these is found in plant cells but NOT in animal cells?",
+      "options": [
+        "Nucleus",
+        "Chloroplasts",
+        "Cell membrane",
+        "Mitochondria"
+      ],
+      "answer": "Chloroplasts",
+      "explanation": "Chloroplasts (where photosynthesis happens) are only in plant cells. Plant cells also have a cell wall and a permanent vacuole."
+    },
+    {
+      "topic": "Cells",
+      "question": "What is the job of the cell membrane?",
+      "options": [
+        "Makes food by photosynthesis",
+        "Controls what enters and leaves the cell",
+        "Releases energy from glucose",
+        "Keeps the cell rigid"
+      ],
+      "answer": "Controls what enters and leaves the cell",
+      "explanation": "The membrane controls movement of substances in and out. The cell wall (in plants) keeps the cell rigid."
+    },
+    {
+      "topic": "Cells",
+      "question": "What is the correct order of organisation, from smallest to largest?",
+      "options": [
+        "Tissue → cell → organ → organ system",
+        "Cell → tissue → organ → organ system",
+        "Cell → organ → tissue → organ system",
+        "Organ → tissue → cell → organ system"
+      ],
+      "answer": "Cell → tissue → organ → organ system",
+      "explanation": "Similar cells form a tissue, tissues form an organ, and organs work together as an organ system."
+    },
+    {
+      "topic": "Particles & states of matter",
+      "question": "In which state are particles closest together and only vibrating on the spot?",
+      "options": [
+        "Solid",
+        "Liquid",
+        "Gas",
+        "All three equally"
+      ],
+      "answer": "Solid",
+      "explanation": "In a solid the particles are tightly packed in a fixed arrangement and can only vibrate."
+    },
+    {
+      "topic": "Particles & states of matter",
+      "question": "What is the name for a liquid changing into a gas at its boiling point?",
+      "options": [
+        "Melting",
+        "Condensing",
+        "Boiling",
+        "Freezing"
+      ],
+      "answer": "Boiling",
+      "explanation": "Boiling is liquid → gas at the boiling point. Condensing is the reverse: gas → liquid."
+    },
+    {
+      "topic": "Particles & states of matter",
+      "question": "Why can a gas be squashed (compressed) but a solid cannot?",
+      "options": [
+        "There are big spaces between gas particles",
+        "Gas particles are smaller",
+        "Gas particles do not move",
+        "Solids are always heavier"
+      ],
+      "answer": "There are big spaces between gas particles",
+      "explanation": "Gas particles are far apart, so pushing them closer together is possible. Solid particles are already touching."
+    },
+    {
+      "topic": "Mixtures & separation",
+      "question": "Which method would you use to get salt back from salty water?",
+      "options": [
+        "Filtration",
+        "Magnetism",
+        "Evaporation",
+        "Sieving"
+      ],
+      "answer": "Evaporation",
+      "explanation": "Heating the solution evaporates the water and leaves the salt crystals behind. Filtration cannot remove a dissolved solid."
+    },
+    {
+      "topic": "Mixtures & separation",
+      "question": "Sand is mixed with water. Which method separates them best?",
+      "options": [
+        "Evaporation",
+        "Filtration",
+        "Chromatography",
+        "Distillation"
+      ],
+      "answer": "Filtration",
+      "explanation": "Sand does not dissolve, so it is trapped by filter paper while the water passes through."
+    },
+    {
+      "topic": "Acids & alkalis",
+      "question": "A solution has a pH of 2. What is it?",
+      "options": [
+        "A strong acid",
+        "A weak acid",
+        "Neutral",
+        "An alkali"
+      ],
+      "answer": "A strong acid",
+      "explanation": "pH below 7 is acidic; the lower the number, the stronger the acid. pH 7 is neutral; above 7 is alkaline."
+    },
+    {
+      "topic": "Acids & alkalis",
+      "question": "What is produced when an acid reacts with an alkali?",
+      "options": [
+        "A metal and oxygen",
+        "Only hydrogen",
+        "Only carbon dioxide",
+        "A salt and water"
+      ],
+      "answer": "A salt and water",
+      "explanation": "This is neutralisation: acid + alkali → salt + water."
+    },
+    {
+      "topic": "Forces",
+      "question": "What is the unit of force?",
+      "options": [
+        "Kilogram (kg)",
+        "Joule (J)",
+        "Newton (N)",
+        "Metre per second (m/s)"
+      ],
+      "answer": "Newton (N)",
+      "explanation": "Forces are measured in newtons, using a newtonmeter (force meter)."
+    },
+    {
+      "topic": "Forces",
+      "question": "A box has a 10 N force pushing it right and a 4 N friction force to the left. What is the resultant force?",
+      "options": [
+        "14 N to the right",
+        "6 N to the left",
+        "6 N to the right",
+        "4 N to the left"
+      ],
+      "answer": "6 N to the right",
+      "explanation": "Opposite forces subtract: $10 - 4 = 6$ N, in the direction of the bigger force (right)."
+    },
+    {
+      "topic": "Forces",
+      "question": "Why does an astronaut weigh less on the Moon than on Earth, even though their mass is the same?",
+      "options": [
+        "The Moon has no air",
+        "The Moon is colder",
+        "Mass changes in space",
+        "The Moon's gravity is weaker"
+      ],
+      "answer": "The Moon's gravity is weaker",
+      "explanation": "Weight = mass × gravitational field strength. Mass stays the same, but the Moon's gravity is about one sixth of Earth's."
+    },
+    {
+      "topic": "Energy",
+      "question": "A battery-powered torch is switched on. Which energy store is being emptied?",
+      "options": [
+        "Chemical store",
+        "Kinetic store",
+        "Gravitational store",
+        "Elastic store"
+      ],
+      "answer": "Chemical store",
+      "explanation": "The battery's chemical store is emptied; energy is transferred electrically and by light (and some by heating)."
+    },
+    {
+      "topic": "Energy",
+      "question": "Which of these is a renewable energy resource?",
+      "options": [
+        "Coal",
+        "Wind",
+        "Natural gas",
+        "Oil"
+      ],
+      "answer": "Wind",
+      "explanation": "Wind will not run out. Coal, oil and gas are fossil fuels and are non-renewable."
+    },
+    {
+      "topic": "Light & sound",
+      "question": "Why do we see lightning before we hear the thunder?",
+      "options": [
+        "Our eyes are faster than our ears",
+        "Sound needs light to travel",
+        "Thunder happens later",
+        "Light travels much faster than sound"
+      ],
+      "answer": "Light travels much faster than sound",
+      "explanation": "Light travels at about 300 000 km/s; sound in air only about 340 m/s."
+    },
+    {
+      "topic": "Light & sound",
+      "question": "Sound cannot travel through which of these?",
+      "options": [
+        "A vacuum",
+        "Steel",
+        "Air",
+        "Water"
+      ],
+      "answer": "A vacuum",
+      "explanation": "Sound is a vibration passed between particles. A vacuum has no particles, so sound cannot travel through it."
+    },
+    {
+      "topic": "Working scientifically",
+      "question": "A student tests how the height of a ramp affects how far a car rolls. What is the independent variable?",
+      "options": [
+        "How far the car rolls",
+        "The type of floor",
+        "The mass of the car",
+        "The height of the ramp"
+      ],
+      "answer": "The height of the ramp",
+      "explanation": "The independent variable is the one you change on purpose. The distance rolled is the dependent variable you measure."
+    },
+    {
+      "topic": "Working scientifically",
+      "question": "Why should you repeat an experiment several times?",
+      "options": [
+        "To make it take longer",
+        "To change the variables",
+        "To check results are repeatable and spot anomalies",
+        "To use more equipment"
+      ],
+      "answer": "To check results are repeatable and spot anomalies",
+      "explanation": "Repeating lets you calculate a mean, spot odd results and check your results are reliable."
+    }
+  ]
+}

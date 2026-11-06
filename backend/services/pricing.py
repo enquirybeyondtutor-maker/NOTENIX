@@ -15,6 +15,27 @@ NAMES = {"GBP": "UK", "AED": "UAE", "USD": "US", "EUR": "Europe", "AUD": "Austra
          "NZD": "New Zealand", "SGD": "Singapore", "CAD": "Canada", "INR": "India"}
 
 
+KS3_PRICES = {
+    "GBP": 149, "AED": 699, "USD": 189, "EUR": 179, "AUD": 289,
+    "NZD": 319, "SGD": 255, "CAD": 259, "INR": 16999,
+}
+
+
+def ks3_for_currency(currency: str | None) -> dict:
+    """Notenix KS3 yearly price in this currency (KS3_PRICES env overrides the defaults)."""
+    p = dict(KS3_PRICES)
+    try:
+        custom = json.loads(settings.ks3_prices or "{}")
+        if isinstance(custom, dict) and custom:
+            p = {k.upper(): float(v) for k, v in custom.items()}
+    except Exception:
+        pass
+    cur = (currency or "GBP").upper()
+    if cur not in p:
+        cur = "GBP" if "GBP" in p else next(iter(p))
+    return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
+
+
 def prices() -> dict[str, float]:
     try:
         custom = json.loads(settings.subscription_prices or "{}")

@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht6",
+  "subject": "Maths",
+  "title": "Year 7 Maths: Half-term 6 (Statistics, probability and end-of-year review)",
+  "topic": "ht6",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Averages",
+      "question": "Find the mode of 4, 7, 2, 7, 9, 4, 7.",
+      "options": [
+        "7",
+        "6",
+        "4",
+        "9"
+      ],
+      "answer": "7",
+      "explanation": "7 appears three times, more than any other value."
+    },
+    {
+      "topic": "Averages",
+      "question": "Find the range of 12, 3, 19, 8, 6.",
+      "options": [
+        "3",
+        "8",
+        "16",
+        "19"
+      ],
+      "answer": "16",
+      "explanation": "Range = highest − lowest = $19 - 3 = 16$."
+    },
+    {
+      "topic": "Averages",
+      "question": "The mean of four numbers is 6. Three of them are 3, 5 and 8. What is the fourth?",
+      "options": [
+        "4",
+        "6",
+        "8",
+        "10"
+      ],
+      "answer": "8",
+      "explanation": "Total = $4 \\times 6 = 24$. $24 - (3 + 5 + 8) = 8$."
+    },
+    {
+      "topic": "Charts",
+      "question": "In a pie chart of 60 people, 15 chose football. What angle is the football sector?",
+      "options": [
+        "90°",
+        "60°",
+        "15°",
+        "120°"
+      ],
+      "answer": "90°",
+      "explanation": "$\\dfrac{15}{60} = \\dfrac{1}{4}$ of 360° = 90°."
+    },
+    {
+      "topic": "Probability",
+      "question": "A fair six-sided dice is rolled. What is the probability of a number greater than 4?",
+      "options": [
+        "$\\dfrac{1}{6}$",
+        "$\\dfrac{1}{3}$",
+        "$\\dfrac{1}{2}$",
+        "$\\dfrac{2}{3}$"
+      ],
+      "answer": "$\\dfrac{1}{3}$",
+      "explanation": "5 or 6: 2 outcomes out of 6, which is $\\dfrac{1}{3}$."
+    },
+    {
+      "topic": "Probability",
+      "question": "The probability it rains tomorrow is 0.35. What is the probability it does NOT rain?",
+      "options": [
+        "0.35",
+        "0.55",
+        "0.65",
+        "1.35"
+      ],
+      "answer": "0.65",
+      "explanation": "Probabilities add to 1: $1 - 0.35 = 0.65$."
+    },
+    {
+      "topic": "Probability",
+      "question": "A bag has 3 red, 5 green and 2 blue counters. One is picked at random. What is P(green)?",
+      "options": [
+        "$\\dfrac{1}{5}$",
+        "$\\dfrac{3}{10}$",
+        "$\\dfrac{5}{8}$",
+        "$\\dfrac{1}{2}$"
+      ],
+      "answer": "$\\dfrac{1}{2}$",
+      "explanation": "5 green out of 10 counters: $\\dfrac{5}{10} = \\dfrac{1}{2}$."
+    },
+    {
+      "topic": "Probability",
+      "question": "Which word best describes the probability of picking a red card from a normal pack of cards?",
+      "options": [
+        "Impossible",
+        "Even chance",
+        "Unlikely",
+        "Certain"
+      ],
+      "answer": "Even chance",
+      "explanation": "Half the cards are red, so the probability is $\\dfrac{1}{2}$: an even chance."
+    },
+    {
+      "topic": "Review: fractions",
+      "question": "Work out $1\\dfrac{1}{2} + 2\\dfrac{2}{3}$.",
+      "options": [
+        "$4\\dfrac{1}{6}$",
+        "$3\\dfrac{3}{5}$",
+        "$3\\dfrac{5}{6}$",
+        "$4\\dfrac{1}{3}$"
+      ],
+      "answer": "$4\\dfrac{1}{6}$",
+      "explanation": "Whole numbers: 3. Fractions: $\\dfrac{3}{6} + \\dfrac{4}{6} = \\dfrac{7}{6} = 1\\dfrac{1}{6}$. Total $4\\dfrac{1}{6}$."
+    },
+    {
+      "topic": "Review: algebra",
+      "question": "Solve $3(x + 4) = 27$.",
+      "options": [
+        "$x = 23$",
+        "$x = 7.7$",
+        "$x = 9$",
+        "$x = 5$"
+      ],
+      "answer": "$x = 5$",
+      "explanation": "Divide by 3: $x + 4 = 9$, so $x = 5$."
+    },
+    {
+      "topic": "Review: ratio",
+      "question": "Share 56 sweets in the ratio 3 : 4. What is the larger share?",
+      "options": [
+        "24",
+        "28",
+        "42",
+        "32"
+      ],
+      "answer": "32",
+      "explanation": "7 parts = 56, so 1 part = 8. Larger share = $4 \\times 8 = 32$."
+    },
+    {
+      "topic": "Review: angles",
+      "question": "Find the third angle of a triangle whose other angles are 37° and 89°.",
+      "options": [
+        "44°",
+        "54°",
+        "64°",
+        "126°"
+      ],
+      "answer": "54°",
+      "explanation": "$180 - 37 - 89 = 54$°."
+    }
+  ]
+}

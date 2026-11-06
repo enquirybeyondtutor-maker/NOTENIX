@@ -1,0 +1,249 @@
+{
+  "slot": "y9-baseline",
+  "subject": "English",
+  "title": "Year 9 English Baseline",
+  "topic": "baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"They told us the war would be over by Christmas. Christmas came, and then another, and the letters home grew shorter. My brother had once filled four pages with jokes about army food. His last letter was a single line: 'Still here. Don't worry.' Mother read it eleven times. I counted.\"\n\nWhat does \"the letters home grew shorter\" suggest?",
+      "options": [
+        "The brother was busy with jokes",
+        "The war was taking a heavy toll on the brother",
+        "Paper was cheap",
+        "The family moved house"
+      ],
+      "answer": "The war was taking a heavy toll on the brother",
+      "explanation": "Shorter letters suggest exhaustion and that he has less he can or wants to say."
+    },
+    {
+      "topic": "Structure",
+      "question": "Read the passage.\n\n\"They told us the war would be over by Christmas. Christmas came, and then another, and the letters home grew shorter. My brother had once filled four pages with jokes about army food. His last letter was a single line: 'Still here. Don't worry.' Mother read it eleven times. I counted.\"\n\nHow does the writer use contrast in the passage?",
+      "options": [
+        "Between summer and winter",
+        "Between four pages of jokes and a single line",
+        "Between two different families",
+        "Between the past and the future tense only"
+      ],
+      "answer": "Between four pages of jokes and a single line",
+      "explanation": "The cheerful long letters contrast with the brief last one, showing how he has changed."
+    },
+    {
+      "topic": "Language",
+      "question": "Read the passage.\n\n\"They told us the war would be over by Christmas. Christmas came, and then another, and the letters home grew shorter. My brother had once filled four pages with jokes about army food. His last letter was a single line: 'Still here. Don't worry.' Mother read it eleven times. I counted.\"\n\n\"Still here. Don't worry.\" Why is this letter so effective?",
+      "options": [
+        "It is long and detailed",
+        "Its brevity hints at what is left unsaid, which is more worrying",
+        "It is funny",
+        "It explains the battle"
+      ],
+      "answer": "Its brevity hints at what is left unsaid, which is more worrying",
+      "explanation": "Telling the family not to worry, in so few words, makes the reader worry more."
+    },
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"They told us the war would be over by Christmas. Christmas came, and then another, and the letters home grew shorter. My brother had once filled four pages with jokes about army food. His last letter was a single line: 'Still here. Don't worry.' Mother read it eleven times. I counted.\"\n\n\"Mother read it eleven times. I counted.\" What does this reveal?",
+      "options": [
+        "The mother cannot read well",
+        "The letter was hard to read",
+        "The family's anxiety and how closely the narrator watches her",
+        "The narrator was bored"
+      ],
+      "answer": "The family's anxiety and how closely the narrator watches her",
+      "explanation": "Rereading shows desperate worry; counting shows the narrator's own anxiety."
+    },
+    {
+      "topic": "Irony",
+      "question": "Read the passage.\n\n\"They told us the war would be over by Christmas. Christmas came, and then another, and the letters home grew shorter. My brother had once filled four pages with jokes about army food. His last letter was a single line: 'Still here. Don't worry.' Mother read it eleven times. I counted.\"\n\nWhy is \"the war would be over by Christmas\" ironic?",
+      "options": [
+        "The war lasted much longer, so the confident promise was wrong",
+        "It came true",
+        "Christmas was cancelled",
+        "It was a joke"
+      ],
+      "answer": "The war lasted much longer, so the confident promise was wrong",
+      "explanation": "The optimistic prediction is shown to be badly wrong."
+    },
+    {
+      "topic": "Narrative voice",
+      "question": "Read the passage.\n\n\"They told us the war would be over by Christmas. Christmas came, and then another, and the letters home grew shorter. My brother had once filled four pages with jokes about army food. His last letter was a single line: 'Still here. Don't worry.' Mother read it eleven times. I counted.\"\n\nWhat is the effect of the first-person narrator?",
+      "options": [
+        "It makes the story feel distant",
+        "It is a news report",
+        "It shows the brother's thoughts directly",
+        "It makes the family's experience feel personal and close"
+      ],
+      "answer": "It makes the family's experience feel personal and close",
+      "explanation": "Seeing events through a family member's eyes makes them intimate."
+    },
+    {
+      "topic": "Grammar",
+      "question": "Which sentence contains a relative clause?",
+      "options": [
+        "I borrowed a book.",
+        "The book that I borrowed was brilliant.",
+        "Borrow the book!",
+        "Was the book good?"
+      ],
+      "answer": "The book that I borrowed was brilliant.",
+      "explanation": "'That I borrowed' adds information about the book."
+    },
+    {
+      "topic": "Grammar",
+      "question": "Which sentence uses the subjunctive mood?",
+      "options": [
+        "You were late.",
+        "If I was going, I'd tell you.",
+        "I am you.",
+        "If I were you, I would apologise."
+      ],
+      "answer": "If I were you, I would apologise.",
+      "explanation": "'If I were' is the subjunctive, used for hypothetical situations."
+    },
+    {
+      "topic": "Punctuation",
+      "question": "Which sentence is correctly punctuated?",
+      "options": [
+        "However; the plan failed.",
+        "However the plan, failed.",
+        "However, the plan failed.",
+        "However: the plan failed"
+      ],
+      "answer": "However, the plan failed.",
+      "explanation": "A comma follows 'However' when it starts a sentence."
+    },
+    {
+      "topic": "Vocabulary",
+      "question": "What does \"ambiguous\" mean?",
+      "options": [
+        "Very clear",
+        "Having more than one possible meaning",
+        "Angry",
+        "Old-fashioned"
+      ],
+      "answer": "Having more than one possible meaning",
+      "explanation": "Ambiguous means open to more than one interpretation."
+    },
+    {
+      "topic": "Vocabulary",
+      "question": "What does \"juxtaposition\" mean?",
+      "options": [
+        "A type of rhyme",
+        "Repeating a word",
+        "Placing contrasting things side by side for effect",
+        "Exaggeration"
+      ],
+      "answer": "Placing contrasting things side by side for effect",
+      "explanation": "e.g. placing wealth next to poverty to highlight the difference."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "What is a motif?",
+      "options": [
+        "A type of punctuation",
+        "The first line of a poem",
+        "A recurring image or idea in a text",
+        "The narrator's name"
+      ],
+      "answer": "A recurring image or idea in a text",
+      "explanation": "e.g. repeated images of light and dark."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Which is an example of a rhetorical question?",
+      "options": [
+        "What time is it?",
+        "Did you finish?",
+        "Where is the station?",
+        "How can we sit back while this injustice continues?"
+      ],
+      "answer": "How can we sit back while this injustice continues?",
+      "explanation": "It is asked for effect, not to get an answer."
+    },
+    {
+      "topic": "Poetry",
+      "question": "What is enjambment?",
+      "options": [
+        "A sentence running over the end of a line into the next",
+        "A rhyme at the end of each line",
+        "A pause in the middle of a line",
+        "A poem with 14 lines"
+      ],
+      "answer": "A sentence running over the end of a line into the next",
+      "explanation": "Enjambment lets a sentence flow across line breaks."
+    },
+    {
+      "topic": "Poetry",
+      "question": "What is a caesura?",
+      "options": [
+        "A pause in the middle of a line of poetry",
+        "A rhyming couplet",
+        "The last stanza",
+        "A type of metaphor"
+      ],
+      "answer": "A pause in the middle of a line of poetry",
+      "explanation": "A caesura is a break mid-line, often shown by punctuation."
+    },
+    {
+      "topic": "Context",
+      "question": "Why might knowing when a text was written help you understand it?",
+      "options": [
+        "Attitudes and events of the time shape what the writer says",
+        "It never helps",
+        "It tells you the ending",
+        "It gives you the word count"
+      ],
+      "answer": "Attitudes and events of the time shape what the writer says",
+      "explanation": "Context explains the values and events behind a text."
+    },
+    {
+      "topic": "Writing",
+      "question": "Which sentence best shows a varied, ambitious opening?",
+      "options": [
+        "I went outside.",
+        "It was a day.",
+        "Trembling, she reached for the handle.",
+        "The thing happened."
+      ],
+      "answer": "Trembling, she reached for the handle.",
+      "explanation": "Starting with a verb ending -ing (a participle) is varied and vivid."
+    },
+    {
+      "topic": "Writing",
+      "question": "In an argument essay, what is a counter-argument?",
+      "options": [
+        "Your main point",
+        "The conclusion",
+        "A list of facts",
+        "An opposing view that you then respond to"
+      ],
+      "answer": "An opposing view that you then respond to",
+      "explanation": "Acknowledging and rebutting the other side strengthens your argument."
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which is spelt correctly?",
+      "options": [
+        "Emberrass",
+        "Embarass",
+        "Embbarass",
+        "Embarrass"
+      ],
+      "answer": "Embarrass",
+      "explanation": "Double r and double s: embarrass."
+    },
+    {
+      "topic": "Shakespeare",
+      "question": "In 'Romeo and Juliet', the two families are...",
+      "options": [
+        "The Montagues and the Capulets",
+        "The Macbeths and the Duncans",
+        "The Bennets and the Darcys",
+        "The Lears and the Gloucesters"
+      ],
+      "answer": "The Montagues and the Capulets",
+      "explanation": "The feud between the Montagues and Capulets drives the tragedy."
+    }
+  ]
+}

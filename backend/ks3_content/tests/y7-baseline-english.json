@@ -1,0 +1,249 @@
+{
+  "slot": "y7-baseline",
+  "subject": "English",
+  "title": "Year 7 English Baseline",
+  "topic": "Baseline",
+  "duration": 30,
+  "questions": [
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"Maya hovered at the school gates, clutching the straps of her new rucksack so tightly that her knuckles turned white. Everyone else seemed to know exactly where to go. A bell shrieked somewhere inside, and a river of blazers swept past her. She took a breath, lifted her chin, and stepped through the gates.\"\n\nHow is Maya feeling at the start of the passage?",
+      "options": [
+        "Bored",
+        "Angry",
+        "Nervous",
+        "Excited"
+      ],
+      "answer": "Nervous",
+      "explanation": "Clutching the straps so tightly her knuckles turn white suggests tension and nerves."
+    },
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"Maya hovered at the school gates, clutching the straps of her new rucksack so tightly that her knuckles turned white. Everyone else seemed to know exactly where to go. A bell shrieked somewhere inside, and a river of blazers swept past her. She took a breath, lifted her chin, and stepped through the gates.\"\n\nWhat does \"Everyone else seemed to know exactly where to go\" suggest about Maya?",
+      "options": [
+        "She is late for school",
+        "She dislikes the other pupils",
+        "She feels lost and out of place",
+        "She has been to the school many times"
+      ],
+      "answer": "She feels lost and out of place",
+      "explanation": "The contrast with \"everyone else\" shows Maya feels she does not belong yet."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Read the passage.\n\n\"Maya hovered at the school gates, clutching the straps of her new rucksack so tightly that her knuckles turned white. Everyone else seemed to know exactly where to go. A bell shrieked somewhere inside, and a river of blazers swept past her. She took a breath, lifted her chin, and stepped through the gates.\"\n\n\"A river of blazers swept past her\" is an example of which technique?",
+      "options": [
+        "Simile",
+        "Alliteration",
+        "Metaphor",
+        "Onomatopoeia"
+      ],
+      "answer": "Metaphor",
+      "explanation": "It says the pupils ARE a river (no \"like\" or \"as\"), so it is a metaphor. It shows a huge, unstoppable crowd."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Read the passage.\n\n\"Maya hovered at the school gates, clutching the straps of her new rucksack so tightly that her knuckles turned white. Everyone else seemed to know exactly where to go. A bell shrieked somewhere inside, and a river of blazers swept past her. She took a breath, lifted her chin, and stepped through the gates.\"\n\nWhy does the writer say the bell \"shrieked\" rather than \"rang\"?",
+      "options": [
+        "To show the bell is broken",
+        "To make the moment feel loud and alarming",
+        "Because shrieked is shorter",
+        "To show the bell is far away"
+      ],
+      "answer": "To make the moment feel loud and alarming",
+      "explanation": "\"Shrieked\" is like a scream, which matches Maya's nervousness and makes the school feel overwhelming."
+    },
+    {
+      "topic": "Reading inference",
+      "question": "Read the passage.\n\n\"Maya hovered at the school gates, clutching the straps of her new rucksack so tightly that her knuckles turned white. Everyone else seemed to know exactly where to go. A bell shrieked somewhere inside, and a river of blazers swept past her. She took a breath, lifted her chin, and stepped through the gates.\"\n\nWhat does \"She took a breath, lifted her chin\" show about how Maya changes?",
+      "options": [
+        "She decides to go home",
+        "She finds the courage to go in",
+        "She is feeling ill",
+        "She is looking for a friend"
+      ],
+      "answer": "She finds the courage to go in",
+      "explanation": "Taking a breath and lifting her chin show her gathering confidence before she steps through the gates."
+    },
+    {
+      "topic": "Vocabulary",
+      "question": "Read the passage.\n\n\"Maya hovered at the school gates, clutching the straps of her new rucksack so tightly that her knuckles turned white. Everyone else seemed to know exactly where to go. A bell shrieked somewhere inside, and a river of blazers swept past her. She took a breath, lifted her chin, and stepped through the gates.\"\n\nWhich word is closest in meaning to \"hovered\"?",
+      "options": [
+        "Lingered",
+        "Ran",
+        "Shouted",
+        "Fell"
+      ],
+      "answer": "Lingered",
+      "explanation": "To hover is to wait or stay in one place uncertainly, like lingering."
+    },
+    {
+      "topic": "Word classes",
+      "question": "Which word in this sentence is an adverb?\n\n\"The tired dog slowly climbed the steep hill.\"",
+      "options": [
+        "tired",
+        "slowly",
+        "climbed",
+        "steep"
+      ],
+      "answer": "slowly",
+      "explanation": "\"Slowly\" describes HOW the dog climbed (a verb), so it is an adverb. \"Tired\" and \"steep\" are adjectives."
+    },
+    {
+      "topic": "Word classes",
+      "question": "Which word is a conjunction?\n\n\"I wanted to play outside, but it was raining.\"",
+      "options": [
+        "wanted",
+        "outside",
+        "raining",
+        "but"
+      ],
+      "answer": "but",
+      "explanation": "\"But\" joins two clauses, so it is a conjunction."
+    },
+    {
+      "topic": "Sentences & clauses",
+      "question": "Which of these is a complex sentence?",
+      "options": [
+        "Although it was late, the cat refused to sleep.",
+        "The cat slept and the dog barked.",
+        "The cat slept.",
+        "Sleep!"
+      ],
+      "answer": "Although it was late, the cat refused to sleep.",
+      "explanation": "It has a main clause plus a subordinate clause starting with \"although\"."
+    },
+    {
+      "topic": "Sentences & clauses",
+      "question": "Which sentence is written in the passive voice?",
+      "options": [
+        "The chef cooked the meal.",
+        "Cook the meal!",
+        "The chef is cooking.",
+        "The meal was cooked by the chef."
+      ],
+      "answer": "The meal was cooked by the chef.",
+      "explanation": "In the passive, the thing the action happens to (the meal) comes first: \"was cooked by\"."
+    },
+    {
+      "topic": "Punctuation",
+      "question": "Which sentence uses the apostrophe correctly?",
+      "options": [
+        "The dog wagged its tail.",
+        "The dog wagged it's tail.",
+        "The dogs' wagged its tail.",
+        "The dog wagg'ed its tail."
+      ],
+      "answer": "The dog wagged its tail.",
+      "explanation": "\"Its\" (belonging to it) has no apostrophe. \"It's\" only means \"it is\" or \"it has\"."
+    },
+    {
+      "topic": "Punctuation",
+      "question": "Which sentence is punctuated correctly?",
+      "options": [
+        "\"Where are you going\" asked Tom.",
+        "Where are you going? \"asked Tom.\"",
+        "\"Where are you going?\" Asked Tom.",
+        "\"Where are you going?\" asked Tom."
+      ],
+      "answer": "\"Where are you going?\" asked Tom.",
+      "explanation": "The question mark goes inside the speech marks, and \"asked\" continues the same sentence, so it stays lower case."
+    },
+    {
+      "topic": "Punctuation",
+      "question": "Where should a semicolon go?\n\n\"It was getting dark we decided to head home.\"",
+      "options": [
+        "It was getting dark; we decided to head home.",
+        "It was; getting dark we decided to head home.",
+        "It was getting dark we decided; to head home.",
+        "It was getting; dark we decided to head home."
+      ],
+      "answer": "It was getting dark; we decided to head home.",
+      "explanation": "A semicolon joins two closely linked main clauses that could each stand alone."
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which word is spelt correctly?",
+      "options": [
+        "Definately",
+        "Definitely",
+        "Defenitely",
+        "Definitly"
+      ],
+      "answer": "Definitely",
+      "explanation": "Think of the root word \"finite\": de-FINITE-ly."
+    },
+    {
+      "topic": "Spelling",
+      "question": "Which sentence uses \"their\", \"there\" or \"they're\" correctly?",
+      "options": [
+        "Their going to the park.",
+        "They're bags are over their.",
+        "They're putting their coats over there.",
+        "There putting they're coats on."
+      ],
+      "answer": "They're putting their coats over there.",
+      "explanation": "They're = they are; their = belonging to them; there = a place."
+    },
+    {
+      "topic": "Vocabulary",
+      "question": "Which word means \"to make something less severe or serious\"?",
+      "options": [
+        "Exaggerate",
+        "Investigate",
+        "Celebrate",
+        "Alleviate"
+      ],
+      "answer": "Alleviate",
+      "explanation": "To alleviate pain or worry is to make it less severe."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "\"The wind howled through the empty streets.\" Which technique is used?",
+      "options": [
+        "Simile",
+        "Personification",
+        "Rhyme",
+        "Alliteration"
+      ],
+      "answer": "Personification",
+      "explanation": "Howling is something a living creature does, so the wind is given a human or animal quality."
+    },
+    {
+      "topic": "Language techniques",
+      "question": "Which of these is a simile?",
+      "options": [
+        "Her smile was sunshine.",
+        "The leaves danced.",
+        "Crash! Bang!",
+        "He ran as fast as a cheetah."
+      ],
+      "answer": "He ran as fast as a cheetah.",
+      "explanation": "A simile compares using \"like\" or \"as\"."
+    },
+    {
+      "topic": "Writer's purpose",
+      "question": "A leaflet says: \"Join today and save 20%! Don't miss out on the best summer ever!\" What is its main purpose?",
+      "options": [
+        "To persuade",
+        "To inform",
+        "To entertain",
+        "To instruct"
+      ],
+      "answer": "To persuade",
+      "explanation": "The offer, exclamations and \"Don't miss out\" are trying to get the reader to join."
+    },
+    {
+      "topic": "Writer's purpose",
+      "question": "Which text is most likely written to instruct?",
+      "options": [
+        "A diary entry",
+        "A poem about autumn",
+        "A recipe",
+        "A newspaper opinion column"
+      ],
+      "answer": "A recipe",
+      "explanation": "A recipe gives step-by-step commands telling the reader how to do something."
+    }
+  ]
+}

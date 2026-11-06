@@ -39,6 +39,7 @@ def _user_row(u: User) -> dict:
         "activated_at": u.activated_at.isoformat() if getattr(u, "activated_at", None) else None,
         "terms_accepted_at": u.terms_accepted_at.isoformat() if getattr(u, "terms_accepted_at", None) else None,
         "terms_price": getattr(u, "terms_price", None),
+        "ks3_year": getattr(u, "ks3_year", None),
         "billing_currency": pricing.for_currency(getattr(u, "billing_currency", None))["currency"],
         "subscription_label": pricing.for_currency(getattr(u, "billing_currency", None))["label"],
         "created_at": u.created_at.isoformat() if u.created_at else None,
@@ -179,15 +180,16 @@ async def suggest_id(name: str, admin: User = Depends(require_admin), db: AsyncS
     return {"email": await _free_id(name, db)}
 
 
-async def _free_id(name: str, db: AsyncSession) -> str:
+async def _free_id(name: str, db: AsyncSession, domain: str | None = None) -> str:
     """musa@thebeyondtutors.com, then musa.k@…, then musa2@… if taken."""
+    domain = domain or settings.student_id_domain
     parts = [re.sub(r"[^a-z0-9]", "", p) for p in name.lower().split()]
     parts = [p for p in parts if p] or ["student"]
     first, last = parts[0], (parts[-1] if len(parts) > 1 else "")
     candidates = [first] + ([f"{first}.{last[0]}", f"{first}.{last}"] if last else [])
     candidates += [f"{first}{n}" for n in range(2, 100)]
     for c in candidates:
-        email = f"{c}@{settings.student_id_domain}"
+        email = f"{c}@{domain}"
         if not (await db.execute(select(User.id).where(User.email == email))).first():
             return email
     raise HTTPException(400, "Couldn't find a free user ID; please type one.")

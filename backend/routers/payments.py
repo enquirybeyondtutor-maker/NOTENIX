@@ -230,6 +230,62 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     return _payment_row(p)
 
 
+# ── Notenix KS3 (£149/yr): a trial family continues by bank transfer ──────────
+
+@router.get("/ks3-checkout")
+async def ks3_checkout_info():
+    from services import pricing
+    table = {c: pricing.ks3_for_currency(c) for c in pricing.KS3_PRICES}
+    return {"accounts": payment_accounts(), "prices": table, "gbp": pricing.ks3_for_currency("GBP"),
+            "days": settings.subscription_days, "pay_link": settings.revision_pay_link}
+
+
+class Ks3CheckoutIn(BaseModel):
+    login_id: str
+    password: str
+    currency: str = "GBP"
+    paid_via: str | None = None
+    payer_name: str | None = None
+    payer_note: str | None = None
+
+
+@router.post("/ks3-checkout")
+async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
+    """Public on purpose: a family whose free week has ended is locked out of the app,
+    so they confirm the child's Notenix login here instead of signing in."""
+    from services import pricing
+    user = (await db.execute(select(User).where(User.email == data.login_id.strip().lower()))).scalar_one_or_none()
+    if not user or not verify_password(data.password, user.password_hash):
+        raise HTTPException(400, "That Notenix user ID or password isn't right.")
+    if not user.ks3_year:
+        raise HTTPException(400, "This account isn't on Notenix KS3. Start a free week at notenix.com/ks3 first.")
+    if not (data.payer_name or "").strip():
+        raise HTTPException(400, "Please tell us the name of the person who paid.")
+    price = pricing.ks3_for_currency(data.currency)
+    open_claim = (await db.execute(select(Payment).where(
+        Payment.user_id == user.id, Payment.purpose == "ks3", Payment.status == "claimed"))).scalar_one_or_none()
+    if open_claim:
+        return _payment_row(open_claim)
+    user.billing_currency = price["currency"]
+    p = Payment(
+        user_id=user.id, purpose="ks3", reference=f"NX-K{user.id}",
+        amount=price["amount"], currency=price["currency"],
+        paid_via=(data.paid_via or "")[:80] or None,
+        payer_name=(data.payer_name or "")[:120] or None,
+        payer_note=(data.payer_note or "")[:1000] or None,
+    )
+    db.add(p)
+    await db.commit()
+    await db.refresh(p)
+    await notify_admins(
+        f"Payment to check: {p.reference}",
+        f"{user.full_name} ({user.email}, Year {user.ks3_year}) says they paid {price['label']} for Notenix KS3 "
+        f"via {p.paid_via or 'bank transfer'}. Payer: {p.payer_name}. Note: {p.payer_note or '-'}",
+        "/admin/requests",
+    )
+    return _payment_row(p)
+
+
 # ── Admin ────────────────────────────────────────────────────────────────────
 
 @router.get("/admin")
@@ -263,24 +319,31 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         user.plan, user.pro_until = "pro", start + timedelta(days=PRO_DAYS)
     if data.approve and p.purpose == "revision":
         user.access_kind, user.access_until = "paid", datetime.utcnow() + timedelta(days=settings.subscription_days)
+    if data.approve and p.purpose == "ks3":
+        now = datetime.utcnow()
+        start = user.access_until if (user.access_kind == "paid" and user.access_until and user.access_until > now) else now
+        user.access_kind, user.access_until = "paid", start + timedelta(days=settings.subscription_days)
     if req and req.status == "payment_claimed":
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
 
     name = escape((user.full_name or "there").split(" ")[0])
-    what = {"pro": "Notenix Pro", "revision": "Notenix revision access"}.get(p.purpose, f"your test request #{p.request_id}")
+    what = {"pro": "Notenix Pro", "revision": "Notenix revision access", "ks3": f"{user.full_name}'s Notenix KS3 year"
+            }.get(p.purpose, f"your test request #{p.request_id}")
+    to = user.parent_email or user.email  # Notenix user IDs are not mailboxes
     try:
         if data.approve:
             body = (f"Hi {name}, we've received your payment of {p.amount:g} {p.currency} for {what}."
                     + (f" Pro is active for the next {PRO_DAYS} days." if p.purpose == "pro"
                        else " Your full revision access is now on for a year. Sign in to start." if p.purpose == "revision"
+                       else " Notenix KS3 is on for a year: half-termly tests, homework help, notes and a monthly progress report." if p.purpose == "ks3"
                        else " Our team will send your test shortly."))
-            await send_notice(user.email, "Payment received", "Payment received", body, body,
+            await send_notice(to, "Payment received", "Payment received", body, body,
                               "/requests" if p.purpose == "test_request" else "/dashboard", "Open Notenix")
         else:
             body = (f"Hi {name}, we couldn't find your payment for {what} (reference {p.reference}). "
                     "Please check the transfer and reference, then tell us again from the pay page, or reply to this email.")
-            await send_notice(user.email, "We couldn't match your payment", "We couldn't match your payment",
+            await send_notice(to, "We couldn't match your payment", "We couldn't match your payment",
                               body, body, "/requests" if req else "/pay", "Check payment")
     except Exception as ex:
         print(f"[payments] notice failed: {ex}")

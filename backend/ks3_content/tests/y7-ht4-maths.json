@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht4",
+  "subject": "Maths",
+  "title": "Year 7 Maths: Half-term 4 (Sequences, ratio and proportion)",
+  "topic": "ht4",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Sequences",
+      "question": "What is the term-to-term rule for 50, 44, 38, 32, ...?",
+      "options": [
+        "Subtract 6",
+        "Add 6",
+        "Subtract 4",
+        "Divide by 2"
+      ],
+      "answer": "Subtract 6",
+      "explanation": "Each term is 6 less than the one before."
+    },
+    {
+      "topic": "Sequences",
+      "question": "Find the 5th term of a sequence with first term 2 and rule 'multiply by 3'.",
+      "options": [
+        "162",
+        "54",
+        "14",
+        "486"
+      ],
+      "answer": "162",
+      "explanation": "2, 6, 18, 54, 162. The 5th term is 162."
+    },
+    {
+      "topic": "nth term",
+      "question": "Find the $n$th term of 4, 7, 10, 13, ...",
+      "options": [
+        "$3n + 4$",
+        "$n + 3$",
+        "$4n$",
+        "$3n + 1$"
+      ],
+      "answer": "$3n + 1$",
+      "explanation": "The difference is 3, so start with $3n$ (3, 6, 9, ...). Add 1 to get 4, 7, 10: $3n + 1$."
+    },
+    {
+      "topic": "nth term",
+      "question": "Is 75 in the sequence with $n$th term $4n - 1$?",
+      "options": [
+        "No, it would need $n = 18.5$",
+        "Yes, it is the 18th term",
+        "Yes, it is the 19th term",
+        "No, all the terms are even"
+      ],
+      "answer": "Yes, it is the 19th term",
+      "explanation": "Solve $4n - 1 = 75$: $4n = 76$, so $n = 19$, a whole number. Check: $4 \\times 19 - 1 = 75$."
+    },
+    {
+      "topic": "Ratio",
+      "question": "Simplify the ratio 24 : 36.",
+      "options": [
+        "2 : 3",
+        "4 : 6",
+        "3 : 4",
+        "6 : 9"
+      ],
+      "answer": "2 : 3",
+      "explanation": "Divide both parts by 12 (the HCF): 2 : 3."
+    },
+    {
+      "topic": "Ratio",
+      "question": "Red and blue beads are in the ratio 3 : 5. There are 40 beads. How many are blue?",
+      "options": [
+        "15",
+        "24",
+        "25",
+        "35"
+      ],
+      "answer": "25",
+      "explanation": "8 parts make 40, so 1 part = 5. Blue = $5 \\times 5 = 25$."
+    },
+    {
+      "topic": "Ratio",
+      "question": "Paint is mixed yellow : red = 2 : 3. How much red is needed with 10 litres of yellow?",
+      "options": [
+        "6 litres",
+        "12 litres",
+        "15 litres",
+        "20 litres"
+      ],
+      "answer": "15 litres",
+      "explanation": "Yellow went from 2 to 10 (× 5), so red goes from 3 to 15 litres."
+    },
+    {
+      "topic": "Ratio and fractions",
+      "question": "Boys and girls in a club are in the ratio 4 : 7. What fraction are boys?",
+      "options": [
+        "$\\dfrac{4}{7}$",
+        "$\\dfrac{4}{11}$",
+        "$\\dfrac{7}{11}$",
+        "$\\dfrac{3}{7}$"
+      ],
+      "answer": "$\\dfrac{4}{11}$",
+      "explanation": "There are $4 + 7 = 11$ parts, so boys are $\\dfrac{4}{11}$."
+    },
+    {
+      "topic": "Proportion",
+      "question": "5 pens cost £3.50. How much do 8 pens cost?",
+      "options": [
+        "£4.80",
+        "£5.25",
+        "£6.00",
+        "£5.60"
+      ],
+      "answer": "£5.60",
+      "explanation": "One pen costs $3.50 \\div 5 = $ £0.70, so 8 pens cost £5.60."
+    },
+    {
+      "topic": "Proportion",
+      "question": "A recipe for 4 people uses 300 g of rice. How much rice for 6 people?",
+      "options": [
+        "400 g",
+        "600 g",
+        "500 g",
+        "450 g"
+      ],
+      "answer": "450 g",
+      "explanation": "75 g per person, so $6 \\times 75 = 450$ g."
+    },
+    {
+      "topic": "Best buy",
+      "question": "Which is better value: 500 ml for £1.20, or 750 ml for £1.65?",
+      "options": [
+        "500 ml",
+        "750 ml",
+        "Both the same",
+        "Cannot tell"
+      ],
+      "answer": "750 ml",
+      "explanation": "500 ml: 0.24p per ml. 750 ml: 0.22p per ml. The 750 ml bottle is cheaper per ml."
+    },
+    {
+      "topic": "Unit conversion",
+      "question": "How many grams are there in 2.4 kg?",
+      "options": [
+        "24 g",
+        "2400 g",
+        "240 g",
+        "24 000 g"
+      ],
+      "answer": "2400 g",
+      "explanation": "1 kg = 1000 g, so $2.4 \\times 1000 = 2400$ g."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht2",
+  "subject": "Maths",
+  "title": "Year 7 Maths: Half-term 2 (Fractions, decimals and percentages)",
+  "topic": "ht2",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Equivalent fractions",
+      "question": "Simplify $\\dfrac{18}{24}$ fully.",
+      "options": [
+        "$\\dfrac{9}{12}$",
+        "$\\dfrac{3}{4}$",
+        "$\\dfrac{6}{8}$",
+        "$\\dfrac{2}{3}$"
+      ],
+      "answer": "$\\dfrac{3}{4}$",
+      "explanation": "The highest common factor of 18 and 24 is 6: 18 ÷ 6 = 3 and 24 ÷ 6 = 4."
+    },
+    {
+      "topic": "Fractions",
+      "question": "Work out $\\dfrac{3}{4} - \\dfrac{1}{6}$.",
+      "options": [
+        "$\\dfrac{2}{2}$",
+        "$\\dfrac{7}{12}$",
+        "$\\dfrac{1}{2}$",
+        "$\\dfrac{5}{12}$"
+      ],
+      "answer": "$\\dfrac{7}{12}$",
+      "explanation": "Common denominator 12: $\\dfrac{9}{12} - \\dfrac{2}{12} = \\dfrac{7}{12}$."
+    },
+    {
+      "topic": "Fractions",
+      "question": "Work out $\\dfrac{2}{5} \\times \\dfrac{3}{4}$.",
+      "options": [
+        "$\\dfrac{3}{10}$",
+        "$\\dfrac{5}{9}$",
+        "$\\dfrac{8}{15}$",
+        "$\\dfrac{6}{9}$"
+      ],
+      "answer": "$\\dfrac{3}{10}$",
+      "explanation": "Multiply the tops and the bottoms: $\\dfrac{6}{20}$, which simplifies to $\\dfrac{3}{10}$."
+    },
+    {
+      "topic": "Mixed numbers",
+      "question": "Write $\\dfrac{17}{5}$ as a mixed number.",
+      "options": [
+        "$3\\dfrac{2}{5}$",
+        "$2\\dfrac{7}{5}$",
+        "$3\\dfrac{1}{5}$",
+        "$4\\dfrac{3}{5}$"
+      ],
+      "answer": "$3\\dfrac{2}{5}$",
+      "explanation": "$17 \\div 5 = 3$ remainder 2, so $3\\dfrac{2}{5}$."
+    },
+    {
+      "topic": "Fraction of an amount",
+      "question": "Find $\\dfrac{5}{8}$ of 72.",
+      "options": [
+        "40",
+        "48",
+        "45",
+        "54"
+      ],
+      "answer": "45",
+      "explanation": "$72 \\div 8 = 9$, then $9 \\times 5 = 45$."
+    },
+    {
+      "topic": "Converting",
+      "question": "Write $\\dfrac{7}{20}$ as a percentage.",
+      "options": [
+        "7%",
+        "20%",
+        "35%",
+        "70%"
+      ],
+      "answer": "35%",
+      "explanation": "$\\dfrac{7}{20} = \\dfrac{35}{100} = 35\\%$."
+    },
+    {
+      "topic": "Converting",
+      "question": "Write 0.08 as a fraction in its simplest form.",
+      "options": [
+        "$\\dfrac{8}{10}$",
+        "$\\dfrac{1}{8}$",
+        "$\\dfrac{4}{5}$",
+        "$\\dfrac{2}{25}$"
+      ],
+      "answer": "$\\dfrac{2}{25}$",
+      "explanation": "$0.08 = \\dfrac{8}{100} = \\dfrac{2}{25}$."
+    },
+    {
+      "topic": "Percentages",
+      "question": "Find 35% of 80.",
+      "options": [
+        "24",
+        "28",
+        "35",
+        "45"
+      ],
+      "answer": "28",
+      "explanation": "10% = 8, so 30% = 24 and 5% = 4. 35% = 28."
+    },
+    {
+      "topic": "Percentages",
+      "question": "A jacket costs £60. It is reduced by 20%. What is the sale price?",
+      "options": [
+        "£12",
+        "£40",
+        "£50",
+        "£48"
+      ],
+      "answer": "£48",
+      "explanation": "20% of £60 is £12, and £60 − £12 = £48."
+    },
+    {
+      "topic": "Percentages",
+      "question": "Sam scored 18 out of 24 in a quiz. What percentage is that?",
+      "options": [
+        "18%",
+        "60%",
+        "75%",
+        "72%"
+      ],
+      "answer": "75%",
+      "explanation": "$\\dfrac{18}{24} = \\dfrac{3}{4} = 75\\%$."
+    },
+    {
+      "topic": "Ordering",
+      "question": "Which is the smallest: $\\dfrac{3}{5}$, 0.62, 58%, $\\dfrac{5}{8}$?",
+      "options": [
+        "58%",
+        "0.62",
+        "$\\dfrac{3}{5}$",
+        "$\\dfrac{5}{8}$"
+      ],
+      "answer": "58%",
+      "explanation": "As decimals: 0.6, 0.62, 0.58, 0.625. The smallest is 0.58 = 58%."
+    },
+    {
+      "topic": "Decimals",
+      "question": "Work out $0.3 \\times 0.4$.",
+      "options": [
+        "0.012",
+        "0.7",
+        "1.2",
+        "0.12"
+      ],
+      "answer": "0.12",
+      "explanation": "$3 \\times 4 = 12$, and there are two decimal places in total, so 0.12."
+    }
+  ]
+}

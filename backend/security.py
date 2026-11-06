@@ -56,6 +56,10 @@ def access_ended_message(user: User) -> str | None:
         return None
     if getattr(user, "access_kind", None) == "pending":
         return "We're confirming your payment. Your access will switch on as soon as it arrives, and we'll email you."
+    if getattr(user, "ks3_year", None):
+        what = "free week" if getattr(user, "access_kind", None) == "trial" else "Notenix KS3 year"
+        return (f"Your {what} ended on {until.strftime('%d %b %Y')}. Continue Notenix KS3 at "
+                f"notenix.com/ks3/continue: your results are saved.")
     what = "free trial" if getattr(user, "access_kind", None) == "trial" else "Notenix subscription"
     return f"Your {what} ended on {until.strftime('%d %b %Y')}. Please contact Beyond Tutors to renew."
 

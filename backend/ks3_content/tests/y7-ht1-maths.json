@@ -1,0 +1,153 @@
+{
+  "slot": "y7-ht1",
+  "subject": "Maths",
+  "title": "Year 7 Maths: Half-term 1 (Place value, rounding and negative numbers)",
+  "topic": "ht1",
+  "duration": 20,
+  "questions": [
+    {
+      "topic": "Place value",
+      "question": "Write 3 040 506 in words.",
+      "options": [
+        "Three million, four thousand, five hundred and six",
+        "Three hundred and four thousand, five hundred and six",
+        "Three million, forty thousand, five hundred and six",
+        "Three million, four hundred thousand, fifty-six"
+      ],
+      "answer": "Three million, forty thousand, five hundred and six",
+      "explanation": "3 040 506 = 3 millions, 0 hundred-thousands, 4 ten-thousands (40 thousand), 0 thousands, 5 hundreds, 0 tens, 6 ones."
+    },
+    {
+      "topic": "Place value",
+      "question": "Work out $3.6 \\times 100$.",
+      "options": [
+        "0.036",
+        "36",
+        "3600",
+        "360"
+      ],
+      "answer": "360",
+      "explanation": "Multiplying by 100 moves every digit two places to the left: 360."
+    },
+    {
+      "topic": "Place value",
+      "question": "Work out $45 \\div 1000$.",
+      "options": [
+        "0.045",
+        "0.45",
+        "4.5",
+        "45 000"
+      ],
+      "answer": "0.045",
+      "explanation": "Dividing by 1000 moves every digit three places to the right: 0.045."
+    },
+    {
+      "topic": "Ordering",
+      "question": "Put in order, smallest first: 0.6, 0.06, 0.66, 0.606",
+      "options": [
+        "0.06, 0.6, 0.606, 0.66",
+        "0.06, 0.606, 0.6, 0.66",
+        "0.6, 0.06, 0.66, 0.606",
+        "0.66, 0.606, 0.6, 0.06"
+      ],
+      "answer": "0.06, 0.6, 0.606, 0.66",
+      "explanation": "Compare as thousandths: 0.060, 0.600, 0.606, 0.660."
+    },
+    {
+      "topic": "Rounding",
+      "question": "Round 46 872 to the nearest thousand.",
+      "options": [
+        "46 000",
+        "47 000",
+        "46 900",
+        "50 000"
+      ],
+      "answer": "47 000",
+      "explanation": "The hundreds digit is 8 (5 or more), so round up to 47 000."
+    },
+    {
+      "topic": "Rounding",
+      "question": "Round 0.04718 to 2 significant figures.",
+      "options": [
+        "0.047",
+        "0.04",
+        "0.0472",
+        "0.05"
+      ],
+      "answer": "0.047",
+      "explanation": "The first significant figure is 4, the second is 7. The next digit is 1, so it stays 0.047."
+    },
+    {
+      "topic": "Estimation",
+      "question": "Estimate $49.7 \\times 6.1$ by rounding each number to 1 significant figure.",
+      "options": [
+        "240",
+        "300",
+        "250",
+        "360"
+      ],
+      "answer": "300",
+      "explanation": "$49.7 \\approx 50$ and $6.1 \\approx 6$, so $50 \\times 6 = 300$."
+    },
+    {
+      "topic": "Negative numbers",
+      "question": "Work out $-7 + 3$.",
+      "options": [
+        "$-10$",
+        "10",
+        "4",
+        "$-4$"
+      ],
+      "answer": "$-4$",
+      "explanation": "Start at $-7$ and move 3 to the right: $-4$."
+    },
+    {
+      "topic": "Negative numbers",
+      "question": "Work out $2 - (-5)$.",
+      "options": [
+        "$-7$",
+        "$-3$",
+        "3",
+        "7"
+      ],
+      "answer": "7",
+      "explanation": "Subtracting a negative is the same as adding: $2 + 5 = 7$."
+    },
+    {
+      "topic": "Negative numbers",
+      "question": "Work out $-24 \\div -6$.",
+      "options": [
+        "$-4$",
+        "$-18$",
+        "4",
+        "18"
+      ],
+      "answer": "4",
+      "explanation": "Same signs give a positive answer: $24 \\div 6 = 4$."
+    },
+    {
+      "topic": "Negative numbers",
+      "question": "At 6 am the temperature was $-3$°C. By 2 pm it was 8°C. By how much did it rise?",
+      "options": [
+        "5°C",
+        "11°C",
+        "8°C",
+        "$-11$°C"
+      ],
+      "answer": "11°C",
+      "explanation": "From $-3$ up to 0 is 3, then up to 8 is 8 more: $3 + 8 = 11$°C."
+    },
+    {
+      "topic": "Order of operations",
+      "question": "Work out $5 + 3 \\times (6 - 2)^2$.",
+      "options": [
+        "145",
+        "128",
+        "53",
+        "61"
+      ],
+      "answer": "53",
+      "explanation": "Brackets: $6 - 2 = 4$. Index: $4^2 = 16$. Multiply: $3 \\times 16 = 48$. Add: $5 + 48 = 53$."
+    }
+  ]
+}

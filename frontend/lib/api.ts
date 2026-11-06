@@ -116,6 +116,7 @@ export const adminAPI = {
   // Beyond Tutors-issued accounts: the password comes back once, in the response.
   suggestId: (name: string) => api.get("/admin/suggest-id", { params: { name } }),
   prices: () => api.get("/admin/prices"),
+  setKs3: (id: number | string, year: number | null) => api.post(`/ks3/admin/users/${id}`, { year }),
   setCurrency: (id: number | string, currency: string) => api.post(`/admin/users/${id}/currency`, { currency }),
   createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string }) =>
     api.post("/admin/users", data),
@@ -175,6 +176,9 @@ export const paymentsAPI = {
     api.post("/payments/claim", data),
   mine: () => api.get("/payments/mine"),
   revisionInfo: () => api.get("/payments/revision-checkout"),
+  ks3Info: () => api.get("/payments/ks3-checkout"),
+  ks3Checkout: (data: { login_id: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+    api.post("/payments/ks3-checkout", data),
   revisionCheckout: (data: { full_name: string; email: string; password: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/revision-checkout", data),
   adminList: (status?: string) => api.get("/payments/admin", { params: status ? { status } : {} }),
@@ -197,6 +201,23 @@ export const requestsAPI = {
     api.post(`/requests/admin/${id}/assign`, data),
   update: (id: number, data: { status?: "open" | "cancelled"; note?: string }) =>
     api.post(`/requests/admin/${id}`, data),
+};
+
+// KS3 homework help (student asks, tutor replies).
+export const helpAPI = {
+  mine: () => api.get("/help"),
+  ask: (data: { subject: string; question?: string; images: string[] }) => api.post("/help", data),
+  queue: () => api.get("/teacher/help"),
+  detail: (id: number) => api.get(`/teacher/help/${id}`),
+  reply: (id: number, data: { reply: string; images: string[] }) => api.post(`/teacher/help/${id}/reply`, data),
+};
+
+// Notenix KS3 free trial (public sign-up by a parent).
+export const ks3API = {
+  startTrial: (data: { child_name: string; year_group: number; parent_email: string; agree_terms: boolean }) =>
+    api.post("/ks3/trial/start", data),
+  verifyTrial: (data: { parent_email: string; code: string }) => api.post("/ks3/trial/verify", data),
+  completeTrial: (data: { parent_email: string; setup_token: string; password: string }) => api.post("/ks3/trial/complete", data),
 };
 
 export function saveAuth(token: string, user: object) {
