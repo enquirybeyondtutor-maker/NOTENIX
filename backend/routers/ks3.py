@@ -2,6 +2,8 @@
 
 Only this trial form is public; normal sign-up stays off. One free trial per parent email.
 """
+import hashlib
+import hmac
 import re
 import secrets
 from datetime import datetime, timedelta
@@ -79,7 +81,7 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
         raise HTTPException(429, "Please wait a minute before asking for another code.")
     if not u:
         u = User(email=await _free_id(name, db, domain=settings.ks3_id_domain), full_name=name, role="student",
-                 is_verified=True, password_hash=hash_password(secrets.token_urlsafe(16)), needs_activation=True,
+                 is_verified=True, password_hash="!", needs_activation=True,  # no password until the parent picks one
                  parent_email=email, token_version=0)
         db.add(u)
     u.full_name, u.ks3_year = name, data.year_group
@@ -106,7 +108,8 @@ async def trial_verify(data: TrialVerifyIn, db: AsyncSession = Depends(get_db)):
         await db.commit()
         raise HTTPException(400, "That code isn't right. Please check the email and try again.")
     token = secrets.token_urlsafe(24)
-    u.otp_hash = hash_password(token)  # the 6-digit code can't be reused from here on
+    # A long random token, so a fast SHA-256 is enough (bcrypt is for short, guessable secrets).
+    u.otp_hash = "sha256$" + hashlib.sha256(token.encode()).hexdigest()  # the 6-digit code is now spent
     u.otp_expires_at = datetime.utcnow() + timedelta(minutes=SETUP_MINUTES)
     u.otp_attempts = 0
     await db.commit()
@@ -119,7 +122,8 @@ async def trial_complete(data: TrialCompleteIn, db: AsyncSession = Depends(get_d
     if len(data.password) < 8:
         raise HTTPException(400, "Please choose a password of at least 8 characters.")
     u = await _pending(data.parent_email, db)
-    if not verify_password(data.setup_token, u.otp_hash):
+    want = "sha256$" + hashlib.sha256(data.setup_token.encode()).hexdigest()
+    if not hmac.compare_digest(want, u.otp_hash or ""):
         u.otp_attempts = (u.otp_attempts or 0) + 1
         await db.commit()
         raise HTTPException(400, "This sign-up link has expired. Please start again.")
@@ -131,14 +135,14 @@ async def trial_complete(data: TrialCompleteIn, db: AsyncSession = Depends(get_d
     u.access_kind, u.access_until = "trial", now + timedelta(days=settings.ks3_trial_days)
     u.terms_price = f"Free {settings.ks3_trial_days}-day KS3 trial"
     u.token_version = (u.token_version or 0) + 1
+    u.ks3_emails = sorted(set((u.ks3_emails or []) + ["welcome"]))
+    await db.flush()  # one UPDATE for all of the above
     await ks3.assign_due_tests(db, u)  # this year's baseline tests
     await db.flush()
     await share_year_notes(db, u)  # this year's KS3 notes
-    try:
-        await ks3.send(db, u, "welcome")
-    except Exception as e:
-        print(f"[ks3] welcome email for {u.id} failed: {e}")
+    welcome = ks3.welcome(u, {})  # the welcome email needs no results, so no extra query
     await db.commit()
+    ks3.deliver_later(u.parent_email, *welcome)  # don't make the parent wait for the email service
     return {"access_token": create_token(u.id, u.token_version), "token_type": "bearer",
             "user": _user_dict(u), "login_id": u.email}
 

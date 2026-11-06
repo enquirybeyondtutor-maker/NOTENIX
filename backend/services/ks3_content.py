@@ -8,7 +8,8 @@ so fixing a typo is a normal deploy. New notes are shared with that year's KS3 s
 """
 import json
 from pathlib import Path
-from sqlalchemy import select
+from datetime import datetime
+from sqlalchemy import select, insert
 from database import SessionLocal
 from models import User, Test, ClassNote, NoteShare
 
@@ -86,8 +87,8 @@ async def share_year_notes(db, student: User | None = None) -> int:
             continue
         have = set((await db.execute(select(NoteShare.note_id).where(
             NoteShare.student_id == s.id, NoteShare.note_id.in_(notes)))).scalars().all())
-        for nid in notes:
-            if nid not in have:
-                db.add(NoteShare(note_id=nid, student_id=s.id))
-                added += 1
+        rows = [{"note_id": nid, "student_id": s.id, "created_at": datetime.utcnow()} for nid in notes if nid not in have]
+        if rows:  # one batched insert instead of a round trip per note
+            await db.execute(insert(NoteShare), rows)
+            added += len(rows)
     return added

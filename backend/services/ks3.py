@@ -292,15 +292,16 @@ async def assign_due_tests(db, u: User) -> int:
         return 0
     have = set((await db.execute(select(TestAssignment.test_id).where(
         TestAssignment.student_id == u.id, TestAssignment.test_id.in_([t.id for t in tests])))).scalars().all())
-    owner = await db.scalar(select(User.id).where(User.role == "admin").order_by(User.id).limit(1))
-    added = 0
+    rows = []
     for t in tests:
         if t.id not in have:
             label = "baseline" if t.ks3_slot.endswith("baseline") else f"half-term {t.ks3_slot.rsplit('ht', 1)[-1]}"
-            db.add(TestAssignment(test_id=t.id, student_id=u.id, assigned_by=owner or t.owner_id,
-                                  class_label=f"KS3 Year {u.ks3_year} {label}"))
-            added += 1
-    return added
+            rows.append({"test_id": t.id, "student_id": u.id, "assigned_by": t.owner_id, "status": "assigned",
+                         "class_label": f"KS3 Year {u.ks3_year} {label}", "created_at": datetime.utcnow()})
+    if rows:  # one batched insert instead of a round trip per test
+        from sqlalchemy import insert
+        await db.execute(insert(TestAssignment), rows)
+    return len(rows)
 
 
 async def run_yearly() -> dict:
@@ -345,6 +346,24 @@ BUILDERS = {"welcome": welcome, "checkin": checkin, "ending": ending, "report": 
 
 async def render(db, u: User, kind: str) -> tuple[str, str, str]:
     return BUILDERS[kind](u, await progress(db, u))
+
+
+_pending_sends: set = set()
+
+
+def deliver_later(to: str | None, subject: str, html: str, text: str) -> None:
+    """Send an email without holding up the web request."""
+    import asyncio
+    if not to:
+        return
+    async def go():
+        try:
+            await _deliver(to, subject, html, text)
+        except Exception as e:
+            print(f"[ks3] email to parent failed: {e}")
+    task = asyncio.create_task(go())
+    _pending_sends.add(task)
+    task.add_done_callback(_pending_sends.discard)
 
 
 async def send(db, u: User, kind: str) -> bool:

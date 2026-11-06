@@ -24,7 +24,10 @@ def hash_password(p: str) -> str:
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_context.verify(plain, hashed)
+    try:
+        return pwd_context.verify(plain, hashed)
+    except (ValueError, TypeError):  # "!" = no password set yet, or a malformed hash
+        return False
 
 
 def password_needs_rehash(hashed: str) -> bool:

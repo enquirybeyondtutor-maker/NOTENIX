@@ -25,7 +25,10 @@ def _prepare(url: str):
 
 DATABASE_URL, connect_args = _prepare(settings.database_url)
 
-engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True, connect_args=connect_args)
+# No pool_pre_ping: it costs an extra database round trip on every request, and the database is
+# far from the web server. Recycling connections every 4 minutes (before Neon's 5-minute idle
+# suspend) keeps them fresh instead.
+engine = create_async_engine(DATABASE_URL, echo=False, pool_recycle=240, connect_args=connect_args)
 SessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 
