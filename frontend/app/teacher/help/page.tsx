@@ -57,7 +57,7 @@ export default function TeacherHelpPage() {
           {rows.map((r) => (
             <button key={r.id} onClick={() => view(r.id)} className="flex w-full items-center justify-between gap-3 px-5 py-3 text-left hover:bg-canvas">
               <div>
-                <div className="text-sm font-medium text-ink">{r.student.full_name} · Year {r.student.year} · {r.subject}</div>
+                <div className="text-sm font-medium text-ink">{r.student.full_name} · {r.student.level || `Year ${r.student.year}`} · {r.subject}</div>
                 <div className="text-xs text-ink-subtle">{formatDate(r.created_at)} · {r.question ? r.question.slice(0, 80) : `${r.photos} photo${r.photos === 1 ? "" : "s"}`}</div>
               </div>
               <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${r.status === "open" ? "bg-amber-100 text-amber-800" : "bg-emerald-100 text-emerald-800"}`}>
@@ -73,7 +73,7 @@ export default function TeacherHelpPage() {
           <div className="my-8 w-full max-w-3xl rounded-xl bg-surface p-5" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <div className="font-semibold text-ink">{open.student.full_name} · Year {open.student.year} · {open.subject}</div>
+                <div className="font-semibold text-ink">{open.student.full_name} · {open.student.level || `Year ${open.student.year}`} · {open.subject}</div>
                 <div className="text-xs text-ink-subtle">{open.student.email} · asked {formatDate(open.created_at)}</div>
               </div>
               <button onClick={() => setOpen(null)} aria-label="Close"><X size={18} /></button>

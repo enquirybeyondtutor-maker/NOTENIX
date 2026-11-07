@@ -13,6 +13,7 @@ from database import get_db
 from models import User, HelpRequest
 from security import get_current_user, require_teacher
 from services.email import notify_admins, send_help_answered
+from services import doubt
 
 router = APIRouter(tags=["help"])
 
@@ -32,6 +33,13 @@ def _row(h: HelpRequest, images: bool = True) -> dict:
 
 
 async def _allowance(u: User, db: AsyncSession) -> dict:
+    if doubt.live(u):  # Doubt Help plan: count from the start of the trial / current 30 days
+        plan = doubt.PLANS[u.help_plan]
+        used = await db.scalar(select(func.count()).select_from(HelpRequest).where(
+            HelpRequest.student_id == u.id, HelpRequest.created_at >= doubt.period_start(u))) or 0
+        return {"used": used, "cap": plan["cap"], "left": max(0, plan["cap"] - used),
+                "period": "trial" if u.help_plan == "trial" else "month", "plan": u.help_plan,
+                "until": u.help_until.isoformat()}
     trial = u.access_kind == "trial"
     q = select(func.count()).select_from(HelpRequest).where(HelpRequest.student_id == u.id)
     if not trial:
@@ -42,8 +50,12 @@ async def _allowance(u: User, db: AsyncSession) -> dict:
 
 
 def _require_ks3(u: User) -> None:
-    if not u.ks3_year:
-        raise HTTPException(403, "Homework help is part of Notenix KS3.")
+    if not (u.ks3_year or doubt.live(u)):
+        raise HTTPException(403, "Ask a tutor is part of Notenix KS3 and Doubt Help plans.")
+
+
+def _subjects(u: User) -> tuple[str, ...]:
+    return doubt.subjects_for(u.sg_level) if (doubt.live(u) and u.sg_level) else SUBJECTS
 
 
 @router.get("/help")
@@ -51,7 +63,8 @@ async def my_help(user: User = Depends(get_current_user), db: AsyncSession = Dep
     _require_ks3(user)
     rows = (await db.execute(select(HelpRequest).where(HelpRequest.student_id == user.id)
                              .order_by(HelpRequest.created_at.desc()))).scalars().all()
-    return {"requests": [_row(h) for h in rows], "allowance": await _allowance(user, db)}
+    return {"requests": [_row(h) for h in rows], "allowance": await _allowance(user, db),
+            "subjects": list(_subjects(user)), "level": user.sg_level}
 
 
 class AskIn(BaseModel):
@@ -63,7 +76,7 @@ class AskIn(BaseModel):
 @router.post("/help")
 async def ask(data: AskIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     _require_ks3(user)
-    if data.subject not in SUBJECTS:
+    if data.subject not in _subjects(user) and data.subject not in SUBJECTS:
         raise HTTPException(400, "Pick a subject.")
     text = (data.question or "").strip()[:3000]
     imgs = [i for i in data.images if i][:MAX_PHOTOS]
@@ -73,6 +86,10 @@ async def ask(data: AskIn, user: User = Depends(get_current_user), db: AsyncSess
         raise HTTPException(400, "Each photo must be an image under 1.5 MB.")
     allow = await _allowance(user, db)
     if allow["left"] <= 0:
+        if allow.get("plan"):
+            raise HTTPException(429, "You've used all your free trial questions. Choose a plan at notenix.com/ask-a-tutor/continue to keep asking."
+                                if allow["period"] == "trial" else
+                                "You've used this month's questions. They reset when the plan renews, or upgrade to Doubt Help Plus.")
         raise HTTPException(429, "You've used all your homework-help questions for the free week. "
                                  "Continue Notenix KS3 to keep asking." if allow["period"] == "trial" else
                                  "You've reached this month's homework-help limit. It resets in a few days.")
@@ -81,7 +98,7 @@ async def ask(data: AskIn, user: User = Depends(get_current_user), db: AsyncSess
     await db.commit()
     await notify_admins(f"Homework question from {user.full_name}",
                         f"{user.full_name} sent a {data.subject} homework question. Please reply within a day.", "/teacher/help",
-                        rows=[("Student", f"{user.full_name} (Year {user.ks3_year})"), ("Subject", data.subject),
+                        rows=[("Student", f"{user.full_name} ({user.sg_level or f'Year {user.ks3_year}'})"), ("Subject", data.subject),
                               ("Question", text[:300] or "(photo only)"), ("Photos", str(len(imgs)))])
     return _row(h)
 
@@ -91,7 +108,7 @@ async def help_queue(teacher: User = Depends(require_teacher), db: AsyncSession 
     rows = (await db.execute(select(HelpRequest, User).join(User, User.id == HelpRequest.student_id)
                              .order_by(HelpRequest.created_at.desc()).limit(200))).all()
     out = [{**_row(h, images=False), "student": {"id": u.id, "full_name": u.full_name, "email": u.email,
-                                                 "year": u.ks3_year}} for h, u in rows]
+                                                 "year": u.ks3_year, "level": u.sg_level}} for h, u in rows]
     out.sort(key=lambda r: r["status"] != "open")  # open first, newest first within each
     return out
 
@@ -103,7 +120,7 @@ async def help_detail(help_id: int, teacher: User = Depends(require_teacher), db
     if not row:
         raise HTTPException(404, "Not found")
     h, u = row
-    return {**_row(h), "student": {"id": u.id, "full_name": u.full_name, "email": u.email, "year": u.ks3_year}}
+    return {**_row(h), "student": {"id": u.id, "full_name": u.full_name, "email": u.email, "year": u.ks3_year, "level": u.sg_level}}
 
 
 class ReplyIn(BaseModel):

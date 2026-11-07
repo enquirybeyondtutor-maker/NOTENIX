@@ -54,6 +54,12 @@ class User(Base):
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # The student's own inbox for homework / class-notes updates (their login ID is not a mailbox).
     notify_email: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    # Doubt Help / Ask a Tutor (services/doubt.py): plan trial|doubt|plus, when it ends, the student's
+    # Singapore level (Sec 1 .. JC 2) and which plan emails have gone out.
+    help_plan: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    help_until: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    sg_level: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    help_emails: Mapped[list | None] = mapped_column(JSON, nullable=True)
     notify_email_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     ks3_trial_started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     ks3_emails: Mapped[list | None] = mapped_column(JSON, nullable=True)

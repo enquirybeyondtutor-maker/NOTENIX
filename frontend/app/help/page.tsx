@@ -21,7 +21,7 @@ export default function HomeworkHelpPage() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
 
-  const load = () => helpAPI.mine().then((r) => setData(r.data)).catch((e) => setError(e?.response?.data?.detail || "Couldn't load."));
+  const load = () => helpAPI.mine().then((r) => { setData(r.data); if (r.data.subjects?.length) setSubject((cur) => r.data.subjects.includes(cur) ? cur : r.data.subjects[0]); }).catch((e) => setError(e?.response?.data?.detail || "Couldn't load."));
   useEffect(() => { if (ready) load(); }, [ready]);
 
   const addPhotos = async (files: FileList | null) => {
@@ -58,17 +58,18 @@ export default function HomeworkHelpPage() {
 
   return (
     <PageContainer>
-      <PageHeader icon={LifeBuoy} title="Homework help" subtitle="Stuck on school homework? Send it to a Beyond Tutors tutor." />
+      <PageHeader icon={LifeBuoy} title={a.plan ? "Ask a tutor" : "Homework help"}
+        subtitle={a.plan ? `Stuck on a question${data.level ? ` (${data.level})` : ""}? Send a photo and a Beyond Tutors tutor explains it.` : "Stuck on school homework? Send it to a Beyond Tutors tutor."} />
 
       <form onSubmit={send} className="card p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="font-semibold text-ink">Ask about a homework question</div>
           <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${a.left ? "bg-brand-50 text-brand-700" : "bg-red-50 text-red-700"}`}>
-            {a.left} of {a.cap} questions left {a.period === "trial" ? "in your free week" : "this month"}
+            {a.left} of {a.cap} questions left {a.period === "trial" ? (a.plan ? "in your free trial" : "in your free week") : a.plan ? `until ${new Date(a.until).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}` : "this month"}
           </span>
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
-          {SUBJECTS.map((s) => (
+          {(data.subjects || SUBJECTS).map((s: string) => (
             <button type="button" key={s} onClick={() => setSubject(s)}
               className={`rounded-full border px-3 py-1 text-sm ${subject === s ? "border-brand-600 bg-brand-600 text-white" : "border-line text-ink-muted hover:border-brand-400"}`}>
               {s}

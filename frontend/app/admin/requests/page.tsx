@@ -78,7 +78,7 @@ export default function AdminRequestsPage() {
   const load = () => {
     requestsAPI.adminList().then((r) => setRows(r.data)).catch(() => setRows([]));
     requestsAPI.adminTests().then((r) => setTests(r.data)).catch(() => {});
-    paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro" || p.purpose === "revision" || p.purpose === "ks3"))).catch(() => {});
+    paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro" || p.purpose === "revision" || p.purpose === "ks3" || p.purpose === "doubt" || p.purpose === "plus" || p.purpose === "annual"))).catch(() => {});
   };
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function AdminRequestsPage() {
               <div key={p.id} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
                 <div>
                   <b>{p.user?.full_name}</b> <span className="text-ink-subtle">{p.user?.email}</span>{" "}
-                  <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{p.purpose === "revision" ? "Revision access" : p.purpose === "ks3" ? "Notenix KS3" : "Pro"}</span>
+                  <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{p.purpose === "revision" ? "Revision access" : p.purpose === "ks3" ? "Notenix KS3" : p.purpose === "annual" ? "Ask a Tutor · 1 year" : p.purpose === "doubt" ? "Doubt Help · 30 days" : p.purpose === "plus" ? "Doubt Help Plus · 30 days" : "Pro"}</span>
                   <div className="text-ink-muted">
                     {p.currency} {p.amount} · ref <span className="font-mono">{p.reference}</span> · via {p.paid_via || "?"} · payer {p.payer_name || "?"}
                     {p.payer_note ? ` · "${p.payer_note}"` : ""} · {relativeTime(p.created_at)}

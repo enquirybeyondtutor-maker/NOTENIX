@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { doubtAPI, SG_LEVELS } from "@/lib/doubtApi";
 import { useRouter } from "next/navigation";
 import { Shield, Users, GraduationCap, PenSquare, Ban, CheckCircle2, UserX, PenLine, UserPlus, KeyRound, Copy } from "lucide-react";
 import { adminAPI, getUser, authAPI } from "@/lib/api";
@@ -28,6 +29,9 @@ interface Row {
   billing_currency?: string;
   ks3_year?: number | null;
   notify_email?: string | null;
+  help_plan?: string | null;
+  help_until?: string | null;
+  sg_level?: string | null;
   subscription_label?: string;
   created_at: string;
   last_active: string | null;
@@ -249,6 +253,18 @@ export default function AdminPage() {
     }
   };
 
+  const changeDoubt = async (row: Row, plan: string, level?: string) => {
+    setBusy(row.id);
+    try {
+      await doubtAPI.adminSet(row.id, { plan: plan || null, level: level || row.sg_level || "Sec 1" });
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Couldn't change Doubt Help");
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const changeKs3 = async (row: Row, value: string) => {
     setBusy(row.id);
     try {
@@ -407,6 +423,27 @@ export default function AdminPage() {
                           <option value="8">KS3: Year 8</option>
                           <option value="9">KS3: Year 9</option>
                         </select>
+                      )}
+                      {u.role === "student" && !u.is_admin && (
+                        <div className="mt-1 flex items-center gap-1">
+                          <select value={u.help_plan && u.help_until && new Date(u.help_until + "Z") > new Date() ? u.help_plan : ""} disabled={busy === u.id}
+                            onChange={(e) => changeDoubt(u, e.target.value)} title="Ask a Tutor: picking a plan adds its time (1 year, 30 days, or a 7-day trial)"
+                            className="rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">
+                            <option value="">Doubt Help: off</option>
+                            <option value="trial">Doubt: trial (5 Qs)</option>
+                            <option value="annual">Ask a Tutor 1 year (+365 days)</option>
+                            <option value="doubt">Doubt Help (+30 days)</option>
+                            <option value="plus">Doubt Plus (+30 days)</option>
+                          </select>
+                          <select value={u.sg_level || ""} disabled={busy === u.id} onChange={(e) => changeDoubt(u, u.help_plan || "", e.target.value)}
+                            title="Singapore level (sets the subjects)" className="rounded-md border border-line bg-white px-1 py-0.5 text-xs text-ink">
+                            <option value="">Level</option>
+                            {SG_LEVELS.map((l) => <option key={l}>{l}</option>)}
+                          </select>
+                        </div>
+                      )}
+                      {u.role === "student" && !u.is_admin && u.help_plan && u.help_until && (
+                        <div className="text-[11px] text-ink-subtle">Doubt Help until {formatDate(u.help_until)}</div>
                       )}
                       {u.role === "student" && !u.is_admin && !u.needs_activation && (
                         <button onClick={() => requireActivation(u)} disabled={busy === u.id}

@@ -319,6 +319,9 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         user.plan, user.pro_until = "pro", start + timedelta(days=PRO_DAYS)
     if data.approve and p.purpose == "revision":
         user.access_kind, user.access_until = "paid", datetime.utcnow() + timedelta(days=settings.subscription_days)
+    if data.approve and p.purpose in ("annual", "doubt", "plus"):
+        from services import doubt
+        doubt.set_plan(user, p.purpose)
     if data.approve and p.purpose == "ks3":
         now = datetime.utcnow()
         start = user.access_until if (user.access_kind == "paid" and user.access_until and user.access_until > now) else now
@@ -327,11 +330,16 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
 
-    what = {"pro": "Notenix Pro", "revision": "Notenix revision access", "ks3": f"{user.full_name}'s Notenix KS3 year"
+    what = {"pro": "Notenix Pro", "revision": "Notenix revision access", "ks3": f"{user.full_name}'s Notenix KS3 year",
+            "doubt": f"{user.full_name}'s Doubt Help (30 days)", "plus": f"{user.full_name}'s Doubt Help Plus (30 days)",
+            "annual": f"{user.full_name}'s Ask a Tutor year"
             }.get(p.purpose, f"test request #{p.request_id}")
     extra = {"pro": f"Pro is on for the next {PRO_DAYS} days.",
              "revision": "Full revision access is now on for a year.",
              "ks3": "Notenix KS3 is on for a year: a test every half-term, homework help, notes and a progress report every month.",
+             "doubt": "Ask a Tutor is on for the next 30 days: up to 20 questions, answered step by step.",
+             "annual": "Ask a Tutor is on for a whole year: up to 20 questions every month, answered step by step.",
+             "plus": "Ask a Tutor is on for the next 30 days: up to 50 questions, plus 2 live 30-minute doubt calls. Reply on WhatsApp to book them.",
              }.get(p.purpose, "Our team will send the test shortly.")
     try:
         await send_payment_result(user, data.approve, what, p.amount, p.currency, p.reference, extra)

@@ -174,7 +174,12 @@ def _content(full_name: str, code: str, kind: str = "verify") -> tuple[str, str,
     """(subject, html, text). kind = verify | reset | activate | ks3."""
     mins = settings.otp_expiry_minutes
     child = T.first_name(full_name)
-    if kind == "ks3":
+    if kind == "doubt":
+        subject = f"{code} is your code to start {child}'s free trial"
+        heading, pre = f"Start {child}'s free trial", "Enter this code on notenix.com to continue."
+        lead = f"Enter this code on notenix.com to confirm your email and start {child}'s free Ask a Tutor trial."
+        ignore, audience = "If you didn't ask for this, you can ignore this email; nothing will be set up.", "signup"
+    elif kind == "ks3":
         subject = f"{code} is your code to start {child}'s free week"
         heading, pre = f"Start {child}'s free week", "Enter this code on notenix.com to continue."
         lead = f"Enter this code on notenix.com to confirm your email and start {child}'s free Notenix KS3 week."

@@ -74,8 +74,8 @@ export default function Navbar() {
     // insert Practice right after My Tests
     links = [...STUDENT_LINKS.slice(0, 2), { href: "/practice", label: "Practice", icon: PenLine }, ...STUDENT_LINKS.slice(2)];
   }
-  if (isAuthed && !isTeacher && user?.ks3_year) {
-    links = [...links.slice(0, 3), { href: "/help", label: "Homework help", icon: LifeBuoy }, ...links.slice(3)];
+  if (isAuthed && !isTeacher && (user?.ks3_year || user?.help_plan)) {
+    links = [...links.slice(0, 3), { href: "/help", label: user?.ks3_year ? "Homework help" : "Ask a tutor", icon: LifeBuoy }, ...links.slice(3)];
   }
   if (isAuthed && isTeacher) {
     links = [...links, { href: "/teacher/help", label: "Help", icon: LifeBuoy }];

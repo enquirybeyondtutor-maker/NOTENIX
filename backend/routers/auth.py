@@ -26,6 +26,7 @@ def _require_open_signup():
 EMAIL_FAIL_MSG = "We couldn't send the verification email right now. Please try again in a moment."
 
 from services import pricing
+from services import doubt
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -85,6 +86,9 @@ def _user_dict(u: User) -> dict:
         "subscription": pricing.for_currency(getattr(u, "billing_currency", None)),
         "ks3_year": getattr(u, "ks3_year", None),
         "notify_email": getattr(u, "notify_email", None),
+        "help_plan": getattr(u, "help_plan", None) if doubt.live(u) else None,
+        "help_until": u.help_until.isoformat() if getattr(u, "help_until", None) else None,
+        "sg_level": getattr(u, "sg_level", None),
         # Show the "get homework by email" prompt: a student with no inbox of their own on file.
         "ask_notify_email": role == "student" and not student_inbox(u),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,

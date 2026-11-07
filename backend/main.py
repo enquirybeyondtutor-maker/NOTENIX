@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from services.retention import purge_old_responses
 from services.sittings import auto_submit_expired
-from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests, notes, papers, sync, ks3, help
+from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests, notes, papers, sync, ks3, help, doubt
 from routers.payments import expire_pro_plans
 
 
@@ -37,6 +37,13 @@ async def _ks3_loop():
                 print(f"[ks3] sent {n} trial email(s)")
         except Exception as e:
             print(f"[ks3] sequence failed: {e}")
+        try:
+            from services.doubt import run_sequence as doubt_sequence
+            n = await doubt_sequence()
+            if n:
+                print(f"[doubt] sent {n} plan email(s)")
+        except Exception as e:
+            print(f"[doubt] sequence failed: {e}")
         try:
             from services.ks3 import run_yearly
             st = await run_yearly()
@@ -98,6 +105,7 @@ app.include_router(papers.router)
 app.include_router(sync.router)
 app.include_router(ks3.router)
 app.include_router(help.router)
+app.include_router(doubt.router)
 
 
 @app.get("/health")

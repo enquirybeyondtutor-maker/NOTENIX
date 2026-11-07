@@ -269,6 +269,10 @@ async def migrate_note_kinds():
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS terms_price VARCHAR(40)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_year INTEGER"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS notify_email VARCHAR(255)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS help_plan VARCHAR(20)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS help_until TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sg_level VARCHAR(20)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS help_emails JSON"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS notify_email_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_trial_started_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_emails JSON"))
@@ -285,7 +289,9 @@ async def migrate_note_kinds():
             if "terms_price" not in ucols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN terms_price VARCHAR(40)"))
             for col, typ in (("ks3_year", "INTEGER"), ("ks3_trial_started_at", "TIMESTAMP"), ("ks3_emails", "JSON"),
-                             ("notify_email", "VARCHAR(255)"), ("notify_email_at", "TIMESTAMP")):
+                             ("notify_email", "VARCHAR(255)"), ("notify_email_at", "TIMESTAMP"),
+                             ("help_plan", "VARCHAR(20)"), ("help_until", "TIMESTAMP"), ("sg_level", "VARCHAR(20)"),
+                             ("help_emails", "JSON")):
                 if col not in ucols:
                     await conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {typ}"))
             tcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(tests)"))).all()}
