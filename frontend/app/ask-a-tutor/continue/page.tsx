@@ -13,7 +13,16 @@ type Info = { accounts: Account[]; prices: Record<string, Record<string, number>
 const SYM: Record<string, string> = { SGD: "S$", GBP: "£", USD: "$", AUD: "A$", INR: "₹" };
 const money = (cur: string, n: number) => (SYM[cur] ? `${SYM[cur]}${n.toLocaleString("en")}` : `${cur} ${n.toLocaleString("en")}`);
 
-// Ask a Tutor monthly plans, paid by bank transfer and confirmed by an admin (adds 30 days).
+/** Ask a Tutor is priced in S$: show the visitor's own local account if we have one, otherwise the
+ *  Singapore (SGD) account rather than the international GBP one. */
+function accountsFor(accounts: Account[], country: string) {
+  const r = pickAccounts(accounts, country);
+  if (r.local) return { ...r, place: countryName(country) };
+  const sg = accounts.filter((a) => (a.countries || []).includes("SG"));
+  return sg.length ? { shown: sg, local: true, place: "Singapore" } : { ...r, place: "" };
+}
+
+// Ask a Tutor plans, paid by bank transfer and confirmed by an admin.
 export default function DoubtContinue() {
   const [info, setInfo] = useState<Info | null>(null);
   const [plan, setPlan] = useState<"annual" | "doubt" | "plus">("annual");
@@ -30,12 +39,12 @@ export default function DoubtContinue() {
   }, []);
   useEffect(() => {
     if (!info) return;
-    const { shown } = pickAccounts(info.accounts, country);
+    const { shown } = accountsFor(info.accounts, country);
     if (shown[0]) setForm((f) => ({ ...f, paid_via: shown[0].label }));
   }, [info, country]);
 
   if (!info) return <Spinner label="Loading…" />;
-  const { shown, local } = pickAccounts(info.accounts, country);
+  const { shown, local, place } = accountsFor(info.accounts, country);
   const chosen = shown.find((a) => a.label === form.paid_via) || shown[0];
   const currency = local && chosen?.currency && info.prices[plan][chosen.currency.toUpperCase()] ? chosen.currency.toUpperCase() : "SGD";
   const price = money(currency, info.prices[plan][currency]);
@@ -110,7 +119,7 @@ export default function DoubtContinue() {
             <div key={a.label} className={`space-y-3 rounded-lg border p-4 ${local ? "border-brand-300 bg-brand-50/40" : "border-line"}`}>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-sm font-semibold text-ink">{a.label}</p>
-                {local && <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-[11px] font-semibold text-white">For {countryName(country)}</span>}
+                {local && place && <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-[11px] font-semibold text-white">{place === "Singapore" && countryName(country) !== "Singapore" ? "Singapore account (S$)" : `For ${place}`}</span>}
               </div>
               <p className="text-sm text-ink">Send <b>{price}</b> · reference: your child&apos;s name</p>
               <dl className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-sm">
