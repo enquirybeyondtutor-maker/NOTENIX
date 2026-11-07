@@ -12,6 +12,7 @@ from config import settings
 from database import get_db
 from models import User, ClassNote, NoteShare, Test, TestAssignment, TestAttempt, HomeworkSubmission
 from routers.notes import MAX_FILE_CHARS
+from services.email import in_background, send_new_material, send_assignment_email
 
 router = APIRouter(prefix="/sync", tags=["sync"])
 
@@ -135,6 +136,7 @@ async def upload(data: UploadIn, db: AsyncSession = Depends(get_db)):
     await db.flush()
     db.add(NoteShare(note_id=n.id, student_id=s.id))
     await db.commit()
+    in_background(send_new_material(s, data.kind, n.title, None, n.due_at, n.body))
     if data.file_data:
         from routers.notes import start_render
         start_render(n.id)  # prepare the student page images now, not on first view
@@ -163,4 +165,5 @@ async def assign(data: AssignIn, db: AsyncSession = Depends(get_db)):
                        due_at=data.due_at.replace(tzinfo=None) if data.due_at else None)
     db.add(a)
     await db.commit()
+    in_background(send_assignment_email(s, t.title, t.subject, "Your tutor", a.due_at))
     return {"id": a.id, "already": False}

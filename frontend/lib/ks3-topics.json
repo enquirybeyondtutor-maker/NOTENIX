@@ -1,0 +1,1278 @@
+[
+ {
+  "key": "y7-english-grammar",
+  "year": 7,
+  "subject": "English",
+  "title": "Word classes and sentences",
+  "slug": "word-classes-and-sentences",
+  "body": "WORD CLASSES\n• Noun: a person, place or thing (Maya, school, courage)\n• Verb: an action or state (run, is, decided)\n• Adjective: describes a noun (tired dog, steep hill)\n• Adverb: describes a verb, often ends in -ly (slowly, quietly, soon)\n• Pronoun: replaces a noun (she, it, they)\n• Preposition: shows where or when (under, after, through)\n• Conjunction: joins clauses (and, but, because, although)\n\nSENTENCE TYPES\n• Simple: one main clause. \"The cat slept.\"\n• Compound: two main clauses joined by and/but/or. \"The cat slept and the dog barked.\"\n• Complex: a main clause + a subordinate clause. \"Although it was late, the cat refused to sleep.\"\n\nACTIVE AND PASSIVE\nActive: The chef cooked the meal.\nPassive: The meal was cooked by the chef.\nUse the passive to put the focus on what happened, not who did it.\n\nWRITE BETTER SENTENCES\nVary how you start: with an adverb (Slowly, …), a subordinate clause (When the bell rang, …) or a verb ending in -ing (Clutching her bag, …).",
+  "questions": [
+   {
+    "question": "Which word is a pronoun? \"Maya gave it to them yesterday.\"",
+    "options": [
+     "them",
+     "gave",
+     "Maya",
+     "yesterday"
+    ],
+    "answer": "them",
+    "explanation": "'Them' replaces a noun, so it is a pronoun (as is 'it').",
+    "topic": "Word classes"
+   },
+   {
+    "question": "Which word is a preposition? \"The cat hid under the table.\"",
+    "options": [
+     "cat",
+     "hid",
+     "under",
+     "table"
+    ],
+    "answer": "under",
+    "explanation": "'Under' shows where the cat is in relation to the table.",
+    "topic": "Word classes"
+   },
+   {
+    "question": "Which is a compound sentence?",
+    "options": [
+     "The dog barked.",
+     "Barking loudly.",
+     "Because the dog barked, the baby woke up.",
+     "The dog barked and the baby woke up."
+    ],
+    "answer": "The dog barked and the baby woke up.",
+    "explanation": "Two main clauses joined by 'and' make a compound sentence.",
+    "topic": "Sentence types"
+   },
+   {
+    "question": "What word class is \"happiness\"?",
+    "options": [
+     "Adjective",
+     "Adverb",
+     "Verb",
+     "Abstract noun"
+    ],
+    "answer": "Abstract noun",
+    "explanation": "Happiness is a feeling you cannot touch: an abstract noun.",
+    "topic": "Word classes"
+   }
+  ]
+ },
+ {
+  "key": "y7-english-punctuation",
+  "year": 7,
+  "subject": "English",
+  "title": "Punctuation and spelling",
+  "slug": "punctuation-and-spelling",
+  "body": "APOSTROPHES\n• Missing letters: do not → don't, it is → it's\n• Belonging: the girl's bag (one girl), the girls' bags (more than one)\n• its = belonging to it (no apostrophe). it's = it is / it has.\n\nSPEECH MARKS\n\"Where are you going?\" asked Tom.\n• Punctuation goes inside the speech marks\n• New speaker, new line\n\nCOMMAS\n• In lists: eggs, flour, sugar and butter\n• After a fronted adverbial: After lunch, we went outside.\n• Around extra information: My brother, who is twelve, loves football.\n\nSEMICOLONS AND COLONS\n• Semicolon joins two linked main clauses: It was getting dark; we headed home.\n• Colon introduces a list or explanation: You need three things: a pen, a ruler and a calculator.\n\nTRICKY SPELLINGS\ndefinitely (de-FINITE-ly), separate (there's A RAT in sepARATe), necessary (one Collar, two Sleeves), their / there / they're, your / you're",
+  "questions": [
+   {
+    "question": "In \"When the rain stopped, we went outside\", which part is the subordinate clause?",
+    "options": [
+     "we went outside",
+     "When the rain stopped",
+     "outside",
+     "the rain"
+    ],
+    "answer": "When the rain stopped",
+    "explanation": "'When the rain stopped' cannot stand alone; it depends on the main clause.",
+    "topic": "Clauses"
+   },
+   {
+    "question": "Which sentence uses commas correctly?",
+    "options": [
+     "My sister who is ten, likes swimming.",
+     "My sister, who is ten, likes swimming.",
+     "My, sister who is ten likes swimming.",
+     "My sister who, is ten likes swimming."
+    ],
+    "answer": "My sister, who is ten, likes swimming.",
+    "explanation": "Extra information in the middle of a sentence needs a comma on both sides.",
+    "topic": "Commas"
+   },
+   {
+    "question": "Which is correct?",
+    "options": [
+     "The childrens' toys",
+     "The children's toys",
+     "The childrens toy's",
+     "The children toys'"
+    ],
+    "answer": "The children's toys",
+    "explanation": "'Children' is already plural, so add 's for possession: children's.",
+    "topic": "Apostrophes"
+   },
+   {
+    "question": "What does r\"they're\" mean?",
+    "options": [
+     "Belonging to them",
+     "In that place",
+     "They are",
+     "They were"
+    ],
+    "answer": "They are",
+    "explanation": "They're is short for 'they are'.",
+    "topic": "Apostrophes"
+   }
+  ]
+ },
+ {
+  "key": "y7-english-reading",
+  "year": 7,
+  "subject": "English",
+  "title": "Reading: inference and language",
+  "slug": "reading-inference-and-language",
+  "body": "INFERENCE = READING BETWEEN THE LINES\nWriters often SHOW feelings instead of telling you.\n\"She clutched her bag so tightly her knuckles turned white.\" → she is nervous.\nAsk: what does this detail suggest? How do I know?\n\nANSWERING READING QUESTIONS (P.E.E.)\n• Point: Maya feels nervous at first.\n• Evidence: \"clutching the straps … so tightly that her knuckles turned white\"\n• Explain: the tight grip shows she is tense and anxious about starting school.\n\nLANGUAGE TECHNIQUES\n• Simile: compares using like/as. \"as fast as a cheetah\"\n• Metaphor: says something IS something else. \"a river of blazers\"\n• Personification: gives human qualities to objects. \"the wind howled\"\n• Alliteration: same starting sound. \"silent, silver stars\"\n• Onomatopoeia: words that sound like the noise. crash, shriek, buzz\n\nWHY WORD CHOICE MATTERS\nAsk why the writer chose THIS word. \"Shrieked\" (not \"rang\") makes the bell sound loud and alarming.\n\nPURPOSE: PIE\nPersuade (offers, exclamations, \"you\"), Inform (facts, headings), Entertain (stories, description). Instructions use commands: \"Mix the flour.\"",
+  "questions": [
+   {
+    "question": "\"The classroom was a zoo.\" What does this metaphor suggest?",
+    "options": [
+     "The class had pets",
+     "The class was outside",
+     "The class was noisy and wild",
+     "The class was quiet"
+    ],
+    "answer": "The class was noisy and wild",
+    "explanation": "Comparing the class to a zoo suggests chaos and noise.",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "\"The bees buzzed busily.\" Which TWO techniques are used?",
+    "options": [
+     "Simile and metaphor",
+     "Personification and rhyme",
+     "Alliteration and onomatopoeia",
+     "Hyperbole and simile"
+    ],
+    "answer": "Alliteration and onomatopoeia",
+    "explanation": "Repeated 'b' sounds (alliteration) and 'buzzed' sounds like the noise (onomatopoeia).",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "r\"I've told you a million times!\" This is an example of ...",
+    "options": [
+     "a simile",
+     "hyperbole",
+     "personification",
+     "a metaphor"
+    ],
+    "answer": "hyperbole",
+    "explanation": "It is a deliberate exaggeration for effect: hyperbole.",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "A writer says a character 'slammed the door and stomped upstairs'. What does this SHOW rather than tell?",
+    "options": [
+     "That the character is tired",
+     "That the house is old",
+     "That the character is happy",
+     "That the character is angry"
+    ],
+    "answer": "That the character is angry",
+    "explanation": "The actions reveal anger without the writer stating it.",
+    "topic": "Characterisation"
+   }
+  ]
+ },
+ {
+  "key": "y7-maths-algebra",
+  "year": 7,
+  "subject": "Maths",
+  "title": "Algebra basics",
+  "slug": "algebra-basics",
+  "body": "WORDS TO KNOW\n• Term: $3a$, $5$, $-2b$\n• Expression: terms added or subtracted, e.g. $3a + 5b - 2$ (no equals sign)\n• Equation: has an equals sign and can be solved, e.g. $2x + 5 = 17$\n\nSIMPLIFYING (collect like terms)\nOnly combine terms with the same letter.\n$3a + 5b - a + 2b = 2a + 7b$\n\nSUBSTITUTION\nSwap the letter for the number, then follow BIDMAS.\nIf $x = 4$: $3x^2 = 3 \\times 16 = 48$  (square first, then multiply)\n\nSOLVING ONE- AND TWO-STEP EQUATIONS\nDo the same thing to both sides, undoing in reverse order.\n$2x + 5 = 17$\nsubtract 5: $2x = 12$\ndivide by 2: $x = 6$\nCheck: $2 \\times 6 + 5 = 17$ ✓\n\nSEQUENCES\n3, 7, 11, 15, … goes up by 4 each time.\n$n$th term: $4n - 1$  (the times-table of the difference, then adjust)",
+  "questions": [
+   {
+    "question": "Work out $5 + 3 \\times (6 - 2)^2$.",
+    "options": [
+     "145",
+     "128",
+     "53",
+     "61"
+    ],
+    "answer": "53",
+    "explanation": "Brackets: $6 - 2 = 4$. Index: $4^2 = 16$. Multiply: $3 \\times 16 = 48$. Add: $5 + 48 = 53$.",
+    "topic": "Order of operations"
+   },
+   {
+    "question": "Which expression means 'multiply n by 4, then subtract 3'?",
+    "options": [
+     "$4(n - 3)$",
+     "$n - 12$",
+     "$4n - 3$",
+     "$3 - 4n$"
+    ],
+    "answer": "$4n - 3$",
+    "explanation": "Multiplying n by 4 gives $4n$; then subtract 3: $4n - 3$.",
+    "topic": "Notation"
+   },
+   {
+    "question": "Simplify $3a \\times 4b$.",
+    "options": [
+     "$7ab$",
+     "$34ab$",
+     "$12a + b$",
+     "$12ab$"
+    ],
+    "answer": "$12ab$",
+    "explanation": "Multiply the numbers ($3 \\times 4 = 12$) and write the letters together: $12ab$.",
+    "topic": "Simplifying"
+   },
+   {
+    "question": "I think of a number, double it and add 7. The answer is 31. What was my number?",
+    "options": [
+     "19",
+     "12",
+     "24",
+     "38"
+    ],
+    "answer": "12",
+    "explanation": "$2n + 7 = 31$, so $2n = 24$ and $n = 12$.",
+    "topic": "Forming equations"
+   }
+  ]
+ },
+ {
+  "key": "y7-maths-angles-area",
+  "year": 7,
+  "subject": "Maths",
+  "title": "Angles, area and perimeter",
+  "slug": "angles-area-and-perimeter",
+  "body": "ANGLE FACTS\n• Angles on a straight line add up to 180°\n• Angles around a point add up to 360°\n• Angles in a triangle add up to 180°\n• Vertically opposite angles are equal\n\nExample: a triangle has angles 48° and 75°. Third angle = $180 - 48 - 75 = 57$°\n\nTYPES OF ANGLE\nacute: less than 90°   right: 90°   obtuse: between 90° and 180°   reflex: more than 180°\n\nPERIMETER\nThe distance all the way around. Add every side.\n\nAREA\n• Rectangle: length × width\n• Triangle: $\\dfrac{1}{2} \\times$ base × perpendicular height\n• Parallelogram: base × perpendicular height\n\nExample: triangle, base 10 cm, height 6 cm → $\\dfrac{1}{2} \\times 10 \\times 6 = 30$ cm²\n\nUNITS\nPerimeter is in cm; area is in cm² (squared units).",
+  "questions": [
+   {
+    "question": "An isosceles triangle has one angle of 40° between its two equal sides. What is each of the other two angles?",
+    "options": [
+     "40°",
+     "100°",
+     "70°",
+     "140°"
+    ],
+    "answer": "70°",
+    "explanation": "$180 - 40 = 140$, shared equally: 70° each.",
+    "topic": "Angle facts"
+   },
+   {
+    "question": "Two straight lines cross. One of the angles is 58°. What is the angle vertically opposite it?",
+    "options": [
+     "32°",
+     "122°",
+     "58°",
+     "302°"
+    ],
+    "answer": "58°",
+    "explanation": "Vertically opposite angles are equal: 58°.",
+    "topic": "Angle facts"
+   },
+   {
+    "question": "Angles around a point are 95°, 120° and $x$. Find $x$.",
+    "options": [
+     "65°",
+     "215°",
+     "155°",
+     "145°"
+    ],
+    "answer": "145°",
+    "explanation": "Angles around a point add to 360°: $360 - 95 - 120 = 145$°.",
+    "topic": "Angle facts"
+   },
+   {
+    "question": "Which of these is a reflex angle?",
+    "options": [
+     "89°",
+     "200°",
+     "179°",
+     "90°"
+    ],
+    "answer": "200°",
+    "explanation": "Reflex angles are between 180° and 360°.",
+    "topic": "Types of angle"
+   }
+  ]
+ },
+ {
+  "key": "y7-maths-fdp",
+  "year": 7,
+  "subject": "Maths",
+  "title": "Fractions, decimals and percentages",
+  "slug": "fractions-decimals-and-percentages",
+  "body": "KEY IDEA\nFractions, decimals and percentages are three ways of writing the same amount.\n$\\dfrac{1}{2} = 0.5 = 50\\%$     $\\dfrac{1}{4} = 0.25 = 25\\%$     $\\dfrac{3}{4} = 0.75 = 75\\%$     $\\dfrac{1}{10} = 0.1 = 10\\%$     $\\dfrac{1}{5} = 0.2 = 20\\%$\n\nCONVERTING\n• Fraction → decimal: divide the top by the bottom. $\\dfrac{3}{8} = 3 \\div 8 = 0.375$\n• Decimal → percentage: multiply by 100. $0.375 = 37.5\\%$\n• Percentage → fraction: put it over 100 and simplify. $35\\% = \\dfrac{35}{100} = \\dfrac{7}{20}$\n\nADDING FRACTIONS\nMake the denominators the same first.\n$\\dfrac{2}{3} + \\dfrac{1}{4} = \\dfrac{8}{12} + \\dfrac{3}{12} = \\dfrac{11}{12}$\n\nFRACTION OF AN AMOUNT\nDivide by the bottom, multiply by the top.\n$\\dfrac{3}{5}$ of 40: $40 \\div 5 = 8$, then $8 \\times 3 = 24$\n\nPERCENTAGE OF AN AMOUNT (no calculator)\nBuild it from 10% and 5%.\n15% of 60: 10% = 6, 5% = 3, so 15% = 9\n\nCOMMON MISTAKE\nAdding the tops and the bottoms: $\\dfrac{1}{2} + \\dfrac{1}{3}$ is NOT $\\dfrac{2}{5}$. It is $\\dfrac{3}{6} + \\dfrac{2}{6} = \\dfrac{5}{6}$.",
+  "questions": [
+   {
+    "question": "Find $\\dfrac{5}{8}$ of 72.",
+    "options": [
+     "40",
+     "48",
+     "45",
+     "54"
+    ],
+    "answer": "45",
+    "explanation": "$72 \\div 8 = 9$, then $9 \\times 5 = 45$.",
+    "topic": "Fraction of an amount"
+   },
+   {
+    "question": "Simplify $\\dfrac{18}{24}$ fully.",
+    "options": [
+     "$\\dfrac{9}{12}$",
+     "$\\dfrac{3}{4}$",
+     "$\\dfrac{6}{8}$",
+     "$\\dfrac{2}{3}$"
+    ],
+    "answer": "$\\dfrac{3}{4}$",
+    "explanation": "The highest common factor of 18 and 24 is 6: 18 ÷ 6 = 3 and 24 ÷ 6 = 4.",
+    "topic": "Equivalent fractions"
+   },
+   {
+    "question": "Write $\\dfrac{7}{20}$ as a percentage.",
+    "options": [
+     "7%",
+     "20%",
+     "35%",
+     "70%"
+    ],
+    "answer": "35%",
+    "explanation": "$\\dfrac{7}{20} = \\dfrac{35}{100} = 35\\%$.",
+    "topic": "Converting"
+   },
+   {
+    "question": "Work out $\\dfrac{3}{4} - \\dfrac{1}{6}$.",
+    "options": [
+     "$\\dfrac{2}{2}$",
+     "$\\dfrac{7}{12}$",
+     "$\\dfrac{1}{2}$",
+     "$\\dfrac{5}{12}$"
+    ],
+    "answer": "$\\dfrac{7}{12}$",
+    "explanation": "Common denominator 12: $\\dfrac{9}{12} - \\dfrac{2}{12} = \\dfrac{7}{12}$.",
+    "topic": "Fractions"
+   }
+  ]
+ },
+ {
+  "key": "y7-maths-negatives",
+  "year": 7,
+  "subject": "Maths",
+  "title": "Negative numbers",
+  "slug": "negative-numbers",
+  "body": "ON THE NUMBER LINE\nNumbers to the left are smaller: $-7 < -2 < 0 < 3$.\nThink of temperatures: $-7$°C is colder than $-2$°C.\n\nADDING AND SUBTRACTING\n• Adding a positive: move right. $-4 + 9 = 5$\n• Subtracting a positive: move left. $3 - 8 = -5$\n• Two signs next to each other:\n  $+\\,-$ or $-\\,+$ → minus.  $6 + (-2) = 6 - 2 = 4$\n  $-\\,-$ → plus.  $5 - (-3) = 5 + 3 = 8$\n\nMULTIPLYING AND DIVIDING\nSame signs → positive. Different signs → negative.\n$-3 \\times -6 = 18$     $-20 \\div 4 = -5$     $7 \\times -2 = -14$\n\nCHECK YOURSELF\n$-2 - 5 = ?$   (answer: $-7$)\n$-12 \\div -3 = ?$   (answer: 4)",
+  "questions": [
+   {
+    "question": "Work out $-7 + 3$.",
+    "options": [
+     "$-10$",
+     "10",
+     "4",
+     "$-4$"
+    ],
+    "answer": "$-4$",
+    "explanation": "Start at $-7$ and move 3 to the right: $-4$.",
+    "topic": "Negative numbers"
+   },
+   {
+    "question": "Work out $2 - (-5)$.",
+    "options": [
+     "$-7$",
+     "$-3$",
+     "3",
+     "7"
+    ],
+    "answer": "7",
+    "explanation": "Subtracting a negative is the same as adding: $2 + 5 = 7$.",
+    "topic": "Negative numbers"
+   },
+   {
+    "question": "Work out $-24 \\div -6$.",
+    "options": [
+     "$-4$",
+     "$-18$",
+     "4",
+     "18"
+    ],
+    "answer": "4",
+    "explanation": "Same signs give a positive answer: $24 \\div 6 = 4$.",
+    "topic": "Negative numbers"
+   },
+   {
+    "question": "At 6 am the temperature was $-3$°C. By 2 pm it was 8°C. By how much did it rise?",
+    "options": [
+     "5°C",
+     "11°C",
+     "8°C",
+     "$-11$°C"
+    ],
+    "answer": "11°C",
+    "explanation": "From $-3$ up to 0 is 3, then up to 8 is 8 more: $3 + 8 = 11$°C.",
+    "topic": "Negative numbers"
+   }
+  ]
+ },
+ {
+  "key": "y7-science-cells",
+  "year": 7,
+  "subject": "Science",
+  "title": "Cells",
+  "slug": "cells",
+  "body": "ALL LIVING THINGS ARE MADE OF CELLS\n\nANIMAL AND PLANT CELLS BOTH HAVE\n• Nucleus: contains DNA, controls the cell\n• Cell membrane: controls what goes in and out\n• Cytoplasm: jelly where chemical reactions happen\n• Mitochondria: where respiration releases energy\n\nONLY PLANT CELLS HAVE\n• Cell wall: made of cellulose, keeps the cell rigid\n• Chloroplasts: where photosynthesis happens (contain green chlorophyll)\n• Permanent vacuole: filled with cell sap, keeps the cell firm\n\nLEVELS OF ORGANISATION\ncell → tissue → organ → organ system → organism\ne.g. muscle cell → muscle tissue → heart → circulatory system → you\n\nSPECIALISED CELLS\n• Red blood cell: no nucleus, more room to carry oxygen\n• Root hair cell: long and thin to absorb water\n• Sperm cell: tail to swim\n\nUSING A MICROSCOPE\nStart on the lowest power, focus with the coarse knob, then the fine knob.",
+  "questions": [
+   {
+    "question": "What is the cell wall of a plant cell made of?",
+    "options": [
+     "Protein",
+     "Starch",
+     "Cellulose",
+     "Fat"
+    ],
+    "answer": "Cellulose",
+    "explanation": "Plant cell walls are made of cellulose, which keeps the cell rigid.",
+    "topic": "Cells"
+   },
+   {
+    "question": "Why does a red blood cell have no nucleus?",
+    "options": [
+     "So it can divide faster",
+     "To have more room to carry oxygen",
+     "So it can swim",
+     "To make it stronger"
+    ],
+    "answer": "To have more room to carry oxygen",
+    "explanation": "Without a nucleus there is more space for haemoglobin, which carries oxygen.",
+    "topic": "Specialised cells"
+   },
+   {
+    "question": "What does the nucleus contain?",
+    "options": [
+     "Cell sap",
+     "Chlorophyll",
+     "Genetic material (DNA)",
+     "Air"
+    ],
+    "answer": "Genetic material (DNA)",
+    "explanation": "The nucleus holds DNA, the instructions that control the cell.",
+    "topic": "Cells"
+   },
+   {
+    "question": "Which cell part is the site of respiration?",
+    "options": [
+     "Nucleus",
+     "Chloroplast",
+     "Mitochondria",
+     "Vacuole"
+    ],
+    "answer": "Mitochondria",
+    "explanation": "Mitochondria release energy from glucose by respiration.",
+    "topic": "Cells"
+   }
+  ]
+ },
+ {
+  "key": "y7-science-forces",
+  "year": 7,
+  "subject": "Science",
+  "title": "Forces and energy",
+  "slug": "forces-and-energy",
+  "body": "FORCES\nA force is a push or a pull, measured in newtons (N).\nContact forces: friction, air resistance, tension, normal (support) force\nNon-contact forces: gravity (weight), magnetism, static electricity\n\nRESULTANT FORCE\n• Same direction: add.  Opposite directions: subtract.\n10 N right and 4 N left → resultant 6 N to the right.\n• Balanced forces (resultant 0): the object stays still or keeps moving at the same speed.\n\nMASS AND WEIGHT\nMass is the amount of matter (kg) and does not change.\nWeight is the force of gravity (N): weight = mass × gravitational field strength\nOn Earth $g \\approx 10$ N/kg, so a 50 kg pupil weighs 500 N. On the Moon they weigh about one sixth as much.\n\nENERGY STORES\nkinetic (moving), gravitational (high up), elastic (stretched), chemical (food, fuel, batteries), thermal (hot), nuclear\nEnergy is never used up; it is transferred between stores.\n\nRENEWABLE vs NON-RENEWABLE\nRenewable: wind, solar, tidal, hydroelectric, geothermal\nNon-renewable: coal, oil, natural gas, nuclear",
+  "questions": [
+   {
+    "question": "Two people push a box the same way with 30 N and 45 N. What is the resultant force?",
+    "options": [
+     "75 N",
+     "45 N",
+     "15 N",
+     "1350 N"
+    ],
+    "answer": "75 N",
+    "explanation": "Forces in the same direction add: $30 + 45 = 75$ N.",
+    "topic": "Resultant force"
+   },
+   {
+    "question": "A car's engine pushes it forward with 900 N. Friction and air resistance total 900 N. What happens?",
+    "options": [
+     "It speeds up",
+     "It keeps moving at a steady speed",
+     "It slows down",
+     "It goes backwards"
+    ],
+    "answer": "It keeps moving at a steady speed",
+    "explanation": "The forces are balanced (resultant 0 N), so the speed does not change.",
+    "topic": "Resultant force"
+   },
+   {
+    "question": "Which of these is a non-contact force?",
+    "options": [
+     "Friction",
+     "Gravity",
+     "Air resistance",
+     "Tension"
+    ],
+    "answer": "Gravity",
+    "explanation": "Gravity acts without touching. Friction, air resistance and tension are contact forces.",
+    "topic": "Forces"
+   },
+   {
+    "question": "A bag has a mass of 4 kg. Taking $g = 10$ N/kg, what is its weight?",
+    "options": [
+     "0.4 N",
+     "40 N",
+     "14 N",
+     "4 N"
+    ],
+    "answer": "40 N",
+    "explanation": "Weight = mass × $g$ = $4 \\times 10 = 40$ N.",
+    "topic": "Weight"
+   }
+  ]
+ },
+ {
+  "key": "y7-science-particles",
+  "year": 7,
+  "subject": "Science",
+  "title": "Particles and states of matter",
+  "slug": "particles-and-states-of-matter",
+  "body": "THE PARTICLE MODEL\nEverything is made of tiny particles. How they are arranged decides the state.\n\nSOLID: particles touching, in a regular pattern, vibrate on the spot. Fixed shape, cannot be squashed.\nLIQUID: particles touching but arranged randomly, can slide past each other. Flows, takes the shape of its container, cannot be squashed.\nGAS: particles far apart, moving quickly in all directions. Fills its container, can be squashed.\n\nCHANGES OF STATE\nsolid → liquid: melting\nliquid → gas: boiling / evaporating\ngas → liquid: condensing\nliquid → solid: freezing\nsolid → gas: subliming\n\nDIFFUSION\nParticles spread out from where there are lots to where there are few. It is faster in gases and when hotter.\n\nMIXTURES\n• Filtration: separates an insoluble solid from a liquid (sand and water)\n• Evaporation: gets a dissolved solid back (salt from salty water)\n• Chromatography: separates coloured dyes in ink",
+  "questions": [
+   {
+    "question": "What is the change from gas to liquid called?",
+    "options": [
+     "Melting",
+     "Evaporating",
+     "Condensing",
+     "Freezing"
+    ],
+    "answer": "Condensing",
+    "explanation": "Gas to liquid is condensing, e.g. water droplets forming on a cold window.",
+    "topic": "Changes of state"
+   },
+   {
+    "question": "Ice melts at 0°C. What happens to the particles as the ice melts?",
+    "options": [
+     "They get bigger",
+     "They gain energy and break out of their fixed positions",
+     "They stop moving",
+     "They turn into new particles"
+    ],
+    "answer": "They gain energy and break out of their fixed positions",
+    "explanation": "Heat gives the particles energy; they break free of the fixed pattern and can move past each other.",
+    "topic": "Changes of state"
+   },
+   {
+    "question": "What is the difference between evaporation and boiling?",
+    "options": [
+     "There is no difference",
+     "Evaporation happens only at the surface, at any temperature below boiling point",
+     "Boiling happens only at the surface",
+     "Evaporation only happens to solids"
+    ],
+    "answer": "Evaporation happens only at the surface, at any temperature below boiling point",
+    "explanation": "Evaporation happens at the surface at any temperature; boiling happens throughout the liquid at its boiling point.",
+    "topic": "Changes of state"
+   },
+   {
+    "question": "Which statement about liquids is true?",
+    "options": [
+     "They have a fixed shape",
+     "Their particles are far apart",
+     "They can be easily squashed",
+     "They take the shape of their container"
+    ],
+    "answer": "They take the shape of their container",
+    "explanation": "Liquid particles touch but can slide past each other, so liquids flow and take their container's shape.",
+    "topic": "States of matter"
+   }
+  ]
+ },
+ {
+  "key": "y8-english-analysis",
+  "year": 8,
+  "subject": "English",
+  "title": "Analysing language and structure",
+  "slug": "analysing-language-and-structure",
+  "body": "LANGUAGE: ZOOM IN ON WORDS\nAsk: what does this word make me picture or feel? Why THIS word?\n\"the river had swallowed the lower field\" → personification: the river seems hungry and powerful.\n\nTECHNIQUES TO SPOT\n• Pathetic fallacy: weather matches mood (storm = chaos, sunshine = hope)\n• Oxymoron: opposites together (deafening silence)\n• Semantic field: a group of related words (blood, wound, battle → a field of war)\n• Sibilance: repeated 's' sounds (slithering, silent snake)\n\nSTRUCTURE: ZOOM OUT\n• How does it open and end? Short sentences = impact.\n• Does the focus shift (wide view → one detail)?\n• Is there a turning point?\n\nWRITING ABOUT IT (P.E.E.)\nPoint: The writer shows the storm's power.\nEvidence: the fence lay \"like matchsticks\".\nExplain: matchsticks are tiny and fragile, so the reader sees how easily the storm destroyed it.",
+  "questions": [
+   {
+    "question": "What is pathetic fallacy?",
+    "options": [
+     "A sad character",
+     "A weak argument",
+     "Weather or setting reflecting a character's mood",
+     "A type of rhyme"
+    ],
+    "answer": "Weather or setting reflecting a character's mood",
+    "explanation": "e.g. rain and grey skies when a character is sad.",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "Which is an oxymoron?",
+    "options": [
+     "Very loud",
+     "Deafening silence",
+     "Silent night",
+     "Loud noise"
+    ],
+    "answer": "Deafening silence",
+    "explanation": "An oxymoron puts opposite ideas together: deafening + silence.",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "What does \"reluctant\" mean?",
+    "options": [
+     "Eager",
+     "Angry",
+     "Unwilling",
+     "Late"
+    ],
+    "answer": "Unwilling",
+    "explanation": "Reluctant means not wanting to do something.",
+    "topic": "Vocabulary"
+   },
+   {
+    "question": "Which word is an antonym (opposite) of \"generous\"?",
+    "options": [
+     "Kind",
+     "Giving",
+     "Selfish",
+     "Friendly"
+    ],
+    "answer": "Selfish",
+    "explanation": "Selfish is the opposite of generous.",
+    "topic": "Vocabulary"
+   }
+  ]
+ },
+ {
+  "key": "y8-english-writing",
+  "year": 8,
+  "subject": "English",
+  "title": "Grammar and persuasive writing",
+  "slug": "grammar-and-persuasive-writing",
+  "body": "ACTIVE AND PASSIVE\nActive: The ball broke the window.\nPassive: The window was broken by the ball.\n\nPUNCTUATION FOR EFFECT\n• Semicolon: links two related main clauses. I like tea; my brother prefers coffee.\n• Colon: introduces a list or explanation.\n• Dash: a dramatic pause. The door opened - and there stood the headteacher.\n\nPERSUASIVE TECHNIQUES: AFOREST\nAnecdote, Facts, Opinion, Rhetorical question, Emotive language, Statistics, Triples (rule of three)\nPlus: direct address (\"you\"), imperatives (\"Act now\"), counter-argument then rebuttal.\n\nSTRONG OPENINGS\nStart with a vivid scenario, a shocking fact or a question, not \"I am going to talk about...\".\n\nSPELLINGS TO LEARN\naccommodation, receive, believe, definitely, separate, embarrass, occurrence, rhythm",
+  "questions": [
+   {
+    "question": "Which is the strongest opening for a persuasive speech about school uniform?",
+    "options": [
+     "Uniform is a thing.",
+     "Uniform. Yes.",
+     "I am going to talk about uniform.",
+     "Imagine walking into school and being judged for your clothes before you even speak."
+    ],
+    "answer": "Imagine walking into school and being judged for your clothes before you even speak.",
+    "explanation": "It hooks the audience with direct address and an emotional scenario.",
+    "topic": "Persuasive writing"
+   },
+   {
+    "question": "What is pathetic fallacy?",
+    "options": [
+     "A sad character",
+     "A weak argument",
+     "Weather or setting reflecting a character's mood",
+     "A type of rhyme"
+    ],
+    "answer": "Weather or setting reflecting a character's mood",
+    "explanation": "e.g. rain and grey skies when a character is sad.",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "Which is an oxymoron?",
+    "options": [
+     "Very loud",
+     "Deafening silence",
+     "Silent night",
+     "Loud noise"
+    ],
+    "answer": "Deafening silence",
+    "explanation": "An oxymoron puts opposite ideas together: deafening + silence.",
+    "topic": "Language techniques"
+   },
+   {
+    "question": "Which uses dashes correctly for a dramatic pause?",
+    "options": [
+     "- The door opened",
+     "The - door opened.",
+     "The door - opened - and.",
+     "The door opened - and there stood the headteacher."
+    ],
+    "answer": "The door opened - and there stood the headteacher.",
+    "explanation": "A dash before the reveal creates suspense.",
+    "topic": "Punctuation"
+   }
+  ]
+ },
+ {
+  "key": "y8-maths-algebra",
+  "year": 8,
+  "subject": "Maths",
+  "title": "Expanding, factorising and equations",
+  "slug": "expanding-factorising-and-equations",
+  "body": "EXPANDING BRACKETS\nMultiply everything inside by the term outside.\n$5(x + 3) = 5x + 15$     $-2(x - 4) = -2x + 8$  (negative × negative = positive)\n\nFACTORISING (the reverse)\nTake out the highest common factor.\n$12x + 18 = 6(2x + 3)$     $x^2 + 7x = x(x + 7)$\n\nEQUATIONS WITH x ON BOTH SIDES\nGet the x terms on one side first.\n$7x - 4 = 3x + 20$\nsubtract $3x$: $4x - 4 = 20$\nadd 4: $4x = 24$\ndivide by 4: $x = 6$\n\nEQUATIONS WITH BRACKETS\nExpand first. $4(x - 2) = 2x + 6$ → $4x - 8 = 2x + 6$ → $2x = 14$ → $x = 7$\n\nnth TERM\nDifference first, then adjust. 11, 8, 5, 2: difference $-3$, so $14 - 3n$.\nCheck with $n = 1$: $14 - 3 = 11$ ✓",
+  "questions": [
+   {
+    "question": "Expand and simplify $5(x + 3) - 2(x - 4)$.",
+    "options": [
+     "$3x + 7$",
+     "$7x + 23$",
+     "$3x - 1$",
+     "$3x + 23$"
+    ],
+    "answer": "$3x + 23$",
+    "explanation": "$5x + 15 - 2x + 8 = 3x + 23$. Careful: $-2 \\times -4 = +8$.",
+    "topic": "Expanding"
+   },
+   {
+    "question": "Work out $-6 \\times 4 + 15$.",
+    "options": [
+     "$-39$",
+     "39",
+     "9",
+     "$-9$"
+    ],
+    "answer": "$-9$",
+    "explanation": "$-6 \\times 4 = -24$, then $-24 + 15 = -9$.",
+    "topic": "Negative numbers"
+   },
+   {
+    "question": "Factorise fully $12x + 18$.",
+    "options": [
+     "$2(6x + 9)$",
+     "$6(2x + 3)$",
+     "$3(4x + 6)$",
+     "$12(x + 18)$"
+    ],
+    "answer": "$6(2x + 3)$",
+    "explanation": "The highest common factor of 12 and 18 is 6: $6(2x + 3)$.",
+    "topic": "Factorising"
+   },
+   {
+    "question": "Solve $7x - 4 = 3x + 20$.",
+    "options": [
+     "$x = 4$",
+     "$x = 6$",
+     "$x = 2.4$",
+     "$x = 16$"
+    ],
+    "answer": "$x = 6$",
+    "explanation": "Subtract $3x$: $4x - 4 = 20$. Add 4: $4x = 24$, so $x = 6$.",
+    "topic": "Equations"
+   }
+  ]
+ },
+ {
+  "key": "y8-maths-percent-geometry",
+  "year": 8,
+  "subject": "Maths",
+  "title": "Percentage change, angles and circles",
+  "slug": "percentage-change-angles-and-circles",
+  "body": "PERCENTAGE CHANGE\nPercentage change = change ÷ original × 100\n£40 → £46: change 6, $6 \\div 40 \\times 100 = 15\\%$ increase\n\nMULTIPLIERS\nIncrease by 12%: × 1.12.   Decrease by 20%: × 0.8\n£250 increased by 12% = $250 \\times 1.12 = $ £280\n\nANGLES IN PARALLEL LINES\n• Alternate angles (Z shape) are equal\n• Corresponding angles (F shape) are equal\n• Co-interior angles (C shape) add up to 180°\n\nPOLYGONS\nExterior angles always add up to 360°.\nRegular octagon: each exterior angle = $360 \\div 8 = 45$°, so each interior angle = 135°.\n\nCIRCLES\nCircumference $= \\pi d$ (or $2\\pi r$)\nArea $= \\pi r^2$\nRadius 5 cm: area $= 3.14 \\times 25 = 78.5$ cm²\n\nVOLUME OF A CUBOID\nlength × width × height, in cm³",
+  "questions": [
+   {
+    "question": "A price rises from £40 to £46. What is the percentage increase?",
+    "options": [
+     "6%",
+     "15%",
+     "13%",
+     "46%"
+    ],
+    "answer": "15%",
+    "explanation": "Increase £6. $\\dfrac{6}{40} = 0.15 = 15\\%$.",
+    "topic": "Percentage change"
+   },
+   {
+    "question": "What is each exterior angle of a regular octagon?",
+    "options": [
+     "30°",
+     "135°",
+     "60°",
+     "45°"
+    ],
+    "answer": "45°",
+    "explanation": "Exterior angles add to 360°: $360 \\div 8 = 45$°.",
+    "topic": "Polygons"
+   },
+   {
+    "question": "Two parallel lines are crossed by a straight line. One alternate angle is 65°. What is the other?",
+    "options": [
+     "25°",
+     "295°",
+     "115°",
+     "65°"
+    ],
+    "answer": "65°",
+    "explanation": "Alternate angles (Z-angles) are equal.",
+    "topic": "Angles"
+   },
+   {
+    "question": "Co-interior angles between parallel lines are $x$ and 110°. Find $x$.",
+    "options": [
+     "250°",
+     "110°",
+     "70°",
+     "20°"
+    ],
+    "answer": "70°",
+    "explanation": "Co-interior angles add to 180°: $180 - 110 = 70$°.",
+    "topic": "Angles"
+   }
+  ]
+ },
+ {
+  "key": "y8-science-body-physics",
+  "year": 8,
+  "subject": "Science",
+  "title": "Digestion, respiration and electricity",
+  "slug": "digestion-respiration-and-electricity",
+  "body": "DIGESTION\nmouth → oesophagus → stomach → small intestine (nutrients absorbed) → large intestine (water absorbed)\nEnzymes break big food molecules into small ones the body can absorb.\n\nRESPIRATION (in every cell)\nAerobic: glucose + oxygen → carbon dioxide + water (+ energy)\nAnaerobic (muscles, short of oxygen): glucose → lactic acid (+ less energy)\n\nPHOTOSYNTHESIS (in plants)\ncarbon dioxide + water → glucose + oxygen  (needs light, happens in chloroplasts)\n\nBREATHING\nGas exchange happens in the alveoli: oxygen into the blood, carbon dioxide out.\n\nELECTRICITY\nCurrent (I) in amps, potential difference (V) in volts, resistance (R) in ohms.\n$V = I \\times R$, so $R = V \\div I$.  6 V and 0.5 A → 12 Ω\n\nMAGNETS\nLike poles repel, opposite poles attract.",
+  "questions": [
+   {
+    "question": "Where is most water absorbed back into the body?",
+    "options": [
+     "Stomach",
+     "Large intestine",
+     "Small intestine",
+     "Oesophagus"
+    ],
+    "answer": "Large intestine",
+    "explanation": "The large intestine absorbs water from undigested food.",
+    "topic": "Digestion"
+   },
+   {
+    "question": "What is produced by anaerobic respiration in human muscles?",
+    "options": [
+     "Carbon dioxide and water",
+     "Alcohol",
+     "Lactic acid",
+     "Oxygen"
+    ],
+    "answer": "Lactic acid",
+    "explanation": "Without enough oxygen, muscles make lactic acid.",
+    "topic": "Respiration"
+   },
+   {
+    "question": "What do enzymes do in digestion?",
+    "options": [
+     "Make food bigger",
+     "Turn food into water",
+     "Break large molecules into small ones the body can absorb",
+     "Kill all bacteria"
+    ],
+    "answer": "Break large molecules into small ones the body can absorb",
+    "explanation": "Enzymes are biological catalysts that break down large food molecules.",
+    "topic": "Digestion"
+   },
+   {
+    "question": "What is the word equation for aerobic respiration?",
+    "options": [
+     "glucose → lactic acid",
+     "carbon dioxide + water → glucose + oxygen",
+     "glucose + oxygen → carbon dioxide + water",
+     "oxygen + water → glucose"
+    ],
+    "answer": "glucose + oxygen → carbon dioxide + water",
+    "explanation": "Aerobic respiration uses oxygen to release energy from glucose.",
+    "topic": "Respiration"
+   }
+  ]
+ },
+ {
+  "key": "y8-science-chemistry",
+  "year": 8,
+  "subject": "Science",
+  "title": "Atoms, elements, compounds and reactions",
+  "slug": "atoms-elements-compounds-and-reactions",
+  "body": "ATOMS AND ELEMENTS\nEverything is made of atoms. An element contains only one type of atom (iron, oxygen, carbon).\nThe periodic table lists all the elements. Metals: left and middle. Non-metals: right.\nElements in the same GROUP (column) react in similar ways.\n\nCOMPOUNDS\nTwo or more elements chemically joined. Water $\\text{H}_2\\text{O}$: 2 hydrogen + 1 oxygen.\nCarbon dioxide $\\text{CO}_2$: 1 carbon + 2 oxygen.\n\nMIXTURE vs COMPOUND\nMixture: not joined, easy to separate (air, salt water).\nCompound: chemically joined, new properties (water, salt).\n\nCHEMICAL REACTIONS\nreactants → products\nmagnesium + oxygen → magnesium oxide\nMass is conserved: atoms are rearranged, never created or destroyed.\n\nSIGNS OF A REACTION\ngas given off, colour change, temperature change, new solid (precipitate) forms",
+  "questions": [
+   {
+    "question": "Elements in the same group of the periodic table ...",
+    "options": [
+     "have similar chemical properties",
+     "have the same mass",
+     "are all gases",
+     "were discovered at the same time"
+    ],
+    "answer": "have similar chemical properties",
+    "explanation": "Elements in a group react in similar ways, e.g. the alkali metals.",
+    "topic": "Periodic table"
+   },
+   {
+    "question": "Where are the metals found on the periodic table?",
+    "options": [
+     "On the right",
+     "Only at the bottom",
+     "Only at the top",
+     "On the left and in the middle"
+    ],
+    "answer": "On the left and in the middle",
+    "explanation": "Metals are on the left and centre; non-metals are on the right.",
+    "topic": "Periodic table"
+   },
+   {
+    "question": "Magnesium burns in oxygen. What is the product?",
+    "options": [
+     "Magnesium oxide",
+     "Magnesium oxygenate",
+     "Magnesium carbonate",
+     "Oxygen magnesium"
+    ],
+    "answer": "Magnesium oxide",
+    "explanation": "Magnesium + oxygen → magnesium oxide.",
+    "topic": "Chemical reactions"
+   },
+   {
+    "question": "What is an element?",
+    "options": [
+     "A mixture of atoms",
+     "A substance made of only one type of atom",
+     "Two atoms bonded together",
+     "A liquid"
+    ],
+    "answer": "A substance made of only one type of atom",
+    "explanation": "An element contains only one type of atom, e.g. oxygen or iron.",
+    "topic": "Atoms and elements"
+   }
+  ]
+ },
+ {
+  "key": "y9-english-analysis",
+  "year": 9,
+  "subject": "English",
+  "title": "Analysing texts like a GCSE student",
+  "slug": "analysing-texts-like-a-gcse-student",
+  "body": "WHAT EXAMINERS WANT\nNot just WHAT a technique is, but WHY the writer uses it and its EFFECT on the reader.\n\nADVANCED TERMS\n• Juxtaposition: contrasting ideas side by side (four pages of jokes vs one line)\n• Irony: the opposite of what's expected (\"over by Christmas\")\n• Motif: a repeated image or idea\n• Enjambment: a sentence running over a line break; Caesura: a pause mid-line\n\nCONTEXT\nWhen and why was it written? What did people believe then? Link it to the writer's message.\n\nA STRONG PARAGRAPH (What, How, Why)\nWhat: The writer shows the war slowly breaking the brother.\nHow: The contrast between \"four pages of jokes\" and a \"single line\" ...\nWhy: ... makes the reader feel the family's growing fear, which reflects how many families experienced the war.\n\nEMBED SHORT QUOTES\nBetter: the \"single line\" letter suggests ...  Worse: copying a whole sentence.",
+  "questions": [
+   {
+    "question": "Why might knowing when a text was written help you understand it?",
+    "options": [
+     "Attitudes and events of the time shape what the writer says",
+     "It never helps",
+     "It tells you the ending",
+     "It gives you the word count"
+    ],
+    "answer": "Attitudes and events of the time shape what the writer says",
+    "explanation": "Context explains the values and events behind a text.",
+    "topic": "Context"
+   },
+   {
+    "question": "Which sentence uses the subjunctive mood?",
+    "options": [
+     "You were late.",
+     "If I was going, I'd tell you.",
+     "I am you.",
+     "If I were you, I would apologise."
+    ],
+    "answer": "If I were you, I would apologise.",
+    "explanation": "'If I were' is the subjunctive, used for hypothetical situations.",
+    "topic": "Grammar"
+   },
+   {
+    "question": "What does \"juxtaposition\" mean?",
+    "options": [
+     "A type of rhyme",
+     "Repeating a word",
+     "Placing contrasting things side by side for effect",
+     "Exaggeration"
+    ],
+    "answer": "Placing contrasting things side by side for effect",
+    "explanation": "e.g. placing wealth next to poverty to highlight the difference.",
+    "topic": "Vocabulary"
+   },
+   {
+    "question": "What is a motif?",
+    "options": [
+     "A type of punctuation",
+     "The first line of a poem",
+     "A recurring image or idea in a text",
+     "The narrator's name"
+    ],
+    "answer": "A recurring image or idea in a text",
+    "explanation": "e.g. repeated images of light and dark.",
+    "topic": "Language techniques"
+   }
+  ]
+ },
+ {
+  "key": "y9-english-writing",
+  "year": 9,
+  "subject": "English",
+  "title": "Writing with control and range",
+  "slug": "writing-with-control-and-range",
+  "body": "SENTENCE VARIETY\n• Start with a participle: Trembling, she reached for the handle.\n• Short sentence for impact. Then a longer one that builds detail and rhythm.\n• Relative clauses add detail: The book that I borrowed was brilliant.\n\nPUNCTUATION RANGE\nSemicolon; colon: dash - brackets ( ) - used deliberately, not just for decoration.\n\nARGUMENT WRITING\nIntroduction with a clear view → points with evidence → counter-argument and rebuttal → strong conclusion.\nUse discourse markers: Furthermore, However, Consequently, Ultimately.\n\nDESCRIPTIVE / NARRATIVE WRITING\nZoom in on small details. Use all five senses. Show feelings through actions, not labels.\nPlan a structure: hook → build → turning point → resolution.\n\nGRAMMAR FOR GCSE\nIf I were you (subjunctive for hypotheticals). Fewer (countable) vs less (uncountable).\nWho (subject) vs whom (object).",
+  "questions": [
+   {
+    "question": "In an argument essay, what is a counter-argument?",
+    "options": [
+     "Your main point",
+     "The conclusion",
+     "A list of facts",
+     "An opposing view that you then respond to"
+    ],
+    "answer": "An opposing view that you then respond to",
+    "explanation": "Acknowledging and rebutting the other side strengthens your argument.",
+    "topic": "Writing"
+   },
+   {
+    "question": "Which sentence is correctly punctuated?",
+    "options": [
+     "However; the plan failed.",
+     "However the plan, failed.",
+     "However, the plan failed.",
+     "However: the plan failed"
+    ],
+    "answer": "However, the plan failed.",
+    "explanation": "A comma follows 'However' when it starts a sentence.",
+    "topic": "Punctuation"
+   },
+   {
+    "question": "Which sentence best shows a varied, ambitious opening?",
+    "options": [
+     "I went outside.",
+     "It was a day.",
+     "Trembling, she reached for the handle.",
+     "The thing happened."
+    ],
+    "answer": "Trembling, she reached for the handle.",
+    "explanation": "Starting with a verb ending -ing (a participle) is varied and vivid.",
+    "topic": "Writing"
+   },
+   {
+    "question": "Which sentence contains a relative clause?",
+    "options": [
+     "I borrowed a book.",
+     "The book that I borrowed was brilliant.",
+     "Borrow the book!",
+     "Was the book good?"
+    ],
+    "answer": "The book that I borrowed was brilliant.",
+    "explanation": "'That I borrowed' adds information about the book.",
+    "topic": "Grammar"
+   }
+  ]
+ },
+ {
+  "key": "y9-maths-algebra",
+  "year": 9,
+  "subject": "Maths",
+  "title": "Indices, standard form and algebra",
+  "slug": "indices-standard-form-and-algebra",
+  "body": "INDEX LAWS\n$x^a \\times x^b = x^{a+b}$     $x^a \\div x^b = x^{a-b}$     $(x^a)^b = x^{ab}$\n$x^0 = 1$     $x^{-1} = \\dfrac{1}{x}$\n\nSTANDARD FORM: $A \\times 10^n$ with $1 \\le A < 10$\n46 000 000 = $4.6 \\times 10^7$     0.00032 = $3.2 \\times 10^{-4}$\n\nDOUBLE BRACKETS (multiply every term by every term)\n$(x + 3)(x + 5) = x^2 + 5x + 3x + 15 = x^2 + 8x + 15$\n\nFACTORISING QUADRATICS\n$x^2 + 7x + 12$: find two numbers that multiply to 12 and add to 7 → 3 and 4\n$= (x + 3)(x + 4)$\n\nINEQUALITIES\nSolve like equations: $3x - 4 < 11$ → $3x < 15$ → $x < 5$\n(If you multiply or divide by a negative number, flip the sign.)\n\nSIMULTANEOUS EQUATIONS\n$x + y = 10$ and $x - y = 4$: add them → $2x = 14$ → $x = 7$, then $y = 3$",
+  "questions": [
+   {
+    "question": "Write 46 000 000 in standard form.",
+    "options": [
+     "$46 \\times 10^6$",
+     "$0.46 \\times 10^8$",
+     "$4.6 \\times 10^6$",
+     "$4.6 \\times 10^7$"
+    ],
+    "answer": "$4.6 \\times 10^7$",
+    "explanation": "The first number must be between 1 and 10: $4.6 \\times 10^7$.",
+    "topic": "Standard form"
+   },
+   {
+    "question": "Write $3.2 \\times 10^{-4}$ as an ordinary number.",
+    "options": [
+     "0.0032",
+     "0.00032",
+     "32 000",
+     "0.000032"
+    ],
+    "answer": "0.00032",
+    "explanation": "Move the decimal point 4 places to the left: 0.00032.",
+    "topic": "Standard form"
+   },
+   {
+    "question": "Solve $\\dfrac{2x + 1}{3} = 5$.",
+    "options": [
+     "$x = 2$",
+     "$x = 7$",
+     "$x = 8$",
+     "$x = 14$"
+    ],
+    "answer": "$x = 7$",
+    "explanation": "Multiply by 3: $2x + 1 = 15$, so $2x = 14$ and $x = 7$.",
+    "topic": "Equations"
+   },
+   {
+    "question": "Simplify $x^5 \\times x^3$.",
+    "options": [
+     "$x^8$",
+     "$x^{15}$",
+     "$x^2$",
+     "$2x^8$"
+    ],
+    "answer": "$x^8$",
+    "explanation": "Multiplying: add the powers, $5 + 3 = 8$.",
+    "topic": "Indices"
+   }
+  ]
+ },
+ {
+  "key": "y9-maths-geometry",
+  "year": 9,
+  "subject": "Maths",
+  "title": "Graphs, Pythagoras and percentages",
+  "slug": "graphs-pythagoras-and-percentages",
+  "body": "STRAIGHT-LINE GRAPHS: $y = mx + c$\n$m$ = gradient (steepness), $c$ = where it crosses the $y$-axis.\nGradient from two points = change in $y$ ÷ change in $x$\n(1, 3) to (4, 12): $9 \\div 3 = 3$\n\nPYTHAGORAS (right-angled triangles only)\n$a^2 + b^2 = c^2$, where $c$ is the hypotenuse (longest side, opposite the right angle)\nFinding $c$: square, ADD, square root.  6 and 8 → $\\sqrt{100} = 10$\nFinding a shorter side: square, SUBTRACT, square root.  13 and 12 → $\\sqrt{25} = 5$\n\nVOLUME OF A PRISM / CYLINDER\nVolume = area of cross-section × length.  Cylinder: $\\pi r^2 h$\n\nREVERSE PERCENTAGES\nAfter a 20% increase the price is £60. £60 = 120%, so 100% = $60 \\div 1.2 = $ £50\n\nCOMPOUND INTEREST\noriginal × (multiplier)$^{\\text{years}}$:  $1000 \\times 1.1^2 = 1210$",
+  "questions": [
+   {
+    "question": "What is the gradient of the line $y = 4x - 7$?",
+    "options": [
+     "$-7$",
+     "4",
+     "$-4$",
+     "7"
+    ],
+    "answer": "4",
+    "explanation": "In $y = mx + c$, the gradient is $m = 4$.",
+    "topic": "Straight-line graphs"
+   },
+   {
+    "question": "A line passes through (1, 3) and (4, 12). What is its gradient?",
+    "options": [
+     "$\\dfrac{1}{3}$",
+     "4",
+     "3",
+     "9"
+    ],
+    "answer": "3",
+    "explanation": "Gradient = change in $y$ ÷ change in $x$ = $9 \\div 3 = 3$.",
+    "topic": "Straight-line graphs"
+   },
+   {
+    "question": "A right-angled triangle has shorter sides 6 cm and 8 cm. How long is the hypotenuse?",
+    "options": [
+     "14 cm",
+     "12 cm",
+     "10 cm",
+     "48 cm"
+    ],
+    "answer": "10 cm",
+    "explanation": "$6^2 + 8^2 = 36 + 64 = 100$, and $\\sqrt{100} = 10$.",
+    "topic": "Pythagoras"
+   },
+   {
+    "question": "Find the volume of a cylinder with radius 3 cm and height 10 cm. Use $\\pi \\approx 3.14$.",
+    "options": [
+     "94.2 cm³",
+     "188.4 cm³",
+     "942 cm³",
+     "282.6 cm³"
+    ],
+    "answer": "282.6 cm³",
+    "explanation": "$V = \\pi r^2 h = 3.14 \\times 9 \\times 10 = 282.6$ cm³.",
+    "topic": "Volume"
+   }
+  ]
+ },
+ {
+  "key": "y9-science-bio-physics",
+  "year": 9,
+  "subject": "Science",
+  "title": "Genetics, energy and forces",
+  "slug": "genetics-energy-and-forces",
+  "body": "DNA AND GENES\nDNA is in the chromosomes inside the nucleus. A gene is a section of DNA that codes for a characteristic.\nBody cells: 46 chromosomes (23 pairs). Sex cells: 23.\n\nVARIATION AND EVOLUTION\nInherited (eye colour) vs environmental (scars, language).\nNatural selection: the best-adapted individuals survive, reproduce and pass on their genes.\n\nENERGY\nEnergy (kWh) = power (kW) × time (h)\nEfficiency = useful energy out ÷ total energy in  (500 J in, 400 J useful → 80%)\n\nELECTRICITY\n$P = I \\times V$  (power = current × potential difference)\n\nFORCES AND MOTION\n$F = m \\times a$  (force = mass × acceleration)\nDensity = mass ÷ volume\n\nWAVES\nSound: longitudinal. Light and all EM waves: transverse.\nEM spectrum: radio, microwave, infrared, visible, ultraviolet, X-ray, gamma",
+  "questions": [
+   {
+    "question": "What is the power of a device with current 5 A and potential difference 230 V?",
+    "options": [
+     "46 W",
+     "235 W",
+     "11.5 W",
+     "1150 W"
+    ],
+    "answer": "1150 W",
+    "explanation": "$P = I \\times V = 5 \\times 230 = 1150$ W.",
+    "topic": "Electricity"
+   },
+   {
+    "question": "How many chromosomes are in a normal human body cell?",
+    "options": [
+     "23",
+     "44",
+     "46",
+     "92"
+    ],
+    "answer": "46",
+    "explanation": "Body cells have 46 chromosomes (23 pairs); sex cells have 23.",
+    "topic": "Genetics"
+   },
+   {
+    "question": "Which of these is caused only by genes (inherited)?",
+    "options": [
+     "Natural eye colour",
+     "A scar",
+     "Language spoken",
+     "Hair length"
+    ],
+    "answer": "Natural eye colour",
+    "explanation": "Natural eye colour is inherited; the others depend on the environment.",
+    "topic": "Variation"
+   },
+   {
+    "question": "What does 'natural selection' mean?",
+    "options": [
+     "Individuals best suited to their environment survive and pass on their genes",
+     "Animals choose their food",
+     "Humans breed animals",
+     "All organisms survive equally"
+    ],
+    "answer": "Individuals best suited to their environment survive and pass on their genes",
+    "explanation": "Better-adapted individuals are more likely to survive and reproduce.",
+    "topic": "Evolution"
+   }
+  ]
+ },
+ {
+  "key": "y9-science-chemistry",
+  "year": 9,
+  "subject": "Science",
+  "title": "Atomic structure and equations",
+  "slug": "atomic-structure-and-equations",
+  "body": "INSIDE THE ATOM\nNucleus: protons (+1) and neutrons (0). Shells: electrons (−1).\nAtomic number = number of protons. Neutral atom: protons = electrons.\n\nTHE PERIODIC TABLE\nGroup 1 (alkali metals): very reactive, react with water to make hydrogen. More reactive going DOWN.\nGroup 7 (halogens): reactive non-metals. Less reactive going down.\nGroup 0 (noble gases): unreactive, full outer shells.\n\nBALANCING EQUATIONS\nSame number of each atom on both sides; change only the big numbers in front.\n$2\\text{H}_2 + \\text{O}_2 \\rightarrow 2\\text{H}_2\\text{O}$  (4 H and 2 O each side)\n\nREACTIVITY SERIES (most → least)\npotassium, sodium, calcium, magnesium, aluminium, (carbon), zinc, iron, copper, silver, gold\n\nTHE ATMOSPHERE\n78% nitrogen, 21% oxygen, about 1% argon, about 0.04% carbon dioxide.\nMore $\\text{CO}_2$ traps more heat → global warming.",
+  "questions": [
+   {
+    "question": "An atom has 11 protons. How many electrons does a neutral atom of it have?",
+    "options": [
+     "11",
+     "0",
+     "12",
+     "23"
+    ],
+    "answer": "11",
+    "explanation": "Neutral atoms have equal numbers of protons and electrons.",
+    "topic": "Atomic structure"
+   },
+   {
+    "question": "Which particles are found in the nucleus of an atom?",
+    "options": [
+     "Electrons only",
+     "Protons and neutrons",
+     "Protons and electrons",
+     "Neutrons and electrons"
+    ],
+    "answer": "Protons and neutrons",
+    "explanation": "The nucleus holds protons and neutrons; electrons orbit in shells.",
+    "topic": "Atomic structure"
+   },
+   {
+    "question": "Group 1 metals (e.g. sodium) are stored in oil. Why?",
+    "options": [
+     "They are too heavy",
+     "They react quickly with air and water",
+     "They melt easily",
+     "They are radioactive"
+    ],
+    "answer": "They react quickly with air and water",
+    "explanation": "Alkali metals react vigorously with oxygen and water.",
+    "topic": "Periodic table"
+   },
+   {
+    "question": "What is the charge on an electron?",
+    "options": [
+     "+1",
+     "$-1$",
+     "0",
+     "+2"
+    ],
+    "answer": "$-1$",
+    "explanation": "Protons are +1, neutrons 0, electrons −1.",
+    "topic": "Atomic structure"
+   }
+  ]
+ }
+]

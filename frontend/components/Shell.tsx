@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import NotifyEmailPrompt from "@/components/NotifyEmailPrompt";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -38,6 +39,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     <>
       <Navbar />
       <main className={isAuthPage ? "min-h-screen" : "min-h-screen pt-16 print:min-h-0 print:pt-0"}>{children}</main>
+      {(isAppSurface || pathname.startsWith("/notes") || pathname.startsWith("/help")) && <NotifyEmailPrompt />}
       {!isAuthPage && !isAppSurface && <Footer />}
     </>
   );

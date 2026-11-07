@@ -175,6 +175,25 @@ export default function Ks3Landing() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Free resources</span>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink">KS3 notes and guides, free to read</h2>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-4">
+          {[7, 8, 9].map((y) => (
+            <a key={y} href={`/ks3/year-${y}`} className="card p-5 transition hover:border-brand-300">
+              <div className="font-semibold text-ink">Year {y} topics</div>
+              <p className="mt-1 text-sm text-ink-muted">Notes with worked examples and practice questions in Maths, Science and English.</p>
+            </a>
+          ))}
+          <a href="/guides" className="card p-5 transition hover:border-brand-300">
+            <div className="font-semibold text-ink">Guides for parents</div>
+            <p className="mt-1 text-sm text-ink-muted">The Year 7 dip, what Year 7 covers, parents&apos; evening questions and homework help.</p>
+          </a>
+        </div>
+      </section>
+
       <section className="bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
           <h2 className="text-center text-2xl font-bold text-ink">Questions parents ask</h2>

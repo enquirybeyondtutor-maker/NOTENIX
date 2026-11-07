@@ -10,6 +10,7 @@ from sqlalchemy import select, delete, func
 from database import get_db, SessionLocal
 from models import User, ClassNote, NoteShare, HomeworkSubmission, NotePage
 from services import note_pages
+from services.email import in_background, send_new_material
 from security import require_teacher, get_current_user, is_admin
 
 router = APIRouter(tags=["notes"])
@@ -84,8 +85,9 @@ def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
     return row
 
 
-async def _share(note: ClassNote, emails: list[str], db: AsyncSession) -> list[str]:
-    """Share with these student IDs; returns the ones that don't exist."""
+async def _share(note: ClassNote, emails: list[str], db: AsyncSession, teacher: User | None = None) -> list[str]:
+    """Share with these student IDs; returns the ones that don't exist. Newly added students
+    get a "new homework / class notes" email in the background (to their own inbox, if given)."""
     emails = sorted({e.strip().lower() for e in emails if e.strip()})
     if not emails:
         return []
@@ -95,6 +97,8 @@ async def _share(note: ClassNote, emails: list[str], db: AsyncSession) -> list[s
     for u in found:
         if u.id not in have:
             db.add(NoteShare(note_id=note.id, student_id=u.id))
+            in_background(send_new_material(u, note.kind or "notes", note.title, note.subject, note.due_at,
+                                            note.body, teacher.full_name if teacher else None))
     return [e for e in emails if e not in {u.email for u in found}]
 
 
@@ -118,7 +122,7 @@ async def create_note(data: NoteIn, teacher: User = Depends(require_teacher), db
                   file_data=data.file_data or None)
     db.add(n)
     await db.flush()
-    missing = await _share(n, data.student_emails, db)
+    missing = await _share(n, data.student_emails, db, teacher)
     await db.commit()
     await db.refresh(n)
     if n.has_file:
@@ -146,7 +150,7 @@ async def my_notes(teacher: User = Depends(require_teacher), db: AsyncSession = 
 @router.post("/teacher/notes/{note_id}/share")
 async def share_note(note_id: int, data: ShareIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
     n = await _owned(note_id, teacher, db)
-    missing = await _share(n, data.student_emails, db)
+    missing = await _share(n, data.student_emails, db, teacher)
     await db.commit()
     return {"not_found": missing}
 

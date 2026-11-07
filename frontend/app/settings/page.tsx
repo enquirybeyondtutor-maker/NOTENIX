@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import NotifyEmailSettings from "@/components/NotifyEmailSettings";
 import { UserCog, Mail, Shield, Sparkles, AlertCircle, CheckCircle2, Lock } from "lucide-react";
 import { authAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
@@ -74,6 +75,8 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
+
+      {(user.role || "student") === "student" && <NotifyEmailSettings user={user} />}
 
       {/* Display name */}
       <form onSubmit={save} className="card p-6">

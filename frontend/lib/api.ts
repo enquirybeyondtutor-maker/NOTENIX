@@ -43,6 +43,7 @@ export const authAPI = {
     }),
   me: () => api.get("/auth/me"),
   updateProfile: (full_name: string) => api.patch("/auth/profile", { full_name }),
+  setNotifyEmail: (email: string) => api.put("/auth/notify-email", { email }),
   // Parent activation: email + phone → code emailed to the parent → code + new password.
   activationSendCode: (parent_email: string, phone: string, agree_terms: boolean) =>
     api.post("/auth/activation/send-code", { parent_email, phone, agree_terms }),

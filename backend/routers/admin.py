@@ -40,6 +40,7 @@ def _user_row(u: User) -> dict:
         "terms_accepted_at": u.terms_accepted_at.isoformat() if getattr(u, "terms_accepted_at", None) else None,
         "terms_price": getattr(u, "terms_price", None),
         "ks3_year": getattr(u, "ks3_year", None),
+        "notify_email": getattr(u, "notify_email", None),
         "billing_currency": pricing.for_currency(getattr(u, "billing_currency", None))["currency"],
         "subscription_label": pricing.for_currency(getattr(u, "billing_currency", None))["label"],
         "created_at": u.created_at.isoformat() if u.created_at else None,

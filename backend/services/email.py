@@ -48,16 +48,43 @@ def recipients(user) -> list[tuple[str, str]]:
     parent = (getattr(user, "parent_email", None) or "").strip().lower()
     if parent and is_mailbox(parent):
         out.append((parent, "parent"))
-    own = (getattr(user, "email", None) or "").strip().lower()
-    if is_mailbox(own) and own != parent:
-        out.append((own, "student"))
+    for own in ((getattr(user, "notify_email", None) or "").strip().lower(),
+                (getattr(user, "email", None) or "").strip().lower()):
+        if is_mailbox(own) and own not in {a for a, _ in out}:
+            out.append((own, "student"))
+            break  # one student address is enough
     return out
+
+
+def student_inbox(user) -> str | None:
+    """The student's own inbox: the update email they gave, else their login if it's a real address."""
+    for a in (getattr(user, "notify_email", None), getattr(user, "email", None)):
+        if is_mailbox(a):
+            return a.strip().lower()
+    return None
+
+
+_background: set = set()
+
+
+def in_background(coro) -> None:
+    """Send without making the web request wait (and never fail it)."""
+    import asyncio
+
+    async def run():
+        try:
+            await coro
+        except Exception as e:
+            print(f"[email] background send failed: {e}")
+    task = asyncio.create_task(run())
+    _background.add(task)
+    task.add_done_callback(_background.discard)
 
 
 def best_address(user) -> str | None:
     """Single address for one-time codes: the student's own inbox if real, else the parent's."""
-    own = getattr(user, "email", None)
-    if is_mailbox(own):
+    own = student_inbox(user)
+    if own:
         return own
     parent = getattr(user, "parent_email", None)
     return parent if is_mailbox(parent) else None
@@ -292,6 +319,45 @@ async def send_help_answered(student, subject: str) -> None:
         subj = f"A tutor answered {child}'s homework question" if role == "parent" else "Your homework question has a reply"
         return subj, html, lead + T.text_footer()
     await _to_family(student, build)
+
+
+# ── Homework and class notes, straight to the student ──────────────────────────
+
+async def send_update_email_confirmed(user, address: str) -> None:
+    child = T.first_name(user.full_name)
+    body = (T.para(f"Hi {child}, you're all set. From now on we'll email you here whenever new homework or class notes "
+                   "are added to your Notenix account, so you don't need to keep checking.") +
+            T.login_box(user.email) +
+            T.para(f'<span style="font-size:13px;color:{T.FAINT}">Didn\'t ask for this? You can ignore it, or change the '
+                   "email in Notenix → Settings.</span>"))
+    html = T.layout(preheader="Homework and class notes will arrive here", heading="Homework updates are on",
+                    body=body, buttons=[(T.signin_url(user.email), "Open Notenix")], audience="student")
+    await _deliver(address, "You'll get your homework updates here", html,
+                   "You're set up: we'll email you here whenever homework or class notes are added." + T.text_footer())
+
+
+async def send_new_material(student, kind: str, title: str, subject: str | None = None, due_at=None,
+                            message: str | None = None, teacher_name: str | None = None) -> None:
+    """kind: homework | notes | test. Goes to the student's own inbox only (not the parent)."""
+    to = student_inbox(student)
+    if not to:
+        return
+    child = T.first_name(student.full_name)
+    due = due_at.strftime("%a %d %b") if due_at else None
+    what = {"homework": "homework", "notes": "class notes", "test": "test"}[kind]
+    heading = {"homework": "New homework", "notes": "New class notes", "test": "New test"}[kind]
+    by = f"{escape(teacher_name)} has" if teacher_name else "Your tutor has"
+    rows = [("Title", escape(title))] + ([("Subject", escape(subject))] if subject else []) + ([("Due", due)] if due else [])
+    body = T.para(f"Hi {child}, {by} added new {what} for you on Notenix.") + T.info_table(rows)
+    if message:
+        short = message.strip()
+        body += T.callout("Message", escape(short[:400] + ("…" if len(short) > 400 else "")))
+    page = "/tests" if kind == "test" else "/notes"
+    html = T.layout(preheader=f"{title}" + (f", due {due}" if due else ""), heading=heading, body=body,
+                    buttons=[(T.site(page), f"Open the {what}")], audience="student")
+    subj = f"{heading}: {title}" + (f" (due {due})" if due else "")
+    text = f"{heading}: {title}" + (f", due {due}" if due else "") + f"\n{T.site(page)}" + T.text_footer()
+    await _deliver(to, subj, html, text)
 
 
 # ── Generic notice and admin alerts ────────────────────────────────────────────

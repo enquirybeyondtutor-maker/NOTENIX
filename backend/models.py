@@ -52,6 +52,9 @@ class User(Base):
     # Notenix KS3: school year (7/8/9) when the student is on KS3, when their free trial
     # started, and which parent emails of the trial sequence have gone out.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # The student's own inbox for homework / class-notes updates (their login ID is not a mailbox).
+    notify_email: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    notify_email_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     ks3_trial_started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     ks3_emails: Mapped[list | None] = mapped_column(JSON, nullable=True)
     xp: Mapped[int] = mapped_column(Integer, default=0)

@@ -38,7 +38,7 @@ def label(name, who):
 
 BT = SimpleNamespace(full_name="Musa Khan", email="musa@thebeyondtutors.com", parent_email="musa.parent@example.com", ks3_year=None)
 REAL = SimpleNamespace(full_name="Priya Patel", email="priya.patel@gmail.com", parent_email=None, ks3_year=None)
-KS = SimpleNamespace(full_name="Aisha Khan", email="aisha@notenix.com", parent_email="aisha.mum@example.com", ks3_year=7, billing_currency="GBP")
+KS = SimpleNamespace(full_name="Aisha Khan", email="aisha@notenix.com", parent_email="aisha.mum@example.com", ks3_year=7, billing_currency="GBP", ks3_emails=[], notify_email=None)
 
 
 async def main():
@@ -54,6 +54,14 @@ async def main():
     await E.send_assignment_email(REAL, "SAT Practice Test 2", "Maths", "The Notenix team", None)
     label("Test marked (to parent)", "Parent, when a written test is marked")
     await E.send_marked_email(BT, "GCSE Higher Paper 1", 72, "7")
+    STU = SimpleNamespace(full_name="Musa Khan", email="musa@thebeyondtutors.com", parent_email="musa.parent@example.com",
+                          notify_email="musa.khan@gmail.com", ks3_year=None)
+    label("Homework updates switched on", "Student, right after adding their own email")
+    await E.send_update_email_confirmed(STU, STU.notify_email)
+    label("New homework", "Student's own email, when homework is added")
+    await E.send_new_material(STU, "homework", "Fractions worksheet", "Maths", datetime.utcnow() + timedelta(days=5), "Do questions 1-10. Show your working.", "Aryan")
+    label("New class notes", "Student's own email, when class notes are added")
+    await E.send_new_material(STU, "notes", "Algebra: expanding brackets", "Maths", None, None, "Aryan")
     label("Payment received", "Parent, when you confirm a payment")
     await E.send_payment_result(KS, True, "Aisha Khan's Notenix KS3 year", 149, "GBP", "NX-K42",
                                 "Notenix KS3 is on for a year: a test every half-term, homework help, notes and a progress report every month.")

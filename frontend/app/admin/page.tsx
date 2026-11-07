@@ -27,6 +27,7 @@ interface Row {
   terms_price?: string | null;
   billing_currency?: string;
   ks3_year?: number | null;
+  notify_email?: string | null;
   subscription_label?: string;
   created_at: string;
   last_active: string | null;
@@ -339,6 +340,15 @@ export default function AdminPage() {
                             {u.full_name} {u.is_admin && <Badge tone="brand" className="ml-1">admin</Badge>}
                           </div>
                           <div className="text-xs text-ink-subtle">{u.email}</div>
+                          {u.role === "student" && !u.is_admin && (
+                            u.notify_email ? (
+                              <div className="mt-0.5 text-xs text-emerald-700" title="Homework and class-notes emails go here">
+                                ✉ Updates: {u.notify_email}
+                              </div>
+                            ) : (
+                              <div className="mt-0.5 text-xs text-ink-subtle">✉ No update email yet</div>
+                            )
+                          )}
                         </div>
                       </div>
                     </td>

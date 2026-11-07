@@ -11,7 +11,8 @@ from security import (
     hash_password, verify_password, password_needs_rehash, create_token, get_current_user, is_admin,
     can_write_practice, ai_marks_for, access_ended_message,
 )
-from services.email import generate_otp, send_otp_email, EmailSendError, best_address
+from services.email import (generate_otp, send_otp_email, EmailSendError, best_address, student_inbox,
+                            is_mailbox, in_background, send_update_email_confirmed)
 from config import settings
 
 CLOSED_MSG = "Notenix accounts are issued by Beyond Tutors. Please contact your tutor or hello@thebeyondtutors.com."
@@ -83,6 +84,9 @@ def _user_dict(u: User) -> dict:
         "parent_email": getattr(u, "parent_email", None),
         "subscription": pricing.for_currency(getattr(u, "billing_currency", None)),
         "ks3_year": getattr(u, "ks3_year", None),
+        "notify_email": getattr(u, "notify_email", None),
+        # Show the "get homework by email" prompt: a student with no inbox of their own on file.
+        "ask_notify_email": role == "student" and not student_inbox(u),
         "plan": u.plan, "xp": u.xp, "streak": u.streak, "quiz_count": u.quiz_count,
     }
 
@@ -378,3 +382,28 @@ async def activation_verify(data: ActivationVerifyIn, user: User = Depends(get_c
     await db.commit()
     await db.refresh(user)
     return {"access_token": create_token(user.id, user.token_version or 0), "token_type": "bearer", "user": _user_dict(user)}
+
+
+
+class NotifyEmailIn(BaseModel):
+    email: str | None = None   # empty / None turns the emails off
+
+
+@router.put("/notify-email")
+async def set_notify_email(data: NotifyEmailIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """The student's own inbox for homework and class-notes updates."""
+    email = (data.email or "").strip().lower()
+    if not email:
+        user.notify_email, user.notify_email_at = None, None
+        await db.commit()
+        return _user_dict(user)
+    if not re.fullmatch(r"[^@\s]{1,64}@[^@\s]{1,190}\.[a-z]{2,}", email):
+        raise HTTPException(400, "That doesn't look like an email address.")
+    if not is_mailbox(email):
+        raise HTTPException(400, "Please enter your own email (Gmail, Outlook, school email...), not your Notenix user ID.")
+    changed = email != (user.notify_email or "")
+    user.notify_email, user.notify_email_at = email, datetime.utcnow()
+    await db.commit()
+    if changed:
+        in_background(send_update_email_confirmed(user, email))
+    return _user_dict(user)
