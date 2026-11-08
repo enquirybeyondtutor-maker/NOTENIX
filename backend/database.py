@@ -282,6 +282,7 @@ async def migrate_note_kinds():
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS class_date VARCHAR(10)"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS ks3_year INTEGER"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS ks3_key VARCHAR(60)"))
+            await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS seen_at TIMESTAMP"))
         else:
             ucols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
             if "billing_currency" not in ucols:
@@ -308,3 +309,6 @@ async def migrate_note_kinds():
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_year INTEGER"))
             if "ks3_key" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_key VARCHAR(60)"))
+            scols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(note_shares)"))).all()}
+            if "seen_at" not in scols:
+                await conn.execute(text("ALTER TABLE note_shares ADD COLUMN seen_at TIMESTAMP"))

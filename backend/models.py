@@ -278,6 +278,7 @@ class NoteShare(Base):
     note_id: Mapped[int] = mapped_column(ForeignKey("class_notes.id"), index=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    seen_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # student first opened it
 
 
 class HomeworkSubmission(Base):

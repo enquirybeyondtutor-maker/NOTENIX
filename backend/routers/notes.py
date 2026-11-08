@@ -176,17 +176,32 @@ async def delete_note(note_id: int, teacher: User = Depends(require_teacher), db
 
 @router.get("/notes")
 async def student_notes(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
-    notes = (await db.execute(
-        select(ClassNote).join(NoteShare, NoteShare.note_id == ClassNote.id)
-        .where(NoteShare.student_id == user.id).order_by(ClassNote.created_at.desc())
-    )).scalars().all()
+    rows = (await db.execute(
+        select(ClassNote, NoteShare.created_at, NoteShare.seen_at).join(NoteShare, NoteShare.note_id == ClassNote.id)
+        .where(NoteShare.student_id == user.id).order_by(NoteShare.created_at.desc(), ClassNote.created_at.desc())
+    )).all()
+    notes = [n for n, _, _ in rows]
     subs = {}
     if notes:
         for sub in (await db.execute(select(HomeworkSubmission).where(
                 HomeworkSubmission.student_id == user.id,
                 HomeworkSubmission.note_id.in_([n.id for n in notes])))).scalars().all():
             subs[sub.note_id] = _sub_row(sub)
-    return [{**_note_row(n), "submission": subs.get(n.id)} for n in notes]
+    # "seen" drives the New badges and the dashboard "From your tutor" panel.
+    return [{**_note_row(n), "submission": subs.get(n.id),
+             "shared_at": shared.isoformat() if shared else None, "seen": seen is not None}
+            for n, shared, seen in rows]
+
+
+@router.post("/notes/{note_id}/seen")
+async def mark_seen(note_id: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """The student opened this note / homework: clear its New badge (first open only)."""
+    share = (await db.execute(select(NoteShare).where(
+        NoteShare.note_id == note_id, NoteShare.student_id == user.id))).scalar_one_or_none()
+    if share and share.seen_at is None:
+        share.seen_at = datetime.utcnow()
+        await db.commit()
+    return {"ok": True}
 
 
 async def _visible(note_id: int, user: User, db: AsyncSession) -> tuple[ClassNote, bool]:

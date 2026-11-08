@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ClipboardList, BookOpen, Clock, CheckCircle2, ArrowRight, CalendarClock, PenLine, Hourglass, type LucideIcon } from "lucide-react";
 import { testsAPI } from "@/lib/api";
+import { boardKind } from "@/lib/inbox";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
@@ -38,7 +39,8 @@ function dueLabel(due: string | null): { text: string; tone: "warning" | "neutra
   return { text: `Due ${formatDate(due)}`, tone: "neutral" };
 }
 
-export default function AssignmentBoard({ kind }: { kind: "test" | "homework" }) {
+/** `embedded`: render just the lists (no page header / empty state), inside another page. */
+export default function AssignmentBoard({ kind, embedded = false }: { kind: "test" | "homework"; embedded?: boolean }) {
   const { ready } = useAuthGuard("student");
   const [items, setItems] = useState<Assignment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,7 +52,7 @@ export default function AssignmentBoard({ kind }: { kind: "test" | "homework" })
     if (!ready) return;
     testsAPI
       .mine()
-      .then(({ data }) => setItems(data.filter((a: Assignment) => (a.kind || "test") === kind)))
+      .then(({ data }) => setItems(data.filter((a: Assignment) => boardKind(a) === kind)))
       .catch(() => setItems([]))
       .finally(() => setLoading(false));
   }, [ready, kind]);
@@ -61,7 +63,11 @@ export default function AssignmentBoard({ kind }: { kind: "test" | "homework" })
   const startLabel = (t: Assignment) =>
     homework ? "Start homework" : t.mode === "written" ? "Write answers" : "Start test";
 
-  if (!ready || loading) return <Spinner label={homework ? "Loading your homework…" : "Loading your tests…"} />;
+  if (!ready || loading) return embedded ? null : <Spinner label={homework ? "Loading your homework…" : "Loading your tests…"} />;
+  if (embedded && items.length === 0) return null;
+
+  const lists = renderLists();
+  if (embedded) return lists;
 
   return (
     <PageContainer>
@@ -80,11 +86,16 @@ export default function AssignmentBoard({ kind }: { kind: "test" | "homework" })
             : "When a teacher assigns you a test, it'll appear here. In the meantime, you can practise on your own."}
           action={homework ? undefined : <Button href="/quiz">Practise a quiz</Button>}
         />
-      ) : (
+      ) : lists}
+    </PageContainer>
+  );
+
+  function renderLists() {
+    return (
         <div className="space-y-8">
-          <section>
+          {!(embedded && todo.length === 0) && <section>
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
-              To do · {todo.length}
+              {embedded ? "Online homework to do" : "To do"} · {todo.length}
             </h2>
             {todo.length === 0 ? (
               <div className="card p-6 text-sm text-ink-muted">You're all caught up. 🎉</div>
@@ -132,12 +143,12 @@ export default function AssignmentBoard({ kind }: { kind: "test" | "homework" })
                 })}
               </div>
             )}
-          </section>
+          </section>}
 
           {done.length > 0 && (
             <section>
               <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
-                Completed · {done.length}
+                {embedded ? "Online homework done" : "Completed"} · {done.length}
               </h2>
               <div className="card divide-y divide-line">
                 {done.map((t) => {
@@ -177,7 +188,6 @@ export default function AssignmentBoard({ kind }: { kind: "test" | "homework" })
             </section>
           )}
         </div>
-      )}
-    </PageContainer>
-  );
+    );
+  }
 }

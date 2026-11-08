@@ -7,6 +7,7 @@ import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
+import { useInbox } from "@/lib/inbox";
 
 type NavItem = { href: string; label: string; icon?: LucideIcon };
 
@@ -60,6 +61,13 @@ export default function Navbar() {
       .catch(() => {});
   }, [pathname]);
 
+  // Students: count badges for homework to hand in, new class notes and tests to sit.
+  const student = !!user && user.role !== "teacher" && user.role !== "admin";
+  const inbox = useInbox(student, pathname);
+  const badge = (href: string) =>
+    !inbox ? 0 : href === "/homework" ? inbox.counts.homework : href === "/notes" ? inbox.counts.notes : href === "/tests" ? inbox.counts.tests : 0;
+  const totalBadge = inbox ? inbox.counts.homework + inbox.counts.notes + inbox.counts.tests : 0;
+
   useEffect(() => setOpen(false), [pathname]);
 
   if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password" || pathname === "/ks3/trial") return null;
@@ -102,6 +110,7 @@ export default function Navbar() {
                   )}
                 >
                   {label}
+                  {badge(href) > 0 && <Count n={badge(href)} />}
                 </Link>
               );
             })}
@@ -137,11 +146,12 @@ export default function Navbar() {
           )}
 
           <button
-            className="grid h-9 w-9 place-items-center rounded-lg text-ink-muted hover:bg-slate-100 lg:hidden"
+            className="relative grid h-9 w-9 place-items-center rounded-lg text-ink-muted hover:bg-slate-100 lg:hidden"
             onClick={() => setOpen(!open)}
-            aria-label="Menu"
+            aria-label={totalBadge > 0 ? `Menu, ${totalBadge} things from your tutor` : "Menu"}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
+            {!open && totalBadge > 0 && <span className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full bg-brand-600 ring-2 ring-white" />}
           </button>
         </div>
       </div>
@@ -156,6 +166,7 @@ export default function Navbar() {
                 className="block rounded-lg px-3 py-2.5 text-sm font-medium text-ink-muted hover:bg-slate-100 hover:text-ink"
               >
                 {label}
+                {badge(href) > 0 && <Count n={badge(href)} />}
               </Link>
             ))}
           </nav>
@@ -185,5 +196,13 @@ export default function Navbar() {
         </div>
       )}
     </header>
+  );
+}
+
+function Count({ n }: { n: number }) {
+  return (
+    <span className="ml-1.5 inline-grid h-5 min-w-5 place-items-center rounded-full bg-brand-600 px-1.5 text-[11px] font-semibold leading-none text-white">
+      {n > 9 ? "9+" : n}
+    </span>
   );
 }

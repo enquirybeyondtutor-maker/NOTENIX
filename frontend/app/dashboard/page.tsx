@@ -1,24 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Star, Flame, Brain, Target, ArrowRight, ClipboardList, CalendarClock, CheckCircle2, Trophy } from "lucide-react";
-import { progressAPI, testsAPI } from "@/lib/api";
+import { Star, Flame, Brain, Target, ArrowRight, ClipboardList, CalendarClock, CheckCircle2, Trophy, BookOpen, NotebookText, Bell } from "lucide-react";
+import { progressAPI } from "@/lib/api";
+import { loadInbox, type Inbox, type InboxItem } from "@/lib/inbox";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, StatCard, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { humanize, formatDate } from "@/lib/utils";
-
-interface Assignment {
-  assignment_id: number;
-  title: string;
-  subject: string;
-  topic: string;
-  exam_board: string;
-  num_questions: number;
-  due_at: string | null;
-  status: string;
-  assigned_by: string;
-}
 
 function dueLabel(due: string | null) {
   if (!due) return { text: "No deadline", danger: false };
@@ -33,26 +22,27 @@ function dueLabel(due: string | null) {
 export default function StudentDashboard() {
   const { user, ready } = useAuthGuard("student");
   const [data, setData] = useState<any>(null);
-  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [inbox, setInbox] = useState<Inbox | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!ready) return;
     Promise.all([
       progressAPI.dashboard().then((r) => r.data).catch(() => ({})),
-      testsAPI.mine().then((r) => r.data).catch(() => []),
+      loadInbox(),
     ])
-      .then(([d, a]) => {
+      .then(([d, box]) => {
         setData(d || {});
-        setAssignments(Array.isArray(a) ? a : []);
+        setInbox(box);
       })
       .finally(() => setLoading(false));
   }, [ready]);
 
   if (!ready || loading) return <Spinner label="Loading your dashboard…" />;
 
-  const pending = assignments.filter((a) => a.status !== "completed");
-  const completedCount = assignments.filter((a) => a.status === "completed").length;
+  const todo = inbox?.todo ?? [];
+  const newCount = todo.filter((i) => i.isNew).length;
+  const completedCount = (inbox?.tests ?? []).filter((a) => a.status === "completed").length;
   const subjectStats: any[] = data?.subject_stats || [];
   const recent: any[] = data?.recent || [];
 
@@ -72,52 +62,46 @@ export default function StudentDashboard() {
         <StatCard label="Avg score" value={data?.avg_score != null ? `${data.avg_score}%` : "—"} icon={Target} />
       </div>
 
-      {/* Assigned tests — primary focus */}
+      {/* From your tutor: new notes, homework to hand in, tests to sit — what students must not miss */}
       <section className="mt-8">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-subtle">
-            Assigned to you {pending.length > 0 && `· ${pending.length}`}
+          <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
+            From your tutor {todo.length > 0 && `· ${todo.length} to do`}
+            {newCount > 0 && <span className="rounded-full bg-brand-600 px-2 py-0.5 text-[11px] font-semibold normal-case tracking-normal text-white">{newCount} new</span>}
           </h2>
-          <Link href="/tests" className="text-sm font-medium text-brand-600 hover:text-brand-700">View all</Link>
+          <div className="flex gap-4 text-sm font-medium">
+            <Link href="/homework" className="text-brand-600 hover:text-brand-700">Homework</Link>
+            <Link href="/tests" className="text-brand-600 hover:text-brand-700">Tests</Link>
+          </div>
         </div>
 
-        {pending.length === 0 ? (
+        {newCount > 0 && (
+          <div className="mb-4 flex items-center gap-3 rounded-xl border border-brand-200 bg-brand-50 p-4 text-sm text-ink">
+            <Bell size={18} className="shrink-0 text-brand-600" />
+            <span>
+              Your tutor has added <b>{newCount} new {newCount === 1 ? "item" : "items"}</b> since you last looked
+              {todo.some((i) => i.isNew && i.kind === "homework") ? ", including homework" : ""}.
+            </span>
+          </div>
+        )}
+
+        {todo.length === 0 ? (
           <div className="card flex items-center gap-4 p-6">
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
               <CheckCircle2 size={20} />
             </span>
             <div>
               <div className="font-medium text-ink">You're all caught up</div>
-              <div className="text-sm text-ink-muted">No tests due right now. Practise a quiz to keep your streak going.</div>
+              <div className="text-sm text-ink-muted">No homework or tests waiting. Practise a quiz to keep your streak going.</div>
             </div>
           </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {pending.slice(0, 6).map((t) => {
-              const due = dueLabel(t.due_at);
-              return (
-                <div key={t.assignment_id} className="card card-hover flex flex-col p-5">
-                  <div className="flex items-center gap-2">
-                    <span className="badge-brand">{humanize(t.subject)}</span>
-                    <span className="badge-neutral">{t.exam_board}</span>
-                  </div>
-                  <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
-                  <p className="mt-0.5 text-sm text-ink-muted">{humanize(t.topic)}</p>
-                  <div className="mt-3 flex items-center gap-3 text-xs text-ink-subtle">
-                    <span className="inline-flex items-center gap-1"><ClipboardList size={13} /> {t.num_questions} Q</span>
-                    <span className={`inline-flex items-center gap-1 ${due.danger ? "text-amber-600" : ""}`}>
-                      <CalendarClock size={13} /> {due.text}
-                    </span>
-                  </div>
-                  <div className="mt-4 border-t border-line pt-4">
-                    <Button href={`/tests/${t.assignment_id}`} size="sm" className="w-full">
-                      Start test <ArrowRight size={14} />
-                    </Button>
-                  </div>
-                </div>
-              );
-            })}
+            {todo.slice(0, 6).map((t) => <TodoCard key={t.key} item={t} />)}
           </div>
+        )}
+        {todo.length > 6 && (
+          <p className="mt-3 text-sm text-ink-muted">and {todo.length - 6} more on your <Link href="/homework" className="font-medium text-brand-600">Homework</Link> and <Link href="/tests" className="font-medium text-brand-600">Tests</Link> pages.</p>
         )}
       </section>
 
@@ -169,5 +153,36 @@ export default function StudentDashboard() {
         </div>
       </div>
     </PageContainer>
+  );
+}
+
+const KIND = {
+  homework: { label: "Homework", icon: BookOpen, cls: "bg-amber-100 text-amber-800" },
+  notes: { label: "Class notes", icon: NotebookText, cls: "bg-sky-100 text-sky-800" },
+  test: { label: "Test", icon: ClipboardList, cls: "bg-brand-50 text-brand-700" },
+} as const;
+
+function TodoCard({ item }: { item: InboxItem }) {
+  const k = KIND[item.kind];
+  const due = item.kind === "notes" ? null : dueLabel(item.due_at ?? null);
+  return (
+    <div className={`card card-hover flex flex-col p-5 ${item.isNew ? "ring-2 ring-brand-200" : ""}`}>
+      <div className="flex flex-wrap items-center gap-2">
+        {item.isNew && <span className="rounded-full bg-brand-600 px-2 py-0.5 text-xs font-semibold text-white">New</span>}
+        <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${k.cls}`}><k.icon size={12} /> {k.label}</span>
+        {item.subject && <span className="badge-neutral">{humanize(item.subject)}</span>}
+      </div>
+      <h3 className="mt-3 font-semibold text-ink">{item.title}</h3>
+      {due && (
+        <div className={`mt-2 inline-flex items-center gap-1 text-xs ${due.danger ? "text-amber-600" : "text-ink-subtle"}`}>
+          <CalendarClock size={13} /> {due.text}
+        </div>
+      )}
+      <div className="mt-auto pt-4">
+        <Button href={item.href} size="sm" className="w-full">
+          {item.action} <ArrowRight size={14} />
+        </Button>
+      </div>
+    </div>
   );
 }

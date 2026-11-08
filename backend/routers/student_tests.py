@@ -157,6 +157,7 @@ async def my_assignments(user: User = Depends(get_current_user), db: AsyncSessio
             "assigned_by": teacher_name,
             "due_at": a.due_at.isoformat() if a.due_at else None,
             "status": "completed" if at else "assigned",
+            "started": bool(a.started_at or a.draft_answers),  # opened at least once ("New" until then)
             "marking_status": getattr(at, "status", None) if at else None,
             "score": None if (not at or pending) else at.score,
             "grade": None if (not at or pending) else at.grade,

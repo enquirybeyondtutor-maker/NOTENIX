@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Download, FileText, ChevronDown, ChevronUp, Camera, X, CheckCircle2 } from "lucide-react";
-import { notesAPI } from "@/lib/api";
+import { api, notesAPI } from "@/lib/api";
 import { MathText } from "@/components/MathText";
 import { formatDate } from "@/lib/utils";
 import { compressImage } from "@/lib/images";
@@ -14,8 +14,10 @@ const noSave = {
 
 /** One note / homework card. Tutors see the original file; students see watermarked
  *  page images only (no download), and can hand in photos of homework. */
-export default function NoteViewer({ note, footer }: { note: any; footer?: React.ReactNode }) {
+export default function NoteViewer({ note, footer, defaultOpen = false }: { note: any; footer?: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(false);
+  // Students' cards carry `seen`; a new one shows a "New" badge until it is first opened.
+  const [isNew, setIsNew] = useState(note.seen === false);
   const [detail, setDetail] = useState<any>(null);
   // One slot per page: blob URL when loaded, "" while loading, "x" if it failed.
   const [pages, setPages] = useState<string[]>([]);
@@ -85,7 +87,20 @@ export default function NoteViewer({ note, footer }: { note: any; footer?: React
     const next = !open;
     setOpen(next);
     if (next && !detail) load();
+    if (next && isNew) {
+      setIsNew(false);
+      api.post(`/notes/${note.id}/seen`).catch(() => {});
+      window.dispatchEvent(new Event("notenix:seen"));  // refresh the menu badges
+    }
   };
+
+  // Opened from a dashboard link (/homework#note-12): expand it straight away.
+  useEffect(() => {
+    if (!defaultOpen) return;
+    toggle();
+    setTimeout(() => document.getElementById(`note-${note.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const file: string | undefined = detail?.file_data;
   const isPdf = file?.startsWith("data:application/pdf");
@@ -94,10 +109,11 @@ export default function NoteViewer({ note, footer }: { note: any; footer?: React
   const status = sub?.marked_at ? `Marked${sub.mark ? `: ${sub.mark}` : ""}` : sub ? "Handed in" : null;
 
   return (
-    <div className="card p-5">
+    <div id={`note-${note.id}`} className={`card scroll-mt-24 p-5 ${isNew ? "ring-2 ring-brand-200" : ""}`}>
       <button onClick={toggle} className="flex w-full items-start justify-between gap-3 text-left">
         <div>
           <div className="font-semibold text-ink">
+            {isNew && <span className="mr-2 rounded-full bg-brand-600 px-2 py-0.5 text-xs font-semibold text-white">New</span>}
             {isHomework && <span className="mr-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">Homework</span>}
             {note.title}
             {status && <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">{status}</span>}
