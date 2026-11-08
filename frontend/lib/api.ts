@@ -17,7 +17,14 @@ api.interceptors.response.use(
     if (err.response?.status === 401 && typeof window !== "undefined") {
       localStorage.removeItem("notenix_token");
       localStorage.removeItem("notenix_user");
-      if (!window.location.pathname.startsWith("/login")) window.location.href = "/login";
+      // An expired sign-in only sends people to /login from private pages. On public pages
+      // (request a test, KS3, guides, Ask a Tutor, home) the visitor simply stays, signed out.
+      const path = window.location.pathname;
+      const PRIVATE = ["/dashboard", "/tests", "/homework", "/teacher", "/admin", "/quiz", "/progress", "/practice",
+        "/marking", "/settings", "/requests", "/pay", "/leaderboard", "/notes", "/help"];
+      if (!path.startsWith("/login") && PRIVATE.some((p) => path === p || path.startsWith(p + "/"))) {
+        window.location.href = `/login?returnTo=${encodeURIComponent(path + window.location.search)}`;
+      }
     }
     // Beyond Tutors-issued student account the parent hasn't activated yet.
     if (err.response?.status === 403 && err.response?.data?.detail === "activation_required" &&
