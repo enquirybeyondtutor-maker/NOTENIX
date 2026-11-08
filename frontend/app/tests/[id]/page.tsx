@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2, ImagePlus, X, FileText } from "lucide-react";
-import { testsAPI, getUser } from "@/lib/api";
+import { api, testsAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
@@ -188,6 +188,34 @@ export default function AttemptTestPage() {
 
   // Photos allowed on a question: 4 normally; whole past papers allow more (set by the backend).
   const photoCap = (i: number) => Number(test?.questions?.[i]?.max_photos) || MAX_PHOTOS_PER_Q;
+
+  // A PDF of answers (e.g. a scan): the server turns its pages into answer images, which
+  // join the photos, so the tutor marks them the same way.
+  async function addPdf(files: FileList | null) {
+    const file = files?.[0];
+    if (!file) return;
+    setError("");
+    const cap = photoCap(current);
+    const room = cap - (photos[current]?.length ?? 0);
+    if (room <= 0) { setError(`You can attach up to ${cap} pages here.`); return; }
+    if (file.size > 15 * 1024 * 1024) { setError("That PDF is too large (max 15 MB). Try a smaller scan, or add photos instead."); return; }
+    setPhotoBusy(true);
+    try {
+      const dataUri: string = await new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result));
+        r.onerror = () => reject(new Error("read"));
+        r.readAsDataURL(file);
+      });
+      const { data } = await api.post(`/tests/${id}/pdf-pages`, { file: dataUri, max_pages: room });
+      setPhotos((p) => ({ ...p, [current]: [...(p[current] ?? []), ...data.pages] }));
+      if (data.truncated) setError(`Only the first ${data.pages.length} of ${data.total_pages} PDF pages were added: you can attach up to ${cap} pages here.`);
+    } catch (e: any) {
+      setError(e.response?.data?.detail || "Couldn't read that PDF. Please try again, or add photos instead.");
+    } finally {
+      setPhotoBusy(false);
+    }
+  }
 
   async function addPhotos(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -466,7 +494,7 @@ export default function AttemptTestPage() {
                     <div className="text-sm font-medium text-ink">{photoCap(current) > MAX_PHOTOS_PER_Q ? "Upload photos of your answer pages" : "Or upload a photo of your working"}</div>
                     <span className="text-xs text-ink-subtle">{(photos[current]?.length ?? 0)}/{photoCap(current)}</span>
                   </div>
-                  <p className="mt-0.5 text-xs text-ink-subtle">Handwritten answers, diagrams or maths working. Marked by your teacher.</p>
+                  <p className="mt-0.5 text-xs text-ink-subtle">Photos or a PDF scan of your handwritten answers, diagrams or working. Each PDF page counts as one photo. Marked by your teacher.</p>
 
                   {(photos[current]?.length ?? 0) > 0 && (
                     <div className="mt-3 flex flex-wrap gap-3">
@@ -484,13 +512,22 @@ export default function AttemptTestPage() {
                   )}
 
                   {(photos[current]?.length ?? 0) < photoCap(current) && (
-                    <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-sm font-medium text-ink shadow-xs hover:bg-slate-50">
-                      {photoBusy ? <Loader2 size={15} className="animate-spin" /> : <ImagePlus size={15} />}
-                      {photoBusy ? "Processing…" : "Add photo"}
-                      <input type="file" accept="image/*" capture="environment" multiple className="hidden"
-                        disabled={photoBusy}
-                        onChange={(e) => { addPhotos(e.target.files); e.target.value = ""; }} />
-                    </label>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-sm font-medium text-ink shadow-xs hover:bg-slate-50">
+                        {photoBusy ? <Loader2 size={15} className="animate-spin" /> : <ImagePlus size={15} />}
+                        {photoBusy ? "Processing…" : "Add photo"}
+                        <input type="file" accept="image/*" capture="environment" multiple className="hidden"
+                          disabled={photoBusy}
+                          onChange={(e) => { addPhotos(e.target.files); e.target.value = ""; }} />
+                      </label>
+                      <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-sm font-medium text-ink shadow-xs hover:bg-slate-50">
+                        <FileText size={15} />
+                        Attach PDF
+                        <input type="file" accept="application/pdf,.pdf" className="hidden"
+                          disabled={photoBusy}
+                          onChange={(e) => { addPdf(e.target.files); e.target.value = ""; }} />
+                      </label>
+                    </div>
                   )}
                 </div>
               </div>

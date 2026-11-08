@@ -177,6 +177,64 @@ async def _load_assignment(assignment_id: int, user: User, db: AsyncSession):
     return row  # (assignment, test)
 
 
+class PdfPagesIn(BaseModel):
+    file: str            # data:application/pdf;base64,…
+    max_pages: int = 4   # photo slots the student still has free on this question
+
+
+_MAX_ANSWER_PDF_CHARS = 20_000_000  # ~15 MB PDF (base64)
+
+
+def _pdf_to_jpegs(raw: bytes, limit: int) -> tuple[list[str], int]:
+    """Render up to `limit` pages as answer-photo-sized JPEG data URIs (1200 px long side,
+    like phone photos after in-browser compression). Returns (images, total pages)."""
+    import base64
+    import fitz  # PyMuPDF
+    out: list[str] = []
+    with fitz.open(stream=raw, filetype="pdf") as doc:
+        total = len(doc)
+        for page in doc[:limit]:
+            zoom = 1200 / max(page.rect.width, page.rect.height)
+            pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+            for q in (75, 55, 40):
+                jpg = pix.tobytes("jpeg", jpg_quality=q)
+                uri = "data:image/jpeg;base64," + base64.b64encode(jpg).decode()
+                if len(uri) <= _MAX_ANSWER_IMAGE_CHARS:
+                    break
+            out.append(uri)
+    return out, total
+
+
+@router.post("/{assignment_id}/pdf-pages")
+async def pdf_answer_pages(assignment_id: int, data: PdfPagesIn, user: User = Depends(get_current_user),
+                           db: AsyncSession = Depends(get_db)):
+    """A student attaches a PDF of their answers (e.g. a scan): turn its pages into answer
+    images, which then go in with the photos, so tutors mark them exactly the same way."""
+    import base64
+    from fastapi.concurrency import run_in_threadpool
+    assignment, test = await _load_assignment(assignment_id, user, db)
+    if getattr(test, "mode", "mcq") != "written":
+        raise HTTPException(400, "This test doesn't take uploaded answers.")
+    if (await db.execute(select(TestAttempt.id).where(TestAttempt.assignment_id == assignment_id))).first():
+        raise HTTPException(400, "You have already completed this test.")
+    head, _, b64 = (data.file or "").partition(",")
+    if not head.startswith("data:application/pdf") or not b64:
+        raise HTTPException(400, "Please choose a PDF file.")
+    if len(data.file) > _MAX_ANSWER_PDF_CHARS:
+        raise HTTPException(400, "That PDF is too large (max about 15 MB). Try a smaller scan, or add photos instead.")
+    limit = max(0, min(int(data.max_pages or 0), 24))
+    if limit == 0:
+        raise HTTPException(400, "You've already added the most pages allowed here.")
+    try:
+        raw = base64.b64decode(b64)
+        pages, total = await run_in_threadpool(_pdf_to_jpegs, raw, limit)
+    except Exception:
+        raise HTTPException(400, "Couldn't read that PDF. Please check the file, or add photos instead.")
+    if not pages:
+        raise HTTPException(400, "That PDF has no pages.")
+    return {"pages": pages, "total_pages": total, "truncated": total > len(pages)}
+
+
 @router.get("/{assignment_id}")
 async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     assignment, test = await _load_assignment(assignment_id, user, db)
