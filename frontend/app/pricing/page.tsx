@@ -5,7 +5,7 @@ import LocalPrice from "@/components/LocalPrice";
 const BOOK = "https://www.thebeyondtutors.com/book";
 
 const FEATURES = [
-  "Your own Notenix login (name@thebeyondtutors.com)",
+  "Your own Notenix login (name@beyondtutors.com)",
   "Homework and timed tests set by your tutor",
   "Class notes from every lesson",
   "Instant marking, grade estimates and progress reports",

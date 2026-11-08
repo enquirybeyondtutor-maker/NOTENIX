@@ -5,7 +5,7 @@ Sends over an HTTPS email API (Resend or Brevo) so it works on hosts that block 
 EMAIL_FROM (noreply@notenix.com) with Reply-To SUPPORT_EMAIL (support@notenix.com), and is
 built from services/mail_template.py so they all share one design.
 
-Who receives what: Notenix user IDs (name@thebeyondtutors.com, name@notenix.com) are logins,
+Who receives what: Notenix user IDs (name@beyondtutors.com, older name@thebeyondtutors.com, name@notenix.com) are logins,
 not mailboxes. recipients() sends to the parent's email instead (worded for a parent), and to
 the student as well when their login is a real address.
 """
@@ -39,7 +39,13 @@ def is_mailbox(address: str | None) -> bool:
     if not address or "@" not in address:
         return False
     domain = address.rsplit("@", 1)[1].lower()
-    return domain not in {settings.student_id_domain.lower(), settings.ks3_id_domain.lower()}
+    return domain not in login_domains()
+
+
+def login_domains() -> set[str]:
+    """Domains of Notenix login IDs: name@beyondtutors.com, older name@thebeyondtutors.com, name@notenix.com."""
+    extra = {d.strip().lower() for d in (settings.login_id_domains or "").split(",") if d.strip()}
+    return extra | {settings.student_id_domain.lower(), settings.ks3_id_domain.lower()}
 
 
 def recipients(user) -> list[tuple[str, str]]:

@@ -25,7 +25,7 @@ function IssuedAccountsNotice() {
         <div className="mb-8 flex justify-center"><Logo href="/" /></div>
         <h1 className="text-2xl font-bold text-ink">Accounts come from Beyond Tutors</h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Every Beyond Tutors student gets a Notenix login (like name@thebeyondtutors.com) with
+          Every Beyond Tutors student gets a Notenix login (like name@beyondtutors.com) with
           homework, tests and class notes. Book a free trial class and we&apos;ll set yours up.
         </p>
         <div className="mt-6 flex flex-col gap-2">

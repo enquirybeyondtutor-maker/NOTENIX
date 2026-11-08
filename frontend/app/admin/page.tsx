@@ -70,7 +70,7 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
   const priceLabel = prices.find((p) => p.currency === currency)?.label || "£49";
   const [error, setError] = useState("");
 
-  // Suggest musa@thebeyondtutors.com from the name until the ID is edited by hand.
+  // Suggest musa@beyondtutors.com from the name until the ID is edited by hand.
   useEffect(() => {
     if (touched || name.trim().length < 2) return;
     const t = setTimeout(() => adminAPI.suggestId(name).then((r) => setEmail(r.data.email)).catch(() => {}), 300);
@@ -101,7 +101,7 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
       <p className="mt-1 text-sm text-ink-muted">Send the parent the ID and temporary password shown after you create the account. On first sign-in they enter their email and mobile, confirm an emailed code and set their own password.</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name (e.g. Musa Khan)" required />
-        <input className={field} value={email} onChange={(e) => { setEmail(e.target.value); setTouched(true); }} placeholder="musa@thebeyondtutors.com" />
+        <input className={field} value={email} onChange={(e) => { setEmail(e.target.value); setTouched(true); }} placeholder="musa@beyondtutors.com" />
         <select className={field} value={role} onChange={(e) => setRole(e.target.value as any)}>
           <option value="student">Student</option>
           <option value="teacher">Tutor</option>

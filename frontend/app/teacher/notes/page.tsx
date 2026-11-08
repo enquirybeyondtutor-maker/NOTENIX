@@ -95,7 +95,7 @@ export default function TeacherNotesPage() {
           {file && <button type="button" onClick={() => setFile(null)} className="text-ink-subtle hover:text-ink"><X size={16} /></button>}
         </div>
         <Field label="Share with (student IDs, separated by commas)">
-          <Input value={form.emails} onChange={(e) => setForm({ ...form, emails: e.target.value })} list="note-students" placeholder="musa@thebeyondtutors.com" />
+          <Input value={form.emails} onChange={(e) => setForm({ ...form, emails: e.target.value })} list="note-students" placeholder="musa@beyondtutors.com" />
         </Field>
         <datalist id="note-students">
           {students.map((s) => <option key={s.email} value={s.email}>{s.full_name}</option>)}

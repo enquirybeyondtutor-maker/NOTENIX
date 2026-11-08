@@ -185,7 +185,7 @@ async def suggest_id(name: str, admin: User = Depends(require_admin), db: AsyncS
 
 
 async def _free_id(name: str, db: AsyncSession, domain: str | None = None) -> str:
-    """musa@thebeyondtutors.com, then musa.k@…, then musa2@… if taken."""
+    """musa@beyondtutors.com, then musa.k@…, then musa2@… if taken."""
     domain = domain or settings.student_id_domain
     parts = [re.sub(r"[^a-z0-9]", "", p) for p in name.lower().split()]
     parts = [p for p in parts if p] or ["student"]
@@ -209,7 +209,7 @@ async def create_user(data: CreateUserIn, admin: User = Depends(require_admin), 
         raise HTTPException(400, "Role must be student or teacher")
     email = (data.email or "").strip().lower() or await _free_id(name, db)
     if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
-        raise HTTPException(400, "User ID must look like name@thebeyondtutors.com")
+        raise HTTPException(400, "User ID must look like name@beyondtutors.com")
     if (await db.execute(select(User.id).where(User.email == email))).first():
         raise HTTPException(400, f"{email} is already taken.")
     password = _new_password()

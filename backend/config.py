@@ -65,7 +65,10 @@ class Settings(BaseSettings):
     # Set both in Render, sign in, then delete BOOTSTRAP_ADMIN_PASSWORD.
     bootstrap_admin_email: str = ""
     bootstrap_admin_password: str = ""
-    student_id_domain: str = "thebeyondtutors.com"   # musa@thebeyondtutors.com
+    student_id_domain: str = "beyondtutors.com"      # musa@beyondtutors.com (new IDs)
+    # Every domain used for Notenix login IDs (no inbox behind them), comma-separated.
+    # Older accounts were issued on thebeyondtutors.com, so it stays here.
+    login_id_domains: str = "beyondtutors.com,thebeyondtutors.com"
     subscription_days: int = 365                     # £49 per year
     # Student subscription price per billing currency, JSON, e.g. {"GBP": 49, "AED": 229}.
     # Empty = the defaults in services/pricing.py.

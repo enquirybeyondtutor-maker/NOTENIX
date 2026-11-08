@@ -86,7 +86,7 @@ export default function LoginPage() {
             <Logo href="/" />
           </div>
           <h1 className="text-2xl font-bold text-ink">Welcome back</h1>
-          <p className="mt-1.5 text-sm text-ink-muted">Sign in with your Notenix user ID (e.g. name@notenix.com or name@thebeyondtutors.com) and password.</p>
+          <p className="mt-1.5 text-sm text-ink-muted">Sign in with your Notenix user ID (e.g. name@notenix.com or name@beyondtutors.com) and password.</p>
           <ReturnNote returnTo={returnTo} />
 
           {error && (

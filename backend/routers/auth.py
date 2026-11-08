@@ -11,7 +11,7 @@ from security import (
     hash_password, verify_password, password_needs_rehash, create_token, get_current_user, is_admin,
     can_write_practice, ai_marks_for, access_ended_message,
 )
-from services.email import (generate_otp, send_otp_email, EmailSendError, best_address, student_inbox,
+from services.email import (login_domains, generate_otp, send_otp_email, EmailSendError, best_address, student_inbox,
                             is_mailbox, in_background, send_update_email_confirmed)
 from config import settings
 
@@ -340,7 +340,7 @@ async def activation_send_code(data: ActivationStartIn, user: User = Depends(get
     if not data.agree_terms:
         raise HTTPException(400, "Please agree to the Terms and Conditions to continue.")
     email = data.parent_email.lower()
-    if email.endswith("@" + settings.student_id_domain.lower()):
+    if email.rsplit("@", 1)[-1] in login_domains():
         raise HTTPException(400, "Please enter your own email address, not the Notenix user ID.")
     phone = _clean_phone(data.phone)
     if _within_cooldown(user):
