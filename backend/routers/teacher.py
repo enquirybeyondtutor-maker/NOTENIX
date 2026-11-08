@@ -312,6 +312,51 @@ async def create_photo_questions(data: PhotoQuestionsIn, teacher: User = Depends
     return _test_summary(test)
 
 
+class WrittenQuestionIn(BaseModel):
+    question: str
+    marks: int = 6
+    mark_scheme: str = ""
+
+
+class WrittenTestIn(BaseModel):
+    title: str
+    subject: str
+    topic: str = ""
+    level: str = "GCSE"
+    exam_board: str = ""
+    kind: str = "test"
+    duration_minutes: int | None = None
+    is_library: bool = False
+    questions: list[WrittenQuestionIn]
+
+
+@router.post("/tests/written")
+async def create_written_test(data: WrittenTestIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Build a written (tutor-marked) test from typed questions, each with its marks and a
+    mark scheme the tutor sees while marking. Used for custom requests and Notenix mocks."""
+    qs = [q for q in data.questions if q.question.strip()]
+    if not qs:
+        raise HTTPException(400, "Add at least one question.")
+    if len(qs) > 60:
+        raise HTTPException(400, "You can add up to 60 questions.")
+    questions = [{"question": q.question.strip(), "marks": max(1, min(int(q.marks), 100)),
+                  "mark_scheme": q.mark_scheme.strip(), "image": None} for q in qs]
+    kind = "homework" if data.kind == "homework" else "test"
+    dur = data.duration_minutes if (kind == "test" and data.duration_minutes and 0 < data.duration_minutes <= 300) else None
+    test = Test(
+        owner_id=teacher.id,
+        title=(data.title.strip() or "Written test")[:200],
+        subject=data.subject, topic=data.topic.strip() or "Written questions", level=data.level,
+        exam_board=(data.exam_board or "").strip(), difficulty="medium",
+        mode="written", kind=kind, is_library=bool(data.is_library) and is_admin(teacher),
+        questions=questions, num_questions=len(questions), duration_minutes=dur,
+    )
+    db.add(test)
+    await db.commit()
+    await db.refresh(test)
+    return _test_summary(test)
+
+
 @router.post("/tests/{test_id}/share")
 async def enable_share(test_id: int, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
     """Create (or return existing) a public share token for the test."""
