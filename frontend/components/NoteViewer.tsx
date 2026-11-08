@@ -201,6 +201,32 @@ function HandIn({ noteId, sub, onDone }: { noteId: number; sub: any; onDone: (s:
     }
   };
 
+  // A PDF scan of the worksheet: the server turns each page into a hand-in photo.
+  const addPdf = async (files: FileList | null) => {
+    const file = files?.[0];
+    if (!file) return;
+    setMsg("");
+    const room = MAX_PHOTOS - photos.length;
+    if (room <= 0) return setMsg(`You can hand in up to ${MAX_PHOTOS} pages.`);
+    if (file.size > 15 * 1024 * 1024) return setMsg("That PDF is too large (max 15 MB). Try a smaller scan, or add photos instead.");
+    setBusy(true);
+    try {
+      const dataUri: string = await new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result));
+        r.onerror = () => reject(new Error("read"));
+        r.readAsDataURL(file);
+      });
+      const { data } = await api.post(`/notes/${noteId}/pdf-pages`, { file: dataUri, max_pages: room });
+      setPhotos((p) => [...p, ...data.pages]);
+      if (data.truncated) setMsg(`Only the first ${data.pages.length} of ${data.total_pages} PDF pages were added: you can hand in up to ${MAX_PHOTOS} pages.`);
+    } catch (e: any) {
+      setMsg(e?.response?.data?.detail || "Couldn't read that PDF. Please try again, or add photos instead.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const send = async () => {
     if (!photos.length) return setMsg("Add at least one photo of your work.");
     setBusy(true);
@@ -237,7 +263,7 @@ function HandIn({ noteId, sub, onDone }: { noteId: number; sub: any; onDone: (s:
   return (
     <div className="rounded-lg border border-line p-4">
       <div className="font-semibold text-ink">Hand in your homework</div>
-      <p className="mt-1 text-sm text-ink-muted">Take clear photos of your working (up to {MAX_PHOTOS}).</p>
+      <p className="mt-1 text-sm text-ink-muted">Take clear photos of your working, or attach a PDF scan (up to {MAX_PHOTOS} pages).</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {photos.map((p, i) => (
           <div key={i} className="relative">
@@ -251,6 +277,12 @@ function HandIn({ noteId, sub, onDone }: { noteId: number; sub: any; onDone: (s:
           <label className="flex h-24 w-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-md border border-dashed border-line text-xs text-ink-muted hover:border-brand-400">
             <Camera size={18} /> Add photo
             <input type="file" accept="image/*" multiple capture="environment" className="hidden" onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
+          </label>
+        )}
+        {photos.length < MAX_PHOTOS && (
+          <label className={`flex h-24 w-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-md border border-dashed border-line text-xs text-ink-muted hover:border-brand-400 ${busy ? "pointer-events-none opacity-60" : ""}`}>
+            <FileText size={18} /> {busy ? "Reading…" : "Attach PDF"}
+            <input type="file" accept="application/pdf,.pdf" className="hidden" disabled={busy} onChange={(e) => { addPdf(e.target.files); e.target.value = ""; }} />
           </label>
         )}
       </div>

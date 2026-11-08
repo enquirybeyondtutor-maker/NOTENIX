@@ -24,7 +24,7 @@ export default function HomeworkPage() {
 
   return (
     <PageContainer>
-      <PageHeader icon={BookOpen} title="My homework" subtitle="Everything your tutor has set you. Open a worksheet, do it on paper, then hand in photos." />
+      <PageHeader icon={BookOpen} title="My homework" subtitle="Everything your tutor has set you. Open a worksheet, do it on paper, then hand in photos or a PDF scan." />
 
       {files.length === 0 && hwTests.length === 0 ? (
         <EmptyState icon={BookOpen} title="No homework yet" desc="When your tutor sets homework, it'll appear here and on your dashboard." />

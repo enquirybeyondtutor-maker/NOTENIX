@@ -1,12 +1,14 @@
 """Class notes: teachers upload notes (text and/or one PDF/image) and share them with students."""
 import asyncio
 from datetime import datetime
+
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import Response
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, delete, func
+from services.answer_pdf import pdf_to_answer_pages
 from database import get_db, SessionLocal
 from models import User, ClassNote, NoteShare, HomeworkSubmission, NotePage
 from services import note_pages
@@ -288,6 +290,21 @@ async def submit_homework(note_id: int, data: SubmitIn, user: User = Depends(get
     sub.images, sub.comment, sub.submitted_at = imgs, (data.comment or "").strip()[:2000] or None, datetime.utcnow()
     await db.commit()
     return _sub_row(sub)
+
+
+class PdfPagesIn(BaseModel):
+    file: str            # data:application/pdf;base64,…
+    max_pages: int = MAX_PHOTOS  # photo slots still free in the hand-in
+
+
+@router.post("/notes/{note_id}/pdf-pages")
+async def homework_pdf_pages(note_id: int, data: PdfPagesIn, user: User = Depends(get_current_user),
+                             db: AsyncSession = Depends(get_db)):
+    """Worksheet homework handed in as a PDF scan: its pages become hand-in photos."""
+    n, _ = await _visible(note_id, user, db)
+    if (n.kind or "notes") != "homework":
+        raise HTTPException(400, "This is not homework.")
+    return await pdf_to_answer_pages(data.file, min(data.max_pages, MAX_PHOTOS), MAX_PHOTO_CHARS)
 
 
 @router.get("/teacher/homework-submissions")
