@@ -40,7 +40,7 @@ _MAX_ANSWER_IMAGE_CHARS = 1_600_000        # ~1.2 MB per photo (base64)
 _MAX_ANSWER_IMAGES_TOTAL_CHARS = 18_000_000  # whole submission
 
 
-def _sanitize_answer_images(answer_images, n_questions: int) -> list[list[str]]:
+def _sanitize_answer_images(answer_images, n_questions: int, caps: list[int] | None = None) -> list[list[str]]:
     """Validate/trim uploaded answer photos: keep only data-URI images, cap count per
     question and total payload. Returns a per-question list aligned to the questions."""
     out: list[list[str]] = [[] for _ in range(n_questions)]
@@ -50,7 +50,7 @@ def _sanitize_answer_images(answer_images, n_questions: int) -> list[list[str]]:
     for i in range(min(len(answer_images), n_questions)):
         imgs = answer_images[i] or []
         kept: list[str] = []
-        for img in imgs[:_MAX_ANSWER_IMAGES_PER_Q]:
+        for img in imgs[:(caps[i] if caps and i < len(caps) else _MAX_ANSWER_IMAGES_PER_Q)]:
             if not isinstance(img, str) or not img.startswith("data:image/"):
                 continue
             if len(img) > _MAX_ANSWER_IMAGE_CHARS:
@@ -61,6 +61,14 @@ def _sanitize_answer_images(answer_images, n_questions: int) -> list[list[str]]:
             kept.append(img)
         out[i] = kept
     return out
+
+
+def _photo_cap(q: dict) -> int:
+    """Answer photos allowed for one question: 4 normally, more for a whole past paper."""
+    try:
+        return max(1, min(int(q.get("max_photos") or _MAX_ANSWER_IMAGES_PER_Q), 24))
+    except (TypeError, ValueError):
+        return _MAX_ANSWER_IMAGES_PER_Q
 
 
 def _sanitize_question_times(times, n_questions: int) -> list[int]:
@@ -181,7 +189,8 @@ async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_curre
     mode = getattr(test, "mode", "mcq")
     if mode == "written":
         # written questions: marks visible, mark scheme hidden
-        safe = [{"question": q.get("question"), "marks": q.get("marks"), "image": q.get("image")} for q in test.questions]
+        safe = [{"question": q.get("question"), "marks": q.get("marks"), "image": q.get("image"),
+                 "max_photos": _photo_cap(q), "paper_qp": q.get("paper_qp")} for q in test.questions]
     else:
         # MCQ questions WITHOUT answers/explanations
         safe = [{"question": q.get("question"), "options": q.get("options"), "image": q.get("image")} for q in test.questions]
@@ -255,13 +264,16 @@ async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(g
 
     # Answer photos (written only). Their presence forces human marking — AI can't
     # reliably grade handwriting — even for Pro students.
-    answer_images = _sanitize_answer_images(data.answer_images, len(test.questions)) if mode == "written" else []
+    answer_images = _sanitize_answer_images(data.answer_images, len(test.questions),
+                                            [_photo_cap(q) for q in test.questions]) if mode == "written" else []
     has_photos = any(imgs for imgs in answer_images)
     qtimes = _sanitize_question_times(data.question_times, len(test.questions))
 
     # Image-only questions (a screenshot IS the question, no transcribed text/mark scheme)
     # can't be AI-graded — always route to a human.
     image_only = any(q.get("image") and not (q.get("question") or "").strip() for q in test.questions)
+    # Whole past papers ("tutor_only") are always marked by a tutor, never by AI.
+    image_only = image_only or any(q.get("tutor_only") for q in test.questions)
 
     # ── Written test that isn't AI-marked (non-Pro, photo answers, or image questions): human marking. ──
     if mode == "written" and (not ai_marks_for(user) or has_photos or image_only):

@@ -55,6 +55,19 @@ function fmtAway(s: number) {
   return `${Math.floor(s / 60)}m ${s % 60}s`;
 }
 
+// Mark schemes for marked past papers start with the official PDF link: make links clickable.
+function LinkedText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(https:\/\/[^\s]+)/g).map((part, i) =>
+        /^https:\/\//.test(part)
+          ? <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-700 underline">Open the official PDF</a>
+          : <MathText key={i} text={part} />,
+      )}
+    </>
+  );
+}
+
 export default function MarkingPage() {
   const { ready } = useAuthGuard("teacher");
   const [queue, setQueue] = useState<QueueItem[]>([]);
@@ -230,7 +243,7 @@ export default function MarkingPage() {
 
               {q.mark_scheme && (
                 <div className="mt-3 whitespace-pre-line rounded-lg border border-brand-100 bg-brand-50/50 p-3 text-sm text-ink-muted">
-                  <span className="font-medium text-ink">Mark scheme: </span><MathText text={q.mark_scheme} />
+                  <span className="font-medium text-ink">Mark scheme: </span><LinkedText text={q.mark_scheme} />
                 </div>
               )}
 

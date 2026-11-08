@@ -1,13 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Send, Lock } from "lucide-react";
+import { Send, Lock, FileText } from "lucide-react";
 import { requestsAPI, getUser, saveAuth } from "@/lib/api";
 import { REQUEST_EXAMS } from "@/lib/requestExams";
 import { Button } from "./ui/Button";
 import { Input, Select, Field } from "./ui/Input";
 
 const DRAFT_KEY = "notenix_request_draft";
+
+// "Get this paper marked" links from the Beyond Tutors past-papers pages carry the paper:
+// /request?exam=GCSE&paper=Paper%201H&code=8300/1H&series=June%202024&course=AQA%20GCSE%20Maths&qp=…&ms=…
+type Paper = { name: string; code?: string; series?: string; course?: string; qp?: string; ms?: string };
+
+function paperFromUrl(qs: URLSearchParams): Paper | null {
+  const name = (qs.get("paper") || "").trim().slice(0, 120);
+  if (!name) return null;
+  const get = (k: string) => (qs.get(k) || "").trim().slice(0, 500) || undefined;
+  return { name, code: get("code"), series: get("series"), course: get("course"), qp: get("qp"), ms: get("ms") };
+}
+
+export const paperLabel = (p: Paper) =>
+  [p.course, p.series, p.name + (p.code ? ` (${p.code})` : "")].filter(Boolean).join(" · ");
 
 // Signed-out visitors get one free test: they leave the student's name, email, WhatsApp and a
 // password, which creates a free account they use to sit the test. After that, more tests need
@@ -24,6 +38,7 @@ export default function RequestForm() {
   const [needsSub, setNeedsSub] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [paper, setPaper] = useState<Paper | null>(null);
 
   useEffect(() => {
     setSignedIn(!!getUser());
@@ -40,6 +55,12 @@ export default function RequestForm() {
       setExam(qsExam);
       setSubject((qsSubject || "").slice(0, 120));
     }
+    const p = paperFromUrl(qs);
+    if (p) {
+      setPaper(p);
+      if (qsExam && REQUEST_EXAMS.includes(qsExam)) setExam(qsExam);
+      setSubject((qsSubject || p.course || "").slice(0, 120));
+    }
     requestsAPI.config().then((r) => setPrice({ price: r.data.price, currency: r.data.currency })).catch(() => {});
   }, []);
 
@@ -52,14 +73,20 @@ export default function RequestForm() {
     setBusy(true);
     const preferred_date = date ? new Date(date).toISOString() : null;
     try {
+      const extra = (paper ? { paper } : {}) as {};
+      let assignmentId: number | null = null;
       if (signedIn) {
-        await requestsAPI.create({ exam, subject, details, preferred_date });
+        const { data } = await requestsAPI.create({ exam, subject, details, preferred_date, ...extra });
+        assignmentId = data.assignment_id;
       } else {
-        const { data } = await requestsAPI.guest({ ...guest, exam, subject, details, preferred_date });
+        const { data } = await requestsAPI.guest({ ...guest, exam, subject, details, preferred_date, ...extra });
         saveAuth(data.access_token, data.user);
+        assignmentId = data.request?.assignment_id;
       }
       try { sessionStorage.removeItem(DRAFT_KEY); } catch {}
-      window.location.href = "/requests?new=1";  // full load so the header shows the new sign-in
+      // A marked past paper opens its upload page at once; other requests wait for the team.
+      // Full load either way, so the header shows the new sign-in.
+      window.location.href = paper && assignmentId ? `/tests/${assignmentId}` : "/requests?new=1";
     } catch (err: any) {
       if (err.response?.status === 402) setNeedsSub(true);
       setError(err.response?.data?.detail || "Couldn't send your request. Please try again.");
@@ -69,6 +96,21 @@ export default function RequestForm() {
 
   return (
     <form onSubmit={submit} className="card space-y-5 p-6 sm:p-8">
+      {paper && (
+        <div className="rounded-xl border border-brand-200 bg-brand-50 p-4">
+          <div className="flex items-start gap-3">
+            <FileText size={18} className="mt-0.5 shrink-0 text-brand-600" />
+            <div>
+              <div className="text-xs font-bold uppercase tracking-wide text-brand-700">Paper to be marked</div>
+              <div className="mt-0.5 font-semibold text-ink">{paperLabel(paper)}</div>
+              <p className="mt-1 text-sm text-ink-muted">
+                Sit it at home, then upload photos of your answers. A tutor marks it against the official
+                mark scheme and sends you your mark and feedback.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Exam">
           <Select value={exam} onChange={(e) => setExam(e.target.value)} required>
@@ -80,7 +122,8 @@ export default function RequestForm() {
           <Input value={subject} onChange={(e) => setSubject(e.target.value)} maxLength={120} />
         </Field>
       </div>
-      <Field label="Anything we should know?" hint="Topics, tier/class, target score, exam date…">
+      <Field label={paper ? "Anything the tutor should know? (optional)" : "Anything we should know?"}
+        hint={paper ? "Tier, target grade, exam date…" : "Topics, tier/class, target score, exam date…"}>
         <textarea
           value={details}
           onChange={(e) => setDetails(e.target.value)}
@@ -89,15 +132,20 @@ export default function RequestForm() {
           className="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition-all placeholder:text-ink-subtle focus:border-brand-500 focus:ring-4 focus:ring-brand-600/10"
         />
       </Field>
-      <Field label="When would you like to sit it? (optional)">
-        <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-      </Field>
+      {!paper && (
+        <Field label="When would you like to sit it? (optional)">
+          <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        </Field>
+      )}
 
       {!signedIn && (
         <div className="space-y-4 border-t border-line pt-5">
           <div>
             <h3 className="font-semibold text-ink">Where should we send it?</h3>
-            <p className="mt-1 text-sm text-ink-muted">Our team will message you on WhatsApp and email when your test is ready.</p>
+            <p className="mt-1 text-sm text-ink-muted">
+              {paper ? "We'll message you on WhatsApp and email when your paper is marked."
+                : "Our team will message you on WhatsApp and email when your test is ready."}
+            </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Student's full name">
@@ -120,7 +168,10 @@ export default function RequestForm() {
         <p className="text-sm text-ink-muted">
           {price.price > 0
             ? <>Price: <b className="text-ink">{price.currency} {price.price.toFixed(2)}</b> per test, paid by bank transfer from any country.</>
-            : <>Your first test is <b className="text-ink">free</b>: we send the mock, you sit it online, and a tutor marks
+            : paper
+              ? <>Your first marked paper is <b className="text-ink">free</b>. Your upload page opens straight away. For
+                  more marked papers, subscribe to Notenix or join Beyond Tutors.</>
+              : <>Your first test is <b className="text-ink">free</b>: we send the mock, you sit it online, and a tutor marks
                 your written answers with feedback. For more tests, subscribe to Notenix or join Beyond Tutors.</>}
         </p>
       )}
@@ -135,7 +186,9 @@ export default function RequestForm() {
         </div>
       ) : error && <p className="text-sm text-red-600">{error}</p>}
       <Button type="submit" size="lg" loading={busy} className="w-full sm:w-auto">
-        {signedIn ? <><Send size={16} /> Send request</> : <><Lock size={16} /> Request my free test</>}
+        {paper
+          ? <><Send size={16} /> {signedIn ? "Get my paper marked" : "Get my paper marked free"}</>
+          : signedIn ? <><Send size={16} /> Send request</> : <><Lock size={16} /> Request my free test</>}
       </Button>
       {!signedIn && (
         <p className="text-xs text-ink-subtle">

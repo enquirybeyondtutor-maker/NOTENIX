@@ -17,14 +17,27 @@ const STEPS = [
   { icon: UserCheck, title: "Tutor marks it", desc: "Score, written feedback and what to work on next." },
 ];
 
-export default function RequestPage() {
+const PAPER_STEPS = [
+  { icon: Send, title: "Send it", desc: "Tell us who you are. Your upload page opens straight away." },
+  { icon: PenLine, title: "Sit the paper", desc: "Timed and closed book, on paper, at home." },
+  { icon: ClipboardCheck, title: "Upload your answers", desc: "Photograph every page of your answers in order." },
+  { icon: UserCheck, title: "Tutor marks it", desc: "Your mark, written feedback and the topics to work on next." },
+];
+
+export default async function RequestPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const isPaper = !!(await searchParams).paper;
+  const steps = isPaper ? PAPER_STEPS : STEPS;
   return (
     <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6">
       <div className="max-w-2xl">
-        <span className="eyebrow">Tutor-marked tests</span>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">Request a test, marked by our team</h1>
+        <span className="eyebrow">Tutor-marked {isPaper ? "past papers" : "tests"}</span>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          {isPaper ? "Get your past paper marked by a tutor" : "Request a test, marked by our team"}
+        </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Real exam conditions, marked by experienced tutors. For students anywhere in the world.
+          {isPaper
+            ? "Sit the official paper at home, upload your answers, and an experienced tutor marks it against the official mark scheme."
+            : "Real exam conditions, marked by experienced tutors. For students anywhere in the world."}
         </p>
       </div>
 
@@ -32,7 +45,7 @@ export default function RequestPage() {
         <RequestForm />
         <div>
           <ol className="space-y-6">
-            {STEPS.map((s, i) => (
+            {steps.map((s, i) => (
               <li key={s.title} className="flex gap-4">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-600 text-white"><s.icon size={18} /></span>
                 <div>
@@ -44,7 +57,9 @@ export default function RequestPage() {
             ))}
           </ol>
           <ul className="mt-8 space-y-2 border-t border-line pt-6">
-            {["Original questions written by tutors", "Instant marks for multiple-choice", "Written answers marked by hand", "First test free for every student"].map((x) => (
+            {(isPaper
+              ? ["Marked against the official mark scheme", "Your mark plus written feedback", "Topics to work on next", "First marked paper free"]
+              : ["Original questions written by tutors", "Instant marks for multiple-choice", "Written answers marked by hand", "First test free for every student"]).map((x) => (
               <li key={x} className="flex items-center gap-2 text-sm text-ink-muted">
                 <CheckCircle2 size={15} className="text-emerald-600" /> {x}
               </li>

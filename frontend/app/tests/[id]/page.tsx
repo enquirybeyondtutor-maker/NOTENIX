@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2, ImagePlus, X } from "lucide-react";
+import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2, ImagePlus, X, FileText } from "lucide-react";
 import { testsAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { Spinner } from "@/components/ui/Page";
@@ -15,6 +15,8 @@ interface Question {
   options?: string[];
   marks?: number;
   image?: string | null;
+  max_photos?: number;       // answer photos allowed (more for a whole past paper)
+  paper_qp?: string | null;  // official question-paper PDF for a marked past paper
 }
 interface TestData {
   assignment_id: number;
@@ -184,19 +186,24 @@ export default function AttemptTestPage() {
     }
   }, [test, submitting, answers, photos, id, startedAt, router, markBack]);
 
+  // Photos allowed on a question: 4 normally; whole past papers allow more (set by the backend).
+  const photoCap = (i: number) => Number(test?.questions?.[i]?.max_photos) || MAX_PHOTOS_PER_Q;
+
   async function addPhotos(files: FileList | null) {
     if (!files || files.length === 0) return;
     setError("");
     setPhotoBusy(true);
     try {
       const existing = photos[current] ?? [];
-      const room = MAX_PHOTOS_PER_Q - existing.length;
+      const cap = photoCap(current);
+      const room = cap - existing.length;
       if (room <= 0) {
-        setError(`You can attach up to ${MAX_PHOTOS_PER_Q} photos per question.`);
+        setError(`You can attach up to ${cap} photos here.`);
         return;
       }
       const picked = Array.from(files).slice(0, room);
-      const encoded = await Promise.all(picked.map((f) => compressImage(f)));
+      // Whole past papers allow many pages, so shrink each a little more to keep the upload small.
+      const encoded = await Promise.all(picked.map((f) => compressImage(f, cap > MAX_PHOTOS_PER_Q ? 1200 : 1400)));
       setPhotos((p) => ({ ...p, [current]: [...(p[current] ?? []), ...encoded] }));
     } catch {
       setError("Couldn't process that image. Please try another photo.");
@@ -407,7 +414,9 @@ export default function AttemptTestPage() {
           <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6">
             <div className="flex items-center justify-between">
               <div className="text-sm font-medium text-ink-subtle">Question {current + 1} of {total}</div>
-              {isWritten && q.marks != null && (
+              {isWritten && (q.max_photos ?? 0) > MAX_PHOTOS_PER_Q ? (
+                <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-semibold text-brand-700">Marked by a tutor</span>
+              ) : isWritten && q.marks != null && (
                 <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-semibold text-brand-700">
                   {q.marks} {q.marks === 1 ? "mark" : "marks"}
                 </span>
@@ -415,6 +424,13 @@ export default function AttemptTestPage() {
             </div>
             {q.question && (
               <h2 className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed text-ink sm:text-xl"><MathText text={q.question} /></h2>
+            )}
+
+            {q.paper_qp && (
+              <a href={q.paper_qp} target="_blank" rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2.5 text-sm font-semibold text-brand-700 hover:bg-brand-100">
+                <FileText size={16} /> Open the question paper (official PDF)
+              </a>
             )}
 
             {q.image && (
@@ -447,8 +463,8 @@ export default function AttemptTestPage() {
                 {/* Photo answers — for handwritten working, diagrams, etc. */}
                 <div className="mt-5 rounded-xl border border-dashed border-line-strong bg-slate-50/60 p-4">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-ink">Or upload a photo of your working</div>
-                    <span className="text-xs text-ink-subtle">{(photos[current]?.length ?? 0)}/{MAX_PHOTOS_PER_Q}</span>
+                    <div className="text-sm font-medium text-ink">{photoCap(current) > MAX_PHOTOS_PER_Q ? "Upload photos of your answer pages" : "Or upload a photo of your working"}</div>
+                    <span className="text-xs text-ink-subtle">{(photos[current]?.length ?? 0)}/{photoCap(current)}</span>
                   </div>
                   <p className="mt-0.5 text-xs text-ink-subtle">Handwritten answers, diagrams or maths working. Marked by your teacher.</p>
 
@@ -467,7 +483,7 @@ export default function AttemptTestPage() {
                     </div>
                   )}
 
-                  {(photos[current]?.length ?? 0) < MAX_PHOTOS_PER_Q && (
+                  {(photos[current]?.length ?? 0) < photoCap(current) && (
                     <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-sm font-medium text-ink shadow-xs hover:bg-slate-50">
                       {photoBusy ? <Loader2 size={15} className="animate-spin" /> : <ImagePlus size={15} />}
                       {photoBusy ? "Processing…" : "Add photo"}
