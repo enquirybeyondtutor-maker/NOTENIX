@@ -119,7 +119,11 @@ def _details(data: "RequestIn") -> str | None:
 # Only exam-board (and our own) PDFs may be linked from a mark-my-paper test.
 _PAPER_HOSTS = ("aqa.org.uk", "pearson.com", "ocr.org.uk", "cambridgeinternational.org", "wjec.co.uk",
                 "ccea.org.uk", "sqa.org.uk", "thebeyondtutors.com", "notenix.com", "educationstandards.nsw.edu.au",
-                "vcaa.vic.edu.au", "qcaa.qld.edu.au", "scsa.wa.edu.au", "nzqa.govt.nz", "collegeboard.org")
+                "vcaa.vic.edu.au", "qcaa.qld.edu.au", "scsa.wa.edu.au", "nzqa.govt.nz", "collegeboard.org",
+                "nsw.gov.au",                                   # NESA (HSC) papers
+                "vcaacorporateprod.prod.acquia-sites.com",      # VCAA's own file host
+                "uat-wp.s3.eu-west-2.amazonaws.com",            # UAT-UK (TMUA, ESAT, TARA) papers
+                "esat-tmua.ac.uk")
 PAPER_PHOTOS = 20  # answer photos a student may upload for a whole paper
 
 
