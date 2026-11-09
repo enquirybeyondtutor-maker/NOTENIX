@@ -8,7 +8,7 @@ from config import settings
 
 DEFAULT_PRICES = {
     "GBP": 49, "AED": 229, "USD": 65, "EUR": 59, "AUD": 99,
-    "NZD": 109, "SGD": 85, "CAD": 89, "INR": 5499, "THB": 1990,
+    "NZD": 109, "SGD": 85, "CAD": 89, "INR": 5499, "THB": 2100,
 }
 SYMBOLS = {"GBP": "£", "USD": "$", "EUR": "€", "AUD": "A$", "NZD": "NZ$", "SGD": "S$", "CAD": "C$", "INR": "₹", "THB": "฿"}
 NAMES = {"GBP": "UK", "AED": "UAE", "USD": "US", "EUR": "Europe", "AUD": "Australia",
