@@ -193,7 +193,7 @@ async def grant(user, course: str, access: str, db: AsyncSession, until: datetim
         e = Enrolment(user_id=user.id, course=course, kind="trial", created_at=now)
         db.add(e)
     if access == "trial":
-        e.kind, e.until = "trial", now + timedelta(days=settings.trial_days)
+        e.kind, e.until = "trial", until or now + timedelta(days=settings.trial_days)
     elif access == "year":
         start = e.until if (e.kind == "paid" and e.until and e.until > now) else now
         e.kind, e.until = "paid", start + timedelta(days=settings.subscription_days)
@@ -205,6 +205,8 @@ async def grant(user, course: str, access: str, db: AsyncSession, until: datetim
         raise ValueError("Access must be trial, year, none or until")
     if payment_id:
         e.payment_id = payment_id
+    if course == "sat" and not getattr(user, "sat_since", None):
+        user.sat_since = now   # shows the SAT tab
     await db.flush()
     sync_access(user, await enrolments(user.id, db))
     return e

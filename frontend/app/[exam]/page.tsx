@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/Button";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return EXAMS.map((e) => ({ exam: e.slug }));
+  // SAT has its own page (app/sat) with the diagnostic and Notenix SAT.
+  return EXAMS.filter((e) => e.slug !== "sat").map((e) => ({ exam: e.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ exam: string }> }): Promise<Metadata> {

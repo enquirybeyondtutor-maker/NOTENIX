@@ -1,0 +1,468 @@
+{
+ "slug": "diagnostic",
+ "title": "SAT Diagnostic",
+ "kind": "diagnostic",
+ "summary": "A 34-minute check of every SAT skill area: 14 Reading & Writing and 12 Math questions.",
+ "modules": {
+  "rw": {
+   "title": "Reading and Writing",
+   "section": "rw",
+   "minutes": 16,
+   "questions": [
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The town council's decision to close the library on Sundays was met with ______ opposition: within a week, more than two thousand residents had signed a petition asking the council to reconsider.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "negligible",
+      "hesitant",
+      "widespread",
+      "private"
+     ],
+     "answer": "C",
+     "explanation": "The second half of the sentence describes thousands of residents signing a petition, so the opposition was broad: \"widespread\". \"Negligible\" and \"hesitant\" contradict the evidence, and a public petition is not \"private\".",
+     "id": "diagnostic-rw-01"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Early reviewers dismissed the novelist's first book as slight, but later critics have come to regard its spare, understated style as ______: a deliberate choice that gives its quiet scenes unusual emotional force.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "a weakness",
+      "an accident",
+      "a distraction",
+      "a strength"
+     ],
+     "answer": "D",
+     "explanation": "The colon explains the blank: the style is \"a deliberate choice that gives its quiet scenes unusual emotional force\", which is praise. So later critics see the style as \"a strength\", in contrast with the early reviewers.",
+     "id": "diagnostic-rw-02"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Honeybees communicate the location of food through a \"waggle dance.\" For decades, researchers assumed the dance was entirely instinctive. A 2023 study, however, found that young bees who never watched experienced dancers performed noticeably less precise dances, suggesting that bees refine the behaviour by observing others.",
+     "question": "Which choice best describes the function of the third sentence in the overall structure of the text?",
+     "options": [
+      "It presents evidence that challenges a long-held assumption described earlier in the text.",
+      "It explains why researchers were first interested in the waggle dance.",
+      "It describes a method that later studies have shown to be unreliable.",
+      "It summarises the main argument of the researchers mentioned in the second sentence."
+     ],
+     "answer": "A",
+     "explanation": "The second sentence gives the old assumption (the dance is entirely instinctive). The study, introduced with \"however\", shows learning plays a part, so it challenges that assumption.",
+     "id": "diagnostic-rw-03"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Cross-Text Connections",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Text 1\nSome economists argue that a four-day working week raises productivity: rested employees, they say, accomplish as much in four days as they previously did in five, so output stays level while wellbeing improves.\n\nText 2\nTrials of the four-day week have produced encouraging results, but most took place in office jobs where output is hard to measure. In settings such as hospitals or factories, where a shorter week simply means fewer hours of staffing, it is far less clear that the same amount of work would get done.",
+     "question": "Based on the texts, how would the author of Text 2 most likely respond to the economists' claim in Text 1?",
+     "options": [
+      "By arguing that the trials described in Text 1 were poorly designed and their results should be ignored",
+      "By suggesting that the claim may hold for some kinds of work but has not been shown to apply to all jobs",
+      "By agreeing that productivity rises in every workplace that adopts a four-day week",
+      "By claiming that employee wellbeing is more important than productivity"
+     ],
+     "answer": "B",
+     "explanation": "Text 2 calls the results \"encouraging\" but notes they come mostly from office jobs and that it is \"far less clear\" for hospitals or factories. So the author accepts the claim may hold in some settings but doubts it applies everywhere.",
+     "id": "diagnostic-rw-04"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Mangrove forests grow along tropical coastlines where few other trees can survive the salty, waterlogged soil. Their tangled roots slow incoming waves, reducing coastal erosion, and shelter young fish that later move out to coral reefs. Because of these roles, scientists describe mangroves as a \"nursery\" for the ocean and a natural barrier for coastal communities.",
+     "question": "Which choice best states the main idea of the text?",
+     "options": [
+      "Mangroves are difficult to grow outside the tropics.",
+      "Coastal erosion is the most serious threat facing tropical coastlines.",
+      "Coral reefs depend more on mangroves than on any other habitat.",
+      "Mangroves provide important benefits to both marine life and coastal areas."
+     ],
+     "answer": "D",
+     "explanation": "The text lists two kinds of benefit (slowing waves to reduce erosion, and sheltering young fish) and sums them up as a \"nursery\" for the ocean and a \"natural barrier\" for communities. The other choices are either not stated or too narrow.",
+     "id": "diagnostic-rw-05"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A researcher claims that children who learn a musical instrument develop stronger working memory, the ability to hold and use information over a few seconds.",
+     "question": "Which finding, if true, would most directly support the researcher's claim?",
+     "options": [
+      "Children randomly assigned to two years of instrument lessons improved more on working-memory tests than similar children assigned to art lessons.",
+      "Many professional musicians began learning their instrument before age ten.",
+      "Children who learn an instrument often say they enjoy their lessons.",
+      "Adults who play an instrument tend to listen to more music than adults who do not."
+     ],
+     "answer": "A",
+     "explanation": "Only the finding about randomly assigned lessons links instrument learning to working memory, and with random assignment and a comparison group it suggests the lessons caused the improvement. The others say nothing about working memory.",
+     "id": "diagnostic-rw-06"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A team surveyed visitors to four national parks about how they travelled there. In every park, most visitors arrived by car, but the share arriving by public transport varied widely.\n\nVisitors arriving by public transport\nPark P: 4%\nPark Q: 21%\nPark R: 9%\nPark S: 2%\n\nThe team concluded that parks with direct train links attract more public-transport visitors. Of the four parks, only Park Q has a direct train link.",
+     "question": "Which choice best describes data from the table that support the team's conclusion?",
+     "options": [
+      "Park S had the smallest share of visitors arriving by public transport.",
+      "Park Q, the only park with a direct train link, had a far higher share of public-transport visitors than any other park.",
+      "Most visitors to every park arrived by car.",
+      "Parks P and R together had a larger share of public-transport visitors than Park S."
+     ],
+     "answer": "B",
+     "explanation": "The conclusion is about train links. Park Q is the only park with one, and its 21% is far above the others (2% to 9%), which is the data that supports the conclusion.",
+     "id": "diagnostic-rw-07"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "In laboratory tests, a new drought-resistant variety of wheat produced yields similar to standard wheat when watered normally, and much higher yields when water was scarce. However, the new variety needs a soil nutrient that is low in many of the dry regions where it would be planted. Therefore, without ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "more laboratory testing, the variety's yields under normal watering will remain unknown.",
+      "rainfall, standard wheat will always outperform the new variety.",
+      "added fertiliser, the variety may not deliver its advantage in the places that need it most.",
+      "changes to the variety, it cannot be grown in any region at all."
+     ],
+     "answer": "C",
+     "explanation": "The problem raised is that dry regions lack a nutrient the variety needs. So unless the nutrient is supplied (fertiliser), its drought advantage may not appear where droughts happen. The option about laboratory testing contradicts the text, which already reports yields under normal watering.",
+     "id": "diagnostic-rw-08"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Each of the paintings in the museum's new gallery ______ by an artist who was born in the city.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "were created",
+      "was created",
+      "are created",
+      "have been created"
+     ],
+     "answer": "B",
+     "explanation": "The subject is \"Each\", which is singular (\"of the paintings\" is a phrase in between). The singular verb \"was created\" agrees with it.",
+     "id": "diagnostic-rw-09"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The bridge was designed to carry 20,000 vehicles a ______ by its tenth year, it was carrying nearly twice that number.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "day,",
+      "day",
+      "day;",
+      "day, and,"
+     ],
+     "answer": "C",
+     "explanation": "Both parts are complete sentences, so they need a semicolon (or a full stop) between them. A comma alone creates a comma splice, and no punctuation creates a run-on.",
+     "id": "diagnostic-rw-10"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The expedition's leader, a geologist who had spent two decades mapping the ______ insisted on checking every rock sample herself.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "region;",
+      "region:",
+      "region",
+      "region,"
+     ],
+     "answer": "D",
+     "explanation": "The phrase \"a geologist who had spent two decades mapping the region\" interrupts the sentence, so it must be closed with a comma to match the comma after \"leader\".",
+     "id": "diagnostic-rw-11"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "After months of negotiation, the two companies finally agreed to share ______ research facilities, a move that analysts expect will cut costs for both.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "their",
+      "its",
+      "it's",
+      "they're"
+     ],
+     "answer": "A",
+     "explanation": "The facilities belong to \"the two companies\", a plural noun, so the plural possessive \"their\" is needed. \"Its\" is singular, and \"it's\" and \"they're\" are contractions.",
+     "id": "diagnostic-rw-12"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Electric scooters are cheap to rent and easy to park. ______, many cities have struggled with scooters left blocking pavements and doorways.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "However",
+      "For example",
+      "Similarly",
+      "As a result"
+     ],
+     "answer": "A",
+     "explanation": "The second sentence describes a problem that contrasts with the advantages in the first, so a contrast word, \"However\", fits.",
+     "id": "diagnostic-rw-13"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• The Great Green Wall is a project to restore land across Africa's Sahel region.\n• It was launched in 2007 by the African Union.\n• Its goal is to restore 100 million hectares of degraded land by 2030.\n• By 2020, about 4 million hectares (roughly 4% of the goal) had been restored.",
+     "question": "The student wants to emphasise how much work remains for the project to meet its goal. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "The Great Green Wall, launched by the African Union in 2007, aims to restore land across the Sahel region.",
+      "By 2020, the Great Green Wall had restored only about 4% of the 100 million hectares it aims to restore by 2030.",
+      "The Great Green Wall is a land-restoration project in Africa's Sahel region.",
+      "Launched in 2007, the Great Green Wall has a goal for the year 2030."
+     ],
+     "answer": "B",
+     "explanation": "Only the sentence about 2020 sets what has been done (about 4%) against the goal (100 million hectares by 2030), which shows how much remains.",
+     "id": "diagnostic-rw-14"
+    }
+   ]
+  },
+  "m": {
+   "title": "Math",
+   "section": "math",
+   "minutes": 18,
+   "questions": [
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in one variable",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "If $5x - 8 = 3x + 6$, what is the value of $x$?",
+     "options": [
+      "$-7$",
+      "$1$",
+      "$7$",
+      "$14$"
+     ],
+     "answer": "C",
+     "explanation": "Subtract $3x$ and add $8$ to both sides: $2x = 14$, so $x = 7$.",
+     "id": "diagnostic-m-01"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear functions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A gym charges a joining fee plus a fixed amount per month. The total cost, in dollars, of $m$ months of membership is given by $C(m) = 25m + 40$. What does the number $40$ represent?",
+     "options": [
+      "The joining fee",
+      "The cost per month",
+      "The total cost of one month",
+      "The number of months"
+     ],
+     "answer": "A",
+     "explanation": "When $m = 0$ (no months yet), $C = 40$: the amount paid before any monthly charge, which is the joining fee. $25$ is the cost per month.",
+     "id": "diagnostic-m-02"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Percentages",
+     "difficulty": 1,
+     "type": "spr",
+     "question": "A jacket originally priced at $\\$80$ is on sale for $15\\%$ off. What is the sale price, in dollars?",
+     "answer": [
+      "68",
+      "68.00",
+      "68.0"
+     ],
+     "explanation": "$15\\%$ of $80$ is $12$, so the sale price is $80 - 12 = 68$ dollars.",
+     "id": "diagnostic-m-03"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Ratios, rates and units",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A printer prints $45$ pages in $3$ minutes. At this rate, how many minutes will it take to print $270$ pages?",
+     "options": [
+      "$12$",
+      "$15$",
+      "$18$",
+      "$20$"
+     ],
+     "answer": "C",
+     "explanation": "The rate is $45 \\div 3 = 15$ pages per minute, so $270$ pages take $270 \\div 15 = 18$ minutes.",
+     "id": "diagnostic-m-04"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Systems of linear equations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "$2x + y = 11$\n$x - y = 1$\n\nWhat is the solution $(x, y)$ to the system of equations above?",
+     "options": [
+      "$(3, 5)$",
+      "$(4, 3)$",
+      "$(5, 1)$",
+      "$(6, 5)$"
+     ],
+     "answer": "B",
+     "explanation": "Add the equations: $3x = 12$, so $x = 4$. Then $y = x - 1 = 3$.",
+     "id": "diagnostic-m-05"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which expression is equivalent to $(2x + 3)(x - 4)$?",
+     "options": [
+      "$2x^2 - 5x - 12$",
+      "$2x^2 + 5x - 12$",
+      "$2x^2 - 8x - 12$",
+      "$2x^2 - 11x + 12$"
+     ],
+     "answer": "A",
+     "explanation": "Expand: $2x \\cdot x + 2x(-4) + 3x + 3(-4) = 2x^2 - 8x + 3x - 12 = 2x^2 - 5x - 12$.",
+     "id": "diagnostic-m-06"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Right triangles and trigonometry",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "A right triangle has legs of length $9$ and $12$. What is the length of its hypotenuse?",
+     "answer": [
+      "15"
+     ],
+     "explanation": "By Pythagoras, the hypotenuse is $\\sqrt{9^2 + 12^2} = \\sqrt{81 + 144} = \\sqrt{225} = 15$.",
+     "id": "diagnostic-m-07"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "One-variable data",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The data set $3, 7, 7, 10, 13$ has a mean of $8$. If the value $13$ is replaced by $23$, which of the following is true?",
+     "options": [
+      "Both the mean and the median increase.",
+      "The mean increases and the median stays the same.",
+      "The mean stays the same and the median increases.",
+      "Neither the mean nor the median changes."
+     ],
+     "answer": "B",
+     "explanation": "The total rises by $10$, so the mean rises to $10$. The middle value is still $7$, so the median does not change.",
+     "id": "diagnostic-m-08"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The function $f$ is defined by $f(x) = 2(x - 3)^2 + 5$. What is the minimum value of $f(x)$?",
+     "options": [
+      "$-5$",
+      "$2$",
+      "$3$",
+      "$5$"
+     ],
+     "answer": "D",
+     "explanation": "$(x - 3)^2 \\ge 0$, so $f(x) \\ge 5$, with equality when $x = 3$. The minimum value is $5$ (the $y$-coordinate of the vertex $(3, 5)$).",
+     "id": "diagnostic-m-09"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Circles",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A circle in the $xy$-plane has equation $x^2 + y^2 - 6x + 4y = 12$. What is the radius of the circle?",
+     "options": [
+      "$\\sqrt{12}$",
+      "$5$",
+      "$12$",
+      "$25$"
+     ],
+     "answer": "B",
+     "explanation": "Complete the square: $(x - 3)^2 - 9 + (y + 2)^2 - 4 = 12$, so $(x - 3)^2 + (y + 2)^2 = 25$. The radius is $\\sqrt{25} = 5$.",
+     "id": "diagnostic-m-10"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear equations and systems",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "What is the positive solution to the equation $x^2 - 2x - 35 = 0$?",
+     "answer": [
+      "7"
+     ],
+     "explanation": "Factor: $(x - 7)(x + 5) = 0$, so $x = 7$ or $x = -5$. The positive solution is $7$.",
+     "id": "diagnostic-m-11"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Probability",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A survey asked 200 students whether they walk or take the bus to school.\n\n| | Walk | Bus | Total |\n|---|---|---|---|\n| Year 10 | 36 | 64 | 100 |\n| Year 11 | 54 | 46 | 100 |\n| Total | 90 | 110 | 200 |\n\nIf a student who walks is chosen at random, what is the probability that the student is in Year 11?",
+     "options": [
+      "$\\dfrac{27}{100}$",
+      "$\\dfrac{9}{20}$",
+      "$\\dfrac{27}{50}$",
+      "$\\dfrac{3}{5}$"
+     ],
+     "answer": "D",
+     "explanation": "Only the $90$ walkers count. Of them, $54$ are in Year 11, so the probability is $\\frac{54}{90} = \\frac{3}{5}$.",
+     "id": "diagnostic-m-12"
+    }
+   ]
+  }
+ }
+}

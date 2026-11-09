@@ -1,0 +1,2570 @@
+{
+ "slug": "mock-1",
+ "title": "SAT Practice Test 1",
+ "kind": "mock",
+ "summary": "98 questions · 2 h 14 min · adaptive Module 2 in each section",
+ "modules": {
+  "rw1": {
+   "title": "Reading and Writing: Module 1",
+   "section": "rw",
+   "minutes": 32,
+   "questions": [
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The chef's new menu was deliberately ______: instead of the dozens of dishes the restaurant once offered, it listed only six, each made with ingredients from nearby farms.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "concise",
+      "extensive",
+      "expensive",
+      "traditional"
+     ],
+     "answer": "A",
+     "explanation": "The colon explains the blank: the menu went from dozens of dishes to six. A short, focused menu is \"concise\".",
+     "id": "mock-1-rw1-01"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Although the bridge looked fragile, engineers found it remarkably ______: it had survived two major floods and decades of heavy traffic with only minor repairs.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "ornate",
+      "durable",
+      "temporary",
+      "crowded"
+     ],
+     "answer": "B",
+     "explanation": "\"Although\" sets up a contrast with \"fragile\", and the evidence (surviving floods and traffic) shows the bridge lasts. \"Durable\" means able to withstand wear.",
+     "id": "mock-1-rw1-02"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Historians have long ______ the role of women in the early printing trade. Recent research in guild records shows that widows frequently ran print shops and trained apprentices, a contribution earlier accounts barely mention.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "exaggerated",
+      "celebrated",
+      "overlooked",
+      "documented"
+     ],
+     "answer": "C",
+     "explanation": "The second sentence says earlier accounts \"barely mention\" women's contribution, so historians have \"overlooked\" it. \"Celebrated\" and \"documented\" contradict this, and \"exaggerated\" means the opposite.",
+     "id": "mock-1-rw1-03"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The economist's forecast was ______: it predicted modest growth but surrounded that prediction with so many qualifications and alternative scenarios that almost any outcome could be said to fit it.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "unprecedented",
+      "pessimistic",
+      "erroneous",
+      "equivocal"
+     ],
+     "answer": "D",
+     "explanation": "A forecast hedged with so many qualifications that almost any outcome fits it is \"equivocal\" (open to more than one interpretation). Nothing suggests it was gloomy, wrong or unprecedented.",
+     "id": "mock-1-rw1-04"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Sea otters often float on their backs and use a flat rock resting on their chests as an anvil, striking shellfish against it until the shells crack. Some otters keep a favourite rock tucked in a fold of skin under their forelegs, carrying it from one meal to the next.",
+     "question": "Which choice best states the main purpose of the text?",
+     "options": [
+      "To describe how sea otters use rocks to open their food",
+      "To compare sea otters with other tool-using animals",
+      "To explain why sea otters float on their backs",
+      "To argue that sea otters are the most intelligent marine mammals"
+     ],
+     "answer": "A",
+     "explanation": "Both sentences describe otters using rocks as anvils to crack shellfish, including carrying a favourite rock. No other animals are compared and no argument about intelligence is made.",
+     "id": "mock-1-rw1-05"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "For years, city planners assumed that adding lanes to a congested road would reduce traffic. Studies of dozens of expansions have found the opposite: within a few years, the new lanes fill with drivers who previously took other routes or travelled at other times. Planners call this effect \"induced demand.\"",
+     "question": "Which choice best describes the overall structure of the text?",
+     "options": [
+      "It describes a problem, then proposes several possible solutions.",
+      "It presents a common assumption, then describes evidence that contradicts it and names the effect.",
+      "It explains a scientific term, then gives its history.",
+      "It compares two cities' approaches to reducing traffic."
+     ],
+     "answer": "B",
+     "explanation": "The text states what planners assumed, gives studies showing \"the opposite\", and ends by naming the effect (\"induced demand\").",
+     "id": "mock-1-rw1-06"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "In her 1962 memoir, the architect describes her first commission, a small library in a mountain town, in loving detail: the creak of its floorboards, the smell of pine, the way afternoon light fell across the reading tables. Yet she devotes only a single sentence to the vast government building that made her famous.",
+     "question": "Which choice best describes the function of the second sentence in the text as a whole?",
+     "options": [
+      "It explains why the architect stopped designing libraries.",
+      "It suggests that the government building was poorly designed.",
+      "It provides a contrast that highlights how much more attention the architect gives to her first commission.",
+      "It introduces a criticism of the memoir made by other architects."
+     ],
+     "answer": "C",
+     "explanation": "\"Yet\" signals a contrast: the small library gets loving detail, while her most famous building gets one sentence. The contrast emphasises the attention she gives the library. Nothing is said about quality or critics.",
+     "id": "mock-1-rw1-07"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Cross-Text Connections",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Text 1\nMany nutritionists recommend eating breakfast every day, arguing that a morning meal improves concentration and helps people avoid overeating later.\n\nText 2\nIn a large study, adults who were randomly assigned to skip breakfast did not eat more at lunch or dinner than those who ate breakfast, and their performance on attention tests was the same. The study's authors suggest that the benefits of breakfast may depend more on the individual than on any general rule.",
+     "question": "Based on the texts, how would the authors of the study in Text 2 most likely respond to the nutritionists' recommendation in Text 1?",
+     "options": [
+      "They would agree that breakfast improves concentration for most adults.",
+      "They would suggest that nutritionists should study children instead of adults.",
+      "They would claim that skipping breakfast is healthier than eating it.",
+      "They would argue that the recommendation may not apply to everyone, since their results did not show the claimed benefits."
+     ],
+     "answer": "D",
+     "explanation": "The study found no difference in later eating or attention, and its authors say benefits \"may depend more on the individual than on any general rule\". So they would question a recommendation for everyone, without claiming skipping breakfast is better.",
+     "id": "mock-1-rw1-08"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Before refrigerators, many households kept food cold in an \"icebox\", a wooden cabinet lined with tin or zinc and packed with a large block of ice. Ice was cut from frozen lakes in winter, stored in insulated ice houses, and delivered door to door through the summer. The trade employed tens of thousands of workers until electric refrigerators became affordable in the 1930s.",
+     "question": "Which choice best states the main idea of the text?",
+     "options": [
+      "Electric refrigerators were invented in the 1930s.",
+      "Before electric refrigerators, a large industry supplied ice so households could keep food cold.",
+      "Ice houses were the most important buildings in early towns.",
+      "Wooden cabinets were better at keeping food cold than electric refrigerators."
+     ],
+     "answer": "B",
+     "explanation": "The text describes iceboxes, how ice was harvested, stored and delivered, and how many people the trade employed until refrigerators replaced it. Together that is the ice industry that kept food cold before refrigerators.",
+     "id": "mock-1-rw1-09"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The following text is adapted from a 1913 short story. Maria has just arrived in a city for the first time.\n\nEverything was taller than she had imagined and louder than she had feared. She stood at the corner with her single suitcase, letting the crowd part around her like water around a stone, and for a long moment she could not decide whether she wanted to laugh or to go straight back to the station.",
+     "question": "According to the text, what is true about Maria?",
+     "options": [
+      "She is waiting for a friend to meet her.",
+      "She has visited the city many times before.",
+      "She is unsure how she feels about the city.",
+      "She is angry that people are ignoring her."
+     ],
+     "answer": "C",
+     "explanation": "She \"could not decide whether she wanted to laugh or to go straight back to the station\", which shows mixed, uncertain feelings. The text says this is her first time in a city.",
+     "id": "mock-1-rw1-10"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A historian claims that the spread of public libraries in the late nineteenth century increased reading among working-class adults, not just among the wealthy.",
+     "question": "Which finding, if true, would most directly support the historian's claim?",
+     "options": [
+      "Some public libraries charged a small fee to borrow new novels.",
+      "Many public libraries built in the period had grand entrances and marble floors.",
+      "Wealthy families in the period often owned large private libraries.",
+      "Library membership records from the period show that most new members listed factory, dock or domestic work as their occupation."
+     ],
+     "answer": "D",
+     "explanation": "The claim is about working-class adults reading more thanks to public libraries. Records showing that most new members had working-class jobs connect the libraries directly to that group.",
+     "id": "mock-1-rw1-11"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Ecologist Rosa Delgado studied a meadow where a non-native plant had spread. She hypothesised that the plant was reducing the number of native bee species, not because bees avoided it, but because it crowded out the native flowers those bees depend on.",
+     "question": "Which finding, if true, would most strongly support Delgado's hypothesis?",
+     "options": [
+      "Areas of the meadow where the non-native plant was removed and native flowers regrew saw native bee species return.",
+      "Native bees were frequently observed visiting the non-native plant's flowers.",
+      "The non-native plant flowers earlier in spring than most native plants.",
+      "Non-native bees in other regions prefer native flowers to non-native ones."
+     ],
+     "answer": "A",
+     "explanation": "The hypothesis links bee decline to the loss of native flowers. If bees return when native flowers regrow after the plant is removed, the loss of those flowers is the likely cause. Bees visiting the plant does not show what drives the decline.",
+     "id": "mock-1-rw1-12"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "A school surveyed students about how they usually get to school.\n\n| Method | Percentage of students |\n|---|---|\n| Walk | 35% |\n| Bus | 40% |\n| Car | 18% |\n| Bicycle | 7% |\n\nThe survey found that the most common way students get to school is ______",
+     "question": "Which choice most effectively uses data from the table to complete the statement?",
+     "options": [
+      "by bus.",
+      "on foot.",
+      "by car.",
+      "by bicycle."
+     ],
+     "answer": "A",
+     "explanation": "The bus has the highest percentage in the table (40%), so it is the most common method.",
+     "id": "mock-1-rw1-13"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Researchers measured average daily screen time and average nightly sleep for teenagers in four groups.\n\n| Group | Screen time (hours) | Sleep (hours) |\n|---|---|---|\n| 1 | 2.1 | 8.4 |\n| 2 | 3.8 | 7.9 |\n| 3 | 5.2 | 7.1 |\n| 4 | 6.9 | 6.6 |\n\nThe researchers argue that their data are consistent with the idea that more screen time is associated with less sleep, but they caution that the data alone cannot show that screens cause the loss of sleep.",
+     "question": "Which choice best describes data from the table that support the researchers' argument?",
+     "options": [
+      "Group 1 had the least screen time and the most sleep.",
+      "As average screen time increased from group to group, average sleep decreased.",
+      "Group 4's screen time was more than three times group 1's.",
+      "Every group averaged more than six hours of sleep."
+     ],
+     "answer": "B",
+     "explanation": "The argument is about an association: more screen time going with less sleep. Only the statement describing the pattern across all four groups (screen time rising as sleep falls) supports it. The others describe single groups.",
+     "id": "mock-1-rw1-14"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Glass frogs have transparent skin on their undersides. Researchers recently discovered that when a glass frog sleeps, it stores most of its red blood cells in its liver, making its body almost completely see-through. Because predators in the frogs' forest habitat often hunt by sight, this suggests that ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "the liver is the largest organ in a glass frog's body.",
+      "glass frogs are more active at night than during the day.",
+      "hiding red blood cells may help glass frogs avoid being seen while they sleep.",
+      "predators in the forest cannot see the colour red."
+     ],
+     "answer": "C",
+     "explanation": "Predators hunt by sight, and storing blood in the liver makes a sleeping frog nearly invisible. The logical conclusion is that this helps it avoid predators while asleep.",
+     "id": "mock-1-rw1-15"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Medieval manuscripts were often written on parchment made from animal skin, which was expensive. Scribes sometimes scraped old texts off parchment and wrote new ones over them. Using special imaging, researchers can now read the faint traces of the erased writing. Because the erased texts were usually ones that scribes no longer considered valuable, the recovered writing is likely to include ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "works that were widely copied and read at the time.",
+      "writing that the scribes themselves had composed.",
+      "only religious texts.",
+      "texts that did not survive anywhere else."
+     ],
+     "answer": "D",
+     "explanation": "Texts scribes no longer valued were scraped off rather than copied, so they are the ones least likely to survive elsewhere. Widely copied works are the opposite.",
+     "id": "mock-1-rw1-16"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The museum's newest exhibit features over two hundred ______ many of which have never been shown to the public.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "photographs,",
+      "photographs;",
+      "photographs.",
+      "photographs"
+     ],
+     "answer": "A",
+     "explanation": "\"Many of which have never been shown\" is not a complete sentence, so it cannot follow a semicolon or full stop. It adds detail to \"photographs\" and is joined with a comma.",
+     "id": "mock-1-rw1-17"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The first public demonstration of television took place in London in ______ the inventor, John Logie Baird, showed moving images of a ventriloquist's dummy to a group of scientists.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "1926",
+      "1926, and",
+      "1926 and",
+      "1926,"
+     ],
+     "answer": "B",
+     "explanation": "Two complete sentences are being joined, so they need a comma plus a conjunction (\"1926, and\"). A comma alone is a comma splice; no punctuation is a run-on.",
+     "id": "mock-1-rw1-18"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The recipe calls for three ______ flour, sugar and cocoa powder.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "ingredients,",
+      "ingredients;",
+      "ingredients:",
+      "ingredients"
+     ],
+     "answer": "C",
+     "explanation": "A colon introduces a list after a complete sentence (\"The recipe calls for three ingredients\"). A semicolon needs complete sentences on both sides.",
+     "id": "mock-1-rw1-19"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Marine biologist Asha ______ who has spent fifteen years tracking whale sharks off the coast of Mozambique, believes the animals return to the same feeding grounds each year.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "Nkemelu:",
+      "Nkemelu",
+      "Nkemelu;",
+      "Nkemelu,"
+     ],
+     "answer": "D",
+     "explanation": "The clause \"who has spent fifteen years...\" is extra information about Nkemelu and ends with a comma before \"believes\", so it must also start with a comma.",
+     "id": "mock-1-rw1-20"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The team of volunteers ______ every weekend to clear litter from the riverbank.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "meet",
+      "have met",
+      "are meeting",
+      "meets"
+     ],
+     "answer": "D",
+     "explanation": "The subject is \"team\", a singular noun (\"of volunteers\" describes it), so it takes the singular verb \"meets\".",
+     "id": "mock-1-rw1-21"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "By the time the rescue boat arrived, the stranded hikers ______ on the small island for nearly two days.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "had been waiting",
+      "will wait",
+      "wait",
+      "are waiting"
+     ],
+     "answer": "A",
+     "explanation": "The waiting happened before another past event (the boat arriving), so the past perfect continuous \"had been waiting\" is needed.",
+     "id": "mock-1-rw1-22"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Walking through the market at dawn, ______",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "the smell of fresh bread drew the tourists toward a small bakery.",
+      "the tourists were drawn toward a small bakery by the smell of fresh bread.",
+      "a small bakery drew the tourists in with the smell of fresh bread.",
+      "fresh bread was smelled by the tourists near a small bakery."
+     ],
+     "answer": "B",
+     "explanation": "\"Walking through the market at dawn\" must describe whoever is walking, so the tourists must come right after the comma. In the other options the smell, the bakery or the bread would be doing the walking.",
+     "id": "mock-1-rw1-23"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The first part of the hike follows a wide, gently sloping path. ______, the final kilometre is steep and rocky, and hikers often need to use their hands.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "For instance",
+      "Similarly",
+      "By contrast",
+      "Therefore"
+     ],
+     "answer": "C",
+     "explanation": "The final kilometre (steep, rocky) is the opposite of the first part (wide, gentle), so a contrast transition fits.",
+     "id": "mock-1-rw1-24"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Honey found in ancient Egyptian tombs has been tasted by archaeologists and found to be perfectly edible. Honey's low moisture and natural acidity make it hostile to bacteria. ______, it can last for thousands of years if sealed properly.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "Nevertheless",
+      "As a result",
+      "In other words",
+      "Meanwhile"
+     ],
+     "answer": "B",
+     "explanation": "Honey being hostile to bacteria is the reason it can last so long, so the third sentence is a result of the second.",
+     "id": "mock-1-rw1-25"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• The Atacama Desert in Chile is one of the driest places on Earth.\n• Some weather stations there have never recorded rain.\n• Its clear, dry skies make it ideal for astronomy.\n• Several of the world's largest telescopes are built there.",
+     "question": "The student wants to explain why the Atacama Desert attracts astronomers. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "The Atacama Desert in Chile is one of the driest places on Earth.",
+      "Some weather stations in the Atacama Desert have never recorded rain.",
+      "Because its skies are so clear and dry, the Atacama Desert is home to several of the world's largest telescopes.",
+      "Chile is home to the Atacama Desert, where it rarely rains."
+     ],
+     "answer": "C",
+     "explanation": "The goal is to explain the attraction for astronomers. Only the sentence linking clear, dry skies to the telescopes built there does that.",
+     "id": "mock-1-rw1-26"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• Bioluminescence is light produced by living organisms.\n• Fireflies use it to attract mates.\n• The anglerfish uses a glowing lure to attract prey.\n• Some squid use it to match light from above and hide their shadows from predators.",
+     "question": "The student wants to emphasise that organisms use bioluminescence for different purposes. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "Bioluminescence, light produced by living organisms, is found in fireflies and anglerfish.",
+      "Some squid use bioluminescence to hide their shadows.",
+      "The anglerfish has a glowing lure that it uses to attract prey.",
+      "Organisms use bioluminescence in different ways: fireflies to attract mates, anglerfish to lure prey and some squid to hide from predators."
+     ],
+     "answer": "D",
+     "explanation": "The goal is several different purposes. Only the sentence naming three uses (attracting mates, luring prey, hiding) shows that variety.",
+     "id": "mock-1-rw1-27"
+    }
+   ]
+  },
+  "rw2e": {
+   "title": "Reading and Writing: Module 2",
+   "section": "rw",
+   "minutes": 32,
+   "questions": [
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The library's new reading room is so ______ that visitors often whisper even when no one else is there.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "noisy",
+      "quiet",
+      "colourful",
+      "crowded"
+     ],
+     "answer": "B",
+     "explanation": "Visitors whisper even when alone, which suggests the room is very \"quiet\".",
+     "id": "mock-1-rw2e-01"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The young pianist practised for hours every day, and her ______ paid off when she won the national competition.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "confusion",
+      "boredom",
+      "dedication",
+      "reluctance"
+     ],
+     "answer": "C",
+     "explanation": "Practising for hours every day shows commitment, or \"dedication\", which \"paid off\" with the win.",
+     "id": "mock-1-rw2e-02"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The instructions were so ______ that even first-time users could assemble the desk in under twenty minutes.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "complicated",
+      "unusual",
+      "short-lived",
+      "clear"
+     ],
+     "answer": "D",
+     "explanation": "First-time users assembling the desk quickly shows the instructions were easy to follow: \"clear\".",
+     "id": "mock-1-rw2e-03"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The scientist was careful not to ______ her results; she reported only what the experiment had shown, even though she had hoped for a more dramatic finding.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "overstate",
+      "publish",
+      "repeat",
+      "understand"
+     ],
+     "answer": "A",
+     "explanation": "She reported only what the experiment showed despite hoping for something more dramatic, so she avoided making the results sound bigger than they were: she did not \"overstate\" them.",
+     "id": "mock-1-rw2e-04"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Every spring, volunteers in the village carry hundreds of toads across a busy road in buckets. The toads are migrating to the pond where they were born to lay their eggs, and without help, many would be hit by cars.",
+     "question": "Which choice best states the main purpose of the text?",
+     "options": [
+      "To explain how toads find the pond where they were born",
+      "To argue that the road should be closed every spring",
+      "To describe a local effort to help toads reach their breeding pond safely",
+      "To compare toads with other migrating animals"
+     ],
+     "answer": "C",
+     "explanation": "The text describes volunteers carrying toads across a road so they can reach their pond without being hit. It makes no argument and compares nothing.",
+     "id": "mock-1-rw2e-05"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Most people picture deserts as hot. But the largest desert on Earth is Antarctica. A desert is defined by how little precipitation it receives, not by its temperature, and Antarctica's interior receives less than 5 centimetres of snow a year.",
+     "question": "Which choice best describes the function of the third sentence in the text as a whole?",
+     "options": [
+      "It questions whether Antarctica should be called a desert.",
+      "It describes the wildlife that lives in Antarctica.",
+      "It gives a second example of a hot desert.",
+      "It explains the definition that makes the surprising claim in the second sentence true."
+     ],
+     "answer": "D",
+     "explanation": "The second sentence makes a surprising claim (Antarctica is the largest desert). The third explains why: deserts are defined by precipitation, and Antarctica gets very little.",
+     "id": "mock-1-rw2e-06"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The following text is adapted from a 1908 novel. Anne, a young orphan, has just arrived at a farm.\n\nAnne looked around the kitchen with shining eyes. \"Oh, I'm so glad I'm going to stay here,\" she said, although no one had yet told her that she would. \"I've never had a real home before, and this looks exactly like the sort of place I always imagined.\"",
+     "question": "Which choice best describes the overall structure of the text?",
+     "options": [
+      "A character reacts with joy to a new place and explains why it matters to her.",
+      "A character argues with another character about where she will live.",
+      "A narrator describes a farm in detail and then explains its history.",
+      "A character remembers a home she lived in long ago."
+     ],
+     "answer": "A",
+     "explanation": "Anne looks around \"with shining eyes\", says she is glad to stay, and explains she has never had a real home, so the passage shows her joy and the reason for it.",
+     "id": "mock-1-rw2e-07"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Cross-Text Connections",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Text 1\nSome teachers argue that students learn best when classrooms are silent, because noise makes it harder to concentrate.\n\nText 2\nA study of primary school pupils found that low background noise, like quiet chatter, did not reduce test scores, while loud noise, such as traffic, did. The researchers concluded that it is the volume of noise, rather than any noise at all, that matters.",
+     "question": "Based on the texts, how would the researchers in Text 2 most likely respond to the teachers in Text 1?",
+     "options": [
+      "By agreeing that any noise at all harms learning",
+      "By suggesting that only loud noise, not all noise, makes concentration harder",
+      "By arguing that classrooms should be as loud as possible",
+      "By claiming that noise has no effect on learning"
+     ],
+     "answer": "B",
+     "explanation": "The study found quiet noise did not lower scores but loud noise did, so the researchers would qualify the teachers' view: only loud noise is the problem.",
+     "id": "mock-1-rw2e-08"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The Great Barrier Reef, off the coast of Australia, is the largest coral reef system in the world. It stretches for more than 2,300 kilometres and is home to thousands of species of fish, coral and other animals. It is so large that it can be seen from space.",
+     "question": "Which choice best states the main idea of the text?",
+     "options": [
+      "Coral reefs are found only in Australia.",
+      "The Great Barrier Reef is enormous and full of life.",
+      "Most fish species live on the Great Barrier Reef.",
+      "Scientists use space photographs to study coral reefs."
+     ],
+     "answer": "B",
+     "explanation": "Each detail (largest reef system, over 2,300 km, thousands of species, visible from space) shows how large and full of life the reef is.",
+     "id": "mock-1-rw2e-09"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Some apartment buildings now grow vegetables on their roofs. The gardens give residents fresh food and shade the roof, which keeps the floors below cooler in summer. They also absorb rainwater that would otherwise rush into city drains.",
+     "question": "According to the text, which is one benefit of rooftop gardens?",
+     "options": [
+      "They replace the need for city drains.",
+      "They make apartments cheaper to rent.",
+      "They help keep buildings cooler in summer.",
+      "They are easier to look after than ground gardens."
+     ],
+     "answer": "C",
+     "explanation": "The text says the gardens shade the roof, \"which keeps the floors below cooler in summer\". The other benefits are not stated.",
+     "id": "mock-1-rw2e-10"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "A student claims that the town's new bike lanes have made cycling more popular.",
+     "question": "Which finding, if true, would most directly support the student's claim?",
+     "options": [
+      "Some drivers complained about the new bike lanes.",
+      "The bike lanes were painted green.",
+      "Bicycles have become more expensive in recent years.",
+      "The number of cyclists counted on the town's main roads doubled in the year after the bike lanes opened."
+     ],
+     "answer": "D",
+     "explanation": "The claim is that cycling became more popular after the lanes. A doubling in cyclists after the lanes opened directly supports it.",
+     "id": "mock-1-rw2e-11"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A researcher argues that dogs can tell whether a person is smiling or frowning from a photograph.",
+     "question": "Which finding, if true, would most directly support the researcher's argument?",
+     "options": [
+      "Dogs trained to choose photos of smiling faces kept choosing smiling faces when shown photos of people they had never seen.",
+      "Dogs spend more time looking at people than at other dogs.",
+      "Many dog owners believe their dogs understand their moods.",
+      "Dogs can recognise their owners' voices."
+     ],
+     "answer": "A",
+     "explanation": "Picking smiling faces of unfamiliar people shows dogs are telling expressions apart from photos alone, which is the argument. Owners' beliefs and voices are not evidence about photographs.",
+     "id": "mock-1-rw2e-12"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "A bakery recorded how many loaves of each bread it sold in one week.\n\n| Bread | Loaves sold |\n|---|---|\n| White | 420 |\n| Wholemeal | 310 |\n| Sourdough | 515 |\n| Rye | 145 |\n\nAccording to the table, the bakery sold the most loaves of ______",
+     "question": "Which choice most effectively uses data from the table to complete the statement?",
+     "options": [
+      "wholemeal.",
+      "white bread.",
+      "sourdough.",
+      "rye."
+     ],
+     "answer": "C",
+     "explanation": "Sourdough has the highest number in the table: 515 loaves.",
+     "id": "mock-1-rw2e-13"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A park recorded the number of visitors each season.\n\n| Season | Visitors |\n|---|---|\n| Spring | 18,000 |\n| Summer | 42,000 |\n| Autumn | 21,000 |\n| Winter | 6,000 |\n\nThe park manager claims that summer is by far the park's busiest season.",
+     "question": "Which choice best describes data from the table that support the manager's claim?",
+     "options": [
+      "The park had 87,000 visitors in total.",
+      "Winter had the fewest visitors.",
+      "Spring and autumn had similar numbers of visitors.",
+      "Summer had about twice as many visitors as any other season."
+     ],
+     "answer": "D",
+     "explanation": "Summer's 42,000 is about twice autumn's 21,000, the next highest, which shows summer is \"by far\" the busiest.",
+     "id": "mock-1-rw2e-14"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Penguins cannot fly, but they are excellent swimmers. Their wings have evolved into stiff flippers, and their bodies are shaped like torpedoes. These features suggest that penguins' bodies are suited to ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "moving quickly through water.",
+      "flying long distances.",
+      "climbing trees.",
+      "living in hot deserts."
+     ],
+     "answer": "A",
+     "explanation": "Flippers and a torpedo shape are features for swimming, so the bodies suit moving through water. The text says penguins cannot fly.",
+     "id": "mock-1-rw2e-15"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A town replaced its old orange streetlights with bright white LED lights. Afterwards, residents noticed that the night sky looked less starry, and astronomers recorded that faint stars had become harder to see. This suggests that ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "the stars had moved further from Earth.",
+      "the new lights increased the amount of light in the night sky.",
+      "LED lights use more electricity than orange lights.",
+      "residents preferred the old streetlights."
+     ],
+     "answer": "B",
+     "explanation": "After brighter lights were installed, faint stars became harder to see, which suggests the lights brightened the sky. The text says nothing about electricity use or residents' preferences.",
+     "id": "mock-1-rw2e-16"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Our school's chess club meets every ______ new members are always welcome.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "Tuesday,",
+      "Tuesday",
+      "Tuesday;",
+      "Tuesday, and,"
+     ],
+     "answer": "C",
+     "explanation": "Two complete sentences are joined, so a semicolon is needed. A comma alone is a comma splice, and no punctuation is a run-on.",
+     "id": "mock-1-rw2e-17"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Before the storm arrived, the farmers moved their ______ into the barn.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "sheep:",
+      "sheep,",
+      "sheep;",
+      "sheep"
+     ],
+     "answer": "D",
+     "explanation": "\"The farmers moved their sheep into the barn\" is one clause with nothing to separate, so no punctuation is needed.",
+     "id": "mock-1-rw2e-18"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The author's first ______ a mystery set in a lighthouse, was rejected by six publishers before it became a bestseller.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "novel,",
+      "novel",
+      "novel;",
+      "novel:"
+     ],
+     "answer": "A",
+     "explanation": "\"A mystery set in a lighthouse\" renames \"novel\" and is closed by a comma after \"lighthouse\", so it must open with a comma too.",
+     "id": "mock-1-rw2e-19"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The volcano's last eruption, in ______ covered nearby villages in ash.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "1902",
+      "1902,",
+      "1902;",
+      "1902:"
+     ],
+     "answer": "B",
+     "explanation": "\"In 1902\" is extra information set off by commas; the comma after \"eruption\" opens it, so a comma must close it.",
+     "id": "mock-1-rw2e-20"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Each of the students ______ a short presentation at the end of the term.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "give",
+      "gives",
+      "are giving",
+      "have given"
+     ],
+     "answer": "B",
+     "explanation": "The subject is \"Each\", which is singular, so the verb is \"gives\".",
+     "id": "mock-1-rw2e-21"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "Last summer, my family ______ a week camping in the mountains.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "spends",
+      "spend",
+      "spent",
+      "will spend"
+     ],
+     "answer": "C",
+     "explanation": "\"Last summer\" is in the past, so the past tense \"spent\" is needed.",
+     "id": "mock-1-rw2e-22"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The orchestra tuned ______ instruments before the conductor walked onto the stage.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "they're",
+      "it's",
+      "their's",
+      "its"
+     ],
+     "answer": "D",
+     "explanation": "The instruments belong to \"the orchestra\", treated here as a single group, so the possessive \"its\" is used. \"It's\" means \"it is\".",
+     "id": "mock-1-rw2e-23"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "The museum is closed on Mondays. ______, it stays open late on Thursdays.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "However",
+      "For example",
+      "As a result",
+      "Similarly"
+     ],
+     "answer": "A",
+     "explanation": "Being closed one day and open late another are contrasting facts about the opening hours, so \"However\" fits.",
+     "id": "mock-1-rw2e-24"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Cacti store water in their thick stems. ______, they can survive long periods without rain.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "For instance",
+      "In contrast",
+      "As a result",
+      "Nonetheless"
+     ],
+     "answer": "C",
+     "explanation": "Storing water is the reason cacti survive without rain, so the second sentence is a result.",
+     "id": "mock-1-rw2e-25"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 1,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• The Eiffel Tower is in Paris, France.\n• It was completed in 1889.\n• It is about 330 metres tall.",
+     "question": "The student wants to state when the Eiffel Tower was completed. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "Paris is home to a tall tower.",
+      "The Eiffel Tower is about 330 metres tall.",
+      "The Eiffel Tower is in Paris, France.",
+      "The Eiffel Tower, in Paris, was completed in 1889."
+     ],
+     "answer": "D",
+     "explanation": "Only the sentence giving the year, 1889, states when the tower was completed.",
+     "id": "mock-1-rw2e-26"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• Hummingbirds can hover in place.\n• They beat their wings up to 80 times per second.\n• They feed on flower nectar.\n• The bee hummingbird is the smallest bird in the world.",
+     "question": "The student wants to explain how hummingbirds are able to hover. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "Hummingbirds can hover in place by beating their wings up to 80 times per second.",
+      "The bee hummingbird is the smallest bird in the world.",
+      "Hummingbirds feed on flower nectar.",
+      "There are many kinds of hummingbirds, including the bee hummingbird."
+     ],
+     "answer": "A",
+     "explanation": "Only the sentence linking hovering to very fast wingbeats explains how they do it.",
+     "id": "mock-1-rw2e-27"
+    }
+   ]
+  },
+  "rw2h": {
+   "title": "Reading and Writing: Module 2",
+   "section": "rw",
+   "minutes": 32,
+   "questions": [
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The committee's report was notably ______: rather than recommending a single course of action, it laid out the strengths and weaknesses of each option and left the final decision to the council.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "partisan",
+      "hasty",
+      "dismissive",
+      "even-handed"
+     ],
+     "answer": "D",
+     "explanation": "Setting out strengths and weaknesses of every option without pushing one is balanced, or \"even-handed\". \"Partisan\" means taking a side, the opposite.",
+     "id": "mock-1-rw2h-01"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Critics initially praised the documentary for its candour, but later investigations revealed that several of its most striking scenes had been staged. In retrospect, the film's apparent honesty was largely ______.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "illusory",
+      "inadvertent",
+      "redundant",
+      "unassailable"
+     ],
+     "answer": "A",
+     "explanation": "Staged scenes mean the honesty only seemed real, so it was \"illusory\". \"Unassailable\" means beyond challenge, which the investigations contradict.",
+     "id": "mock-1-rw2h-02"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Rather than abandoning traditional techniques, the ceramicist ______ them, adapting centuries-old glazing methods to work with materials that were unavailable to earlier potters.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "repudiated",
+      "reinvented",
+      "imitated",
+      "neglected"
+     ],
+     "answer": "B",
+     "explanation": "She did not abandon the techniques but adapted them for new materials, so she \"reinvented\" them. \"Repudiated\" and \"neglected\" mean rejecting or ignoring them, and \"imitated\" misses the adaptation.",
+     "id": "mock-1-rw2h-03"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Words in Context",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The senator's speech was so ______ that reporters struggled to identify a single concrete proposal among its many appeals to unity, progress and shared values.",
+     "question": "Which choice completes the text with the most logical and precise word or phrase?",
+     "options": [
+      "incisive",
+      "succinct",
+      "nebulous",
+      "inflammatory"
+     ],
+     "answer": "C",
+     "explanation": "A speech with no concrete proposal, only broad appeals, is vague: \"nebulous\". \"Incisive\" and \"succinct\" suggest sharpness and brevity, the opposite.",
+     "id": "mock-1-rw2h-04"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The following text is from a 1920 poem. The speaker describes an old house.\n\nThe rooms are full of clocks that do not run,\nOf chairs that wait for guests who never come;\nThe windows hold the colour of the sun\nBut let no warmth inside this patient home.",
+     "question": "Which choice best describes the overall structure of the text?",
+     "options": [
+      "It describes the house's history from its building to the present.",
+      "It lists details of the house that together suggest stillness and absence.",
+      "It contrasts the house's cheerful past with its gloomy present.",
+      "It explains why the house's owners left."
+     ],
+     "answer": "B",
+     "explanation": "Stopped clocks, chairs waiting for guests who never come and windows that let in no warmth are a list of details creating a mood of stillness and absence. No history, past or explanation is given.",
+     "id": "mock-1-rw2h-05"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "It is tempting to credit the printing press alone with the spread of literacy in early modern Europe. Yet in several regions, literacy rates rose sharply only decades after printing arrived, once schooling expanded and books became cheap enough for ordinary households. The press, in other words, made widespread literacy possible; it did not by itself make it happen.",
+     "question": "Which choice best states the main purpose of the text?",
+     "options": [
+      "To describe how early printing presses worked",
+      "To show that the printing press slowed the spread of literacy",
+      "To argue that the printing press's role in spreading literacy has been overstated",
+      "To explain why books in early modern Europe were expensive"
+     ],
+     "answer": "C",
+     "explanation": "The text calls crediting the press \"alone\" tempting, then shows literacy rose only when other factors appeared, concluding the press made literacy possible but did not cause it alone. That qualifies the press's role; it never says the press slowed literacy.",
+     "id": "mock-1-rw2h-06"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Text Structure and Purpose",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Biologists once classified fungi as plants because both are rooted in place and grow from the ground. Genetic studies have since shown that fungi are more closely related to animals than to plants. Like animals, fungi cannot make their own food and must absorb nutrients from other organisms, and their cell walls contain chitin, a substance also found in insect shells.",
+     "question": "Which choice best describes the function of the third sentence in the text as a whole?",
+     "options": [
+      "It describes how insects use chitin to build their shells.",
+      "It explains why biologists first classified fungi as plants.",
+      "It challenges the genetic studies mentioned in the second sentence.",
+      "It gives features that fungi share with animals, supporting the finding described in the second sentence."
+     ],
+     "answer": "D",
+     "explanation": "The second sentence says fungi are closer to animals; the third lists shared features (absorbing food, chitin) that back this up. The insect detail is only an example of chitin.",
+     "id": "mock-1-rw2h-07"
+    },
+    {
+     "section": "rw",
+     "domain": "Craft and Structure",
+     "skill": "Cross-Text Connections",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Text 1\nThe decline of honeybee colonies is often blamed on a single cause, such as a particular pesticide. But beekeepers' records suggest that colonies rarely fail for one reason. Parasites, poor nutrition and pesticide exposure each weaken bees, and colonies collapse when several stresses occur together.\n\nText 2\nIn a controlled experiment, researchers exposed colonies to low doses of a common pesticide. Exposed colonies that were also infested with mites suffered heavy losses, while exposed colonies without mites did about as well as unexposed ones.",
+     "question": "Based on the texts, how would the author of Text 1 most likely view the results of the experiment in Text 2?",
+     "options": [
+      "As consistent with the view that colonies collapse when several stresses combine",
+      "As evidence that the pesticide is the single main cause of colony decline",
+      "As proof that mites are harmless to honeybees",
+      "As irrelevant, because experiments cannot show what happens to real colonies"
+     ],
+     "answer": "A",
+     "explanation": "In Text 2, the pesticide hurt colonies only when mites were also present: two stresses together caused losses. That matches Text 1's view that collapse comes from combined stresses, not a single cause.",
+     "id": "mock-1-rw2h-08"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The following text is adapted from Jane Austen's 1813 novel Pride and Prejudice.\n\nMr. Bennet was so odd a mixture of quick parts, sarcastic humour, reserve and caprice, that the experience of three-and-twenty years had been insufficient to make his wife understand his character.",
+     "question": "Which choice best describes Mr. Bennet's character as presented in the text?",
+     "options": [
+      "He is complicated enough that even his wife has not understood him after many years.",
+      "He is honest and straightforward with his family.",
+      "He is unhappy because his wife does not respect him.",
+      "He has only recently married."
+     ],
+     "answer": "A",
+     "explanation": "His \"odd mixture\" of traits means twenty-three years have not been enough for his wife to understand him, so he is complicated and hard to read. \"Three-and-twenty years\" also shows the marriage is long.",
+     "id": "mock-1-rw2h-09"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Central Ideas and Details",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Sociologist Dalia Haddad studied neighbourhood libraries in three cities. She found that libraries offering services beyond lending books, such as job-search help, language classes and spaces for community meetings, had more visitors than libraries that focused on books alone. Haddad argues that libraries are increasingly valued less as storehouses of books than as public spaces where people can gain skills and connect with one another.",
+     "question": "Which choice best states the main idea of the text?",
+     "options": [
+      "Most people no longer read books from libraries.",
+      "Libraries that offer community services attract more visitors, suggesting people value libraries as public spaces.",
+      "Libraries should stop lending books and offer only classes.",
+      "Haddad's study included more cities than earlier studies of libraries."
+     ],
+     "answer": "B",
+     "explanation": "The text presents Haddad's finding (more visitors to libraries with extra services) and her argument (libraries valued as public spaces). It never says people stopped reading or that lending should end.",
+     "id": "mock-1-rw2h-10"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The following text is from a 1919 short story. The narrator describes his grandmother.\n\nShe kept the best garden on the street and baked bread every Saturday, but what people remembered about her was something else. She had a way of listening that made you feel you were the only person in the world who had ever said anything interesting. Visitors who came to call for ten minutes often stayed for two hours, and left looking surprised at the time.",
+     "question": "The narrator claims that the grandmother's way of listening made people feel interesting. Which quotation from the text most effectively illustrates this claim?",
+     "options": [
+      "\"baked bread every Saturday\"",
+      "\"She kept the best garden on the street\"",
+      "\"Visitors who came to call for ten minutes often stayed for two hours, and left looking surprised at the time.\"",
+      "\"what people remembered about her was something else\""
+     ],
+     "answer": "C",
+     "explanation": "Visitors staying two hours instead of ten minutes shows the effect of her listening: people kept talking because she made them feel interesting. The garden and the bread are about other things, and \"something else\" does not say what.",
+     "id": "mock-1-rw2h-11"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Textual",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Linguist Tomás Reyes hypothesises that children learning two languages at once do not become confused between them, as some parents fear, but instead learn early to keep the languages separate, using each with the people who speak it.",
+     "question": "Which finding, if true, would most directly support Reyes's hypothesis?",
+     "options": [
+      "Children raised with one language learn a second language more slowly as teenagers.",
+      "Children raised with two languages sometimes mix words from both in a single sentence.",
+      "Parents who speak two languages often worry about confusing their children.",
+      "Two-year-olds raised with two languages consistently used each language with the parent who spoke it to them."
+     ],
+     "answer": "D",
+     "explanation": "The hypothesis is that young bilingual children keep the languages apart, using each with its speakers. Two-year-olds matching each language to the parent who speaks it is exactly that. Mixing words points the other way.",
+     "id": "mock-1-rw2h-12"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "A researcher compared four kinds of light bulb.\n\n| Bulb | Power (watts) | Light (lumens) | Lifespan (hours) |\n|---|---|---|---|\n| Incandescent | 60 | 800 | 1,000 |\n| Halogen | 43 | 750 | 2,000 |\n| CFL | 13 | 800 | 8,000 |\n| LED | 9 | 800 | 25,000 |\n\nThe researcher concludes that the LED bulb is the best choice for a household that wants bright light while using little electricity.",
+     "question": "Which choice best describes data from the table that support the researcher's conclusion?",
+     "options": [
+      "The LED bulb lasts 25,000 hours, the longest of the four.",
+      "The LED bulb gives as much light as the incandescent bulb while using the least power of the four.",
+      "The halogen bulb uses less power than the incandescent bulb.",
+      "The CFL bulb gives 800 lumens of light."
+     ],
+     "answer": "B",
+     "explanation": "The conclusion is about bright light and little electricity. The LED gives 800 lumens (as bright as the brightest) using only 9 watts (the least). Lifespan, though impressive, is not part of the conclusion.",
+     "id": "mock-1-rw2h-13"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Command of Evidence: Quantitative",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Economists tracked average weekly hours worked and average output per hour in one industry.\n\n| Year | Weekly hours | Output per hour (units) |\n|---|---|---|\n| 2000 | 44 | 20 |\n| 2005 | 42 | 23 |\n| 2010 | 40 | 26 |\n| 2015 | 38 | 30 |\n\nSome managers in the industry worried that shorter working weeks would lead to less total output per worker. The data, however, suggest that this concern may be unfounded, since ______",
+     "question": "Which choice most effectively uses data from the table to complete the statement?",
+     "options": [
+      "output per hour was highest in 2015.",
+      "weekly hours fell from 44 in 2000 to 38 in 2015.",
+      "output per hour rose enough that weekly output per worker increased from 880 units in 2000 to 1,140 units in 2015.",
+      "weekly hours fell by the same amount every five years."
+     ],
+     "answer": "C",
+     "explanation": "The worry is about total output per worker. Weekly output is hours times output per hour: 44 × 20 = 880 in 2000 and 38 × 30 = 1,140 in 2015, so total output rose despite shorter weeks. Hours falling alone would support the worry, not answer it.",
+     "id": "mock-1-rw2h-14"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "When the ancient city of Pompeii was buried by volcanic ash in 79 CE, many everyday objects were preserved, including graffiti scratched into walls. Much of this graffiti consists of jokes, election slogans and messages between friends, written in an informal Latin that differs in spelling and grammar from the polished Latin of surviving literary works. Because most of the Latin that survives from the period was written by educated authors, the Pompeii graffiti is especially valuable to historians because it ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "contains the oldest surviving examples of Latin poetry.",
+      "shows that most people in Pompeii could not read.",
+      "proves that literary Latin was never spoken.",
+      "offers evidence of how ordinary people in the city actually wrote."
+     ],
+     "answer": "D",
+     "explanation": "Surviving Latin mostly comes from educated authors, while the graffiti is everyday, informal writing. So its value lies in showing how ordinary people wrote. It does not show who could read or prove anything about speech.",
+     "id": "mock-1-rw2h-15"
+    },
+    {
+     "section": "rw",
+     "domain": "Information and Ideas",
+     "skill": "Inferences",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Some trees in dry regions shed their leaves during the hottest months rather than in winter. Leaves lose water through tiny pores as they take in carbon dioxide for photosynthesis. Without leaves, a tree loses much less water, but it also cannot photosynthesise. Researchers studying these trees should therefore expect that during the hottest months, the trees ______",
+     "question": "Which choice most logically completes the text?",
+     "options": [
+      "grow little, if at all, while conserving water.",
+      "photosynthesise more than at any other time of year.",
+      "lose more water than trees that keep their leaves.",
+      "take in more carbon dioxide than in winter."
+     ],
+     "answer": "A",
+     "explanation": "In the hottest months the trees are leafless, so they lose little water but cannot photosynthesise. With no photosynthesis there is little energy to grow. The other options contradict the text.",
+     "id": "mock-1-rw2h-16"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "The documentary covers three ______ the building of the canal, the epidemic that halted its construction, and the engineer who finally completed it.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "topics",
+      "topics;",
+      "topics:",
+      "topics, which are"
+     ],
+     "answer": "C",
+     "explanation": "A complete sentence (\"The documentary covers three topics\") introduces a list, so a colon is right. A semicolon would need a complete sentence after it.",
+     "id": "mock-1-rw2h-17"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The novelist rarely gave ______ when she did, she spoke at length about the farmers and miners whose stories had shaped her books.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "interviews but",
+      "interviews but,",
+      "interviews, but,",
+      "interviews, but"
+     ],
+     "answer": "D",
+     "explanation": "Two complete sentences joined by \"but\" need a comma before \"but\" and nothing after it, since \"when she did\" belongs to the second clause.",
+     "id": "mock-1-rw2h-18"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The researchers at the ______ led by astrophysicist Kenji Watanabe, detected the faint signal after months of observations.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "observatory,",
+      "observatory",
+      "observatory;",
+      "observatory:"
+     ],
+     "answer": "A",
+     "explanation": "The phrase \"led by astrophysicist Kenji Watanabe\" is extra information about the researchers, and it is closed by the comma after \"Watanabe\". So it must open with a comma too. A semicolon or colon would cut the subject off from its verb, \"detected\".",
+     "id": "mock-1-rw2h-19"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Boundaries",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Many of the artist's early paintings were lost in a ______ the few that survived now hang in museums on three continents.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "fire, however,",
+      "fire; however,",
+      "fire however",
+      "fire; however"
+     ],
+     "answer": "B",
+     "explanation": "\"However\" begins a new complete sentence here, so it needs a semicolon before it (between the two sentences) and a comma after it.",
+     "id": "mock-1-rw2h-20"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Neither the coach nor the players ______ expected the team to reach the final.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "has",
+      "had",
+      "was",
+      "is"
+     ],
+     "answer": "B",
+     "explanation": "With \"neither... nor\", the verb agrees with the nearer subject, \"players\", which is plural. \"Had expected\" works for a plural subject; \"has\" and \"was\" are singular, and \"is expected\" changes the meaning.",
+     "id": "mock-1-rw2h-21"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The collection of letters, which includes correspondence from three generations of the family, ______ donated to the archive last spring.",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "have been",
+      "were",
+      "was",
+      "are"
+     ],
+     "answer": "C",
+     "explanation": "The subject is \"collection\", which is singular; \"of letters\" and the \"which\" clause only describe it. So the singular \"was\" is needed.",
+     "id": "mock-1-rw2h-22"
+    },
+    {
+     "section": "rw",
+     "domain": "Standard English Conventions",
+     "skill": "Form, Structure, and Sense",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "Unlike the city's older bridges, whose stone arches required decades to build, ______",
+     "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+     "options": [
+      "it took less than two years to assemble the new bridge from prefabricated steel sections.",
+      "engineers assembled the new bridge from prefabricated steel sections in under two years.",
+      "prefabricated steel sections allowed the new bridge to be assembled in under two years.",
+      "the new bridge was assembled from prefabricated steel sections in under two years."
+     ],
+     "answer": "D",
+     "explanation": "\"Unlike the city's older bridges\" compares bridges, so a bridge must follow the comma. Only \"the new bridge was assembled...\" makes the comparison bridge to bridge.",
+     "id": "mock-1-rw2h-23"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 2,
+     "type": "mcq",
+     "passage": "Early weather forecasts relied mainly on observations from a few weather stations. ______, forecasters can draw on data from satellites, radar and thousands of automated sensors.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "Today",
+      "Similarly",
+      "As a result",
+      "In conclusion"
+     ],
+     "answer": "A",
+     "explanation": "The text contrasts early forecasting with how it works now, so a time transition, \"Today\", fits. Nothing in the second sentence results from the first.",
+     "id": "mock-1-rw2h-24"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Transitions",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "The playwright's early comedies were commercial successes, filling theatres for months. Critics, ______, dismissed them as light entertainment, and it was not until her later, darker plays that she won serious critical attention.",
+     "question": "Which choice completes the text with the most logical transition?",
+     "options": [
+      "however",
+      "therefore",
+      "for example",
+      "likewise"
+     ],
+     "answer": "A",
+     "explanation": "Critics dismissing the plays contrasts with their commercial success, so \"however\" fits. \"Therefore\" would wrongly make the dismissal a result of the success.",
+     "id": "mock-1-rw2h-25"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• The Svalbard Global Seed Vault is in Norway, inside a mountain on an Arctic island.\n• It stores more than one million seed samples from almost every country.\n• Its purpose is to protect crop diversity against disasters, wars and climate change.\n• In 2015, researchers in Syria withdrew seeds to replace a seed bank damaged by war.",
+     "question": "The student wants to give an example showing that the vault has fulfilled its purpose. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "The Svalbard Global Seed Vault stores more than one million seed samples from almost every country.",
+      "In 2015, Syrian researchers withdrew seeds from the Svalbard vault to replace a seed bank damaged by war, just as the vault was designed to allow.",
+      "The Svalbard Global Seed Vault is inside a mountain on an Arctic island in Norway.",
+      "The vault's purpose is to protect crop diversity against disasters, wars and climate change."
+     ],
+     "answer": "B",
+     "explanation": "The goal is an example of the vault doing its job. Only the Syrian withdrawal after a war-damaged seed bank shows that happening; the others describe the vault or its purpose without an example.",
+     "id": "mock-1-rw2h-26"
+    },
+    {
+     "section": "rw",
+     "domain": "Expression of Ideas",
+     "skill": "Rhetorical Synthesis",
+     "difficulty": 3,
+     "type": "mcq",
+     "passage": "While researching a topic, a student has taken the following notes:\n• Rosalind Franklin was a British chemist.\n• In 1952, she produced Photo 51, an X-ray image of DNA.\n• The image was key evidence for DNA's double-helix structure.\n• James Watson and Francis Crick published the double-helix model in 1953 after seeing her image, without her knowledge.",
+     "question": "The student wants to emphasise Franklin's contribution to the discovery of DNA's structure. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+     "options": [
+      "Rosalind Franklin was a British chemist who worked with X-rays.",
+      "Watson and Crick published the double-helix model of DNA in 1953.",
+      "Franklin's 1952 X-ray image, Photo 51, provided key evidence for the double-helix structure that Watson and Crick published in 1953.",
+      "DNA has a double-helix structure, as shown by research in the 1950s."
+     ],
+     "answer": "C",
+     "explanation": "Only the sentence centred on Franklin's image as \"key evidence\" for the model highlights her contribution. The others leave her out or do not link her to the discovery.",
+     "id": "mock-1-rw2h-27"
+    }
+   ]
+  },
+  "m1": {
+   "title": "Math: Module 1",
+   "section": "math",
+   "minutes": 35,
+   "questions": [
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in one variable",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "If $4x + 9 = 33$, what is the value of $x$?",
+     "options": [
+      "$3$",
+      "$4$",
+      "$5$",
+      "$6$"
+     ],
+     "answer": "D",
+     "explanation": "Subtract $9$: $4x = 24$, so $x = 6$.",
+     "id": "mock-1-m1-01"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear functions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The function $f$ is defined by $f(x) = 3x - 5$. What is the value of $f(4)$?",
+     "options": [
+      "$-2$",
+      "$7$",
+      "$12$",
+      "$17$"
+     ],
+     "answer": "B",
+     "explanation": "$f(4) = 3(4) - 5 = 12 - 5 = 7$.",
+     "id": "mock-1-m1-02"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Percentages",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is $30\\%$ of $250$?",
+     "options": [
+      "$75$",
+      "$83$",
+      "$175$",
+      "$220$"
+     ],
+     "answer": "A",
+     "explanation": "$0.30 \\times 250 = 75$.",
+     "id": "mock-1-m1-03"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in two variables",
+     "difficulty": 1,
+     "type": "spr",
+     "question": "The line $y = 2x + b$ passes through the point $(3, 11)$. What is the value of $b$?",
+     "answer": [
+      "5"
+     ],
+     "explanation": "Substitute: $11 = 2(3) + b = 6 + b$, so $b = 5$.",
+     "id": "mock-1-m1-04"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Lines, angles and triangles",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Two angles of a triangle measure $48^\\circ$ and $67^\\circ$. What is the measure of the third angle?",
+     "options": [
+      "$65^\\circ$",
+      "$75^\\circ$",
+      "$115^\\circ$",
+      "$133^\\circ$"
+     ],
+     "answer": "A",
+     "explanation": "The angles of a triangle add to $180^\\circ$: $180 - 48 - 67 = 65$.",
+     "id": "mock-1-m1-05"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which expression is equivalent to $x^2 - 49$?",
+     "options": [
+      "$(x - 7)^2$",
+      "$(x + 7)^2$",
+      "$(x - 7)(x + 7)$",
+      "$(x - 49)(x + 1)$"
+     ],
+     "answer": "C",
+     "explanation": "$x^2 - 49$ is a difference of two squares: $x^2 - 7^2 = (x - 7)(x + 7)$.",
+     "id": "mock-1-m1-06"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Ratios, rates and units",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A car travels $210$ miles on $7$ gallons of fuel. At this rate, how many gallons are needed to travel $330$ miles?",
+     "options": [
+      "$9$",
+      "$10$",
+      "$11$",
+      "$12$"
+     ],
+     "answer": "C",
+     "explanation": "The car does $210 \\div 7 = 30$ miles per gallon, so $330$ miles needs $330 \\div 30 = 11$ gallons.",
+     "id": "mock-1-m1-07"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Systems of linear equations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "$3x + 2y = 16$\n$x + 2y = 8$\n\nWhat is the value of $x$ in the solution to the system of equations above?",
+     "options": [
+      "$2$",
+      "$3$",
+      "$4$",
+      "$5$"
+     ],
+     "answer": "C",
+     "explanation": "Subtract the second equation from the first: $2x = 8$, so $x = 4$.",
+     "id": "mock-1-m1-08"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear equations and systems",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "What is the positive solution to $x^2 = 5x + 24$?",
+     "answer": [
+      "8"
+     ],
+     "explanation": "Rearrange: $x^2 - 5x - 24 = 0$, which factors as $(x - 8)(x + 3) = 0$. The positive solution is $x = 8$.",
+     "id": "mock-1-m1-09"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which value of $x$ satisfies the inequality $5 - 2x > 11$?",
+     "options": [
+      "$-4$",
+      "$-3$",
+      "$0$",
+      "$3$"
+     ],
+     "answer": "A",
+     "explanation": "$5 - 2x > 11$ gives $-2x > 6$, so $x < -3$ (dividing by a negative flips the sign). Only $-4$ is less than $-3$.",
+     "id": "mock-1-m1-10"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "One-variable data",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The mean of five numbers is $12$. Four of the numbers are $8$, $10$, $14$ and $15$. What is the fifth number?",
+     "options": [
+      "$11$",
+      "$12$",
+      "$13$",
+      "$14$"
+     ],
+     "answer": "C",
+     "explanation": "The five numbers total $5 \\times 12 = 60$. The four given add to $47$, so the fifth is $60 - 47 = 13$.",
+     "id": "mock-1-m1-11"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The function $g$ is defined by $g(x) = x^2 - 6x + 10$. What is the minimum value of $g(x)$?",
+     "options": [
+      "$1$",
+      "$3$",
+      "$6$",
+      "$10$"
+     ],
+     "answer": "A",
+     "explanation": "Complete the square: $g(x) = (x - 3)^2 + 1$. The square is never negative, so the minimum is $1$, at $x = 3$.",
+     "id": "mock-1-m1-12"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Area and volume",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "A rectangular box has length $6$ cm, width $4$ cm and volume $96$ cubic centimetres. What is its height, in centimetres?",
+     "answer": [
+      "4"
+     ],
+     "explanation": "Volume $= \\ell w h$, so $96 = 6 \\times 4 \\times h = 24h$, giving $h = 4$.",
+     "id": "mock-1-m1-13"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A plumber charges a call-out fee plus an hourly rate. A $2$-hour job costs $\\$130$ and a $5$-hour job costs $\\$265$. What is the call-out fee?",
+     "options": [
+      "$\\$25$",
+      "$\\$40$",
+      "$\\$45$",
+      "$\\$65$"
+     ],
+     "answer": "B",
+     "explanation": "The extra $3$ hours cost $265 - 130 = 135$ dollars, so the rate is $\\$45$ an hour. Then $130 = 40 + 2(45)$, so the fee is $\\$40$.",
+     "id": "mock-1-m1-14"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Probability",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A bag contains $4$ red, $6$ blue and $10$ green marbles. If one marble is chosen at random, what is the probability that it is not green?",
+     "options": [
+      "$\\dfrac{1}{5}$",
+      "$\\dfrac{3}{10}$",
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{3}{5}$"
+     ],
+     "answer": "C",
+     "explanation": "$10$ of the $20$ marbles are not green, so the probability is $\\frac{10}{20} = \\frac{1}{2}$.",
+     "id": "mock-1-m1-15"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "If $\\dfrac{x^2 + 5x + 6}{x + 2} = ax + b$ for all $x \\ne -2$, where $a$ and $b$ are constants, what is the value of $a + b$?",
+     "options": [
+      "$3$",
+      "$4$",
+      "$5$",
+      "$6$"
+     ],
+     "answer": "B",
+     "explanation": "$x^2 + 5x + 6 = (x + 2)(x + 3)$, so the expression equals $x + 3$. Then $a = 1$, $b = 3$ and $a + b = 4$.",
+     "id": "mock-1-m1-16"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Percentages",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "The price of a phone rose by $20\\%$ and was later reduced by $25\\%$. The final price was $\\$450$. What was the original price, in dollars?",
+     "answer": [
+      "500"
+     ],
+     "explanation": "Final $=$ original $\\times 1.2 \\times 0.75 =$ original $\\times 0.9$. So the original was $450 \\div 0.9 = 500$ dollars.",
+     "id": "mock-1-m1-17"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Right triangles and trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In right triangle $ABC$, angle $C$ is the right angle, $AC = 8$ and $BC = 15$. What is $\\sin A$?",
+     "options": [
+      "$\\dfrac{8}{17}$",
+      "$\\dfrac{8}{15}$",
+      "$\\dfrac{15}{17}$",
+      "$\\dfrac{17}{15}$"
+     ],
+     "answer": "C",
+     "explanation": "The hypotenuse is $AB = \\sqrt{8^2 + 15^2} = 17$. The side opposite angle $A$ is $BC = 15$, so $\\sin A = \\frac{15}{17}$.",
+     "id": "mock-1-m1-18"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Systems of linear equations",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$y = 3x - 2$\n$6x - 2y = k$\n\nFor what value of $k$ does the system of equations above have infinitely many solutions?",
+     "options": [
+      "$-4$",
+      "$-2$",
+      "$2$",
+      "$4$"
+     ],
+     "answer": "D",
+     "explanation": "Substitute $y = 3x - 2$: $6x - 2(3x - 2) = 4$, so the second equation is the same line when $k = 4$.",
+     "id": "mock-1-m1-19"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A population of bacteria doubles every $3$ hours. There are $500$ bacteria now. Which function gives the number of bacteria $t$ hours from now?",
+     "options": [
+      "$P(t) = 500(2)^{3t}$",
+      "$P(t) = 500(3)^{t/2}$",
+      "$P(t) = 500 + 2t$",
+      "$P(t) = 500(2)^{t/3}$"
+     ],
+     "answer": "D",
+     "explanation": "Doubling every $3$ hours means the exponent counts $3$-hour periods: $t/3$. So $P(t) = 500(2)^{t/3}$.",
+     "id": "mock-1-m1-20"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Circles",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "A circle has equation $(x - 4)^2 + (y + 1)^2 = 36$. What is the circumference of the circle? (Use $\\pi \\approx 3.14$ and round to the nearest whole number.)",
+     "answer": [
+      "38"
+     ],
+     "explanation": "The radius is $\\sqrt{36} = 6$, so the circumference is $2\\pi(6) = 12\\pi \\approx 37.68$, which rounds to $38$.",
+     "id": "mock-1-m1-21"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Two-variable data and models",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A line of best fit for a scatterplot of weekly study hours $h$ and test score $s$ is $s = 4.5h + 52$. Which statement is the best interpretation of the number $4.5$?",
+     "options": [
+      "The predicted test score for a student who studies 0 hours a week",
+      "The predicted increase in test score for each additional weekly study hour",
+      "The number of hours a student must study to score 52",
+      "The highest test score in the data"
+     ],
+     "answer": "B",
+     "explanation": "$4.5$ is the slope: the change in predicted score for each one-unit increase in $h$, i.e. each extra weekly hour. $52$ is the predicted score at $0$ hours.",
+     "id": "mock-1-m1-22"
+    }
+   ]
+  },
+  "m2e": {
+   "title": "Math: Module 2",
+   "section": "math",
+   "minutes": 35,
+   "questions": [
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in one variable",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "If $x - 12 = 7$, what is the value of $x$?",
+     "options": [
+      "$-19$",
+      "$-5$",
+      "$5$",
+      "$19$"
+     ],
+     "answer": "D",
+     "explanation": "Add $12$ to both sides: $x = 19$.",
+     "id": "mock-1-m2e-01"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Ratios, rates and units",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A recipe uses $3$ cups of flour for every $2$ cups of milk. How many cups of flour are needed for $8$ cups of milk?",
+     "options": [
+      "$6$",
+      "$10$",
+      "$12$",
+      "$16$"
+     ],
+     "answer": "C",
+     "explanation": "$8$ cups of milk is $4$ times $2$, so use $4 \\times 3 = 12$ cups of flour.",
+     "id": "mock-1-m2e-02"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear functions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which equation represents a line with slope $4$ that passes through $(0, -3)$?",
+     "options": [
+      "$y = -3x + 4$",
+      "$y = 3x - 4$",
+      "$y = 4x + 3$",
+      "$y = 4x - 3$"
+     ],
+     "answer": "D",
+     "explanation": "In $y = mx + b$, $m$ is the slope and $b$ the $y$-intercept: $m = 4$, $b = -3$.",
+     "id": "mock-1-m2e-03"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in one variable",
+     "difficulty": 1,
+     "type": "spr",
+     "question": "If $2(x + 3) = 20$, what is the value of $x$?",
+     "answer": [
+      "7"
+     ],
+     "explanation": "Divide by $2$: $x + 3 = 10$, so $x = 7$.",
+     "id": "mock-1-m2e-04"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Area and volume",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the area of a rectangle with length $9$ and width $4$?",
+     "options": [
+      "$13$",
+      "$26$",
+      "$36$",
+      "$45$"
+     ],
+     "answer": "C",
+     "explanation": "Area $= 9 \\times 4 = 36$.",
+     "id": "mock-1-m2e-05"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Percentages",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A class has $25$ students, and $40\\%$ of them walk to school. How many students walk to school?",
+     "options": [
+      "$8$",
+      "$10$",
+      "$12$",
+      "$15$"
+     ],
+     "answer": "B",
+     "explanation": "$0.4 \\times 25 = 10$.",
+     "id": "mock-1-m2e-06"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which expression is equivalent to $3(x + 4) - x$?",
+     "options": [
+      "$2x + 4$",
+      "$2x + 12$",
+      "$3x + 12$",
+      "$4x + 12$"
+     ],
+     "answer": "B",
+     "explanation": "$3x + 12 - x = 2x + 12$.",
+     "id": "mock-1-m2e-07"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "One-variable data",
+     "difficulty": 1,
+     "type": "spr",
+     "question": "What is the median of the data set $4, 9, 2, 7, 5$?",
+     "answer": [
+      "5"
+     ],
+     "explanation": "In order: $2, 4, 5, 7, 9$. The middle value is $5$.",
+     "id": "mock-1-m2e-08"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Systems of linear equations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "$x + y = 10$\n$x - y = 4$\n\nWhat is the value of $y$?",
+     "options": [
+      "$3$",
+      "$4$",
+      "$6$",
+      "$7$"
+     ],
+     "answer": "A",
+     "explanation": "Add the equations: $2x = 14$, so $x = 7$ and $y = 10 - 7 = 3$.",
+     "id": "mock-1-m2e-09"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "If $h(x) = x^2 + 1$, what is the value of $h(-3)$?",
+     "options": [
+      "$-8$",
+      "$-5$",
+      "$7$",
+      "$10$"
+     ],
+     "answer": "D",
+     "explanation": "$(-3)^2 + 1 = 9 + 1 = 10$.",
+     "id": "mock-1-m2e-10"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A student has $\\$40$ to spend on notebooks that cost $\\$3$ each. Which inequality gives the possible numbers $n$ of notebooks the student can buy?",
+     "options": [
+      "$3n \\le 40$",
+      "$3n \\ge 40$",
+      "$n + 3 \\le 40$",
+      "$40n \\le 3$"
+     ],
+     "answer": "A",
+     "explanation": "$n$ notebooks cost $3n$ dollars, which must be at most $40$: $3n \\le 40$.",
+     "id": "mock-1-m2e-11"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Lines, angles and triangles",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Two lines intersect, forming an angle of $112^\\circ$. What is the measure of each of the two angles next to it?",
+     "options": [
+      "$58^\\circ$",
+      "$68^\\circ$",
+      "$78^\\circ$",
+      "$112^\\circ$"
+     ],
+     "answer": "B",
+     "explanation": "Angles next to each other on a straight line add to $180^\\circ$: $180 - 112 = 68$.",
+     "id": "mock-1-m2e-12"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in two variables",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "What is the slope of the line that passes through $(1, 2)$ and $(5, 14)$?",
+     "answer": [
+      "3"
+     ],
+     "explanation": "Slope $= \\frac{14 - 2}{5 - 1} = \\frac{12}{4} = 3$.",
+     "id": "mock-1-m2e-13"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Probability",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A fair six-sided number cube is rolled once. What is the probability of rolling a number less than $3$?",
+     "options": [
+      "$\\dfrac{1}{6}$",
+      "$\\dfrac{1}{3}$",
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{2}{3}$"
+     ],
+     "answer": "B",
+     "explanation": "Only $1$ and $2$ are less than $3$: $\\frac{2}{6} = \\frac{1}{3}$.",
+     "id": "mock-1-m2e-14"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear equations and systems",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What are the solutions to $x^2 - 9x + 20 = 0$?",
+     "options": [
+      "$x = -5$ and $x = -4$",
+      "$x = -5$ and $x = 4$",
+      "$x = 4$ and $x = 5$",
+      "$x = 2$ and $x = 10$"
+     ],
+     "answer": "C",
+     "explanation": "Factor: $(x - 4)(x - 5) = 0$, so $x = 4$ or $x = 5$.",
+     "id": "mock-1-m2e-15"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Ratios, rates and units",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A runner completes $5$ kilometres in $25$ minutes. At the same pace, how long does $8$ kilometres take?",
+     "options": [
+      "$32$ minutes",
+      "$36$ minutes",
+      "$40$ minutes",
+      "$45$ minutes"
+     ],
+     "answer": "C",
+     "explanation": "The pace is $5$ minutes per kilometre, so $8$ km takes $40$ minutes.",
+     "id": "mock-1-m2e-16"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Right triangles and trigonometry",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "A ladder $13$ feet long leans against a wall. The foot of the ladder is $5$ feet from the wall. How high up the wall does the ladder reach, in feet?",
+     "answer": [
+      "12"
+     ],
+     "explanation": "By Pythagoras, height $= \\sqrt{13^2 - 5^2} = \\sqrt{144} = 12$.",
+     "id": "mock-1-m2e-17"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which expression is equivalent to $(x + 5)^2$?",
+     "options": [
+      "$x^2 + 25$",
+      "$x^2 + 5x + 25$",
+      "$x^2 + 10x + 25$",
+      "$2x + 10$"
+     ],
+     "answer": "C",
+     "explanation": "$(x + 5)(x + 5) = x^2 + 5x + 5x + 25 = x^2 + 10x + 25$.",
+     "id": "mock-1-m2e-18"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Sample statistics and margin of error",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A random sample of $200$ voters in a town found that $58\\%$ support a new park. Which conclusion is best supported?",
+     "options": [
+      "Exactly 58% of all the town's voters support the park.",
+      "About 58% of the town's voters probably support the park.",
+      "Most voters in every town support new parks.",
+      "Exactly 116 voters in the town support the park."
+     ],
+     "answer": "B",
+     "explanation": "A random sample gives an estimate for the whole town, not an exact figure, and says nothing about other towns.",
+     "id": "mock-1-m2e-19"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A tank holds $500$ litres of water and drains at $20$ litres per minute. Which function gives the water $W$, in litres, left after $t$ minutes?",
+     "options": [
+      "$W = 500 - 20t$",
+      "$W = 500 + 20t$",
+      "$W = 20 - 500t$",
+      "$W = 500t - 20$"
+     ],
+     "answer": "A",
+     "explanation": "It starts at $500$ and loses $20$ each minute: $W = 500 - 20t$.",
+     "id": "mock-1-m2e-20"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Percentages",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "A shirt costs $\\$24$ after a $20\\%$ discount. What was the price before the discount, in dollars?",
+     "answer": [
+      "30"
+     ],
+     "explanation": "The sale price is $80\\%$ of the original: $0.8p = 24$, so $p = 30$.",
+     "id": "mock-1-m2e-21"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Circles",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A circle has a diameter of $10$. What is its area?",
+     "options": [
+      "$10\\pi$",
+      "$20\\pi$",
+      "$25\\pi$",
+      "$100\\pi$"
+     ],
+     "answer": "C",
+     "explanation": "The radius is $5$, so the area is $\\pi(5)^2 = 25\\pi$.",
+     "id": "mock-1-m2e-22"
+    }
+   ]
+  },
+  "m2h": {
+   "title": "Math: Module 2",
+   "section": "math",
+   "minutes": 35,
+   "questions": [
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in one variable",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "If $\\dfrac{3x - 4}{5} = \\dfrac{x + 2}{3}$, what is the value of $x$?",
+     "options": [
+      "$\\dfrac{11}{2}$",
+      "$\\dfrac{13}{2}$",
+      "$7$",
+      "$11$"
+     ],
+     "answer": "A",
+     "explanation": "Cross-multiply: $3(3x - 4) = 5(x + 2)$, so $9x - 12 = 5x + 10$, $4x = 22$ and $x = \\frac{11}{2}$.",
+     "id": "mock-1-m2h-01"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The function $f$ is defined by $f(x) = (x - 2)(x + 6)$. What is the $x$-coordinate of the vertex of the graph of $y = f(x)$?",
+     "options": [
+      "$-4$",
+      "$-2$",
+      "$2$",
+      "$4$"
+     ],
+     "answer": "B",
+     "explanation": "The vertex lies midway between the zeros $x = 2$ and $x = -6$: $\\frac{2 + (-6)}{2} = -2$.",
+     "id": "mock-1-m2h-02"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Systems of linear equations",
+     "difficulty": 2,
+     "type": "spr",
+     "question": "$2x - 3y = -1$\n$4x + y = 19$\n\nIf $(x, y)$ is the solution to the system of equations above, what is the value of $x + y$?",
+     "answer": [
+      "7"
+     ],
+     "explanation": "From the second equation, $y = 19 - 4x$. Substitute: $2x - 3(19 - 4x) = -1$, so $14x = 56$, $x = 4$ and $y = 3$. Then $x + y = 7$.",
+     "id": "mock-1-m2h-03"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Percentages",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A town's population grew from $40{,}000$ to $46{,}000$. By what percentage did the population increase?",
+     "options": [
+      "$6\\%$",
+      "$13\\%$",
+      "$15\\%$",
+      "$87\\%$"
+     ],
+     "answer": "C",
+     "explanation": "The increase is $6{,}000$, and $\\frac{6{,}000}{40{,}000} = 0.15 = 15\\%$.",
+     "id": "mock-1-m2h-04"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which expression is equivalent to $\\dfrac{1}{x - 3} - \\dfrac{1}{x + 3}$ for $x \\ne \\pm 3$?",
+     "options": [
+      "$\\dfrac{6}{x^2 - 9}$",
+      "$\\dfrac{-6}{x^2 - 9}$",
+      "$\\dfrac{2x}{x^2 - 9}$",
+      "$\\dfrac{6}{x^2 + 9}$"
+     ],
+     "answer": "A",
+     "explanation": "Common denominator $(x - 3)(x + 3) = x^2 - 9$: $\\frac{(x + 3) - (x - 3)}{x^2 - 9} = \\frac{6}{x^2 - 9}$.",
+     "id": "mock-1-m2h-05"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Right triangles and trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a right triangle, one acute angle measures $x^\\circ$ and $\\cos x^\\circ = \\dfrac{12}{13}$. What is $\\sin\\left(90^\\circ - x^\\circ\\right)$?",
+     "options": [
+      "$\\dfrac{5}{13}$",
+      "$\\dfrac{12}{13}$",
+      "$\\dfrac{13}{12}$",
+      "$\\dfrac{5}{12}$"
+     ],
+     "answer": "B",
+     "explanation": "For complementary angles, $\\sin(90^\\circ - x^\\circ) = \\cos x^\\circ = \\frac{12}{13}$.",
+     "id": "mock-1-m2h-06"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear equations and systems",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "$y = x^2 - 4x + 7$\n$y = 2x - 2$\n\nThe system of equations above has exactly one solution $(x, y)$. What is the value of $y$?",
+     "answer": [
+      "4"
+     ],
+     "explanation": "Set them equal: $x^2 - 4x + 7 = 2x - 2$, so $x^2 - 6x + 9 = 0$, $(x - 3)^2 = 0$ and $x = 3$. Then $y = 2(3) - 2 = 4$.",
+     "id": "mock-1-m2h-07"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "One-variable data",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Data set A is $10, 12, 14, 16, 18$. Data set B is formed by adding $5$ to every value in A. Which statement is true?",
+     "options": [
+      "Both the mean and the standard deviation increase by 5.",
+      "The mean is unchanged and the standard deviation increases by 5.",
+      "Neither the mean nor the standard deviation changes.",
+      "The mean increases by 5 and the standard deviation is unchanged."
+     ],
+     "answer": "D",
+     "explanation": "Adding the same number to every value shifts the centre by $5$ but does not change how spread out the values are.",
+     "id": "mock-1-m2h-08"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The graph of the linear function $f$ passes through $(2, 7)$ and $(6, -1)$. What is the $x$-intercept of the graph?",
+     "options": [
+      "$\\left(\\dfrac{11}{2}, 0\\right)$",
+      "$\\left(\\dfrac{9}{2}, 0\\right)$",
+      "$\\left(\\dfrac{7}{2}, 0\\right)$",
+      "$(11, 0)$"
+     ],
+     "answer": "A",
+     "explanation": "Slope $= \\frac{-1 - 7}{6 - 2} = -2$, so $f(x) = -2x + 11$. Setting $f(x) = 0$ gives $x = \\frac{11}{2}$.",
+     "id": "mock-1-m2h-09"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A ball is thrown upward. Its height, in metres, after $t$ seconds is $h(t) = -5t^2 + 20t + 1$. What is the maximum height of the ball?",
+     "options": [
+      "$15$ metres",
+      "$20$ metres",
+      "$21$ metres",
+      "$25$ metres"
+     ],
+     "answer": "C",
+     "explanation": "The maximum is at $t = \\frac{-20}{2(-5)} = 2$: $h(2) = -20 + 40 + 1 = 21$ metres.",
+     "id": "mock-1-m2h-10"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Ratios, rates and units",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "A map uses a scale of $1$ centimetre to $2.5$ kilometres. Two towns are $14$ centimetres apart on the map. A cyclist rides between them at $15$ kilometres per hour. How many minutes does the trip take?",
+     "answer": [
+      "140"
+     ],
+     "explanation": "Distance $= 14 \\times 2.5 = 35$ km. Time $= \\frac{35}{15}$ hours $= \\frac{7}{3}$ hours $= 140$ minutes.",
+     "id": "mock-1-m2h-11"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Circles",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A circle has centre $O$ and radius $9$. Points $A$ and $B$ lie on the circle, and central angle $AOB$ measures $80^\\circ$. What is the length of minor arc $AB$?",
+     "options": [
+      "$2\\pi$",
+      "$4\\pi$",
+      "$8\\pi$",
+      "$18\\pi$"
+     ],
+     "answer": "B",
+     "explanation": "Arc length $= \\frac{80}{360} \\times 2\\pi(9) = \\frac{2}{9} \\times 18\\pi = 4\\pi$.",
+     "id": "mock-1-m2h-12"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Probability",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A cinema recorded the snacks bought by $300$ customers.\n\n| | Popcorn | No popcorn | Total |\n|---|---|---|---|\n| Drink | 120 | 45 | 165 |\n| No drink | 60 | 75 | 135 |\n| Total | 180 | 120 | 300 |\n\nA customer who bought popcorn is chosen at random. What is the probability that this customer also bought a drink?",
+     "options": [
+      "$\\dfrac{2}{5}$",
+      "$\\dfrac{8}{11}$",
+      "$\\dfrac{2}{3}$",
+      "$\\dfrac{11}{20}$"
+     ],
+     "answer": "C",
+     "explanation": "Only the $180$ popcorn buyers count; $120$ of them bought a drink: $\\frac{120}{180} = \\frac{2}{3}$.",
+     "id": "mock-1-m2h-13"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Equivalent expressions",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "If $2^{x + 3} = 4^{x - 1}$, what is the value of $x$?",
+     "answer": [
+      "5"
+     ],
+     "explanation": "Write $4^{x - 1} = 2^{2x - 2}$. Then $x + 3 = 2x - 2$, so $x = 5$.",
+     "id": "mock-1-m2h-14"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A delivery van can carry at most $1{,}200$ kilograms. Boxes of type P weigh $40$ kg and boxes of type Q weigh $25$ kg. If the van carries $18$ boxes of type P, what is the greatest number of type Q boxes it can also carry?",
+     "options": [
+      "$18$",
+      "$19$",
+      "$20$",
+      "$21$"
+     ],
+     "answer": "B",
+     "explanation": "$18 \\times 40 = 720$ kg, leaving $480$ kg. $25q \\le 480$ gives $q \\le 19.2$, so at most $19$ boxes.",
+     "id": "mock-1-m2h-15"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Studies and experiments",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Researchers randomly assigned $300$ volunteers to either take a new vitamin or a placebo for six months. The vitamin group reported significantly fewer colds. Which conclusion is best supported?",
+     "options": [
+      "The vitamin prevents colds in everyone who takes it.",
+      "People who choose to take vitamins catch fewer colds.",
+      "The vitamin likely reduces colds among people similar to the volunteers.",
+      "The study shows nothing, because volunteers were used."
+     ],
+     "answer": "C",
+     "explanation": "Random assignment supports a cause-and-effect conclusion, but only for people like the volunteers, and not for every individual.",
+     "id": "mock-1-m2h-16"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Area and volume",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A cylinder has radius $3$ and height $8$. A cone has the same radius and the same volume as the cylinder. What is the height of the cone?",
+     "options": [
+      "$8$",
+      "$12$",
+      "$16$",
+      "$24$"
+     ],
+     "answer": "D",
+     "explanation": "Cylinder: $\\pi(3)^2(8) = 72\\pi$. Cone: $\\frac{1}{3}\\pi(3)^2 h = 3\\pi h$. Setting $3\\pi h = 72\\pi$ gives $h = 24$.",
+     "id": "mock-1-m2h-17"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The function $p(x) = 800(0.9)^x$ models the value, in dollars, of a laptop $x$ years after purchase. Which statement is true?",
+     "options": [
+      "The value decreases by $90 each year.",
+      "The value decreases by 90% each year.",
+      "The value increases by 10% each year.",
+      "The value decreases by 10% each year."
+     ],
+     "answer": "D",
+     "explanation": "Multiplying by $0.9$ each year keeps $90\\%$ of the value, a $10\\%$ decrease each year.",
+     "id": "mock-1-m2h-18"
+    },
+    {
+     "section": "math",
+     "domain": "Geometry and Trigonometry",
+     "skill": "Lines, angles and triangles",
+     "difficulty": 3,
+     "type": "spr",
+     "question": "In triangle $PQR$, $PQ = PR$ and angle $Q$ measures $52^\\circ$. What is the measure of angle $P$, in degrees?",
+     "answer": [
+      "76"
+     ],
+     "explanation": "$PQ = PR$ makes the base angles at $Q$ and $R$ equal: each $52^\\circ$. So angle $P = 180 - 104 = 76$.",
+     "id": "mock-1-m2h-19"
+    },
+    {
+     "section": "math",
+     "domain": "Algebra",
+     "skill": "Linear equations in two variables",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Line $\\ell$ has equation $3x - 4y = 12$. Line $m$ is perpendicular to $\\ell$ and passes through $(0, 5)$. Which equation represents line $m$?",
+     "options": [
+      "$y = -\\dfrac{4}{3}x + 5$",
+      "$y = -\\dfrac{3}{4}x + 5$",
+      "$y = \\dfrac{3}{4}x + 5$",
+      "$y = \\dfrac{4}{3}x + 5$"
+     ],
+     "answer": "A",
+     "explanation": "Line $\\ell$ is $y = \\frac{3}{4}x - 3$, slope $\\frac{3}{4}$. A perpendicular slope is $-\\frac{4}{3}$, and the $y$-intercept is $5$.",
+     "id": "mock-1-m2h-20"
+    },
+    {
+     "section": "math",
+     "domain": "Problem-Solving and Data Analysis",
+     "skill": "Sample statistics and margin of error",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A survey of a random sample of students estimates that $64\\%$ of students at a school use the library weekly, with a margin of error of $5\\%$. Which statement is best supported?",
+     "options": [
+      "Exactly 64% of all students use the library weekly.",
+      "The true percentage is plausibly between 59% and 69%.",
+      "At least 69% of students use the library weekly.",
+      "The survey's results cannot be applied to the school."
+     ],
+     "answer": "B",
+     "explanation": "The margin of error gives a plausible range for the true value: $64\\% \\pm 5\\%$, i.e. $59\\%$ to $69\\%$.",
+     "id": "mock-1-m2h-21"
+    },
+    {
+     "section": "math",
+     "domain": "Advanced Math",
+     "skill": "Nonlinear equations and systems",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How many real solutions does the equation $3x^2 - 2x + 5 = 0$ have?",
+     "options": [
+      "Zero",
+      "Exactly one",
+      "Exactly two",
+      "Infinitely many"
+     ],
+     "answer": "A",
+     "explanation": "The discriminant is $(-2)^2 - 4(3)(5) = 4 - 60 = -56$, which is negative, so there are no real solutions.",
+     "id": "mock-1-m2h-22"
+    }
+   ]
+  }
+ }
+}

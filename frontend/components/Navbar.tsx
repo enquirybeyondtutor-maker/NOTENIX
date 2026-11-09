@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, LifeBuoy, type LucideIcon } from "lucide-react";
+import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, LifeBuoy, GraduationCap, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
@@ -81,6 +81,9 @@ export default function Navbar() {
   if (isAuthed && !isTeacher && user?.can_write_practice) {
     // insert Practice right after My Tests
     links = [...STUDENT_LINKS.slice(0, 2), { href: "/practice", label: "Practice", icon: PenLine }, ...STUDENT_LINKS.slice(2)];
+  }
+  if (isAuthed && !isTeacher && user?.sat) {
+    links = [...links.slice(0, 1), { href: "/sat/practice", label: "SAT", icon: GraduationCap }, ...links.slice(1)];
   }
   if (isAuthed && !isTeacher && (user?.ks3_year || user?.help_plan)) {
     links = [...links.slice(0, 3), { href: "/help", label: user?.ks3_year ? "Homework help" : "Ask a tutor", icon: LifeBuoy }, ...links.slice(3)];

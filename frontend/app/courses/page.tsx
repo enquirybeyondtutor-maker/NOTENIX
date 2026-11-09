@@ -13,7 +13,7 @@ import { formatDate } from "@/lib/utils";
 // (bank transfer; the course unlocks for a year once the team confirms the payment).
 export default function CoursesPage() {
   const { user, ready } = useAuthGuard("student");
-  const [data, setData] = useState<{ restricted: boolean; courses: Enrolment[]; pending: string[]; price: Price } | null>(null);
+  const [data, setData] = useState<{ restricted: boolean; courses: Enrolment[]; pending: string[]; price: Price; prices?: Record<string, Price> } | null>(null);
   const [catalogue, setCatalogue] = useState<Course[]>([]);
   const [buying, setBuying] = useState("");
 
@@ -28,6 +28,7 @@ export default function CoursesPage() {
 
   if (!ready || !data) return <Spinner label="Loading your courses…" />;
   const name = (k: string) => catalogue.find((c) => c.key === k)?.name || k;
+  const priceOf = (k: string) => data.prices?.[k] ?? data.price;  // SAT has its own price
   const live = data.courses.filter((c) => c.live);
   const ended = data.courses.filter((c) => !c.live);
 
@@ -38,8 +39,10 @@ export default function CoursesPage() {
           <ArrowLeft size={15} /> My courses
         </button>
         <PageHeader icon={Plus} title={`Add ${name(buying)}`}
-          subtitle={`${data.price.label} for a year: practice papers, quizzes, revision resources and test requests for ${name(buying)}.`} />
-        <PaymentBox purpose="course" course={buying} amount={data.price.amount} currency={data.price.currency}
+          subtitle={buying === "sat"
+            ? `${priceOf(buying).label} for a year: full adaptive SAT practice tests, score reports and worked explanations.`
+            : `${priceOf(buying).label} for a year: practice papers, quizzes, revision resources and test requests for ${name(buying)}.`} />
+        <PaymentBox purpose="course" course={buying} amount={priceOf(buying).amount} currency={priceOf(buying).currency}
           reference={`NX-C${user?.id ?? ""}`} onClaimed={load} />
       </PageContainer>
     );
@@ -62,7 +65,7 @@ export default function CoursesPage() {
               <h3 className="mt-3 font-semibold text-ink">{c.name}</h3>
               <p className="mt-1 text-sm text-ink-muted">{c.until ? `Until ${formatDate(c.until)}` : "No end date"}</p>
               {c.kind === "trial" && (
-                <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Keep it: {data.price.label} / year</Button>
+                <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Keep it: {priceOf(c.course).label} / year</Button>
               )}
             </div>
           ))}
@@ -71,7 +74,7 @@ export default function CoursesPage() {
               <span className="badge-danger">Ended</span>
               <h3 className="mt-3 font-semibold text-ink">{c.name}</h3>
               <p className="mt-1 text-sm text-ink-muted">Ended {c.until ? formatDate(c.until) : ""}</p>
-              <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Renew: {data.price.label} / year</Button>
+              <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Renew: {priceOf(c.course).label} / year</Button>
             </div>
           ))}
         </div>

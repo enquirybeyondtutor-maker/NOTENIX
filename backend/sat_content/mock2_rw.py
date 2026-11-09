@@ -1,0 +1,397 @@
+r"""Practice Test 2, Reading and Writing: Module 1 (mixed) and Module 2 easier. Original questions."""
+from _sat import rw
+
+II, CS, EI, SEC = "Information and Ideas", "Craft and Structure", "Expression of Ideas", "Standard English Conventions"
+WIC, TSP, CTC = "Words in Context", "Text Structure and Purpose", "Cross-Text Connections"
+CID, COET, COEQ, INF = "Central Ideas and Details", "Command of Evidence: Textual", "Command of Evidence: Quantitative", "Inferences"
+BND, FSS, TR, RS = "Boundaries", "Form, Structure, and Sense", "Transitions", "Rhetorical Synthesis"
+Q_WIC = "Which choice completes the text with the most logical and precise word or phrase?"
+Q_SEC = "Which choice completes the text so that it conforms to the conventions of Standard English?"
+Q_TR = "Which choice completes the text with the most logical transition?"
+
+RW1 = [
+    rw(CS, WIC, 1,
+       r"""After the long drought, the farmers were ______ to see dark clouds gathering over the hills, and many stood outside to watch the first drops fall.""",
+       Q_WIC, ["relieved", "annoyed", "puzzled", "indifferent"], "A",
+       r"""After a long drought, rain is welcome, and people stood outside to watch it, so the farmers felt "relieved"."""),
+    rw(CS, WIC, 1,
+       r"""The museum guide gave a ______ explanation of the painting, covering its history, the artist's technique and the meaning of every symbol in it.""",
+       Q_WIC, ["thorough", "brief", "careless", "confusing"], "A",
+       r"""Covering history, technique and every symbol is complete and detailed: "thorough". "Brief" and "careless" contradict this."""),
+    rw(CS, WIC, 2,
+       r"""The new law was intended to ______ the process of starting a small business: applicants now fill in one online form instead of visiting four separate government offices.""",
+       Q_WIC, ["complicate", "simplify", "investigate", "postpone"], "B",
+       r"""Replacing four office visits with one online form makes the process easier: the law was meant to "simplify" it."""),
+    rw(CS, WIC, 3,
+       r"""Although the composer was celebrated in her lifetime, her music fell into ______ after her death, and it was not performed again for nearly a century until a researcher found her manuscripts in an attic.""",
+       Q_WIC, ["obscurity", "fashion", "controversy", "abundance"], "A",
+       r"""Not being performed for nearly a century, until rediscovered in an attic, means the music became unknown: it fell into "obscurity"."""),
+    rw(CS, TSP, 1,
+       r"""Every winter, monarch butterflies from across North America fly thousands of kilometres to the same small patch of forest in central Mexico. No single butterfly makes the round trip: the ones that return north in spring are the great-grandchildren of those that left the year before.""",
+       "Which choice best states the main purpose of the text?",
+       ["To describe a remarkable feature of the monarch butterfly's migration",
+        "To argue that the forests in Mexico should be protected",
+        "To explain how butterflies find their way using the sun",
+        "To compare monarch butterflies with migrating birds"], "A",
+       r"""The text describes the monarchs' long journey to one forest and the surprising fact that no single butterfly completes the round trip. It makes no argument and no comparison."""),
+    rw(CS, TSP, 2,
+       r"""Many people assume that the Great Wall of China is a single continuous wall. In fact, it is a series of walls, built and rebuilt by different dynasties over roughly two thousand years. Some sections are made of stone and brick, while older ones are made of packed earth.""",
+       "Which choice best describes the overall structure of the text?",
+       ["It corrects a common belief and then gives details that support the correction.",
+        "It tells the story of a single dynasty that built the wall.",
+        "It compares the Great Wall with other famous walls.",
+        "It argues that the Great Wall should be rebuilt."], "A",
+       r"""The first sentence gives a belief; "In fact" corrects it (a series of walls), and the last sentence adds supporting detail about different materials."""),
+    rw(CS, TSP, 3,
+       r"""The following text is from a 1911 novel. The narrator has just moved to a small coastal town.
+
+At first the town seemed to me nothing but grey stone and wind. But by the end of my first month I had learned which baker saved the warm loaves for the fishermen, which path along the cliff smelled of wild thyme in the evenings, and which neighbour would lend a lamp without being asked. The stone and the wind were still there; I had simply stopped noticing them.""",
+       "Which choice best describes the function of the last sentence in the text as a whole?",
+       ["It shows that the narrator's view of the town has changed although the town itself has not.",
+        "It explains why the narrator decided to leave the town.",
+        "It describes the weather the narrator experienced in the first month.",
+        "It suggests that the narrator's neighbours were unfriendly."], "A",
+       r"""The town is first described as "grey stone and wind", then through warm details the narrator learns. The last sentence says the stone and wind "were still there" but the narrator stopped noticing them, so the narrator changed, not the town."""),
+    rw(CS, CTC, 3,
+       r"""Text 1
+Some urban planners argue that cities should replace parking spaces with bike lanes and wider pavements. Fewer parking spaces, they claim, encourage people to walk, cycle or take public transport, which reduces traffic and pollution.
+
+Text 2
+When one city removed street parking in its centre, shop owners worried they would lose customers. Sales data from the following year showed that most shops had more customers than before, largely because more people were walking and cycling past them.""",
+       "Based on the texts, how would the planners in Text 1 most likely respond to the results described in Text 2?",
+       ["They would see the results as supporting their view that removing parking changes how people travel.",
+        "They would argue that the shop owners' worries were justified.",
+        "They would claim that the results show bike lanes increase pollution.",
+        "They would say that the results are unrelated to their argument."], "A",
+       r"""Text 2 found more people walking and cycling after parking was removed, which is exactly what the planners in Text 1 predicted. The shop owners' worries turned out not to be justified."""),
+    rw(II, CID, 1,
+       r"""Earthworms are often called "ecosystem engineers." As they tunnel, they mix the soil and create channels that let air and water reach plant roots. They also eat dead leaves and turn them into nutrient-rich droppings that help plants grow.""",
+       "Which choice best states the main idea of the text?",
+       ["Earthworms improve soil in ways that help plants.",
+        "Earthworms eat only dead leaves.",
+        "Engineers have studied earthworm tunnels to design buildings.",
+        "Plants cannot grow in soil that contains earthworms."], "A",
+       r"""Each detail (mixing soil, letting air and water in, turning leaves into nutrients) shows earthworms improving soil for plants, which is why they are called "ecosystem engineers"."""),
+    rw(II, CID, 2,
+       r"""The following text is adapted from a 1902 short story.
+
+Old Jonah had kept the lighthouse for forty years. Ships no longer needed him: a new electric beacon on the headland did his work automatically. Still, every evening at dusk, he climbed the hundred and twelve steps, polished the great lens and lit the lamp, as if the sea might be waiting for him.""",
+       "According to the text, why does Jonah light the lamp each evening?",
+       ["Out of long habit and loyalty, even though his work is no longer needed",
+        "Because the new electric beacon has stopped working",
+        "Because ships have complained that the coast is too dark",
+        "Because he has been ordered to keep the lighthouse running"], "A",
+       r"""Ships "no longer needed him", yet he lights the lamp "as if the sea might be waiting", after forty years, which points to habit and loyalty. Nothing says the beacon failed or that he was ordered to."""),
+    rw(II, COET, 2,
+       r"""A nutrition researcher claims that eating meals at regular times each day helps people sleep better.""",
+       "Which finding, if true, would most directly support the researcher's claim?",
+       ["Participants randomly assigned to eat at fixed times for a month fell asleep faster than participants who ate at varying times.",
+        "Many people eat breakfast at the same time every day.",
+        "People who sleep well tend to exercise regularly.",
+        "Some foods contain substances that make people feel sleepy."], "A",
+       r"""The claim links regular meal times to better sleep. Randomly assigning meal schedules and finding faster sleep with fixed times supports that link directly."""),
+    rw(II, COET, 3,
+       r"""Art historian Lena Fischer argues that a painting long credited to a famous Dutch master was actually painted by one of his students, who copied the master's style closely.""",
+       "Which finding, if true, would most directly support Fischer's argument?",
+       ["Chemical analysis shows that the painting's blue pigment was not available until ten years after the master's death.",
+        "The painting is displayed next to several of the master's best-known works.",
+        "The master is known to have taught many students in his workshop.",
+        "Critics have praised the painting as one of the master's finest."], "A",
+       r"""A pigment that did not exist until after the master died means he could not have painted it, which supports the claim that someone else did. That the master had students does not show this painting is by one."""),
+    rw(II, COEQ, 1,
+       r"""A café recorded the drinks it sold on one Saturday.
+
+| Drink | Cups sold |
+|---|---|
+| Tea | 85 |
+| Coffee | 140 |
+| Hot chocolate | 60 |
+| Juice | 45 |
+
+On that Saturday, the café sold more cups of ______ than of any other drink.""",
+       "Which choice most effectively uses data from the table to complete the statement?",
+       ["coffee", "tea", "hot chocolate", "juice"], "A",
+       r"""Coffee has the highest number in the table: 140 cups."""),
+    rw(II, COEQ, 3,
+       r"""A conservation group counted nesting pairs of two seabird species on an island.
+
+| Year | Species X | Species Y |
+|---|---|---|
+| 2010 | 420 | 310 |
+| 2014 | 380 | 360 |
+| 2018 | 330 | 415 |
+| 2022 | 290 | 470 |
+
+A biologist suggests that the two species may be competing for the same nesting sites, so that as one species gains sites, the other loses them.""",
+       "Which choice best describes data from the table that support the biologist's suggestion?",
+       ["From 2010 to 2022, Species X's nesting pairs fell steadily while Species Y's rose steadily.",
+        "Species Y had more nesting pairs than Species X in 2022.",
+        "Species X had 420 nesting pairs in 2010.",
+        "The total number of nesting pairs was about the same in 2010 and 2022."], "A",
+       r"""The suggestion is that one species gains as the other loses. Only the opposite trends across all four counts (X falling while Y rises) show that pattern."""),
+    rw(II, INF, 2,
+       r"""Desert tortoises spend most of the hottest part of the year in burrows they dig underground, coming out mainly in the cooler early morning. Burrow temperatures stay far lower than temperatures at the surface during summer afternoons. This suggests that burrows help tortoises ______""",
+       "Which choice most logically completes the text?",
+       ["avoid the extreme heat of the desert surface.",
+        "find more food than they could at the surface.",
+        "stay warm during cold summer nights.",
+        "hide their eggs from other tortoises."], "A",
+       r"""Tortoises stay in burrows during the hottest time, and burrows are much cooler than the surface, so the burrows help them escape the heat."""),
+    rw(II, INF, 3,
+       r"""In a study of two groups of children learning to read, one group practised with books that matched each child's interests, while the other used a standard set of books. After six months, the two groups scored equally well on reading tests, but children in the first group read more books in their free time. If the study's results hold more widely, matching books to children's interests may ______""",
+       "Which choice most logically completes the text?",
+       ["encourage children to read more for pleasure, even if it does not raise test scores.",
+        "raise reading test scores more than standard books do.",
+        "make children less interested in reading in their free time.",
+        "be the only way to teach children to read."], "A",
+       r"""Test scores were equal, but the interest-matched group read more in their free time. So the benefit is more reading for pleasure, not higher scores."""),
+    rw(SEC, BND, 1,
+       r"""The festival includes music, food stalls and a ______ it ends each night with fireworks over the river.""",
+       Q_SEC, ["parade;", "parade,", "parade", "parade and,"], "A",
+       r"""Both parts are complete sentences, so a semicolon joins them. A comma alone would be a comma splice."""),
+    rw(SEC, BND, 2,
+       r"""The scientists collected three types of ______ ice cores, ocean sediments and tree rings.""",
+       Q_SEC, ["samples:", "samples;", "samples,", "samples"], "A",
+       r"""A complete sentence introduces a list, so a colon is used. A semicolon would need a complete sentence after it."""),
+    rw(SEC, BND, 2,
+       r"""Frida Kahlo, the Mexican painter known for her vivid self-______ often included plants and animals from her garden in her work.""",
+       Q_SEC, ["portraits,", "portraits", "portraits;", "portraits:"], "A",
+       r"""The phrase "the Mexican painter known for her vivid self-portraits" renames Frida Kahlo and opens with a comma, so it must close with one before the verb "included"."""),
+    rw(SEC, BND, 3,
+       r"""The team had prepared for every ______ even so, the sudden power cut caught them by surprise.""",
+       Q_SEC, ["possibility;", "possibility,", "possibility", "possibility, and"], "A",
+       r""""Even so" starts a new complete sentence, so a semicolon is needed before it. A comma would create a comma splice, and "and" would clash with "even so"."""),
+    rw(SEC, FSS, 1,
+       r"""The books on the top shelf ______ older than the ones below.""",
+       Q_SEC, ["is", "are", "was", "has been"], "B",
+       r"""The subject is "books", which is plural ("on the top shelf" describes them), so the plural "are" is needed."""),
+    rw(SEC, FSS, 2,
+       r"""If the weather ______ clear tomorrow, the astronomy club will set up its telescopes in the park.""",
+       Q_SEC, ["stays", "stayed", "had stayed", "will have stayed"], "A",
+       r"""In a sentence about the future with "will" in the main clause, the "if" clause uses the present tense: "stays"."""),
+    rw(SEC, FSS, 3,
+       r"""Each of the paintings, along with the sketches that the artist made for them, ______ for the first time at the gallery this spring.""",
+       Q_SEC, ["is being shown", "are being shown", "have been shown", "were shown"], "A",
+       r"""The subject is "Each", which is singular; "along with the sketches..." does not change that. "Is being shown" is singular and fits "this spring"."""),
+    rw(EI, TR, 1,
+       r"""Sloths move very slowly through the trees. ______, they are surprisingly good swimmers.""",
+       Q_TR, ["However", "Therefore", "For example", "Likewise"], "A",
+       r"""Being good swimmers contrasts with moving slowly in trees, so a contrast word fits."""),
+    rw(EI, TR, 2,
+       r"""The bridge was closed for repairs for six months. ______, drivers had to take a route that added twenty minutes to their journey.""",
+       Q_TR, ["During that time", "In contrast", "For instance", "Above all"], "A",
+       r"""The second sentence describes what happened while the bridge was closed, so a time transition fits."""),
+    rw(EI, RS, 2,
+       r"""While researching a topic, a student has taken the following notes:
+• Chess originated in India around the 6th century.
+• The early version was called chaturanga.
+• It spread to Persia, then to Europe.
+• Modern rules were settled in Europe in the 15th century.""",
+       "The student wants to describe how chess spread from its place of origin. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+       ["Chess began in India as chaturanga around the 6th century and spread to Persia and then Europe.",
+        "Modern chess rules were settled in Europe in the 15th century.",
+        "Chess is a very old game played around the world.",
+        "The early version of chess was called chaturanga."], "A",
+       r"""Only the sentence tracing the route from India through Persia to Europe describes how chess spread."""),
+    rw(EI, RS, 3,
+       r"""While researching a topic, a student has taken the following notes:
+• Wangari Maathai was a Kenyan environmentalist.
+• In 1977 she founded the Green Belt Movement.
+• The movement has planted over 50 million trees.
+• It paid women to plant trees, giving them income and fighting deforestation.
+• Maathai won the Nobel Peace Prize in 2004.""",
+       "The student wants to explain how the Green Belt Movement helped both people and the environment. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+       ["By paying women to plant trees, the Green Belt Movement gave them an income while fighting deforestation.",
+        "Wangari Maathai, a Kenyan environmentalist, won the Nobel Peace Prize in 2004.",
+        "The Green Belt Movement, founded in 1977, has planted over 50 million trees.",
+        "Wangari Maathai founded the Green Belt Movement in Kenya."], "A",
+       r"""The goal is benefits to both people and the environment. Only the sentence linking women's income to fighting deforestation covers both."""),
+]
+
+RW2E = [
+    rw(CS, WIC, 1,
+       r"""The kitten was so ______ that it explored every corner of the new house within an hour.""",
+       Q_WIC, ["curious", "sleepy", "frightened", "lazy"], "A",
+       r"""Exploring every corner quickly shows a strong wish to find out about things: "curious"."""),
+    rw(CS, WIC, 1,
+       r"""The old map was too ______ to read clearly: the ink had faded and the paper was torn in several places.""",
+       Q_WIC, ["damaged", "colourful", "accurate", "modern"], "A",
+       r"""Faded ink and torn paper describe a map in poor condition: "damaged"."""),
+    rw(CS, WIC, 2,
+       r"""The coach praised the team's ______ effort: even when they were losing by ten points, no player stopped trying.""",
+       Q_WIC, ["persistent", "careless", "brief", "uneven"], "A",
+       r"""Never stopping trying while losing shows effort that continues: "persistent"."""),
+    rw(CS, WIC, 2,
+       r"""Scientists hope the new vaccine will ______ the spread of the disease by protecting the people most likely to catch it.""",
+       Q_WIC, ["limit", "celebrate", "measure", "describe"], "A",
+       r"""Protecting those most likely to catch the disease would reduce its spread, so the vaccine is meant to "limit" it."""),
+    rw(CS, TSP, 1,
+       r"""Many lighthouses once had keepers who lived on site and lit the lamps each night. Today, most lighthouses are automated, with electric lights that switch on by themselves at dusk.""",
+       "Which choice best describes the overall structure of the text?",
+       ["It contrasts how lighthouses worked in the past with how most work today.",
+        "It explains how to become a lighthouse keeper.",
+        "It describes one famous lighthouse in detail.",
+        "It argues that lighthouses are no longer needed."], "A",
+       r"""The first sentence describes the past (keepers) and the second describes today (automation), a then-and-now contrast."""),
+    rw(CS, TSP, 2,
+       r"""Some of the world's oldest trees are bristlecone pines in the mountains of California. One tree, known as Methuselah, is more than 4,800 years old. The trees grow very slowly in cold, dry, rocky soil, and scientists think their slow growth is part of why they live so long.""",
+       "Which choice best states the main purpose of the text?",
+       ["To describe very old trees and suggest a reason for their long lives",
+        "To argue that bristlecone pines should be planted in cities",
+        "To explain how scientists measure the age of trees",
+        "To compare California's trees with trees in other places"], "A",
+       r"""The text describes bristlecone pines and Methuselah's age, then gives scientists' explanation (slow growth) for their long lives."""),
+    rw(CS, TSP, 2,
+       r"""Most bats find their way in the dark using echolocation: they make high-pitched sounds and listen for the echoes. Fruit bats, however, rely mainly on their large eyes and strong sense of smell to find the fruit they eat.""",
+       "Which choice best describes the function of the second sentence in the text as a whole?",
+       ["It describes a group of bats that differs from the general pattern in the first sentence.",
+        "It explains how echolocation works.",
+        "It gives a second example of bats that use echolocation.",
+        "It argues that fruit bats have the best eyesight of any animal."], "A",
+       r""""However" signals a contrast: most bats use echolocation, but fruit bats rely on sight and smell instead."""),
+    rw(CS, CTC, 2,
+       r"""Text 1
+Some people believe that goldfish have a memory of only three seconds.
+
+Text 2
+In experiments, goldfish learned to push a lever to get food and still remembered how to do it months later. Researchers have also trained goldfish to respond to particular sounds at feeding time.""",
+       "Based on the texts, how would the researchers in Text 2 most likely respond to the belief in Text 1?",
+       ["They would say the belief is wrong, since goldfish can remember things for months.",
+        "They would agree that goldfish forget things after a few seconds.",
+        "They would say goldfish remember sounds but not actions.",
+        "They would argue that goldfish should not be kept as pets."], "A",
+       r"""Goldfish remembering a lever task for months shows they remember far longer than three seconds, so the researchers would reject the belief."""),
+    rw(II, CID, 1,
+       r"""Volunteers in a coastal town meet every month to clean the beach. They collect plastic bottles, fishing nets and other rubbish, and record what they find. The records help the town see where the rubbish comes from and how to stop it.""",
+       "Which choice best states the main idea of the text?",
+       ["Volunteers clean a beach and keep records that help the town tackle rubbish.",
+        "Fishing nets are the most common type of rubbish on beaches.",
+        "The town pays people to clean its beach every day.",
+        "Plastic bottles cannot be recycled."], "A",
+       r"""The text describes volunteers cleaning the beach and recording what they find, and how those records help the town. The other choices are not stated."""),
+    rw(II, CID, 2,
+       r"""Kenji wanted to learn to cook, so every Sunday he chose one recipe from his grandmother's handwritten notebook. Some dishes turned out badly at first, but he kept notes on what went wrong and tried again the next week. By the end of the year, he could make every recipe in the notebook.""",
+       "According to the text, how did Kenji improve his cooking?",
+       ["By noting his mistakes and trying the recipes again",
+        "By taking a cooking class every Sunday",
+        "By cooking only dishes that were easy",
+        "By asking his grandmother to watch him cook"], "A",
+       r"""The text says he "kept notes on what went wrong and tried again the next week". No class, easy dishes or supervision is mentioned."""),
+    rw(II, COET, 1,
+       r"""A student claims that the school's new water fountains have led students to drink more water.""",
+       "Which finding, if true, would most directly support the student's claim?",
+       ["The number of times the fountains were used each day doubled compared with the old ones, while sales of bottled drinks fell.",
+        "The new water fountains are a bright blue colour.",
+        "Some students bring their own water bottles to school.",
+        "The old fountains were installed many years ago."], "A",
+       r"""Much more fountain use, together with fewer bottled drinks sold, suggests students are drinking more water from the fountains. Colour and age say nothing about drinking."""),
+    rw(II, COET, 2,
+       r"""A gardener claims that planting marigolds next to tomato plants helps protect the tomatoes from insects.""",
+       "Which finding, if true, would most directly support the gardener's claim?",
+       ["In a test garden, tomato plants grown next to marigolds had fewer insect-damaged leaves than tomato plants grown without them.",
+        "Marigolds are easy to grow from seed.",
+        "Tomatoes need plenty of sunlight to ripen.",
+        "Many gardeners like the colour of marigolds."], "A",
+       r"""Fewer insect-damaged leaves on tomatoes next to marigolds, compared with tomatoes without them, directly supports the claim."""),
+    rw(II, COEQ, 1,
+       r"""A school library recorded how many books of each type were borrowed in March.
+
+| Type of book | Books borrowed |
+|---|---|
+| Adventure | 230 |
+| Science | 145 |
+| History | 90 |
+| Poetry | 35 |
+
+In March, the type of book borrowed least often was ______""",
+       "Which choice most effectively uses data from the table to complete the statement?",
+       ["poetry.", "adventure.", "science.", "history."], "A",
+       r"""Poetry has the smallest number in the table: 35 books."""),
+    rw(II, COEQ, 2,
+       r"""A town measured average daily water use per household before and after a campaign to save water.
+
+| Period | Litres per household per day |
+|---|---|
+| Before campaign | 380 |
+| After campaign | 310 |
+
+Town officials claim that the campaign helped households use less water.""",
+       "Which choice best describes data from the table that support the officials' claim?",
+       ["Average daily water use per household fell from 380 litres to 310 litres after the campaign.",
+        "Households used 380 litres of water a day before the campaign.",
+        "The campaign lasted for several months.",
+        "Some households use more water than others."], "A",
+       r"""The claim is about using less water after the campaign. The fall from 380 to 310 litres shows exactly that."""),
+    rw(II, INF, 1,
+       r"""Squirrels bury thousands of nuts each autumn to eat in winter, but they do not find all of them. Some of the forgotten nuts sprout in spring. This suggests that squirrels may help ______""",
+       "Which choice most logically completes the text?",
+       ["new trees to grow.", "nuts to stay fresh.", "birds to find food.", "winter to end sooner."], "A",
+       r"""Forgotten nuts sprout into seedlings, so squirrels help plant new trees without meaning to."""),
+    rw(II, INF, 2,
+       r"""A bakery started selling a smaller, cheaper version of its most popular cake. Afterwards, sales of the full-size cake stayed the same, but the bakery sold many of the smaller cakes to people who had never bought cake there before. This suggests that the smaller cake ______""",
+       "Which choice most logically completes the text?",
+       ["attracted new customers without reducing sales of the full-size cake.",
+        "replaced the full-size cake as the bakery's main product.",
+        "was more popular with the bakery's regular customers.",
+        "cost more to make than the full-size cake."], "A",
+       r"""Full-size sales did not change, and the small cakes went to people who had never bought cake there, so they drew in new customers."""),
+    rw(SEC, BND, 1,
+       r"""The class grew sunflowers in the school ______ the tallest one reached nearly three metres.""",
+       Q_SEC, ["garden;", "garden,", "garden", "garden, and,"], "A",
+       r"""Two complete sentences are joined, so a semicolon is needed."""),
+    rw(SEC, BND, 1,
+       r"""My brother plays the ______ my sister plays the violin.""",
+       Q_SEC, ["trumpet, and", "trumpet and,", "trumpet", "trumpet,"], "A",
+       r"""Two complete sentences joined with "and" need a comma before "and"."""),
+    rw(SEC, BND, 2,
+       r"""The trip will take us to three ______ Rome, Florence and Venice.""",
+       Q_SEC, ["cities:", "cities;", "cities", "cities, and"], "A",
+       r"""A complete sentence introduces a list of the three cities, so a colon fits."""),
+    rw(SEC, BND, 2,
+       r"""The library's oldest ______ a Bible printed in 1611, is kept in a glass case.""",
+       Q_SEC, ["book,", "book", "book;", "book:"], "A",
+       r""""A Bible printed in 1611" renames "book" and is closed by a comma after "1611", so it opens with a comma too."""),
+    rw(SEC, FSS, 1,
+       r"""Yesterday, the students ______ a trip to the science museum.""",
+       Q_SEC, ["take", "takes", "took", "will take"], "C",
+       r""""Yesterday" is in the past, so the past tense "took" is needed."""),
+    rw(SEC, FSS, 1,
+       r"""The dogs in the park ______ chasing a ball.""",
+       Q_SEC, ["was", "were", "is", "has been"], "B",
+       r"""The subject "dogs" is plural, so the plural verb "were" is needed."""),
+    rw(SEC, FSS, 2,
+       r"""The company announced that ______ new phone would go on sale next month.""",
+       Q_SEC, ["its", "it's", "their", "they're"], "A",
+       r"""The phone belongs to "the company", a singular noun, so the singular possessive "its" is used. "It's" means "it is"."""),
+    rw(EI, TR, 1,
+       r"""The forecast said it would be sunny all day. ______, it rained heavily in the afternoon.""",
+       Q_TR, ["Instead", "Similarly", "For example", "As a result"], "A",
+       r"""Heavy rain is the opposite of the forecast, so a contrast transition such as "Instead" fits."""),
+    rw(EI, TR, 2,
+       r"""Exercise strengthens the heart and lungs. ______, it can improve mood and help people sleep better.""",
+       Q_TR, ["In addition", "However", "Instead", "In contrast"], "A",
+       r"""The second sentence adds more benefits of exercise, so an addition transition fits."""),
+    rw(EI, RS, 1,
+       r"""While researching a topic, a student has taken the following notes:
+• The Amazon is the largest rainforest on Earth.
+• It covers parts of nine countries.
+• Most of it is in Brazil.""",
+       "The student wants to state how many countries the Amazon rainforest covers. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+       ["The Amazon rainforest covers parts of nine countries.",
+        "The Amazon is the largest rainforest on Earth.",
+        "Most of the Amazon rainforest is in Brazil.",
+        "The Amazon rainforest is in South America."], "A",
+       r"""Only the sentence giving the number of countries (nine) meets the goal."""),
+    rw(EI, RS, 2,
+       r"""While researching a topic, a student has taken the following notes:
+• The Statue of Liberty was a gift from France to the United States.
+• It was dedicated in 1886.
+• It is made of copper.
+• It turned green because copper reacts with air and water over time.""",
+       "The student wants to explain why the Statue of Liberty is green. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+       ["The copper Statue of Liberty turned green because copper reacts with air and water over time.",
+        "The Statue of Liberty was a gift from France.",
+        "The Statue of Liberty was dedicated in 1886.",
+        "The Statue of Liberty is in the United States."], "A",
+       r"""Only the sentence linking the copper's reaction with air and water to the green colour explains it."""),
+]

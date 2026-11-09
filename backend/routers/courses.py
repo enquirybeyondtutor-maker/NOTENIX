@@ -22,8 +22,11 @@ def _is_bt_student(user: User) -> bool:
     return domain in login_domains() and domain.endswith("beyondtutors.com")
 
 
-def course_price(user: User) -> dict:
-    """Price of one course for a year: £49-equivalent for BT students, £149 for everyone else."""
+def course_price(user: User, course: str | None = None) -> dict:
+    """Price of one course for a year: £49-equivalent for BT students, £149 for everyone else.
+    SAT has its own price (pricing.SAT_PRICES) for students outside Beyond Tutors."""
+    if course == "sat" and not _is_bt_student(user):
+        return pricing.sat_for_currency(getattr(user, "billing_currency", None))
     if _is_bt_student(user):
         return pricing.for_currency(getattr(user, "billing_currency", None))
     return {"currency": settings.price_currency, "amount": settings.revision_price,
@@ -46,6 +49,7 @@ async def mine(user: User = Depends(get_current_user), db: AsyncSession = Depend
         "courses": [course_svc.enrolment_row(e) for e in rows],
         "pending": sorted(set(pending)),  # courses paid for, waiting for the admin to confirm
         "price": course_price(user),
+        "prices": {"sat": course_price(user, "sat")},   # courses priced differently from the rest
     }
 
 
@@ -64,7 +68,7 @@ async def buy(data: BuyIn, user: User = Depends(get_current_user), db: AsyncSess
     if (await db.execute(select(Payment.id).where(
             Payment.user_id == user.id, Payment.status == "claimed", Payment.course == data.course))).first():
         raise HTTPException(400, "We already have your payment for this course and are checking it.")
-    price = course_price(user)
+    price = course_price(user, data.course)
     p = Payment(
         user_id=user.id, purpose="course", course=data.course, reference=f"NX-C{user.id}",
         amount=price["amount"], currency=price["currency"],

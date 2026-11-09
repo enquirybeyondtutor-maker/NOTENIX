@@ -75,6 +75,7 @@ class Settings(BaseSettings):
     subscription_prices: str = ""
     # Notenix KS3 (Year 7-9): yearly price per currency (JSON, empty = defaults) and free trial length.
     ks3_prices: str = ""
+    sat_prices: str = ""   # Notenix SAT yearly price per currency, JSON; empty = pricing.SAT_PRICES
     ks3_trial_days: int = 7
     ks3_help_trial_cap: int = 5      # homework-help questions during the free week
     ks3_help_monthly_cap: int = 30   # fair use for paying KS3 families

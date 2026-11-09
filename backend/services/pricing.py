@@ -21,6 +21,28 @@ KS3_PRICES = {
 }
 
 
+# Notenix SAT, one year. Lower than KS3: SAT families are mostly in India, the Gulf and Asia.
+SAT_PRICES = {
+    "USD": 129, "INR": 7999, "AED": 469, "GBP": 99, "SGD": 169, "AUD": 199,
+    "EUR": 119, "NZD": 219, "CAD": 179,
+}
+
+
+def sat_for_currency(currency: str | None) -> dict:
+    """Notenix SAT yearly price in this currency (SAT_PRICES env overrides the defaults)."""
+    p = dict(SAT_PRICES)
+    try:
+        custom = json.loads(getattr(settings, "sat_prices", "") or "{}")
+        if isinstance(custom, dict) and custom:
+            p = {k.upper(): float(v) for k, v in custom.items()}
+    except Exception:
+        pass
+    cur = (currency or "USD").upper()
+    if cur not in p:
+        cur = "USD" if "USD" in p else next(iter(p))
+    return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
+
+
 def ks3_for_currency(currency: str | None) -> dict:
     """Notenix KS3 yearly price in this currency (KS3_PRICES env overrides the defaults)."""
     p = dict(KS3_PRICES)

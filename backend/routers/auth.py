@@ -77,6 +77,7 @@ def _user_dict(u: User) -> dict:
         "is_verified": getattr(u, "is_verified", True),
         "can_write": getattr(u, "can_write", False),
         "can_write_practice": can_write_practice(u),  # may access written practice
+        "sat": bool(getattr(u, "sat_since", None)),   # Notenix SAT student: shows the SAT tab
         "ai_marking": ai_marks_for(u),                # Pro → instant AI marking
         "can_mark": role in ("teacher", "admin") or is_admin(u),  # may manually mark
         "access_until": u.access_until.isoformat() if getattr(u, "access_until", None) else None,

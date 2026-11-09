@@ -52,6 +52,10 @@ class User(Base):
     # Notenix KS3: school year (7/8/9) when the student is on KS3, when their free trial
     # started, and which parent emails of the trial sequence have gone out.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Notenix SAT: when they joined, their test date (YYYY-MM-DD) and target score.
+    sat_since: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    sat_test_date: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    sat_target: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # The student's own inbox for homework / class-notes updates (their login ID is not a mailbox).
     notify_email: Mapped[str | None] = mapped_column(String(255), nullable=True)
     # Doubt Help / Ask a Tutor (services/doubt.py): plan trial|doubt|plus, when it ends, the student's
@@ -280,6 +284,28 @@ class NoteShare(Base):
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     seen_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # student first opened it
+
+
+class SatAttempt(Base):
+    """A sitting of a Notenix SAT form (services/sat.py): a full adaptive mock or the
+    diagnostic (saved when a visitor who took it signs up). stage = index of the current
+    module; route = {"rw": "e"|"h", "m": ...} once module 1 of a section is done."""
+    __tablename__ = "sat_attempts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    form: Mapped[str] = mapped_column(String(40))
+    status: Mapped[str] = mapped_column(String(20), default="in_progress")  # in_progress | done
+    stage: Mapped[int] = mapped_column(Integer, default=0)
+    route: Mapped[dict] = mapped_column(JSON, default=dict)
+    answers: Mapped[dict] = mapped_column(JSON, default=dict)     # {module_key: {question_id: answer}}
+    marked: Mapped[dict] = mapped_column(JSON, default=dict)      # {module_key: [question_id, ...]}
+    module_started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # None = on a break
+    rw_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    math_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    total_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
 
 class Enrolment(Base):

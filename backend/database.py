@@ -284,6 +284,9 @@ async def migrate_note_kinds():
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS ks3_key VARCHAR(60)"))
             await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS seen_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE payments ADD COLUMN IF NOT EXISTS course VARCHAR(60)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_since TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_test_date VARCHAR(10)"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_target INTEGER"))
         else:
             ucols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(users)"))).all()}
             if "billing_currency" not in ucols:
@@ -293,7 +296,8 @@ async def migrate_note_kinds():
             for col, typ in (("ks3_year", "INTEGER"), ("ks3_trial_started_at", "TIMESTAMP"), ("ks3_emails", "JSON"),
                              ("notify_email", "VARCHAR(255)"), ("notify_email_at", "TIMESTAMP"),
                              ("help_plan", "VARCHAR(20)"), ("help_until", "TIMESTAMP"), ("sg_level", "VARCHAR(20)"),
-                             ("help_emails", "JSON")):
+                             ("help_emails", "JSON"), ("sat_since", "TIMESTAMP"), ("sat_test_date", "VARCHAR(10)"),
+                             ("sat_target", "INTEGER")):
                 if col not in ucols:
                     await conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {typ}"))
             tcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(tests)"))).all()}
