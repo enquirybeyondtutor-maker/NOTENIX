@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Clock, ChevronLeft, ChevronRight, Flag, AlertCircle, CheckCircle2, Loader2, ImagePlus, X, FileText } from "lucide-react";
 import { api, testsAPI, getUser } from "@/lib/api";
+import { invalidateInbox } from "@/lib/inbox";
 import { useAuthGuard } from "@/lib/guard";
 import { Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
@@ -179,6 +180,7 @@ export default function AttemptTestPage() {
         burst_flags: burstFlags.current,
       });
       try { if (document.fullscreenElement) await document.exitFullscreen(); } catch { /* ignore */ }
+      invalidateInbox();  // it's done: drop it from the dashboard and menu counts
       router.replace(`/tests/${id}/result`);
     } catch (e: any) {
       setError(e.response?.data?.detail || "Submission failed. Please try again.");

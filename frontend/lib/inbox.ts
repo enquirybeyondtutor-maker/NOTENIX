@@ -59,24 +59,92 @@ export function buildInbox(notes: any[], tests: any[]): Inbox {
   };
 }
 
-export async function loadInbox(): Promise<Inbox> {
-  const [n, t] = await Promise.all([
-    notesAPI.mine().then((r) => r.data).catch(() => []),
-    testsAPI.mine().then((r) => r.data).catch(() => []),
-  ]);
-  return buildInbox(Array.isArray(n) ? n : [], Array.isArray(t) ? t : []);
+// ── Shared cache ─────────────────────────────────────────────────────────────
+// The menu badges, the dashboard and the Homework page all read the same inbox. It is
+// fetched once and reused for FRESH_MS (also across full page loads, via sessionStorage),
+// so clicking between pages costs no extra requests. It refreshes when it goes stale, when
+// the student comes back to the tab, and straight after they open, hand in or submit work.
+const FRESH_MS = 2 * 60 * 1000;
+const STORE = "notenix_inbox";
+type Raw = { key: string; at: number; notes: any[]; tests: any[] };
+let mem: Raw | null = null;
+let inflight: { key: string; p: Promise<Inbox> } | null = null;
+const listeners = new Set<(x: Inbox) => void>();
+
+const userKey = () => {
+  try { return (localStorage.getItem("notenix_token") || "").slice(-32); } catch { return ""; }
+};
+
+function cached(): Raw | null {
+  const key = userKey();
+  if (mem && mem.key === key) return mem;
+  try {
+    const r = JSON.parse(sessionStorage.getItem(STORE) || "null") as Raw | null;
+    if (r && r.key === key) return (mem = r);
+  } catch { /* storage blocked or bad JSON: just fetch */ }
+  return null;
 }
 
-/** Inbox for a signed-in student; reloads when a note is opened, or when refreshKey (e.g. the path) changes. */
-export function useInbox(enabled: boolean, refreshKey = ""): Inbox | null {
+/** The cached inbox right now (possibly stale), or null: lets pages render without a flash. */
+export function peekInbox(): Inbox | null {
+  const r = cached();
+  return r ? buildInbox(r.notes, r.tests) : null;
+}
+
+export async function loadInbox(opts: { fresh?: boolean } = {}): Promise<Inbox> {
+  const key = userKey();
+  const r = cached();
+  if (!opts.fresh && r && Date.now() - r.at < FRESH_MS) return buildInbox(r.notes, r.tests);
+  if (inflight && inflight.key === key) return inflight.p;  // one request, however many callers
+  const p = (async () => {
+    const [n, t] = await Promise.all([
+      notesAPI.mine().then((x) => x.data).catch(() => null),
+      testsAPI.mine().then((x) => x.data).catch(() => null),
+    ]);
+    const notes = Array.isArray(n) ? n : r?.notes ?? [];
+    const tests = Array.isArray(t) ? t : r?.tests ?? [];
+    if (Array.isArray(n) && Array.isArray(t)) {
+      mem = { key, at: Date.now(), notes, tests };
+      try { sessionStorage.setItem(STORE, JSON.stringify(mem)); } catch { /* storage full or blocked */ }
+    }
+    const box = buildInbox(notes, tests);
+    listeners.forEach((fn) => fn(box));
+    return box;
+  })().finally(() => { inflight = null; });
+  inflight = { key, p };
+  return p;
+}
+
+/** Something changed (homework handed in, test submitted): refetch for everyone listening. */
+export function invalidateInbox() {
+  mem = null;
+  try { sessionStorage.removeItem(STORE); } catch { /* ignore */ }
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("notenix:inbox"));
+}
+
+/** Inbox for a signed-in student, shared with every other component that uses it. */
+export function useInbox(enabled: boolean, _refreshKey = ""): Inbox | null {
   const [inbox, setInbox] = useState<Inbox | null>(null);
   useEffect(() => {
     if (!enabled) return;
     let alive = true;
-    const refresh = () => loadInbox().then((x) => alive && setInbox(x));
-    refresh();
-    window.addEventListener("notenix:seen", refresh);
-    return () => { alive = false; window.removeEventListener("notenix:seen", refresh); };
-  }, [enabled, refreshKey]);
+    const set = (x: Inbox) => { if (alive) setInbox(x); };
+    const now = peekInbox();
+    if (now) setInbox(now);
+    listeners.add(set);
+    loadInbox().then(set);                                   // cached unless stale
+    const fresh = () => { loadInbox({ fresh: true }).then(set); };
+    const onVisible = () => { if (document.visibilityState === "visible") loadInbox().then(set); };
+    window.addEventListener("notenix:seen", fresh);
+    window.addEventListener("notenix:inbox", fresh);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      alive = false;
+      listeners.delete(set);
+      window.removeEventListener("notenix:seen", fresh);
+      window.removeEventListener("notenix:inbox", fresh);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [enabled, _refreshKey]);
   return inbox;
 }

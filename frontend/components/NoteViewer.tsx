@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Download, FileText, ChevronDown, ChevronUp, Camera, X, CheckCircle2 } from "lucide-react";
 import { api, notesAPI } from "@/lib/api";
+import { invalidateInbox } from "@/lib/inbox";
 import { MathText } from "@/components/MathText";
 import { formatDate } from "@/lib/utils";
 import { compressImage } from "@/lib/images";
@@ -89,8 +90,8 @@ export default function NoteViewer({ note, footer, defaultOpen = false }: { note
     if (next && !detail) load();
     if (next && isNew) {
       setIsNew(false);
-      api.post(`/notes/${note.id}/seen`).catch(() => {});
-      window.dispatchEvent(new Event("notenix:seen"));  // refresh the menu badges
+      // Refresh the menu badges once the server has recorded it (not before, or they'd still say New).
+      api.post(`/notes/${note.id}/seen`).catch(() => {}).finally(() => window.dispatchEvent(new Event("notenix:seen")));
     }
   };
 
@@ -234,6 +235,7 @@ function HandIn({ noteId, sub, onDone }: { noteId: number; sub: any; onDone: (s:
     try {
       const { data } = await notesAPI.submit(noteId, { images: photos, comment });
       onDone({ ...data, images: photos });
+      invalidateInbox();  // homework count in the menu and dashboard
       setEditing(false);
       setPhotos([]);
     } catch (e: any) {
