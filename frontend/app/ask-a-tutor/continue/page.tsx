@@ -10,7 +10,7 @@ import { type Account, useCountry, pickAccounts, countryName } from "@/lib/count
 
 type Info = { accounts: Account[]; prices: Record<string, Record<string, number>>;
   plans: Record<string, { name: string; cap: number; calls: number; days?: number }> };
-const SYM: Record<string, string> = { SGD: "S$", GBP: "£", USD: "$", AUD: "A$", INR: "₹" };
+const SYM: Record<string, string> = { SGD: "S$", GBP: "£", USD: "$", AUD: "A$", INR: "₹", THB: "฿" };
 const money = (cur: string, n: number) => (SYM[cur] ? `${SYM[cur]}${n.toLocaleString("en")}` : `${cur} ${n.toLocaleString("en")}`);
 
 /** Ask a Tutor is priced in S$: show the visitor's own local account if we have one, otherwise the

@@ -47,7 +47,7 @@ export type StudyPlan = {
 
 /** Billing currency for a visitor's country (SAT prices: services/pricing.SAT_PRICES). */
 export function satCurrency(country: string): string {
-  const map: Record<string, string> = { IN: "INR", AE: "AED", GB: "GBP", SG: "SGD", AU: "AUD", NZ: "NZD", CA: "CAD", US: "USD" };
+  const map: Record<string, string> = { IN: "INR", AE: "AED", GB: "GBP", SG: "SGD", AU: "AUD", NZ: "NZD", CA: "CAD", US: "USD", TH: "THB" };
   const eu = ["AT", "BE", "CY", "DE", "EE", "ES", "FI", "FR", "GR", "HR", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PT", "SI", "SK"];
   if (map[country]) return map[country];
   return eu.includes(country) ? "EUR" : "USD";

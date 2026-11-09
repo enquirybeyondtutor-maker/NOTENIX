@@ -17,7 +17,7 @@ export type Account = {
 
 const COUNTRY_NAMES: Record<string, string> = {
   AU: "Australia", SG: "Singapore", GB: "the UK", NZ: "New Zealand", IN: "India",
-  AE: "the UAE", US: "the US", IE: "Ireland", MY: "Malaysia", HK: "Hong Kong", CA: "Canada",
+  AE: "the UAE", US: "the US", IE: "Ireland", MY: "Malaysia", HK: "Hong Kong", CA: "Canada", TH: "Thailand",
   DE: "Germany", FR: "France", NL: "the Netherlands", ES: "Spain", IT: "Italy", BE: "Belgium",
   AT: "Austria", PT: "Portugal", CH: "Switzerland", SE: "Sweden", DK: "Denmark", NO: "Norway",
   PL: "Poland", FI: "Finland", GR: "Greece",
@@ -34,6 +34,7 @@ function countryFromTimeZone(): string {
   try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch {}
   if (tz.startsWith("Australia/")) return "AU";
   if (tz === "Asia/Singapore") return "SG";
+  if (tz === "Asia/Bangkok") return "TH";
   if (tz === "Pacific/Auckland" || tz === "Pacific/Chatham") return "NZ";
   if (tz === "Europe/London") return "GB";
   if (tz === "Asia/Kolkata" || tz === "Asia/Calcutta") return "IN";
@@ -78,12 +79,12 @@ export function pickAccounts(accounts: Account[], country: string): { shown: Acc
 // that account's currency (rounded, at today's rate); everyone else sees GBP.
 
 const SYMBOL: Record<string, string> = {
-  GBP: "£", AUD: "A$", NZD: "NZ$", SGD: "S$", CAD: "C$", USD: "US$", EUR: "€", AED: "AED ", INR: "₹",
+  GBP: "£", AUD: "A$", NZD: "NZ$", SGD: "S$", CAD: "C$", USD: "US$", EUR: "€", AED: "AED ", INR: "₹", THB: "฿",
 };
 
 /** Round up to a price ending in 9: A$286.60 → A$289, US$200.70 → US$209 (₹ to the next ...99). */
 function tidy(amount: number, currency: string): number {
-  const step = currency === "INR" ? 100 : 10;
+  const step = currency === "INR" || currency === "THB" ? 100 : 10;
   let v = Math.ceil(amount / step) * step - 1;
   if (v < amount) v += step;
   return v;

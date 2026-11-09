@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Sparkles, Send } from "lucide-react";
 import { paymentsAPI } from "@/lib/api";
 
-const SYM: Record<string, string> = { GBP: "£", USD: "$", EUR: "€", INR: "₹" };
+const SYM: Record<string, string> = { GBP: "£", USD: "$", EUR: "€", INR: "₹", THB: "฿" };
 
 // Reminds people on the auth screens what they were in the middle of, so signing in or up
 // mid-purchase doesn't feel like starting over.

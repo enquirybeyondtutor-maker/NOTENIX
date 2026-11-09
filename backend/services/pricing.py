@@ -8,23 +8,24 @@ from config import settings
 
 DEFAULT_PRICES = {
     "GBP": 49, "AED": 229, "USD": 65, "EUR": 59, "AUD": 99,
-    "NZD": 109, "SGD": 85, "CAD": 89, "INR": 5499,
+    "NZD": 109, "SGD": 85, "CAD": 89, "INR": 5499, "THB": 1990,
 }
-SYMBOLS = {"GBP": "£", "USD": "$", "EUR": "€", "AUD": "A$", "NZD": "NZ$", "SGD": "S$", "CAD": "C$", "INR": "₹"}
+SYMBOLS = {"GBP": "£", "USD": "$", "EUR": "€", "AUD": "A$", "NZD": "NZ$", "SGD": "S$", "CAD": "C$", "INR": "₹", "THB": "฿"}
 NAMES = {"GBP": "UK", "AED": "UAE", "USD": "US", "EUR": "Europe", "AUD": "Australia",
-         "NZD": "New Zealand", "SGD": "Singapore", "CAD": "Canada", "INR": "India"}
+         "NZD": "New Zealand", "SGD": "Singapore", "CAD": "Canada", "INR": "India",
+         "THB": "Thailand"}
 
 
 KS3_PRICES = {
     "GBP": 149, "AED": 699, "USD": 189, "EUR": 179, "AUD": 289,
-    "NZD": 319, "SGD": 255, "CAD": 259, "INR": 16999,
+    "NZD": 319, "SGD": 255, "CAD": 259, "INR": 16999, "THB": 5990,
 }
 
 
 # Notenix SAT, one year. Lower than KS3: SAT families are mostly in India, the Gulf and Asia.
 SAT_PRICES = {
     "USD": 129, "INR": 7999, "AED": 469, "GBP": 99, "SGD": 169, "AUD": 199,
-    "EUR": 119, "NZD": 219, "CAD": 179,
+    "EUR": 119, "NZD": 219, "CAD": 179, "THB": 3990,
 }
 
 

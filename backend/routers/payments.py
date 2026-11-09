@@ -154,8 +154,8 @@ async def mine(user: User = Depends(get_current_user), db: AsyncSession = Depend
 # Prices are set in GBP. For visitors elsewhere we show a rounded local equivalent.
 # Rates come from open.er-api.com (free, daily) and are cached for 12 hours; if that
 # fails we fall back to these rates (5 Nov 2026) so the page never breaks.
-FX_CURRENCIES = ["AUD", "NZD", "SGD", "CAD", "EUR", "USD", "AED", "INR"]
-_FX_FALLBACK = {"AUD": 1.92, "NZD": 2.39, "SGD": 1.72, "CAD": 1.88, "EUR": 1.20, "USD": 1.35, "AED": 4.95, "INR": 127.5}
+FX_CURRENCIES = ["AUD", "NZD", "SGD", "CAD", "EUR", "USD", "AED", "INR", "THB"]
+_FX_FALLBACK = {"AUD": 1.92, "NZD": 2.39, "SGD": 1.72, "CAD": 1.88, "EUR": 1.20, "USD": 1.35, "AED": 4.95, "INR": 127.5, "THB": 43.5}
 _fx_cache: dict = {"at": None, "rates": None}
 
 

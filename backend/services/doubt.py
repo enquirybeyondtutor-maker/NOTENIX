@@ -22,9 +22,9 @@ PLANS = {
     "plus": {"name": "Doubt Help Plus", "cap": 50, "days": 30, "calls": 2},
 }
 PRICES = {  # annual: per year; doubt / plus: per 30 days
-    "annual": {"SGD": 249, "GBP": 149, "USD": 189, "AED": 699, "AUD": 289, "INR": 15999},
-    "doubt": {"SGD": 39, "GBP": 25, "USD": 29, "AED": 109, "AUD": 45, "INR": 2499},
-    "plus": {"SGD": 79, "GBP": 49, "USD": 59, "AED": 215, "AUD": 89, "INR": 4999},
+    "annual": {"SGD": 249, "GBP": 149, "USD": 189, "AED": 699, "AUD": 289, "INR": 15999, "THB": 5990},
+    "doubt": {"SGD": 39, "GBP": 25, "USD": 29, "AED": 109, "AUD": 45, "INR": 2499, "THB": 990},
+    "plus": {"SGD": 79, "GBP": 49, "USD": 59, "AED": 215, "AUD": 89, "INR": 4999, "THB": 1890},
 }
 LEVELS = ("Sec 1", "Sec 2", "Sec 3", "Sec 4", "Sec 5", "JC 1", "JC 2")
 LOWER = ("Science", "Maths", "English", "Other")
