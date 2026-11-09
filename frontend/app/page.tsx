@@ -55,6 +55,7 @@ export default function LandingPage() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
           <div className="animate-slide-up">
             <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
+              <span className="block text-brand-600">Notenix</span>
               Practice tests,<br className="hidden sm:block" /> marked by real tutors.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
