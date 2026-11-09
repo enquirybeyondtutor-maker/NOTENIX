@@ -1,0 +1,744 @@
+{
+ "exam": "tmua",
+ "slug": "mock-3",
+ "title": "TMUA Practice Test 3",
+ "kind": "mock",
+ "summary": "Paper 1 + Paper 2 · 40 questions · 2 h 30 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Paper 1",
+   "section": "p1",
+   "minutes": 75,
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "For non-zero $x$ and $y$, which of the following is equal to $\\dfrac{(3x^2y)^2}{xy^3}$?",
+     "options": [
+      "$\\dfrac{3x^3}{y}$",
+      "$\\dfrac{6x^3}{y}$",
+      "$\\dfrac{9x}{y}$",
+      "$9x^3y$",
+      "$\\dfrac{9x^3}{y}$"
+     ],
+     "answer": "E",
+     "explanation": "$(3x^2y)^2 = 9x^4y^2$. Dividing by $xy^3$ gives $9x^{4-1}y^{2-3} = \\frac{9x^3}{y}$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is the complete solution of $3x - 7 > 2(x + 1)$?",
+     "options": [
+      "$x > 9$",
+      "$x < 9$",
+      "$x > 5$",
+      "$x > -9$",
+      "$x < -5$"
+     ],
+     "answer": "A",
+     "explanation": "Expand: $3x - 7 > 2x + 2$. Subtract $2x$ and add $7$: $x > 9$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the least value of $x^2 + 6x + 2$ as $x$ varies over the real numbers?",
+     "options": [
+      "$-11$",
+      "$-9$",
+      "$-8$",
+      "$-7$",
+      "$2$"
+     ],
+     "answer": "D",
+     "explanation": "Complete the square: $x^2 + 6x + 2 = (x + 3)^2 - 7$, which is least when $x = -3$, giving $-7$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Given that $\\log_2 a = 3$ and $\\log_2 b = 5$, what is the value of $\\log_2 \\dfrac{a^2}{b}$?",
+     "options": [
+      "$-5$",
+      "$-3$",
+      "$-1$",
+      "$0$",
+      "$1$"
+     ],
+     "answer": "E",
+     "explanation": "$\\log_2 \\frac{a^2}{b} = 2\\log_2 a - \\log_2 b = 6 - 5 = 1$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-04"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the sum of the first $50$ positive even numbers?",
+     "options": [
+      "$2450$",
+      "$2500$",
+      "$2550$",
+      "$2600$",
+      "$5100$"
+     ],
+     "answer": "C",
+     "explanation": "$2 + 4 + \\cdots + 100 = 2(1 + 2 + \\cdots + 50) = 2 \\times \\frac{50 \\times 51}{2} = 2550$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-05"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Where do the lines $y = 3x - 2$ and $2x + y = 8$ intersect?",
+     "options": [
+      "$(1, 1)$",
+      "$(4, 0)$",
+      "$(3, 7)$",
+      "$(2, 4)$",
+      "$(2, 6)$"
+     ],
+     "answer": "D",
+     "explanation": "Substitute: $2x + 3x - 2 = 8$, so $x = 2$ and $y = 3(2) - 2 = 4$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-06"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A triangle has sides of length $5$ and $7$ with an angle of $60^\\circ$ between them. What is the length of the third side?",
+     "options": [
+      "$\\sqrt{29}$",
+      "$\\sqrt{39}$",
+      "$7$",
+      "$\\sqrt{59}$",
+      "$\\sqrt{74}$"
+     ],
+     "answer": "B",
+     "explanation": "By the cosine rule, $c^2 = 25 + 49 - 2(5)(7)\\cos 60^\\circ = 74 - 35 = 39$, so $c = \\sqrt{39}$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-07"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The graph of $y = \\dfrac{1}{x - 2} + 3$ has a vertical and a horizontal asymptote. At which point do the asymptotes meet?",
+     "options": [
+      "$(-2, 3)$",
+      "$(2, -3)$",
+      "$(2, 3)$",
+      "$(3, 2)$",
+      "$(-3, 2)$"
+     ],
+     "answer": "C",
+     "explanation": "The graph of $y = \\frac{1}{x}$, with asymptotes $x = 0$ and $y = 0$, has been moved $2$ right and $3$ up. So the asymptotes are $x = 2$ and $y = 3$, meeting at $(2, 3)$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-08"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the equation of the tangent to the curve $y = x^3 - 2x$ at the point where $x = 1$?",
+     "options": [
+      "$y = x - 2$",
+      "$y = x$",
+      "$y = 3x - 4$",
+      "$y = -x$",
+      "$y = x + 2$"
+     ],
+     "answer": "A",
+     "explanation": "At $x = 1$, $y = -1$ and $\\frac{dy}{dx} = 3x^2 - 2 = 1$. The tangent is $y + 1 = 1(x - 1)$, that is $y = x - 2$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-09"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Evaluate $\\displaystyle\\int_1^2 (6x^2 - 4x + 1)\\,dx$.",
+     "options": [
+      "$5$",
+      "$6$",
+      "$7$",
+      "$8$",
+      "$9$"
+     ],
+     "answer": "E",
+     "explanation": "An antiderivative is $2x^3 - 2x^2 + x$. At $2$: $16 - 8 + 2 = 10$. At $1$: $2 - 2 + 1 = 1$. The integral is $9$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-10"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The line $y = x + c$ is a tangent to the curve $y = x^2 - 3x$. What is the value of $c$?",
+     "options": [
+      "$-4$",
+      "$-2$",
+      "$0$",
+      "$2$",
+      "$4$"
+     ],
+     "answer": "A",
+     "explanation": "Setting $x^2 - 3x = x + c$ gives $x^2 - 4x - c = 0$. A tangent meets the curve once, so the discriminant $16 + 4c$ is zero and $c = -4$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-11"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Given that $x = 2 + \\sqrt{3}$, what is the value of $x + \\dfrac{1}{x}$?",
+     "options": [
+      "$2$",
+      "$2\\sqrt{3}$",
+      "$4$",
+      "$4 + \\sqrt{3}$",
+      "$7$"
+     ],
+     "answer": "C",
+     "explanation": "$\\frac{1}{2 + \\sqrt{3}} = \\frac{2 - \\sqrt{3}}{4 - 3} = 2 - \\sqrt{3}$, so $x + \\frac{1}{x} = 4$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-12"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "When $p(x) = x^3 + ax + b$ is divided by $x - 1$ the remainder is $4$, and when it is divided by $x + 1$ the remainder is $6$. What is the value of $ab$?",
+     "options": [
+      "$-10$",
+      "$-5$",
+      "$3$",
+      "$5$",
+      "$10$"
+     ],
+     "answer": "A",
+     "explanation": "$p(1) = 1 + a + b = 4$ and $p(-1) = -1 - a + b = 6$. Adding gives $2b = 10$, so $b = 5$ and $a = -2$. Then $ab = -10$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-13"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is the solution of $5^x = 3^{x + 1}$?",
+     "options": [
+      "$x = \\dfrac{\\log 3}{\\log 5}$",
+      "$x = \\dfrac{\\log 3}{\\log \\frac{5}{3}}$",
+      "$x = \\dfrac{\\log 5}{\\log 3}$",
+      "$x = \\dfrac{\\log \\frac{5}{3}}{\\log 3}$",
+      "$x = \\dfrac{3}{2}$"
+     ],
+     "answer": "B",
+     "explanation": "Take logs: $x\\log 5 = (x + 1)\\log 3$, so $x(\\log 5 - \\log 3) = \\log 3$ and $x = \\frac{\\log 3}{\\log 5 - \\log 3} = \\frac{\\log 3}{\\log \\frac{5}{3}}$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-14"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The sum of the first $n$ terms of a sequence is $S_n = 3n^2 + 2n$. What is the $10$th term of the sequence?",
+     "options": [
+      "$53$",
+      "$55$",
+      "$57$",
+      "$59$",
+      "$61$"
+     ],
+     "answer": "D",
+     "explanation": "The $10$th term is $S_{10} - S_9 = (300 + 20) - (243 + 18) = 320 - 261 = 59$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-15"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A circle passes through the points $(0, 0)$, $(6, 0)$ and $(0, 8)$. What is the area of the circle?",
+     "options": [
+      "$16\\pi$",
+      "$25\\pi$",
+      "$36\\pi$",
+      "$48\\pi$",
+      "$100\\pi$"
+     ],
+     "answer": "B",
+     "explanation": "The right angle at the origin means the hypotenuse, from $(6, 0)$ to $(0, 8)$, is a diameter. Its length is $10$, so the radius is $5$ and the area is $25\\pi$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-16"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How many solutions does the equation $\\cos 2x = \\cos x$ have in the interval $0 \\le x < 2\\pi$?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$",
+      "$6$"
+     ],
+     "answer": "C",
+     "explanation": "Use $\\cos 2x = 2\\cos^2 x - 1$: $2\\cos^2 x - \\cos x - 1 = 0$, so $\\cos x = 1$ or $\\cos x = -\\frac{1}{2}$. That gives $x = 0$, $\\frac{2\\pi}{3}$ and $\\frac{4\\pi}{3}$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-17"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Let $f(x) = x^3 - 3x$. For how many real values of $k$ does the equation $f(x) = k$ have exactly two distinct real solutions?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$",
+      "infinitely many"
+     ],
+     "answer": "B",
+     "explanation": "$f'(x) = 3x^2 - 3$, so there is a local maximum $f(-1) = 2$ and a local minimum $f(1) = -2$. A horizontal line meets the graph exactly twice only when it touches a turning point: $k = 2$ or $k = -2$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-18"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A rectangle has two vertices on the $x$-axis and the other two on the curve $y = 12 - x^2$, above the axis and placed symmetrically about the $y$-axis. What is the largest possible area of the rectangle?",
+     "options": [
+      "$16$",
+      "$20$",
+      "$24$",
+      "$28$",
+      "$32$"
+     ],
+     "answer": "E",
+     "explanation": "With vertices at $x = \\pm a$, the area is $A = 2a(12 - a^2) = 24a - 2a^3$. $A' = 24 - 6a^2 = 0$ gives $a = 2$, so $A = 4 \\times 8 = 32$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-19"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Given that $\\displaystyle\\int_0^k (2x - 3)\\,dx = 4$ and $k > 0$, what is the value of $k$?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$",
+      "$5$"
+     ],
+     "answer": "D",
+     "explanation": "The integral is $k^2 - 3k$, so $k^2 - 3k - 4 = 0$ and $(k - 4)(k + 1) = 0$. With $k > 0$, $k = 4$.",
+     "section": "p1",
+     "id": "tmua-mock-3-p1-20"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Paper 2",
+   "section": "p2",
+   "minutes": 75,
+   "questions": [
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The statement \"If $n$ is a multiple of $4$, then $n$ is even\" is true. Which value of $n$ shows that its converse is false?",
+     "options": [
+      "$6$",
+      "$8$",
+      "$12$",
+      "$16$",
+      "$20$"
+     ],
+     "answer": "A",
+     "explanation": "The converse is ‘if $n$ is even, then $n$ is a multiple of $4$’. To show it is false we need an even number that is not a multiple of $4$: $6$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-01"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "For a triangle, which of the following describes the condition \"the triangle is equilateral\" for the statement \"the triangle is isosceles\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "B",
+     "explanation": "An equilateral triangle has (at least) two equal sides, so it is isosceles: the condition is sufficient. A triangle with sides $5$, $5$, $8$ is isosceles but not equilateral, so it is not necessary.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-02"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which value of $x$ is a counterexample to the statement\n\n\"$x^2 \\ge x$ for every real number $x$\"?",
+     "options": [
+      "$-2$",
+      "$0$",
+      "$\\dfrac{1}{2}$",
+      "$1$",
+      "$2$"
+     ],
+     "answer": "C",
+     "explanation": "$x = \\frac{1}{2}$ gives $x^2 = \\frac{1}{4} < \\frac{1}{2}$. For the other values, $x^2 \\ge x$ holds.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-03"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is logically equivalent to\n\n\"Not all cats are black\"?",
+     "options": [
+      "No cats are black.",
+      "All cats are not black.",
+      "Some cats are black.",
+      "Some cats are not black.",
+      "Some black things are not cats."
+     ],
+     "answer": "D",
+     "explanation": "‘Not all cats are black’ says that at least one cat is not black, which is exactly ‘some cats are not black’. ‘No cats are black’ is much stronger.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-04"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A student solves $\\log_2 \\left(x^2\\right) = 4$ as follows.\n\n(1) $\\log_2 \\left(x^2\\right) = 2\\log_2 x$.\n(2) So $2\\log_2 x = 4$.\n(3) So $\\log_2 x = 2$.\n(4) So $x = 4$ is the only solution.\n\nWhich line is the first one that is not valid for every $x$ for which the equation makes sense?",
+     "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)",
+      "The working is correct."
+     ],
+     "answer": "A",
+     "explanation": "The equation makes sense for any $x \\ne 0$, but $\\log_2 x$ needs $x > 0$. The correct identity is $\\log_2 (x^2) = 2\\log_2 |x|$, so line (1) loses the solution $x = -4$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-05"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For integers $a$ and $b$, which of the following describes the condition \"$a + b$ is even\" for the statement \"$a$ and $b$ are both even\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "A",
+     "explanation": "If $a$ and $b$ are both even, so is $a + b$: the condition is necessary. But $a = b = 1$ makes $a + b$ even with neither even, so it is not sufficient.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-06"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For a real number $x$, which of the following statements are true?\n\nI: If $x^2 = 4$, then $x = 2$.\nII: $x = 2$ only if $x^2 = 4$.\nIII: $x^2 = 4$ if $x = -2$.",
+     "options": [
+      "I only",
+      "II only",
+      "III only",
+      "I and II only",
+      "II and III only"
+     ],
+     "answer": "E",
+     "explanation": "I is false ($x = -2$). II means ‘if $x = 2$ then $x^2 = 4$’, which is true. III means ‘if $x = -2$ then $x^2 = 4$’, which is also true.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-07"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is a valid proof that $n^2 - 1$ is a multiple of $8$ for every odd integer $n$?",
+     "options": [
+      "$n^2 - 1 = (n - 1)(n + 1)$, and both factors are even, so the product is a multiple of $4$.",
+      "$3^2 - 1 = 8$, $5^2 - 1 = 24$ and $7^2 - 1 = 48$, all multiples of $8$.",
+      "$n^2 - 1$ is even, so it is a multiple of $8$.",
+      "Write $n = 2k + 1$. Then $n^2 - 1 = 4k^2 + 4k$, which is a multiple of $4$.",
+      "Write $n = 2k + 1$. Then $n^2 - 1 = 4k(k + 1)$, and one of $k$ and $k + 1$ is even, so $n^2 - 1$ is a multiple of $8$."
+     ],
+     "answer": "E",
+     "explanation": "$4k(k + 1)$ contains $4$ and the even number $k(k + 1)$, so it is a multiple of $8$. The first and fourth arguments only reach a multiple of $4$; examples and ‘even’ are not enough.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-08"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "$a$ and $b$ are real numbers with $a > b$. Which of the following must be true?\n\nI: $a^3 > b^3$\nII: $a^2 > b^2$\nIII: $a - 1 > b - 1$",
+     "options": [
+      "I only",
+      "I and III only",
+      "III only",
+      "I and II only",
+      "I, II and III"
+     ],
+     "answer": "B",
+     "explanation": "Cubing keeps the order of real numbers (I), and subtracting $1$ from both sides does too (III). II fails: $a = 1$, $b = -2$ gives $1 < 4$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-09"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For a real number $x$, which of the following is a necessary and sufficient condition for $x^3 > x$?",
+     "options": [
+      "$x > 1$",
+      "$x > 0$",
+      "$|x| > 1$",
+      "$-1 < x < 0$ or $x > 1$",
+      "$x < -1$ or $0 < x < 1$"
+     ],
+     "answer": "D",
+     "explanation": "$x^3 - x = x(x - 1)(x + 1)$, which is positive for $-1 < x < 0$ and for $x > 1$ (check the sign in each interval between $-1$, $0$ and $1$).",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-10"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A student writes:\n\n(1) Let $f(x) = x^3$.\n(2) Then $f'(x) = 3x^2$, so $f'(0) = 0$.\n(3) Any point where the derivative is zero is a turning point.\n(4) So the graph of $y = x^3$ has a turning point at $x = 0$.\n\nWhich line contains the first error?",
+     "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)",
+      "There is no error."
+     ],
+     "answer": "C",
+     "explanation": "A zero derivative gives a stationary point, which need not be a turning point. For $y = x^3$, $f'(x) = 3x^2 \\ge 0$ on both sides of $0$, so the graph keeps increasing through a point of inflection.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-11"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is the negation of the statement\n\n\"For every positive integer $n$, if $n$ is prime then $n + 2$ is prime\"?",
+     "options": [
+      "There is a positive integer $n$ such that $n$ is prime and $n + 2$ is not prime.",
+      "For every positive integer $n$, if $n$ is prime then $n + 2$ is not prime.",
+      "For every positive integer $n$, if $n$ is not prime then $n + 2$ is not prime.",
+      "There is a positive integer $n$ such that $n$ is prime and $n + 2$ is prime.",
+      "There is a positive integer $n$ such that $n$ is not prime and $n + 2$ is prime."
+     ],
+     "answer": "A",
+     "explanation": "The negation of ‘for every $n$, $P(n)$’ is ‘for some $n$, not $P(n)$’, and ‘if prime then $n + 2$ prime’ fails exactly when $n$ is prime and $n + 2$ is not. (The original is false: $n = 7$ gives $9$.)",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-12"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A student wants to prove by contradiction that $\\sqrt{2} + \\sqrt{3}$ is irrational. They write:\n\n\"Suppose $\\sqrt{2} + \\sqrt{3} = r$, where $r$ is rational. Squaring gives $5 + 2\\sqrt{6} = r^2$, so $\\sqrt{6} = \\dfrac{r^2 - 5}{2}$.\"\n\nWhich fact completes the proof?",
+     "options": [
+      "$\\sqrt{2}$ and $\\sqrt{3}$ are both irrational.",
+      "$r^2$ is rational.",
+      "$r \\ne 0$.",
+      "$\\sqrt{6}$ is irrational.",
+      "The sum of two irrational numbers is irrational."
+     ],
+     "answer": "D",
+     "explanation": "The right-hand side is rational because $r$ is, so $\\sqrt{6}$ would be rational. Knowing that $\\sqrt{6}$ is irrational gives the contradiction. The last statement is false ($\\sqrt{2} + (-\\sqrt{2}) = 0$).",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-13"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$f(x) = x^2 + px + q$, where $p$ and $q$ are real. Which of the following describes the condition \"$q < 0$\" for the statement \"$f(x) = 0$ has two real roots of opposite sign\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "C",
+     "explanation": "The product of the roots is $q$. Roots of opposite sign need a negative product, so $q < 0$ is necessary. Conversely, if $q < 0$ the discriminant $p^2 - 4q$ is positive, so there are two real roots whose product is negative: sufficient too.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-14"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following must be true for every angle $\\theta$ with $0^\\circ < \\theta < 90^\\circ$?\n\nI: $\\sin\\theta < \\tan\\theta$\nII: $\\cos\\theta < 1$\nIII: $\\sin\\theta + \\cos\\theta > 1$",
+     "options": [
+      "I only",
+      "I and II only",
+      "I and III only",
+      "II and III only",
+      "I, II and III"
+     ],
+     "answer": "E",
+     "explanation": "II holds because $\\theta \\ne 0^\\circ$. Then I follows: $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} > \\sin\\theta$ as $0 < \\cos\\theta < 1$. III: $\\sin\\theta + \\cos\\theta = \\sqrt{2}\\sin(\\theta + 45^\\circ)$, and $45^\\circ < \\theta + 45^\\circ < 135^\\circ$ makes this more than $1$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-15"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$p(x)$ is a cubic polynomial with $p(1) = p(2) = p(3) = 0$ and $p(0) = -12$. What is the value of $p(4)$?",
+     "options": [
+      "$-12$",
+      "$6$",
+      "$8$",
+      "$12$",
+      "$24$"
+     ],
+     "answer": "D",
+     "explanation": "$p(x) = a(x - 1)(x - 2)(x - 3)$. Then $p(0) = -6a = -12$, so $a = 2$, and $p(4) = 2 \\times 3 \\times 2 \\times 1 = 12$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-16"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$f$ is a polynomial with $f'(x) > 0$ for every real $x$. Which of the following must be true?\n\nI: The equation $f(x) = 0$ has at most one real root.\nII: $f(2) > f(1)$\nIII: $f''(x) > 0$ for every real $x$",
+     "options": [
+      "I only",
+      "I and II only",
+      "I and III only",
+      "II and III only",
+      "I, II and III"
+     ],
+     "answer": "B",
+     "explanation": "$f$ is strictly increasing, so it takes each value at most once (I) and $f(2) > f(1)$ (II). III fails: $f(x) = x^3 + x$ has $f'(x) = 3x^2 + 1 > 0$ but $f''(x) = 6x$, which is negative for $x < 0$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-17"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following numbers is the largest?",
+     "options": [
+      "$2^{30}$",
+      "$5^{12}$",
+      "$7^{10}$",
+      "$10^{9}$",
+      "$3^{20}$"
+     ],
+     "answer": "E",
+     "explanation": "$3^{20} = 9^{10}$ and $2^{30} = 8^{10}$, and both are larger than $7^{10}$. $5^{12} = 25^6 < 10^9$. Finally $9^{10} = 10^{10} \\times 0.9^{10}$, and $0.9^{10} > 0.1$, so $3^{20} > 10^9$.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-18"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For a real number $x$, which one of the following statements is false?",
+     "options": [
+      "If $x > 1$, then $x^2 > 1$.",
+      "If $x^2 > 1$, then $x > 1$.",
+      "If $x > 1$, then $x^3 > 1$.",
+      "If $x^3 > 1$, then $x > 1$.",
+      "If $x < -1$, then $x^2 > 1$."
+     ],
+     "answer": "B",
+     "explanation": "$x = -2$ gives $x^2 = 4 > 1$ but $x < 1$, so the second statement is false. Cubing keeps the order, so the third and fourth are true, and the first and last are true by squaring.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-19"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is a valid proof that no square number ends in the digit $7$?",
+     "options": [
+      "$1, 4, 9, 16, 25, 36, 49, 64, 81, 100$ do not end in $7$.",
+      "$7$ is prime, so it cannot be the last digit of a square.",
+      "The last digit of $n^2$ depends only on the last digit of $n$, and the squares of $0, 1, \\ldots, 9$ end in $0, 1, 4, 9, 6, 5, 6, 9, 4, 1$, none of which is $7$.",
+      "Squares of odd numbers are odd and $7$ is odd, so the argument must consider odd numbers only.",
+      "$\\sqrt{7}$ is irrational, so no square ends in $7$."
+     ],
+     "answer": "C",
+     "explanation": "Every integer ends in one of $0$ to $9$, and $(10a + b)^2 = 100a^2 + 20ab + b^2$ ends in the same digit as $b^2$. Checking all ten cases covers every integer. A list of examples does not.",
+     "section": "p2",
+     "id": "tmua-mock-3-p2-20"
+    }
+   ]
+  }
+ }
+}

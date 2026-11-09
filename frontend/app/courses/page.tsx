@@ -5,6 +5,7 @@ import { useAuthGuard } from "@/lib/guard";
 import { coursesAPI, type Course, type Enrolment, type Price } from "@/lib/coursesApi";
 import { PageContainer, PageHeader, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
+import { hasEngine } from "@/lib/examApi";
 import CoursePicker from "@/components/CoursePicker";
 import PaymentBox from "@/components/PaymentBox";
 import { formatDate } from "@/lib/utils";
@@ -64,6 +65,9 @@ export default function CoursesPage() {
               <span className={c.kind === "trial" ? "badge-neutral" : "badge-brand"}>{c.kind === "trial" ? "Free trial" : "Active"}</span>
               <h3 className="mt-3 font-semibold text-ink">{c.name}</h3>
               <p className="mt-1 text-sm text-ink-muted">{c.until ? `Until ${formatDate(c.until)}` : "No end date"}</p>
+              {(c.course === "sat" || hasEngine(c.course)) && (
+                <Button size="sm" variant="secondary" className="mt-4 mr-2" href={`/${c.course}/practice`}>Open practice</Button>
+              )}
               {c.kind === "trial" && (
                 <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Keep it: {priceOf(c.course).label}{c.course === "sat" ? " until test day" : " / year"}</Button>
               )}

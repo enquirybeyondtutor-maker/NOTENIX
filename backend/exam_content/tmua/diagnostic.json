@@ -1,0 +1,243 @@
+{
+ "exam": "tmua",
+ "slug": "diagnostic",
+ "title": "TMUA diagnostic",
+ "kind": "diagnostic",
+ "summary": "12 questions · 44 minutes · both papers",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Paper 1 style",
+   "section": "p1",
+   "minutes": 22,
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is equivalent to $\\dfrac{x^2 - 9}{x^2 + x - 6}$ for all $x \\ne 2$ and $x \\ne -3$?",
+     "options": [
+      "$\\dfrac{x + 3}{x - 2}$",
+      "$\\dfrac{x - 3}{x + 2}$",
+      "$\\dfrac{x - 3}{x - 2}$",
+      "$\\dfrac{x + 3}{x + 2}$",
+      "$\\dfrac{x - 3}{x + 3}$"
+     ],
+     "answer": "C",
+     "explanation": "Factorise: $x^2 - 9 = (x - 3)(x + 3)$ and $x^2 + x - 6 = (x + 3)(x - 2)$. Cancelling $x + 3$ leaves $\\frac{x - 3}{x - 2}$.",
+     "section": "p1",
+     "id": "tmua-diagnostic-p1-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the complete set of values of $x$ for which $x^2 - 5x + 4 < 0$?",
+     "options": [
+      "$x < 1$ or $x > 4$",
+      "$1 < x < 4$",
+      "$-4 < x < -1$",
+      "$x < -4$ or $x > -1$",
+      "$x < 4$"
+     ],
+     "answer": "B",
+     "explanation": "$x^2 - 5x + 4 = (x - 1)(x - 4)$, a parabola opening upwards with roots $1$ and $4$. It is negative between the roots: $1 < x < 4$.",
+     "section": "p1",
+     "id": "tmua-diagnostic-p1-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Find all real solutions of $\\log_2 x + \\log_2 (x - 2) = 3$.",
+     "options": [
+      "$x = -2$",
+      "$x = 2$",
+      "$x = -2$ and $x = 4$",
+      "$x = 4$",
+      "$x = 6$"
+     ],
+     "answer": "D",
+     "explanation": "Combine the logs: $\\log_2 (x(x - 2)) = 3$, so $x^2 - 2x = 8$ and $(x - 4)(x + 2) = 0$. The logarithms need $x > 2$, so $x = -2$ is rejected and only $x = 4$ remains.",
+     "section": "p1",
+     "id": "tmua-diagnostic-p1-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "An arithmetic sequence has third term $11$ and eighth term $31$. What is the sum of its first $10$ terms?",
+     "options": [
+      "$190$",
+      "$200$",
+      "$210$",
+      "$230$",
+      "$250$"
+     ],
+     "answer": "C",
+     "explanation": "$a + 2d = 11$ and $a + 7d = 31$, so $5d = 20$, $d = 4$ and $a = 3$. Then $S_{10} = \\frac{10}{2}(2 \\cdot 3 + 9 \\cdot 4) = 5 \\times 42 = 210$.",
+     "section": "p1",
+     "id": "tmua-diagnostic-p1-04"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The curve $y = x^3 - 6x^2 + 9x + 1$ has two stationary points. What is the $y$-coordinate of the local minimum?",
+     "options": [
+      "$1$",
+      "$3$",
+      "$5$",
+      "$7$",
+      "$9$"
+     ],
+     "answer": "A",
+     "explanation": "$\\frac{dy}{dx} = 3x^2 - 12x + 9 = 3(x - 1)(x - 3)$, so the stationary points are at $x = 1$ and $x = 3$. A positive cubic has its minimum at the larger one: $y(3) = 27 - 54 + 27 + 1 = 1$.",
+     "section": "p1",
+     "id": "tmua-diagnostic-p1-05"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the area of the finite region enclosed by the curve $y = x^2$ and the line $y = 2x$?",
+     "options": [
+      "$\\dfrac{1}{3}$",
+      "$\\dfrac{2}{3}$",
+      "$1$",
+      "$\\dfrac{4}{3}$",
+      "$\\dfrac{8}{3}$"
+     ],
+     "answer": "D",
+     "explanation": "They meet where $x^2 = 2x$, at $x = 0$ and $x = 2$. Between them the line is above the curve, so the area is $\\int_0^2 (2x - x^2)\\,dx = \\left[x^2 - \\frac{x^3}{3}\\right]_0^2 = 4 - \\frac{8}{3} = \\frac{4}{3}$.",
+     "section": "p1",
+     "id": "tmua-diagnostic-p1-06"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Paper 2 style",
+   "section": "p2",
+   "minutes": 22,
+   "questions": [
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Consider the statement:\n\n\"If a whole number is divisible by $6$, then it is divisible by $3$.\"\n\nWhich of the following is the contrapositive of this statement?",
+     "options": [
+      "If a whole number is not divisible by 3, then it is not divisible by 6.",
+      "If a whole number is divisible by 3, then it is divisible by 6.",
+      "If a whole number is not divisible by 6, then it is not divisible by 3.",
+      "If a whole number is divisible by 6, then it is not divisible by 3.",
+      "A whole number is divisible by 6 only if it is not divisible by 3."
+     ],
+     "answer": "A",
+     "explanation": "The contrapositive of ‘if $P$ then $Q$’ is ‘if not $Q$ then not $P$’. Here $Q$ is ‘divisible by $3$’ and $P$ is ‘divisible by $6$’. Swapping without negating gives the converse instead.",
+     "section": "p2",
+     "id": "tmua-diagnostic-p2-01"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For a real number $x$, consider the conditions\n\n$P$: $x > 2$\n$Q$: $x^2 > 4$\n\nWhich of the following is true?",
+     "options": [
+      "P is necessary but not sufficient for Q.",
+      "P is sufficient but not necessary for Q.",
+      "P is necessary and sufficient for Q.",
+      "P is neither necessary nor sufficient for Q."
+     ],
+     "answer": "B",
+     "explanation": "If $x > 2$ then $x^2 > 4$, so $P$ is sufficient for $Q$. But $x = -3$ gives $x^2 > 4$ without $x > 2$, so $P$ is not necessary.",
+     "section": "p2",
+     "id": "tmua-diagnostic-p2-02"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Consider the statement:\n\n\"$n^2 + n + 41$ is prime for every positive integer $n$.\"\n\nWhich of the following values of $n$ is a counterexample to the statement?",
+     "options": [
+      "$1$",
+      "$10$",
+      "$20$",
+      "$39$",
+      "$40$"
+     ],
+     "answer": "E",
+     "explanation": "$n = 40$ gives $1600 + 40 + 41 = 1681 = 41^2$, which is not prime. The other values give $43$, $151$, $461$ and $1601$, all of which are prime.",
+     "section": "p2",
+     "id": "tmua-diagnostic-p2-03"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A student writes the following argument.\n\n(1) Let $a = b$, where $a$ and $b$ are non-zero.\n(2) Then $a^2 = ab$.\n(3) So $a^2 - b^2 = ab - b^2$.\n(4) So $(a + b)(a - b) = b(a - b)$.\n(5) So $a + b = b$.\n(6) So $2b = b$, and therefore $2 = 1$.\n\nWhich line is the first one that does not follow from the line before it?",
+     "options": [
+      "(2)",
+      "(3)",
+      "(4)",
+      "(5)",
+      "(6)"
+     ],
+     "answer": "D",
+     "explanation": "Line (5) divides both sides of line (4) by $a - b$. Since $a = b$, this is dividing by zero, so it is not valid. Lines (2) to (4) are correct steps, and (6) would follow from (5).",
+     "section": "p2",
+     "id": "tmua-diagnostic-p2-04"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is the negation of the statement\n\n\"Every student in the class passed at least one test\"?",
+     "options": [
+      "No student in the class passed any test.",
+      "Every student in the class failed at least one test.",
+      "At least one student in the class passed no tests.",
+      "At least one student in the class failed at least one test.",
+      "Exactly one student in the class passed no tests."
+     ],
+     "answer": "C",
+     "explanation": "The negation of ‘every student has property $X$’ is ‘at least one student does not have property $X$’. Not passing at least one test means passing no tests. The statement about ‘exactly one’ is too strong.",
+     "section": "p2",
+     "id": "tmua-diagnostic-p2-05"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Let $f(x) = x^3 + ax + b$, where $a$ and $b$ are real constants. Consider the statements:\n\nI: If $a > 0$, then $f(x) = 0$ has exactly one real root.\nII: If $f(x) = 0$ has exactly one real root, then $a > 0$.\nIII: If $a < 0$, then $f(x) = 0$ has three distinct real roots.\n\nWhich of these statements are true for all real values of $b$?",
+     "options": [
+      "none of them",
+      "I only",
+      "II only",
+      "III only",
+      "I and II only",
+      "I and III only"
+     ],
+     "answer": "B",
+     "explanation": "If $a > 0$, then $f'(x) = 3x^2 + a > 0$, so $f$ is increasing and crosses zero exactly once: I is true. With $a = -1$ and $b = 10$, the local minimum value is positive, so there is exactly one real root even though $a < 0$. That one example shows both II and III are false.",
+     "section": "p2",
+     "id": "tmua-diagnostic-p2-06"
+    }
+   ]
+  }
+ }
+}

@@ -6,6 +6,7 @@ import { EXAMS, EXAM_BY_SLUG, requestHref } from "@/lib/exams";
 import { SITE } from "@/lib/site";
 import SampleQuiz from "@/components/SampleQuiz";
 import { Button } from "@/components/ui/Button";
+import { hasEngine } from "@/lib/examApi";
 
 // Only the exams in lib/exams.ts exist; anything else 404s (static routes like /pricing win anyway).
 export const dynamicParams = false;
@@ -92,7 +93,11 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-ink-muted">{exam.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="#try" size="lg">Try free questions <ArrowRight size={18} /></Button>
+            {hasEngine(exam.slug) ? (
+              <Button href={`/${exam.slug}/diagnostic`} size="lg">Take the free {exam.name} diagnostic <ArrowRight size={18} /></Button>
+            ) : (
+              <Button href="#try" size="lg">Try free questions <ArrowRight size={18} /></Button>
+            )}
             <Button href={request} variant="secondary" size="lg">
               Get a free marked mock
             </Button>
@@ -105,6 +110,11 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
               </div>
             ))}
           </dl>
+          {hasEngine(exam.slug) && (
+            <p className="mt-5 text-sm text-ink-muted">
+              Already on Notenix {exam.name}? <Link href={`/${exam.slug}/practice`} className="font-medium text-brand-600 hover:underline">Open your practice tests, skill map and study plan</Link>
+            </p>
+          )}
         </div>
       </section>
 

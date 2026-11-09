@@ -9,7 +9,7 @@ import type { SatModule } from "@/lib/satApi";
 /** One timed SAT module, laid out like the Digital SAT app. The parent owns answers/marks
  *  (so it can autosave) and handles submit; the timer calls onSubmit itself at 0:00. */
 export default function Runner({
-  heading, module, answers, marked, secondsLeft, onAnswer, onToggleMark, onSubmit, submitting,
+  heading, module, answers, marked, secondsLeft, onAnswer, onToggleMark, onSubmit, submitting, calculator, reference,
 }: {
   heading: string;
   module: SatModule;
@@ -20,6 +20,9 @@ export default function Runner({
   onToggleMark: (qid: string) => void;
   onSubmit: (auto: boolean) => void;
   submitting?: boolean;
+  /** Show the Desmos calculator / reference sheet buttons (default: in SAT Math modules). */
+  calculator?: boolean;
+  reference?: boolean;
 }) {
   const qs = module.questions;
   const [i, setI] = useState(0);          // current question; qs.length = review page
@@ -31,6 +34,7 @@ export default function Runner({
   const [crossed, setCrossed] = useState<Record<string, string[]>>({});
   const fired = useRef(false);
   const isMath = module.section === "math";
+  const showCalc = calculator ?? isMath, showRef = reference ?? isMath;
   const onReview = i >= qs.length;
   const q = qs[Math.min(i, qs.length - 1)];
 
@@ -73,22 +77,22 @@ export default function Runner({
           </button>
         </div>
         <div className="flex items-center gap-1.5">
-          {isMath && (
-            <>
+          {showCalc && (
               <button onClick={() => setCalc(!calc)} className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold ${calc ? "bg-brand-600 text-white" : "border border-line text-ink hover:bg-slate-50"}`}>
                 <Calculator size={14} /> <span className="hidden sm:inline">Calculator</span>
               </button>
+          )}
+          {showRef && (
               <button onClick={() => setRef(true)} className="inline-flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1.5 text-xs font-semibold text-ink hover:bg-slate-50">
                 <FileText size={14} /> <span className="hidden sm:inline">Reference</span>
               </button>
-            </>
           )}
         </div>
       </header>
 
       {/* Body */}
       <div className="flex min-h-0 flex-1">
-        {calc && (
+        {calc && showCalc && (
           <aside className="hidden w-[min(44vw,560px)] shrink-0 border-r border-line md:block">
             <iframe src="https://www.desmos.com/calculator" title="Desmos graphing calculator" className="h-full w-full" />
           </aside>
@@ -125,7 +129,7 @@ export default function Runner({
                 {q.type === "mcq" ? (
                   <div className="mt-5 space-y-2.5">
                     {(q.options ?? []).map((opt, k) => {
-                      const letter = "ABCD"[k];
+                      const letter = "ABCDEFGH"[k];
                       const chosen = answers[q.id] === letter;
                       const out = (crossed[q.id] ?? []).includes(letter);
                       return (

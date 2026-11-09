@@ -321,6 +321,53 @@ class SatDrillAnswer(Base):
     answered_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
 
 
+class ExamAttempt(Base):
+    """A sitting of a practice test or diagnostic in the exam engine (services/exams.py),
+    e.g. TMUA. stage = index into the form's stages; scores = {"p1": 5.6, ..., "total": 5.9}."""
+    __tablename__ = "exam_attempts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    exam: Mapped[str] = mapped_column(String(20), index=True)
+    form: Mapped[str] = mapped_column(String(40))
+    status: Mapped[str] = mapped_column(String(20), default="in_progress")  # in_progress | done
+    stage: Mapped[int] = mapped_column(Integer, default=0)
+    answers: Mapped[dict] = mapped_column(JSON, default=dict)     # {module_key: {question_id: answer}}
+    marked: Mapped[dict] = mapped_column(JSON, default=dict)      # {module_key: [question_id, ...]}
+    module_started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # None = between modules
+    scores: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    total_score: Mapped[float | None] = mapped_column(Float, nullable=True)
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class ExamDrillAnswer(Base):
+    """One answer in an exam-engine skill drill (latest answer per question counts)."""
+    __tablename__ = "exam_drill_answers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    exam: Mapped[str] = mapped_column(String(20), index=True)
+    question_id: Mapped[str] = mapped_column(String(80))
+    skill: Mapped[str] = mapped_column(String(80))     # drill slug
+    correct: Mapped[bool] = mapped_column(Boolean, default=False)
+    answered_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
+
+
+class ExamGoal(Base):
+    """A student's test date and target for one exam, and the weekly emails already sent."""
+    __tablename__ = "exam_goals"
+    __table_args__ = (UniqueConstraint("user_id", "exam", name="uq_exam_goal_user_exam"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    exam: Mapped[str] = mapped_column(String(20))
+    test_date: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    target: Mapped[float | None] = mapped_column(Float, nullable=True)
+    emails: Mapped[list | None] = mapped_column(JSON, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
 class Enrolment(Base):
     """A course a student holds (services/courses.py), e.g. "igcse-chemistry" or "tmua",
     each with its own end date. Students with none are unrestricted (pre-course accounts)."""

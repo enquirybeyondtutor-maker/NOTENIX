@@ -1,0 +1,1637 @@
+{
+ "exam": "tmua",
+ "slug": "drills",
+ "title": "TMUA skill drills",
+ "kind": "drills",
+ "stages": [],
+ "modules": {
+  "algebraic-manipulation": {
+   "title": "Algebraic manipulation",
+   "domain": "Algebra and functions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Expanding, factorising, indices, surds and algebraic fractions, done quickly without a calculator.",
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is the expansion of $(x + 3)(2x - 5)$?",
+     "options": [
+      "$2x^2 + x - 15$",
+      "$2x^2 - x - 15$",
+      "$2x^2 + 11x - 15$",
+      "$2x^2 + x + 15$",
+      "$2x^2 - 2$"
+     ],
+     "answer": "A",
+     "explanation": "$2x^2 - 5x + 6x - 15 = 2x^2 + x - 15$.",
+     "section": "drill",
+     "id": "tmua-drill-algebraic-manipulation-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the value of $8^{2/3}$?",
+     "options": [
+      "$2$",
+      "$4$",
+      "$\\dfrac{16}{3}$",
+      "$8$",
+      "$16$"
+     ],
+     "answer": "B",
+     "explanation": "$8^{2/3} = \\left(8^{1/3}\\right)^2 = 2^2 = 4$.",
+     "section": "drill",
+     "id": "tmua-drill-algebraic-manipulation-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the value of $\\sqrt{50} - \\sqrt{18}$?",
+     "options": [
+      "$\\sqrt{2}$",
+      "$2$",
+      "$2\\sqrt{2}$",
+      "$4$",
+      "$4\\sqrt{2}$"
+     ],
+     "answer": "C",
+     "explanation": "$\\sqrt{50} = 5\\sqrt{2}$ and $\\sqrt{18} = 3\\sqrt{2}$, so the difference is $2\\sqrt{2}$.",
+     "section": "drill",
+     "id": "tmua-drill-algebraic-manipulation-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the coefficient of $x^2$ in the expansion of $(1 + 2x)^5$?",
+     "options": [
+      "$10$",
+      "$20$",
+      "$32$",
+      "$40$",
+      "$80$"
+     ],
+     "answer": "D",
+     "explanation": "The $x^2$ term is $\\binom{5}{2}(2x)^2 = 10 \\times 4x^2 = 40x^2$.",
+     "section": "drill",
+     "id": "tmua-drill-algebraic-manipulation-04"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Given that $a + \\dfrac{1}{a} = 3$, what is the value of $a^2 + \\dfrac{1}{a^2}$?",
+     "options": [
+      "$5$",
+      "$7$",
+      "$9$",
+      "$11$",
+      "$3\\sqrt{3}$"
+     ],
+     "answer": "B",
+     "explanation": "Square: $a^2 + 2 + \\frac{1}{a^2} = 9$, so $a^2 + \\frac{1}{a^2} = 7$.",
+     "section": "drill",
+     "id": "tmua-drill-algebraic-manipulation-05"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Algebraic manipulation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For $x \\ne 2$ and $x \\ne -1$, which of the following is equal to $\\dfrac{x^2 - 4}{x^2 - x - 2}$?",
+     "options": [
+      "$\\dfrac{x - 2}{x + 1}$",
+      "$\\dfrac{x + 2}{x - 1}$",
+      "$\\dfrac{x - 2}{x - 1}$",
+      "$x + 2$",
+      "$\\dfrac{x + 2}{x + 1}$"
+     ],
+     "answer": "E",
+     "explanation": "$x^2 - 4 = (x - 2)(x + 2)$ and $x^2 - x - 2 = (x - 2)(x + 1)$. Cancel $x - 2$ to get $\\frac{x + 2}{x + 1}$.",
+     "section": "drill",
+     "id": "tmua-drill-algebraic-manipulation-06"
+    }
+   ]
+  },
+  "equations-and-inequalities": {
+   "title": "Equations and inequalities",
+   "domain": "Algebra and functions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Linear and quadratic equations and inequalities, simultaneous equations, and the discriminant.",
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is the solution of $5 - 2x \\ge 11$?",
+     "options": [
+      "$x \\le -3$",
+      "$x \\ge -3$",
+      "$x \\le 3$",
+      "$x \\ge 3$",
+      "$x \\le -8$"
+     ],
+     "answer": "A",
+     "explanation": "Subtract $5$: $-2x \\ge 6$. Dividing by $-2$ reverses the inequality: $x \\le -3$.",
+     "section": "drill",
+     "id": "tmua-drill-equations-and-inequalities-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What are the solutions of $x^2 = 5x$?",
+     "options": [
+      "$x = 5$ only",
+      "$x = 0$ or $x = 5$",
+      "$x = -5$ or $x = 0$",
+      "$x = \\pm\\sqrt{5}$",
+      "$x = 0$ only"
+     ],
+     "answer": "B",
+     "explanation": "$x^2 - 5x = 0$, so $x(x - 5) = 0$ and $x = 0$ or $x = 5$. Dividing by $x$ at the start would lose $x = 0$.",
+     "section": "drill",
+     "id": "tmua-drill-equations-and-inequalities-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Real numbers $x$ and $y$ satisfy $x - y = 1$ and $x^2 + y^2 = 13$. What are the possible values of $x + y$?",
+     "options": [
+      "$5$ only",
+      "$-5$ only",
+      "$5$ or $-5$",
+      "$1$ or $13$",
+      "$3$ or $-2$"
+     ],
+     "answer": "C",
+     "explanation": "Substitute $y = x - 1$: $2x^2 - 2x - 12 = 0$, so $x = 3$ or $x = -2$, giving $(3, 2)$ and $(-2, -3)$. Then $x + y = 5$ or $-5$.",
+     "section": "drill",
+     "id": "tmua-drill-equations-and-inequalities-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the complete solution of $x^2 - x - 6 > 0$?",
+     "options": [
+      "$-2 < x < 3$",
+      "$x < -3$ or $x > 2$",
+      "$x > 3$",
+      "$x < -2$ or $x > 3$",
+      "$x < -2$"
+     ],
+     "answer": "D",
+     "explanation": "$x^2 - x - 6 = (x - 3)(x + 2)$, an upward parabola that is positive outside its roots: $x < -2$ or $x > 3$.",
+     "section": "drill",
+     "id": "tmua-drill-equations-and-inequalities-04"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For which values of $k$ does $kx^2 + 4x + k = 0$ have two distinct real roots?",
+     "options": [
+      "$k > 2$",
+      "$-2 < k < 2$",
+      "$k < 2$",
+      "$k \\ne 0$",
+      "$-2 < k < 2$ and $k \\ne 0$"
+     ],
+     "answer": "E",
+     "explanation": "Two distinct roots need $16 - 4k^2 > 0$, so $-2 < k < 2$. Also $k \\ne 0$, because then the equation is linear with only one root.",
+     "section": "drill",
+     "id": "tmua-drill-equations-and-inequalities-05"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the complete solution of $|x - 3| < 2x$?",
+     "options": [
+      "$x > 1$",
+      "$x > 3$",
+      "$x > -3$",
+      "$1 < x < 3$",
+      "$x < 1$"
+     ],
+     "answer": "A",
+     "explanation": "For $x \\ge 3$: $x - 3 < 2x$ always holds. For $x < 3$: $3 - x < 2x$ gives $x > 1$. Together, $x > 1$.",
+     "section": "drill",
+     "id": "tmua-drill-equations-and-inequalities-06"
+    }
+   ]
+  },
+  "polynomials": {
+   "title": "Polynomials",
+   "domain": "Algebra and functions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The factor and remainder theorems, completing the square and the roots of polynomials.",
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Given that $x - 2$ is a factor of $x^3 - 3x^2 + kx - 2$, what is the value of $k$?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$",
+      "$6$"
+     ],
+     "answer": "C",
+     "explanation": "By the factor theorem, the value at $x = 2$ is zero: $8 - 12 + 2k - 2 = 0$, so $k = 3$.",
+     "section": "drill",
+     "id": "tmua-drill-polynomials-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the remainder when $x^4 + 1$ is divided by $x + 1$?",
+     "options": [
+      "$-2$",
+      "$-1$",
+      "$0$",
+      "$1$",
+      "$2$"
+     ],
+     "answer": "E",
+     "explanation": "The remainder is the value at $x = -1$: $(-1)^4 + 1 = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-polynomials-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The equation $2x^3 - 5x^2 + x + 2 = 0$ has roots $1$ and $2$. What is the sum of all three roots?",
+     "options": [
+      "$-\\dfrac{5}{2}$",
+      "$\\dfrac{1}{2}$",
+      "$2$",
+      "$\\dfrac{5}{2}$",
+      "$5$"
+     ],
+     "answer": "D",
+     "explanation": "The product of the roots is $-\\frac{2}{2} = -1$, so the third root is $-\\frac{1}{2}$. The sum is $1 + 2 - \\frac{1}{2} = \\frac{5}{2}$, which also equals $\\frac{5}{2}$ from the $x^2$ coefficient.",
+     "section": "drill",
+     "id": "tmua-drill-polynomials-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What are the coordinates of the vertex of $y = 2x^2 - 8x + 3$?",
+     "options": [
+      "$(-2, -5)$",
+      "$(2, -5)$",
+      "$(2, 3)$",
+      "$(4, 3)$",
+      "$(2, 5)$"
+     ],
+     "answer": "B",
+     "explanation": "$2x^2 - 8x + 3 = 2(x - 2)^2 - 5$, so the vertex is $(2, -5)$.",
+     "section": "drill",
+     "id": "tmua-drill-polynomials-04"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The polynomial $x^3 + px + q$ has a factor $(x - 1)^2$. What is the value of $q$?",
+     "options": [
+      "$-3$",
+      "$-2$",
+      "$1$",
+      "$2$",
+      "$3$"
+     ],
+     "answer": "D",
+     "explanation": "$x = 1$ is a repeated root, so it is a root of the polynomial and of its derivative: $1 + p + q = 0$ and $3 + p = 0$. So $p = -3$ and $q = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-polynomials-05"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Polynomials",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How many distinct real roots does $x^3 - 3x^2 + 4 = 0$ have?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "It cannot be determined."
+     ],
+     "answer": "B",
+     "explanation": "$x = -1$ and $x = 2$ are roots, and $x^3 - 3x^2 + 4 = (x + 1)(x - 2)^2$. So the distinct roots are $-1$ and $2$.",
+     "section": "drill",
+     "id": "tmua-drill-polynomials-06"
+    }
+   ]
+  },
+  "exponentials-and-logarithms": {
+   "title": "Exponentials and logarithms",
+   "domain": "Algebra and functions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The laws of indices and logarithms, and solving exponential equations.",
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the value of $\\log_5 125$?",
+     "options": [
+      "$2$",
+      "$3$",
+      "$5$",
+      "$25$",
+      "$\\dfrac{1}{3}$"
+     ],
+     "answer": "B",
+     "explanation": "$5^3 = 125$, so $\\log_5 125 = 3$.",
+     "section": "drill",
+     "id": "tmua-drill-exponentials-and-logarithms-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the value of $\\log_{10} 50 + \\log_{10} 2$?",
+     "options": [
+      "$2$",
+      "$3$",
+      "$10$",
+      "$52$",
+      "$\\log_{10} 52$"
+     ],
+     "answer": "A",
+     "explanation": "$\\log_{10} 50 + \\log_{10} 2 = \\log_{10} 100 = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-exponentials-and-logarithms-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Solve $2^{x + 3} = 32$.",
+     "options": [
+      "$x = 1$",
+      "$x = 2$",
+      "$x = 3$",
+      "$x = 4$",
+      "$x = 5$"
+     ],
+     "answer": "B",
+     "explanation": "$32 = 2^5$, so $x + 3 = 5$ and $x = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-exponentials-and-logarithms-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Given that $\\log_a 2 = p$ and $\\log_a 3 = q$, which of the following is equal to $\\log_a 18$?",
+     "options": [
+      "$p + q$",
+      "$2p + q$",
+      "$p + 2q$",
+      "$2pq$",
+      "$pq^2$"
+     ],
+     "answer": "C",
+     "explanation": "$18 = 2 \\times 3^2$, so $\\log_a 18 = \\log_a 2 + 2\\log_a 3 = p + 2q$.",
+     "section": "drill",
+     "id": "tmua-drill-exponentials-and-logarithms-04"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Solve $\\log_3 (x + 1) - \\log_3 (x - 1) = 1$.",
+     "options": [
+      "$x = \\dfrac{1}{2}$",
+      "$x = 1$",
+      "$x = \\dfrac{3}{2}$",
+      "$x = 2$",
+      "$x = 3$"
+     ],
+     "answer": "D",
+     "explanation": "$\\log_3 \\frac{x + 1}{x - 1} = 1$, so $x + 1 = 3(x - 1)$ and $x = 2$. This satisfies $x > 1$, so both logarithms exist.",
+     "section": "drill",
+     "id": "tmua-drill-exponentials-and-logarithms-05"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Exponentials and logarithms",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is the largest?",
+     "options": [
+      "$\\log_5 100$",
+      "$\\log_3 30$",
+      "$\\pi$",
+      "$3.2$",
+      "$\\log_2 10$"
+     ],
+     "answer": "E",
+     "explanation": "$2^{33} = 8 \\times 1024^3 \\approx 8.6 \\times 10^9 < 10^{10}$, so $2^{3.3} < 10$ and $\\log_2 10 > 3.3$. $3^{16} = 43\\,046\\,721 > 30^5 = 24\\,300\\,000$, so $3^{3.2} > 30$ and $\\log_3 30 < 3.2$. Also $\\pi < 3.2$, and $\\log_5 100 < 3$ because $5^3 = 125$.",
+     "section": "drill",
+     "id": "tmua-drill-exponentials-and-logarithms-06"
+    }
+   ]
+  },
+  "sequences-and-series": {
+   "title": "Sequences and series",
+   "domain": "Algebra and functions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Arithmetic and geometric sequences and series, sigma notation and recurrence relations.",
+   "questions": [
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "An arithmetic sequence has first term $7$ and common difference $3$. What is its $20$th term?",
+     "options": [
+      "$57$",
+      "$60$",
+      "$64$",
+      "$67$",
+      "$70$"
+     ],
+     "answer": "C",
+     "explanation": "$u_{20} = 7 + 19 \\times 3 = 64$.",
+     "section": "drill",
+     "id": "tmua-drill-sequences-and-series-01"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the $8$th term of the geometric sequence $3, 6, 12, \\ldots$?",
+     "options": [
+      "$48$",
+      "$96$",
+      "$192$",
+      "$384$",
+      "$768$"
+     ],
+     "answer": "D",
+     "explanation": "$u_8 = 3 \\times 2^7 = 3 \\times 128 = 384$.",
+     "section": "drill",
+     "id": "tmua-drill-sequences-and-series-02"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the value of $4 + 7 + 10 + \\cdots + 61$?",
+     "options": [
+      "$610$",
+      "$620$",
+      "$650$",
+      "$680$",
+      "$1300$"
+     ],
+     "answer": "C",
+     "explanation": "There are $\\frac{61 - 4}{3} + 1 = 20$ terms, so the sum is $\\frac{20}{2}(4 + 61) = 650$.",
+     "section": "drill",
+     "id": "tmua-drill-sequences-and-series-03"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the value of $\\displaystyle\\sum_{k=1}^{6} 2^k$?",
+     "options": [
+      "$126$",
+      "$127$",
+      "$128$",
+      "$254$",
+      "$255$"
+     ],
+     "answer": "A",
+     "explanation": "$2 + 4 + 8 + 16 + 32 + 64 = 126$, or $\\frac{2(2^6 - 1)}{2 - 1} = 126$.",
+     "section": "drill",
+     "id": "tmua-drill-sequences-and-series-04"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A sequence has $u_1 = 2$ and $u_{n+1} = 3u_n - 2$. What is $u_4$?",
+     "options": [
+      "$26$",
+      "$28$",
+      "$30$",
+      "$82$",
+      "$84$"
+     ],
+     "answer": "B",
+     "explanation": "$u_2 = 4$, $u_3 = 10$, $u_4 = 28$.",
+     "section": "drill",
+     "id": "tmua-drill-sequences-and-series-05"
+    },
+    {
+     "domain": "Algebra and functions",
+     "skill": "Sequences and series",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The sum to infinity of a geometric series is $4$ times its first term. What is the common ratio?",
+     "options": [
+      "$\\dfrac{1}{4}$",
+      "$\\dfrac{1}{3}$",
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{2}{3}$",
+      "$\\dfrac{3}{4}$"
+     ],
+     "answer": "E",
+     "explanation": "$\\frac{a}{1 - r} = 4a$, so $1 - r = \\frac{1}{4}$ and $r = \\frac{3}{4}$.",
+     "section": "drill",
+     "id": "tmua-drill-sequences-and-series-06"
+    }
+   ]
+  },
+  "coordinate-geometry": {
+   "title": "Coordinate geometry",
+   "domain": "Geometry and graphs",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Straight lines, gradients, perpendicular lines and circles in the coordinate plane.",
+   "questions": [
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the gradient of the line through $(2, -1)$ and $(6, 7)$?",
+     "options": [
+      "$\\dfrac{1}{2}$",
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$"
+     ],
+     "answer": "C",
+     "explanation": "$\\frac{7 - (-1)}{6 - 2} = \\frac{8}{4} = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-coordinate-geometry-01"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What are the centre and radius of the circle $(x - 1)^2 + (y + 3)^2 = 16$?",
+     "options": [
+      "centre $(1, -3)$, radius $4$",
+      "centre $(-1, 3)$, radius $4$",
+      "centre $(1, -3)$, radius $16$",
+      "centre $(-1, 3)$, radius $16$",
+      "centre $(1, 3)$, radius $4$"
+     ],
+     "answer": "A",
+     "explanation": "$(x - a)^2 + (y - b)^2 = r^2$ has centre $(a, b)$ and radius $r$, so the centre is $(1, -3)$ and the radius is $\\sqrt{16} = 4$.",
+     "section": "drill",
+     "id": "tmua-drill-coordinate-geometry-02"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which line passes through $(1, 1)$ and is parallel to $4x - 2y = 7$?",
+     "options": [
+      "$y = -2x + 3$",
+      "$y = 2x - 1$",
+      "$y = \\frac{1}{2}x + \\frac{1}{2}$",
+      "$y = -\\frac{1}{2}x + \\frac{3}{2}$",
+      "$y = 2x + 1$"
+     ],
+     "answer": "B",
+     "explanation": "$4x - 2y = 7$ has gradient $2$. Through $(1, 1)$: $y - 1 = 2(x - 1)$, so $y = 2x - 1$.",
+     "section": "drill",
+     "id": "tmua-drill-coordinate-geometry-03"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the perpendicular bisector of the line segment from $(0, 0)$ to $(4, 2)$?",
+     "options": [
+      "$y = 2x - 3$",
+      "$y = \\frac{1}{2}x$",
+      "$y = -\\frac{1}{2}x + 2$",
+      "$y = -2x + 5$",
+      "$y = -2x + 3$"
+     ],
+     "answer": "D",
+     "explanation": "The midpoint is $(2, 1)$ and the segment has gradient $\\frac{1}{2}$, so the bisector has gradient $-2$: $y - 1 = -2(x - 2)$, or $y = -2x + 5$.",
+     "section": "drill",
+     "id": "tmua-drill-coordinate-geometry-04"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For which values of $m$ is the line $y = mx$ a tangent to the circle $x^2 + (y - 4)^2 = 4$?",
+     "options": [
+      "$m = \\pm 1$",
+      "$m = \\pm\\sqrt{2}$",
+      "$m = \\pm\\sqrt{3}$",
+      "$m = \\pm 2$",
+      "$m = \\pm\\sqrt{5}$"
+     ],
+     "answer": "C",
+     "explanation": "The distance from the centre $(0, 4)$ to $mx - y = 0$ must equal the radius $2$: $\\frac{4}{\\sqrt{m^2 + 1}} = 2$, so $m^2 + 1 = 4$ and $m = \\pm\\sqrt{3}$.",
+     "section": "drill",
+     "id": "tmua-drill-coordinate-geometry-05"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Coordinate geometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the area of the triangle with vertices $(0, 0)$, $(6, 0)$ and $(2, 5)$?",
+     "options": [
+      "$6$",
+      "$10$",
+      "$12$",
+      "$13$",
+      "$15$"
+     ],
+     "answer": "E",
+     "explanation": "The base along the $x$-axis is $6$ and the height is the $y$-coordinate $5$, so the area is $\\frac{1}{2} \\times 6 \\times 5 = 15$.",
+     "section": "drill",
+     "id": "tmua-drill-coordinate-geometry-06"
+    }
+   ]
+  },
+  "trigonometry": {
+   "title": "Trigonometry",
+   "domain": "Geometry and graphs",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Exact values, the sine and cosine rules, identities and solving trigonometric equations.",
+   "questions": [
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the value of $\\sin 30^\\circ + \\cos 60^\\circ$?",
+     "options": [
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{\\sqrt{3}}{2}$",
+      "$1$",
+      "$\\sqrt{3}$",
+      "$2$"
+     ],
+     "answer": "C",
+     "explanation": "Both are $\\frac{1}{2}$, so the sum is $1$.",
+     "section": "drill",
+     "id": "tmua-drill-trigonometry-01"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Solve $\\cos x = -\\dfrac{1}{2}$ for $0^\\circ \\le x \\le 180^\\circ$.",
+     "options": [
+      "$60^\\circ$",
+      "$120^\\circ$",
+      "$150^\\circ$",
+      "$210^\\circ$",
+      "$240^\\circ$"
+     ],
+     "answer": "B",
+     "explanation": "$\\cos 60^\\circ = \\frac{1}{2}$, and cosine is negative in the second quadrant, so $x = 180^\\circ - 60^\\circ = 120^\\circ$.",
+     "section": "drill",
+     "id": "tmua-drill-trigonometry-02"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A triangle has sides $6$ and $8$ with an angle of $30^\\circ$ between them. What is its area?",
+     "options": [
+      "$12$",
+      "$24$",
+      "$12\\sqrt{3}$",
+      "$24\\sqrt{3}$",
+      "$48$"
+     ],
+     "answer": "A",
+     "explanation": "Area $= \\frac{1}{2}ab\\sin C = \\frac{1}{2} \\times 6 \\times 8 \\times \\frac{1}{2} = 12$.",
+     "section": "drill",
+     "id": "tmua-drill-trigonometry-03"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the exact value of $\\tan 225^\\circ$?",
+     "options": [
+      "$-\\sqrt{3}$",
+      "$-1$",
+      "$\\dfrac{1}{\\sqrt{3}}$",
+      "$1$",
+      "$\\sqrt{3}$"
+     ],
+     "answer": "D",
+     "explanation": "$225^\\circ = 180^\\circ + 45^\\circ$, and tangent repeats every $180^\\circ$, so $\\tan 225^\\circ = \\tan 45^\\circ = 1$.",
+     "section": "drill",
+     "id": "tmua-drill-trigonometry-04"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Given that $\\sin x = 2\\cos x$, what is the value of $\\sin^2 x$?",
+     "options": [
+      "$\\dfrac{1}{5}$",
+      "$\\dfrac{1}{3}$",
+      "$\\dfrac{2}{5}$",
+      "$\\dfrac{3}{5}$",
+      "$\\dfrac{4}{5}$"
+     ],
+     "answer": "E",
+     "explanation": "$\\sin^2 x = 4\\cos^2 x = 4(1 - \\sin^2 x)$, so $5\\sin^2 x = 4$ and $\\sin^2 x = \\frac{4}{5}$.",
+     "section": "drill",
+     "id": "tmua-drill-trigonometry-05"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How many solutions does $2\\sin^2 x = \\sin x$ have in the interval $0 \\le x < 2\\pi$?",
+     "options": [
+      "$2$",
+      "$3$",
+      "$4$",
+      "$5$",
+      "$6$"
+     ],
+     "answer": "C",
+     "explanation": "$\\sin x(2\\sin x - 1) = 0$. $\\sin x = 0$ gives $x = 0$ and $\\pi$; $\\sin x = \\frac{1}{2}$ gives $\\frac{\\pi}{6}$ and $\\frac{5\\pi}{6}$. Do not divide by $\\sin x$, or two solutions are lost.",
+     "section": "drill",
+     "id": "tmua-drill-trigonometry-06"
+    }
+   ]
+  },
+  "graphs-and-transformations": {
+   "title": "Graphs and transformations",
+   "domain": "Geometry and graphs",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Sketching curves, transformations of graphs and counting intersections without a calculator.",
+   "questions": [
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The graph of $y = (x - 2)^2 + 1$ is the graph of $y = x^2$ after which translation?",
+     "options": [
+      "2 left and 1 up",
+      "2 right and 1 up",
+      "2 right and 1 down",
+      "1 right and 2 up",
+      "2 left and 1 down"
+     ],
+     "answer": "B",
+     "explanation": "Replacing $x$ by $x - 2$ moves the graph $2$ to the right, and adding $1$ moves it $1$ up.",
+     "section": "drill",
+     "id": "tmua-drill-graphs-and-transformations-01"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The graph of $y = f(x)$ is reflected in the $y$-axis. What is the equation of the new graph?",
+     "options": [
+      "$y = f(-x)$",
+      "$y = -f(x)$",
+      "$y = -f(-x)$",
+      "$y = f(x) + 1$",
+      "$y = \\dfrac{1}{f(x)}$"
+     ],
+     "answer": "A",
+     "explanation": "Reflecting in the $y$-axis sends $(x, y)$ to $(-x, y)$, so the new graph is $y = f(-x)$. $y = -f(x)$ is the reflection in the $x$-axis.",
+     "section": "drill",
+     "id": "tmua-drill-graphs-and-transformations-02"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How many real solutions does the equation $x^2 = 2^x$ have?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$",
+      "infinitely many"
+     ],
+     "answer": "C",
+     "explanation": "$x = 2$ and $x = 4$ are solutions. For negative $x$, $x^2$ falls from very large to $0$ while $2^x$ stays between $0$ and $1$, so the graphs cross once more. Beyond $x = 4$, $2^x$ grows faster. That makes $3$.",
+     "section": "drill",
+     "id": "tmua-drill-graphs-and-transformations-03"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The function $f$ has its greatest value, $5$, at $x = 1$. Where is the greatest point on the graph of $y = 3f(2x)$?",
+     "options": [
+      "$(2, 15)$",
+      "$(2, 5)$",
+      "$\\left(\\tfrac{1}{2}, 5\\right)$",
+      "$\\left(\\tfrac{1}{2}, 15\\right)$",
+      "$(1, 15)$"
+     ],
+     "answer": "D",
+     "explanation": "$f(2x)$ takes the value $f(1)$ when $2x = 1$, that is $x = \\frac{1}{2}$. Multiplying by $3$ makes the greatest value $15$.",
+     "section": "drill",
+     "id": "tmua-drill-graphs-and-transformations-04"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Where does the graph of $y = x(x - 2)^2$ touch the $x$-axis without crossing it?",
+     "options": [
+      "at $x = 0$ only",
+      "at $x = -2$ only",
+      "at $x = 0$ and $x = 2$",
+      "nowhere",
+      "at $x = 2$ only"
+     ],
+     "answer": "E",
+     "explanation": "A squared factor gives a repeated root, where the graph touches the axis: $x = 2$. At the single root $x = 0$ the sign of $y$ changes, so the graph crosses there.",
+     "section": "drill",
+     "id": "tmua-drill-graphs-and-transformations-05"
+    },
+    {
+     "domain": "Geometry and graphs",
+     "skill": "Graphs and transformations",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the least value of $|x - 1| + |x + 3|$ as $x$ varies over the real numbers?",
+     "options": [
+      "$2$",
+      "$3$",
+      "$4$",
+      "$5$",
+      "$6$"
+     ],
+     "answer": "C",
+     "explanation": "$|x - 1| + |x + 3|$ is the sum of the distances from $x$ to $1$ and to $-3$. For any $x$ between $-3$ and $1$ this is $4$, the distance between them; outside it is larger.",
+     "section": "drill",
+     "id": "tmua-drill-graphs-and-transformations-06"
+    }
+   ]
+  },
+  "differentiation": {
+   "title": "Differentiation",
+   "domain": "Calculus",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Differentiating powers of x, gradients, tangents and normals, stationary points and optimisation.",
+   "questions": [
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is $\\dfrac{d}{dx}\\left(4x^3 - 2x + 7\\right)$?",
+     "options": [
+      "$12x^2 - 2$",
+      "$12x^2 - 2x$",
+      "$4x^2 - 2$",
+      "$12x^3 - 2$",
+      "$12x^2 + 5$"
+     ],
+     "answer": "A",
+     "explanation": "Differentiate each term: $4x^3 \\to 12x^2$, $-2x \\to -2$ and the constant $7 \\to 0$.",
+     "section": "drill",
+     "id": "tmua-drill-differentiation-01"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the gradient of the curve $y = \\dfrac{1}{x}$ at the point where $x = 2$?",
+     "options": [
+      "$-2$",
+      "$-\\dfrac{1}{2}$",
+      "$-\\dfrac{1}{4}$",
+      "$\\dfrac{1}{4}$",
+      "$\\dfrac{1}{2}$"
+     ],
+     "answer": "C",
+     "explanation": "$y = x^{-1}$, so $\\frac{dy}{dx} = -x^{-2} = -\\frac{1}{4}$ at $x = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-differentiation-02"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For $y = \\sqrt{x}\\,(x + 3)$, what is the value of $\\dfrac{dy}{dx}$ at $x = 1$?",
+     "options": [
+      "$\\dfrac{3}{2}$",
+      "$2$",
+      "$\\dfrac{5}{2}$",
+      "$3$",
+      "$4$"
+     ],
+     "answer": "D",
+     "explanation": "$y = x^{3/2} + 3x^{1/2}$, so $\\frac{dy}{dx} = \\frac{3}{2}x^{1/2} + \\frac{3}{2}x^{-1/2}$, which is $\\frac{3}{2} + \\frac{3}{2} = 3$ at $x = 1$.",
+     "section": "drill",
+     "id": "tmua-drill-differentiation-03"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following describes the stationary point of $y = x^2 - 6x + 5$?",
+     "options": [
+      "$(3, -4)$, a maximum",
+      "$(3, -4)$, a minimum",
+      "$(-3, 32)$, a minimum",
+      "$(3, 4)$, a minimum",
+      "$(6, 5)$, a minimum"
+     ],
+     "answer": "B",
+     "explanation": "$\\frac{dy}{dx} = 2x - 6 = 0$ at $x = 3$, where $y = 9 - 18 + 5 = -4$. $\\frac{d^2y}{dx^2} = 2 > 0$, so it is a minimum.",
+     "section": "drill",
+     "id": "tmua-drill-differentiation-04"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For which values of $k$ is $f(x) = x^3 + kx^2 + 3x$ increasing for every real $x$?",
+     "options": [
+      "$k \\le 3$",
+      "$k \\ge -3$",
+      "$-9 \\le k \\le 9$",
+      "$k = 0$ only",
+      "$-3 \\le k \\le 3$"
+     ],
+     "answer": "E",
+     "explanation": "$f'(x) = 3x^2 + 2kx + 3$ must never be negative, so its discriminant must satisfy $4k^2 - 36 \\le 0$, giving $-3 \\le k \\le 3$.",
+     "section": "drill",
+     "id": "tmua-drill-differentiation-05"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Differentiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The normal to $y = x^2$ at the point $(1, 1)$ meets the curve again at another point. What is its $x$-coordinate?",
+     "options": [
+      "$-3$",
+      "$-2$",
+      "$-\\dfrac{3}{2}$",
+      "$-1$",
+      "$-\\dfrac{1}{2}$"
+     ],
+     "answer": "C",
+     "explanation": "The tangent gradient is $2$, so the normal has gradient $-\\frac{1}{2}$: $y = 1 - \\frac{1}{2}(x - 1)$. Setting $x^2$ equal to this gives $2x^2 + x - 3 = 0$, so $(2x + 3)(x - 1) = 0$ and $x = -\\frac{3}{2}$.",
+     "section": "drill",
+     "id": "tmua-drill-differentiation-06"
+    }
+   ]
+  },
+  "integration": {
+   "title": "Integration",
+   "domain": "Calculus",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Integrating powers of x, definite integrals and areas between curves.",
+   "questions": [
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is $\\displaystyle\\int (6x^2 + 2)\\,dx$?",
+     "options": [
+      "$2x^3 + 2x + c$",
+      "$12x + c$",
+      "$6x^3 + 2x + c$",
+      "$2x^3 + c$",
+      "$3x^3 + 2x + c$"
+     ],
+     "answer": "A",
+     "explanation": "Raise each power by one and divide by the new power: $6x^2 \\to 2x^3$ and $2 \\to 2x$. Then add the constant $c$.",
+     "section": "drill",
+     "id": "tmua-drill-integration-01"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the value of $\\displaystyle\\int_0^3 2x\\,dx$?",
+     "options": [
+      "$3$",
+      "$6$",
+      "$9$",
+      "$12$",
+      "$18$"
+     ],
+     "answer": "C",
+     "explanation": "$\\left[x^2\\right]_0^3 = 9 - 0 = 9$.",
+     "section": "drill",
+     "id": "tmua-drill-integration-02"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the value of $\\displaystyle\\int_1^4 x^{-1/2}\\,dx$?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$4$",
+      "$6$"
+     ],
+     "answer": "B",
+     "explanation": "An antiderivative is $2x^{1/2}$, so the integral is $2(2) - 2(1) = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-integration-03"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the area between the curve $y = 4 - x^2$ and the $x$-axis, from $x = 0$ to $x = 2$?",
+     "options": [
+      "$\\dfrac{8}{3}$",
+      "$4$",
+      "$\\dfrac{14}{3}$",
+      "$\\dfrac{16}{3}$",
+      "$8$"
+     ],
+     "answer": "D",
+     "explanation": "$\\int_0^2 (4 - x^2)\\,dx = \\left[4x - \\frac{x^3}{3}\\right]_0^2 = 8 - \\frac{8}{3} = \\frac{16}{3}$.",
+     "section": "drill",
+     "id": "tmua-drill-integration-04"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the value of $\\displaystyle\\int_{-2}^{2} (x^3 + x^2)\\,dx$?",
+     "options": [
+      "$0$",
+      "$\\dfrac{4}{3}$",
+      "$\\dfrac{8}{3}$",
+      "$4$",
+      "$\\dfrac{16}{3}$"
+     ],
+     "answer": "E",
+     "explanation": "The $x^3$ part is odd, so it integrates to $0$ over $[-2, 2]$. The $x^2$ part gives $\\left[\\frac{x^3}{3}\\right]_{-2}^{2} = \\frac{8}{3} + \\frac{8}{3} = \\frac{16}{3}$.",
+     "section": "drill",
+     "id": "tmua-drill-integration-05"
+    },
+    {
+     "domain": "Calculus",
+     "skill": "Integration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Given that $\\displaystyle\\int_1^a \\frac{1}{x^2}\\,dx = \\frac{1}{2}$ and $a > 1$, what is the value of $a$?",
+     "options": [
+      "$\\sqrt{2}$",
+      "$\\dfrac{3}{2}$",
+      "$2$",
+      "$3$",
+      "$4$"
+     ],
+     "answer": "C",
+     "explanation": "$\\left[-\\frac{1}{x}\\right]_1^a = 1 - \\frac{1}{a} = \\frac{1}{2}$, so $a = 2$.",
+     "section": "drill",
+     "id": "tmua-drill-integration-06"
+    }
+   ]
+  },
+  "logical-statements": {
+   "title": "Logical statements",
+   "domain": "Logic",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Converses, contrapositives, negations and quantifiers: what a mathematical statement really says.",
+   "questions": [
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the converse of \"If a shape is a square, then it is a rectangle\"?",
+     "options": [
+      "If a shape is not a square, then it is not a rectangle.",
+      "If a shape is a rectangle, then it is a square.",
+      "If a shape is not a rectangle, then it is not a square.",
+      "A shape is a square and a rectangle.",
+      "If a shape is a square, then it is not a rectangle."
+     ],
+     "answer": "B",
+     "explanation": "The converse of ‘if $P$ then $Q$’ is ‘if $Q$ then $P$’. Here the original is true but its converse is false.",
+     "section": "drill",
+     "id": "tmua-drill-logical-statements-01"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "For a real number $x$, what is the negation of \"$x > 3$\"?",
+     "options": [
+      "$x \\le 3$",
+      "$x < 3$",
+      "$x > -3$",
+      "$x \\ge 3$",
+      "$x < -3$"
+     ],
+     "answer": "A",
+     "explanation": "The negation must be true exactly when $x > 3$ is false, which includes $x = 3$: so it is $x \\le 3$.",
+     "section": "drill",
+     "id": "tmua-drill-logical-statements-02"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The statement \"$P$ only if $Q$\" means the same as which of the following?",
+     "options": [
+      "If Q, then P.",
+      "P and Q are both true.",
+      "If P, then Q.",
+      "If not P, then not Q.",
+      "P if and only if Q."
+     ],
+     "answer": "C",
+     "explanation": "‘$P$ only if $Q$’ says $P$ cannot be true unless $Q$ is, which is ‘if $P$ then $Q$’.",
+     "section": "drill",
+     "id": "tmua-drill-logical-statements-03"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is logically equivalent to \"If it is sunny, then I go out\"?",
+     "options": [
+      "If I go out, then it is sunny.",
+      "If it is not sunny, then I do not go out.",
+      "It is sunny and I go out.",
+      "If I do not go out, then it is not sunny.",
+      "I go out only when it is not sunny."
+     ],
+     "answer": "D",
+     "explanation": "Only the contrapositive, ‘if not $Q$ then not $P$’, is equivalent. The converse and the inverse are not.",
+     "section": "drill",
+     "id": "tmua-drill-logical-statements-04"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the negation of \"There is a real number $x$ such that $x^2 < 0$\"?",
+     "options": [
+      "There is a real number $x$ such that $x^2 \\ge 0$.",
+      "For every real number $x$, $x^2 < 0$.",
+      "There is no real number $x$ with $x^2 \\ge 0$.",
+      "For every real number $x$, $x^2 > 0$.",
+      "For every real number $x$, $x^2 \\ge 0$."
+     ],
+     "answer": "E",
+     "explanation": "The negation of ‘there is an $x$ with $P(x)$’ is ‘every $x$ has not $P(x)$’. The negation of $x^2 < 0$ is $x^2 \\ge 0$, not $x^2 > 0$.",
+     "section": "drill",
+     "id": "tmua-drill-logical-statements-05"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Logical statements",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Consider the statements:\n\nI: For every real number $x$, there is a real number $y$ with $y > x$.\nII: There is a real number $y$ such that, for every real number $x$, $y > x$.\n\nWhich of these statements are true?",
+     "options": [
+      "neither",
+      "I only",
+      "II only",
+      "both"
+     ],
+     "answer": "B",
+     "explanation": "I is true: take $y = x + 1$. II is false: it claims there is a largest real number. The order of ‘for every’ and ‘there is’ matters.",
+     "section": "drill",
+     "id": "tmua-drill-logical-statements-06"
+    }
+   ]
+  },
+  "necessary-and-sufficient-conditions": {
+   "title": "Necessary and sufficient conditions",
+   "domain": "Logic",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Necessary, sufficient, and necessary-and-sufficient conditions, tested with examples and counterexamples.",
+   "questions": [
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "For a real number $x$, which of the following describes the condition \"$x = 2$\" for the statement \"$x^2 = 4$\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "B",
+     "explanation": "If $x = 2$ then $x^2 = 4$, so it is sufficient. $x = -2$ also gives $x^2 = 4$, so it is not necessary.",
+     "section": "drill",
+     "id": "tmua-drill-necessary-and-sufficient-conditions-01"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "For a whole number $n$, which of the following describes the condition \"$n$ is even\" for the statement \"$n$ is a multiple of $6$\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "A",
+     "explanation": "Every multiple of $6$ is even, so it is necessary. $n = 4$ is even but not a multiple of $6$, so it is not sufficient.",
+     "section": "drill",
+     "id": "tmua-drill-necessary-and-sufficient-conditions-02"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For real numbers $x$ and $y$, which of the following describes the condition \"$x > 0$ and $y > 0$\" for the statement \"$x + y > 0$\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "B",
+     "explanation": "Two positive numbers have a positive sum, so it is sufficient. $x = 5$, $y = -1$ has a positive sum without both being positive, so it is not necessary.",
+     "section": "drill",
+     "id": "tmua-drill-necessary-and-sufficient-conditions-03"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "For a triangle, which of the following describes the condition \"two of its angles are equal\" for the statement \"two of its sides are equal\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "C",
+     "explanation": "A triangle has two equal sides exactly when the angles opposite them are equal, so each condition implies the other: necessary and sufficient.",
+     "section": "drill",
+     "id": "tmua-drill-necessary-and-sufficient-conditions-04"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For a real number $x$, which of the following describes the condition \"$x^2 < x$\" for the statement \"$0 < x < 1$\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "C",
+     "explanation": "$x^2 < x$ means $x(x - 1) < 0$, which holds exactly when $0 < x < 1$. So the two conditions are equivalent.",
+     "section": "drill",
+     "id": "tmua-drill-necessary-and-sufficient-conditions-05"
+    },
+    {
+     "domain": "Logic",
+     "skill": "Necessary and sufficient conditions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For a real number $x$, which of the following describes the condition \"$x > 1$\" for the statement \"$x^2 > 4$\"?",
+     "options": [
+      "necessary but not sufficient",
+      "sufficient but not necessary",
+      "necessary and sufficient",
+      "neither necessary nor sufficient"
+     ],
+     "answer": "D",
+     "explanation": "$x = 1.5$ satisfies $x > 1$ but not $x^2 > 4$, so it is not sufficient. $x = -3$ satisfies $x^2 > 4$ but not $x > 1$, so it is not necessary.",
+     "section": "drill",
+     "id": "tmua-drill-necessary-and-sufficient-conditions-06"
+    }
+   ]
+  },
+  "proof-and-counterexamples": {
+   "title": "Proof and counterexamples",
+   "domain": "Proof",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Counterexamples, direct proof, proof by contradiction, contrapositive and exhaustion.",
+   "questions": [
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which number is a counterexample to \"All multiples of $3$ are odd\"?",
+     "options": [
+      "$3$",
+      "$9$",
+      "$6$",
+      "$15$",
+      "$21$"
+     ],
+     "answer": "C",
+     "explanation": "A counterexample must be a multiple of $3$ that is not odd: $6$. The others are odd multiples of $3$.",
+     "section": "drill",
+     "id": "tmua-drill-proof-and-counterexamples-01"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "To show that a statement of the form \"for every $n$, $P(n)$\" is false, what is enough?",
+     "options": [
+      "one value of $n$ for which $P(n)$ is false",
+      "one value of $n$ for which $P(n)$ is true",
+      "checking $P(n)$ for $n = 1$ to $10$",
+      "showing that $P(n)$ is true for infinitely many $n$",
+      "a proof that $P(n)$ is true for every $n$"
+     ],
+     "answer": "A",
+     "explanation": "A single counterexample disproves a ‘for every’ statement. Checking many true cases never proves or disproves it.",
+     "section": "drill",
+     "id": "tmua-drill-proof-and-counterexamples-02"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is a suitable first line for a proof by contradiction that \"there is no largest even number\"?",
+     "options": [
+      "Suppose every even number is smaller than 100.",
+      "Suppose there is no largest even number.",
+      "Let n be any odd number.",
+      "Suppose there is a largest even number, N.",
+      "Let the even numbers be 2, 4, 6, and so on."
+     ],
+     "answer": "D",
+     "explanation": "A proof by contradiction starts by assuming the statement is false: that a largest even number $N$ exists. Then $N + 2$ is a larger even number, a contradiction.",
+     "section": "drill",
+     "id": "tmua-drill-proof-and-counterexamples-03"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is a valid proof that the product of any two consecutive integers is even?",
+     "options": [
+      "$3 \\times 4 = 12$, which is even.",
+      "Of $n$ and $n + 1$, one is even, so $n(n + 1)$ has a factor of $2$.",
+      "$n(n + 1) = n^2 + n$, and $n^2$ is always even.",
+      "Consecutive integers add to an odd number.",
+      "$n(n + 1)$ is even because $n + 1$ is even."
+     ],
+     "answer": "B",
+     "explanation": "Consecutive integers alternate between odd and even, so one of $n$ and $n + 1$ is even and the product is even. $n^2$ is not always even, and $n + 1$ is not always even.",
+     "section": "drill",
+     "id": "tmua-drill-proof-and-counterexamples-04"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which is the most direct way to prove \"for every integer $n$, if $n^2$ is even then $n$ is even\"?",
+     "options": [
+      "Check that $2^2$, $4^2$ and $6^2$ are even.",
+      "Show that if $n$ is even, then $n^2$ is even.",
+      "Assume $n^2$ is even and take the square root.",
+      "Show that $n^2$ is even for every integer $n$.",
+      "Prove the contrapositive: if $n$ is odd, $n = 2k + 1$, then $n^2 = 2(2k^2 + 2k) + 1$ is odd."
+     ],
+     "answer": "E",
+     "explanation": "The contrapositive ‘if $n$ is odd then $n^2$ is odd’ is equivalent and easy to prove. Showing ‘if $n$ is even then $n^2$ is even’ proves the converse, and the fourth claim is false.",
+     "section": "drill",
+     "id": "tmua-drill-proof-and-counterexamples-05"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Proof and counterexamples",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is a valid proof that $n^2 + n + 1$ is odd for every integer $n$?",
+     "options": [
+      "$1^2 + 1 + 1 = 3$ and $2^2 + 2 + 1 = 7$ are odd.",
+      "$n^2 + n + 1 > 0$, so it is odd.",
+      "$n^2 + n = n(n + 1)$ is a product of consecutive integers, so it is even, and adding $1$ makes it odd.",
+      "$n^2$ is odd and $n$ is odd, so their sum plus $1$ is odd.",
+      "$n^2 + n + 1$ is prime, so it is odd."
+     ],
+     "answer": "C",
+     "explanation": "$n(n + 1)$ is always even, so $n^2 + n + 1$ is one more than an even number. The other arguments use examples or false claims ($n^2$ is not always odd, and $4^2 + 4 + 1 = 21$ is not prime).",
+     "section": "drill",
+     "id": "tmua-drill-proof-and-counterexamples-06"
+    }
+   ]
+  },
+  "errors-in-proofs": {
+   "title": "Errors in proofs",
+   "domain": "Proof",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Spotting the first invalid step: dividing by zero, losing solutions, squaring, reversing inequalities.",
+   "questions": [
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A student solves $2x + 3 = 11$:\n\n(1) $2x = 14$\n(2) $x = 7$\n\nWhich line contains the first error?",
+     "options": [
+      "(1)",
+      "(2)",
+      "There is no error."
+     ],
+     "answer": "A",
+     "explanation": "Subtracting $3$ from $11$ gives $8$, not $14$. The correct working is $2x = 8$, so $x = 4$.",
+     "section": "drill",
+     "id": "tmua-drill-errors-in-proofs-01"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A student claims that $(a + b)^2 = a^2 + b^2$ for all real $a$ and $b$. Which values show that the claim is wrong?",
+     "options": [
+      "$a = 0$, $b = 0$",
+      "$a = 1$, $b = 0$",
+      "$a = 0$, $b = 5$",
+      "$a = 1$, $b = 1$",
+      "$a = 0$, $b = -2$"
+     ],
+     "answer": "D",
+     "explanation": "$(1 + 1)^2 = 4$ but $1^2 + 1^2 = 2$. In every other pair one number is $0$, and then the claim happens to hold. In general $(a + b)^2 = a^2 + 2ab + b^2$.",
+     "section": "drill",
+     "id": "tmua-drill-errors-in-proofs-02"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A student solves $x^2 = 3x$:\n\n(1) Divide both sides by $x$: $x = 3$.\n(2) So the only solution is $x = 3$.\n\nWhat is wrong?",
+     "options": [
+      "Line (1) divides by $x$, which could be $0$, and loses the solution $x = 0$.",
+      "Line (1) should give $x = \\frac{1}{3}$.",
+      "Line (2) should say $x = \\pm 3$.",
+      "Nothing: $x = 3$ is the only solution.",
+      "The equation has no real solutions."
+     ],
+     "answer": "A",
+     "explanation": "Dividing by $x$ assumes $x \\ne 0$. Factorising instead, $x(x - 3) = 0$, gives both solutions, $x = 0$ and $x = 3$.",
+     "section": "drill",
+     "id": "tmua-drill-errors-in-proofs-03"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A student solves $-2x < 6$:\n\n(1) Divide both sides by $-2$: $x < -3$.\n\nWhat is the correct solution?",
+     "options": [
+      "$x < -3$",
+      "$x > -3$",
+      "$x < 3$",
+      "$x > 3$",
+      "$x < -12$"
+     ],
+     "answer": "B",
+     "explanation": "Dividing an inequality by a negative number reverses it, so $x > -3$. Check: $x = 0$ satisfies $-2x < 6$.",
+     "section": "drill",
+     "id": "tmua-drill-errors-in-proofs-04"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A student 'proves' that $\\dfrac{a + b}{2} \\ge \\sqrt{ab}$ for all positive $a$ and $b$:\n\n(1) Assume $\\dfrac{a + b}{2} \\ge \\sqrt{ab}$.\n(2) Squaring, $(a + b)^2 \\ge 4ab$.\n(3) So $a^2 - 2ab + b^2 \\ge 0$, that is $(a - b)^2 \\ge 0$, which is true.\n(4) Hence $\\dfrac{a + b}{2} \\ge \\sqrt{ab}$.\n\nWhat is the main flaw in this argument?",
+     "options": [
+      "Line (2) is wrong: squaring is never allowed in an inequality.",
+      "$(a - b)^2 \\ge 0$ is false for some values.",
+      "It starts by assuming what it is trying to prove; a correct proof must start from $(a - b)^2 \\ge 0$ and work forwards.",
+      "The result is false for some positive $a$ and $b$.",
+      "Line (3) should give $(a + b)^2 \\ge 0$."
+     ],
+     "answer": "C",
+     "explanation": "Reaching a true statement from the claim proves nothing. Running the steps backwards from $(a - b)^2 \\ge 0$, each step reversible because both sides are positive, gives a valid proof.",
+     "section": "drill",
+     "id": "tmua-drill-errors-in-proofs-05"
+    },
+    {
+     "domain": "Proof",
+     "skill": "Errors in proofs",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which line contains the first error?\n\n(1) Let $x = -3$.\n(2) Then $x^2 = 9$.\n(3) So $\\sqrt{x^2} = \\sqrt{9} = 3$.\n(4) But $\\sqrt{x^2} = x$, so $3 = -3$.",
+     "options": [
+      "(1)",
+      "(2)",
+      "(3)",
+      "(4)",
+      "There is no error."
+     ],
+     "answer": "D",
+     "explanation": "$\\sqrt{x^2} = |x|$, not $x$. For $x = -3$, $\\sqrt{x^2} = 3 = |x|$, so line (4) is the error.",
+     "section": "drill",
+     "id": "tmua-drill-errors-in-proofs-06"
+    }
+   ]
+  }
+ }
+}
