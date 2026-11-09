@@ -56,6 +56,7 @@ class User(Base):
     sat_since: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     sat_test_date: Mapped[str | None] = mapped_column(String(10), nullable=True)
     sat_target: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    sat_emails: Mapped[list | None] = mapped_column(JSON, nullable=True)   # weekly progress emails sent (keys)
     # The student's own inbox for homework / class-notes updates (their login ID is not a mailbox).
     notify_email: Mapped[str | None] = mapped_column(String(255), nullable=True)
     # Doubt Help / Ask a Tutor (services/doubt.py): plan trial|doubt|plus, when it ends, the student's
@@ -306,6 +307,18 @@ class SatAttempt(Base):
     total_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
     started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class SatDrillAnswer(Base):
+    """One answer in a Notenix SAT skill drill (latest answer per question counts for mastery)."""
+    __tablename__ = "sat_drill_answers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    question_id: Mapped[str] = mapped_column(String(80))
+    skill: Mapped[str] = mapped_column(String(80))     # drill slug, e.g. "boundaries"
+    correct: Mapped[bool] = mapped_column(Boolean, default=False)
+    answered_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
 
 
 class Enrolment(Base):

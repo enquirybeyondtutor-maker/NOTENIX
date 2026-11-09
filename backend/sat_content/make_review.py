@@ -9,7 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 DOCS = HERE.parent.parent / "docs"
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-ORDER = ["diagnostic", "mock-1", "mock-2"]
+ORDER = ["diagnostic", "mock-1", "mock-2", "drills"]
 MODULE_NAMES = {"rw": "Reading and Writing", "m": "Math", "rw1": "Reading and Writing · Module 1",
                 "rw2e": "Reading and Writing · Module 2 (easier)", "rw2h": "Reading and Writing · Module 2 (harder)",
                 "m1": "Math · Module 1", "m2e": "Math · Module 2 (easier)", "m2h": "Math · Module 2 (harder)"}
@@ -39,7 +39,8 @@ def main():
         f = json.loads((HERE / f"{slug}.json").read_text(encoding="utf-8"))
         parts.append(f'<h1>{html.escape(f["title"])}</h1>')
         for key, m in f["modules"].items():
-            parts.append(f'<h2>{MODULE_NAMES.get(key, key)} · {len(m["questions"])} questions · {m["minutes"]} min</h2>')
+            mins = f" · {m['minutes']} min" if m["minutes"] else ""
+            parts.append(f'<h2>{MODULE_NAMES.get(key, m["title"])} · {len(m["questions"])} questions{mins}</h2>')
             for i, q in enumerate(m["questions"], 1):
                 total += 1
                 meta = f'{q["domain"]} · {q["skill"]} · difficulty {q["difficulty"]}'
@@ -77,7 +78,7 @@ def main():
 </style></head><body>
 <div class="cover"><h1 style="page-break-before:avoid;font-size:28pt">Notenix SAT</h1>
 <p style="font-size:13pt">Content review: {total} original questions</p>
-<p>Diagnostic (26) · Practice Test 1 (147) · Practice Test 2 (147)<br>Correct options in green, explanation below each question.</p></div>
+<p>Diagnostic (26) · Practice Test 1 (147) · Practice Test 2 (147) · Skill drills (180)<br>Correct options in green, explanation below each question.</p></div>
 {''.join(parts)}
 <script>window.addEventListener('load', () => setTimeout(() => document.title += ' ready', 2500));</script>
 </body></html>"""

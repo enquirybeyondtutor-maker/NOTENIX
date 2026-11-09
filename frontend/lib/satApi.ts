@@ -27,6 +27,22 @@ export const satAPI = {
   save: (id: number | string, data: { module: string; answers: Record<string, string>; marked: string[] }) => api.put(`/sat/attempts/${id}/save`, data),
   submit: (id: number | string, data: { module: string; answers: Record<string, string>; marked: string[] }) => api.post(`/sat/attempts/${id}/submit`, data),
   result: (id: number | string) => api.get(`/sat/attempts/${id}/result`),
+  // Phase 2
+  skills: () => api.get<SkillStatus[]>("/sat/skills"),
+  plan: () => api.get<StudyPlan>("/sat/plan"),
+  drill: (slug: string) => api.get(`/sat/drills/${slug}`),
+  drillAnswer: (slug: string, question_id: string, answer: string) =>
+    api.post<{ correct: boolean; answer: string | string[]; explanation: string }>(`/sat/drills/${slug}/answer`, { question_id, answer }),
+};
+
+export type SkillStatus = {
+  slug: string; skill: string; domain: string; section: "rw" | "math"; about: string;
+  right: number; total: number; accuracy: number | null; status: "strong" | "building" | "weak" | "untried";
+};
+export type PlanTask = { kind: "drill" | "mock"; title: string; detail: string; href: string; done: boolean; progress: string };
+export type StudyPlan = {
+  test_date: string | null; days_left: number | null; target: number | null;
+  tasks: PlanTask[]; weeks: { week_of: string; items: string[]; current: boolean }[]; focus: SkillStatus[];
 };
 
 /** Billing currency for a visitor's country (SAT prices: services/pricing.SAT_PRICES). */

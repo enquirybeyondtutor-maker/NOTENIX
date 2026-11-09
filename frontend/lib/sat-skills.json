@@ -1,0 +1,1779 @@
+[
+ {
+  "slug": "central-ideas-and-details",
+  "skill": "Central Ideas and Details",
+  "domain": "Information and Ideas",
+  "section": "rw",
+  "about": "Finding the main idea of a passage and the details that support it.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Central Ideas and Details",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "Owls can turn their heads about 270 degrees. Because their eyes are fixed in their sockets and cannot move, turning the head is how owls look around.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "Owls turn their heads so far because their eyes cannot move.",
+     "Owls have the largest eyes of any bird.",
+     "Owls hunt only at night.",
+     "Owls cannot see to the side."
+    ],
+    "answer": "A",
+    "explanation": "The text links the wide head turn to eyes that cannot move in their sockets.",
+    "id": "drills-central-ideas-and-details-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Central Ideas and Details",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "The town's new library has a café, a recording studio and rooms people can book for meetings. On weekends, it runs free coding classes for children.",
+    "question": "According to the text, what does the library offer on weekends?",
+    "options": [
+     "Discounts at its café",
+     "Free coding classes for children",
+     "Concerts in its studio",
+     "Longer opening hours"
+    ],
+    "answer": "B",
+    "explanation": "The text says \"On weekends, it runs free coding classes for children\".",
+    "id": "drills-central-ideas-and-details-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Central Ideas and Details",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "When the ship's engine failed, the crew did not panic. They rationed the drinking water, rigged a sail from spare canvas and steered by the stars. Eleven days later, they reached a fishing village, tired but unharmed.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "Fishing villages often help stranded sailors.",
+     "The ship's engine had never been reliable.",
+     "The crew survived a dangerous situation through calm, practical action.",
+     "Steering by the stars is easier than using an engine."
+    ],
+    "answer": "C",
+    "explanation": "The crew stayed calm, rationed water, made a sail and navigated, and reached safety: they survived through calm, practical action.",
+    "id": "drills-central-ideas-and-details-03"
+   }
+  ]
+ },
+ {
+  "slug": "command-of-evidence-textual",
+  "skill": "Command of Evidence: Textual",
+  "domain": "Information and Ideas",
+  "section": "rw",
+  "about": "Choosing the finding or quotation that best supports a claim.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Command of Evidence: Textual",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "A student claims that the school's recycling programme has reduced the amount of rubbish the school throws away.",
+    "question": "Which finding, if true, would most directly support the student's claim?",
+    "options": [
+     "The recycling bins are painted green.",
+     "The weight of rubbish collected from the school each month fell by a third after the programme began.",
+     "Most students know what recycling means.",
+     "The programme was started by a student club."
+    ],
+    "answer": "B",
+    "explanation": "A fall in rubbish collected after the programme began directly supports the claim. The other facts say nothing about the amount of rubbish.",
+    "id": "drills-command-of-evidence-textual-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Command of Evidence: Textual",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "A researcher claims that reading aloud to young children improves their vocabulary.",
+    "question": "Which finding, if true, would most directly support the researcher's claim?",
+    "options": [
+     "Picture books are popular gifts.",
+     "Many children enjoy being read to at bedtime.",
+     "Children whose parents were randomly assigned to read aloud daily learned more new words over a year than children whose parents were not.",
+     "Some parents read silently to themselves every evening."
+    ],
+    "answer": "C",
+    "explanation": "Random assignment plus a vocabulary gain links reading aloud to vocabulary growth, which is the claim.",
+    "id": "drills-command-of-evidence-textual-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Command of Evidence: Textual",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "The following text is from a 1913 short story. The narrator describes his neighbour.\n\nMr. Reyes was the most generous man on our street. Whenever a family fell on hard times, a basket of vegetables from his garden would appear on their doorstep before anyone had asked.",
+    "question": "Which quotation from the text most effectively illustrates the narrator's claim about Mr. Reyes?",
+    "options": [
+     "\"Whenever a family fell\"",
+     "\"Mr. Reyes was the most generous man\"",
+     "\"on our street\"",
+     "\"a basket of vegetables from his garden would appear on their doorstep before anyone had asked\""
+    ],
+    "answer": "D",
+    "explanation": "The claim is that he was generous; leaving vegetables for struggling families unasked is the example that shows it. Repeating the claim does not illustrate it.",
+    "id": "drills-command-of-evidence-textual-03"
+   }
+  ]
+ },
+ {
+  "slug": "command-of-evidence-quantitative",
+  "skill": "Command of Evidence: Quantitative",
+  "domain": "Information and Ideas",
+  "section": "rw",
+  "about": "Using data from a table or graph to complete or support a statement.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Command of Evidence: Quantitative",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "A school recorded students' favourite subjects.\n\n| Subject | Students |\n|---|---|\n| Art | 64 |\n| Maths | 52 |\n| Science | 71 |\n| History | 38 |\n\nThe most popular subject was ______",
+    "question": "Which choice most effectively uses data from the table to complete the statement?",
+    "options": [
+     "science.",
+     "art.",
+     "maths.",
+     "history."
+    ],
+    "answer": "A",
+    "explanation": "Science has the highest number of students: 71.",
+    "id": "drills-command-of-evidence-quantitative-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Command of Evidence: Quantitative",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "A shop tracked umbrella sales and rainfall.\n\n| Month | Rainfall (mm) | Umbrellas sold |\n|---|---|---|\n| June | 20 | 15 |\n| July | 45 | 32 |\n| August | 90 | 70 |\n\nThe manager suggests that umbrella sales rise when there is more rain.",
+    "question": "Which choice best describes data from the table that support the manager's suggestion?",
+    "options": [
+     "The shop sold 15 umbrellas in June.",
+     "As rainfall increased from June to August, umbrella sales also increased.",
+     "August had 90 mm of rain.",
+     "The shop sold umbrellas in all three months."
+    ],
+    "answer": "B",
+    "explanation": "The suggestion is that more rain goes with more sales. Only the statement linking rising rainfall to rising sales across the months supports it.",
+    "id": "drills-command-of-evidence-quantitative-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Command of Evidence: Quantitative",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Researchers measured how long four kinds of battery lasted.\n\n| Battery | Hours |\n|---|---|\n| Brand P | 12 |\n| Brand Q | 18 |\n| Brand R | 9 |\n| Brand S | 15 |\n\nA reviewer claims that Brand Q lasts at least twice as long as Brand R. ______",
+    "question": "Which choice most effectively uses data from the table to complete the text?",
+    "options": [
+     "Brand R lasted the shortest time of the four.",
+     "Brand Q lasted longer than Brand S.",
+     "Brand Q lasted 18 hours and Brand R 9 hours, so the claim is correct.",
+     "Brand P lasted 12 hours."
+    ],
+    "answer": "C",
+    "explanation": "The claim compares Q and R: 18 hours is exactly twice 9 hours, so Q lasts at least twice as long.",
+    "id": "drills-command-of-evidence-quantitative-03"
+   }
+  ]
+ },
+ {
+  "slug": "inferences",
+  "skill": "Inferences",
+  "domain": "Information and Ideas",
+  "section": "rw",
+  "about": "Choosing the most logical conclusion that follows from a passage.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Inferences",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "Most cacti have spines instead of broad leaves. Broad leaves lose a lot of water through evaporation. This suggests that spines help cacti ______",
+    "question": "Which choice most logically completes the text?",
+    "options": [
+     "lose less water than they would with broad leaves.",
+     "grow faster than other plants.",
+     "attract more insects.",
+     "survive in cold climates."
+    ],
+    "answer": "A",
+    "explanation": "Broad leaves lose water, and cacti have spines instead, so spines likely help them save water.",
+    "id": "drills-inferences-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Inferences",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "In a survey, students who used the school's online homework help scored higher on tests than students who did not. However, the students who used it were also more likely to do extra reading at home. Therefore, the survey alone cannot show that ______",
+    "question": "Which choice most logically completes the text?",
+    "options": [
+     "students used the online homework help.",
+     "the online homework help caused the higher scores.",
+     "some students did extra reading at home.",
+     "test scores varied between students."
+    ],
+    "answer": "B",
+    "explanation": "The users also did more extra reading, which could explain their scores, so the survey cannot show the homework help caused them.",
+    "id": "drills-inferences-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Information and Ideas",
+    "skill": "Inferences",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Arctic foxes have brown fur in summer and white fur in winter. Their summer coat blends in with rocks and soil, while their winter coat blends in with snow. This suggests that the fox's changing coat ______",
+    "question": "Which choice most logically completes the text?",
+    "options": [
+     "attracts mates in winter.",
+     "makes it warmer in summer.",
+     "helps it stay hidden as its surroundings change through the year.",
+     "is a sign that the fox is ill."
+    ],
+    "answer": "C",
+    "explanation": "Each coat matches the season's surroundings, so the change keeps the fox camouflaged all year.",
+    "id": "drills-inferences-03"
+   }
+  ]
+ },
+ {
+  "slug": "words-in-context",
+  "skill": "Words in Context",
+  "domain": "Craft and Structure",
+  "section": "rw",
+  "about": "Choosing the most precise word or phrase for a blank, using clues in the sentence around it.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Words in Context",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "The hiking trail is so ______ that families with young children can complete it in under an hour.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "remote",
+     "treacherous",
+     "gentle",
+     "lengthy"
+    ],
+    "answer": "C",
+    "explanation": "A trail young children finish quickly must be easy: \"gentle\". \"Treacherous\" and \"lengthy\" contradict this.",
+    "id": "drills-words-in-context-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Words in Context",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "Because the meeting ran so long, several members left ______, before the final vote had been taken.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "happily",
+     "late",
+     "together",
+     "early"
+    ],
+    "answer": "D",
+    "explanation": "Leaving before the final vote means leaving before the end: \"early\".",
+    "id": "drills-words-in-context-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Words in Context",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "The documentary's narrator remains ______ throughout, presenting the arguments of both sides without revealing which she finds more convincing.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "impartial",
+     "enthusiastic",
+     "sarcastic",
+     "uncertain"
+    ],
+    "answer": "A",
+    "explanation": "Presenting both sides without showing a preference is being \"impartial\". \"Uncertain\" suggests confusion, which the text does not describe.",
+    "id": "drills-words-in-context-03"
+   }
+  ]
+ },
+ {
+  "slug": "text-structure-and-purpose",
+  "skill": "Text Structure and Purpose",
+  "domain": "Craft and Structure",
+  "section": "rw",
+  "about": "Working out why a text was written and how its sentences fit together.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Text Structure and Purpose",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "Camels can go for days without drinking. When they do find water, they can drink over 100 litres in about ten minutes, and their bodies are built to absorb it quickly without harm.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To describe how camels cope with long periods without water",
+     "To argue that camels should be protected",
+     "To compare camels with horses",
+     "To explain where camels find water in the desert"
+    ],
+    "answer": "A",
+    "explanation": "The text describes camels going days without water and drinking large amounts quickly: how they cope with scarce water.",
+    "id": "drills-text-structure-and-purpose-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Text Structure and Purpose",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Many people think tomatoes have always been part of Italian cooking. In fact, tomatoes came from the Americas and were not widely eaten in Italy until the 1800s. Before then, many Europeans grew them only as decorative plants.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It gives a recipe and explains its origins.",
+     "It presents a common belief and then corrects it with historical facts.",
+     "It compares Italian and American cooking.",
+     "It argues that tomatoes are healthier than other vegetables."
+    ],
+    "answer": "B",
+    "explanation": "The first sentence gives a belief; \"In fact\" introduces facts that correct it.",
+    "id": "drills-text-structure-and-purpose-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Text Structure and Purpose",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Most stars appear to twinkle at night. Planets, however, usually shine with a steady light. The difference arises because stars are so far away that they appear as single points, which are easily disturbed by Earth's moving air, while planets appear as tiny discs.",
+    "question": "Which choice best describes the function of the third sentence in the text as a whole?",
+    "options": [
+     "It questions whether planets really shine steadily.",
+     "It gives a new example of a twinkling star.",
+     "It explains the cause of the difference described in the first two sentences.",
+     "It describes how astronomers measure distances."
+    ],
+    "answer": "C",
+    "explanation": "The first two sentences describe a difference (stars twinkle, planets don't); the third explains why.",
+    "id": "drills-text-structure-and-purpose-03"
+   }
+  ]
+ },
+ {
+  "slug": "cross-text-connections",
+  "skill": "Cross-Text Connections",
+  "domain": "Craft and Structure",
+  "section": "rw",
+  "about": "Comparing two short texts and predicting how one author would respond to the other.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Cross-Text Connections",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Text 1\nSome nutritionists say that eating late at night causes weight gain.\n\nText 2\nA study found that people who ate the same total number of calories gained the same amount of weight whether they ate in the evening or earlier in the day. What mattered was how much they ate, not when.",
+    "question": "Based on the texts, how would the researchers in Text 2 most likely respond to the nutritionists in Text 1?",
+    "options": [
+     "By claiming that eating late helps people lose weight",
+     "By agreeing that evening meals cause weight gain",
+     "By arguing that the total amount eaten, not the time of eating, affects weight",
+     "By suggesting that nutritionists should study only breakfast"
+    ],
+    "answer": "C",
+    "explanation": "The study found timing made no difference when calories were equal, so the researchers would say amount, not timing, matters.",
+    "id": "drills-cross-text-connections-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Cross-Text Connections",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Text 1\nElectric cars are often described as having zero emissions.\n\nText 2\nElectric cars produce no exhaust while driving. However, if the electricity that charges them comes from burning coal, the emissions are simply moved from the car to the power station.",
+    "question": "Based on the texts, how would the author of Text 2 most likely respond to the description in Text 1?",
+    "options": [
+     "By claiming that power stations no longer burn coal",
+     "By agreeing that electric cars cause no pollution of any kind",
+     "By arguing that petrol cars are cleaner than electric cars",
+     "By pointing out that it ignores emissions that may occur where the electricity is produced"
+    ],
+    "answer": "D",
+    "explanation": "Text 2 accepts there is no exhaust but notes emissions can move to the power station, so \"zero emissions\" leaves something out.",
+    "id": "drills-cross-text-connections-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Craft and Structure",
+    "skill": "Cross-Text Connections",
+    "difficulty": 3,
+    "type": "mcq",
+    "passage": "Text 1\nHistorians have often portrayed medieval peasants as almost never travelling more than a few miles from their villages.\n\nText 2\nRecords of pilgrimages, markets and seasonal work show that many medieval peasants travelled considerable distances, sometimes hundreds of miles, at least occasionally in their lives.",
+    "question": "Based on the texts, how would the author of Text 2 most likely respond to the portrayal in Text 1?",
+    "options": [
+     "By arguing that it underestimates how far many peasants travelled",
+     "By agreeing that peasants rarely left their villages",
+     "By claiming that peasants travelled more than modern people do",
+     "By suggesting that pilgrimage records are unreliable"
+    ],
+    "answer": "A",
+    "explanation": "Text 2 uses records to show many peasants travelled far at least sometimes, which challenges the \"few miles\" portrayal.",
+    "id": "drills-cross-text-connections-03"
+   }
+  ]
+ },
+ {
+  "slug": "rhetorical-synthesis",
+  "skill": "Rhetorical Synthesis",
+  "domain": "Expression of Ideas",
+  "section": "rw",
+  "about": "Using notes to write a sentence that achieves a specific goal.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Expression of Ideas",
+    "skill": "Rhetorical Synthesis",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "While researching a topic, a student has taken the following notes:\n• Mount Everest is the highest mountain on Earth.\n• Its summit is 8,849 metres above sea level.\n• It lies on the border between Nepal and China.",
+    "question": "The student wants to state the height of Mount Everest. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+    "options": [
+     "Mount Everest lies on the border between Nepal and China.",
+     "Mount Everest's summit is 8,849 metres above sea level.",
+     "Mount Everest is a famous mountain.",
+     "Many climbers try to reach Mount Everest."
+    ],
+    "answer": "B",
+    "explanation": "Only the sentence giving 8,849 metres states the height.",
+    "id": "drills-rhetorical-synthesis-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Expression of Ideas",
+    "skill": "Rhetorical Synthesis",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "While researching a topic, a student has taken the following notes:\n• Penicillin was discovered by Alexander Fleming in 1928.\n• It was the first widely used antibiotic.\n• Mass production began during the Second World War.\n• It saved many soldiers from infected wounds.",
+    "question": "The student wants to emphasise penicillin's impact during the Second World War. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+    "options": [
+     "Penicillin was the first widely used antibiotic.",
+     "Penicillin was discovered by Alexander Fleming in 1928.",
+     "Mass-produced during the Second World War, penicillin saved many soldiers from infected wounds.",
+     "Alexander Fleming was a scientist."
+    ],
+    "answer": "C",
+    "explanation": "Only the sentence linking wartime production to saving soldiers shows its impact during the war.",
+    "id": "drills-rhetorical-synthesis-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Expression of Ideas",
+    "skill": "Rhetorical Synthesis",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "While researching a topic, a student has taken the following notes:\n• The cheetah is the fastest land animal.\n• It can reach about 110 km/h.\n• It can keep this speed for only about 20 to 30 seconds.",
+    "question": "The student wants to emphasise a limit on the cheetah's speed. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+    "options": [
+     "Cheetahs are fast animals that live on land.",
+     "The cheetah is the fastest land animal.",
+     "The cheetah can reach about 110 km/h.",
+     "Although the cheetah can reach about 110 km/h, it can keep that speed for only 20 to 30 seconds."
+    ],
+    "answer": "D",
+    "explanation": "The limit is how briefly it can sprint; only the sentence including the 20–30 second limit emphasises it.",
+    "id": "drills-rhetorical-synthesis-03"
+   }
+  ]
+ },
+ {
+  "slug": "transitions",
+  "skill": "Transitions",
+  "domain": "Expression of Ideas",
+  "section": "rw",
+  "about": "Choosing the linking word that shows how two ideas connect.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Expression of Ideas",
+    "skill": "Transitions",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "The test was difficult. ______, most students passed.",
+    "question": "Which choice completes the text with the most logical transition?",
+    "options": [
+     "Similarly",
+     "Therefore",
+     "For example",
+     "Still"
+    ],
+    "answer": "D",
+    "explanation": "Students passing despite a difficult test is a contrast, so \"Still\" fits.",
+    "id": "drills-transitions-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Expression of Ideas",
+    "skill": "Transitions",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "Bananas are rich in potassium. ______, they are a popular snack for athletes.",
+    "question": "Which choice completes the text with the most logical transition?",
+    "options": [
+     "For this reason",
+     "However",
+     "In contrast",
+     "Nonetheless"
+    ],
+    "answer": "A",
+    "explanation": "Being rich in potassium is a reason athletes eat bananas, so a cause-and-effect transition fits.",
+    "id": "drills-transitions-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Expression of Ideas",
+    "skill": "Transitions",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "The first part of the novel is set in a busy city. ______, the second part takes place on a quiet, isolated farm.",
+    "question": "Which choice completes the text with the most logical transition?",
+    "options": [
+     "As a result",
+     "By contrast",
+     "For instance",
+     "In addition"
+    ],
+    "answer": "B",
+    "explanation": "A quiet farm is the opposite of a busy city, so a contrast transition fits.",
+    "id": "drills-transitions-03"
+   }
+  ]
+ },
+ {
+  "slug": "boundaries",
+  "skill": "Boundaries",
+  "domain": "Standard English Conventions",
+  "section": "rw",
+  "about": "Punctuating between clauses and phrases: commas, semicolons, colons and full stops.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Standard English Conventions",
+    "skill": "Boundaries",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "The bakery opens at six every ______ its first loaves sell out within an hour.",
+    "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    "options": [
+     "morning, and,",
+     "morning,",
+     "morning",
+     "morning;"
+    ],
+    "answer": "D",
+    "explanation": "Two complete sentences are joined, so a semicolon is needed. A comma alone is a comma splice.",
+    "id": "drills-boundaries-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Standard English Conventions",
+    "skill": "Boundaries",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "For the camping trip, we packed three ______ a tent, a stove and a first-aid kit.",
+    "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    "options": [
+     "essentials:",
+     "essentials;",
+     "essentials",
+     "essentials, which"
+    ],
+    "answer": "A",
+    "explanation": "A complete sentence introduces the list, so a colon fits.",
+    "id": "drills-boundaries-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Standard English Conventions",
+    "skill": "Boundaries",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Dr. Mei ______ a leading expert on volcanoes, will give the opening lecture.",
+    "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    "options": [
+     "Lin",
+     "Lin,",
+     "Lin;",
+     "Lin:"
+    ],
+    "answer": "B",
+    "explanation": "\"A leading expert on volcanoes\" renames Dr. Mei Lin and closes with a comma, so it must open with one.",
+    "id": "drills-boundaries-03"
+   }
+  ]
+ },
+ {
+  "slug": "form-structure-and-sense",
+  "skill": "Form, Structure, and Sense",
+  "domain": "Standard English Conventions",
+  "section": "rw",
+  "about": "Subject-verb agreement, verb tense, pronouns and modifiers.",
+  "samples": [
+   {
+    "section": "rw",
+    "domain": "Standard English Conventions",
+    "skill": "Form, Structure, and Sense",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "The keys to the classroom ______ on the teacher's desk.",
+    "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    "options": [
+     "are",
+     "is",
+     "was",
+     "has been"
+    ],
+    "answer": "A",
+    "explanation": "The subject is \"keys\", which is plural (\"to the classroom\" describes them), so \"are\" is needed.",
+    "id": "drills-form-structure-and-sense-01"
+   },
+   {
+    "section": "rw",
+    "domain": "Standard English Conventions",
+    "skill": "Form, Structure, and Sense",
+    "difficulty": 1,
+    "type": "mcq",
+    "passage": "Tomorrow, the students ______ their science projects to the judges.",
+    "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    "options": [
+     "presented",
+     "will present",
+     "have presented",
+     "were presenting"
+    ],
+    "answer": "B",
+    "explanation": "\"Tomorrow\" refers to the future, so \"will present\" is needed.",
+    "id": "drills-form-structure-and-sense-02"
+   },
+   {
+    "section": "rw",
+    "domain": "Standard English Conventions",
+    "skill": "Form, Structure, and Sense",
+    "difficulty": 2,
+    "type": "mcq",
+    "passage": "Neither of the paintings ______ been cleaned since it arrived at the gallery.",
+    "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    "options": [
+     "are",
+     "have",
+     "has",
+     "were"
+    ],
+    "answer": "C",
+    "explanation": "The subject \"Neither\" is singular (and \"it arrived\" confirms it), so \"has\" is needed.",
+    "id": "drills-form-structure-and-sense-03"
+   }
+  ]
+ },
+ {
+  "slug": "linear-equations-in-one-variable",
+  "skill": "Linear equations in one variable",
+  "domain": "Algebra",
+  "section": "math",
+  "about": "Solving equations like $5(x - 2) = 3x + 6$, and spotting when there are no or infinitely many solutions.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear equations in one variable",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "If $x + 9 = 15$, what is the value of $x$?",
+    "options": [
+     "$6$",
+     "$9$",
+     "$15$",
+     "$24$"
+    ],
+    "answer": "A",
+    "explanation": "Subtract $9$ from both sides: $x = 6$.",
+    "id": "drills-linear-equations-in-one-variable-01"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear equations in one variable",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "If $6x = 42$, what is the value of $x$?",
+    "options": [
+     "$6$",
+     "$7$",
+     "$36$",
+     "$48$"
+    ],
+    "answer": "B",
+    "explanation": "Divide both sides by $6$: $x = 7$.",
+    "id": "drills-linear-equations-in-one-variable-02"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear equations in one variable",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "If $5(x - 2) = 3x + 6$, what is the value of $x$?",
+    "answer": [
+     "8"
+    ],
+    "explanation": "$5x - 10 = 3x + 6$, so $2x = 16$ and $x = 8$.",
+    "id": "drills-linear-equations-in-one-variable-03"
+   }
+  ]
+ },
+ {
+  "slug": "linear-functions",
+  "skill": "Linear functions",
+  "domain": "Algebra",
+  "section": "math",
+  "about": "Reading and building functions like $f(x) = mx + b$ from words, tables and graphs.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear functions",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "If $f(x) = 2x + 7$, what is $f(5)$?",
+    "options": [
+     "$12$",
+     "$14$",
+     "$17$",
+     "$19$"
+    ],
+    "answer": "C",
+    "explanation": "$f(5) = 2(5) + 7 = 17$.",
+    "id": "drills-linear-functions-01"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear functions",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "A taxi charges $\\$3$ plus $\\$2$ per mile. Which function gives the cost $C$ of a ride of $m$ miles?",
+    "options": [
+     "$C = 3m + 2$",
+     "$C = 5m$",
+     "$C = 2m + 3$",
+     "$C = 2 + m$"
+    ],
+    "answer": "C",
+    "explanation": "The fixed $\\$3$ is the starting amount and $\\$2$ is added per mile: $C = 2m + 3$.",
+    "id": "drills-linear-functions-02"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear functions",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "The function $g$ is linear, $g(0) = 4$ and $g(2) = 10$. What is $g(5)$?",
+    "answer": [
+     "19"
+    ],
+    "explanation": "The slope is $\\frac{10 - 4}{2} = 3$, so $g(x) = 3x + 4$ and $g(5) = 19$.",
+    "id": "drills-linear-functions-03"
+   }
+  ]
+ },
+ {
+  "slug": "linear-equations-in-two-variables",
+  "skill": "Linear equations in two variables",
+  "domain": "Algebra",
+  "section": "math",
+  "about": "Slopes, intercepts and equations of lines, including parallel and perpendicular lines.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear equations in two variables",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the slope of the line $y = -4x + 9$?",
+    "options": [
+     "$-4$",
+     "$4$",
+     "$9$",
+     "$-9$"
+    ],
+    "answer": "A",
+    "explanation": "In $y = mx + b$, the slope is $m = -4$.",
+    "id": "drills-linear-equations-in-two-variables-01"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear equations in two variables",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the $y$-intercept of the line $y = 3x - 5$?",
+    "options": [
+     "$(0, 3)$",
+     "$(0, -5)$",
+     "$(-5, 0)$",
+     "$(3, 0)$"
+    ],
+    "answer": "B",
+    "explanation": "When $x = 0$, $y = -5$.",
+    "id": "drills-linear-equations-in-two-variables-02"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear equations in two variables",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "The line $4x + 2y = 18$ crosses the $y$-axis at $(0, b)$. What is $b$?",
+    "answer": [
+     "9"
+    ],
+    "explanation": "Set $x = 0$: $2y = 18$, so $y = 9$.",
+    "id": "drills-linear-equations-in-two-variables-03"
+   }
+  ]
+ },
+ {
+  "slug": "systems-of-linear-equations",
+  "skill": "Systems of linear equations",
+  "domain": "Algebra",
+  "section": "math",
+  "about": "Solving two equations together, and when a system has no or infinitely many solutions.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Systems of linear equations",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "$x + y = 9$\n$x - y = 3$\n\nWhat is the value of $x$?",
+    "options": [
+     "$3$",
+     "$5$",
+     "$6$",
+     "$9$"
+    ],
+    "answer": "C",
+    "explanation": "Add the equations: $2x = 12$, so $x = 6$.",
+    "id": "drills-systems-of-linear-equations-01"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Systems of linear equations",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "$y = x + 2$\n$y = 3x - 4$\n\nWhat is the value of $x$ in the solution?",
+    "options": [
+     "$1$",
+     "$2$",
+     "$3$",
+     "$5$"
+    ],
+    "answer": "C",
+    "explanation": "$x + 2 = 3x - 4$, so $2x = 6$ and $x = 3$.",
+    "id": "drills-systems-of-linear-equations-02"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Systems of linear equations",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "$2x + 3y = 13$\n$x + 3y = 8$\n\nWhat is the value of $y$?",
+    "answer": [
+     "1"
+    ],
+    "explanation": "Subtract the second equation from the first: $x = 5$. Then $5 + 3y = 8$, so $y = 1$.",
+    "id": "drills-systems-of-linear-equations-03"
+   }
+  ]
+ },
+ {
+  "slug": "linear-inequalities",
+  "skill": "Linear inequalities",
+  "domain": "Algebra",
+  "section": "math",
+  "about": "Solving inequalities and using them to model limits like budgets and capacities.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear inequalities",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "Which value of $x$ satisfies $x - 4 > 6$?",
+    "options": [
+     "$8$",
+     "$9$",
+     "$10$",
+     "$11$"
+    ],
+    "answer": "D",
+    "explanation": "$x > 10$, so only $11$ works.",
+    "id": "drills-linear-inequalities-01"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear inequalities",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "Which inequality means \\\"$y$ is at least $12$\\\"?",
+    "options": [
+     "$y \\ge 12$",
+     "$y < 12$",
+     "$y > 12$",
+     "$y \\le 12$"
+    ],
+    "answer": "A",
+    "explanation": "\\\"At least $12$\\\" means $12$ or more: $y \\ge 12$.",
+    "id": "drills-linear-inequalities-02"
+   },
+   {
+    "section": "math",
+    "domain": "Algebra",
+    "skill": "Linear inequalities",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "What is the greatest integer $x$ for which $3x + 5 \\le 26$?",
+    "answer": [
+     "7"
+    ],
+    "explanation": "$3x \\le 21$, so $x \\le 7$.",
+    "id": "drills-linear-inequalities-03"
+   }
+  ]
+ },
+ {
+  "slug": "nonlinear-functions",
+  "skill": "Nonlinear functions",
+  "domain": "Advanced Math",
+  "section": "math",
+  "about": "Quadratic and exponential functions: vertices, growth and decay.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Nonlinear functions",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "If $f(x) = x^2 + 3$, what is $f(4)$?",
+    "options": [
+     "$11$",
+     "$16$",
+     "$19$",
+     "$22$"
+    ],
+    "answer": "C",
+    "explanation": "$f(4) = 16 + 3 = 19$.",
+    "id": "drills-nonlinear-functions-01"
+   },
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Nonlinear functions",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "An investment of $\\$1{,}000$ doubles every $8$ years. What will it be worth after $16$ years?",
+    "options": [
+     "$\\$2{,}000$",
+     "$\\$3{,}000$",
+     "$\\$4{,}000$",
+     "$\\$16{,}000$"
+    ],
+    "answer": "C",
+    "explanation": "$16$ years is two doubling periods: $1{,}000 \\times 2 \\times 2 = 4{,}000$.",
+    "id": "drills-nonlinear-functions-02"
+   },
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Nonlinear functions",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "The graph of $y = (x - 5)^2 - 3$ has its vertex at $(h, k)$. What is $h + k$?",
+    "answer": [
+     "2"
+    ],
+    "explanation": "The vertex is $(5, -3)$, so $h + k = 2$.",
+    "id": "drills-nonlinear-functions-03"
+   }
+  ]
+ },
+ {
+  "slug": "nonlinear-equations-and-systems",
+  "skill": "Nonlinear equations and systems",
+  "domain": "Advanced Math",
+  "section": "math",
+  "about": "Solving quadratics and systems that include a curve.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Nonlinear equations and systems",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What are the solutions to $x^2 = 36$?",
+    "options": [
+     "$6$ only",
+     "$18$ only",
+     "$-6$ and $6$",
+     "$-18$ and $18$"
+    ],
+    "answer": "C",
+    "explanation": "Both $6^2$ and $(-6)^2$ equal $36$.",
+    "id": "drills-nonlinear-equations-and-systems-01"
+   },
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Nonlinear equations and systems",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What are the solutions to $(x - 2)(x + 5) = 0$?",
+    "options": [
+     "$x = -2$ and $x = 5$",
+     "$x = 2$ and $x = -5$",
+     "$x = 2$ and $x = 5$",
+     "$x = -2$ and $x = -5$"
+    ],
+    "answer": "B",
+    "explanation": "A product is zero when a factor is zero: $x = 2$ or $x = -5$.",
+    "id": "drills-nonlinear-equations-and-systems-02"
+   },
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Nonlinear equations and systems",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "What is the positive solution of $x^2 + 3x - 28 = 0$?",
+    "answer": [
+     "4"
+    ],
+    "explanation": "$(x + 7)(x - 4) = 0$, so $x = 4$ or $x = -7$.",
+    "id": "drills-nonlinear-equations-and-systems-03"
+   }
+  ]
+ },
+ {
+  "slug": "equivalent-expressions",
+  "skill": "Equivalent expressions",
+  "domain": "Advanced Math",
+  "section": "math",
+  "about": "Expanding, factorising and simplifying expressions, including exponents.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Equivalent expressions",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "Which expression is equivalent to $3x + 2x - 4$?",
+    "options": [
+     "$x - 4$",
+     "$5x - 4$",
+     "$6x - 4$",
+     "$5x + 4$"
+    ],
+    "answer": "B",
+    "explanation": "Combine like terms: $3x + 2x = 5x$.",
+    "id": "drills-equivalent-expressions-01"
+   },
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Equivalent expressions",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "Which expression is equivalent to $(x + 3)(x + 2)$?",
+    "options": [
+     "$x^2 + 6$",
+     "$2x + 5$",
+     "$x^2 + 6x + 5$",
+     "$x^2 + 5x + 6$"
+    ],
+    "answer": "D",
+    "explanation": "$x^2 + 2x + 3x + 6 = x^2 + 5x + 6$.",
+    "id": "drills-equivalent-expressions-02"
+   },
+   {
+    "section": "math",
+    "domain": "Advanced Math",
+    "skill": "Equivalent expressions",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "Which expression is equivalent to $4x^2 - 9$?",
+    "options": [
+     "$(2x - 3)(2x + 3)$",
+     "$(4x - 3)(x + 3)$",
+     "$(2x - 3)^2$",
+     "$(4x - 9)(x + 1)$"
+    ],
+    "answer": "A",
+    "explanation": "Difference of squares: $(2x)^2 - 3^2 = (2x - 3)(2x + 3)$.",
+    "id": "drills-equivalent-expressions-03"
+   }
+  ]
+ },
+ {
+  "slug": "ratios-rates-and-units",
+  "skill": "Ratios, rates and units",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "Proportions, speeds, unit conversions and scale.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Ratios, rates and units",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "A recipe uses $2$ eggs for $12$ muffins. How many eggs are needed for $36$ muffins?",
+    "options": [
+     "$4$",
+     "$6$",
+     "$8$",
+     "$12$"
+    ],
+    "answer": "B",
+    "explanation": "$36$ is $3$ times $12$, so use $3 \\times 2 = 6$ eggs.",
+    "id": "drills-ratios-rates-and-units-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Ratios, rates and units",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "A car travels $150$ miles in $3$ hours. What is its average speed?",
+    "options": [
+     "$50$ mph",
+     "$45$ mph",
+     "$60$ mph",
+     "$450$ mph"
+    ],
+    "answer": "A",
+    "explanation": "$150 \\div 3 = 50$ miles per hour.",
+    "id": "drills-ratios-rates-and-units-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Ratios, rates and units",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "How many minutes are in $3.5$ hours?",
+    "answer": [
+     "210"
+    ],
+    "explanation": "$3.5 \\times 60 = 210$.",
+    "id": "drills-ratios-rates-and-units-03"
+   }
+  ]
+ },
+ {
+  "slug": "percentages",
+  "skill": "Percentages",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "Percentages of amounts, percentage change and reverse percentages.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Percentages",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is $25\\%$ of $80$?",
+    "options": [
+     "$20$",
+     "$25$",
+     "$32$",
+     "$55$"
+    ],
+    "answer": "A",
+    "explanation": "$25\\%$ is a quarter: $80 \\div 4 = 20$.",
+    "id": "drills-percentages-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Percentages",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "$18$ is what percent of $72$?",
+    "options": [
+     "$18\\%$",
+     "$40\\%$",
+     "$25\\%$",
+     "$54\\%$"
+    ],
+    "answer": "C",
+    "explanation": "$\\frac{18}{72} = 0.25 = 25\\%$.",
+    "id": "drills-percentages-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Percentages",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "A bike costs $\\$240$. During a sale it is reduced by $35\\%$. What is the sale price, in dollars?",
+    "answer": [
+     "156"
+    ],
+    "explanation": "$240 \\times 0.65 = 156$.",
+    "id": "drills-percentages-03"
+   }
+  ]
+ },
+ {
+  "slug": "one-variable-data",
+  "skill": "One-variable data",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "Mean, median, mode, range and spread of a data set.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "One-variable data",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the mean of $4, 6, 8, 10, 12$?",
+    "options": [
+     "$6$",
+     "$8$",
+     "$10$",
+     "$40$"
+    ],
+    "answer": "B",
+    "explanation": "The total is $40$ and there are $5$ numbers: $40 \\div 5 = 8$.",
+    "id": "drills-one-variable-data-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "One-variable data",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the mode of $3, 5, 5, 7, 9, 5, 2$?",
+    "options": [
+     "$2$",
+     "$3$",
+     "$5$",
+     "$7$"
+    ],
+    "answer": "C",
+    "explanation": "$5$ appears three times, more than any other value.",
+    "id": "drills-one-variable-data-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "One-variable data",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "What is the median of $12, 3, 8, 15, 6, 10$?",
+    "answer": [
+     "9"
+    ],
+    "explanation": "In order: $3, 6, 8, 10, 12, 15$. The median is the mean of $8$ and $10$: $9$.",
+    "id": "drills-one-variable-data-03"
+   }
+  ]
+ },
+ {
+  "slug": "two-variable-data-and-models",
+  "skill": "Two-variable data and models",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "Scatterplots, lines of best fit and linear or exponential models.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Two-variable data and models",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "A scatterplot shows that as temperature rises, ice-cream sales rise. What kind of association is this?",
+    "options": [
+     "Negative",
+     "Positive",
+     "No association",
+     "Exactly linear"
+    ],
+    "answer": "B",
+    "explanation": "Both variables increase together, which is a positive association.",
+    "id": "drills-two-variable-data-and-models-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Two-variable data and models",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "The line of best fit $y = 2x + 10$ predicts plant height $y$ (cm) after $x$ weeks. What is the predicted height after $6$ weeks?",
+    "options": [
+     "$16$ cm",
+     "$20$ cm",
+     "$32$ cm",
+     "$22$ cm"
+    ],
+    "answer": "D",
+    "explanation": "Substitute $x = 6$: $y = 2(6) + 10 = 22$ cm.",
+    "id": "drills-two-variable-data-and-models-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Two-variable data and models",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "In the model $y = 1.5x + 40$, $y$ is a phone bill in dollars and $x$ is gigabytes used. What does $1.5$ represent?",
+    "options": [
+     "The extra cost for each additional gigabyte",
+     "The bill with no data used",
+     "The number of gigabytes included",
+     "The maximum bill"
+    ],
+    "answer": "A",
+    "explanation": "$1.5$ is the slope: the change in the bill for each extra gigabyte.",
+    "id": "drills-two-variable-data-and-models-03"
+   }
+  ]
+ },
+ {
+  "slug": "probability",
+  "skill": "Probability",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "Simple and conditional probability, including two-way tables.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Probability",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "A fair coin is tossed. What is the probability of tails?",
+    "options": [
+     "$0$",
+     "$\\dfrac{1}{4}$",
+     "$1$",
+     "$\\dfrac{1}{2}$"
+    ],
+    "answer": "D",
+    "explanation": "There are $2$ equally likely outcomes, $1$ of them tails.",
+    "id": "drills-probability-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Probability",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "A bag has $3$ red and $7$ blue marbles. What is the probability of picking red?",
+    "options": [
+     "$\\dfrac{3}{10}$",
+     "$\\dfrac{3}{7}$",
+     "$\\dfrac{7}{10}$",
+     "$\\dfrac{1}{3}$"
+    ],
+    "answer": "A",
+    "explanation": "$3$ of the $10$ marbles are red.",
+    "id": "drills-probability-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Probability",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "A number from $1$ to $20$ is chosen at random. What is the probability it is a multiple of $4$?",
+    "options": [
+     "$\\dfrac{1}{5}$",
+     "$\\dfrac{1}{2}$",
+     "$\\dfrac{1}{4}$",
+     "$\\dfrac{4}{5}$"
+    ],
+    "answer": "C",
+    "explanation": "$4, 8, 12, 16, 20$: $5$ of $20$, which is $\\frac{1}{4}$.",
+    "id": "drills-probability-03"
+   }
+  ]
+ },
+ {
+  "slug": "sample-statistics-and-margin-of-error",
+  "skill": "Sample statistics and margin of error",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "What a random sample tells you about a population, and margins of error.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Sample statistics and margin of error",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "To estimate how many students at a school like a new lunch menu, which method gives the most reliable result?",
+    "options": [
+     "Asking a random sample of students from the whole school",
+     "Asking only the students in the lunch queue first",
+     "Asking only the cooks",
+     "Asking only students in one class"
+    ],
+    "answer": "A",
+    "explanation": "A random sample from the whole school is the most representative.",
+    "id": "drills-sample-statistics-and-margin-of-error-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Sample statistics and margin of error",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "In a random sample of $80$ of the $2{,}000$ households in a town, $20$ own a dog. About how many households in the town own a dog?",
+    "answer": [
+     "500"
+    ],
+    "explanation": "$\\frac{20}{80} = 25\\%$, and $25\\%$ of $2{,}000$ is $500$.",
+    "id": "drills-sample-statistics-and-margin-of-error-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Sample statistics and margin of error",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "A poll finds $52\\%$ support with a margin of error of $4\\%$. Which range is plausible for the true support?",
+    "options": [
+     "$50\\%$ to $54\\%$",
+     "$48\\%$ to $56\\%$",
+     "$52\\%$ to $56\\%$",
+     "$4\\%$ to $52\\%$"
+    ],
+    "answer": "B",
+    "explanation": "$52\\% \\pm 4\\%$ gives $48\\%$ to $56\\%$.",
+    "id": "drills-sample-statistics-and-margin-of-error-03"
+   }
+  ]
+ },
+ {
+  "slug": "studies-and-experiments",
+  "skill": "Studies and experiments",
+  "domain": "Problem-Solving and Data Analysis",
+  "section": "math",
+  "about": "When a study shows cause and effect, and who its results apply to.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Studies and experiments",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "Which study design allows a conclusion that a new teaching method causes better scores?",
+    "options": [
+     "Comparing students who chose the method with those who did not",
+     "Asking students whether they like the method",
+     "Randomly assigning students to use the method or not, then comparing scores",
+     "Measuring scores only for students using the method"
+    ],
+    "answer": "C",
+    "explanation": "Random assignment balances other differences, so a difference in scores can be put down to the method.",
+    "id": "drills-studies-and-experiments-01"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Studies and experiments",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "Researchers notice that people who drink more coffee live in bigger cities. Which statement is most appropriate?",
+    "options": [
+     "Coffee causes people to move to cities.",
+     "The data show an association, not necessarily cause and effect.",
+     "Living in a city causes coffee drinking.",
+     "There is no relationship."
+    ],
+    "answer": "B",
+    "explanation": "Observational data show association only; other factors could explain it.",
+    "id": "drills-studies-and-experiments-02"
+   },
+   {
+    "section": "math",
+    "domain": "Problem-Solving and Data Analysis",
+    "skill": "Studies and experiments",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "In an experiment, $100$ volunteers are randomly split into two groups; one gets a new sunscreen and one a placebo cream. The sunscreen group has fewer burns. To whom do the results apply best?",
+    "options": [
+     "All people in the world",
+     "No one",
+     "Only the 50 people who got the sunscreen",
+     "People similar to the volunteers"
+    ],
+    "answer": "D",
+    "explanation": "Results from volunteers generalise best to people like them.",
+    "id": "drills-studies-and-experiments-03"
+   }
+  ]
+ },
+ {
+  "slug": "area-and-volume",
+  "skill": "Area and volume",
+  "domain": "Geometry and Trigonometry",
+  "section": "math",
+  "about": "Areas and volumes of 2D and 3D shapes, and how they scale.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Area and volume",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the area of a rectangle $8$ m long and $5$ m wide?",
+    "options": [
+     "$13\\text{ m}^2$",
+     "$40\\text{ m}^2$",
+     "$26\\text{ m}^2$",
+     "$80\\text{ m}^2$"
+    ],
+    "answer": "B",
+    "explanation": "Area $=$ length $\\times$ width $= 8 \\times 5 = 40$ square metres.",
+    "id": "drills-area-and-volume-01"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Area and volume",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the volume of a cube with edges of $3$ cm?",
+    "options": [
+     "$9\\text{ cm}^3$",
+     "$18\\text{ cm}^3$",
+     "$54\\text{ cm}^3$",
+     "$27\\text{ cm}^3$"
+    ],
+    "answer": "D",
+    "explanation": "Volume $=$ edge cubed $= 3^3 = 27$ cubic centimetres.",
+    "id": "drills-area-and-volume-02"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Area and volume",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "A cylinder has radius $2$ and height $5$. Its volume is $k\\pi$. What is $k$?",
+    "answer": [
+     "20"
+    ],
+    "explanation": "$V = \\pi r^2 h = \\pi(4)(5) = 20\\pi$.",
+    "id": "drills-area-and-volume-03"
+   }
+  ]
+ },
+ {
+  "slug": "lines-angles-and-triangles",
+  "skill": "Lines, angles and triangles",
+  "domain": "Geometry and Trigonometry",
+  "section": "math",
+  "about": "Angle facts, parallel lines and similar triangles.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Lines, angles and triangles",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "Two angles on a straight line measure $70^\\circ$ and $x^\\circ$. What is $x$?",
+    "options": [
+     "$20$",
+     "$90$",
+     "$110$",
+     "$290$"
+    ],
+    "answer": "C",
+    "explanation": "Angles on a straight line add to $180^\\circ$: $x = 110$.",
+    "id": "drills-lines-angles-and-triangles-01"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Lines, angles and triangles",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "In an equilateral triangle, what is the measure of each angle?",
+    "options": [
+     "$60^\\circ$",
+     "$45^\\circ$",
+     "$90^\\circ$",
+     "$120^\\circ$"
+    ],
+    "answer": "A",
+    "explanation": "The three equal angles share $180^\\circ$: $60^\\circ$ each.",
+    "id": "drills-lines-angles-and-triangles-02"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Lines, angles and triangles",
+    "difficulty": 2,
+    "type": "spr",
+    "question": "Two parallel lines are cut by a transversal. One angle measures $65^\\circ$. Its corresponding angle measures $x^\\circ$. What is $x$?",
+    "answer": [
+     "65"
+    ],
+    "explanation": "Corresponding angles on parallel lines are equal: $65$.",
+    "id": "drills-lines-angles-and-triangles-03"
+   }
+  ]
+ },
+ {
+  "slug": "right-triangles-and-trigonometry",
+  "skill": "Right triangles and trigonometry",
+  "domain": "Geometry and Trigonometry",
+  "section": "math",
+  "about": "Pythagoras, special right triangles, and sine, cosine and tangent.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Right triangles and trigonometry",
+    "difficulty": 1,
+    "type": "spr",
+    "question": "A right triangle has legs $5$ and $12$. What is the length of the hypotenuse?",
+    "answer": [
+     "13"
+    ],
+    "explanation": "$\\sqrt{25 + 144} = \\sqrt{169} = 13$.",
+    "id": "drills-right-triangles-and-trigonometry-01"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Right triangles and trigonometry",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "In a right triangle, the side opposite angle $A$ is $3$ and the hypotenuse is $5$. What is $\\sin A$?",
+    "options": [
+     "$\\dfrac{3}{4}$",
+     "$\\dfrac{4}{5}$",
+     "$\\dfrac{3}{5}$",
+     "$\\dfrac{5}{3}$"
+    ],
+    "answer": "C",
+    "explanation": "$\\sin A = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\frac{3}{5}$.",
+    "id": "drills-right-triangles-and-trigonometry-02"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Right triangles and trigonometry",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "A $45^\\circ$-$45^\\circ$-$90^\\circ$ triangle has legs of length $7$. What is the hypotenuse?",
+    "options": [
+     "$7$",
+     "$7\\sqrt{2}$",
+     "$7\\sqrt{3}$",
+     "$14$"
+    ],
+    "answer": "B",
+    "explanation": "In a $45$-$45$-$90$ triangle the hypotenuse is $\\sqrt{2}$ times a leg.",
+    "id": "drills-right-triangles-and-trigonometry-03"
+   }
+  ]
+ },
+ {
+  "slug": "circles",
+  "skill": "Circles",
+  "domain": "Geometry and Trigonometry",
+  "section": "math",
+  "about": "Circumference, area, arcs, sectors and circle equations.",
+  "samples": [
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Circles",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the circumference of a circle with radius $5$?",
+    "options": [
+     "$5\\pi$",
+     "$25\\pi$",
+     "$10\\pi$",
+     "$50\\pi$"
+    ],
+    "answer": "C",
+    "explanation": "$C = 2\\pi r = 10\\pi$.",
+    "id": "drills-circles-01"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Circles",
+    "difficulty": 1,
+    "type": "mcq",
+    "question": "What is the area of a circle with radius $6$?",
+    "options": [
+     "$6\\pi$",
+     "$36\\pi$",
+     "$12\\pi$",
+     "$72\\pi$"
+    ],
+    "answer": "B",
+    "explanation": "$A = \\pi r^2 = 36\\pi$.",
+    "id": "drills-circles-02"
+   },
+   {
+    "section": "math",
+    "domain": "Geometry and Trigonometry",
+    "skill": "Circles",
+    "difficulty": 2,
+    "type": "mcq",
+    "question": "A circle has equation $(x - 3)^2 + (y + 2)^2 = 49$. What is its radius?",
+    "options": [
+     "$3$",
+     "$7$",
+     "$24.5$",
+     "$49$"
+    ],
+    "answer": "B",
+    "explanation": "The right side is $r^2 = 49$, so $r = 7$.",
+    "id": "drills-circles-03"
+   }
+  ]
+ }
+]

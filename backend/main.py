@@ -38,6 +38,13 @@ async def _ks3_loop():
         except Exception as e:
             print(f"[ks3] sequence failed: {e}")
         try:
+            from services.sat_progress import run_weekly as sat_weekly
+            n = await sat_weekly()
+            if n:
+                print(f"[sat] sent {n} weekly progress email(s)")
+        except Exception as e:
+            print(f"[sat] weekly emails failed: {e}")
+        try:
             from services.doubt import run_sequence as doubt_sequence
             n = await doubt_sequence()
             if n:

@@ -390,3 +390,60 @@ async def result(attempt_id: int, user: User = Depends(get_current_user), db: As
                      "questions": sat.review(f, k, ans.get(k, {}))} for k in keys],
         "skills": rows, "weakest": sat.weakest(rows),
     }
+
+
+# ── Phase 2: skills, study plan and drills ────────────────────────────────────
+
+@router.get("/skills")
+async def skills(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """Every SAT skill with this student's accuracy and status (strong / building / weak / untried)."""
+    from services import sat_progress
+    await _sat_user(user, db)
+    return await sat_progress.skills(user.id, db)
+
+
+@router.get("/plan")
+async def study_plan(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """This week's tasks (drills on the weakest skills, a practice test when due) and the weeks to the test."""
+    from services import sat_progress
+    await _sat_user(user, db)
+    return await sat_progress.plan(user, db)
+
+
+@router.get("/drills/{slug}")
+async def drill(slug: str, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """A skill drill: its questions (no answers) and the student's earlier answers to them."""
+    from models import SatDrillAnswer
+    from services import sat_progress
+    await _sat_user(user, db)
+    m = sat_progress.drills().get(slug)
+    if not m:
+        raise HTTPException(404, "Skill not found.")
+    ids = [q["id"] for q in m["questions"]]
+    prev = {}
+    for r in (await db.execute(select(SatDrillAnswer).where(
+            SatDrillAnswer.user_id == user.id, SatDrillAnswer.question_id.in_(ids)).order_by(SatDrillAnswer.answered_at))).scalars().all():
+        prev[r.question_id] = r.correct
+    return {"slug": slug, "skill": m["title"], "domain": m["domain"], "section": m["section"], "about": m.get("about", ""),
+            "questions": [sat.public_question(q) for q in m["questions"]], "previous": prev}
+
+
+class DrillAnswerIn(BaseModel):
+    question_id: str
+    answer: str
+
+
+@router.post("/drills/{slug}/answer")
+async def drill_answer(slug: str, data: DrillAnswerIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """Check one drill answer straight away: right or wrong, the answer and the explanation."""
+    from models import SatDrillAnswer
+    from services import sat_progress
+    await _sat_user(user, db)
+    m = sat_progress.drills().get(slug)
+    q = next((x for x in (m or {}).get("questions", []) if x["id"] == data.question_id), None)
+    if not q:
+        raise HTTPException(404, "Question not found.")
+    ok = sat.is_correct(q, data.answer)
+    db.add(SatDrillAnswer(user_id=user.id, question_id=q["id"], skill=slug, correct=ok))
+    await db.commit()
+    return {"correct": ok, "answer": q["answer"], "explanation": q["explanation"]}

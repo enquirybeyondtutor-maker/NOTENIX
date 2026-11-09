@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { GraduationCap, CalendarDays, Target, PlayCircle, RotateCcw, BarChart3, Sparkles } from "lucide-react";
 import { useAuthGuard } from "@/lib/guard";
-import { satAPI } from "@/lib/satApi";
+import { satAPI, type SkillStatus, type StudyPlan as Plan } from "@/lib/satApi";
+import { StudyPlan, SkillMap } from "@/components/sat/StudyPlan";
 import { PageContainer, PageHeader, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { formatDate } from "@/lib/utils";
@@ -16,10 +17,14 @@ export default function SatPractice() {
   const [error, setError] = useState("");
   const [goal, setGoal] = useState({ test_date: "", target: "" });
   const [busy, setBusy] = useState("");
+  const [plan, setPlan] = useState<Plan | null>(null);
+  const [skills, setSkills] = useState<SkillStatus[]>([]);
 
   const load = () => satAPI.home().then((r) => {
     setH(r.data);
     setGoal({ test_date: r.data.test_date || "", target: r.data.target ? String(r.data.target) : "" });
+    satAPI.plan().then((p) => setPlan(p.data)).catch(() => {});
+    satAPI.skills().then((s) => setSkills(s.data)).catch(() => {});
   }).catch((e) => setError(e.response?.data?.detail || "Couldn't load SAT practice."));
   useEffect(() => { if (ready) load(); }, [ready]);
 
@@ -98,7 +103,9 @@ export default function SatPractice() {
         <Button size="sm" className="mt-3" onClick={saveGoal}>Save date and target</Button>
       )}
 
-      <h2 className="mb-3 mt-10 text-sm font-semibold uppercase tracking-wide text-ink-subtle">Full-length practice tests</h2>
+      {plan && <div className="mt-8"><StudyPlan plan={plan} /></div>}
+
+      <h2 id="tests" className="mb-3 mt-10 scroll-mt-24 text-sm font-semibold uppercase tracking-wide text-ink-subtle">Full-length practice tests</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {h.forms.map((f: any) => {
           const open = f.attempts.find((a: any) => a.status === "in_progress");
@@ -121,6 +128,7 @@ export default function SatPractice() {
           );
         })}
       </div>
+      {skills.length > 0 && <div className="mt-10"><SkillMap skills={skills} /></div>}
     </PageContainer>
   );
 }

@@ -65,6 +65,7 @@ export default function SatLanding() {
               <Button href="/sat/diagnostic" size="lg" variant="secondary">Start a free week</Button>
             </div>
             <p className="mt-3 text-sm text-ink-subtle">No sign-up for the diagnostic · Free for 7 days after · No card needed</p>
+            <p className="mt-2 text-sm"><a href="/sat/skills" className="font-medium text-brand-600 hover:underline">Browse all 30 SAT skills with free practice questions</a></p>
           </div>
           <div className="card p-6">
             <div className="text-xs font-semibold uppercase tracking-wide text-ink-subtle">Sample score report</div>
