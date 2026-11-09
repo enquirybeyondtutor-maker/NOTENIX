@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import String, Integer, Float, Boolean, DateTime, Text, ForeignKey, JSON, LargeBinary
+from sqlalchemy import UniqueConstraint, String, Integer, Float, Boolean, DateTime, Text, ForeignKey, JSON, LargeBinary
 from sqlalchemy.orm import Mapped, mapped_column, relationship, column_property
 from database import Base
 
@@ -239,6 +239,7 @@ class Payment(Base):
     payer_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
     payer_note: Mapped[str | None] = mapped_column(Text, nullable=True)       # transfer id, amount sent…
     status: Mapped[str] = mapped_column(String(20), default="claimed", index=True)  # claimed | confirmed | rejected
+    course: Mapped[str | None] = mapped_column(String(60), nullable=True)   # purpose "course": which course it buys
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     reviewed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
@@ -279,6 +280,21 @@ class NoteShare(Base):
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     seen_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # student first opened it
+
+
+class Enrolment(Base):
+    """A course a student holds (services/courses.py), e.g. "igcse-chemistry" or "tmua",
+    each with its own end date. Students with none are unrestricted (pre-course accounts)."""
+    __tablename__ = "enrolments"
+    __table_args__ = (UniqueConstraint("user_id", "course", name="uq_enrolment_user_course"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    course: Mapped[str] = mapped_column(String(60))
+    kind: Mapped[str] = mapped_column(String(20), default="paid")      # trial | paid
+    until: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # None = no end date
+    payment_id: Mapped[int | None] = mapped_column(ForeignKey("payments.id"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 
 class HomeworkSubmission(Base):

@@ -9,6 +9,7 @@ from database import get_db
 from models import User, Question, QuizSession
 from security import get_current_user
 from services import ai
+from services import courses as course_svc
 from config import settings
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
@@ -34,18 +35,23 @@ def _check_quota(user: User):
 
 
 @router.get("/subjects")
-async def subjects(db: AsyncSession = Depends(get_db)):
+async def subjects(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     rows = (await db.execute(
         select(Question.subject, Question.level, Question.topic).distinct()
     )).all()
+    mine = await course_svc.live_courses(user, db)  # only the student's courses
     out: dict = {}
     for subject, level, topic in rows:
+        if not course_svc.allows(mine, level, subject):
+            continue
         out.setdefault(level, {}).setdefault(subject, set()).add(topic)
     return {lvl: {s: sorted(t) for s, t in subs.items()} for lvl, subs in out.items()}
 
 
 @router.post("/create")
 async def create_quiz(data: CreateQuizIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    if not course_svc.allows(await course_svc.live_courses(user, db), data.level, data.subject):
+        raise HTTPException(403, course_svc.locked_message(data.level, data.subject))
     _check_quota(user)
     n = max(1, min(data.num_questions, 20))
 

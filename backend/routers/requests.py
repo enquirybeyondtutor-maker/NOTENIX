@@ -16,6 +16,7 @@ from models import User, Test, TestAssignment, TestAttempt, TestRequest, Payment
 from security import get_current_user, require_admin, hash_password, create_token, is_free_account
 from services.email import send_assignment_email, send_request_cancelled, notify_admins
 from routers.payments import reference_for
+from services import courses as course_svc
 
 router = APIRouter(prefix="/requests", tags=["requests"])
 
@@ -200,6 +201,10 @@ async def config():
 async def create(data: RequestIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     if data.exam not in EXAMS:
         raise HTTPException(400, "Please choose an exam from the list.")
+    # Students with courses can request tests for those courses only.
+    subject = data.subject or (data.paper.course if data.paper else None)
+    if not course_svc.allows(await course_svc.live_courses(user, db), data.exam, subject):
+        raise HTTPException(403, course_svc.locked_message(data.exam, subject))
     if is_free_account(user):
         used = len((await db.execute(select(TestRequest.id).where(
             TestRequest.student_id == user.id, TestRequest.status != "cancelled"))).all())

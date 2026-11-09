@@ -5,6 +5,7 @@ import { PenLine, FileUp, Lock, Sparkles, ArrowRight, BookOpen, CheckCircle2, Ho
 import { practiceAPI, getUser } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, EmptyState, Spinner } from "@/components/ui/Page";
+import { coursesAPI } from "@/lib/coursesApi";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import { humanize } from "@/lib/utils";
@@ -33,6 +34,11 @@ export default function PracticePage() {
   const aiMarking = !!user?.ai_marking;
 
   const [library, setLibrary] = useState<LibItem[]>([]);
+  // Names of the student's live courses (null = no course limit), for the library hint.
+  const [myCourses, setMyCourses] = useState<string[] | null>(null);
+  useEffect(() => {
+    coursesAPI.mine().then((r) => setMyCourses(r.data.restricted ? r.data.courses.filter((c) => c.live).map((c) => c.name) : null)).catch(() => {});
+  }, []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -182,6 +188,12 @@ export default function PracticePage() {
         <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
           <BookOpen size={15} /> Practice library
         </h2>
+        {myCourses && myCourses.length > 0 && (
+          <p className="mb-3 text-sm text-ink-muted">
+            Papers for your courses: {myCourses.join(", ")}.{" "}
+            <a href="/courses" className="font-medium text-brand-600 hover:text-brand-700">Add a course</a>
+          </p>
+        )}
         {library.length === 0 ? (
           <div className="card p-6 text-sm text-ink-muted">No library papers yet — upload your own above to get started.</div>
         ) : (

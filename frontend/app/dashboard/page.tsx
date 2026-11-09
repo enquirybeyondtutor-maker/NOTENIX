@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Star, Flame, Brain, Target, ArrowRight, ClipboardList, CalendarClock, CheckCircle2, Trophy, BookOpen, NotebookText, Bell } from "lucide-react";
+import { Star, Flame, Brain, Target, ArrowRight, ClipboardList, CalendarClock, CheckCircle2, Trophy, BookOpen, NotebookText, Bell, Layers } from "lucide-react";
 import { progressAPI } from "@/lib/api";
 import { loadInbox, type Inbox, type InboxItem } from "@/lib/inbox";
 import { useAuthGuard } from "@/lib/guard";
@@ -51,7 +51,12 @@ export default function StudentDashboard() {
       <PageHeader
         title={`Welcome back, ${user?.full_name?.split(" ")[0] || "there"}`}
         subtitle={data?.plan === "pro" ? "Pro member" : "Free plan"}
-        actions={<Button href="/quiz" variant="secondary"><Brain size={16} /> Practise a quiz</Button>}
+        actions={
+          <div className="flex gap-2">
+            <Button href="/courses" variant="secondary"><Layers size={16} /> My courses</Button>
+            <Button href="/quiz" variant="secondary"><Brain size={16} /> Practise a quiz</Button>
+          </div>
+        }
       />
 
       {/* Stats */}

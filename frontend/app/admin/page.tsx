@@ -4,6 +4,9 @@ import { doubtAPI, SG_LEVELS } from "@/lib/doubtApi";
 import { useRouter } from "next/navigation";
 import { Shield, Users, GraduationCap, PenSquare, Ban, CheckCircle2, UserX, PenLine, UserPlus, KeyRound, Copy } from "lucide-react";
 import { adminAPI, getUser, authAPI } from "@/lib/api";
+import { coursesAPI, type Course, type Enrolment } from "@/lib/coursesApi";
+import CoursePicker from "@/components/CoursePicker";
+import CourseMigration from "./CourseMigration";
 import { PageContainer, PageHeader, StatCard, Spinner, EmptyState } from "@/components/ui/Page";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -33,6 +36,7 @@ interface Row {
   help_until?: string | null;
   sg_level?: string | null;
   subscription_label?: string;
+  courses?: Enrolment[];
   created_at: string;
   last_active: string | null;
 }
@@ -56,8 +60,9 @@ function accessLabel(u: Row) {
 }
 
 /** Form to issue a Beyond Tutors account; the generated password is shown once. */
-function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
+function IssueAccount({ onIssued, catalogue }: { onIssued: (i: Issued) => void; catalogue: Course[] }) {
   const [name, setName] = useState("");
+  const [courses, setCourses] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [touched, setTouched] = useState(false);
   const [role, setRole] = useState<"student" | "teacher">("student");
@@ -82,11 +87,12 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
     setSaving(true);
     setError("");
     try {
-      const { data } = await adminAPI.createUser({ full_name: name, email, role, access, currency });
+      const { data } = await coursesAPI.createUser({ full_name: name, email, role, access, currency, courses: role === "student" ? courses : [] });
       onIssued({ name: data.user.full_name, email: data.user.email, password: data.password, role });
       setName("");
       setEmail("");
       setTouched(false);
+      setCourses([]);
     } catch (err: any) {
       setError(err.response?.data?.detail || "Couldn't create the account.");
     } finally {
@@ -117,6 +123,20 @@ function IssueAccount({ onIssued }: { onIssued: (i: Issued) => void }) {
           ))}
         </select>
       </div>
+      {role === "student" && (
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="text-sm font-medium text-ink">Courses:</span>
+          {courses.map((c) => (
+            <span key={c} className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700">
+              {catalogue.find((x) => x.key === c)?.name || c}
+              <button type="button" onClick={() => setCourses(courses.filter((x) => x !== c))} aria-label="Remove course" className="text-brand-400 hover:text-brand-700">×</button>
+            </span>
+          ))}
+          <CoursePicker catalogue={catalogue} value="" exclude={courses} onChange={(k) => k && setCourses([...courses, k])}
+            placeholder={courses.length ? "Add another course…" : "Choose the course they're paying for…"} className={field} />
+          {courses.length === 0 && <span className="text-xs text-amber-700">No course: the student can open every course.</span>}
+        </div>
+      )}
       <div className="mt-4 flex items-center gap-3">
         <Button type="submit" loading={saving}>Create account</Button>
         {error && <span className="text-sm text-red-600">{error}</span>}
@@ -159,6 +179,7 @@ export default function AdminPage() {
   const [users, setUsers] = useState<Row[]>([]);
   const [busy, setBusy] = useState<number | null>(null);
   const [issued, setIssued] = useState<Issued | null>(null);
+  const [catalogue, setCatalogue] = useState<Course[]>([]);
 
   useEffect(() => {
     const token = typeof window !== "undefined" ? localStorage.getItem("notenix_token") : null;
@@ -175,6 +196,7 @@ export default function AdminPage() {
         }
         setReady(true);
         load();
+        coursesAPI.catalogue().then((r) => setCatalogue(r.data)).catch(() => {});
       })
       .catch(() => router.replace("/login"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -304,6 +326,30 @@ export default function AdminPage() {
     }
   };
 
+  const addCourse = async (row: Row, course: string, access: "trial" | "year" | "none") => {
+    if (!course) return;
+    setBusy(row.id);
+    try {
+      await coursesAPI.add(row.id, course, access);
+      load();
+    } catch (e: any) {
+      alert(e.response?.data?.detail || "Couldn't add the course.");
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const removeCourse = async (row: Row, c: Enrolment) => {
+    if (!confirm(`Remove ${c.name} from ${row.full_name}? They will lose access to it.`)) return;
+    setBusy(row.id);
+    try {
+      await coursesAPI.remove(row.id, c.course);
+      load();
+    } finally {
+      setBusy(null);
+    }
+  };
+
   if (!ready) return <Spinner label="Loading admin…" />;
 
   return (
@@ -319,7 +365,8 @@ export default function AdminPage() {
       </div>
 
       {issued && <IssuedCard issued={issued} onClose={() => setIssued(null)} />}
-      <IssueAccount onIssued={(i) => { setIssued(i); load(); }} />
+      <IssueAccount catalogue={catalogue} onIssued={(i) => { setIssued(i); load(); }} />
+      <CourseMigration catalogue={catalogue} onDone={load} />
 
       <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
         All users · {users.length}
@@ -454,6 +501,9 @@ export default function AdminPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div>{accessLabel(u)}</div>
+                      {u.role === "student" && !u.is_admin && !u.ks3_year && (
+                        <CourseCell row={u} catalogue={catalogue} busy={busy === u.id} onAdd={addCourse} onRemove={removeCourse} />
+                      )}
                       {u.role === "student" && !u.is_admin && (
                         <select value="" disabled={busy === u.id} onChange={(e) => changeAccess(u, e.target.value)}
                           className="mt-1 rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink-muted outline-none">
@@ -514,5 +564,43 @@ export default function AdminPage() {
         </div>
       )}
     </PageContainer>
+  );
+}
+
+/** A student's courses: chips (× removes) and an add-course control. No courses = every course. */
+function CourseCell({ row, catalogue, busy, onAdd, onRemove }: {
+  row: Row; catalogue: Course[]; busy: boolean;
+  onAdd: (row: Row, course: string, access: "trial" | "year" | "none") => void;
+  onRemove: (row: Row, c: Enrolment) => void;
+}) {
+  const [access, setAccess] = useState<"trial" | "year" | "none">(row.access_kind === "trial" ? "trial" : "year");
+  const list = row.courses ?? [];
+  return (
+    <div className="mt-2 max-w-[220px] space-y-1">
+      {list.length === 0 ? (
+        <div className="text-[11px] font-medium text-amber-700">All courses (none set)</div>
+      ) : (
+        <div className="flex flex-wrap gap-1">
+          {list.map((c) => (
+            <span key={c.course} title={c.until ? `${c.kind === "trial" ? "Trial" : "Paid"} until ${formatDate(c.until)}` : "No end date"}
+              className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold",
+                !c.live ? "bg-red-50 text-red-700 line-through" : c.kind === "trial" ? "bg-amber-50 text-amber-800" : "bg-brand-50 text-brand-700")}>
+              {c.name}
+              <button onClick={() => onRemove(row, c)} disabled={busy} aria-label={`Remove ${c.name}`} className="opacity-60 hover:opacity-100">×</button>
+            </span>
+          ))}
+        </div>
+      )}
+      <div className="flex gap-1">
+        <CoursePicker catalogue={catalogue} value="" disabled={busy} exclude={[]} onChange={(k) => onAdd(row, k, access)}
+          placeholder="+ Course…" className="w-[120px] rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink-muted outline-none" />
+        <select value={access} onChange={(e) => setAccess(e.target.value as any)} disabled={busy} title="Trial, a paid year (adds to a live course), or no end date"
+          className="rounded-md border border-line bg-white px-1 py-0.5 text-xs text-ink-muted outline-none">
+          <option value="year">1 year</option>
+          <option value="trial">Trial</option>
+          <option value="none">No end</option>
+        </select>
+      </div>
+    </div>
   );
 }

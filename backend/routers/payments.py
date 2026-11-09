@@ -14,6 +14,7 @@ from database import get_db
 from models import User, Payment, TestRequest
 from security import get_current_user, require_admin, hash_password, verify_password
 from services.email import send_payment_result, notify_admins
+from services import courses as course_svc
 
 router = APIRouter(prefix="/payments", tags=["payments"])
 
@@ -35,8 +36,10 @@ def reference_for(purpose: str, user_id: int, request_id: int | None = None) -> 
 
 
 def _payment_row(p: Payment, user: User | None = None) -> dict:
+    course = getattr(p, "course", None)
     row = {
         "id": p.id, "purpose": p.purpose, "request_id": p.request_id, "reference": p.reference,
+        "course": course, "course_name": course_svc.course_name(course) if course else None,
         "amount": p.amount, "currency": p.currency, "paid_via": p.paid_via,
         "payer_name": p.payer_name, "payer_note": p.payer_note, "status": p.status,
         "created_at": p.created_at.isoformat() if p.created_at else None,
@@ -189,6 +192,7 @@ class RevisionCheckoutIn(BaseModel):
     full_name: str
     email: str
     password: str
+    course: str | None = None   # the course being bought (services/courses.py); None = everything (old checkout)
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
@@ -199,6 +203,8 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     email = data.email.strip().lower()
     if "@" not in email or len(data.password) < 8 or not data.full_name.strip():
         raise HTTPException(400, "Enter your name, a valid email and a password of at least 8 characters.")
+    if data.course and not course_svc.is_course(data.course):
+        raise HTTPException(400, "Please choose your course.")
     now = datetime.utcnow()
     user = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
     if user:
@@ -212,7 +218,7 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     user.access_kind, user.access_until = "pending", now  # locked until the payment is confirmed
     await db.flush()
     p = Payment(
-        user_id=user.id, purpose="revision", reference=f"NX-V{user.id}",
+        user_id=user.id, purpose="revision", reference=f"NX-V{user.id}", course=data.course or None,
         amount=settings.revision_price, currency=settings.price_currency,
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
@@ -223,7 +229,8 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     await db.refresh(p)
     await notify_admins(
         f"Payment to check: {p.reference}",
-        f"{user.full_name} ({user.email}) says they paid {p.amount:g} {p.currency} for revision access "
+        f"{user.full_name} ({user.email}) says they paid {p.amount:g} {p.currency} for "
+        f"{course_svc.course_name(p.course) if p.course else 'revision access'} "
         f"via {p.paid_via or 'bank transfer'}. Note: {p.payer_note or '-'}",
         "/admin/requests",
     )
@@ -317,8 +324,11 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
     if data.approve and p.purpose == "pro":
         start = max(datetime.utcnow(), user.pro_until or datetime.utcnow())
         user.plan, user.pro_until = "pro", start + timedelta(days=PRO_DAYS)
-    if data.approve and p.purpose == "revision":
+    if data.approve and p.purpose == "revision" and not p.course:
         user.access_kind, user.access_until = "paid", datetime.utcnow() + timedelta(days=settings.subscription_days)
+    if data.approve and (p.purpose == "course" or (p.purpose == "revision" and p.course)):
+        # One course for a year (renewing early adds the year on to the current end date).
+        await course_svc.grant(user, p.course, "year", db, payment_id=p.id)
     if data.approve and p.purpose in ("annual", "doubt", "plus"):
         from services import doubt
         doubt.set_plan(user, p.purpose)
@@ -330,12 +340,15 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
 
-    what = {"pro": "Notenix Pro", "revision": "Notenix revision access", "ks3": f"{user.full_name}'s Notenix KS3 year",
+    course_label = course_svc.course_name(p.course) if p.course else None
+    what = {"pro": "Notenix Pro", "revision": f"Notenix {course_label}" if course_label else "Notenix revision access",
+            "course": f"Notenix {course_label}", "ks3": f"{user.full_name}'s Notenix KS3 year",
             "doubt": f"{user.full_name}'s Doubt Help (30 days)", "plus": f"{user.full_name}'s Doubt Help Plus (30 days)",
             "annual": f"{user.full_name}'s Ask a Tutor year"
             }.get(p.purpose, f"test request #{p.request_id}")
     extra = {"pro": f"Pro is on for the next {PRO_DAYS} days.",
-             "revision": "Full revision access is now on for a year.",
+             "revision": f"{course_label} is now on for a year." if course_label else "Full revision access is now on for a year.",
+             "course": f"{course_label} is now on for a year: practice, quizzes and revision for this course.",
              "ks3": "Notenix KS3 is on for a year: a test every half-term, homework help, notes and a progress report every month.",
              "doubt": "Ask a Tutor is on for the next 30 days: up to 20 questions, answered step by step.",
              "annual": "Ask a Tutor is on for a whole year: up to 20 questions every month, answered step by step.",

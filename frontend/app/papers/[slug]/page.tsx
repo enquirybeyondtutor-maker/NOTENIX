@@ -77,13 +77,17 @@ export default function PaperPage() {
         <div className="card mt-4 p-8 text-center">
           <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-50 text-brand-600"><Lock size={22} /></span>
           <p className="mt-3 text-lg font-semibold text-ink">
-            {state === "ended" ? "Renew to keep reading" : "The rest is waiting for you"}
+            {state === "ended" && /your courses/.test(message) ? "This paper is for another course" : state === "ended" ? "Renew to keep reading" : "The rest is waiting for you"}
           </p>
           <p className="mt-1 text-sm text-ink-muted">
             {state === "ended" ? message : `Unlock page 2 and the full paper (${meta.pages - 1} more pages) with Notenix.`}
           </p>
           <div className="mt-5 flex flex-col items-center gap-3">
-            <Button href="/pricing">Get Notenix access <ArrowRight size={16} /></Button>
+            {state === "ended" && meta.course && /your courses/.test(message) ? (
+              <Button href={`/courses?add=${meta.course}`}>Add {meta.course_name} <ArrowRight size={16} /></Button>
+            ) : (
+              <Button href="/pricing">Get Notenix access <ArrowRight size={16} /></Button>
+            )}
             {state === "visitor" && (
               <a href={`/login?returnTo=${encodeURIComponent(returnTo)}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
                 <LogIn size={15} /> Already a subscriber? Sign in

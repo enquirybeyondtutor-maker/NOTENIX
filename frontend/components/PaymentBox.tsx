@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Copy, Check, Landmark, Send } from "lucide-react";
 import { paymentsAPI } from "@/lib/api";
+import { coursesAPI } from "@/lib/coursesApi";
 import { Button } from "./ui/Button";
 import { Input, Select, Field } from "./ui/Input";
 import PayLink from "./PayLink";
@@ -22,12 +23,13 @@ function CopyValue({ value }: { value: string }) {
   );
 }
 
-// Bank-transfer instructions + "I've paid" form. Used for Pro and for paid test requests.
+// Bank-transfer instructions + "I've paid" form. Used for Pro, paid test requests and buying a course.
 export default function PaymentBox({
-  purpose, requestId, amount, currency, reference, onClaimed,
+  purpose, requestId, course, amount, currency, reference, onClaimed,
 }: {
-  purpose: "pro" | "test_request";
+  purpose: "pro" | "test_request" | "course";
   requestId?: number;
+  course?: string;
   amount: number;
   currency: string;
   reference: string;
@@ -57,7 +59,8 @@ export default function PaymentBox({
     e.preventDefault();
     setBusy(true); setError("");
     try {
-      await paymentsAPI.claim({ purpose, request_id: requestId, paid_via: via, payer_name: payerName, payer_note: note });
+      if (purpose === "course" && course) await coursesAPI.buy({ course, paid_via: via, payer_name: payerName, payer_note: note });
+      else await paymentsAPI.claim({ purpose: purpose as "pro" | "test_request", request_id: requestId, paid_via: via, payer_name: payerName, payer_note: note });
       setMsg("Thanks! We'll check our account and confirm by email, usually within 24 hours.");
       onClaimed?.();
     } catch (err: any) {

@@ -9,19 +9,20 @@ const FEATURES = [
   "Homework and timed tests set by your tutor",
   "Class notes from every lesson",
   "Instant marking, grade estimates and progress reports",
-  "TMUA, ESAT, TARA, HSC, GCSE, A-Level and more",
+  "Per course: e.g. IGCSE Chemistry, A-Level Maths or TMUA",
+  "Add another course any time for the same yearly price",
 ];
 
 const OPEN_FEATURES = [
-  "Full access for a whole year",
+  "One course for a whole year (e.g. IGCSE Chemistry, A-Level Maths, TMUA)",
   "Revision notes, worksheets and topic questions",
   "Timed, exam-style practice tests on any device",
   "Instant marking with worked solutions",
   "Tutor-marked mocks on request, with written feedback",
   "Grade estimates and topic-by-topic progress reports",
   "See your weak topics and what to revise next",
-  "GCSE, IGCSE and A-Level, all major boards",
-  "SAT, ESAT, TMUA, HSC, VCE, QCE, WACE and NCEA",
+  "GCSE, IGCSE, A-Level, HSC, VCE, QCE, WACE, NCEA, SAT, ESAT, TMUA and TARA courses",
+  "Add more courses any time, each for the same yearly price",
   "Pay once by card or bank transfer, from any country",
   "No auto-renewal: you choose whether to renew",
 ];
@@ -35,7 +36,7 @@ export default function Pricing() {
           Simple yearly pricing
         </h1>
         <p className="mt-4 text-lg text-ink-muted">
-          <LocalPrice gbp={49} /> a year for Beyond Tutors students. Not with Beyond Tutors? Full access is <LocalPrice gbp={149} /> a year.
+          <LocalPrice gbp={49} /> a year per course for Beyond Tutors students. Not with Beyond Tutors? <LocalPrice gbp={149} /> a year per course.
         </p>
       </div>
 
@@ -44,7 +45,7 @@ export default function Pricing() {
           <h3 className="text-lg font-semibold text-ink">Beyond Tutors students</h3>
           <div className="mt-2 flex items-baseline gap-1">
             <LocalPrice gbp={49} className="text-4xl font-bold text-ink" subClassName="text-sm text-ink-subtle" />
-            <span className="text-sm text-ink-subtle">/ year</span>
+            <span className="text-sm text-ink-subtle">/ year per course</span>
           </div>
           <p className="mt-1 text-sm text-ink-muted">
             Paid once when you join Beyond Tutors, renewed each year. Your login is issued by our team.
@@ -61,15 +62,15 @@ export default function Pricing() {
 
         <div className="relative flex flex-col rounded-2xl p-8 text-white shadow-lg" style={{ background: "#5444DC" }}>
           <span className="absolute -top-3 left-8 rounded-full bg-white px-3 py-1 text-xs font-semibold shadow-sm" style={{ color: "#5444DC" }}>
-            Full access
+            Any student
           </span>
-          <h3 className="text-lg font-semibold">Notenix full access</h3>
+          <h3 className="text-lg font-semibold">Notenix course</h3>
           <div className="mt-2 flex items-baseline gap-1">
             <LocalPrice gbp={149} className="text-4xl font-bold" subClassName="text-sm text-white/70" />
-            <span className="text-sm text-white/70">/ year</span>
+            <span className="text-sm text-white/70">/ year per course</span>
           </div>
           <p className="mt-1 text-sm text-white/80">
-            For any student, anywhere. Everything Notenix offers, for a whole year.
+            For any student, anywhere. Everything Notenix offers for your course, for a whole year.
           </p>
           <ul className="mt-6 flex-1 space-y-3">
             {OPEN_FEATURES.map((f) => (
@@ -78,7 +79,7 @@ export default function Pricing() {
               </li>
             ))}
           </ul>
-          <Button href="/revision/checkout" variant="inverse" className="mt-8 w-full">Get full access <ArrowRight size={16} /></Button>
+          <Button href="/revision/checkout" variant="inverse" className="mt-8 w-full">Choose your course <ArrowRight size={16} /></Button>
         </div>
       </div>
 

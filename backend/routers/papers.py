@@ -11,7 +11,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse
 from models import User
 from fastapi import HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+from database import get_db
 from security import get_current_user, is_free_account
+from services import courses as course_svc
 
 router = APIRouter(tags=["papers"])
 
@@ -37,7 +40,10 @@ def _page(folder: Path, meta: dict, n: int, *, private: bool) -> FileResponse:
 @router.get("/papers/{slug}")
 async def paper_info(slug: str):
     _, meta = _paper(slug)
-    return {"slug": slug, **meta, "free_pages": 1}
+    c = course_svc.content_course(None, meta.get("subject"), meta.get("board"))
+    return {"slug": slug, **meta, "free_pages": 1,
+            "course": c if c and not c.endswith("-*") else None,
+            "course_name": course_svc.course_name(c) if c and not c.endswith("-*") else None}
 
 
 @router.get("/papers/{slug}/preview")
@@ -47,8 +53,10 @@ async def paper_preview(slug: str):
 
 
 @router.get("/papers/{slug}/pages/{n}")
-async def paper_page(slug: str, n: int, user: User = Depends(get_current_user)):
+async def paper_page(slug: str, n: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     if is_free_account(user):
         raise HTTPException(402, "Revision resources need a Notenix subscription.")
     folder, meta = _paper(slug)
+    if not course_svc.allows(await course_svc.live_courses(user, db), None, meta.get("subject"), meta.get("board")):
+        raise HTTPException(403, course_svc.locked_message(None, meta.get("subject"), meta.get("board")))
     return _page(folder, meta, n, private=True)

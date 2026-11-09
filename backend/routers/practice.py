@@ -12,6 +12,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import require_write_practice, ai_marks_for
 from services import ai
+from services import courses as course_svc
 from services.pdf_extract import render_pages_to_png, crop_figures, read_uploads
 
 router = APIRouter(prefix="/practice", tags=["practice"])
@@ -43,6 +44,9 @@ async def library(user: User = Depends(require_write_practice), db: AsyncSession
             Test.mode == "written", Test.is_library == True, Test.is_archived == False  # noqa: E712
         ).order_by(Test.created_at.desc())
     )).scalars().all()
+
+    mine = await course_svc.live_courses(user, db)  # only papers for the student's courses
+    tests = [t for t in tests if course_svc.allows(mine, t.level, t.subject, t.exam_board)]
 
     # which of these the student has already started/finished
     test_ids = [t.id for t in tests]
@@ -79,6 +83,8 @@ async def start_library(test_id: int, user: User = Depends(require_write_practic
     )).scalar_one_or_none()
     if not test:
         raise HTTPException(404, "Practice paper not found.")
+    if not course_svc.allows(await course_svc.live_courses(user, db), test.level, test.subject, test.exam_board):
+        raise HTTPException(403, course_svc.locked_message(test.level, test.subject, test.exam_board))
     assignment = await _self_assignment(test, user, db)
     attempt = (await db.execute(
         select(TestAttempt).where(TestAttempt.assignment_id == assignment.id)
