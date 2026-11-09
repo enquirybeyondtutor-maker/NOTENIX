@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CheckCircle2, XCircle, MinusCircle, ChevronDown, ChevronUp, Target } from "lucide-react";
+import { CheckCircle2, XCircle, MinusCircle, ChevronDown, ChevronUp, Target, UserRound, ArrowRight } from "lucide-react";
 import { MathText } from "@/components/MathText";
 import SatText from "./SatText";
 import { SAT_DOMAINS, type ReviewQuestion, type SkillRow } from "@/lib/satApi";
@@ -46,6 +46,18 @@ export default function Report({
           ))}
         </div>
         {note && <div className="border-t border-line bg-slate-50 px-6 py-3 text-xs text-ink-muted">{note}</div>}
+      </div>
+
+      <div className="card flex flex-wrap items-center justify-between gap-4 border-brand-200 bg-brand-50 p-5">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 font-semibold text-ink"><UserRound size={16} className="text-brand-600" /> Go through this test with a tutor</div>
+          <p className="mt-1 text-sm text-ink-muted">A Beyond Tutors SAT tutor reviews your mistakes with you and tells you exactly what to fix before test day.</p>
+        </div>
+        <a href="https://www.thebeyondtutors.com/book?utm_source=notenix&utm_medium=sat_report&utm_campaign=tutor_review"
+          target="_blank" rel="noopener"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+          Book a tutor review of your mock <ArrowRight size={15} />
+        </a>
       </div>
 
       {weakest.length > 0 && (
@@ -99,7 +111,7 @@ export default function Report({
   );
 }
 
-function ReviewList({ modules }: { modules: { key: string; title: string; questions: ReviewQuestion[] }[] }) {
+export function ReviewList({ modules }: { modules: { key: string; title: string; questions: ReviewQuestion[] }[] }) {
   const [onlyWrong, setOnlyWrong] = useState(true);
   const [open, setOpen] = useState<string | null>(null);
   return (
@@ -138,7 +150,7 @@ function ReviewList({ modules }: { modules: { key: string; title: string; questi
                           {q.options && (
                             <ul className="space-y-1.5">
                               {q.options.map((o, k) => {
-                                const L = "ABCD"[k];
+                                const L = "ABCDEFGH"[k];
                                 return (
                                   <li key={L} className={`rounded-lg px-3 py-2 ${L === right ? "bg-emerald-50 font-medium text-emerald-900" : L === q.given ? "bg-red-50 text-red-900" : "text-ink-muted"}`}>
                                     {L}. <MathText text={o} />{L === right ? "  ✓" : L === q.given ? "  (your answer)" : ""}
