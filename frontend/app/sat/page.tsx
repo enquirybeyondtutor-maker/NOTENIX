@@ -33,7 +33,7 @@ const FAQS = [
   { q: "How accurate is the diagnostic?", a: "It is 26 questions across every SAT skill area, so it gives an estimated score band rather than an exact score. A full practice test narrows your estimate down." },
   { q: "Are these official College Board questions?", a: "No. Every Notenix SAT question is original, written by our tutors to match the Digital SAT's style, skills and difficulty. Use the College Board's Bluebook practice tests too." },
   { q: "How is my score worked out?", a: "Your section scores are Notenix estimates on the official 200–800 scale, based on how many questions you get right and which Module 2 you reached. The real SAT uses the College Board's own scoring, so treat ours as a close guide." },
-  { q: "What happens after the free week?", a: "Your account stays, with your scores. To keep practising, choose a year of Notenix SAT. Nothing renews by itself." },
+  { q: "What happens after the free week?", a: "Your account stays, with your scores. To keep practising, choose Notenix SAT until your test date (12 months of access). Nothing renews by itself." },
   { q: "Can I get help from a tutor?", a: "Yes. Beyond Tutors runs live 1:1 SAT classes, and you can request a tutor review of a practice test." },
 ];
 
@@ -108,11 +108,11 @@ export default function SatLanding() {
           </div>
           <div id="plans" className="lg:pt-14">
             <div className="card p-8">
-              <div className="text-sm font-semibold text-brand-700">Notenix SAT · 1 year</div>
-              <div className="mt-2"><SatPrice className="text-4xl font-bold text-ink" /> <span className="text-sm text-ink-subtle">/ year</span></div>
+              <div className="text-sm font-semibold text-brand-700">Notenix SAT · Until your SAT date</div>
+              <div className="mt-2"><SatPrice className="text-4xl font-bold text-ink" /> <span className="text-sm text-ink-subtle">one payment</span></div>
               <ul className="mt-6 space-y-2.5 text-sm text-ink-muted">
                 {["Full-length adaptive practice tests", "Score out of 1600 after every test", "All eight SAT skill areas tracked",
-                  "Worked explanations for every question", "Countdown to your test date", "Free for the first 7 days"]
+                  "Worked explanations for every question", "Countdown to your test date", "Free for the first 7 days", "Access for 12 months, enough for your test and a resit"]
                   .map((x) => <li key={x} className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-emerald-600" /> {x}</li>)}
               </ul>
               <Button href="/sat/diagnostic" className="mt-8 w-full">Start with the free diagnostic <ArrowRight size={16} /></Button>

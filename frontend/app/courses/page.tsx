@@ -40,7 +40,7 @@ export default function CoursesPage() {
         </button>
         <PageHeader icon={Plus} title={`Add ${name(buying)}`}
           subtitle={buying === "sat"
-            ? `${priceOf(buying).label} for a year: full adaptive SAT practice tests, score reports and worked explanations.`
+            ? `${priceOf(buying).label} until your SAT date (12 months of access): full adaptive SAT practice tests, score reports and worked explanations.`
             : `${priceOf(buying).label} for a year: practice papers, quizzes, revision resources and test requests for ${name(buying)}.`} />
         <PaymentBox purpose="course" course={buying} amount={priceOf(buying).amount} currency={priceOf(buying).currency}
           reference={`NX-C${user?.id ?? ""}`} onClaimed={load} />
@@ -65,7 +65,7 @@ export default function CoursesPage() {
               <h3 className="mt-3 font-semibold text-ink">{c.name}</h3>
               <p className="mt-1 text-sm text-ink-muted">{c.until ? `Until ${formatDate(c.until)}` : "No end date"}</p>
               {c.kind === "trial" && (
-                <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Keep it: {priceOf(c.course).label} / year</Button>
+                <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Keep it: {priceOf(c.course).label}{c.course === "sat" ? " until test day" : " / year"}</Button>
               )}
             </div>
           ))}
@@ -74,7 +74,7 @@ export default function CoursesPage() {
               <span className="badge-danger">Ended</span>
               <h3 className="mt-3 font-semibold text-ink">{c.name}</h3>
               <p className="mt-1 text-sm text-ink-muted">Ended {c.until ? formatDate(c.until) : ""}</p>
-              <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Renew: {priceOf(c.course).label} / year</Button>
+              <Button size="sm" className="mt-4" onClick={() => setBuying(c.course)}>Renew: {priceOf(c.course).label}{c.course === "sat" ? " until test day" : " / year"}</Button>
             </div>
           ))}
         </div>

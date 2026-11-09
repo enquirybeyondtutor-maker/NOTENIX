@@ -65,8 +65,8 @@ export default function SatPractice() {
       {trial && (
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-200 bg-brand-50 p-4 text-sm">
           <span className="flex items-center gap-2 text-ink"><Sparkles size={16} className="text-brand-600" />
-            Free week{h.course.until ? ` until ${formatDate(h.course.until)}` : ""}. Keep going all year for {h.price.label}.</span>
-          <Button href="/courses?add=sat" size="sm">Get the full year</Button>
+            Free week{h.course.until ? ` until ${formatDate(h.course.until)}` : ""}. Keep going until your SAT for {h.price.label}.</span>
+          <Button href="/courses?add=sat" size="sm">Keep going to test day</Button>
         </div>
       )}
 

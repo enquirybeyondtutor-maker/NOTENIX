@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { satAPI, satCurrency } from "@/lib/satApi";
 import { useCountry } from "@/lib/country";
 
-/** The Notenix SAT yearly price in the visitor's currency ($129 until their country is known). */
+/** The Notenix SAT price in the visitor's currency ($129 until their country is known). */
 export default function SatPrice({ className = "" }: { className?: string }) {
   const country = useCountry();
   const [label, setLabel] = useState("$129");

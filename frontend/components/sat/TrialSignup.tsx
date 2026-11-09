@@ -74,7 +74,7 @@ export default function TrialSignup({ diagnosticAnswers, onDone }: { diagnosticA
           </label>
           {error && <p className="text-sm text-red-600">{error}</p>}
           <Button type="submit" loading={busy} className="w-full">Email me a code</Button>
-          {price && <p className="text-center text-xs text-ink-subtle">No card needed. After your free week, a full year is {price.label}.</p>}
+          {price && <p className="text-center text-xs text-ink-subtle">No card needed. After your free week, full access until your SAT date is {price.label}.</p>}
         </form>
       )}
       {step === "code" && (

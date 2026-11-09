@@ -192,7 +192,7 @@ def welcome(u: User) -> tuple[str, str, str]:
             "<li>Read your score report: your estimated score out of 1600 and the skills losing you the most points.</li>"
             "<li>Go back through every question you missed. Each one has a worked explanation.</li></ol>" +
             T.login_box(u.email) +
-            T.para(f"After your free week, a full year of Notenix SAT is {p['label']}. Nothing renews by itself."))
+            T.para(f"After your free week, full access until your SAT date is {p['label']} (12 months of access). Nothing renews by itself."))
     html = T.layout(preheader="Your free week of SAT practice starts now", heading="Your Notenix SAT week has started",
                     body=body, buttons=[(T.site("/sat/practice"), "Start Practice Test 1")], audience="student",
                     tagline="SAT")
