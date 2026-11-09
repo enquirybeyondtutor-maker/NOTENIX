@@ -293,6 +293,62 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
     return _payment_row(p)
 
 
+# ── Notenix SAT after the free week ─────────────────────────────────────────
+
+@router.get("/sat-checkout")
+async def sat_checkout_info():
+    from services import pricing
+    table = {c: pricing.sat_for_currency(c) for c in pricing.SAT_PRICES}
+    return {"accounts": payment_accounts(), "prices": table, "usd": pricing.sat_for_currency("USD"),
+            "pay_link": settings.revision_pay_link}
+
+
+class SatCheckoutIn(BaseModel):
+    email: str
+    password: str
+    currency: str = "USD"
+    paid_via: str | None = None
+    payer_name: str | None = None
+    payer_note: str | None = None
+
+
+@router.post("/sat-checkout")
+async def sat_checkout(data: SatCheckoutIn, db: AsyncSession = Depends(get_db)):
+    """Public on purpose: once the free week ends the student is locked out of the app,
+    so they confirm their Notenix SAT login here instead of signing in."""
+    from services import pricing
+    user = (await db.execute(select(User).where(User.email == data.email.strip().lower()))).scalar_one_or_none()
+    if not user or not verify_password(data.password, user.password_hash):
+        raise HTTPException(400, "That email or password isn't right.")
+    if not user.sat_since:
+        raise HTTPException(400, "This account isn't on Notenix SAT. Start with the free diagnostic at notenix.com/sat.")
+    if not (data.payer_name or "").strip():
+        raise HTTPException(400, "Please tell us the name of the person who paid.")
+    open_claim = (await db.execute(select(Payment).where(
+        Payment.user_id == user.id, Payment.course == "sat", Payment.status == "claimed"))).scalar_one_or_none()
+    if open_claim:
+        return _payment_row(open_claim)
+    price = pricing.sat_for_currency(data.currency)
+    user.billing_currency = price["currency"]
+    p = Payment(
+        user_id=user.id, purpose="course", course="sat", reference=f"NX-C{user.id}",
+        amount=price["amount"], currency=price["currency"],
+        paid_via=(data.paid_via or "")[:80] or None,
+        payer_name=(data.payer_name or "")[:120] or None,
+        payer_note=(data.payer_note or "")[:1000] or None,
+    )
+    db.add(p)
+    await db.commit()
+    await db.refresh(p)
+    await notify_admins(
+        f"Payment to check: {p.reference}",
+        f"{user.full_name} ({user.email}) says they paid {price['label']} for Notenix SAT "
+        f"via {p.paid_via or 'bank transfer'}. Payer: {p.payer_name}. Note: {p.payer_note or '-'}",
+        "/admin/requests",
+    )
+    return _payment_row(p)
+
+
 # ── Admin ────────────────────────────────────────────────────────────────────
 
 @router.get("/admin")

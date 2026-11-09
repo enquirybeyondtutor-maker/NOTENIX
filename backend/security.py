@@ -67,6 +67,10 @@ def access_ended_message(user: User) -> str | None:
         what = "free week" if getattr(user, "access_kind", None) == "trial" else "Notenix KS3 year"
         return (f"Your {what} ended on {until.strftime('%d %b %Y')}. Continue Notenix KS3 at "
                 f"notenix.com/ks3/continue: your results are saved.")
+    if getattr(user, "sat_since", None):
+        what = "free week of Notenix SAT" if getattr(user, "access_kind", None) == "trial" else "Notenix SAT access"
+        return (f"Your {what} ended on {until.strftime('%d %b %Y')}. Continue at notenix.com/sat/continue: "
+                f"your scores are saved.")
     what = "free trial" if getattr(user, "access_kind", None) == "trial" else "Notenix subscription"
     return f"Your {what} ended on {until.strftime('%d %b %Y')}. Please contact Beyond Tutors to renew."
 

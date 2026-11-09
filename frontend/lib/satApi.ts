@@ -57,3 +57,10 @@ export const SAT_DOMAINS: Record<"rw" | "math", string[]> = {
   rw: ["Information and Ideas", "Craft and Structure", "Expression of Ideas", "Standard English Conventions"],
   math: ["Algebra", "Advanced Math", "Problem-Solving and Data Analysis", "Geometry and Trigonometry"],
 };
+
+// Paying after the free week (public: the student is locked out by then).
+export const satCheckoutAPI = {
+  info: () => api.get("/payments/sat-checkout"),
+  pay: (data: { email: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+    api.post("/payments/sat-checkout", data),
+};

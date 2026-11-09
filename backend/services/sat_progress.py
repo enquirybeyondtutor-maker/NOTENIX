@@ -178,7 +178,65 @@ def weekly_email(user, s: dict, days_left: int | None) -> tuple[str, str, str]:
     return f"{name}'s SAT week on Notenix", html, text
 
 
+def trial_ending_email(user, until: datetime) -> tuple[str, str, str]:
+    from services import mail_template as T, pricing
+    name = T.first_name(user.full_name)
+    p = pricing.sat_for_currency(user.billing_currency)
+    day = until.strftime("%A %d %B")
+    body = (T.para(f"{name}'s free week of Notenix SAT ends on <b>{day}</b>.") +
+            T.para(f"To keep the practice tests, skill drills and study plan going up to test day, full access "
+                   f"until the SAT is <b>{p['label']}</b> (12 months of access), paid once by bank transfer. "
+                   f"Nothing renews by itself, and every score so far is kept.") +
+            T.para("Want a tutor to go through a practice test? Beyond Tutors can review the mistakes and set a plan."))
+    html = T.layout(preheader=f"Free week ends {day}", heading="Your free SAT week ends in 2 days", body=body,
+                    buttons=[(T.site("/sat/continue"), f"Continue for {p['label']}"),
+                             ("https://www.thebeyondtutors.com/book?utm_source=notenix&utm_medium=sat_trial_email", "Book a tutor review")],
+                    audience="student", tagline="SAT")
+    text = (f"{name}'s free week of Notenix SAT ends on {day}. Continue until the SAT for {p['label']}: "
+            f"notenix.com/sat/continue" + T.text_footer())
+    return "Your free SAT week ends in 2 days", html, text
+
+
+async def run_trial_ending() -> int:
+    """'Ends in 2 days' email to the student and parent, once per free week. Safe to call every hour."""
+    from database import SessionLocal
+    from models import User, Enrolment
+    from services.email import _deliver, is_mailbox
+    now = datetime.utcnow()
+    sent = 0
+    async with SessionLocal() as db:
+        rows = (await db.execute(select(User, Enrolment).join(Enrolment, Enrolment.user_id == User.id).where(
+            Enrolment.course == "sat", Enrolment.kind == "trial", Enrolment.until.isnot(None),
+            Enrolment.until > now, Enrolment.until <= now + timedelta(days=2),
+            User.is_active == True))).all()  # noqa: E712
+        for u, e in rows:
+            if "trial-ending" in (u.sat_emails or []):
+                continue
+            subject, html, text = trial_ending_email(u, e.until)
+            for to in [u.email, u.parent_email]:
+                if to and is_mailbox(to):
+                    try:
+                        await _deliver(to, subject, html, text)
+                    except Exception as ex:
+                        print(f"[sat] trial-ending email to {to} failed: {ex}")
+            u.sat_emails = (u.sat_emails or []) + ["trial-ending"]
+            sent += 1
+        await db.commit()
+    return sent
+
+
 async def run_weekly() -> int:
+    """Called every hour: the 'free week ends in 2 days' email, then (Mondays) the weekly progress email."""
+    try:
+        n = await run_trial_ending()
+        if n:
+            print(f"[sat] sent {n} trial-ending email(s)")
+    except Exception as ex:
+        print(f"[sat] trial-ending emails failed: {ex}")
+    return await _run_weekly_progress()
+
+
+async def _run_weekly_progress() -> int:
     """Monday progress email to every SAT student with live access (and their parent, if given).
     Sent once per ISO week; safe to call every hour."""
     from database import SessionLocal
