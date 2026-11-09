@@ -7,6 +7,7 @@ from html import escape
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+from services.timeutil import UtcDateTime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -106,7 +107,7 @@ class RequestIn(BaseModel):
     exam: str
     subject: str | None = None
     details: str | None = None
-    preferred_date: datetime | None = None
+    preferred_date: UtcDateTime | None = None
     paper: PaperIn | None = None
 
 
@@ -335,7 +336,7 @@ async def admin_tests(admin: User = Depends(require_admin), db: AsyncSession = D
 
 class AssignIn(BaseModel):
     test_id: int
-    due_at: datetime | None = None
+    due_at: UtcDateTime | None = None
     note: str | None = None
 
 

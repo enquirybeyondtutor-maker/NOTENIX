@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
+from services.timeutil import UtcDateTime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from datetime import datetime
@@ -46,7 +47,7 @@ class CreateTestIn(BaseModel):
 class AssignIn(BaseModel):
     student_emails: list[str]
     class_label: str | None = None
-    due_at: datetime | None = None
+    due_at: UtcDateTime | None = None
 
 
 class PhotoQuestionsIn(BaseModel):

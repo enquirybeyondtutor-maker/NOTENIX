@@ -4,6 +4,7 @@ import secrets
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+from services.timeutil import UtcDateTime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from config import settings
@@ -295,7 +296,7 @@ async def courses_catalogue(admin: User = Depends(require_admin)):
 class CourseIn(BaseModel):
     course: str
     access: str = "year"         # trial | year | none | until
-    until: datetime | None = None
+    until: UtcDateTime | None = None
 
 
 async def _student(user_id: int, db: AsyncSession) -> User:
