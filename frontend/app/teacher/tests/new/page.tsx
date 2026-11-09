@@ -15,6 +15,15 @@ import { cn } from "@/lib/utils";
 
 const SUBJECTS = ["maths", "biology", "chemistry", "physics", "computer_science", "economics", "english_literature", "geography", "history", "psychology", "business"];
 const BOARDS = ["AQA", "Edexcel", "OCR", "Cambridge", "WJEC", "CCEA"];
+// AU/NZ maths is several separate courses; for these the "board" picker chooses the course,
+// and that is what decides which students' courses the test belongs to.
+const MATHS_COURSES: Record<string, string[]> = {
+  HSC: ["Maths Standard", "Maths Advanced", "Maths Extension 1", "Maths Extension 2"],
+  VCE: ["Foundation Maths", "General Maths", "Maths Methods", "Specialist Maths"],
+  QCE: ["Essential Maths", "General Maths", "Maths Methods", "Specialist Maths"],
+  WACE: ["Maths Essential", "Maths Applications", "Maths Methods", "Maths Specialist"],
+  NCEA: ["Level 1 Maths", "Level 2 Maths", "Level 3 Calculus", "Level 3 Statistics"],
+};
 const LEVELS = ["GCSE", "A-Level", "IGCSE", "SAT", "ESAT", "TMUA", "TARA", "HSC", "VCE", "QCE", "WACE", "NCEA", "CBSE", "ICSE", "JEE", "NEET"];
 const DIFFICULTIES = ["easy", "medium", "hard"];
 
@@ -317,9 +326,19 @@ export default function NewTestPage() {
             <Field label="Level">
               <Select value={meta.level} onChange={(e) => set("level", e.target.value)}>{LEVELS.map((l) => <option key={l}>{l}</option>)}</Select>
             </Field>
-            <Field label="Exam board">
-              <Select value={meta.exam_board} onChange={(e) => set("exam_board", e.target.value)}>{BOARDS.map((b) => <option key={b}>{b}</option>)}</Select>
-            </Field>
+            {meta.subject === "maths" && MATHS_COURSES[meta.level] ? (
+              <Field label="Maths course">
+                <Select value={MATHS_COURSES[meta.level].includes(meta.exam_board) ? meta.exam_board : ""}
+                  onChange={(e) => set("exam_board", e.target.value)}>
+                  <option value="" disabled>Choose…</option>
+                  {MATHS_COURSES[meta.level].map((b) => <option key={b}>{b}</option>)}
+                </Select>
+              </Field>
+            ) : (
+              <Field label="Exam board">
+                <Select value={meta.exam_board} onChange={(e) => set("exam_board", e.target.value)}>{BOARDS.map((b) => <option key={b}>{b}</option>)}</Select>
+              </Field>
+            )}
             {kind === "test" ? (
               <Field label="Time limit (min)" hint="0 = untimed">
                 <Input type="number" min={0} max={240} value={meta.duration_minutes}

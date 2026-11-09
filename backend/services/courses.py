@@ -36,9 +36,35 @@ SUBJECTS = {
     "english_literature": "English Literature", "english_language": "English Language",
 }
 
+# Curricula whose maths is split into separate courses (each school offers several, and a
+# student takes one or two). Key suffix, display name, keywords that identify it in a test's
+# subject/board text. Checked in order, so "extension 2" is tried before "extension 1".
+MATHS_COURSES = {
+    "hsc": [("maths-standard", "Maths Standard", ("standard",)),
+            ("maths-advanced", "Maths Advanced", ("advanced",)),
+            ("maths-ext2", "Maths Extension 2", ("extension 2", "ext 2", "ext2", "x2")),
+            ("maths-ext1", "Maths Extension 1", ("extension 1", "ext 1", "ext1", "extension", "x1"))],
+    "vce": [("maths-foundation", "Foundation Maths", ("foundation",)),
+            ("maths-general", "General Maths", ("general", "further")),
+            ("maths-methods", "Maths Methods", ("method",)),
+            ("maths-specialist", "Specialist Maths", ("specialist",))],
+    "qce": [("maths-essential", "Essential Maths", ("essential",)),
+            ("maths-general", "General Maths", ("general",)),
+            ("maths-methods", "Maths Methods", ("method",)),
+            ("maths-specialist", "Specialist Maths", ("specialist",))],
+    "wace": [("maths-essential", "Maths Essential", ("essential",)),
+             ("maths-applications", "Maths Applications", ("application",)),
+             ("maths-methods", "Maths Methods", ("method",)),
+             ("maths-specialist", "Maths Specialist", ("specialist",))],
+    "ncea": [("maths-l1", "Level 1 Maths", ("level 1", "l1")),
+             ("maths-l2", "Level 2 Maths", ("level 2", "l2")),
+             ("maths-l3-calculus", "Level 3 Calculus", ("calculus",)),
+             ("maths-l3-statistics", "Level 3 Statistics", ("statistic",))],
+}
+
 # Keyword → subject, checked in order (so "further maths" wins over "maths").
 _SUBJECT_WORDS = [
-    (("further math",), "further_maths"), (("math",), "maths"), (("physic",), "physics"),
+    (("further math",), "further_maths"), (("math", "calculus", "statistic"), "maths"), (("physic",), "physics"),
     (("chem",), "chemistry"), (("bio",), "biology"), (("computer", "computing"), "computer_science"),
     (("econ",), "economics"), (("business",), "business"), (("account",), "accounting"),
     (("psych",), "psychology"), (("geog",), "geography"), (("histor",), "history"),
@@ -56,11 +82,20 @@ def catalogue() -> list[dict]:
     """Every course, grouped for pickers: admissions tests first, then each curriculum."""
     out = [{"key": k, "name": v, "group": "Admissions tests"} for k, v in EXAMS.items()]
     for ck, cn in CURRICULA.items():
-        out += [{"key": f"{ck}-{sk}", "name": f"{cn} {sn}", "group": cn} for sk, sn in SUBJECTS.items()]
+        for sk, sn in SUBJECTS.items():
+            if ck in MATHS_COURSES and sk in ("maths", "further_maths"):
+                if sk == "maths":
+                    out += [{"key": f"{ck}-{mk}", "name": f"{cn} {mn}", "group": cn}
+                            for mk, mn, _ in MATHS_COURSES[ck]]
+                continue
+            out.append({"key": f"{ck}-{sk}", "name": f"{cn} {sn}", "group": cn})
     return out
 
 
 _NAMES = {c["key"]: c["name"] for c in catalogue()}
+# Older single-maths keys ("hsc-maths") stay valid for enrolments made before the split;
+# they open every maths course of that curriculum.
+_NAMES.update({f"{ck}-maths": f"{CURRICULA[ck]} Maths (all)" for ck in MATHS_COURSES})
 
 
 def course_name(key: str) -> str:
@@ -106,7 +141,20 @@ def content_course(level: str | None, subject: str | None, board: str | None = N
     if not cur:
         return None
     subj = norm_subject(subject) or norm_subject(board)
+    if subj in ("maths", "further_maths") and cur in MATHS_COURSES:
+        return maths_course(cur, subject, board)
     return f"{cur}-{subj}" if subj else f"{cur}-*"
+
+
+def maths_course(cur: str, subject: str | None, board: str | None = None) -> str:
+    """Which of a curriculum's maths courses, e.g. ("hsc", "Maths Extension 1") → "hsc-maths-ext1".
+    The subject is read first, then the board; "<cur>-maths" when the text doesn't say."""
+    for text in (subject, board):
+        t = " " + re.sub(r"[^a-z0-9]+", " ", (text or "").lower()) + " "
+        for mk, _, words in MATHS_COURSES[cur]:
+            if any(re.search(rf"\b{re.escape(w)}", t) for w in words):
+                return f"{cur}-{mk}"
+    return f"{cur}-maths"
 
 
 def allows(courses: set[str] | None, level: str | None, subject: str | None, board: str | None = None) -> bool:
@@ -120,6 +168,13 @@ def allows(courses: set[str] | None, level: str | None, subject: str | None, boa
         return any(k.startswith(c[:-1]) for k in courses)
     if c in courses:
         return True
+    cur = next((k for k in MATHS_COURSES if c.startswith(k + "-maths")), None)
+    if cur:
+        if f"{cur}-maths" in courses:   # an old all-maths enrolment opens every maths course
+            return True
+        if c == f"{cur}-maths":         # maths content not tagged with a course: any maths course opens it
+            return any(k.startswith(f"{cur}-maths-") for k in courses)
+        return False
     # Combined Science overlaps the single sciences: its content is open to a Physics,
     # Chemistry or Biology student, and their content to a Combined Science student.
     # (Chemistry does not open Physics.)
