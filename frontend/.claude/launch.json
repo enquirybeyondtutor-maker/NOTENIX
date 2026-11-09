@@ -7,6 +7,12 @@
       "runtimeArgs": ["run", "dev"],
       "port": 3000,
       "env": { "BACKEND_URL": "http://localhost:8097" }
+    },
+    {
+      "name": "notenix-api",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "uvicorn", "main:app", "--port", "8097", "--app-dir", "../backend"],
+      "port": 8097
     }
   ]
 }

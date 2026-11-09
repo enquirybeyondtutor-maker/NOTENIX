@@ -36,6 +36,15 @@ export default function Ks3TrialPage() {
   const [error, setError] = useState("");
   const [cooldown, setCooldown] = useState(0);
 
+  const [source, setSource] = useState<string | undefined>();
+  useEffect(() => {  // ?year=6&src=kent-grammar from the Kent grammar page
+    const q = new URLSearchParams(window.location.search);
+    const y = Number(q.get("year"));
+    if ([6, 7, 8, 9].includes(y)) setYear(y);
+    const src = q.get("src");
+    if (src) setSource(src.slice(0, 40));
+  }, []);
+
   useEffect(() => {
     if (cooldown <= 0) return;
     const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
@@ -47,7 +56,7 @@ export default function Ks3TrialPage() {
     setLoading(true);
     setError("");
     try {
-      await ks3API.startTrial({ child_name: childName, year_group: year, parent_email: parentEmail, agree_terms: agreed });
+      await ks3API.startTrial({ child_name: childName, year_group: year, parent_email: parentEmail, agree_terms: agreed, source });
       setStep("code");
       setCooldown(60);
     } catch (err: any) {
@@ -161,6 +170,7 @@ export default function Ks3TrialPage() {
                   <Field label="School year">
                     <select value={year} onChange={(e) => setYear(Number(e.target.value))}
                       className="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink outline-none focus:border-brand-500">
+                      <option value={6}>Year 6 (starting Year 7 in September)</option>
                       <option value={7}>Year 7</option>
                       <option value={8}>Year 8</option>
                       <option value={9}>Year 9</option>

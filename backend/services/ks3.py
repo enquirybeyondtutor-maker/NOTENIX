@@ -177,6 +177,8 @@ def report(u: User, p: dict) -> tuple[str, str, str]:
                      f'<div style="font-size:12px;color:{MUTED};margin-top:4px">Based on {len(p["taken"])} test'
                      f'{"s" if len(p["taken"]) != 1 else ""} so far. It is a starting point, not a prediction: '
                      f"Year {yr} is exactly when steady practice moves it.</div></div>")
+        if is_grammar(u):
+            body += _grammar_box(p)
         if p["missed"]:
             body += f"<p>{len(p['missed'])} test{'s were' if len(p['missed']) != 1 else ' was'} not taken, so this picture is partial.</p>"
     else:
@@ -214,6 +216,8 @@ def monthly(u: User, p: dict) -> tuple[str, str, str]:
                      f'<div style="font-size:12px;color:{MUTED}">Early GCSE indicator</div>'
                      f'<div style="font-size:18px;font-weight:700;color:{INK};margin-top:2px">Working towards grades {p["gcse"]}</div>'
                      f'<div style="font-size:12px;color:{MUTED};margin-top:4px">A starting point from {len(p["taken"])} tests, not a prediction.</div></div>')
+        if is_grammar(u):
+            body += _grammar_box(p)
         if p["missed"]:
             body += f"<p>{len(p['missed'])} test{'s are' if len(p['missed']) != 1 else ' is'} still waiting in Notenix.</p>"
     else:
@@ -228,12 +232,38 @@ def monthly(u: User, p: dict) -> tuple[str, str, str]:
     return subject, html, f"{name}'s {month} progress report\n" + "\n".join(lines) + f"\n{_site('/tests')}"
 
 
-def year_set_now(u: User) -> None:
+def year_set_now(u: User, starting_next: bool = False) -> None:
     """The KS3 year was just set by hand or at sign-up: it is right for this school year,
-    so the automatic move up waits until next September."""
+    so the automatic move up waits until next September. starting_next = a Year 6 child
+    already on Year 7 work, so the coming September must not move them to Year 8 either."""
     now = datetime.utcnow()
     start = now.year if now.month >= 9 else now.year - 1
-    u.ks3_emails = sorted(set(u.ks3_emails or []) | {f"yearup-{start}"})
+    keys = {f"yearup-{start}"} | ({f"yearup-{start + 1}", "y6start"} if starting_next else set())
+    u.ks3_emails = sorted(set(u.ks3_emails or []) | keys)
+
+
+GRAMMAR_READY = 75  # grammar-school Year 7 expectation (higher bar than the national average)
+
+
+def is_grammar(u: User) -> bool:
+    tags = set(u.ks3_emails or [])
+    return "src-kent-grammar" in tags or "y6start" in tags
+
+
+def _grammar_box(p: dict) -> str:
+    """Each subject against the grammar-level Year 7 bar."""
+    if not p["subjects"]:
+        return ""
+    rows = "".join(
+        f'<tr><td style="padding:4px 0;color:{INK}">{k}</td><td style="padding:4px 0;text-align:right;font-weight:700;'
+        f'color:{GOOD if v["latest"] >= GRAMMAR_READY else WEAK}">'
+        f'{"Grammar-ready" if v["latest"] >= GRAMMAR_READY else str(GRAMMAR_READY - v["latest"]) + " points to go"}</td></tr>'
+        for k, v in p["subjects"].items())
+    return (f'<div style="background:#f8fafc;border:1px solid {LINE};border-radius:12px;padding:14px 16px;margin:18px 0">'
+            f'<div style="font-size:12px;color:{MUTED}">Against grammar-school Year 7 expectations ({GRAMMAR_READY}%+)</div>'
+            f'<table style="width:100%;border-collapse:collapse;margin-top:6px;font-size:14px">{rows}</table>'
+            f'<div style="font-size:12px;color:{MUTED};margin-top:6px">Grammar classes move faster and many set early in Year 7, '
+            f"so this is the bar we track against.</div></div>")
 
 
 def half_term(d: datetime) -> int:

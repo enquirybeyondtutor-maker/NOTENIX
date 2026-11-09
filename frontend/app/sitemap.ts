@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...TOPICS.map((t) => ({ url: `${SITE}${topicPath(t)}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     ...GUIDES.map((g) => ({ url: `${SITE}/guides/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
+    { url: `${SITE}/kent-grammar`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     ...["terms", "privacy", "refunds"].map((p) => ({ url: `${SITE}/${p}`, lastModified: now, changeFrequency: "yearly" as const, priority: 0.2 })),
   ];

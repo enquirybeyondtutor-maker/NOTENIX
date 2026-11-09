@@ -1,0 +1,191 @@
+<title>Notenix Feature Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: single reading column; each product is a section with a status line, a feature list and a price row */
+:root{--bg:#f7f8fb;--surface:#fff;--fg:#1b2333;--muted:#5d6779;--line:#dde2ec;--accent:#2f4fd8;--ok:#1c7c4a;--warn:#a5650b;
+--display:"Fraunces",Georgia,serif;--body:"Source Sans 3",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151d;--surface:#181e29;--fg:#e6e9f0;--muted:#9aa3b5;--line:#2a3242;--accent:#8ea2ff;--ok:#5fcf93;--warn:#e9b25a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11151d;--surface:#181e29;--fg:#e6e9f0;--muted:#9aa3b5;--line:#2a3242;--accent:#8ea2ff;--ok:#5fcf93;--warn:#e9b25a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+.wrap{max-width:820px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.2}
+h1{font-size:2.2rem;margin:0 0 .4rem}
+h2{font-size:1.45rem;margin:0}
+h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:1rem 0 .3rem}
+.lede{color:var(--muted);max-width:65ch;margin:0}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin:24px 0 8px}
+nav a{font-size:.85rem;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);outline:none}
+section{border-top:1px solid var(--line);padding-top:28px;margin-top:28px}
+.head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline}
+.pill{font-size:.75rem;font-weight:600;border-radius:999px;padding:1px 9px;border:1px solid currentColor}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+ul{margin:.2rem 0;padding-left:1.2rem}li{margin:.15rem 0}
+.price{font-family:var(--mono);font-size:.85rem;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin-top:12px}
+.todo{color:var(--warn)}
+code{font-family:var(--mono);font-size:.85em}
+.tbl{overflow-x:auto;margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+</style>
+<div class="wrap">
+<h1>Notenix feature map</h1>
+<p class="lede">What each part of Notenix offers today, as of 9 Nov 2026 (live build 3e0270a). A green tag means the section has its own product built for it. An amber tag means it runs on the shared platform and its public page promises more than is built for it alone.</p>
+<nav>
+<a href="#core">Shared platform</a><a href="#sat">SAT</a><a href="#ks3">KS3</a><a href="#kent">Kent grammar</a><a href="#tmua">TMUA</a><a href="#esat">ESAT &amp; TARA</a><a href="#ukmt">UKMT</a><a href="#ausnz">HSC · VCE · QCE · WACE · NCEA</a><a href="#uk">GCSE · IGCSE · A-Level</a><a href="#india">CBSE · ICSE · JEE · NEET</a><a href="#ask">Ask a Tutor (SG)</a><a href="#gaps">Gaps</a>
+</nav>
+
+<section id="core">
+<div class="head"><h2>Shared platform</h2><span class="pill ok">Every course</span></div>
+<p class="lede">Every course below gets all of this.</p>
+<h3>Tests</h3>
+<ul>
+<li>Timed tests that auto-submit: the clock starts at "Begin exam" and keeps time on the server. Tutors can reset the timer or leave an attempt out of the stats.</li>
+<li>Question types: multiple choice, typed numeric answers, and written answers that a tutor marks. Students can answer written questions with photos or an attached PDF.</li>
+<li>Tutors make tests with AI, from a PDF, from photos or typed in. They share a join link or assign the test directly.</li>
+<li>Get your past paper marked: the student picks a board paper, uploads their answers and a tutor marks it against the mark scheme.</li>
+<li>Request a test: the student asks for a test on a topic and the team builds and assigns it (free for now).</li>
+<li>Staff can download PDF performance reports, split by section.</li>
+</ul>
+<h3>Learning</h3>
+<ul>
+<li>Practice library, quizzes, progress page and leaderboard.</li>
+<li>Class notes students can only view, as watermarked pages (no download).</li>
+<li>Homework in one place: worksheets with hand-in and marking, plus a "From your tutor" panel and New badges.</li>
+<li>Revision papers: free page-1 preview, then locked pages.</li>
+</ul>
+<h3>Accounts and payments</h3>
+<ul>
+<li>Per-course access: students open only the courses they hold. Work a tutor sends them is never locked.</li>
+<li>Beyond Tutors accounts (<code>name@beyondtutors.com</code>) with parent activation by email code and terms acceptance.</li>
+<li>Pricing in 9 currencies. Payment by bank transfer or Wise, and admin confirms it.</li>
+<li>One design for all emails. Mail goes to the parent's or student's real inbox. Homework-update emails.</li>
+<li>Sync with BT Sessions (assign tests, upload homework, see hand-ins).</li>
+</ul>
+<div class="price">BT students £49/yr per course (or local equivalent) · others £149/yr per course · 7-day trial</div>
+</section>
+
+<section id="sat">
+<div class="head"><h2>SAT</h2><span class="pill ok">Own product · live</span></div>
+<ul>
+<li>Free public diagnostic (14 Reading &amp; Writing + 12 Math, 34 min) with a band score. It saves progress if the student leaves.</li>
+<li>Student signs up with their own email (code check), which starts a 7-day trial.</li>
+<li>Adaptive Digital SAT mocks with a Bluebook-style runner: Desmos, reference sheet, mark for review, cross-out, grid-in answers, review page, break before Math, autosave.</li>
+<li>Score report with section estimates (a strong module 1 routes to a hard module 2).</li>
+<li>Skill drills: 30 skills × 6 questions, plus a skill map (strong / building / weak / untried).</li>
+<li>Study plan up to the test date: this week's tasks, a mock about every 2 weeks.</li>
+<li>Monday weekly email to the student and parent.</li>
+<li>Public skill pages for SEO.</li>
+</ul>
+<div class="price">USD 129 · GBP 99 · INR 7,999 · AED 469 · SGD 169 · AUD 199 · EUR 119 · NZD 219 · CAD 179</div>
+<p class="todo">To do: Practice Tests 3–4 (mock 3 content is written but not committed), parent report, tutor upsell.</p>
+</section>
+
+<section id="ks3">
+<div class="head"><h2>KS3 (Years 7–9)</h2><span class="pill ok">Own product · live</span></div>
+<ul>
+<li>Free 1-week trial, signed up by the parent on <code>/ks3</code> (one per parent email, <code>@notenix.com</code> ID).</li>
+<li>Maths, Science and English. Baseline test on day 1.</li>
+<li>27 tests: Year 7 half-term tests 1–6 for each subject, plus Year 8 and Year 9 baselines. 22 topic notes.</li>
+<li>Homework help: the student sends a photo and a tutor replies (5 during the trial, 30 a month when paid).</li>
+<li>Trial emails on day 0, 3, 5 and 7 (the last one is a progress report). Then a monthly parent report.</li>
+<li>Indicator of the GCSE grade the student is on track for. Half-term tests are assigned automatically, and the year group moves up each September.</li>
+<li>22 public topic pages and 4 parent guides (the Year 7 dip, parents' evening and more).</li>
+</ul>
+<div class="price">GBP 149 · AED 699 · USD 189 · EUR 179 · AUD 289 · NZD 319 · SGD 255 · CAD 259 · INR 16,999 per year</div>
+<p class="todo">To do: Year 8 and 9 half-term tests, the tutor-marked written part of English. KS3 work in progress is uncommitted.</p>
+</section>
+
+<section id="kent">
+<div class="head"><h2>Kent grammar (Year 7, Sept 2027)</h2><span class="pill ok">Landing page on KS3</span></div>
+<ul>
+<li>Landing page aimed at children starting a Kent grammar school.</li>
+<li>Uses the KS3 product underneath: grammar-ready baseline, a grammar-level benchmark and homework help.</li>
+</ul>
+</section>
+
+<section id="tmua">
+<div class="head"><h2>TMUA</h2><span class="pill warn">Shared platform</span></div>
+<ul>
+<li>Course key <code>tmua</code> with its own exam page: format, sample questions, FAQ.</li>
+<li>Mocks set by tutors, e.g. TMUA Algebra Mock 1 (20 Q, 75 min), with sections like "[Paper 2 · Q4]" so reports split by section.</li>
+<li>Staff PDF performance reports.</li>
+<li>Marked past papers from the official UAT-UK PDFs.</li>
+</ul>
+<p class="todo">The exam page promises "standard and hard Paper 1 and Paper 2 mocks" and "timing analytics per question". There is no dedicated TMUA mock set, adaptive engine, score estimate (1.0–9.0) or study plan like SAT has.</p>
+</section>
+
+<section id="esat">
+<div class="head"><h2>ESAT &amp; TARA</h2><span class="pill warn">Shared platform</span></div>
+<ul>
+<li>Course keys <code>esat</code> and <code>tara</code>. ESAT has its own exam page.</li>
+<li>Tests set by tutors, past papers marked from UAT-UK PDFs, and staff reports.</li>
+<li>TARA: the Writing task fits the tutor-marked written tests.</li>
+</ul>
+<p class="todo">No dedicated mocks, module-by-module scoring or skill tracking. TARA has no public exam page yet.</p>
+</section>
+
+<section id="ukmt">
+<div class="head"><h2>UKMT</h2><span class="pill warn">Course only</span></div>
+<ul><li>Course key <code>ukmt</code>. A readiness diagnostic pack exists as PDFs.</li></ul>
+<p class="todo">The <code>/ukmt</code> landing page isn't built yet.</p>
+</section>
+
+<section id="ausnz">
+<div class="head"><h2>HSC · VCE · QCE · WACE · NCEA</h2><span class="pill warn">Shared platform</span></div>
+<ul>
+<li>One public exam page per board (format, results, sample questions).</li>
+<li>New today: maths is split into the real courses for each board (below). The sciences, English and other subjects are one course per board.</li>
+<li>HSC Maths Advanced diagnostic paper, with a free preview and an email-gated copy.</li>
+<li>Marked past papers (HSC and VCE paper sites allowed).</li>
+</ul>
+<div class="tbl"><table>
+<tr><th>Board</th><th>Maths courses</th></tr>
+<tr><td>HSC</td><td>Standard · Advanced · Extension 1 · Extension 2</td></tr>
+<tr><td>VCE</td><td>Foundation · General · Methods · Specialist</td></tr>
+<tr><td>QCE</td><td>Essential · General · Methods · Specialist</td></tr>
+<tr><td>WACE</td><td>Essential · Applications · Methods · Specialist</td></tr>
+<tr><td>NCEA</td><td>Level 1 Maths · Level 2 Maths · Level 3 Calculus · Level 3 Statistics</td></tr>
+</table></div>
+<p class="todo">Very little content per course yet beyond the HSC Advanced diagnostic. Maths isn't split this way for IB or AP either.</p>
+</section>
+
+<section id="uk">
+<div class="head"><h2>GCSE · IGCSE · A-Level</h2><span class="pill warn">Shared platform</span></div>
+<ul>
+<li>One course per subject (Maths, Further Maths, sciences, humanities and more), with exam pages for GCSE Maths, A-Level Maths and IGCSE.</li>
+<li>Tests made with AI by board (AQA, Edexcel, OCR, Cambridge, WJEC, CCEA). Calculator advice in the copy is board-specific.</li>
+<li>Revision topic pages with a £149 checkout (sample: AQA GCSE Physics momentum notes).</li>
+<li>Past papers marked against the mark scheme (AQA PDFs allowed).</li>
+</ul>
+</section>
+
+<section id="india">
+<div class="head"><h2>CBSE · ICSE · JEE · NEET</h2><span class="pill warn">Course only</span></div>
+<ul><li>Course keys and request options exist, and tutors can set tests for them.</li></ul>
+<p class="todo">No content and no exam pages listed beyond the course picker.</p>
+</section>
+
+<section id="ask">
+<div class="head"><h2>Ask a Tutor (Singapore Sec 1 – JC 2)</h2><span class="pill ok">Own product · live</span></div>
+<ul>
+<li>Photo doubt help with subjects set by level (E-Math, A-Math, the sciences, JC H2 subjects).</li>
+<li>Free trial: 5 questions in 7 days. Parent signs up with an email code.</li>
+<li>Plans: Doubt S$39 for 30 days (20 questions), Plus S$79 (50 questions + 2 live calls), annual S$249.</li>
+<li>Welcome, "trial ending" and renewal emails. Payment to an SGD account.</li>
+</ul>
+<p class="todo">Not in the sitemap yet. Prices in other currencies are still placeholders.</p>
+</section>
+
+<section id="gaps">
+<div class="head"><h2>Biggest gaps</h2></div>
+<ul>
+<li><strong>TMUA / ESAT / TARA</strong> are the main admissions products but have no engine of their own. A SAT-style build (mock sets, score estimate, skill map, plan, weekly email) is the obvious next step.</li>
+<li><strong>AU/NZ maths courses</strong> now exist, but they need content: at least a diagnostic for each course.</li>
+<li><strong>Exam-page promises</strong> on TMUA and others should either be built or toned down.</li>
+<li><strong>Uncommitted work</strong>: KS3 changes, SAT mock 3, sitemap.</li>
+</ul>
+</section>
+</div>

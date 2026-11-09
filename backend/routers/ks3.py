@@ -30,6 +30,7 @@ class TrialStartIn(BaseModel):
     year_group: int
     parent_email: EmailStr
     agree_terms: bool = False
+    source: str | None = None  # landing page, e.g. "kent-grammar"
 
 
 class TrialVerifyIn(BaseModel):
@@ -64,8 +65,8 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
     name = re.sub(r"\s+", " ", data.child_name).strip()[:120]
     if len(name) < 2:
         raise HTTPException(400, "Please enter your child's name.")
-    if data.year_group not in (7, 8, 9):
-        raise HTTPException(400, "Notenix KS3 is for Years 7, 8 and 9.")
+    if data.year_group not in (6, 7, 8, 9):
+        raise HTTPException(400, "Notenix KS3 is for Years 7, 8 and 9 (or Year 6 starting Year 7 next September).")
     if not data.agree_terms:
         raise HTTPException(400, "Please agree to the Terms and Privacy policy to continue.")
     email = data.parent_email.lower()
@@ -84,8 +85,10 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
                  is_verified=True, password_hash="!", needs_activation=True,  # no password until the parent picks one
                  parent_email=email, token_version=0)
         db.add(u)
-    u.full_name, u.ks3_year = name, data.year_group
-    ks3.year_set_now(u)
+    u.full_name, u.ks3_year = name, max(7, data.year_group)  # Year 6 works on Year 7 content
+    ks3.year_set_now(u, starting_next=data.year_group == 6)
+    if data.source == "kent-grammar":
+        u.ks3_emails = sorted(set(u.ks3_emails or []) | {"src-kent-grammar"})
     code = generate_otp()
     u.otp_hash = hash_password(code)
     u.otp_expires_at = datetime.utcnow() + timedelta(minutes=settings.otp_expiry_minutes)
