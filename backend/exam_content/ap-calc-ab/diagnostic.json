@@ -1,0 +1,282 @@
+{
+ "exam": "ap-calc-ab",
+ "slug": "diagnostic",
+ "title": "AP Calculus AB diagnostic",
+ "kind": "diagnostic",
+ "summary": "15 multiple-choice questions covering all eight AP Calculus AB units, in the format of Section I.",
+ "stages": [
+  "mcq-a",
+  "mcq-b"
+ ],
+ "modules": {
+  "mcq-a": {
+   "title": "Part A: no calculator",
+   "section": "mcq-a",
+   "minutes": 20,
+   "questions": [
+    {
+     "domain": "Limits and continuity",
+     "skill": "Limits and continuity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is $\\displaystyle\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$?",
+     "options": [
+      "$0$",
+      "$3$",
+      "$6$",
+      "The limit does not exist."
+     ],
+     "answer": "C",
+     "explanation": "Substituting gives $\\frac{0}{0}$, so factorise: $\\frac{(x - 3)(x + 3)}{x - 3} = x + 3$ for $x \\ne 3$. As $x \\to 3$ this tends to $6$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-01"
+    },
+    {
+     "domain": "Limits and continuity",
+     "skill": "Limits and continuity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is $\\displaystyle\\lim_{x \\to \\infty} \\frac{3x^2 - 5x}{1 - 2x^2}$?",
+     "options": [
+      "$-\\dfrac{3}{2}$",
+      "$\\dfrac{3}{2}$",
+      "$0$",
+      "The limit does not exist."
+     ],
+     "answer": "A",
+     "explanation": "Numerator and denominator have the same degree, so the limit is the ratio of the leading coefficients: $\\frac{3}{-2} = -\\frac{3}{2}$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-02"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Derivative rules",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "If $f(x) = x^3 - \\dfrac{4}{x}$, what is $f'(2)$?",
+     "options": [
+      "$11$",
+      "$13$",
+      "$12$",
+      "$14$"
+     ],
+     "answer": "B",
+     "explanation": "Write $f(x) = x^3 - 4x^{-1}$, so $f'(x) = 3x^2 + 4x^{-2}$. Then $f'(2) = 12 + 1 = 13$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-03"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Chain, implicit and inverse",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is $\\dfrac{d}{dx}\\left[\\sin(x^2)\\right]$?",
+     "options": [
+      "$\\cos(x^2)$",
+      "$-2x\\cos(x^2)$",
+      "$2x\\sin(x^2)$",
+      "$2x\\cos(x^2)$"
+     ],
+     "answer": "D",
+     "explanation": "By the chain rule, the derivative of $\\sin(u)$ is $\\cos(u)\\cdot u'$. With $u = x^2$, $u' = 2x$, giving $2x\\cos(x^2)$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-04"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Chain, implicit and inverse",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The curve $x^2 + y^2 = 25$ passes through the point $(3, 4)$. What is $\\dfrac{dy}{dx}$ at this point?",
+     "options": [
+      "$-\\dfrac{3}{4}$",
+      "$\\dfrac{3}{4}$",
+      "$-\\dfrac{4}{3}$",
+      "$\\dfrac{4}{3}$"
+     ],
+     "answer": "A",
+     "explanation": "Differentiate implicitly: $2x + 2y\\frac{dy}{dx} = 0$, so $\\frac{dy}{dx} = -\\frac{x}{y} = -\\frac{3}{4}$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-05"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Contextual applications",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A particle moves along the $x$-axis with position $x(t) = t^3 - 6t^2 + 9t$ for $t \\ge 0$. At which times is the particle at rest?",
+     "options": [
+      "$t = 1$ only",
+      "$t = 3$ only",
+      "$t = 1$ and $t = 3$",
+      "$t = 2$ only"
+     ],
+     "answer": "C",
+     "explanation": "At rest means velocity zero: $v(t) = 3t^2 - 12t + 9 = 3(t - 1)(t - 3)$, which is zero at $t = 1$ and $t = 3$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-06"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Analytical applications",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "At what value of $x$ does the graph of $f(x) = x^3 - 3x^2$ have a point of inflection?",
+     "options": [
+      "$0$",
+      "$1$",
+      "$2$",
+      "$3$"
+     ],
+     "answer": "B",
+     "explanation": "$f''(x) = 6x - 6$, which is zero at $x = 1$ and changes sign there (negative before, positive after), so concavity changes at $x = 1$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-07"
+    },
+    {
+     "domain": "Integration",
+     "skill": "Integration and accumulation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is $\\displaystyle\\int_0^2 (3x^2 + 1)\\,dx$?",
+     "options": [
+      "$8$",
+      "$9$",
+      "$12$",
+      "$10$"
+     ],
+     "answer": "D",
+     "explanation": "An antiderivative is $x^3 + x$. Evaluating from $0$ to $2$ gives $(8 + 2) - 0 = 10$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-08"
+    },
+    {
+     "domain": "Integration",
+     "skill": "Integration and accumulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Let $g(x) = \\displaystyle\\int_0^x \\sqrt{1 + t^3}\\,dt$. What is $g'(2)$?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$3$",
+      "$9$"
+     ],
+     "answer": "C",
+     "explanation": "By the Fundamental Theorem of Calculus, $g'(x) = \\sqrt{1 + x^3}$. So $g'(2) = \\sqrt{9} = 3$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-09"
+    },
+    {
+     "domain": "Integration",
+     "skill": "Differential equations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which function is the solution of $\\dfrac{dy}{dx} = xy$ with $y(0) = 2$?",
+     "options": [
+      "$y = 2e^{x^2/2}$",
+      "$y = e^{x^2/2} + 1$",
+      "$y = 2e^{x^2}$",
+      "$y = \\dfrac{x^2}{2} + 2$"
+     ],
+     "answer": "A",
+     "explanation": "Separate: $\\frac{1}{y}\\,dy = x\\,dx$, so $\\ln|y| = \\frac{x^2}{2} + C$ and $y = Ae^{x^2/2}$. The condition $y(0) = 2$ gives $A = 2$.",
+     "section": "mcq-a",
+     "id": "ap-calc-ab-diagnostic-mcq-a-10"
+    }
+   ]
+  },
+  "mcq-b": {
+   "title": "Part B: graphing calculator",
+   "section": "mcq-b",
+   "minutes": 15,
+   "questions": [
+    {
+     "domain": "Integration",
+     "skill": "Applications of integration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the area of the region under $y = e^{-x^2}$ and above the $x$-axis, for $0 \\le x \\le 1$? (Calculator allowed.)",
+     "options": [
+      "$0.632$",
+      "$0.747$",
+      "$0.842$",
+      "$1.000$"
+     ],
+     "answer": "B",
+     "explanation": "Area $= \\int_0^1 e^{-x^2}\\,dx$. This has no elementary antiderivative, so evaluate it on the calculator: $\\approx 0.747$.",
+     "section": "mcq-b",
+     "id": "ap-calc-ab-diagnostic-mcq-b-01"
+    },
+    {
+     "domain": "Integration",
+     "skill": "Applications of integration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The region under $y = \\sqrt{x}$ for $0 \\le x \\le 4$ is rotated about the $x$-axis. What is the volume of the solid formed? (Calculator allowed.)",
+     "options": [
+      "$8.000$",
+      "$12.566$",
+      "$25.133$",
+      "$50.265$"
+     ],
+     "answer": "C",
+     "explanation": "Disc method: $V = \\pi\\int_0^4 (\\sqrt{x})^2\\,dx = \\pi\\int_0^4 x\\,dx = \\pi \\cdot 8 = 8\\pi \\approx 25.133$.",
+     "section": "mcq-b",
+     "id": "ap-calc-ab-diagnostic-mcq-b-02"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Contextual applications",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Water flows into a tank at a rate of $r(t) = 10e^{-0.2t}$ litres per minute. How many litres flow in during the first $5$ minutes? (Calculator allowed.)",
+     "options": [
+      "$18.39$",
+      "$31.61$",
+      "$36.79$",
+      "$50.00$"
+     ],
+     "answer": "B",
+     "explanation": "The amount is the integral of the rate: $\\int_0^5 10e^{-0.2t}\\,dt = 50\\left(1 - e^{-1}\\right) \\approx 31.61$ litres.",
+     "section": "mcq-b",
+     "id": "ap-calc-ab-diagnostic-mcq-b-03"
+    },
+    {
+     "domain": "Differentiation",
+     "skill": "Analytical applications",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "For $f(x) = x^3$ on $[0, 2]$, the Mean Value Theorem guarantees a value $c$ in $(0, 2)$ with $f'(c) = \\dfrac{f(2) - f(0)}{2 - 0}$. What is $c$? (Calculator allowed.)",
+     "options": [
+      "$1.000$",
+      "$1.333$",
+      "$1.414$",
+      "$1.155$"
+     ],
+     "answer": "D",
+     "explanation": "The average rate of change is $\\frac{8 - 0}{2} = 4$. Solve $3c^2 = 4$: $c = \\frac{2}{\\sqrt{3}} \\approx 1.155$.",
+     "section": "mcq-b",
+     "id": "ap-calc-ab-diagnostic-mcq-b-04"
+    },
+    {
+     "domain": "Limits and continuity",
+     "skill": "Limits and continuity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Let $f(x) = \\begin{cases} kx + 1, & x < 2 \\ x^2 - k, & x \\ge 2 \\end{cases}$\n\nFor which value of $k$ is $f$ continuous at $x = 2$?",
+     "options": [
+      "$1$",
+      "$0$",
+      "$\\dfrac{3}{2}$",
+      "$3$"
+     ],
+     "answer": "A",
+     "explanation": "The two pieces must agree at $x = 2$: $2k + 1 = 4 - k$, so $3k = 3$ and $k = 1$.",
+     "section": "mcq-b",
+     "id": "ap-calc-ab-diagnostic-mcq-b-05"
+    }
+   ]
+  }
+ }
+}

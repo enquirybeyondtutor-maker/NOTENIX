@@ -5,7 +5,7 @@ import type { SatModule, ReviewQuestion, PlanTask } from "@/lib/satApi";
 // SAT keeps its own adaptive engine (lib/satApi.ts).
 
 /** Exams that have the engine: practice tests, diagnostic, skill map, plan and drills. */
-export const ENGINE_EXAMS = ["tmua"] as const;
+export const ENGINE_EXAMS = ["tmua", "ap-calc-ab"] as const;
 export const hasEngine = (slug: string) => (ENGINE_EXAMS as readonly string[]).includes(slug);
 
 export type ExamInfo = {

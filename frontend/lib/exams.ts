@@ -242,6 +242,56 @@ export const EXAMS: Exam[] = [
     ],
   },
   {
+    slug: "ap-calc-ab",
+    name: "AP Calculus AB",
+    fullName: "AP Calculus AB",
+    title: "AP Calculus AB Practice Tests & Free Diagnostic",
+    description:
+      "AP Calculus AB practice online: a free diagnostic across all 8 units, timed Section I multiple-choice practice with and without a calculator, and an estimated AP score from 1 to 5.",
+    keywords: ["AP Calculus AB practice test", "AP Calc AB diagnostic", "AP Calculus AB multiple choice", "AP Calc AB mock exam", "AP Calculus AB India"],
+    tagline: "Free AP Calc AB diagnostic, unit drills and Section I practice.",
+    intro:
+      "AP Calculus AB covers limits, derivatives, integrals and differential equations, much of which overlaps with CBSE Class 12, IB and A-Level calculus. Notenix shows which of the eight units cost you marks and drills them in the real exam format.",
+    facts: [
+      { label: "Section I", value: "45 MCQ · 1 h 45 min" },
+      { label: "Section II", value: "6 FRQ · 1 h 30 min" },
+      { label: "Calculator", value: "Part B only" },
+      { label: "Score scale", value: "1–5" },
+    ],
+    format: [
+      "Section I Part A: 30 multiple-choice questions in 60 minutes, no calculator.",
+      "Section I Part B: 15 multiple-choice questions in 45 minutes, graphing calculator required.",
+      "Section II: 6 free-response questions in 90 minutes (2 with a calculator, 4 without), written by hand.",
+      "Taken in person at an authorised AP test centre in May; multiple choice on screen in Bluebook, free response on paper.",
+    ],
+    howWeHelp: [
+      "A free 15-question diagnostic across all eight units, with an estimated score band.",
+      "Timed practice in the Section I format, calculator and no-calculator parts.",
+      "Worked explanations for every question.",
+      "Free-response answers checked by a Beyond Tutors tutor.",
+    ],
+    samples: [
+      {
+        question: "What is $\displaystyle\lim_{x \to 0} \frac{\sin 3x}{x}$?",
+        options: ["$0$", "$1$", "$3$", "The limit does not exist."],
+        answer: "$3$",
+        explanation: "$\dfrac{\sin 3x}{x} = 3 \cdot \dfrac{\sin 3x}{3x} \to 3 \cdot 1 = 3$.",
+      },
+      {
+        question: "If $y = e^{2x}\cos x$, what is $\dfrac{dy}{dx}$ at $x = 0$?",
+        options: ["$0$", "$1$", "$2$", "$3$"],
+        answer: "$2$",
+        explanation: "Product rule: $y' = 2e^{2x}\cos x - e^{2x}\sin x$. At $x = 0$: $2 - 0 = 2$.",
+      },
+    ],
+    faqs: [
+      { q: "Can I take AP Calculus AB from India?", a: "Yes, in person at an authorised AP test centre. Registration usually closes in mid-November for the May exams, with a late fee after that. Check with your counsellor or test centre." },
+      { q: "Is the AP exam online?", a: "Partly. You sit it at a test centre: multiple-choice answers go into College Board's Bluebook app, and free-response answers are handwritten in a paper booklet." },
+      { q: "Do I need AP Calculus if I study CBSE or IB?", a: "Not for your school exams. It is for university applications, mainly in the US. Much of the content overlaps with Class 12 calculus, so the extra work is mostly AP-only topics and exam technique." },
+      { q: "Are the Notenix AP questions official?", a: "No. All questions are original, written by our tutors to match the style and level of the real exam." },
+    ],
+  },
+  {
     slug: "gcse-maths",
     name: "GCSE Maths",
     fullName: "GCSE Mathematics",
@@ -441,6 +491,7 @@ const REQUEST_FOR_SLUG: Record<string, { exam: string; subject?: string }> = {
   sat: { exam: "SAT" },
   esat: { exam: "ESAT" },
   tmua: { exam: "TMUA" },
+  "ap-calc-ab": { exam: "AP", subject: "Maths" },
   "gcse-maths": { exam: "GCSE", subject: "Maths" },
   "a-level-maths": { exam: "A-Level", subject: "Maths" },
   igcse: { exam: "IGCSE" },

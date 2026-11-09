@@ -20,7 +20,7 @@ from config import settings
 # Whole-exam courses: any content labelled with the exam (as its level or its subject).
 EXAMS = {
     "tmua": "TMUA", "tara": "TARA", "esat": "ESAT", "sat": "SAT", "ukmt": "UKMT",
-    "jee": "JEE", "neet": "NEET",
+    "jee": "JEE", "neet": "NEET", "ap-calc-ab": "AP Calculus AB",
 }
 # Curricula: one course per subject.
 CURRICULA = {

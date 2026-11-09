@@ -46,6 +46,29 @@ EXAMS: dict[str, dict] = {
         "mock_detail": "2 papers · 40 questions · 2 h 30 min",
         "about_score": "TMUA scores run from 1.0 to 9.0. Ours are Notenix estimates from the share of questions you get right; the real test uses its own scaling.",
     },
+    "ap-calc-ab": {
+        "name": "AP Calculus AB",
+        "full_name": "AP Calculus AB (College Board)",
+        "course": "ap-calc-ab",
+        "sections": {"mcq-a": "Section I Part A: Multiple choice, no calculator",
+                     "mcq-b": "Section I Part B: Multiple choice, graphing calculator"},
+        # The eight College Board units, grouped.
+        "domains": {
+            "Limits and continuity": ["Limits and continuity"],
+            "Differentiation": ["Derivative rules", "Chain, implicit and inverse",
+                                "Contextual applications", "Analytical applications"],
+            "Integration": ["Integration and accumulation", "Differential equations",
+                            "Applications of integration"],
+        },
+        # Share right -> AP score 1-5 (roughly the usual AB cut-offs; an estimate only).
+        "scale": {"min": 1.0, "max": 5.0, "decimals": 1,
+                  "points": [(0.0, 1.0), (0.25, 1.5), (0.4, 2.5), (0.5, 3.0), (0.62, 4.0), (0.72, 4.6), (1.0, 5.0)]},
+        "band": 0.5,
+        "target_range": (1.0, 5.0),
+        "calculator": True,
+        "mock_detail": "Section I · 45 multiple-choice questions · 1 h 45 min (Part A no calculator, Part B calculator)",
+        "about_score": "AP scores run from 1 to 5; most universities look for a 4 or 5. Ours are Notenix estimates from the multiple-choice share you get right. The real score also counts the six written free-response questions.",
+    },
 }
 
 
