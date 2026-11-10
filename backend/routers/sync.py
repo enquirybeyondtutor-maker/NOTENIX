@@ -2,9 +2,11 @@
 
 Auth: header `X-Sync-Key` must equal SYNC_KEY. Students are addressed by email.
 """
+import base64
 import hmac
+import os
 from datetime import datetime
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, UploadFile
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -118,6 +120,10 @@ class UploadIn(BaseModel):
 
 @router.post("/upload", dependencies=[Depends(require_sync)])
 async def upload(data: UploadIn, db: AsyncSession = Depends(get_db)):
+    return await _save_upload(data, db)
+
+
+async def _save_upload(data: UploadIn, db: AsyncSession):
     if data.kind not in ("notes", "homework"):
         raise HTTPException(400, "kind must be notes or homework")
     if not data.title.strip():
@@ -167,3 +173,51 @@ async def assign(data: AssignIn, db: AsyncSession = Depends(get_db)):
     await db.commit()
     in_background(send_assignment_email(s, t.title, t.subject, "Your tutor", a.due_at))
     return {"id": a.id, "already": False}
+
+
+# ---------------------------------------------------------------- iPad share sheet
+# Used by the "Send to Notenix" iOS Shortcut: pick a student, then post the PDF straight from GoodNotes.
+
+@router.get("/students", dependencies=[Depends(require_sync)])
+async def students(db: AsyncSession = Depends(get_db)):
+    """{"Name": "login email"} for active Beyond Tutors students, A-Z (the Shortcut shows the names as a list)."""
+    from services.email import login_domains
+    domains = login_domains() - {settings.ks3_id_domain.lower()}
+    rows = (await db.execute(select(User.full_name, User.email).where(
+        User.role == "student", User.is_active == True))).all()  # noqa: E712
+    out: dict[str, str] = {}
+    for name, email in sorted(rows, key=lambda r: (r[0] or r[1]).lower()):
+        if email.rsplit("@", 1)[-1].lower() not in domains:
+            continue
+        label = (name or "").strip() or email.split("@")[0]
+        if label in out:  # two students with the same name
+            label = f"{label} ({email.split('@')[0]})"
+        out[label] = email
+    return out
+
+
+_SHARE_TYPES = {".pdf": "application/pdf", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
+
+
+@router.post("/share", dependencies=[Depends(require_sync)])
+async def share(email: str = Form(...), kind: str = Form("notes"), title: str = Form(""),
+                file: UploadFile = File(...), db: AsyncSession = Depends(get_db)):
+    """One file as a normal form upload. Title defaults to the file name."""
+    name = os.path.basename(file.filename or "notes.pdf")
+    stem, ext = os.path.splitext(name)
+    raw = await file.read()
+    if raw[:5] == b"%PDF-":
+        mime = "application/pdf"
+        if ext.lower() != ".pdf":
+            name = (stem or "notes") + ".pdf"
+    else:
+        mime = _SHARE_TYPES.get(ext.lower())
+        if mime == "application/pdf":
+            mime = None  # named .pdf but is not one
+    if not mime or not raw:
+        raise HTTPException(400, "Send a PDF or an image (PNG/JPG)")
+    file_data = f"data:{mime};base64," + base64.b64encode(raw).decode()
+    kind = kind.strip().lower()
+    out = await _save_upload(UploadIn(email=email, kind=kind, title=title.strip() or stem or "Class notes",
+                                      file_name=name, file_data=file_data), db)
+    return {**out, "message": f"Sent to {email.strip().lower()} as {kind}"}
