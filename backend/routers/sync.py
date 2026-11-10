@@ -5,6 +5,7 @@ Auth: header `X-Sync-Key` must equal SYNC_KEY. Students are addressed by email.
 import base64
 import hmac
 import os
+import re
 from datetime import datetime
 from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, UploadFile
 from pydantic import BaseModel
@@ -196,6 +197,18 @@ async def students(db: AsyncSession = Depends(get_db)):
     return out
 
 
+async def _share_email(text: str, db: AsyncSession) -> str:
+    """The Shortcut may send the login email, the student's name, or both bundled ('jayda: jayda@…', JSON)."""
+    m = re.search(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+", text or "")
+    if m:
+        return m.group(0).lower()
+    want = re.sub(r"\s+", " ", (text or "").strip().strip("{}\"' ")).lower()
+    hits = [e for label, e in (await students(db)).items() if label.lower() == want]
+    if len(hits) != 1:
+        raise HTTPException(404, f"Could not tell which student '{(text or '').strip()[:60]}' is")
+    return hits[0]
+
+
 _SHARE_TYPES = {".pdf": "application/pdf", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
 
 
@@ -218,6 +231,7 @@ async def share(email: str = Form(...), kind: str = Form("notes"), title: str = 
         raise HTTPException(400, "Send a PDF or an image (PNG/JPG)")
     file_data = f"data:{mime};base64," + base64.b64encode(raw).decode()
     kind = kind.strip().lower()
+    email = await _share_email(email, db)
     out = await _save_upload(UploadIn(email=email, kind=kind, title=title.strip() or stem or "Class notes",
                                       file_name=name, file_data=file_data), db)
-    return {**out, "message": f"Sent to {email.strip().lower()} as {kind}"}
+    return {**out, "message": f"Sent to {email} as {kind}"}
