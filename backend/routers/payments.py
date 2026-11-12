@@ -199,8 +199,9 @@ async def revision_checkout_info(course: str | None = None):
     return {"accounts": payment_accounts(), "price": p["amount"], "currency": p["currency"],
             "standard_price": settings.revision_price, "days": settings.subscription_days,
             "course_name": course_svc.course_name(course) if _known_course(course) else None,
-            # The card link is a fixed-amount Wise link for the standard price, so offer it only then.
-            "pay_link": settings.revision_pay_link if p["amount"] == settings.revision_price else ""}
+            # Wise card links are fixed-amount, one per price; no link for a price -> bank transfer only.
+            "pay_link": {settings.revision_price: settings.revision_pay_link, 99: settings.pay_link_99,
+                         349: settings.pay_link_349}.get(p["amount"], "")}
 
 
 class RevisionCheckoutIn(BaseModel):

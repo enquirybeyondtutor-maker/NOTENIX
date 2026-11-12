@@ -1,4 +1,4 @@
-import { Check, ArrowRight } from "lucide-react";
+﻿import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import LocalPrice from "@/components/LocalPrice";
 
@@ -23,7 +23,7 @@ const OPEN_FEATURES = [
   "See your weak topics and what to revise next",
   "GCSE, IGCSE, A-Level, HSC, VCE, QCE, WACE, NCEA, SAT, ESAT, TMUA and TARA courses",
   "Add more courses any time",
-  "Pay once by bank transfer from any country, or by card for £149 courses",
+  "Pay once by card or bank transfer, from any country",
   "No auto-renewal: you choose whether to renew",
 ];
 
@@ -39,24 +39,24 @@ const PLANS: Plan[] = [
     name: "GCSE, one subject", who: "Year 10 and 11 students taking GCSE Maths, Biology, Chemistry or Physics (AQA, Edexcel, OCR).",
     gbp: 99, per: "/ year",
     includes: [
-      "Free diagnostic test with a 9–1 grade estimate and a skill map",
+      "Free diagnostic test with a 9â€“1 grade estimate and a skill map",
       "Topic drills for every skill, with worked explanations",
       "Two full practice papers, timed and marked instantly",
       "Tutor-marked past papers on request, with written feedback",
     ],
-    pay: "One payment, one subject, 12 months of access. Bank transfer from any country.",
+    pay: "One payment, one subject, 12 months of access. Card or bank transfer, from any country.",
     cta: "Buy one GCSE subject", href: "/revision/checkout?course=gcse-maths",
     more: { label: "Try the free GCSE diagnostic", href: "/gcse-maths/diagnostic" },
   },
   {
     name: "GCSE, all four subjects", who: "Students taking GCSE Maths and the three separate sciences.",
-    gbp: 349, per: "/ year", tag: "Save £47",
+    gbp: 349, per: "/ year", tag: "Save Â£47",
     includes: [
       "Everything in the one-subject plan, for Maths, Biology, Chemistry and Physics",
       "One payment unlocks all four courses at once",
-      "£47 less than buying the four subjects one by one (£396)",
+      "Â£47 less than buying the four subjects one by one (Â£396)",
     ],
-    pay: "One payment, 12 months of access to all four. Bank transfer from any country.",
+    pay: "One payment, 12 months of access to all four. Card or bank transfer, from any country.",
     cta: "Buy all four GCSEs", href: "/revision/checkout?course=gcse-bundle",
   },
   {
@@ -68,7 +68,7 @@ const PLANS: Plan[] = [
       "Skill drills with worked explanations for Reading & Writing and Maths",
       "Access until your SAT date (12 months)",
     ],
-    pay: "One payment, 12 months of access. Bank transfer from any country.",
+    pay: "One payment, 12 months of access. Card or bank transfer, from any country.",
     cta: "Buy SAT", href: "/revision/checkout?course=sat",
     more: { label: "Start with a free SAT diagnostic", href: "/sat" },
   },
@@ -101,9 +101,9 @@ const PLANS: Plan[] = [
     name: "Ask a Tutor", who: "Any student stuck on homework who wants a tutor's step-by-step answer.",
     gbp: 25, per: "/ 30 days", from: true,
     includes: [
-      "30 days: up to 20 questions, answered step by step by a tutor (£25)",
-      "Plus, 30 days: up to 50 questions and two live 30-minute calls with a tutor (£49)",
-      "A whole year: up to 20 questions every month (£149)",
+      "30 days: up to 20 questions, answered step by step by a tutor (Â£25)",
+      "Plus, 30 days: up to 50 questions and two live 30-minute calls with a tutor (Â£49)",
+      "A whole year: up to 20 questions every month (Â£149)",
     ],
     pay: "Starts with a free 7-day trial (5 questions). No auto-renewal.",
     cta: "Try Ask a Tutor free", href: "/ask-a-tutor",

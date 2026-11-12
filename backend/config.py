@@ -33,6 +33,8 @@ class Settings(BaseSettings):
     # Wise payment link for the £149 checkout (button + QR). Empty = bank details only.
     # Accounts in PAYMENT_ACCOUNTS can also carry their own "pay_link".
     revision_pay_link: str = "https://wise.com/pay/r/BeDOBG4eucVVAg0"
+    pay_link_99: str = "https://wise.com/pay/r/pmJ_vlY6iKl8a8k"    # Wise card link, GBP 99 (one GCSE subject, SAT)
+    pay_link_349: str = "https://wise.com/pay/r/76Ch6kq7sJpErfU"   # Wise card link, GBP 349 (all four GCSEs)
 
     # Freemium limits
     free_quiz_limit: int = 3
