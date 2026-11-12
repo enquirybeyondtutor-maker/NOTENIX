@@ -11,12 +11,16 @@ import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
 
-// £149/year per course for students outside Beyond Tutors (one course per purchase). Payment is a bank
-// transfer: the student makes it from their own bank, tells us here, and an admin
-// confirms it in /admin/requests, which switches access on for a year.
+// One course a year for students outside Beyond Tutors: GCSE £99 a subject, all four GCSEs £349
+// (?course=gcse-bundle), SAT £99, anything else £149. The backend prices the chosen course.
+// Payment is by card (Wise link, £149 courses only) or bank transfer: the student tells us here,
+// and an admin confirms it in /admin/requests, which switches the course on for a year.
+
+const BUNDLE = "gcse-bundle";
+const BUNDLE_NAME = "GCSE Maths, Biology, Chemistry and Physics";
 
 export default function RevisionCheckout() {
-  const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string } | null>(null);
+  const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string; standard_price?: number } | null>(null);
   const [returnTo, setReturnTo] = useState<string | null>(null);
   const [form, setForm] = useState({ course: "", full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
   const [catalogue, setCatalogue] = useState<Course[]>([]);
@@ -32,12 +36,17 @@ export default function RevisionCheckout() {
     coursesAPI.catalogue().then((r) => {
       setCatalogue(r.data);
       const want = qs.get("course");
-      if (want && r.data.some((c) => c.key === want)) setForm((f) => ({ ...f, course: want }));
+      if (want && (want === BUNDLE || r.data.some((c) => c.key === want))) setForm((f) => ({ ...f, course: want }));
     }).catch(() => {});
-    paymentsAPI.revisionInfo()
-      .then((r) => { setInfo(r.data); setForm((f) => ({ ...f, paid_via: r.data.accounts?.[0]?.label || "" })); })
-      .catch(() => setInfo({ accounts: [], price: 149, currency: "GBP" }));
   }, []);
+
+  // The price depends on the course (GCSE and SAT £99, the GCSE bundle £349, others £149).
+  useEffect(() => {
+    paymentsAPI.revisionInfo(form.course || undefined)
+      .then((r) => { setInfo(r.data); setForm((f) => ({ ...f, paid_via: f.paid_via || r.data.accounts?.[0]?.label || "" })); })
+      .catch(() => setInfo((i) => i ?? { accounts: [], price: 149, currency: "GBP" }));
+  }, [form.course]);
+  const courseName = form.course === BUNDLE ? BUNDLE_NAME : catalogue.find((c) => c.key === form.course)?.name;
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -77,7 +86,7 @@ export default function RevisionCheckout() {
           <h1 className="mt-4 text-2xl font-bold text-ink">Payment received for checking</h1>
           <p className="mt-2 text-sm text-ink-muted">
             Reference <b className="font-mono text-ink">{done.reference}</b>. We match it to our bank account, usually within a few hours,
-            then email you. {catalogue.find((c) => c.key === form.course)?.name || "Your course"} switches on for a year as soon as it&apos;s confirmed.
+            then email you. {courseName || "Your course"} {form.course === BUNDLE ? "switch" : "switches"} on for a year as soon as it&apos;s confirmed.
           </p>
           <Button href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`} className="mt-6">Go to sign in</Button>
         </div>
@@ -88,16 +97,30 @@ export default function RevisionCheckout() {
   return (
     <PageContainer className="max-w-3xl">
       <p className="text-sm font-semibold text-brand-600">Notenix course access</p>
-      <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink sm:text-3xl">{price} / year per course</h1>
-      <p className="mt-1 text-sm text-ink-muted">Practice papers, quizzes, revision resources and tutor-marked test requests for your course. Add more courses any time.</p>
+      <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        {form.course ? <>{courseName}: {price} / year</> : <>{price} / year per course</>}
+      </h1>
+      <p className="mt-1 text-sm text-ink-muted">
+        {form.course === BUNDLE
+          ? "All four GCSE sciences and maths for a year: diagnostics, topic drills, practice papers and tutor-marked test requests."
+          : "Practice papers, revision resources and tutor-marked test requests for your course. GCSE and SAT £99, other courses £149. Add more courses any time."}
+      </p>
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div className="card space-y-4 p-6">
           <h2 className="font-semibold text-ink">1. Your course and Notenix account</h2>
-          <Field label="Course" hint="e.g. IGCSE Chemistry, A-Level Maths, TMUA. Each course is a separate purchase.">
-            <CoursePicker catalogue={catalogue} value={form.course} onChange={(k) => setForm((f) => ({ ...f, course: k }))}
-              placeholder="Choose your course…"
-              className="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink outline-none focus:border-brand-500" />
+          <Field label="Course" hint="e.g. GCSE Biology, IGCSE Chemistry, A-Level Maths, TMUA. Each course is a separate purchase; the price updates when you choose.">
+            {form.course === BUNDLE ? (
+              <div className="flex items-center justify-between gap-3 rounded-lg border border-brand-200 bg-brand-50/50 px-3.5 py-2.5 text-sm">
+                <span className="font-medium text-ink">{BUNDLE_NAME} <span className="text-ink-muted">(all four GCSEs)</span></span>
+                <button type="button" onClick={() => setForm((f) => ({ ...f, course: "" }))}
+                  className="shrink-0 font-semibold text-brand-600 hover:text-brand-700">Change</button>
+              </div>
+            ) : (
+              <CoursePicker catalogue={catalogue} value={form.course} onChange={(k) => setForm((f) => ({ ...f, course: k }))}
+                placeholder="Choose your course…"
+                className="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink outline-none focus:border-brand-500" />
+            )}
           </Field>
           <Field label="Student's full name"><Input required value={form.full_name} onChange={set("full_name")} placeholder="e.g. Priya Patel" /></Field>
           <Field label="Email"><Input required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" /></Field>

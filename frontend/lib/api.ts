@@ -183,7 +183,7 @@ export const paymentsAPI = {
   claim: (data: { purpose: "pro" | "test_request"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/claim", data),
   mine: () => api.get("/payments/mine"),
-  revisionInfo: () => api.get("/payments/revision-checkout"),
+  revisionInfo: (course?: string) => api.get("/payments/revision-checkout", { params: course ? { course } : {} }),
   ks3Info: () => api.get("/payments/ks3-checkout"),
   ks3Checkout: (data: { login_id: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/ks3-checkout", data),

@@ -181,11 +181,26 @@ async def fx():
     return {"base": "GBP", "rates": await gbp_rates()}
 
 
+def _public_price(course: str | None) -> dict:
+    """What a new student (not with Beyond Tutors) pays for this course a year, in GBP:
+    GCSE £99 a subject, the GCSE bundle £349, SAT £99, anything else the standard £149."""
+    import types
+    from routers.courses import course_price
+    return course_price(types.SimpleNamespace(email="", billing_currency=settings.price_currency), course)
+
+
+def _known_course(course: str | None) -> bool:
+    return bool(course) and (course_svc.is_course(course) or course_svc.is_bundle(course))
+
+
 @router.get("/revision-checkout")
-async def revision_checkout_info():
-    return {"accounts": payment_accounts(), "price": settings.revision_price,
-            "currency": settings.price_currency, "days": settings.subscription_days,
-            "pay_link": settings.revision_pay_link}
+async def revision_checkout_info(course: str | None = None):
+    p = _public_price(course if _known_course(course) else None)
+    return {"accounts": payment_accounts(), "price": p["amount"], "currency": p["currency"],
+            "standard_price": settings.revision_price, "days": settings.subscription_days,
+            "course_name": course_svc.course_name(course) if _known_course(course) else None,
+            # The card link is a fixed-amount Wise link for the standard price, so offer it only then.
+            "pay_link": settings.revision_pay_link if p["amount"] == settings.revision_price else ""}
 
 
 class RevisionCheckoutIn(BaseModel):
@@ -203,8 +218,9 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     email = data.email.strip().lower()
     if "@" not in email or len(data.password) < 8 or not data.full_name.strip():
         raise HTTPException(400, "Enter your name, a valid email and a password of at least 8 characters.")
-    if data.course and not course_svc.is_course(data.course):
+    if data.course and not _known_course(data.course):
         raise HTTPException(400, "Please choose your course.")
+    price = _public_price(data.course)   # GCSE £99, bundle £349, SAT £99, else £149
     now = datetime.utcnow()
     user = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
     if user:
@@ -219,7 +235,7 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     await db.flush()
     p = Payment(
         user_id=user.id, purpose="revision", reference=f"NX-V{user.id}", course=data.course or None,
-        amount=settings.revision_price, currency=settings.price_currency,
+        amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
         payer_note=(data.payer_note or "")[:1000] or None,
