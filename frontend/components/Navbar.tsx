@@ -1,15 +1,15 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, LifeBuoy, GraduationCap, type LucideIcon } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ChevronDown, Menu, X, LayoutDashboard, ClipboardList, LineChart, Users, FilePlus2, LogOut, Trophy, Shield, PenLine, CheckSquare, BookOpen, NotebookText, UserCog, FileBarChart, Inbox, LifeBuoy, GraduationCap, type LucideIcon } from "lucide-react";
 import { getUser, logout, authAPI } from "@/lib/api";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
 import { useInbox } from "@/lib/inbox";
 
-type NavItem = { href: string; label: string; icon?: LucideIcon };
+type NavItem = { href: string; label: string; icon?: LucideIcon; children?: { href: string; label: string }[] };
 
 const STUDENT_LINKS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -31,9 +31,36 @@ const TEACHER_LINKS: NavItem[] = [
   { href: "/teacher/reports", label: "Reports", icon: FileBarChart },
 ];
 
+// Exams with the full engine (diagnostic, drills, mocks) get their own place in the menu.
+// Every other exam is listed on the homepage (/#exams) and in the footer.
 const PUBLIC_LINKS: NavItem[] = [
-  { href: "/#exams", label: "Exams" },
   { href: "/sat", label: "SAT" },
+  {
+    href: "/gcse-maths", label: "GCSE",
+    children: [
+      { href: "/gcse-maths", label: "GCSE Maths" },
+      { href: "/gcse-biology", label: "GCSE Biology" },
+      { href: "/gcse-chemistry", label: "GCSE Chemistry" },
+      { href: "/gcse-physics", label: "GCSE Physics" },
+    ],
+  },
+  {
+    // No A-Level engine yet: the Maths page plus a tutor-marked mock on request.
+    href: "/a-level-maths", label: "A-Level",
+    children: [
+      { href: "/a-level-maths", label: "A-Level Maths" },
+      { href: "/request?exam=A-Level", label: "Request an A-Level mock" },
+    ],
+  },
+  {
+    // UK university admissions tests. TARA has no page yet, so it opens the request form.
+    href: "/tmua", label: "Admissions tests",
+    children: [
+      { href: "/tmua", label: "TMUA" },
+      { href: "/esat", label: "ESAT" },
+      { href: "/request?exam=TARA", label: "TARA (request a mock)" },
+    ],
+  },
   { href: "/ks3", label: "KS3" },
   { href: "/request", label: "Request a test" },
   { href: "/pricing", label: "Pricing" },
@@ -101,7 +128,8 @@ export default function Navbar() {
         <div className="flex items-center gap-8">
           <Logo />
           <nav className="hidden items-center gap-1 lg:flex">
-            {links.map(({ href, label }) => {
+            {links.map(({ href, label, children }) => {
+              if (children) return <NavMenu key={label} label={label} items={children} pathname={pathname} />;
               const active = pathname === href || (href !== "/" && href !== "/admin" && !href.includes("#") && pathname.startsWith(href));
               return (
                 <Link
@@ -162,7 +190,17 @@ export default function Navbar() {
       {open && (
         <div className="border-t border-line bg-white px-4 py-3 lg:hidden">
           <nav className="space-y-1">
-            {links.map(({ href, label }) => (
+            {links.map(({ href, label, children }) => children ? (
+              <div key={label}>
+                <div className="px-3 pb-1 pt-2.5 text-xs font-semibold uppercase tracking-wider text-ink-subtle">{label}</div>
+                {children.map((c) => (
+                  <Link key={c.href} href={c.href}
+                    className="block rounded-lg py-2 pl-6 pr-3 text-sm font-medium text-ink-muted hover:bg-slate-100 hover:text-ink">
+                    {c.label}
+                  </Link>
+                ))}
+              </div>
+            ) : (
               <Link
                 key={href}
                 href={href}
@@ -199,6 +237,55 @@ export default function Navbar() {
         </div>
       )}
     </header>
+  );
+}
+
+/** A top-bar item that opens a small menu (hover or click; closes on route change, Escape or click outside). */
+function NavMenu({ label, items, pathname }: { label: string; items: { href: string; label: string }[]; pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const active = items.some((i) => !i.href.includes("?") && (pathname === i.href || pathname.startsWith(i.href + "/")));
+
+  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("mousedown", onDown); document.removeEventListener("keydown", onKey); };
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}   // hover already opens it; a click (or tap) must not toggle it shut
+        aria-expanded={open}
+        aria-haspopup="menu"
+        className={cn(
+          "flex items-center gap-1 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+          active ? "bg-brand-50 text-brand-700" : "text-ink-muted hover:bg-slate-100 hover:text-ink"
+        )}
+      >
+        {label} <ChevronDown size={14} className={cn("transition-transform", open && "rotate-180")} />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full z-50 pt-1">
+          <div role="menu" className="w-56 rounded-xl border border-line bg-white p-1.5 shadow-lg">
+            {items.map((i) => (
+              <Link key={i.href} href={i.href} role="menuitem"
+                className={cn(
+                  "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  pathname === i.href ? "bg-brand-50 text-brand-700" : "text-ink-muted hover:bg-slate-100 hover:text-ink"
+                )}>
+                {i.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
