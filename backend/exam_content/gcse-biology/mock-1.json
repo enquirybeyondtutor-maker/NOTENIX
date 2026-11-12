@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-biology",
+ "slug": "mock-1",
+ "title": "GCSE Biology Practice Paper 1",
+ "kind": "mock",
+ "summary": "Foundation and crossover · grades 1 to 5 · 24 questions · 36 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which part of a cell controls which substances enter and leave it?",
+     "options": [
+      "Nucleus",
+      "Cell membrane",
+      "Cell wall",
+      "Ribosome"
+     ],
+     "answer": "B",
+     "explanation": "The cell membrane controls the passage of substances in and out of the cell. The cell wall, found in plant and bacterial cells, strengthens the cell.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is diffusion?",
+     "options": [
+      "The movement of water only across a membrane",
+      "The movement of particles against a concentration gradient, using energy",
+      "The movement of particles from a lower to a higher concentration",
+      "The net movement of particles from a higher to a lower concentration"
+     ],
+     "answer": "D",
+     "explanation": "Diffusion is the spreading out of particles, giving a net movement from where they are more concentrated to where they are less concentrated. It needs no energy from the cell.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which part of a cell is the site of protein synthesis?",
+     "options": [
+      "Ribosome",
+      "Mitochondrion",
+      "Permanent vacuole",
+      "Chloroplast"
+     ],
+     "answer": "A",
+     "explanation": "Proteins are made on ribosomes. Mitochondria are where aerobic respiration happens, and chloroplasts are where photosynthesis happens.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the process called by which a cell becomes specialised for a particular job?",
+     "options": [
+      "Mitosis",
+      "Meiosis",
+      "Differentiation",
+      "Diffusion"
+     ],
+     "answer": "C",
+     "explanation": "Differentiation is when a cell gains the structures it needs to carry out a particular function. Most animal cells differentiate early in development, but many plant cells keep the ability throughout life.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which organ produces bile?",
+     "options": [
+      "Gall bladder",
+      "Liver",
+      "Stomach",
+      "Pancreas"
+     ],
+     "answer": "B",
+     "explanation": "Bile is made in the liver. It is stored in the gall bladder and released into the small intestine.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-05"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which reagent is used to test for starch, and what colour shows that starch is present?",
+     "options": [
+      "Iodine solution, turning blue-black",
+      "Benedict's solution, turning brick red",
+      "Biuret reagent, turning purple",
+      "Iodine solution, staying orange-brown"
+     ],
+     "answer": "A",
+     "explanation": "Iodine solution changes from orange-brown to blue-black when starch is present. Benedict's solution is used for sugars and Biuret reagent for proteins.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-06"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which plant tissue transports dissolved sugars around the plant?",
+     "options": [
+      "Xylem",
+      "Epidermis",
+      "Palisade mesophyll",
+      "Phloem"
+     ],
+     "answer": "D",
+     "explanation": "Phloem carries dissolved sugars from the leaves to the rest of the plant. This is called translocation. Xylem carries water and mineral ions up from the roots.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-07"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why do veins contain valves?",
+     "options": [
+      "To make the blood flow faster",
+      "To let oxygen diffuse out of the blood",
+      "To stop blood flowing backwards",
+      "To raise the blood pressure"
+     ],
+     "answer": "C",
+     "explanation": "Blood in veins is at low pressure, so valves are needed to keep it flowing towards the heart and stop it flowing backwards.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-08"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of these diseases is caused by a virus?",
+     "options": [
+      "Measles",
+      "Malaria",
+      "Gonorrhoea",
+      "Athlete's foot"
+     ],
+     "answer": "A",
+     "explanation": "Measles is caused by a virus and is spread by droplets from sneezes and coughs. Malaria is caused by a protist, gonorrhoea by a bacterium and athlete's foot by a fungus.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-09"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these is a non-specific defence of the human body against pathogens?",
+     "options": [
+      "Antibodies",
+      "The skin acting as a barrier",
+      "Vaccination",
+      "Antibiotics"
+     ],
+     "answer": "B",
+     "explanation": "Non-specific defences stop any pathogen getting in. They include the skin, hairs and mucus in the nose, and acid in the stomach. Antibodies are specific to one pathogen.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-10"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "In which part of a plant cell does photosynthesis take place?",
+     "options": [
+      "Nucleus",
+      "Mitochondria",
+      "Chloroplasts",
+      "Cell wall"
+     ],
+     "answer": "C",
+     "explanation": "Chloroplasts contain chlorophyll, which absorbs the light energy needed for photosynthesis.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-11"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which statement correctly compares aerobic and anaerobic respiration in human muscle?",
+     "options": [
+      "Only aerobic respiration produces lactic acid",
+      "Anaerobic respiration transfers more energy per glucose molecule",
+      "Aerobic respiration does not need oxygen",
+      "Only anaerobic respiration produces lactic acid"
+     ],
+     "answer": "D",
+     "explanation": "Anaerobic respiration in muscles produces lactic acid and transfers much less energy. Aerobic respiration needs oxygen and produces carbon dioxide and water.",
+     "section": "p1",
+     "id": "gcse-biology-mock-1-p1-12"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is homeostasis?",
+     "options": [
+      "The response of an organism to a stimulus",
+      "The production of hormones by glands",
+      "Keeping the body's internal conditions within set limits",
+      "The transport of substances in the blood"
+     ],
+     "answer": "C",
+     "explanation": "Homeostasis is the regulation of internal conditions, such as body temperature, blood glucose and water levels, to keep them at the best levels for cells and enzymes to work.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How are hormones carried around the body?",
+     "options": [
+      "In the blood plasma",
+      "Along neurones as electrical impulses",
+      "Through the digestive system",
+      "In the air in the lungs"
+     ],
+     "answer": "A",
+     "explanation": "Hormones are chemicals released by glands directly into the bloodstream. They travel in the blood plasma to their target organs, so their effects are slower than nerve impulses.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How does a contraceptive pill containing oestrogen and progesterone prevent pregnancy?",
+     "options": [
+      "It kills sperm",
+      "It forms a barrier at the cervix",
+      "It makes the lining of the uterus thicker",
+      "It stops FSH production, so no eggs mature"
+     ],
+     "answer": "D",
+     "explanation": "The hormones in the pill inhibit the production of FSH, so eggs do not mature and are not released. Spermicides kill sperm, and barrier methods stop sperm reaching the egg.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is a change in the environment that an organism can detect called?",
+     "options": [
+      "A response",
+      "A stimulus",
+      "An effector",
+      "A receptor"
+     ],
+     "answer": "B",
+     "explanation": "A stimulus is a change in the environment, such as light, sound or temperature. Receptors detect stimuli, and effectors bring about the response.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In the nervous system, what are effectors?",
+     "options": [
+      "Muscles or glands that bring about a response",
+      "Cells that detect stimuli",
+      "Neurones in the spinal cord",
+      "Chemicals that cross synapses"
+     ],
+     "answer": "A",
+     "explanation": "Effectors are muscles, which contract, and glands, which release hormones. They respond to impulses carried by motor neurones.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-05"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which molecule carries the genetic information in cells?",
+     "options": [
+      "Glucose",
+      "Starch",
+      "DNA",
+      "Protein"
+     ],
+     "answer": "C",
+     "explanation": "Genetic information is carried by DNA, which is found in chromosomes in the nucleus. DNA is a polymer made of two strands twisted into a double helix.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-06"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is a dominant allele?",
+     "options": [
+      "An allele that is only expressed when two copies are present",
+      "An allele that is expressed even if only one copy is present",
+      "An allele that is found only in males",
+      "An allele that always causes a disorder"
+     ],
+     "answer": "B",
+     "explanation": "A dominant allele shows its effect when just one copy is present. A recessive allele only shows its effect when two copies are present.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-07"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In a species, brown eyes (B) is dominant to blue eyes (b). Two heterozygous parents (Bb) have children. What is the expected ratio of brown-eyed to blue-eyed offspring?",
+     "options": [
+      "1 : 1",
+      "1 : 3",
+      "2 : 1",
+      "3 : 1"
+     ],
+     "answer": "D",
+     "explanation": "The possible offspring are BB, Bb, Bb and bb. Three of the four have at least one B allele and have brown eyes, and one is bb with blue eyes. The ratio is 3 : 1.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-08"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is a change in the DNA sequence of a gene called?",
+     "options": [
+      "Adaptation",
+      "Evolution",
+      "Mutation",
+      "Selection"
+     ],
+     "answer": "C",
+     "explanation": "A mutation is a change in DNA. Mutations happen all the time. Most have no effect, but occasionally one gives a new characteristic that helps an organism survive.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-09"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these could cause a species to become extinct?",
+     "options": [
+      "A new disease or predator",
+      "An increase in its food supply",
+      "Less competition for resources",
+      "A mild winter"
+     ],
+     "answer": "A",
+     "explanation": "Extinction can be caused by new diseases, new predators, new competitors, or changes to the environment that happen faster than the species can adapt.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-10"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What do the arrows in a food chain show?",
+     "options": [
+      "The direction the animals migrate",
+      "Which organism is the largest",
+      "Which organism lives the longest",
+      "The transfer of energy and biomass from one organism to the next"
+     ],
+     "answer": "D",
+     "explanation": "Each arrow points from the organism being eaten to the organism that eats it. It shows the direction in which biomass and energy are transferred.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-11"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these helps to maintain or increase biodiversity?",
+     "options": [
+      "Cutting down rainforests",
+      "Breeding programmes for endangered species",
+      "Draining peat bogs",
+      "Using more pesticides"
+     ],
+     "answer": "B",
+     "explanation": "Breeding programmes protect endangered species. Other helpful measures include protecting habitats, replanting hedgerows and reducing deforestation. The other choices all reduce biodiversity.",
+     "section": "p2",
+     "id": "gcse-biology-mock-1-p2-12"
+    }
+   ]
+  }
+ }
+}

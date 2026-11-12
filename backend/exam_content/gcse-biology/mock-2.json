@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-biology",
+ "slug": "mock-2",
+ "title": "GCSE Biology Practice Paper 2",
+ "kind": "mock",
+ "summary": "Higher · grades 4 to 9 · 24 questions · 36 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why are root hair cells well adapted to absorb water from the soil?",
+     "options": [
+      "They have a large surface area",
+      "They contain many chloroplasts",
+      "They have a thick cell wall",
+      "They have no vacuole"
+     ],
+     "answer": "A",
+     "explanation": "The long, thin extension of a root hair cell gives a large surface area for water to move in by osmosis and for mineral ions to be absorbed by active transport. They are underground, so they have no chloroplasts.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A cell is $25\\ \\mu\\text{m}$ long. A photograph shows it magnified 400 times. How long is the cell in the photograph?",
+     "options": [
+      "0.0625 mm",
+      "1 mm",
+      "10 mm",
+      "100 mm"
+     ],
+     "answer": "C",
+     "explanation": "Image size $=$ real size $\\times$ magnification $= 25 \\times 400 = 10\\,000\\ \\mu\\text{m}$. There are $1000\\ \\mu\\text{m}$ in 1 mm, so the image is 10 mm long.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A cylinder of potato is placed in a concentrated sugar solution. After an hour its mass has decreased. Why?",
+     "options": [
+      "Sugar moved into the potato by diffusion",
+      "Water moved out of the potato cells by osmosis",
+      "Water moved into the potato cells by active transport",
+      "The potato cells used the sugar in respiration"
+     ],
+     "answer": "B",
+     "explanation": "The solution outside is more concentrated than the cell contents, so water moves out of the cells by osmosis, through the partially permeable membranes. The loss of water reduces the mass.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which statement about mitosis is correct?",
+     "options": [
+      "It produces four genetically different cells",
+      "It halves the number of chromosomes",
+      "It only happens in the reproductive organs",
+      "It produces two genetically identical cells"
+     ],
+     "answer": "D",
+     "explanation": "Mitosis produces two cells that are genetically identical to each other and to the parent cell, with the same number of chromosomes. Meiosis produces four different cells with half the number.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In the lock and key model, why does each enzyme catalyse only one reaction?",
+     "options": [
+      "Enzymes are used up in the reaction",
+      "Enzymes only work at exactly 37 °C",
+      "Only a substrate with a complementary shape fits the active site",
+      "Each enzyme is made of a single amino acid"
+     ],
+     "answer": "C",
+     "explanation": "The active site has a specific shape. Only a substrate whose shape is complementary to it can fit and react, so each enzyme is specific to one reaction. Enzymes are not used up.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-05"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Where in the human body is amylase produced?",
+     "options": [
+      "The salivary glands and the pancreas",
+      "The liver and the gall bladder",
+      "The stomach only",
+      "The large intestine"
+     ],
+     "answer": "A",
+     "explanation": "Amylase, which digests starch into sugars, is made in the salivary glands, the pancreas and the small intestine. The stomach produces protease.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-06"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which feature of the alveoli in the lungs increases the rate of gas exchange?",
+     "options": [
+      "Thick walls",
+      "Walls only one cell thick, giving a short diffusion distance",
+      "A poor blood supply",
+      "A small surface area"
+     ],
+     "answer": "B",
+     "explanation": "Alveoli have very thin walls, a huge surface area and a rich supply of capillaries. These features give a short diffusion path and a steep concentration gradient, so oxygen and carbon dioxide diffuse quickly.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-07"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which blood vessels have walls only one cell thick?",
+     "options": [
+      "Arteries",
+      "Veins",
+      "The aorta",
+      "Capillaries"
+     ],
+     "answer": "D",
+     "explanation": "Capillaries have walls one cell thick, so substances such as oxygen and glucose can diffuse quickly between the blood and the body's cells.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-08"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Monoclonal antibodies are made from a single clone of cells. Why can they be used to target one specific type of cell, such as a cancer cell?",
+     "options": [
+      "They bind only to one specific antigen",
+      "They kill every type of bacteria",
+      "They are a type of antibiotic",
+      "They can enter the nucleus of any cell"
+     ],
+     "answer": "A",
+     "explanation": "Monoclonal antibodies are identical and all bind to the same specific antigen. If that antigen is found on a cancer cell, the antibodies can carry a drug or a marker straight to those cells.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-09"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the purpose of giving some patients a placebo in a drug trial?",
+     "options": [
+      "To make the patients feel better",
+      "To cure the disease faster",
+      "To check whether the drug is toxic",
+      "To act as a control, so the drug's effect can be compared"
+     ],
+     "answer": "D",
+     "explanation": "A placebo looks like the drug but contains no active ingredient. Comparing patients on the drug with those on the placebo shows whether the drug itself has an effect.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-10"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why does the rate of photosynthesis fall when the temperature becomes very high, such as 50 °C?",
+     "options": [
+      "The carbon dioxide runs out",
+      "The light intensity falls",
+      "The enzymes that control photosynthesis are denatured",
+      "The chlorophyll dissolves"
+     ],
+     "answer": "C",
+     "explanation": "Photosynthesis is controlled by enzymes. Above their optimum temperature the active sites change shape and the enzymes are denatured, so the rate falls quickly.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-11"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which is the balanced symbol equation for aerobic respiration?",
+     "options": [
+      "$\\text{C}_6\\text{H}_{12}\\text{O}_6 \\rightarrow 2\\text{C}_2\\text{H}_5\\text{OH} + 2\\text{CO}_2$",
+      "$\\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 \\rightarrow 6\\text{CO}_2 + 6\\text{H}_2\\text{O}$",
+      "$6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\rightarrow \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2$",
+      "$\\text{C}_6\\text{H}_{12}\\text{O}_6 + \\text{O}_2 \\rightarrow \\text{CO}_2 + \\text{H}_2\\text{O}$"
+     ],
+     "answer": "B",
+     "explanation": "Glucose reacts with six molecules of oxygen to give six of carbon dioxide and six of water. The first equation is fermentation, the third is photosynthesis, and the last is not balanced.",
+     "section": "p1",
+     "id": "gcse-biology-mock-2-p1-12"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A plant shoot grows towards light coming from one side. What causes this?",
+     "options": [
+      "Auxin collects on the lit side, so cells there grow faster",
+      "Gibberellin is destroyed by the light",
+      "Cells on the lit side photosynthesise more",
+      "Auxin collects on the shaded side, so cells there elongate more"
+     ],
+     "answer": "D",
+     "explanation": "Light causes auxin to move to the shaded side of the shoot. Auxin makes shoot cells elongate, so the shaded side grows more and the shoot bends towards the light. This is positive phototropism.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "When the blood is too concentrated, the pituitary gland releases more ADH. What does ADH do?",
+     "options": [
+      "It makes the kidneys reabsorb less water",
+      "It makes the kidney tubules more permeable, so more water is reabsorbed into the blood",
+      "It makes the bladder release more urine",
+      "It removes glucose from the blood"
+     ],
+     "answer": "B",
+     "explanation": "ADH increases the permeability of the kidney tubules, so more water returns to the blood. A smaller volume of more concentrated urine is produced. This is controlled by negative feedback.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which hormone, released by the thyroid gland, controls the basal metabolic rate?",
+     "options": [
+      "Thyroxine",
+      "Adrenaline",
+      "Insulin",
+      "Testosterone"
+     ],
+     "answer": "A",
+     "explanation": "Thyroxine from the thyroid gland stimulates the basal metabolic rate and is important for growth and development. Its level is controlled by negative feedback.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How is a signal passed across a synapse from one neurone to the next?",
+     "options": [
+      "The electrical impulse jumps across the gap",
+      "The two neurones touch",
+      "A chemical diffuses across the gap and binds to receptors on the next neurone",
+      "A hormone carries the signal in the blood"
+     ],
+     "answer": "C",
+     "explanation": "When an impulse reaches the end of a neurone, a chemical is released. It diffuses across the gap and binds to receptor molecules on the next neurone, starting a new electrical impulse.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What happens in the eye when it focuses on a near object?",
+     "options": [
+      "The ciliary muscles relax and the lens becomes thinner",
+      "The iris closes completely",
+      "The retina moves towards the lens",
+      "The ciliary muscles contract, the suspensory ligaments loosen and the lens becomes fatter"
+     ],
+     "answer": "D",
+     "explanation": "For a near object, the ciliary muscles contract and the suspensory ligaments loosen, so the lens becomes thicker and refracts light more strongly. For a distant object the opposite happens.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-05"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A woman who carries a recessive allele for a disorder (Hh) has a child with a man who is homozygous dominant (HH). What is the probability that the child will have the disorder?",
+     "options": [
+      "0%",
+      "25%",
+      "50%",
+      "100%"
+     ],
+     "answer": "A",
+     "explanation": "The father can only pass on H, so every child has at least one dominant allele (HH or Hh). The disorder needs two recessive alleles, so the probability is 0%. Half the children are expected to be carriers.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-06"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "One cell divides by meiosis. How many cells are produced, and are they genetically identical?",
+     "options": [
+      "Two cells, genetically identical",
+      "Two cells, genetically different",
+      "Four cells, all genetically different",
+      "Four cells, all genetically identical"
+     ],
+     "answer": "C",
+     "explanation": "In meiosis the chromosomes are copied and the cell divides twice, giving four gametes. Each has a single set of chromosomes, and they are all genetically different.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-07"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "When have two populations of one species become two separate species?",
+     "options": [
+      "When they look different from each other",
+      "When they can no longer interbreed to produce fertile offspring",
+      "When they live in different countries",
+      "When one population becomes much larger"
+     ],
+     "answer": "B",
+     "explanation": "A species is a group of organisms that can interbreed to produce fertile offspring. When two isolated populations have changed so much that they cannot do this, new species have formed.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-08"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which is a benefit of some genetically modified (GM) crops?",
+     "options": [
+      "They no longer need water to grow",
+      "They contain no DNA",
+      "They always taste sweeter",
+      "They can be made resistant to insect attack, increasing yields"
+     ],
+     "answer": "D",
+     "explanation": "Crops can be genetically modified to resist insect pests or herbicides, or to produce bigger fruit, giving higher yields. Some people are concerned about effects on wild plants and insects.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-09"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why is there less biomass at each trophic level of a food chain than at the level below?",
+     "options": [
+      "Animals at higher levels are always smaller",
+      "Biomass is lost in faeces and urine, and much glucose is used in respiration",
+      "The producers absorb all the light",
+      "Predators eat their food too quickly"
+     ],
+     "answer": "B",
+     "explanation": "Not all the biomass eaten is absorbed, some is egested as faeces and some is lost as urea in urine. Much of the glucose is respired to release energy for movement and keeping warm, so it is not built into new biomass.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-10"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which set of conditions gives the fastest rate of decay of garden waste in a compost heap?",
+     "options": [
+      "Warm, moist and with plenty of oxygen",
+      "Cold, dry and with no oxygen",
+      "Very hot, above 80 °C, and dry",
+      "Freezing and waterlogged"
+     ],
+     "answer": "A",
+     "explanation": "Decomposers work fastest when it is warm, moist and there is oxygen for aerobic respiration. Very high temperatures denature their enzymes, and cold or dry conditions slow them down.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-11"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which two gases are the main contributors to global warming caused by human activity?",
+     "options": [
+      "Oxygen and nitrogen",
+      "Argon and helium",
+      "Carbon dioxide and methane",
+      "Hydrogen and oxygen"
+     ],
+     "answer": "C",
+     "explanation": "Carbon dioxide, from burning fossil fuels and deforestation, and methane, from cattle and rice fields, are greenhouse gases. Rising levels are causing global warming.",
+     "section": "p2",
+     "id": "gcse-biology-mock-2-p2-12"
+    }
+   ]
+  }
+ }
+}

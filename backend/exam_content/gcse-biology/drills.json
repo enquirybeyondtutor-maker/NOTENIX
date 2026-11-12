@@ -1,0 +1,1137 @@
+{
+ "exam": "gcse-biology",
+ "slug": "drills",
+ "title": "GCSE Biology skill drills",
+ "kind": "drills",
+ "stages": [],
+ "modules": {
+  "cell-structure-and-transport": {
+   "title": "Cell structure and transport",
+   "domain": "Cells and organisation",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Animal, plant and bacterial cells, microscopy and magnification, diffusion, osmosis and active transport.",
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which part of a cell contains the genetic material and controls the cell's activities?",
+     "options": [
+      "Cell membrane",
+      "Nucleus",
+      "Cytoplasm",
+      "Cell wall"
+     ],
+     "answer": "B",
+     "explanation": "The nucleus contains the chromosomes, which carry the genetic material. It controls what the cell does. The cell membrane controls what enters and leaves the cell.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-structure-and-transport-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Bacterial cells are prokaryotic. Which statement about them is correct?",
+     "options": [
+      "They contain mitochondria",
+      "They are larger than most animal cells",
+      "Their DNA is not enclosed in a nucleus",
+      "Their cell wall is made of cellulose"
+     ],
+     "answer": "C",
+     "explanation": "In prokaryotic cells the genetic material is a single loop of DNA in the cytoplasm, often with small rings called plasmids. They have no nucleus or mitochondria, are much smaller than animal cells, and their cell wall is not made of cellulose.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-structure-and-transport-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Root hair cells take in mineral ions from the soil, where the ions are less concentrated than inside the cell. Which process is this?",
+     "options": [
+      "Active transport",
+      "Diffusion",
+      "Osmosis",
+      "Transpiration"
+     ],
+     "answer": "A",
+     "explanation": "Moving substances from a more dilute solution to a more concentrated one is against the concentration gradient. This needs energy from respiration and is called active transport.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-structure-and-transport-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A cell is 0.02 mm long. In a drawing of the cell it is 4 mm long. What is the magnification of the drawing?",
+     "options": [
+      "$\\times 0.005$",
+      "$\\times 20$",
+      "$\\times 80$",
+      "$\\times 200$"
+     ],
+     "answer": "D",
+     "explanation": "Magnification $= \\dfrac{\\text{size of image}}{\\text{size of real object}} = \\dfrac{4}{0.02} = 200$. Both lengths must be in the same unit before dividing.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-structure-and-transport-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A cube of side 1 cm has a surface area of $6\\ \\text{cm}^2$ and a volume of $1\\ \\text{cm}^3$. A cube of side 2 cm has a surface area of $24\\ \\text{cm}^2$ and a volume of $8\\ \\text{cm}^3$. Which statement is correct?",
+     "options": [
+      "The larger cube has the larger surface area to volume ratio",
+      "The smaller cube's surface area to volume ratio is twice that of the larger cube",
+      "Both cubes have the same surface area to volume ratio",
+      "The smaller cube's surface area to volume ratio is half that of the larger cube"
+     ],
+     "answer": "B",
+     "explanation": "The smaller cube's ratio is 6 : 1 and the larger cube's is 24 : 8, which is 3 : 1. So the smaller cube's ratio is twice as large. This is why small organisms can rely on diffusion across their surface, while large ones need exchange surfaces and transport systems.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-structure-and-transport-05"
+    }
+   ]
+  },
+  "cell-division": {
+   "title": "Cell division",
+   "domain": "Cells and organisation",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Chromosomes, the cell cycle and mitosis, stem cells, meristems and bacterial growth.",
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What name is given to undifferentiated cells that can develop into many different types of cell?",
+     "options": [
+      "Stem cells",
+      "Gametes",
+      "Red blood cells",
+      "Guard cells"
+     ],
+     "answer": "A",
+     "explanation": "Stem cells are undifferentiated. They can divide and then differentiate into specialised cells. They are found in embryos, in adult bone marrow and in plant meristems.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-division-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Before a cell divides by mitosis, what happens to its DNA?",
+     "options": [
+      "It is broken down",
+      "It is halved",
+      "It is replicated, so there are two copies of each chromosome",
+      "It leaves the nucleus"
+     ],
+     "answer": "C",
+     "explanation": "During the cell cycle the cell grows, makes more organelles and replicates its DNA. Each chromosome is copied so that each new cell receives a full set.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-division-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Where are meristem cells found in a plant?",
+     "options": [
+      "In the xylem vessels",
+      "At the tips of the roots and shoots",
+      "In the guard cells",
+      "In the waxy cuticle"
+     ],
+     "answer": "B",
+     "explanation": "Meristem tissue at the tips of roots and shoots contains stem cells. These can differentiate into any type of plant cell throughout the plant's life.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-division-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Mitosis is NOT used for which of these?",
+     "options": [
+      "Growth of an organism",
+      "Repairing damaged tissue",
+      "Asexual reproduction",
+      "Producing sperm and egg cells"
+     ],
+     "answer": "D",
+     "explanation": "Mitosis makes genetically identical cells for growth, repair and asexual reproduction. Gametes such as sperm and egg cells are made by meiosis, which halves the number of chromosomes.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-division-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A bacterium divides once every 20 minutes. Starting with a single bacterium, how many bacteria will there be after 2 hours, if none die?",
+     "options": [
+      "6",
+      "12",
+      "64",
+      "32"
+     ],
+     "answer": "C",
+     "explanation": "2 hours is 120 minutes, which is $120 \\div 20 = 6$ divisions. The number doubles each time, so there are $2^6 = 64$ bacteria.",
+     "section": "drill",
+     "id": "gcse-biology-drill-cell-division-05"
+    }
+   ]
+  },
+  "organisation-and-digestion": {
+   "title": "Organisation and digestion",
+   "domain": "Cells and organisation",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Levels of organisation, the digestive system, enzymes, food tests and plant tissues.",
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which list shows the levels of organisation from smallest to largest?",
+     "options": [
+      "Tissue, cell, organ, organ system",
+      "Cell, organ, tissue, organ system",
+      "Cell, tissue, organ, organ system",
+      "Organ system, organ, tissue, cell"
+     ],
+     "answer": "C",
+     "explanation": "Similar cells form a tissue, several tissues form an organ, and organs working together form an organ system.",
+     "section": "drill",
+     "id": "gcse-biology-drill-organisation-and-digestion-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which reagent is used to test a food for protein?",
+     "options": [
+      "Iodine solution",
+      "Benedict's solution",
+      "Ethanol",
+      "Biuret reagent"
+     ],
+     "answer": "D",
+     "explanation": "Biuret reagent turns from blue to purple (lilac) if protein is present. Iodine tests for starch, Benedict's for sugars, and ethanol for lipids.",
+     "section": "drill",
+     "id": "gcse-biology-drill-organisation-and-digestion-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does bile do in digestion?",
+     "options": [
+      "It digests proteins into amino acids",
+      "It neutralises stomach acid and emulsifies fats",
+      "It absorbs water from food",
+      "It breaks down starch into sugars"
+     ],
+     "answer": "B",
+     "explanation": "Bile is made in the liver and stored in the gall bladder. It is alkaline, so it neutralises stomach acid, and it emulsifies fats into small droplets, giving lipase a larger surface area to work on.",
+     "section": "drill",
+     "id": "gcse-biology-drill-organisation-and-digestion-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why does an enzyme stop working at a high temperature?",
+     "options": [
+      "The shape of its active site changes, so the substrate no longer fits",
+      "It runs out of energy",
+      "It is killed by the heat",
+      "It turns into the substrate"
+     ],
+     "answer": "A",
+     "explanation": "High temperatures break bonds that hold the enzyme in shape. The active site changes shape and the substrate no longer fits, so the enzyme is denatured. Enzymes are proteins, not living things, so they are not killed.",
+     "section": "drill",
+     "id": "gcse-biology-drill-organisation-and-digestion-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which change in conditions would increase the rate of transpiration from a plant?",
+     "options": [
+      "A lower temperature",
+      "Higher humidity",
+      "More air movement",
+      "Lower light intensity"
+     ],
+     "answer": "C",
+     "explanation": "Moving air carries water vapour away from the leaf, keeping a steep concentration gradient, so water evaporates and diffuses out faster. Lower temperature, higher humidity and dimmer light all reduce the rate.",
+     "section": "drill",
+     "id": "gcse-biology-drill-organisation-and-digestion-05"
+    }
+   ]
+  },
+  "heart-blood-and-circulation": {
+   "title": "Heart, blood and circulation",
+   "domain": "Cells and organisation",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The heart, blood vessels, components of blood and coronary heart disease.",
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which component of the blood carries oxygen?",
+     "options": [
+      "Plasma",
+      "Platelets",
+      "White blood cells",
+      "Red blood cells"
+     ],
+     "answer": "D",
+     "explanation": "Red blood cells contain haemoglobin, which binds to oxygen. They have no nucleus and a biconcave shape, giving more room and a larger surface area for oxygen.",
+     "section": "drill",
+     "id": "gcse-biology-drill-heart-blood-and-circulation-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why do arteries have thick, muscular and elastic walls?",
+     "options": [
+      "To withstand blood at high pressure",
+      "To let substances diffuse through them",
+      "Because they contain valves",
+      "Because they carry blood back to the heart"
+     ],
+     "answer": "A",
+     "explanation": "Arteries carry blood away from the heart at high pressure. Thick muscle and elastic fibres let them withstand and smooth out this pressure. Veins carry blood back to the heart and have valves.",
+     "section": "drill",
+     "id": "gcse-biology-drill-heart-blood-and-circulation-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which chamber of the heart pumps blood out to the rest of the body?",
+     "options": [
+      "Right atrium",
+      "Left ventricle",
+      "Right ventricle",
+      "Left atrium"
+     ],
+     "answer": "B",
+     "explanation": "The left ventricle pumps oxygenated blood into the aorta and around the body. It has the thickest wall because it must pump blood the furthest. The right ventricle pumps blood to the lungs.",
+     "section": "drill",
+     "id": "gcse-biology-drill-heart-blood-and-circulation-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why is the human circulatory system described as a double circulatory system?",
+     "options": [
+      "There are two hearts",
+      "Blood flows in both directions in each vessel",
+      "Blood passes through the heart twice for each complete circuit of the body",
+      "Each organ has two arteries"
+     ],
+     "answer": "C",
+     "explanation": "One circuit takes blood from the heart to the lungs and back, and the other takes it from the heart to the rest of the body and back. So blood passes through the heart twice in each full circuit.",
+     "section": "drill",
+     "id": "gcse-biology-drill-heart-blood-and-circulation-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In coronary heart disease, layers of fatty material build up inside the coronary arteries. Why is this harmful?",
+     "options": [
+      "It makes the heart beat faster",
+      "It makes the heart wall thicker",
+      "It stops the heart valves from closing",
+      "It reduces blood flow to the heart muscle, so the muscle gets less oxygen"
+     ],
+     "answer": "D",
+     "explanation": "The coronary arteries supply the heart muscle itself with oxygenated blood. If they narrow, less oxygen reaches the muscle, which can cause chest pain or a heart attack. Stents or statins can be used to treat it.",
+     "section": "drill",
+     "id": "gcse-biology-drill-heart-blood-and-circulation-05"
+    }
+   ]
+  },
+  "infection-and-response": {
+   "title": "Infection and response",
+   "domain": "Infection and bioenergetics",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Pathogens and the diseases they cause, the body's defences, vaccination, antibiotics and drug trials.",
+   "questions": [
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What type of pathogen causes malaria?",
+     "options": [
+      "Virus",
+      "Bacterium",
+      "Protist",
+      "Fungus"
+     ],
+     "answer": "C",
+     "explanation": "Malaria is caused by a protist. It is spread by mosquitoes, which act as vectors. Preventing mosquito bites, for example with nets, reduces the spread.",
+     "section": "drill",
+     "id": "gcse-biology-drill-infection-and-response-01"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How do some white blood cells help to defend the body against pathogens?",
+     "options": [
+      "They produce antibodies",
+      "They carry oxygen to the pathogens",
+      "They form a clot over the pathogen",
+      "They release hormones that kill viruses"
+     ],
+     "answer": "A",
+     "explanation": "White blood cells defend the body by engulfing pathogens (phagocytosis), producing antibodies, and producing antitoxins. Clotting is the job of platelets.",
+     "section": "drill",
+     "id": "gcse-biology-drill-infection-and-response-02"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How does a vaccine protect a person from a disease?",
+     "options": [
+      "It contains antibiotics that kill the pathogen",
+      "It contains a dead or inactive form of the pathogen, so white blood cells make antibodies and memory cells",
+      "It contains antibodies taken from another person",
+      "It destroys viruses inside the body's cells"
+     ],
+     "answer": "B",
+     "explanation": "The vaccine stimulates white blood cells to produce antibodies. Memory cells remain, so if the real pathogen enters later, antibodies are made quickly and the person does not become ill.",
+     "section": "drill",
+     "id": "gcse-biology-drill-infection-and-response-03"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these diseases is caused by a bacterium?",
+     "options": [
+      "Measles",
+      "Salmonella food poisoning",
+      "Rose black spot",
+      "HIV"
+     ],
+     "answer": "B",
+     "explanation": "Salmonella food poisoning is caused by bacteria. Measles and HIV are caused by viruses, and rose black spot is caused by a fungus.",
+     "section": "drill",
+     "id": "gcse-biology-drill-infection-and-response-04"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In a double-blind trial of a new drug, who knows which patients are receiving the drug and which are receiving a placebo?",
+     "options": [
+      "Only the doctors",
+      "Only the patients",
+      "Both the doctors and the patients",
+      "Neither the doctors nor the patients"
+     ],
+     "answer": "D",
+     "explanation": "In a double-blind trial neither the doctors nor the patients know who has the drug and who has the placebo until the end. This stops expectations from affecting the results.",
+     "section": "drill",
+     "id": "gcse-biology-drill-infection-and-response-05"
+    }
+   ]
+  },
+  "photosynthesis": {
+   "title": "Photosynthesis",
+   "domain": "Infection and bioenergetics",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The photosynthesis reaction, limiting factors, the inverse square law and how plants use glucose.",
+   "questions": [
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which gas do plants take in from the air for photosynthesis?",
+     "options": [
+      "Oxygen",
+      "Carbon dioxide",
+      "Nitrogen",
+      "Hydrogen"
+     ],
+     "answer": "B",
+     "explanation": "Photosynthesis uses carbon dioxide and water to make glucose and oxygen. Carbon dioxide enters the leaf through the stomata.",
+     "section": "drill",
+     "id": "gcse-biology-drill-photosynthesis-01"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why is photosynthesis described as an endothermic reaction?",
+     "options": [
+      "Energy is transferred from the environment to the chloroplasts by light",
+      "It gives out heat",
+      "It only happens at night",
+      "It uses up oxygen"
+     ],
+     "answer": "A",
+     "explanation": "An endothermic reaction takes in energy from the surroundings. In photosynthesis the energy is transferred by light and absorbed by chlorophyll in the chloroplasts.",
+     "section": "drill",
+     "id": "gcse-biology-drill-photosynthesis-02"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "On a warm, bright day the rate of photosynthesis of a plant stops increasing, even when the light gets brighter. Which factor is most likely to be limiting the rate?",
+     "options": [
+      "Light intensity",
+      "Oxygen concentration",
+      "Carbon dioxide concentration",
+      "The length of the day"
+     ],
+     "answer": "C",
+     "explanation": "Light cannot be limiting, because making it brighter has no effect, and the day is already warm. Carbon dioxide concentration is the most likely limiting factor. Oxygen is a product, not a reactant.",
+     "section": "drill",
+     "id": "gcse-biology-drill-photosynthesis-03"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Plants turn some of the glucose they make into starch for storage. Why is starch useful for storage?",
+     "options": [
+      "It dissolves easily in water",
+      "It is used directly to make proteins",
+      "It releases oxygen while it is stored",
+      "It is insoluble, so it does not draw water into cells by osmosis"
+     ],
+     "answer": "D",
+     "explanation": "Starch is insoluble. Storing lots of soluble glucose would make cells draw in water by osmosis. Plants also use glucose for respiration, cellulose for cell walls, and with nitrate ions to make proteins.",
+     "section": "drill",
+     "id": "gcse-biology-drill-photosynthesis-04"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A lamp is moved from 10 cm to 20 cm away from a plant. According to the inverse square law, what happens to the light intensity at the plant?",
+     "options": [
+      "It halves",
+      "It doubles",
+      "It falls to a quarter",
+      "It stays the same"
+     ],
+     "answer": "C",
+     "explanation": "Light intensity is proportional to $\\dfrac{1}{d^2}$. Doubling the distance gives $\\left(\\dfrac{1}{2}\\right)^2 = \\dfrac{1}{4}$ of the intensity.",
+     "section": "drill",
+     "id": "gcse-biology-drill-photosynthesis-05"
+    }
+   ]
+  },
+  "respiration": {
+   "title": "Respiration",
+   "domain": "Infection and bioenergetics",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Aerobic and anaerobic respiration, fermentation, exercise, oxygen debt and metabolism.",
+   "questions": [
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Where in a cell does most aerobic respiration take place?",
+     "options": [
+      "Nucleus",
+      "Ribosomes",
+      "Mitochondria",
+      "Cell membrane"
+     ],
+     "answer": "C",
+     "explanation": "Aerobic respiration takes place mainly in the mitochondria. Cells that need a lot of energy, such as muscle and sperm cells, have many mitochondria.",
+     "section": "drill",
+     "id": "gcse-biology-drill-respiration-01"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which word equation shows aerobic respiration?",
+     "options": [
+      "glucose + oxygen → carbon dioxide + water",
+      "glucose → lactic acid",
+      "glucose → ethanol + carbon dioxide",
+      "carbon dioxide + water → glucose + oxygen"
+     ],
+     "answer": "A",
+     "explanation": "Aerobic respiration uses oxygen to break down glucose completely, producing carbon dioxide and water and transferring energy. The last equation is photosynthesis.",
+     "section": "drill",
+     "id": "gcse-biology-drill-respiration-02"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What are the products of anaerobic respiration in yeast cells?",
+     "options": [
+      "Lactic acid",
+      "Ethanol and carbon dioxide",
+      "Oxygen and water",
+      "Carbon dioxide and water only"
+     ],
+     "answer": "B",
+     "explanation": "Anaerobic respiration in yeast is called fermentation. It produces ethanol and carbon dioxide, which is why yeast is used in brewing and bread-making. Muscle cells make lactic acid instead.",
+     "section": "drill",
+     "id": "gcse-biology-drill-respiration-03"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why does anaerobic respiration transfer much less energy per molecule of glucose than aerobic respiration?",
+     "options": [
+      "It happens more slowly",
+      "The oxidation of glucose is incomplete",
+      "It uses more glucose",
+      "It happens outside cells"
+     ],
+     "answer": "B",
+     "explanation": "Without oxygen, glucose is only partly broken down, so much of its energy stays in the products such as lactic acid. Aerobic respiration oxidises glucose completely.",
+     "section": "drill",
+     "id": "gcse-biology-drill-respiration-04"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "After hard exercise, a person keeps breathing deeply and quickly for some time. Why?",
+     "options": [
+      "To cool the body down",
+      "To remove excess glucose from the blood",
+      "To make more lactic acid",
+      "To repay the oxygen debt, supplying oxygen to break down lactic acid"
+     ],
+     "answer": "D",
+     "explanation": "Lactic acid builds up during anaerobic respiration. The extra oxygen needed to deal with it is the oxygen debt. Blood carries the lactic acid to the liver, where it is converted back into glucose.",
+     "section": "drill",
+     "id": "gcse-biology-drill-respiration-05"
+    }
+   ]
+  },
+  "homeostasis-and-hormones": {
+   "title": "Homeostasis and hormones",
+   "domain": "Control and inheritance",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Homeostasis, the endocrine system, blood glucose and diabetes, reproductive hormones and plant hormones.",
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which gland is often called the 'master gland' because it releases hormones that control other glands?",
+     "options": [
+      "Pituitary gland",
+      "Adrenal gland",
+      "Pancreas",
+      "Thyroid gland"
+     ],
+     "answer": "A",
+     "explanation": "The pituitary gland in the brain releases several hormones, such as FSH, LH and TSH, that act on other glands and cause them to release their own hormones.",
+     "section": "drill",
+     "id": "gcse-biology-drill-homeostasis-and-hormones-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the cause of Type 1 diabetes?",
+     "options": [
+      "Body cells stop responding to insulin",
+      "The liver makes too much glucagon",
+      "The pancreas produces little or no insulin",
+      "Eating too much sugar"
+     ],
+     "answer": "C",
+     "explanation": "In Type 1 diabetes the pancreas produces too little insulin, so it is treated with insulin injections. In Type 2 diabetes the body's cells no longer respond properly to insulin.",
+     "section": "drill",
+     "id": "gcse-biology-drill-homeostasis-and-hormones-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these is an effect of the hormone adrenaline?",
+     "options": [
+      "It decreases heart rate",
+      "It lowers blood glucose concentration",
+      "It slows breathing",
+      "It increases heart rate"
+     ],
+     "answer": "D",
+     "explanation": "Adrenaline is released by the adrenal glands in times of fear or stress. It increases heart rate, boosting the delivery of oxygen and glucose to the brain and muscles and preparing the body for 'fight or flight'.",
+     "section": "drill",
+     "id": "gcse-biology-drill-homeostasis-and-hormones-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In the menstrual cycle, which hormone causes an egg to mature in the ovary?",
+     "options": [
+      "FSH",
+      "Oestrogen",
+      "LH",
+      "Progesterone"
+     ],
+     "answer": "A",
+     "explanation": "FSH (follicle stimulating hormone) from the pituitary gland causes an egg to mature. LH triggers ovulation, and oestrogen and progesterone build up and maintain the lining of the uterus.",
+     "section": "drill",
+     "id": "gcse-biology-drill-homeostasis-and-hormones-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A person's blood glucose concentration falls too low. How does the body respond?",
+     "options": [
+      "The pancreas releases insulin, so glucose moves into cells",
+      "The pancreas releases glucagon, so the liver converts glycogen into glucose",
+      "The liver stores more glycogen",
+      "The kidneys release glucose into the urine"
+     ],
+     "answer": "B",
+     "explanation": "When blood glucose is too low, the pancreas releases glucagon. This causes the liver to convert stored glycogen into glucose, which is released into the blood. This is an example of negative feedback.",
+     "section": "drill",
+     "id": "gcse-biology-drill-homeostasis-and-hormones-05"
+    }
+   ]
+  },
+  "nervous-system": {
+   "title": "Nervous system",
+   "domain": "Control and inheritance",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Neurones and reflex arcs, synapses, the brain and the eye.",
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What does a sensory neurone do?",
+     "options": [
+      "Carries impulses from the central nervous system to muscles",
+      "Connects neurones within the brain only",
+      "Carries impulses from receptors to the central nervous system",
+      "Produces hormones"
+     ],
+     "answer": "C",
+     "explanation": "Sensory neurones carry electrical impulses from receptors to the central nervous system. Motor neurones carry impulses from the central nervous system to effectors.",
+     "section": "drill",
+     "id": "gcse-biology-drill-nervous-system-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is a synapse?",
+     "options": [
+      "A type of receptor in the skin",
+      "The gap between two neurones, which is crossed by chemicals",
+      "The part of the brain that controls balance",
+      "A muscle that responds to impulses"
+     ],
+     "answer": "B",
+     "explanation": "A synapse is a junction between two neurones. The impulse cannot jump the gap, so a chemical is released that diffuses across and starts an impulse in the next neurone.",
+     "section": "drill",
+     "id": "gcse-biology-drill-nervous-system-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why are reflex actions important?",
+     "options": [
+      "They are slow and carefully thought about",
+      "They are controlled by hormones",
+      "They only happen during sleep",
+      "They are rapid and automatic, which helps to protect the body"
+     ],
+     "answer": "D",
+     "explanation": "Reflexes do not involve the conscious part of the brain, so they are very fast. Examples include pulling your hand away from something hot and the pupil narrowing in bright light.",
+     "section": "drill",
+     "id": "gcse-biology-drill-nervous-system-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which part of the eye controls how much light enters it?",
+     "options": [
+      "Iris",
+      "Retina",
+      "Lens",
+      "Cornea"
+     ],
+     "answer": "A",
+     "explanation": "The iris contains muscles that change the size of the pupil. In bright light the pupil becomes smaller, letting less light in. The retina contains the light receptors.",
+     "section": "drill",
+     "id": "gcse-biology-drill-nervous-system-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which part of the brain controls unconscious activities such as heart rate and breathing?",
+     "options": [
+      "Cerebral cortex",
+      "Cerebellum",
+      "Medulla",
+      "Pituitary gland"
+     ],
+     "answer": "C",
+     "explanation": "The medulla controls unconscious activities such as heartbeat and breathing. The cerebral cortex is involved in memory, language and consciousness, and the cerebellum coordinates muscle activity and balance.",
+     "section": "drill",
+     "id": "gcse-biology-drill-nervous-system-05"
+    }
+   ]
+  },
+  "inheritance-and-genetics": {
+   "title": "Inheritance and genetics",
+   "domain": "Control and inheritance",
+   "section": "drill",
+   "minutes": 0,
+   "about": "DNA and genes, meiosis, sexual and asexual reproduction, alleles and genetic crosses.",
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is a gene?",
+     "options": [
+      "A type of cell",
+      "A small section of DNA that codes for a particular protein",
+      "All of an organism's genetic material",
+      "A pair of chromosomes"
+     ],
+     "answer": "B",
+     "explanation": "A gene is a small section of DNA on a chromosome. It codes for a particular sequence of amino acids, which makes a specific protein. All of an organism's genetic material is its genome.",
+     "section": "drill",
+     "id": "gcse-biology-drill-inheritance-and-genetics-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does it mean if a person is homozygous for a gene?",
+     "options": [
+      "They have two different alleles of the gene",
+      "They have only one copy of each chromosome",
+      "They have a mutation in the gene",
+      "They have two identical alleles of the gene"
+     ],
+     "answer": "D",
+     "explanation": "Homozygous means having two copies of the same allele, for example BB or bb. Heterozygous means having two different alleles, such as Bb.",
+     "section": "drill",
+     "id": "gcse-biology-drill-inheritance-and-genetics-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A human body cell has 46 chromosomes. How many chromosomes does a human egg cell have?",
+     "options": [
+      "46",
+      "23",
+      "92",
+      "22"
+     ],
+     "answer": "B",
+     "explanation": "Gametes are made by meiosis, which halves the number of chromosomes. An egg cell has 23, so when it is fertilised by a sperm with 23, the embryo has the full 46.",
+     "section": "drill",
+     "id": "gcse-biology-drill-inheritance-and-genetics-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which statement about sexual reproduction is correct?",
+     "options": [
+      "It involves the fusion of male and female gametes, producing variation",
+      "It produces offspring that are clones of the parent",
+      "It needs only one parent",
+      "Its gametes are made by mitosis"
+     ],
+     "answer": "A",
+     "explanation": "Sexual reproduction joins genetic information from two parents when gametes fuse. The offspring are genetically different, which produces variation. Asexual reproduction needs one parent and produces clones.",
+     "section": "drill",
+     "id": "gcse-biology-drill-inheritance-and-genetics-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In pea plants, the allele for purple flowers (P) is dominant to the allele for white flowers (p). A plant with genotype Pp is crossed with a plant with genotype pp. What percentage of the offspring are expected to have white flowers?",
+     "options": [
+      "0%",
+      "25%",
+      "75%",
+      "50%"
+     ],
+     "answer": "D",
+     "explanation": "The Pp parent gives P or p, and the pp parent always gives p. The offspring are Pp and pp in equal numbers. Only pp plants are white, so 50% are expected to be white.",
+     "section": "drill",
+     "id": "gcse-biology-drill-inheritance-and-genetics-05"
+    }
+   ]
+  },
+  "variation-and-evolution": {
+   "title": "Variation and evolution",
+   "domain": "Control and inheritance",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Variation, mutation, natural selection, selective breeding, genetic engineering, fossils and classification.",
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Who proposed the theory of evolution by natural selection?",
+     "options": [
+      "Gregor Mendel",
+      "Charles Darwin",
+      "Louis Pasteur",
+      "Alexander Fleming"
+     ],
+     "answer": "B",
+     "explanation": "Charles Darwin published the theory of evolution by natural selection in 1859, based on his observations and experiments. Gregor Mendel carried out early work on inheritance using pea plants.",
+     "section": "drill",
+     "id": "gcse-biology-drill-variation-and-evolution-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these characteristics is caused only by the environment?",
+     "options": [
+      "Blood group",
+      "Eye colour",
+      "A scar from an injury",
+      "Natural hair colour"
+     ],
+     "answer": "C",
+     "explanation": "A scar results from something that happened to the person, so it is environmental. Blood group, eye colour and natural hair colour are inherited from the parents.",
+     "section": "drill",
+     "id": "gcse-biology-drill-variation-and-evolution-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is selective breeding?",
+     "options": [
+      "Animals choosing their own mates in the wild",
+      "Changing an organism's genes using enzymes",
+      "The survival of the best adapted organisms in nature",
+      "Humans choosing organisms with desired characteristics and breeding them together"
+     ],
+     "answer": "D",
+     "explanation": "In selective breeding humans choose parents with a useful characteristic, breed them, and repeat over many generations. Changing genes with enzymes is genetic engineering, and survival of the best adapted is natural selection.",
+     "section": "drill",
+     "id": "gcse-biology-drill-variation-and-evolution-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why is the fossil record incomplete?",
+     "options": [
+      "Many early organisms were soft-bodied and left few traces",
+      "Fossils have only formed in the last thousand years",
+      "Only animals with backbones lived in the past",
+      "Every fossil that formed has been found"
+     ],
+     "answer": "A",
+     "explanation": "Soft-bodied organisms rarely formed fossils, and many fossils have been destroyed by geological activity or have not yet been found. This is why scientists cannot be certain how life began.",
+     "section": "drill",
+     "id": "gcse-biology-drill-variation-and-evolution-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Bacteria can be genetically engineered to make human insulin. What is used as a vector to carry the human insulin gene into a bacterial cell?",
+     "options": [
+      "A ribosome",
+      "A red blood cell",
+      "A chloroplast",
+      "A plasmid"
+     ],
+     "answer": "D",
+     "explanation": "The gene is cut out using enzymes and inserted into a plasmid, a small ring of DNA. The plasmid carries the gene into the bacterium, which then makes insulin as it grows and divides.",
+     "section": "drill",
+     "id": "gcse-biology-drill-variation-and-evolution-05"
+    }
+   ]
+  },
+  "ecology": {
+   "title": "Ecology",
+   "domain": "Ecology",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Food chains, biotic and abiotic factors, cycles of materials, biomass transfer and biodiversity.",
+   "questions": [
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is a producer in a food chain?",
+     "options": [
+      "An animal that eats plants",
+      "An organism that makes its own food, usually by photosynthesis",
+      "An animal that eats other animals",
+      "An organism that breaks down dead material"
+     ],
+     "answer": "B",
+     "explanation": "Producers, such as green plants and algae, make glucose by photosynthesis. They are always at the start of a food chain.",
+     "section": "drill",
+     "id": "gcse-biology-drill-ecology-01"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these is an abiotic factor?",
+     "options": [
+      "Temperature",
+      "Predation",
+      "A new pathogen",
+      "Competition for food"
+     ],
+     "answer": "A",
+     "explanation": "Abiotic factors are non-living, such as temperature, light intensity, moisture, soil pH and wind. Predation, pathogens and competition are biotic, because they involve living things.",
+     "section": "drill",
+     "id": "gcse-biology-drill-ecology-02"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In the carbon cycle, how do decomposers return carbon to the atmosphere?",
+     "options": [
+      "By photosynthesis",
+      "By combustion",
+      "By respiring as they break down dead material, releasing carbon dioxide",
+      "By absorbing carbon dioxide"
+     ],
+     "answer": "C",
+     "explanation": "Decomposers such as bacteria and fungi feed on dead organisms and waste. As they respire, they release carbon dioxide into the air, and mineral ions are returned to the soil.",
+     "section": "drill",
+     "id": "gcse-biology-drill-ecology-03"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In a food chain, the producers have a biomass of 10 000 kg and the primary consumers have a biomass of 1000 kg. What is the efficiency of biomass transfer?",
+     "options": [
+      "1%",
+      "90%",
+      "0.1%",
+      "10%"
+     ],
+     "answer": "D",
+     "explanation": "Efficiency $= \\dfrac{\\text{biomass transferred to the next level}}{\\text{biomass available}} \\times 100 = \\dfrac{1000}{10\\,000} \\times 100 = 10\\%$.",
+     "section": "drill",
+     "id": "gcse-biology-drill-ecology-04"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a predator-prey relationship, what usually happens soon after the number of prey increases?",
+     "options": [
+      "The number of predators increases",
+      "The number of predators decreases",
+      "The prey stop reproducing",
+      "The predator population stays exactly the same"
+     ],
+     "answer": "A",
+     "explanation": "More prey means more food for the predators, so more of them survive and breed and their numbers rise. The predator peak comes a little after the prey peak.",
+     "section": "drill",
+     "id": "gcse-biology-drill-ecology-05"
+    }
+   ]
+  }
+ }
+}

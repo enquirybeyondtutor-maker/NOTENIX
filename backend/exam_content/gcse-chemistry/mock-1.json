@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-chemistry",
+ "slug": "mock-1",
+ "title": "GCSE Chemistry Practice Paper 1",
+ "kind": "mock",
+ "summary": "Foundation and crossover · grades 1 to 5 · 24 questions · 36 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which particle in an atom has no electrical charge?",
+     "options": [
+      "Proton",
+      "Neutron",
+      "Electron",
+      "Ion"
+     ],
+     "answer": "B",
+     "explanation": "Neutrons have no charge. Protons are positive and electrons are negative. Protons and neutrons are found in the nucleus.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-01"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "An atom of fluorine has a mass number of 19 and an atomic number of 9. How many neutrons does it have?",
+     "options": [
+      "9",
+      "19",
+      "28",
+      "10"
+     ],
+     "answer": "D",
+     "explanation": "Number of neutrons = mass number − atomic number = 19 − 9 = 10.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-02"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Where are the metals found in the periodic table?",
+     "options": [
+      "On the left and towards the bottom",
+      "On the far right only",
+      "Only in Group 0",
+      "Only along the top row"
+     ],
+     "answer": "A",
+     "explanation": "Metals are on the left and towards the bottom of the periodic table. Non-metals are on the right and towards the top.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-03"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What happens to the reactivity of the halogens going down Group 7?",
+     "options": [
+      "It increases",
+      "It stays the same",
+      "It decreases",
+      "It increases and then decreases"
+     ],
+     "answer": "C",
+     "explanation": "The halogens become less reactive going down the group. Fluorine is the most reactive halogen. This is the opposite of the trend in Group 1.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-04"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Ionic bonding happens between which types of element?",
+     "options": [
+      "Two non-metals",
+      "A metal and a non-metal",
+      "Two metals",
+      "Two noble gases"
+     ],
+     "answer": "B",
+     "explanation": "In ionic bonding, metal atoms lose electrons to form positive ions and non-metal atoms gain electrons to form negative ions. The oppositely charged ions attract strongly.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-05"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Magnesium forms $\\text{Mg}^{2+}$ ions and chlorine forms $\\text{Cl}^-$ ions. What is the formula of magnesium chloride?",
+     "options": [
+      "$\\text{MgCl}_2$",
+      "$\\text{MgCl}$",
+      "$\\text{Mg}_2\\text{Cl}$",
+      "$\\text{Mg}_2\\text{Cl}_3$"
+     ],
+     "answer": "A",
+     "explanation": "The charges must balance. One $\\text{Mg}^{2+}$ ion needs two $\\text{Cl}^-$ ions, so the formula is $\\text{MgCl}_2$.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-06"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the relative formula mass of magnesium hydroxide, $\\text{Mg(OH)}_2$? (Relative atomic masses: Mg = 24, O = 16, H = 1)",
+     "options": [
+      "41",
+      "42",
+      "57",
+      "58"
+     ],
+     "answer": "D",
+     "explanation": "The bracket means two OH groups. $M_r = 24 + 2 \\times (16 + 1) = 24 + 34 = 58$.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-07"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Magnesium ribbon is heated in a crucible with a lid lifted now and then. The mass of the solid increases. Why?",
+     "options": [
+      "Magnesium gets heavier when it is hot",
+      "Mass is created in the reaction",
+      "Oxygen atoms from the air join with the magnesium",
+      "Water evaporates from the crucible"
+     ],
+     "answer": "C",
+     "explanation": "Magnesium reacts with oxygen from the air to form magnesium oxide. The mass of the oxygen is added to the solid, so the mass goes up. Mass is still conserved overall.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-08"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is formed when an acid reacts with an alkali?",
+     "options": [
+      "A salt and water",
+      "A salt and hydrogen",
+      "Carbon dioxide and water",
+      "Only water"
+     ],
+     "answer": "A",
+     "explanation": "This is neutralisation: acid + alkali → salt + water. Hydrogen ions from the acid react with hydroxide ions from the alkali to make water.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-09"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How is iron extracted from iron oxide?",
+     "options": [
+      "By electrolysis of the oxide",
+      "By heating the oxide with carbon",
+      "By dissolving the oxide in water",
+      "By filtering the ore"
+     ],
+     "answer": "B",
+     "explanation": "Iron is less reactive than carbon, so carbon can remove the oxygen from iron oxide. The iron oxide is reduced and the carbon is oxidised.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-10"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "During electrolysis, to which electrode do positive ions move?",
+     "options": [
+      "The positive electrode (anode)",
+      "Both electrodes equally",
+      "The negative electrode (cathode)",
+      "Neither electrode"
+     ],
+     "answer": "C",
+     "explanation": "Opposite charges attract, so positive ions move to the negative electrode and negative ions move to the positive electrode.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-11"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "During a reaction the temperature of the surrounding solution falls. What type of reaction is this?",
+     "options": [
+      "Exothermic",
+      "Neutralisation",
+      "Combustion",
+      "Endothermic"
+     ],
+     "answer": "D",
+     "explanation": "An endothermic reaction takes in energy from its surroundings, so the temperature of the surroundings falls. Sports injury cold packs use endothermic reactions.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-1-p1-12"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which change would decrease the rate of a reaction?",
+     "options": [
+      "Adding a catalyst",
+      "Using a powder instead of lumps",
+      "Lowering the temperature",
+      "Increasing the concentration of a solution"
+     ],
+     "answer": "C",
+     "explanation": "At a lower temperature particles move more slowly, so they collide less often and with less energy. All the other changes increase the rate.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-01"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which symbol in an equation shows that a reaction is reversible?",
+     "options": [
+      "$\\rightleftharpoons$",
+      "$\\rightarrow$",
+      "$+$",
+      "$=$"
+     ],
+     "answer": "A",
+     "explanation": "The double half-arrow symbol $\\rightleftharpoons$ shows that the reaction can go both forwards and backwards.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-02"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Blue hydrated copper sulfate is heated and turns into white anhydrous copper sulfate. What happens when water is added to the white solid?",
+     "options": [
+      "Nothing happens",
+      "It turns black",
+      "It turns blue again and takes in energy",
+      "It turns blue again and gives out energy"
+     ],
+     "answer": "D",
+     "explanation": "The reaction is reversible. If one direction is endothermic, the reverse is exothermic by the same amount. Heating took energy in, so adding water turns it blue again and releases energy.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-03"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the formula of methane, the simplest alkane?",
+     "options": [
+      "$\\text{CH}_3$",
+      "$\\text{CH}_4$",
+      "$\\text{C}_2\\text{H}_6$",
+      "$\\text{CO}_2$"
+     ],
+     "answer": "B",
+     "explanation": "Methane has one carbon atom bonded to four hydrogen atoms: $\\text{CH}_4$. It is the main gas in natural gas.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-04"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What are the products of the complete combustion of a hydrocarbon?",
+     "options": [
+      "Carbon dioxide and water",
+      "Carbon monoxide and water",
+      "Carbon and hydrogen",
+      "Oxygen and water"
+     ],
+     "answer": "A",
+     "explanation": "When a hydrocarbon burns in plenty of oxygen, the carbon is oxidised to carbon dioxide and the hydrogen to water. Carbon monoxide and soot form when there is too little oxygen.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-05"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Alkenes are described as unsaturated. What does this mean?",
+     "options": [
+      "They contain only single bonds",
+      "They are dissolved in water",
+      "They contain a carbon-carbon double bond",
+      "They contain oxygen atoms"
+     ],
+     "answer": "C",
+     "explanation": "Alkenes contain a C=C double bond, so they have two fewer hydrogen atoms than the alkane with the same number of carbons. Alkanes are saturated.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-06"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the test for hydrogen gas?",
+     "options": [
+      "It relights a glowing splint",
+      "A lighted splint burns with a squeaky pop",
+      "It turns limewater milky",
+      "It bleaches damp litmus paper"
+     ],
+     "answer": "B",
+     "explanation": "A lighted splint held near hydrogen burns with a squeaky pop. A glowing splint relighting is the test for oxygen.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-07"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In paper chromatography, what does a pure substance produce?",
+     "options": [
+      "Several spots",
+      "No spots at all",
+      "A line across the whole paper",
+      "A single spot"
+     ],
+     "answer": "D",
+     "explanation": "A pure substance contains only one compound, so it gives one spot in every solvent. A mixture separates into two or more spots.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-08"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which human activity increases the amount of methane in the atmosphere?",
+     "options": [
+      "Planting trees",
+      "Using wind turbines",
+      "Raising cattle",
+      "Recycling glass"
+     ],
+     "answer": "C",
+     "explanation": "Cattle produce methane as they digest food. Rice paddy fields and rotting waste in landfill sites also release methane, a greenhouse gas.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-09"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these gases is NOT a greenhouse gas?",
+     "options": [
+      "Nitrogen",
+      "Carbon dioxide",
+      "Methane",
+      "Water vapour"
+     ],
+     "answer": "A",
+     "explanation": "Carbon dioxide, methane and water vapour all absorb infrared radiation, so they are greenhouse gases. Nitrogen does not, even though it makes up most of the air.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-10"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why is recycling aluminium cans better than extracting new aluminium from its ore?",
+     "options": [
+      "Recycled aluminium is a different element",
+      "It produces more waste",
+      "It needs more electricity",
+      "It uses much less energy and conserves the finite ore"
+     ],
+     "answer": "D",
+     "explanation": "Extracting aluminium by electrolysis uses a lot of electricity. Recycling uses a small fraction of that energy, reduces mining and waste, and saves the limited ore.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-11"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which three elements do NPK fertilisers provide?",
+     "options": [
+      "Nickel, phosphorus and krypton",
+      "Nitrogen, phosphorus and potassium",
+      "Neon, phosphorus and potassium",
+      "Nitrogen, platinum and potassium"
+     ],
+     "answer": "B",
+     "explanation": "N, P and K are the chemical symbols for nitrogen, phosphorus and potassium, the three elements plants need most for healthy growth.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-1-p2-12"
+    }
+   ]
+  }
+ }
+}

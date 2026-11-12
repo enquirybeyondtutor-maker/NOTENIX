@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-chemistry",
+ "slug": "mock-2",
+ "title": "GCSE Chemistry Practice Paper 2",
+ "kind": "mock",
+ "summary": "Higher · grades 4 to 9 · 24 questions · 36 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why do different isotopes of an element have the same chemical properties?",
+     "options": [
+      "They have the same number of electrons, arranged in the same way",
+      "They have the same number of neutrons",
+      "They have the same mass number",
+      "They have no electrons in their outer shell"
+     ],
+     "answer": "A",
+     "explanation": "Chemical reactions depend on electrons. Isotopes have the same number of protons and so the same number and arrangement of electrons. Only their masses differ.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-01"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A particle has 12 protons, 12 neutrons and 10 electrons. Which particle is it? (Magnesium has atomic number 12.)",
+     "options": [
+      "A neon atom",
+      "A $\\text{Na}^+$ ion",
+      "A $\\text{Mg}^{2+}$ ion",
+      "A $\\text{Mg}^{2-}$ ion"
+     ],
+     "answer": "C",
+     "explanation": "12 protons means it is magnesium. It has two more protons than electrons, so its charge is $2+$. It is a $\\text{Mg}^{2+}$ ion.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-02"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why does the reactivity of the halogens decrease going down Group 7?",
+     "options": [
+      "The atoms lose electrons more easily",
+      "The outer shell is further from the nucleus, so an electron is gained less easily",
+      "The atoms have more electrons in their outer shell",
+      "The molecules become lighter"
+     ],
+     "answer": "B",
+     "explanation": "Halogens react by gaining one electron. Further down the group there are more shells, so the outer shell is further from the nucleus and more shielded. The attraction for an extra electron is weaker.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-03"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which property is typical of transition metals but not of Group 1 metals?",
+     "options": [
+      "Low density",
+      "Low melting point",
+      "Vigorous reaction with cold water",
+      "Forming coloured compounds and acting as catalysts"
+     ],
+     "answer": "D",
+     "explanation": "Transition metals such as iron and copper are dense, have high melting points, form ions with different charges and coloured compounds, and are useful catalysts. Group 1 metals are soft, low-density and very reactive.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-04"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why does sodium chloride conduct electricity when molten but not when solid?",
+     "options": [
+      "Electrons are only free when it is molten",
+      "Sodium chloride molecules break apart when molten",
+      "When molten its ions are free to move and carry charge",
+      "Solid sodium chloride has no ions"
+     ],
+     "answer": "C",
+     "explanation": "In the solid the ions are held in fixed positions in the lattice. When it melts or dissolves, the ions can move and carry charge through the liquid.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-05"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why are nanoparticles often very effective catalysts?",
+     "options": [
+      "They have a very high surface area to volume ratio",
+      "They are heavier than normal particles",
+      "They contain no atoms",
+      "They react with everything"
+     ],
+     "answer": "A",
+     "explanation": "Nanoparticles are 1 to 100 nm across, so a large share of their atoms are at the surface. This very high surface area to volume ratio means smaller amounts are needed to catalyse a reaction.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-06"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "0.2 mol of sodium hydroxide is dissolved in water to make $250\\ \\text{cm}^3$ of solution. What is its concentration?",
+     "options": [
+      "$0.05\\ \\text{mol/dm}^3$",
+      "$0.8\\ \\text{mol/dm}^3$",
+      "$50\\ \\text{mol/dm}^3$",
+      "$1.25\\ \\text{mol/dm}^3$"
+     ],
+     "answer": "B",
+     "explanation": "Convert the volume: $250\\ \\text{cm}^3 = 0.25\\ \\text{dm}^3$. Concentration $= \\dfrac{0.2}{0.25} = 0.8\\ \\text{mol/dm}^3$.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-07"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "At room temperature and pressure, one mole of any gas occupies $24\\ \\text{dm}^3$. What volume does 0.5 mol of carbon dioxide occupy?",
+     "options": [
+      "$48\\ \\text{dm}^3$",
+      "$24.5\\ \\text{dm}^3$",
+      "$0.021\\ \\text{dm}^3$",
+      "$12\\ \\text{dm}^3$"
+     ],
+     "answer": "D",
+     "explanation": "Volume $=$ moles $\\times 24 = 0.5 \\times 24 = 12\\ \\text{dm}^3$.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-08"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why is ethanoic acid described as a weak acid?",
+     "options": [
+      "It only partially ionises in water",
+      "It has a low concentration",
+      "It does not contain hydrogen",
+      "It has a pH above 7"
+     ],
+     "answer": "A",
+     "explanation": "A weak acid only partly ionises into hydrogen ions in solution, while a strong acid such as hydrochloric acid ionises completely. 'Weak' is not the same as 'dilute', which describes a low concentration.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-09"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The pH of a solution decreases by 1. What happens to the concentration of $\\text{H}^+$ ions?",
+     "options": [
+      "It halves",
+      "It doubles",
+      "It decreases by a factor of 10",
+      "It increases by a factor of 10"
+     ],
+     "answer": "D",
+     "explanation": "Each decrease of one pH unit means the hydrogen ion concentration is 10 times greater. A fall of 2 units would mean $10 \\times 10 = 100$ times greater.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-10"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In the extraction of aluminium, the aluminium oxide is dissolved in molten cryolite. Why?",
+     "options": [
+      "Cryolite is a catalyst that speeds up the reaction",
+      "Cryolite removes oxygen from the cell",
+      "It lowers the operating temperature, saving energy and cost",
+      "It makes the aluminium more reactive"
+     ],
+     "answer": "C",
+     "explanation": "Aluminium oxide has a very high melting point. Dissolving it in molten cryolite means the cell can run at a much lower temperature, which saves energy. The carbon positive electrodes still need replacing because they react with oxygen.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-11"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In an exothermic reaction, how does the energy released when new bonds form compare with the energy needed to break the bonds in the reactants?",
+     "options": [
+      "It is less",
+      "It is greater",
+      "It is exactly the same",
+      "No energy is involved in making bonds"
+     ],
+     "answer": "B",
+     "explanation": "Breaking bonds takes in energy and making bonds releases energy. In an exothermic reaction more energy is released by making bonds than is taken in to break them, so there is an overall release of energy.",
+     "section": "p1",
+     "id": "gcse-chemistry-mock-2-p1-12"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A reversible reaction is at equilibrium in a closed system. More of one of the reactants is added. What happens?",
+     "options": [
+      "The position of equilibrium shifts to the left",
+      "The reaction stops",
+      "Nothing changes",
+      "The position of equilibrium shifts to the right, making more product"
+     ],
+     "answer": "D",
+     "explanation": "By Le Chatelier's principle, the system responds to oppose the change. Adding reactant shifts the equilibrium to the right, using up some of the added reactant and making more product.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-01"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How does a catalyst increase the rate of a reaction?",
+     "options": [
+      "It increases the temperature",
+      "It provides a different reaction pathway with a lower activation energy",
+      "It gives the particles more energy",
+      "It increases the concentration of the reactants"
+     ],
+     "answer": "B",
+     "explanation": "A catalyst provides an alternative pathway with a lower activation energy. More of the collisions have enough energy to react, so the rate increases.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-02"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A flask containing marble chips and acid loses 0.60 g of carbon dioxide in the first 2 minutes. What is the mean rate of reaction in g/s?",
+     "options": [
+      "0.005 g/s",
+      "0.3 g/s",
+      "0.05 g/s",
+      "200 g/s"
+     ],
+     "answer": "A",
+     "explanation": "Convert the time to seconds: 2 minutes = 120 s. Mean rate $= \\dfrac{0.60}{120} = 0.005$ g/s.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-03"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which statement describes the addition polymerisation of ethene?",
+     "options": [
+      "Ethene molecules join and water is given off",
+      "Ethene is broken into smaller molecules",
+      "Many ethene molecules join together as their double bonds open, forming a single product",
+      "Ethene reacts with oxygen to form a polymer"
+     ],
+     "answer": "C",
+     "explanation": "In addition polymerisation the C=C double bond in each monomer opens, and many monomers join into a long chain. Poly(ethene) is the only product. Polymers that give off water are condensation polymers.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-04"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Ethanol reacts with ethanoic acid, with an acid catalyst. What is formed?",
+     "options": [
+      "Ethene and water",
+      "Ethane and oxygen",
+      "Carbon dioxide and water",
+      "Ethyl ethanoate, an ester, and water"
+     ],
+     "answer": "D",
+     "explanation": "An alcohol and a carboxylic acid react to form an ester and water. Ethyl ethanoate is a sweet-smelling ester used in solvents and flavourings.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-05"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Compared with long-chain hydrocarbons, short-chain hydrocarbons are...",
+     "options": [
+      "more flammable, less viscous and have lower boiling points",
+      "less flammable, more viscous and have higher boiling points",
+      "more viscous and have higher boiling points",
+      "less flammable and have higher boiling points"
+     ],
+     "answer": "A",
+     "explanation": "Short molecules have weaker forces between them, so they boil at lower temperatures, flow more easily and catch fire more easily. This makes them more useful as fuels.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-06"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is one advantage of flame emission spectroscopy over a simple flame test?",
+     "options": [
+      "It can only identify one metal at a time",
+      "It does not need a sample",
+      "It can identify metal ions in a mixture and measure their concentration",
+      "It changes the colour of the flame"
+     ],
+     "answer": "C",
+     "explanation": "Instrumental methods such as flame emission spectroscopy are sensitive, accurate and fast. The spectrum can identify ions even in mixtures, and its intensity shows the concentration. Flame tests struggle with mixtures.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-07"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Dilute hydrochloric acid and barium chloride solution are added to a solution. A white precipitate forms. Which ion is present?",
+     "options": [
+      "Carbonate",
+      "Sulfate",
+      "Chloride",
+      "Nitrate"
+     ],
+     "answer": "B",
+     "explanation": "Sulfate ions form a white precipitate of barium sulfate with barium chloride. The acid is added first to remove carbonate ions, which would otherwise also give a precipitate.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-08"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How did the amount of carbon dioxide in the Earth's early atmosphere decrease?",
+     "options": [
+      "Volcanoes turned it into nitrogen",
+      "It escaped into space",
+      "Animals used it up by breathing",
+      "It dissolved in the oceans, became locked in rocks and fossil fuels, and was used in photosynthesis"
+     ],
+     "answer": "D",
+     "explanation": "Carbon dioxide dissolved in the oceans and formed carbonate precipitates and sedimentary rocks. Algae and plants took it in for photosynthesis, and some carbon became locked up in fossil fuels.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-09"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the carbon footprint of a product?",
+     "options": [
+      "The mass of carbon in the product",
+      "The total amount of carbon dioxide and other greenhouse gases released over its full life cycle",
+      "The area of land needed to make it",
+      "The amount of carbon dioxide it absorbs"
+     ],
+     "answer": "B",
+     "explanation": "A carbon footprint covers emissions from making, transporting, using and disposing of a product. It can be reduced by using renewable energy, improving efficiency and carbon capture.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-10"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In phytomining, how are metal compounds obtained from low-grade ores?",
+     "options": [
+      "Plants are grown on the land, then harvested and burned, and the ash contains metal compounds",
+      "Bacteria produce a solution of the metal from the ore",
+      "The ore is heated with carbon in a blast furnace",
+      "The ore is dissolved in seawater"
+     ],
+     "answer": "A",
+     "explanation": "Plants absorb metal compounds from the soil. When the plants are burned, the ash is rich in metal compounds, which can be extracted by electrolysis or displacement. Using bacteria is bioleaching.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-11"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The forward reaction in the Haber process is exothermic. Why is a temperature of about 450 °C used?",
+     "options": [
+      "A higher temperature would give a higher yield",
+      "The iron catalyst melts above 450 °C",
+      "A lower temperature would give a higher yield, but the rate would be too slow",
+      "Ammonia breaks down below 450 °C"
+     ],
+     "answer": "C",
+     "explanation": "Because the forward reaction is exothermic, a lower temperature would give a higher yield of ammonia. However, the reaction would be too slow, so 450 °C is a compromise between yield and rate.",
+     "section": "p2",
+     "id": "gcse-chemistry-mock-2-p2-12"
+    }
+   ]
+  }
+ }
+}

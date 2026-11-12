@@ -1,0 +1,1137 @@
+{
+ "exam": "gcse-chemistry",
+ "slug": "drills",
+ "title": "GCSE Chemistry skill drills",
+ "kind": "drills",
+ "stages": [],
+ "modules": {
+  "atomic-structure": {
+   "title": "Atomic structure",
+   "domain": "Atoms and bonding",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Protons, neutrons and electrons, isotopes, electronic structure, relative atomic mass and the history of the atom.",
+   "questions": [
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the relative charge of an electron?",
+     "options": [
+      "+1",
+      "0",
+      "−1",
+      "+2"
+     ],
+     "answer": "C",
+     "explanation": "Electrons have a relative charge of −1, protons +1, and neutrons 0. An atom has equal numbers of protons and electrons, so it has no overall charge.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atomic-structure-01"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What are isotopes?",
+     "options": [
+      "Atoms of the same element with different numbers of neutrons",
+      "Atoms of the same element with different numbers of protons",
+      "Atoms of different elements with the same mass number",
+      "Ions of an element with different charges"
+     ],
+     "answer": "A",
+     "explanation": "Isotopes have the same number of protons, so they are the same element, but different numbers of neutrons, so their mass numbers differ. Carbon-12 and carbon-14 are an example.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atomic-structure-02"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Sodium has an atomic number of 11. What is the electronic structure of a sodium atom?",
+     "options": [
+      "2, 9",
+      "2, 8, 1",
+      "2, 1, 8",
+      "8, 2, 1"
+     ],
+     "answer": "B",
+     "explanation": "Sodium has 11 electrons. The first shell holds up to 2 and the second up to 8, which leaves 1 in the third shell: 2, 8, 1. The single outer electron puts sodium in Group 1.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atomic-structure-03"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A sample of chlorine is 75% chlorine-35 and 25% chlorine-37. What is the relative atomic mass of chlorine in the sample?",
+     "options": [
+      "36.0",
+      "35.0",
+      "36.5",
+      "35.5"
+     ],
+     "answer": "D",
+     "explanation": "Relative atomic mass $= \\dfrac{(75 \\times 35) + (25 \\times 37)}{100} = \\dfrac{2625 + 925}{100} = 35.5$.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atomic-structure-04"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Atomic structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which scientist's alpha particle scattering experiment showed that the mass of an atom is concentrated in a small, positively charged nucleus?",
+     "options": [
+      "John Dalton",
+      "J.J. Thomson",
+      "Ernest Rutherford",
+      "Dmitri Mendeleev"
+     ],
+     "answer": "C",
+     "explanation": "Rutherford, with Geiger and Marsden, fired alpha particles at gold foil. A few bounced back, which could only be explained by a tiny, dense, positive nucleus. This replaced Thomson's plum pudding model.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atomic-structure-05"
+    }
+   ]
+  },
+  "periodic-table": {
+   "title": "Periodic table",
+   "domain": "Atoms and bonding",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Groups and periods, the development of the periodic table, Group 1, Group 7, Group 0 and transition metals.",
+   "questions": [
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Elements in the same group of the periodic table have the same number of what?",
+     "options": [
+      "Neutrons",
+      "Protons",
+      "Electron shells",
+      "Electrons in their outer shell"
+     ],
+     "answer": "D",
+     "explanation": "Elements in a group have the same number of outer shell electrons, which is why they have similar chemical properties. Elements in the same period have the same number of shells.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-periodic-table-01"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why are the noble gases (Group 0) very unreactive?",
+     "options": [
+      "They have full outer shells of electrons",
+      "They are all liquids",
+      "They have no electrons",
+      "They have very large atoms"
+     ],
+     "answer": "A",
+     "explanation": "Noble gases have stable arrangements of electrons with full outer shells, so they do not easily gain, lose or share electrons.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-periodic-table-02"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Sodium reacts with water. What are the products?",
+     "options": [
+      "Sodium oxide and hydrogen",
+      "Sodium hydroxide and hydrogen",
+      "Sodium hydroxide and oxygen",
+      "Sodium chloride and water"
+     ],
+     "answer": "B",
+     "explanation": "Group 1 metals react with water to form a metal hydroxide and hydrogen. The hydroxide dissolves to make an alkaline solution, which is why they are called the alkali metals.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-periodic-table-03"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Chlorine water is added to potassium bromide solution. What happens?",
+     "options": [
+      "No reaction, because bromine is more reactive than chlorine",
+      "Chlorine is displaced from the solution",
+      "Bromine is displaced, because chlorine is more reactive than bromine",
+      "Potassium is displaced as a metal"
+     ],
+     "answer": "C",
+     "explanation": "A more reactive halogen displaces a less reactive one from its salt. Chlorine is above bromine in Group 7, so chlorine + potassium bromide → potassium chloride + bromine, and the solution turns orange.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-periodic-table-04"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Periodic table",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why was Mendeleev's periodic table more successful than earlier attempts?",
+     "options": [
+      "He arranged the elements by atomic number",
+      "He included all the noble gases",
+      "He put all the metals in a single group",
+      "He left gaps for elements that had not yet been discovered"
+     ],
+     "answer": "D",
+     "explanation": "Mendeleev left gaps and predicted the properties of the missing elements. When elements such as germanium were found to match his predictions, his table was accepted. He used atomic weight, not atomic number, and the noble gases had not yet been discovered.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-periodic-table-05"
+    }
+   ]
+  },
+  "bonding-and-structure": {
+   "title": "Bonding and structure",
+   "domain": "Atoms and bonding",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Ionic, covalent and metallic bonding, simple molecules, giant structures, forms of carbon and nanoparticles.",
+   "questions": [
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What type of bonding holds the atoms together in a water molecule?",
+     "options": [
+      "Ionic",
+      "Covalent",
+      "Metallic",
+      "There are no bonds"
+     ],
+     "answer": "B",
+     "explanation": "Water is made of the non-metals hydrogen and oxygen. Non-metal atoms bond by sharing pairs of electrons, which is covalent bonding.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-bonding-and-structure-01"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why can metals conduct electricity?",
+     "options": [
+      "They have delocalised electrons that can move through the structure",
+      "They contain ions that move when solid",
+      "Their atoms are held by weak forces",
+      "They have no electrons"
+     ],
+     "answer": "A",
+     "explanation": "In metallic bonding the outer electrons are delocalised. These free electrons can move through the metal and carry charge, so metals conduct electricity and heat.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-bonding-and-structure-02"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these substances has a giant covalent structure?",
+     "options": [
+      "Sodium chloride",
+      "Carbon dioxide",
+      "Diamond",
+      "Methane"
+     ],
+     "answer": "C",
+     "explanation": "In diamond every carbon atom forms four covalent bonds in a giant lattice. Sodium chloride is a giant ionic lattice, while carbon dioxide and methane are simple molecules.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-bonding-and-structure-03"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why does methane have a low boiling point?",
+     "options": [
+      "Its covalent bonds are weak",
+      "The forces between its molecules are weak and need little energy to overcome",
+      "It contains ions",
+      "It has delocalised electrons"
+     ],
+     "answer": "B",
+     "explanation": "When methane boils, only the weak intermolecular forces are overcome, not the strong covalent bonds inside the molecules. Little energy is needed, so the boiling point is low.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-bonding-and-structure-04"
+    },
+    {
+     "domain": "Atoms and bonding",
+     "skill": "Bonding and structure",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why does graphite conduct electricity but diamond does not?",
+     "options": [
+      "Graphite contains ions",
+      "Diamond's atoms are held by weak forces",
+      "Graphite contains metal atoms",
+      "Each carbon atom in graphite forms three bonds, leaving delocalised electrons"
+     ],
+     "answer": "D",
+     "explanation": "In graphite each carbon atom bonds to three others, so one electron from each atom is delocalised and can carry charge. In diamond all four outer electrons are used in bonds, so there are none free to move.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-bonding-and-structure-05"
+    }
+   ]
+  },
+  "quantitative-chemistry": {
+   "title": "Quantitative chemistry",
+   "domain": "Quantities and reactions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Conservation of mass, relative formula mass, concentration, moles and reacting masses.",
+   "questions": [
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What does the law of conservation of mass state?",
+     "options": [
+      "Mass is lost when gases are produced",
+      "Products always have more mass than reactants",
+      "No atoms are made or lost, so the total mass of the products equals the total mass of the reactants",
+      "Mass is only conserved in physical changes"
+     ],
+     "answer": "C",
+     "explanation": "In a chemical reaction atoms are rearranged, not created or destroyed. If a mass seems to change, a gas has usually escaped or been taken in from the air.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-quantitative-chemistry-01"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the relative formula mass of sulfuric acid, $\\text{H}_2\\text{SO}_4$? (Relative atomic masses: H = 1, S = 32, O = 16)",
+     "options": [
+      "98",
+      "50",
+      "96",
+      "49"
+     ],
+     "answer": "A",
+     "explanation": "$M_r = (2 \\times 1) + 32 + (4 \\times 16) = 2 + 32 + 64 = 98$.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-quantitative-chemistry-02"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "25 g of salt is dissolved in water to make $0.5\\ \\text{dm}^3$ of solution. What is the concentration?",
+     "options": [
+      "$12.5\\ \\text{g/dm}^3$",
+      "$50\\ \\text{g/dm}^3$",
+      "$25.5\\ \\text{g/dm}^3$",
+      "$0.02\\ \\text{g/dm}^3$"
+     ],
+     "answer": "B",
+     "explanation": "Concentration $= \\dfrac{\\text{mass}}{\\text{volume}} = \\dfrac{25}{0.5} = 50\\ \\text{g/dm}^3$.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-quantitative-chemistry-03"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How many moles are there in 4.0 g of sodium hydroxide, NaOH? (Relative atomic masses: Na = 23, O = 16, H = 1)",
+     "options": [
+      "10",
+      "160",
+      "1.0",
+      "0.1"
+     ],
+     "answer": "D",
+     "explanation": "$M_r$ of NaOH $= 23 + 16 + 1 = 40$. Moles $= \\dfrac{\\text{mass}}{M_r} = \\dfrac{4.0}{40} = 0.1$ mol.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-quantitative-chemistry-04"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Quantitative chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Magnesium burns in oxygen: $2\\text{Mg} + \\text{O}_2 \\rightarrow 2\\text{MgO}$. What mass of magnesium oxide is made from 12 g of magnesium? (Relative atomic masses: Mg = 24, O = 16)",
+     "options": [
+      "40 g",
+      "28 g",
+      "20 g",
+      "10 g"
+     ],
+     "answer": "C",
+     "explanation": "Moles of Mg $= \\dfrac{12}{24} = 0.5$. The equation shows 2 mol Mg gives 2 mol MgO, so 0.5 mol MgO forms. $M_r$ of MgO $= 40$, so the mass is $0.5 \\times 40 = 20$ g.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-quantitative-chemistry-05"
+    }
+   ]
+  },
+  "chemical-changes": {
+   "title": "Chemical changes",
+   "domain": "Quantities and reactions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The reactivity series, extracting metals, oxidation and reduction, acids, alkalis, salts and pH.",
+   "questions": [
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the pH of a neutral solution?",
+     "options": [
+      "7",
+      "1",
+      "14",
+      "0"
+     ],
+     "answer": "A",
+     "explanation": "A neutral solution, such as pure water, has a pH of 7. Acids have a pH below 7 and alkalis above 7.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-changes-01"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these metals is the most reactive?",
+     "options": [
+      "Copper",
+      "Potassium",
+      "Zinc",
+      "Iron"
+     ],
+     "answer": "B",
+     "explanation": "Potassium is near the top of the reactivity series. It reacts violently with water. Zinc and iron are less reactive, and copper is near the bottom.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-changes-02"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which salt is made when hydrochloric acid reacts with magnesium oxide?",
+     "options": [
+      "Magnesium sulfate",
+      "Magnesium nitrate",
+      "Magnesium hydroxide",
+      "Magnesium chloride"
+     ],
+     "answer": "D",
+     "explanation": "Hydrochloric acid always makes chloride salts. Magnesium oxide + hydrochloric acid → magnesium chloride + water. Sulfuric acid would make sulfates and nitric acid nitrates.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-changes-03"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which ion is present in all acidic solutions?",
+     "options": [
+      "$\\text{OH}^-$",
+      "$\\text{Cl}^-$",
+      "$\\text{H}^+$",
+      "$\\text{Na}^+$"
+     ],
+     "answer": "C",
+     "explanation": "Acids produce hydrogen ions, $\\text{H}^+$, in water. Alkalis produce hydroxide ions, $\\text{OH}^-$. In neutralisation they react to form water.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-changes-04"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Chemical changes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In the reaction $\\text{Zn} + \\text{Cu}^{2+} \\rightarrow \\text{Zn}^{2+} + \\text{Cu}$, which species is oxidised and why?",
+     "options": [
+      "Zinc atoms, because they lose electrons",
+      "Copper ions, because they gain electrons",
+      "Zinc atoms, because they gain electrons",
+      "Copper ions, because they lose electrons"
+     ],
+     "answer": "A",
+     "explanation": "Oxidation is loss of electrons and reduction is gain (OIL RIG). Each zinc atom loses two electrons to form a zinc ion, so zinc is oxidised. The copper ions gain electrons and are reduced.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-changes-05"
+    }
+   ]
+  },
+  "electrolysis": {
+   "title": "Electrolysis",
+   "domain": "Quantities and reactions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Electrolytes, products at each electrode, half equations and extracting aluminium.",
+   "questions": [
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is an electrolyte?",
+     "options": [
+      "A metal that conducts electricity",
+      "A molten or dissolved ionic compound that conducts electricity",
+      "A solid covalent substance",
+      "The negative electrode"
+     ],
+     "answer": "B",
+     "explanation": "An electrolyte is an ionic compound that has been melted or dissolved, so its ions are free to move. When a current passes, it is broken down into elements.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-electrolysis-01"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why is aluminium extracted by electrolysis rather than by heating its oxide with carbon?",
+     "options": [
+      "Aluminium is more reactive than carbon",
+      "Aluminium is less reactive than carbon",
+      "Aluminium oxide is a gas",
+      "Carbon reacts with electricity"
+     ],
+     "answer": "A",
+     "explanation": "Carbon can only reduce oxides of metals less reactive than itself. Aluminium is more reactive than carbon, so electrolysis is needed. This is expensive because of the large amount of electricity used.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-electrolysis-02"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A solution of copper chloride is electrolysed. What forms at the positive electrode (anode)?",
+     "options": [
+      "Copper",
+      "Hydrogen",
+      "Oxygen",
+      "Chlorine"
+     ],
+     "answer": "D",
+     "explanation": "Negative chloride ions are attracted to the positive electrode, where they lose electrons and form chlorine gas. Copper is deposited at the negative electrode.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-electrolysis-03"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A solution of sodium chloride in water is electrolysed. What forms at the negative electrode (cathode)?",
+     "options": [
+      "Sodium",
+      "Chlorine",
+      "Hydrogen",
+      "Oxygen"
+     ],
+     "answer": "C",
+     "explanation": "Sodium is more reactive than hydrogen, so hydrogen ions from the water are discharged instead and hydrogen gas forms. Chlorine forms at the positive electrode, and sodium hydroxide is left in solution.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-electrolysis-04"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Electrolysis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which half equation shows what happens at the negative electrode when copper is deposited during electrolysis?",
+     "options": [
+      "$\\text{Cu} \\rightarrow \\text{Cu}^{2+} + 2e^-$",
+      "$\\text{Cu}^{2+} + 2e^- \\rightarrow \\text{Cu}$",
+      "$\\text{Cu}^{2+} \\rightarrow \\text{Cu} + 2e^-$",
+      "$\\text{Cu} + 2e^- \\rightarrow \\text{Cu}^{2+}$"
+     ],
+     "answer": "B",
+     "explanation": "Positive copper ions are attracted to the negative electrode, where each gains two electrons to become a copper atom. Gaining electrons is reduction.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-electrolysis-05"
+    }
+   ]
+  },
+  "energy-changes": {
+   "title": "Energy changes",
+   "domain": "Quantities and reactions",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Exothermic and endothermic reactions, reaction profiles, activation energy, bond energies and cells.",
+   "questions": [
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of these is an endothermic process?",
+     "options": [
+      "Combustion",
+      "Neutralisation",
+      "Thermal decomposition",
+      "Respiration"
+     ],
+     "answer": "C",
+     "explanation": "Thermal decomposition takes in energy from the surroundings, so it is endothermic. Combustion, neutralisation and respiration all release energy, so they are exothermic.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-energy-changes-01"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "On a reaction profile for an exothermic reaction, where are the products shown compared with the reactants?",
+     "options": [
+      "Lower in energy than the reactants",
+      "Higher in energy than the reactants",
+      "At the same energy as the reactants",
+      "At the top of the curve"
+     ],
+     "answer": "A",
+     "explanation": "In an exothermic reaction energy is given out to the surroundings, so the products have less energy than the reactants. The peak of the curve shows the activation energy.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-energy-changes-02"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the activation energy of a reaction?",
+     "options": [
+      "The energy released by the reaction",
+      "The total energy stored in the products",
+      "The energy stored in a fuel",
+      "The minimum energy that particles must have to react when they collide"
+     ],
+     "answer": "D",
+     "explanation": "Particles must collide with at least the activation energy for a reaction to happen. Catalysts work by providing a route with a lower activation energy.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-energy-changes-03"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Hydrogen reacts with chlorine: $\\text{H}_2 + \\text{Cl}_2 \\rightarrow 2\\text{HCl}$. Bond energies: H–H = 436 kJ/mol, Cl–Cl = 243 kJ/mol, H–Cl = 432 kJ/mol. What is the overall energy change?",
+     "options": [
+      "+185 kJ/mol",
+      "−185 kJ/mol",
+      "+247 kJ/mol",
+      "−1543 kJ/mol"
+     ],
+     "answer": "B",
+     "explanation": "Energy to break bonds $= 436 + 243 = 679$ kJ. Energy released making bonds $= 2 \\times 432 = 864$ kJ. Overall change $= 679 - 864 = -185$ kJ/mol. It is negative, so the reaction is exothermic.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-energy-changes-04"
+    },
+    {
+     "domain": "Quantities and reactions",
+     "skill": "Energy changes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the only waste product of a hydrogen fuel cell?",
+     "options": [
+      "Carbon dioxide",
+      "Hydrogen",
+      "Water",
+      "Oxygen"
+     ],
+     "answer": "C",
+     "explanation": "In a hydrogen fuel cell, hydrogen and oxygen react to produce water and an electric current. No carbon dioxide is produced in the cell itself.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-energy-changes-05"
+    }
+   ]
+  },
+  "rates-and-equilibrium": {
+   "title": "Rates and equilibrium",
+   "domain": "Rates and organic",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Measuring rates, collision theory, catalysts, reversible reactions and equilibrium.",
+   "questions": [
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is a catalyst?",
+     "options": [
+      "A substance that is used up in a reaction",
+      "A substance that speeds up a reaction without being used up",
+      "The main product of a reaction",
+      "A substance that always slows a reaction down"
+     ],
+     "answer": "B",
+     "explanation": "A catalyst increases the rate of a reaction and is not used up, so it can be used again. Enzymes are biological catalysts.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-rates-and-equilibrium-01"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why does using a powder instead of lumps of the same solid increase the rate of a reaction?",
+     "options": [
+      "The powder has a higher temperature",
+      "The powder has more mass",
+      "The powder contains a catalyst",
+      "The powder has a larger surface area to volume ratio, so collisions are more frequent"
+     ],
+     "answer": "D",
+     "explanation": "Breaking a solid into smaller pieces exposes more particles at the surface. More particles can collide with the other reactant, so successful collisions happen more often.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-rates-and-equilibrium-02"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A reaction produces $40\\ \\text{cm}^3$ of gas in 20 s. What is the mean rate of reaction?",
+     "options": [
+      "$800\\ \\text{cm}^3/\\text{s}$",
+      "$0.5\\ \\text{cm}^3/\\text{s}$",
+      "$2\\ \\text{cm}^3/\\text{s}$",
+      "$60\\ \\text{cm}^3/\\text{s}$"
+     ],
+     "answer": "C",
+     "explanation": "Mean rate $= \\dfrac{\\text{amount of product formed}}{\\text{time}} = \\dfrac{40}{20} = 2\\ \\text{cm}^3/\\text{s}$.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-rates-and-equilibrium-03"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Sulfur dioxide reacts with oxygen: $2\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g)$. The pressure is increased. What happens to the position of equilibrium?",
+     "options": [
+      "It shifts to the right, towards fewer molecules of gas",
+      "It shifts to the left, towards more molecules of gas",
+      "It does not change",
+      "The reaction stops"
+     ],
+     "answer": "A",
+     "explanation": "There are 3 molecules of gas on the left and 2 on the right. Increasing the pressure shifts the equilibrium towards the side with fewer gas molecules, so more sulfur trioxide forms.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-rates-and-equilibrium-04"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Rates and equilibrium",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is meant by dynamic equilibrium?",
+     "options": [
+      "The reaction has stopped",
+      "Only the forward reaction is happening",
+      "The concentrations of the reactants and products are equal",
+      "The forward and reverse reactions are happening at the same rate"
+     ],
+     "answer": "D",
+     "explanation": "At equilibrium both reactions continue, but at the same rate, so the amounts of reactants and products stay constant. The amounts do not have to be equal.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-rates-and-equilibrium-05"
+    }
+   ]
+  },
+  "organic-chemistry": {
+   "title": "Organic chemistry",
+   "domain": "Rates and organic",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Crude oil and fractional distillation, alkanes and alkenes, cracking, alcohols, carboxylic acids and polymers.",
+   "questions": [
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Crude oil is mainly a mixture of which type of compound?",
+     "options": [
+      "Carbohydrates",
+      "Proteins",
+      "Hydrocarbons",
+      "Metal oxides"
+     ],
+     "answer": "C",
+     "explanation": "Crude oil is a mixture of hydrocarbons, compounds of hydrogen and carbon only. Most of them are alkanes.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-organic-chemistry-01"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How is crude oil separated into fractions?",
+     "options": [
+      "Fractional distillation",
+      "Filtration",
+      "Chromatography",
+      "Electrolysis"
+     ],
+     "answer": "A",
+     "explanation": "Crude oil is heated and the vapour rises up a fractionating column, which is hotter at the bottom. Hydrocarbons with different boiling points condense at different heights.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-organic-chemistry-02"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Propane is an alkane with three carbon atoms. What is its formula?",
+     "options": [
+      "$\\text{C}_3\\text{H}_6$",
+      "$\\text{C}_3\\text{H}_8$",
+      "$\\text{C}_2\\text{H}_6$",
+      "$\\text{C}_4\\text{H}_{10}$"
+     ],
+     "answer": "B",
+     "explanation": "Alkanes have the general formula $\\text{C}_n\\text{H}_{2n+2}$. With $n = 3$, there are $2 \\times 3 + 2 = 8$ hydrogen atoms, so propane is $\\text{C}_3\\text{H}_8$. $\\text{C}_3\\text{H}_6$ is propene, an alkene.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-organic-chemistry-03"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is cracking?",
+     "options": [
+      "Burning hydrocarbons in plenty of oxygen",
+      "Joining small molecules to make polymers",
+      "Separating crude oil by boiling point",
+      "Breaking long-chain hydrocarbons into shorter, more useful molecules"
+     ],
+     "answer": "D",
+     "explanation": "Cracking breaks down long-chain hydrocarbons, using a hot catalyst or steam, into shorter alkanes that are useful as fuels and alkenes that are used to make polymers.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-organic-chemistry-04"
+    },
+    {
+     "domain": "Rates and organic",
+     "skill": "Organic chemistry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Ethanol is oxidised. Which type of compound is formed?",
+     "options": [
+      "A carboxylic acid",
+      "An alkene",
+      "An ester",
+      "An alkane"
+     ],
+     "answer": "A",
+     "explanation": "Oxidising ethanol produces ethanoic acid, which is a carboxylic acid. This is why wine left open to the air turns sour, like vinegar.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-organic-chemistry-05"
+    }
+   ]
+  },
+  "chemical-analysis": {
+   "title": "Chemical analysis",
+   "domain": "Analysis and the Earth",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Pure substances and formulations, chromatography, gas tests and tests for ions.",
+   "questions": [
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "In chemistry, what is a pure substance?",
+     "options": [
+      "Any natural substance",
+      "A single element or compound, not mixed with any other substance",
+      "A substance with nothing added by people",
+      "A mixture with no harmful chemicals"
+     ],
+     "answer": "B",
+     "explanation": "A pure substance contains only one element or compound. It melts and boils at a fixed temperature. In everyday language 'pure' often just means natural, which is different.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-analysis-01"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which gas relights a glowing splint?",
+     "options": [
+      "Hydrogen",
+      "Carbon dioxide",
+      "Oxygen",
+      "Chlorine"
+     ],
+     "answer": "C",
+     "explanation": "Oxygen relights a glowing splint. Hydrogen burns with a squeaky pop, carbon dioxide turns limewater milky, and chlorine bleaches damp litmus paper.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-analysis-02"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the test for carbon dioxide?",
+     "options": [
+      "It bleaches damp litmus paper",
+      "It gives a squeaky pop with a lighted splint",
+      "It relights a glowing splint",
+      "It turns limewater milky"
+     ],
+     "answer": "D",
+     "explanation": "Bubbling carbon dioxide through limewater (calcium hydroxide solution) turns it milky, or cloudy, because insoluble calcium carbonate forms.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-analysis-03"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Sodium hydroxide solution is added to a solution and a blue precipitate forms. Which metal ion is present?",
+     "options": [
+      "Copper(II)",
+      "Iron(II)",
+      "Iron(III)",
+      "Calcium"
+     ],
+     "answer": "A",
+     "explanation": "Copper(II) ions give a blue precipitate with sodium hydroxide. Iron(II) gives a green precipitate, iron(III) a brown one, and calcium a white one.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-analysis-04"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Chemical analysis",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Dilute nitric acid and then silver nitrate solution are added to a solution. A cream precipitate forms. Which ion is present?",
+     "options": [
+      "Chloride",
+      "Bromide",
+      "Iodide",
+      "Sulfate"
+     ],
+     "answer": "B",
+     "explanation": "With acidified silver nitrate, chloride ions give a white precipitate, bromide ions a cream precipitate and iodide ions a yellow precipitate.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-chemical-analysis-05"
+    }
+   ]
+  },
+  "atmosphere": {
+   "title": "Atmosphere",
+   "domain": "Analysis and the Earth",
+   "section": "drill",
+   "minutes": 0,
+   "about": "How the atmosphere developed, greenhouse gases and climate change, and atmospheric pollutants.",
+   "questions": [
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "According to one widely accepted theory, which gas made up most of the Earth's early atmosphere?",
+     "options": [
+      "Oxygen",
+      "Carbon dioxide",
+      "Argon",
+      "Hydrogen"
+     ],
+     "answer": "B",
+     "explanation": "Volcanoes released mostly carbon dioxide, with water vapour and small amounts of other gases, so the early atmosphere may have been like those of Mars and Venus today. There was little or no oxygen.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atmosphere-01"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How did oxygen build up in the Earth's atmosphere?",
+     "options": [
+      "Algae and plants produced it by photosynthesis",
+      "Volcanoes released it",
+      "It was produced when the oceans formed",
+      "Animals released it as they breathed"
+     ],
+     "answer": "A",
+     "explanation": "Algae, and later plants, carried out photosynthesis, which takes in carbon dioxide and releases oxygen. Over billions of years oxygen rose to about 20% of the atmosphere.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atmosphere-02"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which toxic gas is produced by the incomplete combustion of fuels?",
+     "options": [
+      "Carbon dioxide",
+      "Nitrogen",
+      "Carbon monoxide",
+      "Water vapour"
+     ],
+     "answer": "C",
+     "explanation": "With too little oxygen, fuels burn incompletely and produce carbon monoxide and soot. Carbon monoxide is colourless and odourless and stops the blood carrying oxygen.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atmosphere-03"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How do greenhouse gases keep the Earth warm?",
+     "options": [
+      "They reflect sunlight back into space",
+      "They react with sunlight to release heat",
+      "They make the Sun's radiation stronger",
+      "They absorb infrared radiation given off by the Earth's surface"
+     ],
+     "answer": "D",
+     "explanation": "Short-wavelength radiation from the Sun passes through the atmosphere and warms the Earth. The surface gives off longer-wavelength infrared radiation, which greenhouse gases absorb, keeping the atmosphere warm.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atmosphere-04"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Atmosphere",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Burning fuels that contain sulfur releases sulfur dioxide. What problem does this cause?",
+     "options": [
+      "Global dimming",
+      "Acid rain",
+      "Ozone depletion",
+      "An increase in nitrogen in the air"
+     ],
+     "answer": "B",
+     "explanation": "Sulfur dioxide dissolves in water in clouds to form acid rain, which damages buildings, trees and lakes. It can also cause breathing problems. Global dimming is caused by soot particles.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-atmosphere-05"
+    }
+   ]
+  },
+  "using-resources": {
+   "title": "Using resources",
+   "domain": "Analysis and the Earth",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Finite and renewable resources, potable water, life cycle assessments, recycling, corrosion and the Haber process.",
+   "questions": [
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of these is a finite resource?",
+     "options": [
+      "Wood",
+      "Crude oil",
+      "Wool",
+      "Cotton"
+     ],
+     "answer": "B",
+     "explanation": "Crude oil is finite because it took millions of years to form and will run out. Wood, wool and cotton are renewable because they can be replaced as quickly as they are used.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-using-resources-01"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How is fresh water from rivers or underground made potable in the UK?",
+     "options": [
+      "Distillation only",
+      "Adding salt and then boiling it",
+      "Passing it through filter beds, then sterilising it with chlorine, ozone or ultraviolet light",
+      "Chromatography"
+     ],
+     "answer": "C",
+     "explanation": "Filtering removes solid particles and sterilising kills microbes. Distillation is only used where fresh water is scarce, such as for desalination of seawater, because it needs a lot of energy.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-using-resources-02"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the purpose of a life cycle assessment (LCA)?",
+     "options": [
+      "To assess the environmental impact of a product at every stage of its life",
+      "To work out the selling price of a product",
+      "To measure how long a product will last",
+      "To test whether a product is pure"
+     ],
+     "answer": "A",
+     "explanation": "An LCA looks at the impact of a product from extracting the raw materials, through manufacture and use, to disposal at the end of its life.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-using-resources-03"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which conditions are used in the Haber process to make ammonia?",
+     "options": [
+      "25 °C, 1 atmosphere and no catalyst",
+      "450 °C, 200 atmospheres and a platinum catalyst",
+      "1000 °C, 1 atmosphere and an iron catalyst",
+      "About 450 °C, 200 atmospheres and an iron catalyst"
+     ],
+     "answer": "D",
+     "explanation": "The Haber process reacts nitrogen and hydrogen at about 450 °C and 200 atmospheres, using an iron catalyst. These conditions give an acceptable yield at a fast enough rate.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-using-resources-04"
+    },
+    {
+     "domain": "Analysis and the Earth",
+     "skill": "Using resources",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How does galvanising protect iron from rusting?",
+     "options": [
+      "It coats the iron in tin",
+      "It coats the iron in zinc, which also corrodes in preference to the iron",
+      "It paints the iron with copper",
+      "It keeps the iron under water"
+     ],
+     "answer": "B",
+     "explanation": "Galvanised iron is coated with zinc. The coating keeps out air and water, and because zinc is more reactive than iron, it corrodes instead of the iron even if scratched. This is sacrificial protection.",
+     "section": "drill",
+     "id": "gcse-chemistry-drill-using-resources-05"
+    }
+   ]
+  }
+ }
+}
