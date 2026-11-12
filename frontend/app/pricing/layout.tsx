@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing: £49 a Year per Course for Beyond Tutors Students, £149 for Everyone Else",
-  description: "Notenix is £49 a year for Beyond Tutors students (free during your trial class) and £149 a year per course for any other student (e.g. IGCSE Chemistry, A-Level Maths, TMUA): practice papers, quizzes, revision resources and timed tests with instant marking.",
+  title: "Pricing: £49 a Year for Beyond Tutors Students, from £99 for Everyone Else",
+  description: "Notenix is £49 a year per course for Beyond Tutors students. For any other student: GCSE £99 a subject or £349 for all four, SAT £99, other courses (IGCSE, A-Level, TMUA, ESAT) £149 a year, KS3 £149 a year. Practice papers, revision resources and timed tests, marked by tutors.",
   alternates: { canonical: `${SITE}/pricing` },
 };
 

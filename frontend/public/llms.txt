@@ -25,7 +25,7 @@
 
 ## How it works
 - [Request a tutor-marked test](https://www.notenix.com/request): a student requests a test, the Notenix team assigns it, the student sits it online, and a tutor marks it with feedback.
-- [Pricing](https://www.notenix.com/pricing): free practice; full access is £49 a year for Beyond Tutors students (free during their trial class) and £149 a year for all other students, payable by bank transfer from any country.
+- [Pricing](https://www.notenix.com/pricing): free practice; full access is £49 a year per course for Beyond Tutors students (free during their trial class). Other students pay per course per year: GCSE £99 a subject or £349 for all four subjects, SAT £99, any other course (IGCSE, A-Level, TMUA, ESAT, TARA, HSC, VCE, QCE, WACE, NCEA) £149, KS3 £149. Payable by bank transfer from any country; nothing renews automatically.
 
 ## About
 - Notenix is a unit of Beyond Groups. Tests are marked by tutors from Beyond Tutors (https://www.thebeyondtutors.com).
