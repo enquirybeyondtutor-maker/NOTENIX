@@ -66,6 +66,43 @@ def _name_change_available_at(u: User) -> str | None:
     return nxt.isoformat() if datetime.utcnow() < nxt else None
 
 
+def _is_bt(u: User) -> bool:
+    from routers.courses import _is_bt_student
+    return _is_bt_student(u)
+
+
+def _subscription_quick(u: User) -> dict:
+    """Yearly price without a DB lookup: the Beyond Tutors rate only for IDs on a Beyond Tutors
+    domain; anyone else (e.g. name@notenix.com) pays the usual Notenix price."""
+    from routers.courses import course_price
+    cur = getattr(u, "billing_currency", None)
+    if _is_bt(u):
+        return pricing.for_currency(cur)
+    if getattr(u, "ks3_year", None):
+        return pricing.ks3_for_currency(cur)
+    return course_price(u)
+
+
+async def _subscription_for(u: User, db: AsyncSession) -> dict:
+    """What this account agrees to pay per year, shown in the activation terms and saved as
+    terms_price. Non-Beyond Tutors accounts pay the usual price of the course(s) the admin gave
+    them (GCSE, SAT, bundle...), or the standard Notenix price (£149) when none was given."""
+    from routers.courses import course_price
+    from services import courses as course_svc
+    if _is_bt(u) or getattr(u, "ks3_year", None):
+        return _subscription_quick(u)
+    courses = list(dict.fromkeys(e.course for e in await course_svc.enrolments(u.id, db)))
+    if not courses:
+        return course_price(u)
+    parts = [course_price(u, c) for c in courses]
+    curs = {p["currency"] for p in parts}
+    if len(curs) == 1:
+        total = sum(p["amount"] for p in parts)
+        cur = curs.pop()
+        return {"currency": cur, "amount": total, "label": pricing.label(cur, total)}
+    return {"currency": None, "amount": None, "label": " + ".join(p["label"] for p in parts)}
+
+
 def _user_dict(u: User) -> dict:
     role = getattr(u, "role", None) or "student"
     return {
@@ -84,7 +121,8 @@ def _user_dict(u: User) -> dict:
         "access_kind": getattr(u, "access_kind", None),
         "needs_activation": bool(getattr(u, "needs_activation", False)),
         "parent_email": getattr(u, "parent_email", None),
-        "subscription": pricing.for_currency(getattr(u, "billing_currency", None)),
+        "subscription": _subscription_quick(u),
+        "bt_student": _is_bt(u),   # account issued on a Beyond Tutors domain (BT rate, invoiced by BT)
         "ks3_year": getattr(u, "ks3_year", None),
         "notify_email": getattr(u, "notify_email", None),
         "help_plan": getattr(u, "help_plan", None) if doubt.live(u) else None,
@@ -281,8 +319,11 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = 
 
 
 @router.get("/me")
-async def me(user: User = Depends(get_current_user)):
-    return _user_dict(user)
+async def me(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    d = _user_dict(user)
+    if d["needs_activation"]:   # the activation terms show the exact price for this account
+        d["subscription"] = await _subscription_for(user, db)
+    return d
 
 
 class UpdateProfileIn(BaseModel):
@@ -348,7 +389,7 @@ async def activation_send_code(data: ActivationStartIn, user: User = Depends(get
         raise HTTPException(429, "Please wait a minute before asking for another code.")
     user.parent_email, user.parent_phone = email, phone
     user.terms_accepted_at = datetime.utcnow()
-    user.terms_price = pricing.for_currency(user.billing_currency)["label"] + " per year"
+    user.terms_price = (await _subscription_for(user, db))["label"] + " per year"
     code = generate_otp()
     user.otp_hash = hash_password(code)
     user.otp_expires_at = datetime.utcnow() + timedelta(minutes=settings.otp_expiry_minutes)

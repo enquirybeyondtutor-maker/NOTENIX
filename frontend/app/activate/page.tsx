@@ -27,7 +27,10 @@ export default function ActivatePage() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [cooldown, setCooldown] = useState(0);
-  const price: string = student?.subscription?.label || "£49";
+  // Beyond Tutors students (IDs on a Beyond Tutors domain) get the BT rate, invoiced by BT.
+  // Everyone else (e.g. name@notenix.com) pays the usual Notenix price set for their account.
+  const isBT: boolean = student?.bt_student ?? /beyondtutors\.com$/i.test(student?.email || "");
+  const price: string = student?.subscription?.label || (isBT ? "£49" : "£149");
 
   useEffect(() => {
     if (!localStorage.getItem("notenix_token")) {
@@ -103,7 +106,7 @@ export default function ActivatePage() {
               One last step <br /> before the first class.
             </h2>
             <p className="mt-4 max-w-sm text-brand-100">
-              We confirm a parent&apos;s email and mobile number for every Beyond Tutors student, so we can
+              We confirm a parent&apos;s email and mobile number for every {isBT ? "Beyond Tutors" : "Notenix"} student, so we can
               reach you about classes, homework and progress.
             </p>
           </div>
@@ -216,14 +219,23 @@ export default function ActivatePage() {
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}
             role="dialog" aria-modal="true" aria-labelledby="terms-title">
             <h2 id="terms-title" className="text-lg font-bold text-ink">Terms and Conditions</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
-              <li>This Notenix subscription is purchased through <b className="text-ink">Beyond Tutors</b>. Beyond Tutors
-                provides Notenix to its students as part of its tuition.</li>
-              <li>The subscription costs <b className="text-ink">{price} per year</b>. This payment is made to Beyond Tutors,
-                not to Notenix.</li>
-              <li>The {price} will be included in the <b className="text-ink">next invoice issued by Beyond Tutors</b>. No card
-                details are taken here.</li>
-            </ul>
+            {isBT ? (
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
+                <li>This Notenix subscription is purchased through <b className="text-ink">Beyond Tutors</b>. Beyond Tutors
+                  provides Notenix to its students as part of its tuition.</li>
+                <li>The subscription costs <b className="text-ink">{price} per year</b>. This payment is made to Beyond Tutors,
+                  not to Notenix.</li>
+                <li>The {price} will be included in the <b className="text-ink">next invoice issued by Beyond Tutors</b>. No card
+                  details are taken here.</li>
+              </ul>
+            ) : (
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
+                <li>The Notenix subscription for this account costs <b className="text-ink">{price} per year</b>.</li>
+                <li>Payment is made to Notenix. The amount and payment details are shown on the payment screen
+                  before you pay. No card details are taken here.</li>
+                <li>Access runs for one year from when payment is confirmed, and does not renew automatically.</li>
+              </ul>
+            )}
             <p className="mt-3 text-xs text-ink-subtle">
               See also the full{" "}
               <a href="/terms" target="_blank" className="font-medium text-brand-600 hover:underline">Terms</a> and{" "}
