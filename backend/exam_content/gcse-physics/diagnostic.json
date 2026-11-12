@@ -1,0 +1,299 @@
+{
+ "exam": "gcse-physics",
+ "slug": "diagnostic",
+ "title": "GCSE Physics diagnostic",
+ "kind": "diagnostic",
+ "summary": "16 multiple-choice questions across energy, electricity, particles, radiation, forces, motion, waves, magnetism and space.",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 10,
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A ball of mass $2\\ \\text{kg}$ moves at $3\\ \\text{m/s}$. What is its kinetic energy?",
+     "options": [
+      "3 J",
+      "6 J",
+      "9 J",
+      "18 J"
+     ],
+     "answer": "C",
+     "explanation": "Kinetic energy $= \\frac{1}{2}mv^2 = \\frac{1}{2} \\times 2 \\times 3^2 = 9$ J. Remember to square the speed before multiplying.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A motor is supplied with 200 J of energy and transfers 50 J usefully. What is its efficiency?",
+     "options": [
+      "25%",
+      "75%",
+      "4%",
+      "150%"
+     ],
+     "answer": "A",
+     "explanation": "Efficiency is useful output energy divided by total input energy: 50 divided by 200 is 0.25, which is 25%. The other 150 J is wasted, mostly by heating.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The potential difference across a $4\\ \\Omega$ resistor is $12\\ \\text{V}$. What is the current in the resistor?",
+     "options": [
+      "48 A",
+      "0.33 A",
+      "8 A",
+      "3 A"
+     ],
+     "answer": "D",
+     "explanation": "Use $V = IR$, rearranged to $I = \\frac{V}{R} = \\frac{12}{4} = 3$ A.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Two $6\\ \\Omega$ resistors are connected in series. What is their total resistance?",
+     "options": [
+      "$3\\ \\Omega$",
+      "$12\\ \\Omega$",
+      "$6\\ \\Omega$",
+      "$36\\ \\Omega$"
+     ],
+     "answer": "B",
+     "explanation": "In series, resistances add: $6 + 6 = 12\\ \\Omega$. A total of $3\\ \\Omega$ would be the result for the same two resistors in parallel.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-04"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A kettle is connected to a $230\\ \\text{V}$ supply and the current in it is $10\\ \\text{A}$. What is the power of the kettle?",
+     "options": [
+      "2300 W",
+      "23 W",
+      "240 W",
+      "220 W"
+     ],
+     "answer": "A",
+     "explanation": "Power $=$ potential difference $\\times$ current $= 230 \\times 10 = 2300$ W, which is $2.3$ kW.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-05"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A metal block has a mass of $540\\ \\text{g}$ and a volume of $200\\ \\text{cm}^3$. What is its density?",
+     "options": [
+      "$0.37\\ \\text{g/cm}^3$",
+      "$108\\,000\\ \\text{g/cm}^3$",
+      "$340\\ \\text{g/cm}^3$",
+      "$2.7\\ \\text{g/cm}^3$"
+     ],
+     "answer": "D",
+     "explanation": "Density $=$ mass $\\div$ volume $= 540 \\div 200 = 2.7\\ \\text{g/cm}^3$.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-06"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does an alpha particle consist of?",
+     "options": [
+      "A fast-moving electron",
+      "Two protons and two neutrons",
+      "An electromagnetic wave",
+      "A single neutron"
+     ],
+     "answer": "B",
+     "explanation": "An alpha particle is two protons and two neutrons, the same as a helium nucleus. A fast-moving electron is a beta particle and an electromagnetic wave from the nucleus is a gamma ray.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-07"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The activity of a radioactive source falls from 800 Bq to 100 Bq in 24 hours. What is its half-life?",
+     "options": [
+      "3 hours",
+      "12 hours",
+      "8 hours",
+      "6 hours"
+     ],
+     "answer": "C",
+     "explanation": "Halving from 800 gives 400, then 200, then 100, which is three half-lives. Three half-lives take 24 hours, so one half-life is 8 hours.",
+     "section": "p1",
+     "id": "gcse-physics-diagnostic-p1-08"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 10,
+   "questions": [
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the weight of an object of mass $5\\ \\text{kg}$ on Earth? (Gravitational field strength $= 9.8\\ \\text{N/kg}$)",
+     "options": [
+      "49 N",
+      "0.51 N",
+      "5 N",
+      "14.8 N"
+     ],
+     "answer": "A",
+     "explanation": "Weight $=$ mass $\\times$ gravitational field strength $= 5 \\times 9.8 = 49$ N. Mass is measured in kilograms; weight is a force, measured in newtons.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-01"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A car accelerates steadily from rest to $20\\ \\text{m/s}$ in $8\\ \\text{s}$. What is its acceleration?",
+     "options": [
+      "$160\\ \\text{m/s}^2$",
+      "$0.4\\ \\text{m/s}^2$",
+      "$28\\ \\text{m/s}^2$",
+      "$2.5\\ \\text{m/s}^2$"
+     ],
+     "answer": "D",
+     "explanation": "Acceleration $=$ change in velocity $\\div$ time $= (20 - 0) \\div 8 = 2.5\\ \\text{m/s}^2$.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-02"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A resultant force of $1200\\ \\text{N}$ acts on a car of mass $800\\ \\text{kg}$. What is the acceleration of the car?",
+     "options": [
+      "$0.67\\ \\text{m/s}^2$",
+      "$1.5\\ \\text{m/s}^2$",
+      "$960\\,000\\ \\text{m/s}^2$",
+      "$400\\ \\text{m/s}^2$"
+     ],
+     "answer": "B",
+     "explanation": "Newton's second law: $F = ma$, so $a = \\frac{F}{m} = \\frac{1200}{800} = 1.5\\ \\text{m/s}^2$.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-03"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A car of mass $1500\\ \\text{kg}$ travels at $20\\ \\text{m/s}$. What is its momentum?",
+     "options": [
+      "$30\\,000\\ \\text{kg m/s}$",
+      "$75\\ \\text{kg m/s}$",
+      "$1520\\ \\text{kg m/s}$",
+      "$300\\,000\\ \\text{kg m/s}$"
+     ],
+     "answer": "A",
+     "explanation": "Momentum $=$ mass $\\times$ velocity $= 1500 \\times 20 = 30\\,000\\ \\text{kg m/s}$.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-04"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A wave has a frequency of $50\\ \\text{Hz}$ and a wavelength of $0.4\\ \\text{m}$. What is its speed?",
+     "options": [
+      "125 m/s",
+      "0.008 m/s",
+      "50.4 m/s",
+      "20 m/s"
+     ],
+     "answer": "D",
+     "explanation": "Wave speed $=$ frequency $\\times$ wavelength $= 50 \\times 0.4 = 20$ m/s.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-05"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which type of electromagnetic wave has the highest frequency?",
+     "options": [
+      "Radio waves",
+      "Gamma rays",
+      "Visible light",
+      "Microwaves"
+     ],
+     "answer": "B",
+     "explanation": "Gamma rays have the highest frequency and the shortest wavelength in the electromagnetic spectrum. Radio waves are at the other end, with the lowest frequency.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-06"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A wire carrying a current is placed at right angles to a magnetic field and experiences a force. Which change would increase the size of the force?",
+     "options": [
+      "Reversing the direction of the current",
+      "Using a weaker magnet",
+      "Increasing the current",
+      "Turning the wire so it is parallel to the field"
+     ],
+     "answer": "C",
+     "explanation": "The force on the wire gets bigger if the current, the magnetic flux density or the length of wire in the field is increased. Reversing the current only reverses the direction of the force.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-07"
+    },
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A star about the same size as the Sun reaches the end of its red giant stage. What does it become next?",
+     "options": [
+      "A black hole",
+      "A neutron star",
+      "A white dwarf",
+      "A supernova"
+     ],
+     "answer": "C",
+     "explanation": "A star like the Sun is not massive enough to explode as a supernova. After the red giant stage it sheds its outer layers and the core that is left is a white dwarf.",
+     "section": "p2",
+     "id": "gcse-physics-diagnostic-p2-08"
+    }
+   ]
+  }
+ }
+}

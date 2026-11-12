@@ -14,7 +14,7 @@ import { formatDate } from "@/lib/utils";
 // (bank transfer; the course unlocks for a year once the team confirms the payment).
 export default function CoursesPage() {
   const { user, ready } = useAuthGuard("student");
-  const [data, setData] = useState<{ restricted: boolean; courses: Enrolment[]; pending: string[]; price: Price; prices?: Record<string, Price> } | null>(null);
+  const [data, setData] = useState<{ restricted: boolean; courses: Enrolment[]; pending: string[]; price: Price; prices?: Record<string, Price>; bundles?: { key: string; name: string; courses: string[]; price: Price; saving: string }[] } | null>(null);
   const [catalogue, setCatalogue] = useState<Course[]>([]);
   const [buying, setBuying] = useState("");
 
@@ -28,7 +28,8 @@ export default function CoursesPage() {
   }, [ready]);
 
   if (!ready || !data) return <Spinner label="Loading your courses…" />;
-  const name = (k: string) => catalogue.find((c) => c.key === k)?.name || k;
+  const name = (k: string) => catalogue.find((c) => c.key === k)?.name || data.bundles?.find((b) => b.key === k)?.name
+    || (k === "gcse-bundle" ? "GCSE Maths, Biology, Chemistry and Physics" : k);
   const priceOf = (k: string) => data.prices?.[k] ?? data.price;  // SAT has its own price
   const live = data.courses.filter((c) => c.live);
   const ended = data.courses.filter((c) => !c.live);
@@ -42,7 +43,7 @@ export default function CoursesPage() {
         <PageHeader icon={Plus} title={`Add ${name(buying)}`}
           subtitle={buying === "sat"
             ? `${priceOf(buying).label} until your SAT date (12 months of access): full adaptive SAT practice tests, score reports and worked explanations.`
-            : `${priceOf(buying).label} for a year: practice papers, quizzes, revision resources and test requests for ${name(buying)}.`} />
+            : `${priceOf(buying).label} for a year: practice papers, revision resources and test requests for ${name(buying)}.`} />
         <PaymentBox purpose="course" course={buying} amount={priceOf(buying).amount} currency={priceOf(buying).currency}
           reference={`NX-C${user?.id ?? ""}`} onClaimed={load} />
       </PageContainer>
@@ -95,8 +96,17 @@ export default function CoursesPage() {
         <div className="card mt-8 p-6">
           <h2 className="flex items-center gap-2 font-semibold text-ink"><Plus size={18} /> Add a course</h2>
           <p className="mt-1 text-sm text-ink-muted">
-            Each course is {data.price.label} for a year and unlocks its practice papers, quizzes, revision resources and test requests.
+            Each course is {data.price.label} for a year and unlocks its practice papers, revision resources and test requests.
           </p>
+          {(data.bundles ?? []).filter((b) => !data.pending.includes(b.key)).map((b) => (
+            <div key={b.key} className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-100 bg-brand-50/60 p-4">
+              <div>
+                <div className="font-semibold text-ink">All four GCSE subjects: {b.price.label} / year</div>
+                <div className="mt-0.5 text-sm text-ink-muted">{b.courses.join(", ")}. Saves {b.saving} against buying them one by one.</div>
+              </div>
+              <Button size="sm" onClick={() => setBuying(b.key)}>Add all four</Button>
+            </div>
+          ))}
           <CoursePicker catalogue={catalogue} value="" exclude={live.map((c) => c.course).concat(data.pending)}
             onChange={(k) => k && setBuying(k)} placeholder="Choose a course…"
             className="mt-4 w-full max-w-sm rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-brand-500" />

@@ -124,7 +124,7 @@ export default function ExamDiagnostic() {
       marked={s.marked}
       secondsLeft={left}
       submitting={scoring}
-      calculator={info.calculator}
+      calculator={info.calculator && !(info.no_calculator ?? []).includes(mod.section)}
       reference={false}
       onAnswer={(qid, v) => persist({ ...s, answers: { ...s.answers, [qid]: v } })}
       onToggleMark={(qid) => persist({ ...s, marked: s.marked.includes(qid) ? s.marked.filter((x) => x !== qid) : [...s.marked, qid] })}

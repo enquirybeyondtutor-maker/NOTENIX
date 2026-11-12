@@ -1,0 +1,856 @@
+{
+ "exam": "gcse-physics",
+ "slug": "drills",
+ "title": "GCSE Physics skill drills",
+ "kind": "drills",
+ "stages": [],
+ "modules": {
+  "energy-stores-and-transfers": {
+   "title": "Energy stores and transfers",
+   "domain": "Energy and electricity",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Kinetic and gravitational energy, power, efficiency, specific heat capacity and energy resources.",
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A box of mass $3\\ \\text{kg}$ is lifted $5\\ \\text{m}$. How much gravitational potential energy does it gain? ($g = 9.8\\ \\text{N/kg}$)",
+     "options": [
+      "147 J",
+      "15 J",
+      "1.5 J",
+      "44.1 J"
+     ],
+     "answer": "A",
+     "explanation": "Gravitational potential energy $= mgh = 3 \\times 9.8 \\times 5 = 147$ J.",
+     "section": "drill",
+     "id": "gcse-physics-drill-energy-stores-and-transfers-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A motor transfers 600 J of energy in 20 s. What is its power?",
+     "options": [
+      "12 000 W",
+      "30 W",
+      "0.033 W",
+      "620 W"
+     ],
+     "answer": "B",
+     "explanation": "Power is energy transferred divided by time: 600 divided by 20 = 30 W.",
+     "section": "drill",
+     "id": "gcse-physics-drill-energy-stores-and-transfers-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these is a renewable energy resource?",
+     "options": [
+      "Coal",
+      "Natural gas",
+      "Wind",
+      "Nuclear fuel"
+     ],
+     "answer": "C",
+     "explanation": "Wind is renewable because it is replenished as it is used. Coal, gas and nuclear fuel are finite and will eventually run out.",
+     "section": "drill",
+     "id": "gcse-physics-drill-energy-stores-and-transfers-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How much energy is needed to raise the temperature of $2\\ \\text{kg}$ of water by $10\\ ^\\circ\\text{C}$? (Specific heat capacity of water $= 4200\\ \\text{J/kg}\\,^\\circ\\text{C}$)",
+     "options": [
+      "840 J",
+      "8400 J",
+      "21 000 J",
+      "84 000 J"
+     ],
+     "answer": "D",
+     "explanation": "Energy $= mc\\Delta\\theta = 2 \\times 4200 \\times 10 = 84\\,000$ J.",
+     "section": "drill",
+     "id": "gcse-physics-drill-energy-stores-and-transfers-04"
+    }
+   ]
+  },
+  "electricity": {
+   "title": "Electricity",
+   "domain": "Energy and electricity",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Current, potential difference and resistance, series and parallel circuits, power and mains electricity.",
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A current of 2 A flows for 30 s. How much charge flows?",
+     "options": [
+      "15 C",
+      "60 C",
+      "0.067 C",
+      "32 C"
+     ],
+     "answer": "B",
+     "explanation": "Charge is current multiplied by time: 2 times 30 = 60 C.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electricity-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Two identical lamps are connected in parallel across a 6 V battery. What is the potential difference across each lamp?",
+     "options": [
+      "3 V",
+      "12 V",
+      "6 V",
+      "0 V"
+     ],
+     "answer": "C",
+     "explanation": "Components in parallel each have the full potential difference of the supply across them, so each lamp has 6 V. In series they would share it, 3 V each.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electricity-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What happens to the resistance of a light-dependent resistor (LDR) as the light intensity increases?",
+     "options": [
+      "It decreases",
+      "It increases",
+      "It stays the same",
+      "It becomes infinite"
+     ],
+     "answer": "A",
+     "explanation": "The resistance of an LDR falls as the light gets brighter. That is why LDRs are used in circuits that switch lights on when it gets dark.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electricity-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A 2 kW heater is switched on for 3 minutes. How much energy does it transfer?",
+     "options": [
+      "6000 J",
+      "6 J",
+      "667 J",
+      "360 000 J"
+     ],
+     "answer": "D",
+     "explanation": "Convert the units first: 2 kW is 2000 W and 3 minutes is 180 s. Energy is power multiplied by time: 2000 times 180 = 360 000 J.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electricity-04"
+    }
+   ]
+  },
+  "particle-model": {
+   "title": "Particle model",
+   "domain": "Energy and electricity",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Density, states of matter, internal energy, latent heat and gas pressure.",
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the change of state from solid to liquid called?",
+     "options": [
+      "Melting",
+      "Freezing",
+      "Condensing",
+      "Sublimating"
+     ],
+     "answer": "A",
+     "explanation": "A solid turning into a liquid is melting. Freezing is the reverse, and condensing is a gas turning into a liquid.",
+     "section": "drill",
+     "id": "gcse-physics-drill-particle-model-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How much energy is needed to melt $0.5\\ \\text{kg}$ of ice at $0\\ ^\\circ\\text{C}$? (Specific latent heat of fusion of ice $= 334\\,000\\ \\text{J/kg}$)",
+     "options": [
+      "668 000 J",
+      "334 000 J",
+      "167 000 J",
+      "1670 J"
+     ],
+     "answer": "C",
+     "explanation": "Energy $=$ mass $\\times$ specific latent heat $= 0.5 \\times 334\\,000 = 167\\,000$ J.",
+     "section": "drill",
+     "id": "gcse-physics-drill-particle-model-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A gas is heated in a sealed container of fixed volume. Why does the pressure increase?",
+     "options": [
+      "The particles get bigger",
+      "The particles move faster and hit the walls harder and more often",
+      "More particles are made",
+      "The particles stick to the walls"
+     ],
+     "answer": "B",
+     "explanation": "Heating gives the particles more kinetic energy. They move faster, so they collide with the walls more often and with more force, which increases the pressure.",
+     "section": "drill",
+     "id": "gcse-physics-drill-particle-model-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A substance is melting at a constant temperature while being heated. What is happening to the energy of its particles?",
+     "options": [
+      "Their kinetic energy is increasing",
+      "Both their kinetic and potential energy are decreasing",
+      "No energy is being transferred to them",
+      "Their potential energy is increasing while their kinetic energy stays the same"
+     ],
+     "answer": "D",
+     "explanation": "The temperature is constant, so the average kinetic energy of the particles does not change. The energy supplied breaks bonds between particles, increasing their potential energy.",
+     "section": "drill",
+     "id": "gcse-physics-drill-particle-model-04"
+    }
+   ]
+  },
+  "atomic-structure-and-radiation": {
+   "title": "Atomic structure and radiation",
+   "domain": "Energy and electricity",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The structure of the atom, isotopes, alpha, beta and gamma radiation, and half-life.",
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which particles are found in the nucleus of an atom?",
+     "options": [
+      "Protons and electrons",
+      "Protons and neutrons",
+      "Neutrons and electrons",
+      "Electrons only"
+     ],
+     "answer": "B",
+     "explanation": "The nucleus contains protons and neutrons. Electrons are found in energy levels around the nucleus.",
+     "section": "drill",
+     "id": "gcse-physics-drill-atomic-structure-and-radiation-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which type of nuclear radiation is the most penetrating?",
+     "options": [
+      "Alpha",
+      "Beta",
+      "Gamma",
+      "They are all the same"
+     ],
+     "answer": "C",
+     "explanation": "Gamma rays are the most penetrating and need thick lead or concrete to reduce them. Alpha is stopped by paper and beta by a few millimetres of aluminium.",
+     "section": "drill",
+     "id": "gcse-physics-drill-atomic-structure-and-radiation-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A nucleus emits a beta particle. What happens to its atomic number?",
+     "options": [
+      "It increases by 1",
+      "It decreases by 1",
+      "It decreases by 2",
+      "It stays the same"
+     ],
+     "answer": "A",
+     "explanation": "In beta decay a neutron turns into a proton and an electron, which is emitted. There is one more proton, so the atomic number goes up by 1. The mass number is unchanged.",
+     "section": "drill",
+     "id": "gcse-physics-drill-atomic-structure-and-radiation-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A radioactive isotope has a half-life of 6 hours. What fraction of the original nuclei remains after 18 hours?",
+     "options": [
+      "$\\dfrac{1}{3}$",
+      "$\\dfrac{1}{6}$",
+      "$\\dfrac{1}{4}$",
+      "$\\dfrac{1}{8}$"
+     ],
+     "answer": "D",
+     "explanation": "18 hours is three half-lives. The amount halves each time: $\\frac{1}{2} \\times \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{8}$.",
+     "section": "drill",
+     "id": "gcse-physics-drill-atomic-structure-and-radiation-04"
+    }
+   ]
+  },
+  "forces-and-their-effects": {
+   "title": "Forces and their effects",
+   "domain": "Forces and motion",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Scalars and vectors, weight, resultant forces, springs, work done, moments and pressure.",
+   "questions": [
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of these is a vector quantity?",
+     "options": [
+      "Mass",
+      "Speed",
+      "Velocity",
+      "Temperature"
+     ],
+     "answer": "C",
+     "explanation": "A vector has both size and direction. Velocity is speed in a given direction. Mass, speed and temperature have size only, so they are scalars.",
+     "section": "drill",
+     "id": "gcse-physics-drill-forces-and-their-effects-01"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A spring has a spring constant of $40\\ \\text{N/m}$. What force is needed to extend it by $0.15\\ \\text{m}$?",
+     "options": [
+      "6 N",
+      "267 N",
+      "0.00375 N",
+      "40.15 N"
+     ],
+     "answer": "A",
+     "explanation": "Force $=$ spring constant $\\times$ extension $= 40 \\times 0.15 = 6$ N.",
+     "section": "drill",
+     "id": "gcse-physics-drill-forces-and-their-effects-02"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A force of 50 N moves a box 4 m in the direction of the force. How much work is done?",
+     "options": [
+      "12.5 J",
+      "200 J",
+      "54 J",
+      "0.08 J"
+     ],
+     "answer": "B",
+     "explanation": "Work done is force multiplied by distance moved in the direction of the force: 50 times 4 = 200 J.",
+     "section": "drill",
+     "id": "gcse-physics-drill-forces-and-their-effects-03"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A force of $20\\ \\text{N}$ acts at a perpendicular distance of $0.3\\ \\text{m}$ from a pivot. What is the moment of the force?",
+     "options": [
+      "66.7 N m",
+      "20.3 N m",
+      "0.015 N m",
+      "6 N m"
+     ],
+     "answer": "D",
+     "explanation": "Moment $=$ force $\\times$ perpendicular distance from the pivot $= 20 \\times 0.3 = 6$ N m.",
+     "section": "drill",
+     "id": "gcse-physics-drill-forces-and-their-effects-04"
+    }
+   ]
+  },
+  "motion-and-newton-s-laws": {
+   "title": "Motion and Newton's laws",
+   "domain": "Forces and motion",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Speed, velocity and acceleration, motion graphs, Newton's laws and stopping distances.",
+   "questions": [
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A runner covers 100 m in 20 s. What is the runner's average speed?",
+     "options": [
+      "2000 m/s",
+      "5 m/s",
+      "0.2 m/s",
+      "120 m/s"
+     ],
+     "answer": "B",
+     "explanation": "Speed is distance divided by time: 100 divided by 20 = 5 m/s.",
+     "section": "drill",
+     "id": "gcse-physics-drill-motion-and-newton-s-laws-01"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does a horizontal line on a distance-time graph show?",
+     "options": [
+      "The object is stationary",
+      "The object is moving at a steady speed",
+      "The object is accelerating",
+      "The object is slowing down"
+     ],
+     "answer": "A",
+     "explanation": "A horizontal line means the distance is not changing, so the object is not moving. A steady speed would be a straight sloping line.",
+     "section": "drill",
+     "id": "gcse-physics-drill-motion-and-newton-s-laws-02"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does the area under a velocity-time graph represent?",
+     "options": [
+      "Acceleration",
+      "Speed",
+      "Distance travelled",
+      "Force"
+     ],
+     "answer": "C",
+     "explanation": "The area under a velocity-time graph gives the distance travelled. The gradient of the graph gives the acceleration.",
+     "section": "drill",
+     "id": "gcse-physics-drill-motion-and-newton-s-laws-03"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A car starts from rest and accelerates at $2\\ \\text{m/s}^2$ over a distance of $25\\ \\text{m}$. What is its final speed? (Use $v^2 = u^2 + 2as$)",
+     "options": [
+      "50 m/s",
+      "100 m/s",
+      "7.1 m/s",
+      "10 m/s"
+     ],
+     "answer": "D",
+     "explanation": "$v^2 = 0^2 + 2 \\times 2 \\times 25 = 100$, so $v = \\sqrt{100} = 10$ m/s. Remember to take the square root at the end.",
+     "section": "drill",
+     "id": "gcse-physics-drill-motion-and-newton-s-laws-04"
+    }
+   ]
+  },
+  "momentum": {
+   "title": "Momentum",
+   "domain": "Forces and motion",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Momentum, conservation of momentum in collisions, and force as rate of change of momentum.",
+   "questions": [
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the unit of momentum?",
+     "options": [
+      "kg m/s",
+      "N/kg",
+      "kg/m",
+      "J/s"
+     ],
+     "answer": "A",
+     "explanation": "Momentum is mass multiplied by velocity, so its unit is kilograms times metres per second: kg m/s.",
+     "section": "drill",
+     "id": "gcse-physics-drill-momentum-01"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A ball of mass 0.5 kg moves at 12 m/s. What is its momentum?",
+     "options": [
+      "24 kg m/s",
+      "12.5 kg m/s",
+      "6 kg m/s",
+      "0.042 kg m/s"
+     ],
+     "answer": "C",
+     "explanation": "Momentum is mass multiplied by velocity: 0.5 times 12 = 6 kg m/s.",
+     "section": "drill",
+     "id": "gcse-physics-drill-momentum-02"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A 2 kg trolley moving at 3 m/s collides with a stationary 1 kg trolley and they stick together. What is their velocity after the collision?",
+     "options": [
+      "3 m/s",
+      "2 m/s",
+      "1.5 m/s",
+      "6 m/s"
+     ],
+     "answer": "B",
+     "explanation": "Momentum before is 2 times 3 = 6 kg m/s. Momentum is conserved, and the combined mass is 3 kg, so the velocity after is 6 divided by 3 = 2 m/s.",
+     "section": "drill",
+     "id": "gcse-physics-drill-momentum-03"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The momentum of a car changes by 600 kg m/s in 0.2 s. What is the average force acting on the car?",
+     "options": [
+      "120 N",
+      "600.2 N",
+      "0.00033 N",
+      "3000 N"
+     ],
+     "answer": "D",
+     "explanation": "Force is change in momentum divided by the time taken: 600 divided by 0.2 = 3000 N. This is why crumple zones, which increase the time, reduce the force.",
+     "section": "drill",
+     "id": "gcse-physics-drill-momentum-04"
+    }
+   ]
+  },
+  "waves": {
+   "title": "Waves",
+   "domain": "Waves and magnetism",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Transverse and longitudinal waves, the wave equation, period, reflection and refraction.",
+   "questions": [
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What type of wave is a sound wave?",
+     "options": [
+      "Longitudinal",
+      "Transverse",
+      "Electromagnetic",
+      "A wave that needs no medium"
+     ],
+     "answer": "A",
+     "explanation": "Sound is a longitudinal wave: the particles vibrate parallel to the direction the wave travels. It needs a medium, so it cannot travel through a vacuum.",
+     "section": "drill",
+     "id": "gcse-physics-drill-waves-01"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A wave has a frequency of 50 Hz. What is its period?",
+     "options": [
+      "50 s",
+      "0.5 s",
+      "0.02 s",
+      "2 s"
+     ],
+     "answer": "C",
+     "explanation": "Period is 1 divided by frequency: 1 divided by 50 = 0.02 s. This is the time for one complete wave.",
+     "section": "drill",
+     "id": "gcse-physics-drill-waves-02"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Water waves travel at $3\\ \\text{m/s}$ and have a wavelength of $0.6\\ \\text{m}$. What is their frequency?",
+     "options": [
+      "1.8 Hz",
+      "5 Hz",
+      "0.2 Hz",
+      "3.6 Hz"
+     ],
+     "answer": "B",
+     "explanation": "Rearrange $v = f\\lambda$ to get $f = \\frac{v}{\\lambda} = \\frac{3}{0.6} = 5$ Hz.",
+     "section": "drill",
+     "id": "gcse-physics-drill-waves-03"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A ray of light passes from air into a glass block at an angle to the normal. What happens to the light?",
+     "options": [
+      "It speeds up and bends away from the normal",
+      "It slows down and bends away from the normal",
+      "It speeds up and bends towards the normal",
+      "It slows down and bends towards the normal"
+     ],
+     "answer": "D",
+     "explanation": "Light travels more slowly in glass than in air. Slowing down makes the ray bend towards the normal. Leaving the glass, it speeds up and bends away again.",
+     "section": "drill",
+     "id": "gcse-physics-drill-waves-04"
+    }
+   ]
+  },
+  "electromagnetic-spectrum": {
+   "title": "Electromagnetic spectrum",
+   "domain": "Waves and magnetism",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The order, properties, uses and dangers of electromagnetic waves.",
+   "questions": [
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which type of electromagnetic wave is used in a television remote control?",
+     "options": [
+      "X-rays",
+      "Infrared",
+      "Ultraviolet",
+      "Gamma rays"
+     ],
+     "answer": "B",
+     "explanation": "Remote controls send signals using infrared radiation. Infrared is also used in heaters, cooking and thermal imaging cameras.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electromagnetic-spectrum-01"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What do all electromagnetic waves have in common?",
+     "options": [
+      "The same wavelength",
+      "The same frequency",
+      "The same speed in a vacuum",
+      "They are all visible"
+     ],
+     "answer": "C",
+     "explanation": "All electromagnetic waves are transverse and travel at the same speed in a vacuum. They differ in wavelength and frequency.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electromagnetic-spectrum-02"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which type of electromagnetic wave from the Sun causes sunburn and can lead to skin cancer?",
+     "options": [
+      "Ultraviolet",
+      "Infrared",
+      "Microwaves",
+      "Radio waves"
+     ],
+     "answer": "A",
+     "explanation": "Ultraviolet radiation can damage skin cells, causing sunburn, premature ageing and an increased risk of skin cancer.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electromagnetic-spectrum-03"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Why are X-rays and gamma rays hazardous to living cells?",
+     "options": [
+      "They heat water in the cells",
+      "They are reflected by bone",
+      "They have long wavelengths",
+      "They are ionising and can damage DNA"
+     ],
+     "answer": "D",
+     "explanation": "X-rays and gamma rays carry enough energy to ionise atoms. This can damage the DNA in cells, causing mutations that may lead to cancer.",
+     "section": "drill",
+     "id": "gcse-physics-drill-electromagnetic-spectrum-04"
+    }
+   ]
+  },
+  "magnetism-and-electromagnetism": {
+   "title": "Magnetism and electromagnetism",
+   "domain": "Waves and magnetism",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Magnetic fields, electromagnets, the motor effect, generators and transformers.",
+   "questions": [
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What happens when two north poles are brought close together?",
+     "options": [
+      "They attract",
+      "Nothing happens",
+      "They repel",
+      "They become south poles"
+     ],
+     "answer": "C",
+     "explanation": "Like poles repel and unlike poles attract. Two north poles, or two south poles, push each other apart.",
+     "section": "drill",
+     "id": "gcse-physics-drill-magnetism-and-electromagnetism-01"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which change makes an electromagnet stronger?",
+     "options": [
+      "Adding more turns to the coil",
+      "Removing the iron core",
+      "Reducing the current",
+      "Reversing the current"
+     ],
+     "answer": "A",
+     "explanation": "An electromagnet is made stronger by more turns on the coil, a larger current or adding an iron core. Reversing the current only swaps the poles.",
+     "section": "drill",
+     "id": "gcse-physics-drill-magnetism-and-electromagnetism-02"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A transformer has 100 turns on its primary coil and 500 turns on its secondary coil. The input potential difference is 12 V. What is the output potential difference?",
+     "options": [
+      "2.4 V",
+      "5 V",
+      "600 V",
+      "60 V"
+     ],
+     "answer": "D",
+     "explanation": "The ratio of the potential differences equals the ratio of the turns. The secondary has 5 times as many turns, so the output is 5 times 12 = 60 V.",
+     "section": "drill",
+     "id": "gcse-physics-drill-magnetism-and-electromagnetism-03"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A magnet is pushed into a coil of wire and a potential difference is induced. What happens if the magnet is pushed in faster?",
+     "options": [
+      "The induced potential difference is smaller",
+      "The induced potential difference is larger",
+      "No potential difference is induced",
+      "The induced potential difference is unchanged"
+     ],
+     "answer": "B",
+     "explanation": "Moving the magnet faster makes the magnetic field through the coil change more quickly, which induces a larger potential difference.",
+     "section": "drill",
+     "id": "gcse-physics-drill-magnetism-and-electromagnetism-04"
+    }
+   ]
+  },
+  "space-physics": {
+   "title": "Space physics",
+   "domain": "Space",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The solar system, orbits, the life cycle of stars, and red-shift.",
+   "questions": [
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which force keeps the planets in orbit around the Sun?",
+     "options": [
+      "Magnetism",
+      "Gravity",
+      "Friction",
+      "Air resistance"
+     ],
+     "answer": "B",
+     "explanation": "Gravity provides the force towards the Sun that keeps each planet moving in its orbit.",
+     "section": "drill",
+     "id": "gcse-physics-drill-space-physics-01"
+    },
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the name of the cloud of dust and gas from which a star forms?",
+     "options": [
+      "Nebula",
+      "Supernova",
+      "White dwarf",
+      "Black hole"
+     ],
+     "answer": "A",
+     "explanation": "A star forms when gravity pulls together the dust and gas in a nebula. As it collapses it heats up to form a protostar.",
+     "section": "drill",
+     "id": "gcse-physics-drill-space-physics-02"
+    },
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What process releases energy in a main sequence star such as the Sun?",
+     "options": [
+      "Burning of hydrogen gas",
+      "Nuclear fission of uranium",
+      "Nuclear fusion of hydrogen into helium",
+      "Radioactive decay"
+     ],
+     "answer": "C",
+     "explanation": "In a main sequence star, hydrogen nuclei fuse to form helium, releasing energy. The outward pressure from fusion balances the inward pull of gravity.",
+     "section": "drill",
+     "id": "gcse-physics-drill-space-physics-03"
+    },
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Light from distant galaxies is red-shifted. What does this show?",
+     "options": [
+      "The galaxies are getting hotter",
+      "The galaxies are made of red stars",
+      "The galaxies are moving towards us",
+      "The galaxies are moving away from us"
+     ],
+     "answer": "D",
+     "explanation": "Red-shift means the light's wavelength has been stretched, which happens when the source is moving away. More distant galaxies show more red-shift, evidence that the universe is expanding.",
+     "section": "drill",
+     "id": "gcse-physics-drill-space-physics-04"
+    }
+   ]
+  }
+ }
+}

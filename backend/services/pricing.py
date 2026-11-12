@@ -29,6 +29,50 @@ SAT_PRICES = {
 }
 
 
+# Notenix GCSE, one subject for one year (students outside Beyond Tutors). Agreed Nov 2026: GBP 99.
+GCSE_PRICES = {
+    "GBP": 99, "USD": 129, "INR": 7999, "AED": 469, "SGD": 169, "AUD": 199,
+    "EUR": 119, "NZD": 219, "CAD": 179, "THB": 3990,
+}
+
+
+# All four GCSE subjects together for one year. Agreed Nov 2026: GBP 349 (four singles would be GBP 396).
+GCSE_BUNDLE_PRICES = {
+    "GBP": 349, "USD": 449, "INR": 27999, "AED": 1649, "SGD": 599, "AUD": 699,
+    "EUR": 419, "NZD": 769, "CAD": 629, "THB": 13990,
+}
+
+
+def gcse_bundle_for_currency(currency: str | None) -> dict:
+    """Price of the four-subject GCSE bundle (GCSE_BUNDLE_PRICES env overrides the defaults)."""
+    p = dict(GCSE_BUNDLE_PRICES)
+    try:
+        custom = json.loads(getattr(settings, "gcse_bundle_prices", "") or "{}")
+        if isinstance(custom, dict) and custom:
+            p = {k.upper(): float(v) for k, v in custom.items()}
+    except Exception:
+        pass
+    cur = (currency or "GBP").upper()
+    if cur not in p:
+        cur = "GBP" if "GBP" in p else next(iter(p))
+    return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
+
+
+def gcse_for_currency(currency: str | None) -> dict:
+    """Notenix GCSE yearly price per subject in this currency (GCSE_PRICES env overrides the defaults)."""
+    p = dict(GCSE_PRICES)
+    try:
+        custom = json.loads(getattr(settings, "gcse_prices", "") or "{}")
+        if isinstance(custom, dict) and custom:
+            p = {k.upper(): float(v) for k, v in custom.items()}
+    except Exception:
+        pass
+    cur = (currency or "GBP").upper()
+    if cur not in p:
+        cur = "GBP" if "GBP" in p else next(iter(p))
+    return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
+
+
 def sat_for_currency(currency: str | None) -> dict:
     """Notenix SAT yearly price in this currency (SAT_PRICES env overrides the defaults)."""
     p = dict(SAT_PRICES)

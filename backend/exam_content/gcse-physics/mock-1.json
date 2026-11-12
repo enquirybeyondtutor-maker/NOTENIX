@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-physics",
+ "slug": "mock-1",
+ "title": "GCSE Physics Practice Paper 1",
+ "kind": "mock",
+ "summary": "Foundation and crossover · grades 1 to 5 · 24 questions · 36 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the unit of energy?",
+     "options": [
+      "Watt",
+      "Joule",
+      "Newton",
+      "Volt"
+     ],
+     "answer": "B",
+     "explanation": "Energy is measured in joules (J). The watt is the unit of power, the newton of force and the volt of potential difference.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A trolley of mass 4 kg moves at 5 m/s. What is its kinetic energy?",
+     "options": [
+      "10 J",
+      "20 J",
+      "100 J",
+      "50 J"
+     ],
+     "answer": "D",
+     "explanation": "Kinetic energy $= \\frac{1}{2}mv^2 = \\frac{1}{2} \\times 4 \\times 5^2 = 50$ J.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of these reduces unwanted energy transfers in a machine with moving parts?",
+     "options": [
+      "Lubricating the moving parts",
+      "Making the parts rougher",
+      "Running the machine faster",
+      "Removing the insulation"
+     ],
+     "answer": "A",
+     "explanation": "Lubrication reduces friction between moving parts, so less energy is wasted by heating.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "How should an ammeter be connected to measure the current in a lamp?",
+     "options": [
+      "In parallel with the lamp",
+      "Across the battery",
+      "In series with the lamp",
+      "It does not matter"
+     ],
+     "answer": "C",
+     "explanation": "An ammeter is connected in series so that the same current flows through it and the lamp. A voltmeter is the meter connected in parallel.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-04"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The potential difference across a resistor is 9 V and the current in it is 0.5 A. What is its resistance?",
+     "options": [
+      "$18\\ \\Omega$",
+      "$4.5\\ \\Omega$",
+      "$9.5\\ \\Omega$",
+      "$0.056\\ \\Omega$"
+     ],
+     "answer": "A",
+     "explanation": "Resistance $= \\frac{V}{I} = \\frac{9}{0.5} = 18\\ \\Omega$.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-05"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which statement describes the mains electricity supply in the UK?",
+     "options": [
+      "About 230 V, direct current",
+      "About 12 V, alternating current at 50 Hz",
+      "About 230 V, alternating current at 50 Hz",
+      "About 50 V, alternating current at 230 Hz"
+     ],
+     "answer": "C",
+     "explanation": "UK mains is an alternating current supply with a potential difference of about 230 V and a frequency of 50 Hz.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-06"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "An appliance has a power of 920 W and runs on a 230 V supply. Which fuse is the most suitable?",
+     "options": [
+      "3 A",
+      "5 A",
+      "13 A",
+      "1 A"
+     ],
+     "answer": "B",
+     "explanation": "Current is power divided by potential difference: 920 divided by 230 = 4 A. The fuse should be rated just above the normal current, so 5 A is the best choice.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-07"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "In which state of matter are the particles close together in a regular pattern?",
+     "options": [
+      "Gas",
+      "Liquid",
+      "Plasma",
+      "Solid"
+     ],
+     "answer": "D",
+     "explanation": "In a solid the particles are close together in a regular arrangement and vibrate about fixed positions.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-08"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A metal has a density of $8\\ \\text{g/cm}^3$. What is the mass of $50\\ \\text{cm}^3$ of the metal?",
+     "options": [
+      "6.25 g",
+      "400 g",
+      "0.16 g",
+      "58 g"
+     ],
+     "answer": "B",
+     "explanation": "Mass $=$ density $\\times$ volume $= 8 \\times 50 = 400$ g.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-09"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A neutral atom has 6 protons. How many electrons does it have?",
+     "options": [
+      "6",
+      "12",
+      "3",
+      "0"
+     ],
+     "answer": "A",
+     "explanation": "A neutral atom has no overall charge, so the number of negative electrons equals the number of positive protons: 6.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-10"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which type of radiation is stopped by a sheet of paper?",
+     "options": [
+      "Gamma",
+      "Beta",
+      "X-rays",
+      "Alpha"
+     ],
+     "answer": "D",
+     "explanation": "Alpha particles are the least penetrating: they are stopped by paper, skin or a few centimetres of air.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-11"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A nucleus emits an alpha particle. How do its mass number and atomic number change?",
+     "options": [
+      "Mass number down by 2, atomic number down by 4",
+      "Mass number unchanged, atomic number up by 1",
+      "Mass number down by 4, atomic number down by 2",
+      "Mass number down by 4, atomic number unchanged"
+     ],
+     "answer": "C",
+     "explanation": "An alpha particle is two protons and two neutrons. Losing it reduces the mass number by 4 and the atomic number by 2.",
+     "section": "p1",
+     "id": "gcse-physics-mock-1-p1-12"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the unit of force?",
+     "options": [
+      "Joule",
+      "Pascal",
+      "Newton",
+      "Kilogram"
+     ],
+     "answer": "C",
+     "explanation": "Force is measured in newtons (N). The joule is the unit of energy, the pascal of pressure and the kilogram of mass.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-01"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A box is pulled to the right with a force of 30 N. Friction of 12 N acts to the left. What is the resultant force?",
+     "options": [
+      "18 N to the right",
+      "42 N to the right",
+      "18 N to the left",
+      "42 N to the left"
+     ],
+     "answer": "A",
+     "explanation": "The forces act in opposite directions, so subtract: 30 minus 12 = 18 N, in the direction of the larger force, to the right.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-02"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the unit of acceleration?",
+     "options": [
+      "m/s",
+      "N/kg only",
+      "kg m/s",
+      "$\\text{m/s}^2$"
+     ],
+     "answer": "D",
+     "explanation": "Acceleration is the change in velocity per second, so its unit is metres per second per second, $\\text{m/s}^2$.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-03"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A cyclist travels at a steady 15 m/s for 40 s. How far does the cyclist travel?",
+     "options": [
+      "2.67 m",
+      "600 m",
+      "55 m",
+      "0.375 m"
+     ],
+     "answer": "B",
+     "explanation": "Distance is speed multiplied by time: 15 times 40 = 600 m.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-04"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which statement is Newton's third law?",
+     "options": [
+      "When two objects interact, the forces they exert on each other are equal in size and opposite in direction",
+      "An object stays at rest unless a resultant force acts on it",
+      "Force equals mass multiplied by acceleration",
+      "Heavier objects always fall faster"
+     ],
+     "answer": "A",
+     "explanation": "Newton's third law says that when two objects interact, they exert equal and opposite forces on each other.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-05"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A driver's thinking distance is 12 m and the braking distance is 38 m. What is the stopping distance?",
+     "options": [
+      "26 m",
+      "38 m",
+      "50 m",
+      "456 m"
+     ],
+     "answer": "C",
+     "explanation": "Stopping distance is thinking distance plus braking distance: 12 + 38 = 50 m.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-06"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A car of mass 900 kg travels at 10 m/s. What is its momentum?",
+     "options": [
+      "90 kg m/s",
+      "9000 kg m/s",
+      "910 kg m/s",
+      "45 000 kg m/s"
+     ],
+     "answer": "B",
+     "explanation": "Momentum is mass multiplied by velocity: 900 times 10 = 9000 kg m/s.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-07"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the amplitude of a wave?",
+     "options": [
+      "The number of waves passing a point each second",
+      "The distance from one peak to the next",
+      "The time for one complete wave",
+      "The maximum displacement of a point on the wave from its rest position"
+     ],
+     "answer": "D",
+     "explanation": "Amplitude is the maximum displacement from the undisturbed position. The distance between peaks is the wavelength, and waves per second is the frequency.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-08"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A sound wave has a frequency of 200 Hz and a wavelength of 1.7 m. What is its speed?",
+     "options": [
+      "340 m/s",
+      "118 m/s",
+      "201.7 m/s",
+      "0.0085 m/s"
+     ],
+     "answer": "A",
+     "explanation": "Wave speed is frequency multiplied by wavelength: 200 times 1.7 = 340 m/s.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-09"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which type of electromagnetic wave has the longest wavelength?",
+     "options": [
+      "Gamma rays",
+      "Ultraviolet",
+      "Radio waves",
+      "Infrared"
+     ],
+     "answer": "C",
+     "explanation": "Radio waves have the longest wavelength and the lowest frequency. Gamma rays have the shortest wavelength.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-10"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In which direction do magnetic field lines point around a bar magnet?",
+     "options": [
+      "From south to north",
+      "From north to south",
+      "In circles that never touch the poles",
+      "Straight outwards from both poles"
+     ],
+     "answer": "B",
+     "explanation": "Field lines show the direction of the force on a north pole, so they point away from the magnet's north pole and towards its south pole.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-11"
+    },
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the name of the galaxy that contains our solar system?",
+     "options": [
+      "Andromeda",
+      "The Solar Nebula",
+      "Orion",
+      "The Milky Way"
+     ],
+     "answer": "D",
+     "explanation": "Our solar system is part of the Milky Way galaxy, which contains hundreds of billions of stars.",
+     "section": "p2",
+     "id": "gcse-physics-mock-1-p2-12"
+    }
+   ]
+  }
+ }
+}

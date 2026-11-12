@@ -1,19 +1,17 @@
-"""Student written-answer practice: a shared library of past-paper questions and
-self-uploaded PDFs. Gated to Pro + admin-whitelisted accounts + teachers/admins.
+"""Student written-answer practice: a shared library of past-paper questions published by the team.
+(Uploading your own paper used AI to pull out the questions and is retired.) Gated to Pro + admin-whitelisted accounts + teachers/admins.
 
 Each entry point creates a written `Test` + a self-`TestAssignment`, then hands the
 student off to the existing `/tests/{assignment_id}` attempt → submit → result flow.
 """
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func
+from sqlalchemy import select
 
 from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
-from security import require_write_practice, ai_marks_for
-from services import ai
+from security import require_write_practice
 from services import courses as course_svc
-from services.pdf_extract import render_pages_to_png, crop_figures, read_uploads
 
 router = APIRouter(prefix="/practice", tags=["practice"])
 
@@ -93,48 +91,6 @@ async def start_library(test_id: int, user: User = Depends(require_write_practic
 
 
 @router.post("/upload")
-async def upload_paper(
-    files: list[UploadFile] = File(...),
-    subject: str = Form("general"),
-    level: str = Form("GCSE"),
-    title: str = Form(""),
-    num_questions: int = Form(6),
-    user: User = Depends(require_write_practice),
-    db: AsyncSession = Depends(get_db),
-):
-    """Upload one or more past-paper PDFs/images (screenshots/photos) → extract the
-    written questions → start a private practice test the student can answer now."""
-    data = await read_uploads(files)
-    first_name = files[0].filename or "Practice"
-
-    n = max(1, min(num_questions, 20))
-    try:
-        images = render_pages_to_png(data, max_pages=8)
-    except Exception:
-        images = []
-    if not images:
-        raise HTTPException(422, "Couldn't read that file. It may be corrupted or password-protected.")
-
-    questions = ai.extract_written_from_images(images, subject, level, n)
-    if not questions:
-        raise HTTPException(502, "Couldn't find written questions in that paper. Try a clearer file.")
-    questions = crop_figures(data, questions)
-
-    test = Test(
-        owner_id=user.id,
-        title=(title.strip() or first_name.rsplit(".", 1)[0])[:200],
-        subject=subject, topic="Self-practice", level=level,
-        exam_board="", difficulty="medium",
-        mode="written", is_library=False,
-        questions=questions, num_questions=len(questions),
-    )
-    db.add(test)
-    await db.commit()
-    await db.refresh(test)
-
-    assignment = await _self_assignment(test, user, db)
-    return {
-        "assignment_id": assignment.id,
-        "num_questions": len(questions),
-        "ai_marked": ai_marks_for(user),
-    }
+async def upload_paper(user: User = Depends(require_write_practice)):
+    """Retired: this used AI to read a student's own paper. Students send a paper to a tutor via /request instead."""
+    raise HTTPException(410, "Uploading your own paper has been retired. Use 'Get your past paper marked' to send it to a tutor.")

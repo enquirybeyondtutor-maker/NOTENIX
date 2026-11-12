@@ -52,6 +52,7 @@ EXAMS: dict[str, dict] = {
         "course": "ap-calc-ab",
         "sections": {"mcq-a": "Section I Part A: Multiple choice, no calculator",
                      "mcq-b": "Section I Part B: Multiple choice, graphing calculator"},
+        "no_calculator": ["mcq-a"],
         # The eight College Board units, grouped.
         "domains": {
             "Limits and continuity": ["Limits and continuity"],
@@ -68,6 +69,96 @@ EXAMS: dict[str, dict] = {
         "calculator": True,
         "mock_detail": "Section I · 45 multiple-choice questions · 1 h 45 min (Part A no calculator, Part B calculator)",
         "about_score": "AP scores run from 1 to 5; most universities look for a 4 or 5. Ours are Notenix estimates from the multiple-choice share you get right. The real score also counts the six written free-response questions.",
+    },
+    "gcse-maths": {
+        "name": "GCSE Maths",
+        "full_name": "GCSE Mathematics (AQA, Edexcel, OCR)",
+        "course": "gcse-maths",
+        "access": ("GCSE", "maths"),   # opened by the gcse-maths course (see routers/exam._allowed)
+        "sections": {"non-calc": "Non-calculator", "calc": "Calculator"},
+        "no_calculator": ["non-calc"],   # sections sat without the on-screen calculator
+        "domains": {
+            "Number": ["Fractions, decimals and percentages", "Indices, standard form and surds", "Factors, multiples and estimation"],
+            "Algebra": ["Expressions and formulae", "Equations and inequalities", "Sequences", "Graphs and functions"],
+            "Ratio and proportion": ["Ratio and proportion", "Percentage change and growth"],
+            "Geometry and measures": ["Angles and shapes", "Area, volume and Pythagoras", "Trigonometry", "Vectors and transformations"],
+            "Probability and statistics": ["Probability", "Statistics"],
+        },
+        # Share right -> grade 1-9. An estimate only: real boundaries move each year.
+        "scale": {"min": 1.0, "max": 9.0, "decimals": 0,
+                  "points": [(0.0, 1.0), (0.15, 2.0), (0.3, 3.0), (0.42, 4.0), (0.54, 5.0), (0.65, 6.0),
+                             (0.76, 7.0), (0.86, 8.0), (0.94, 9.0), (1.0, 9.0)]},
+        "band": 1.0,
+        "target_range": (1.0, 9.0),
+        "calculator": True,
+        "mock_detail": "Multiple-choice practice papers · non-calculator and calculator sections",
+        "about_score": "GCSE grades run from 1 to 9. Ours are Notenix estimates from the share of questions you get right; real grade boundaries change every year and depend on your tier and exam board.",
+    },
+    "gcse-biology": {
+        "name": "GCSE Biology",
+        "full_name": "GCSE Biology (AQA, Edexcel, OCR)",
+        "course": "gcse-biology",
+        "access": ("GCSE", "biology"),   # opened by the gcse-biology course (see routers/exam._allowed)
+        "sections": {"p1": "Paper 1 topics", "p2": "Paper 2 topics"},
+        "domains": {
+            "Cells and organisation": ["Cell structure and transport", "Cell division", "Organisation and digestion", "Heart, blood and circulation"],
+            "Infection and bioenergetics": ["Infection and response", "Photosynthesis", "Respiration"],
+            "Control and inheritance": ["Homeostasis and hormones", "Nervous system", "Inheritance and genetics", "Variation and evolution"],
+            "Ecology": ["Ecology"],
+        },
+        # Share right -> grade 1-9. An estimate only: real boundaries move each year.
+        "scale": {"min": 1.0, "max": 9.0, "decimals": 0,
+                  "points": [(0.0, 1.0), (0.15, 2.0), (0.3, 3.0), (0.42, 4.0), (0.54, 5.0), (0.65, 6.0),
+                             (0.76, 7.0), (0.86, 8.0), (0.94, 9.0), (1.0, 9.0)]},
+        "band": 1.0,
+        "target_range": (1.0, 9.0),
+        "calculator": True,
+        "mock_detail": "Multiple-choice practice papers · Paper 1 and Paper 2 topics",
+        "about_score": "GCSE grades run from 1 to 9. Ours are Notenix estimates from the share of questions you get right; real grade boundaries change every year and depend on your tier and exam board.",
+    },
+    "gcse-chemistry": {
+        "name": "GCSE Chemistry",
+        "full_name": "GCSE Chemistry (AQA, Edexcel, OCR)",
+        "course": "gcse-chemistry",
+        "access": ("GCSE", "chemistry"),   # opened by the gcse-chemistry course (see routers/exam._allowed)
+        "sections": {"p1": "Paper 1 topics", "p2": "Paper 2 topics"},
+        "domains": {
+            "Atoms and bonding": ["Atomic structure", "Periodic table", "Bonding and structure"],
+            "Quantities and reactions": ["Quantitative chemistry", "Chemical changes", "Electrolysis", "Energy changes"],
+            "Rates and organic": ["Rates and equilibrium", "Organic chemistry"],
+            "Analysis and the Earth": ["Chemical analysis", "Atmosphere", "Using resources"],
+        },
+        # Share right -> grade 1-9. An estimate only: real boundaries move each year.
+        "scale": {"min": 1.0, "max": 9.0, "decimals": 0,
+                  "points": [(0.0, 1.0), (0.15, 2.0), (0.3, 3.0), (0.42, 4.0), (0.54, 5.0), (0.65, 6.0),
+                             (0.76, 7.0), (0.86, 8.0), (0.94, 9.0), (1.0, 9.0)]},
+        "band": 1.0,
+        "target_range": (1.0, 9.0),
+        "calculator": True,
+        "mock_detail": "Multiple-choice practice papers · Paper 1 and Paper 2 topics",
+        "about_score": "GCSE grades run from 1 to 9. Ours are Notenix estimates from the share of questions you get right; real grade boundaries change every year and depend on your tier and exam board.",
+    },
+    "gcse-physics": {
+        "name": "GCSE Physics",
+        "full_name": "GCSE Physics (AQA, Edexcel, OCR)",
+        "course": "gcse-physics",
+        "access": ("GCSE", "physics"),   # opened by the gcse-physics course (see routers/exam._allowed)
+        "sections": {"p1": "Paper 1 topics", "p2": "Paper 2 topics"},
+        "domains": {
+            "Energy and electricity": ["Energy stores and transfers", "Electricity", "Particle model", "Atomic structure and radiation"],
+            "Forces and motion": ["Forces and their effects", "Motion and Newton's laws", "Momentum"],
+            "Waves and magnetism": ["Waves", "Electromagnetic spectrum", "Magnetism and electromagnetism"],
+            "Space": ["Space physics"],
+        },
+        # Share right -> grade 1-9. An estimate only: real boundaries move each year.
+        "scale": {"min": 1.0, "max": 9.0, "decimals": 0,
+                  "points": [(0.0, 1.0), (0.15, 2.0), (0.3, 3.0), (0.42, 4.0), (0.54, 5.0), (0.65, 6.0),
+                             (0.76, 7.0), (0.86, 8.0), (0.94, 9.0), (1.0, 9.0)]},
+        "band": 1.0,
+        "target_range": (1.0, 9.0),
+        "calculator": True,
+        "mock_detail": "Multiple-choice practice papers · Paper 1 and Paper 2 topics",
+        "about_score": "GCSE grades run from 1 to 9. Ours are Notenix estimates from the share of questions you get right; real grade boundaries change every year and depend on your tier and exam board.",
     },
 }
 
@@ -113,6 +204,12 @@ def drills(exam: str) -> dict:
 
 def public_question(q: dict) -> dict:
     return {k: v for k, v in q.items() if k not in ("answer", "explanation")}
+
+
+def calculator_for(exam: str, section: str) -> bool:
+    """Is the on-screen calculator offered in this section of this exam?"""
+    cfg = EXAMS[exam]
+    return bool(cfg["calculator"]) and section not in cfg.get("no_calculator", ())
 
 
 def public_module(f: dict, key: str) -> dict:

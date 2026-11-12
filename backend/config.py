@@ -86,6 +86,8 @@ class Settings(BaseSettings):
     trial_days: int = 7                              # free access around the trial class
 
     # Private key for the BT Sessions desktop app (/sync/*). Empty = sync disabled.
+    gcse_bundle_prices: str = ""   # optional JSON to override pricing.GCSE_BUNDLE_PRICES
+    gcse_prices: str = ""   # optional JSON {"GBP": 99, ...} to override pricing.GCSE_PRICES
     sync_key: str = ""
     sync_owner_email: str = "hello@thebeyondtutors.com"  # uploads from the app are owned by this account
 

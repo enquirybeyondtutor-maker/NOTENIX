@@ -1,0 +1,299 @@
+{
+ "exam": "gcse-biology",
+ "slug": "diagnostic",
+ "title": "GCSE Biology diagnostic",
+ "kind": "diagnostic",
+ "summary": "16 multiple-choice questions across cells, organisation, infection, bioenergetics, homeostasis, inheritance and ecology.",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 10,
+   "questions": [
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of these structures is found in a plant cell but not in an animal cell?",
+     "options": [
+      "Nucleus",
+      "Mitochondria",
+      "Cell wall",
+      "Ribosomes"
+     ],
+     "answer": "C",
+     "explanation": "Plant cells have a cell wall made of cellulose that supports the cell. Animal cells have a nucleus, mitochondria and ribosomes too, but no cell wall.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-01"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell structure and transport",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Water moves from a dilute solution to a more concentrated solution through a partially permeable membrane. What is this process called?",
+     "options": [
+      "Osmosis",
+      "Active transport",
+      "Diffusion",
+      "Transpiration"
+     ],
+     "answer": "A",
+     "explanation": "Osmosis is the movement of water across a partially permeable membrane from a dilute solution to a more concentrated one. Diffusion is the wider term for any particles spreading out, and active transport needs energy.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-02"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Cell division",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A human body cell has 46 chromosomes. It divides by mitosis. How many chromosomes does each new cell have?",
+     "options": [
+      "23",
+      "92",
+      "12",
+      "46"
+     ],
+     "answer": "D",
+     "explanation": "Mitosis makes two genetically identical cells, so each has the full set of 46 chromosomes. Only meiosis, which makes gametes, halves the number to 23.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-03"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Organisation and digestion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which enzyme breaks down starch into sugars?",
+     "options": [
+      "Lipase",
+      "Amylase",
+      "Protease",
+      "Bile"
+     ],
+     "answer": "B",
+     "explanation": "Amylase breaks starch down into sugars. Lipase works on fats and protease works on proteins. Bile is not an enzyme: it emulsifies fats.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-04"
+    },
+    {
+     "domain": "Cells and organisation",
+     "skill": "Heart, blood and circulation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which blood vessel carries oxygenated blood from the lungs to the heart?",
+     "options": [
+      "Pulmonary vein",
+      "Pulmonary artery",
+      "Aorta",
+      "Vena cava"
+     ],
+     "answer": "A",
+     "explanation": "The pulmonary vein brings oxygenated blood from the lungs back to the left atrium. The pulmonary artery carries deoxygenated blood the other way, from the heart to the lungs.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-05"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Infection and response",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A patient has influenza (flu). Why will antibiotics not cure it?",
+     "options": [
+      "Flu is caused by a fungus",
+      "The patient is already immune to antibiotics",
+      "Flu is caused by a virus, and antibiotics only kill bacteria",
+      "Antibiotics only work on the skin"
+     ],
+     "answer": "C",
+     "explanation": "Antibiotics kill bacteria. Flu is caused by a virus, which reproduces inside the body's own cells, so antibiotics have no effect on it.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-06"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Photosynthesis",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What are the two products of photosynthesis?",
+     "options": [
+      "Carbon dioxide and water",
+      "Glucose and oxygen",
+      "Glucose and carbon dioxide",
+      "Oxygen and water"
+     ],
+     "answer": "B",
+     "explanation": "Photosynthesis uses light energy to turn carbon dioxide and water into glucose and oxygen. Carbon dioxide and water are the reactants, not the products.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-07"
+    },
+    {
+     "domain": "Infection and bioenergetics",
+     "skill": "Respiration",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "During hard exercise, muscle cells may respire anaerobically. What does anaerobic respiration in muscle cells produce?",
+     "options": [
+      "Ethanol and carbon dioxide",
+      "Carbon dioxide and water",
+      "Glucose and oxygen",
+      "Lactic acid"
+     ],
+     "answer": "D",
+     "explanation": "Without enough oxygen, glucose in muscle cells is only partly broken down, producing lactic acid. Ethanol and carbon dioxide are made by yeast and plant cells, not by muscles.",
+     "section": "p1",
+     "id": "gcse-biology-diagnostic-p1-08"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 10,
+   "questions": [
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which hormone lowers the concentration of glucose in the blood?",
+     "options": [
+      "Glucagon",
+      "Adrenaline",
+      "Insulin",
+      "Thyroxine"
+     ],
+     "answer": "C",
+     "explanation": "Insulin, released by the pancreas, causes cells to take in glucose and the liver to store it as glycogen, so blood glucose falls. Glucagon does the opposite.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-01"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Nervous system",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which is the correct order for a reflex arc?",
+     "options": [
+      "Receptor, sensory neurone, relay neurone, motor neurone, effector",
+      "Effector, motor neurone, relay neurone, sensory neurone, receptor",
+      "Receptor, motor neurone, relay neurone, sensory neurone, effector",
+      "Receptor, relay neurone, sensory neurone, effector, motor neurone"
+     ],
+     "answer": "A",
+     "explanation": "A receptor detects the stimulus, a sensory neurone carries the impulse to the spinal cord, a relay neurone passes it on, and a motor neurone carries it to the effector, a muscle or gland.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-02"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Cystic fibrosis is caused by a recessive allele. Both parents are carriers (heterozygous). What is the probability that their next child has cystic fibrosis?",
+     "options": [
+      "50%",
+      "75%",
+      "0%",
+      "25%"
+     ],
+     "answer": "D",
+     "explanation": "Each parent passes on the recessive allele with probability one half. The child needs two recessive alleles, so the probability is one half times one half, which is one quarter or 25%.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-03"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Inheritance and genetics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which sex chromosomes are found in the body cells of a human male?",
+     "options": [
+      "XX",
+      "XY",
+      "YY",
+      "X only"
+     ],
+     "answer": "B",
+     "explanation": "Human males have one X and one Y chromosome in each body cell. Females have two X chromosomes.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-04"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Variation and evolution",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A population of bacteria becomes resistant to an antibiotic. What is the first step in this process?",
+     "options": [
+      "A random mutation gives some bacteria resistance",
+      "The bacteria decide to change when they meet the antibiotic",
+      "The antibiotic makes every bacterium mutate in the same way",
+      "Patients become immune to the antibiotic"
+     ],
+     "answer": "A",
+     "explanation": "Resistance starts with a random mutation in a few bacteria. When the antibiotic is used, those bacteria survive and reproduce while the others die, so the resistant strain spreads.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-05"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In the food chain grass, rabbit, fox, what is the rabbit?",
+     "options": [
+      "Producer",
+      "Secondary consumer",
+      "Primary consumer",
+      "Decomposer"
+     ],
+     "answer": "C",
+     "explanation": "The grass is the producer. The rabbit eats the producer, so it is a primary consumer. The fox, which eats the rabbit, is a secondary consumer.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-06"
+    },
+    {
+     "domain": "Ecology",
+     "skill": "Ecology",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A student places $10$ quadrats, each of area $0.25\\ \\text{m}^2$, at random in a field and counts a total of $40$ daisies. The field has an area of $200\\ \\text{m}^2$. What is the best estimate of the number of daisies in the field?",
+     "options": [
+      "800",
+      "3200",
+      "8000",
+      "320"
+     ],
+     "answer": "B",
+     "explanation": "The area sampled is $10 \\times 0.25 = 2.5\\ \\text{m}^2$, so there are $40 \\div 2.5 = 16$ daisies per square metre. For the whole field: $16 \\times 200 = 3200$.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-07"
+    },
+    {
+     "domain": "Control and inheritance",
+     "skill": "Homeostasis and hormones",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What happens in the skin when body temperature rises too high?",
+     "options": [
+      "Shivering starts",
+      "Blood vessels near the skin surface narrow",
+      "Hairs on the skin stand up",
+      "Blood vessels near the skin surface widen"
+     ],
+     "answer": "D",
+     "explanation": "When the body is too hot, blood vessels near the skin surface widen (vasodilation) so more blood flows there and more energy is lost. Sweating also increases. The other three responses happen when the body is too cold.",
+     "section": "p2",
+     "id": "gcse-biology-diagnostic-p2-08"
+    }
+   ]
+  }
+ }
+}

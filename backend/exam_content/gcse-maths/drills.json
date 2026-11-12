@@ -1,0 +1,1419 @@
+{
+ "exam": "gcse-maths",
+ "slug": "drills",
+ "title": "GCSE Maths skill drills",
+ "kind": "drills",
+ "stages": [],
+ "modules": {
+  "fractions-decimals-and-percentages": {
+   "title": "Fractions, decimals and percentages",
+   "domain": "Number",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Converting between fractions, decimals and percentages, and calculating with fractions.",
+   "questions": [
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Write $0.35$ as a fraction in its simplest form.",
+     "options": [
+      "$\\dfrac{7}{20}$",
+      "$\\dfrac{35}{10}$",
+      "$\\dfrac{3}{5}$",
+      "$\\dfrac{7}{25}$"
+     ],
+     "answer": "A",
+     "explanation": "$0.35 = \\frac{35}{100}$. Divide top and bottom by $5$ to get $\\frac{7}{20}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-fractions-decimals-and-percentages-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Work out $\\dfrac{2}{3} + \\dfrac{1}{4}$.",
+     "options": [
+      "$\\dfrac{3}{7}$",
+      "$\\dfrac{11}{12}$",
+      "$\\dfrac{3}{12}$",
+      "$\\dfrac{1}{2}$"
+     ],
+     "answer": "B",
+     "explanation": "Use a common denominator of $12$: $\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$. Never add the denominators.",
+     "section": "drill",
+     "id": "gcse-maths-drill-fractions-decimals-and-percentages-02"
+    },
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out $15\\%$ of $240$.",
+     "options": [
+      "$16$",
+      "$24$",
+      "$36$",
+      "$3600$"
+     ],
+     "answer": "C",
+     "explanation": "$10\\%$ of $240$ is $24$ and $5\\%$ is $12$, so $15\\%$ is $24 + 12 = 36$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-fractions-decimals-and-percentages-03"
+    },
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out $1\\tfrac{2}{3} \\div \\dfrac{5}{6}$.",
+     "options": [
+      "$\\dfrac{25}{18}$",
+      "$\\dfrac{1}{2}$",
+      "$1\\tfrac{7}{18}$",
+      "$2$"
+     ],
+     "answer": "D",
+     "explanation": "Change to an improper fraction: $\\frac{5}{3}$. Dividing by $\\frac{5}{6}$ is the same as multiplying by $\\frac{6}{5}$: $\\frac{5}{3} \\times \\frac{6}{5} = \\frac{30}{15} = 2$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-fractions-decimals-and-percentages-04"
+    },
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Write the recurring decimal $0.\\dot{4}\\dot{5}$ as a fraction in its simplest form.",
+     "options": [
+      "$\\dfrac{5}{11}$",
+      "$\\dfrac{9}{20}$",
+      "$\\dfrac{45}{100}$",
+      "$\\dfrac{4}{9}$"
+     ],
+     "answer": "A",
+     "explanation": "Let $x = 0.4545\\ldots$ Then $100x = 45.4545\\ldots$ Subtract: $99x = 45$, so $x = \\frac{45}{99} = \\frac{5}{11}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-fractions-decimals-and-percentages-05"
+    }
+   ]
+  },
+  "indices-standard-form-and-surds": {
+   "title": "Indices, standard form and surds",
+   "domain": "Number",
+   "section": "drill",
+   "minutes": 0,
+   "about": "The laws of indices, standard form and simplifying surds.",
+   "questions": [
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Simplify $5^3 \\times 5^4$.",
+     "options": [
+      "$5^{12}$",
+      "$25^7$",
+      "$5^7$",
+      "$25^{12}$"
+     ],
+     "answer": "C",
+     "explanation": "When multiplying powers of the same base, add the indices: $5^{3+4} = 5^7$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-indices-standard-form-and-surds-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Write $3.6 \\times 10^{-3}$ as an ordinary number.",
+     "options": [
+      "$3600$",
+      "$0.036$",
+      "$0.00036$",
+      "$0.0036$"
+     ],
+     "answer": "D",
+     "explanation": "A power of $-3$ means divide by $1000$, moving the digits three places to the right: $0.0036$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-indices-standard-form-and-surds-02"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Simplify $(2x^3)^4$.",
+     "options": [
+      "$8x^7$",
+      "$16x^{12}$",
+      "$2x^{12}$",
+      "$16x^7$"
+     ],
+     "answer": "B",
+     "explanation": "Raise each part to the power $4$: $2^4 = 16$ and $(x^3)^4 = x^{12}$, giving $16x^{12}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-indices-standard-form-and-surds-03"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Work out the value of $16^{-\\frac{3}{4}}$.",
+     "options": [
+      "$\\dfrac{1}{8}$",
+      "$-12$",
+      "$-8$",
+      "$\\dfrac{1}{12}$"
+     ],
+     "answer": "A",
+     "explanation": "The fourth root of $16$ is $2$, and $2^3 = 8$. The negative sign means take the reciprocal: $\\frac{1}{8}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-indices-standard-form-and-surds-04"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Rationalise the denominator of $\\dfrac{6}{\\sqrt{3}}$.",
+     "options": [
+      "$6\\sqrt{3}$",
+      "$3\\sqrt{3}$",
+      "$2\\sqrt{3}$",
+      "$\\sqrt{2}$"
+     ],
+     "answer": "C",
+     "explanation": "Multiply top and bottom by $\\sqrt{3}$: $\\frac{6\\sqrt{3}}{3} = 2\\sqrt{3}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-indices-standard-form-and-surds-05"
+    }
+   ]
+  },
+  "factors-multiples-and-estimation": {
+   "title": "Factors, multiples and estimation",
+   "domain": "Number",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Primes, factors and multiples, rounding, estimating and error intervals.",
+   "questions": [
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of these numbers is prime?",
+     "options": [
+      "$51$",
+      "$57$",
+      "$59$",
+      "$63$"
+     ],
+     "answer": "C",
+     "explanation": "$51 = 3 \\times 17$, $57 = 3 \\times 19$ and $63 = 7 \\times 9$. Only $59$ has no factors other than $1$ and itself.",
+     "section": "drill",
+     "id": "gcse-maths-drill-factors-multiples-and-estimation-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the lowest common multiple (LCM) of $12$ and $18$?",
+     "options": [
+      "$6$",
+      "$36$",
+      "$72$",
+      "$216$"
+     ],
+     "answer": "B",
+     "explanation": "Multiples of $18$ are $18, 36, \\ldots$ and $36$ is also a multiple of $12$. Note that $6$ is the highest common factor, not the LCM.",
+     "section": "drill",
+     "id": "gcse-maths-drill-factors-multiples-and-estimation-02"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "By rounding each number to 1 significant figure, estimate the value of $\\dfrac{19.8 \\times 4.92}{0.51}$.",
+     "options": [
+      "$200$",
+      "$50$",
+      "$100$",
+      "$2000$"
+     ],
+     "answer": "A",
+     "explanation": "Round to $\\frac{20 \\times 5}{0.5} = \\frac{100}{0.5}$. Dividing by $0.5$ doubles the number, giving $200$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-factors-multiples-and-estimation-03"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Write $360$ as a product of its prime factors.",
+     "options": [
+      "$2^2 \\times 3^2 \\times 10$",
+      "$2^3 \\times 45$",
+      "$2^2 \\times 3^3 \\times 5$",
+      "$2^3 \\times 3^2 \\times 5$"
+     ],
+     "answer": "D",
+     "explanation": "$360 = 2 \\times 180 = 2 \\times 2 \\times 90 = 2 \\times 2 \\times 2 \\times 45 = 2^3 \\times 3^2 \\times 5$. Every factor in the answer must be prime.",
+     "section": "drill",
+     "id": "gcse-maths-drill-factors-multiples-and-estimation-04"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A length $l$ is $8.4\\ \\text{cm}$, correct to 1 decimal place. What is the error interval for $l$?",
+     "options": [
+      "$8.3 \\le l < 8.5$",
+      "$8.35 \\le l < 8.45$",
+      "$8.39 \\le l < 8.41$",
+      "$8.4 \\le l < 8.5$"
+     ],
+     "answer": "B",
+     "explanation": "Rounding to 1 decimal place means the nearest $0.1$, so the value can be up to half of that, $0.05$, either side: $8.35 \\le l < 8.45$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-factors-multiples-and-estimation-05"
+    }
+   ]
+  },
+  "expressions-and-formulae": {
+   "title": "Expressions and formulae",
+   "domain": "Algebra",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Simplifying, expanding, factorising, substituting and rearranging formulae.",
+   "questions": [
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Simplify $3a + 5b - a + 2b$.",
+     "options": [
+      "$2a + 7b$",
+      "$4a + 7b$",
+      "$2a + 3b$",
+      "$9ab$"
+     ],
+     "answer": "A",
+     "explanation": "Collect like terms: $3a - a = 2a$ and $5b + 2b = 7b$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-expressions-and-formulae-01"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Work out the value of $3x^2 - 2$ when $x = -4$.",
+     "options": [
+      "$-50$",
+      "$46$",
+      "$142$",
+      "$-46$"
+     ],
+     "answer": "B",
+     "explanation": "Square first: $(-4)^2 = 16$. Then $3 \\times 16 - 2 = 46$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-expressions-and-formulae-02"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Factorise $x^2 + 7x + 12$.",
+     "options": [
+      "$(x + 2)(x + 6)$",
+      "$(x + 1)(x + 12)$",
+      "$(x + 3)(x + 4)$",
+      "$(x - 3)(x - 4)$"
+     ],
+     "answer": "C",
+     "explanation": "Find two numbers that multiply to $12$ and add to $7$: these are $3$ and $4$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-expressions-and-formulae-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Make $r$ the subject of the formula $A = \\pi r^2$, where $r > 0$.",
+     "options": [
+      "$r = \\sqrt{A\\pi}$",
+      "$r = \\dfrac{A}{2\\pi}$",
+      "$r = \\dfrac{A^2}{\\pi}$",
+      "$r = \\sqrt{\\dfrac{A}{\\pi}}$"
+     ],
+     "answer": "D",
+     "explanation": "Divide both sides by $\\pi$ to get $r^2 = \\frac{A}{\\pi}$, then take the square root.",
+     "section": "drill",
+     "id": "gcse-maths-drill-expressions-and-formulae-04"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Simplify fully $\\dfrac{x^2 - 9}{x^2 + 5x + 6}$.",
+     "options": [
+      "$\\dfrac{x - 3}{x + 2}$",
+      "$\\dfrac{x + 3}{x + 2}$",
+      "$\\dfrac{x - 3}{x + 3}$",
+      "$\\dfrac{-9}{5x + 6}$"
+     ],
+     "answer": "A",
+     "explanation": "Factorise both: $\\frac{(x - 3)(x + 3)}{(x + 2)(x + 3)}$. Cancel the common factor $(x + 3)$ to leave $\\frac{x - 3}{x + 2}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-expressions-and-formulae-05"
+    }
+   ]
+  },
+  "equations-and-inequalities": {
+   "title": "Equations and inequalities",
+   "domain": "Algebra",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Solving linear and quadratic equations, simultaneous equations and inequalities.",
+   "questions": [
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Solve $3x + 4 = 19$.",
+     "options": [
+      "$x = 5$",
+      "$x = 15$",
+      "$x = 45$",
+      "$x = \\dfrac{23}{3}$"
+     ],
+     "answer": "A",
+     "explanation": "Subtract $4$ from both sides: $3x = 15$. Divide by $3$: $x = 5$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-equations-and-inequalities-01"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Solve the inequality $4x - 3 > 13$.",
+     "options": [
+      "$x < 4$",
+      "$x > 4$",
+      "$x > 2.5$",
+      "$x > 16$"
+     ],
+     "answer": "B",
+     "explanation": "Add $3$ to both sides: $4x > 16$. Divide by $4$: $x > 4$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-equations-and-inequalities-02"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Solve the simultaneous equations $2x + y = 11$ and $x - y = 1$.",
+     "options": [
+      "$x = 5,\\ y = 1$",
+      "$x = 3,\\ y = 5$",
+      "$x = 4,\\ y = 3$",
+      "$x = 6,\\ y = -1$"
+     ],
+     "answer": "C",
+     "explanation": "Add the two equations to eliminate $y$: $3x = 12$, so $x = 4$. Substitute into $x - y = 1$ to get $y = 3$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-equations-and-inequalities-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Solve $x^2 + 6x - 3 = 0$ by completing the square.",
+     "options": [
+      "$x = 3 \\pm 2\\sqrt{3}$",
+      "$x = -3 \\pm \\sqrt{6}$",
+      "$x = -6 \\pm 2\\sqrt{3}$",
+      "$x = -3 \\pm 2\\sqrt{3}$"
+     ],
+     "answer": "D",
+     "explanation": "$(x + 3)^2 - 9 - 3 = 0$, so $(x + 3)^2 = 12$. Then $x + 3 = \\pm\\sqrt{12} = \\pm 2\\sqrt{3}$, giving $x = -3 \\pm 2\\sqrt{3}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-equations-and-inequalities-04"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Solve the inequality $x^2 - x - 6 < 0$.",
+     "options": [
+      "$-2 < x < 3$",
+      "$x < -2$ or $x > 3$",
+      "$-3 < x < 2$",
+      "$x < 3$"
+     ],
+     "answer": "A",
+     "explanation": "Factorise: $(x - 3)(x + 2) < 0$. The curve crosses the axis at $-2$ and $3$ and is below the axis between them, so $-2 < x < 3$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-equations-and-inequalities-05"
+    }
+   ]
+  },
+  "sequences": {
+   "title": "Sequences",
+   "domain": "Algebra",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Term-to-term rules and nth terms of linear, geometric and quadratic sequences.",
+   "questions": [
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the next term in the sequence $3,\\ 8,\\ 13,\\ 18,\\ \\ldots$?",
+     "options": [
+      "$21$",
+      "$23$",
+      "$22$",
+      "$28$"
+     ],
+     "answer": "B",
+     "explanation": "The terms go up by $5$ each time, so the next term is $18 + 5 = 23$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-sequences-01"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The $n$th term of a sequence is $3n - 1$. What is the 10th term?",
+     "options": [
+      "$31$",
+      "$30$",
+      "$29$",
+      "$13$"
+     ],
+     "answer": "C",
+     "explanation": "Substitute $n = 10$: $3 \\times 10 - 1 = 29$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-sequences-02"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the $n$th term of the sequence $20,\\ 17,\\ 14,\\ 11,\\ \\ldots$?",
+     "options": [
+      "$3n + 17$",
+      "$20 - 3n$",
+      "$17 - 3n$",
+      "$23 - 3n$"
+     ],
+     "answer": "D",
+     "explanation": "The terms go down by $3$, so the rule starts $-3n$. When $n = 1$, $-3n = -3$, and the first term is $20$, so add $23$: $23 - 3n$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-sequences-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A geometric sequence starts $2,\\ 6,\\ 18,\\ 54,\\ \\ldots$ What is the 6th term?",
+     "options": [
+      "$486$",
+      "$162$",
+      "$1458$",
+      "$108$"
+     ],
+     "answer": "A",
+     "explanation": "Each term is multiplied by $3$. The 5th term is $54 \\times 3 = 162$ and the 6th is $162 \\times 3 = 486$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-sequences-04"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the $n$th term of the quadratic sequence $3,\\ 8,\\ 15,\\ 24,\\ \\ldots$?",
+     "options": [
+      "$n^2 + 2$",
+      "$n^2 + 2n$",
+      "$2n^2 + 1$",
+      "$5n - 2$"
+     ],
+     "answer": "B",
+     "explanation": "The differences are $5, 7, 9$ and the second difference is $2$, so the rule starts $n^2$. Subtracting $n^2$ ($1, 4, 9, 16$) leaves $2, 4, 6, 8$, which is $2n$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-sequences-05"
+    }
+   ]
+  },
+  "graphs-and-functions": {
+   "title": "Graphs and functions",
+   "domain": "Algebra",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Straight-line graphs, gradients, quadratic graphs and function notation.",
+   "questions": [
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What are the gradient and $y$-intercept of the line $y = 3x - 5$?",
+     "options": [
+      "Gradient $-5$, intercept $3$",
+      "Gradient $3$, intercept $5$",
+      "Gradient $3$, intercept $-5$",
+      "Gradient $5$, intercept $3$"
+     ],
+     "answer": "C",
+     "explanation": "In $y = mx + c$, $m$ is the gradient and $c$ is the $y$-intercept. Here $m = 3$ and $c = -5$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-graphs-and-functions-01"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which line is parallel to $y = 2x + 1$ and passes through $(0, -4)$?",
+     "options": [
+      "$y = 2x - 4$",
+      "$y = -4x + 1$",
+      "$y = -\\dfrac{1}{2}x - 4$",
+      "$y = 2x + 4$"
+     ],
+     "answer": "A",
+     "explanation": "Parallel lines have the same gradient, $2$. Passing through $(0, -4)$ means the $y$-intercept is $-4$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-graphs-and-functions-02"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the gradient of a line perpendicular to $y = 4x + 3$?",
+     "options": [
+      "$4$",
+      "$-4$",
+      "$\\dfrac{1}{4}$",
+      "$-\\dfrac{1}{4}$"
+     ],
+     "answer": "D",
+     "explanation": "Perpendicular gradients multiply to $-1$. Since $4 \\times \\left(-\\frac{1}{4}\\right) = -1$, the gradient is $-\\frac{1}{4}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-graphs-and-functions-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What are the coordinates of the turning point of the graph $y = (x - 3)^2 + 2$?",
+     "options": [
+      "$(-3, 2)$",
+      "$(3, 2)$",
+      "$(3, -2)$",
+      "$(2, 3)$"
+     ],
+     "answer": "B",
+     "explanation": "$(x - 3)^2$ is smallest, zero, when $x = 3$, and then $y = 2$. So the minimum point is $(3, 2)$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-graphs-and-functions-04"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$f(x) = 2x + 6$. What is $f^{-1}(x)$?",
+     "options": [
+      "$\\dfrac{x}{2} + 6$",
+      "$\\dfrac{1}{2x + 6}$",
+      "$\\dfrac{x - 6}{2}$",
+      "$2x - 6$"
+     ],
+     "answer": "C",
+     "explanation": "Write $y = 2x + 6$ and rearrange for $x$: $x = \\frac{y - 6}{2}$. So $f^{-1}(x) = \\frac{x - 6}{2}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-graphs-and-functions-05"
+    }
+   ]
+  },
+  "ratio-and-proportion": {
+   "title": "Ratio and proportion",
+   "domain": "Ratio and proportion",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Simplifying and sharing in ratios, direct and inverse proportion, scales and compound measures.",
+   "questions": [
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Write the ratio $18 : 24$ in its simplest form.",
+     "options": [
+      "$3 : 4$",
+      "$9 : 12$",
+      "$4 : 3$",
+      "$6 : 8$"
+     ],
+     "answer": "A",
+     "explanation": "Divide both numbers by their highest common factor, $6$: $18 \\div 6 = 3$ and $24 \\div 6 = 4$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-ratio-and-proportion-01"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A recipe uses 300 g of flour to make 12 biscuits. How much flour is needed for 20 biscuits?",
+     "options": [
+      "180 g",
+      "500 g",
+      "308 g",
+      "720 g"
+     ],
+     "answer": "B",
+     "explanation": "One biscuit needs 300 divided by 12, which is 25 g. For 20 biscuits: 20 times 25 = 500 g.",
+     "section": "drill",
+     "id": "gcse-maths-drill-ratio-and-proportion-02"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "It takes 5 workers 12 days to build a wall. How long would 8 workers take, working at the same rate?",
+     "options": [
+      "19.2 days",
+      "9 days",
+      "7.5 days",
+      "15 days"
+     ],
+     "answer": "C",
+     "explanation": "The job is 5 times 12 = 60 worker-days. With 8 workers it takes 60 divided by 8 = 7.5 days. More workers means less time, so this is inverse proportion.",
+     "section": "drill",
+     "id": "gcse-maths-drill-ratio-and-proportion-03"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A map has a scale of $1 : 25\\,000$. Two villages are $6\\ \\text{cm}$ apart on the map. What is the real distance between them?",
+     "options": [
+      "150 km",
+      "15 km",
+      "0.15 km",
+      "1.5 km"
+     ],
+     "answer": "D",
+     "explanation": "$6 \\times 25\\,000 = 150\\,000\\ \\text{cm}$. Divide by $100$ for metres ($1500\\ \\text{m}$), then by $1000$ for kilometres: $1.5\\ \\text{km}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-ratio-and-proportion-04"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$y$ is directly proportional to $x^2$. When $x = 2$, $y = 20$. What is $y$ when $x = 5$?",
+     "options": [
+      "$125$",
+      "$50$",
+      "$100$",
+      "$500$"
+     ],
+     "answer": "A",
+     "explanation": "Write $y = kx^2$. Using $x = 2$, $y = 20$: $k = 5$. When $x = 5$, $y = 5 \\times 25 = 125$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-ratio-and-proportion-05"
+    }
+   ]
+  },
+  "percentage-change-and-growth": {
+   "title": "Percentage change and growth",
+   "domain": "Ratio and proportion",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Percentage increase and decrease, reverse percentages, and compound growth and decay.",
+   "questions": [
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Increase $60$ by $20\\%$.",
+     "options": [
+      "$80$",
+      "$72$",
+      "$62$",
+      "$12$"
+     ],
+     "answer": "B",
+     "explanation": "$20\\%$ of $60$ is $12$, so the new amount is $60 + 12 = 72$. You can also multiply by $1.2$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-percentage-change-and-growth-01"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The price of a jacket falls from £80 to £68. What is the percentage decrease?",
+     "options": [
+      "12%",
+      "17.6%",
+      "15%",
+      "85%"
+     ],
+     "answer": "C",
+     "explanation": "The decrease is £12. As a percentage of the original price: 12 divided by 80 is 0.15, which is 15%. Always divide by the original amount.",
+     "section": "drill",
+     "id": "gcse-maths-drill-percentage-change-and-growth-02"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "After a 25% increase, the price of a ticket is £150. What was the price before the increase?",
+     "options": [
+      "£112.50",
+      "£187.50",
+      "£125",
+      "£120"
+     ],
+     "answer": "D",
+     "explanation": "The new price is 125% of the original, so divide by 1.25: 150 divided by 1.25 = £120. Taking 25% off £150 gives the wrong answer.",
+     "section": "drill",
+     "id": "gcse-maths-drill-percentage-change-and-growth-03"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A car costs £12 000 and loses 10% of its value each year. What is it worth after 2 years?",
+     "options": [
+      "£9720",
+      "£9600",
+      "£10 800",
+      "£9000"
+     ],
+     "answer": "A",
+     "explanation": "Multiply by $0.9$ for each year: $12\\,000 \\times 0.9^2 = 9720$. Taking off $20\\%$ in one go is not correct.",
+     "section": "drill",
+     "id": "gcse-maths-drill-percentage-change-and-growth-04"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A town has a population of 5000, which grows by 4% each year. After how many whole years does the population first exceed 6000?",
+     "options": [
+      "4 years",
+      "5 years",
+      "6 years",
+      "3 years"
+     ],
+     "answer": "B",
+     "explanation": "After $4$ years: $5000 \\times 1.04^4 \\approx 5849$. After $5$ years: $5000 \\times 1.04^5 \\approx 6083$, which is the first value above $6000$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-percentage-change-and-growth-05"
+    }
+   ]
+  },
+  "angles-and-shapes": {
+   "title": "Angles and shapes",
+   "domain": "Geometry and measures",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Angle facts, polygons, parallel lines, bearings and circle theorems.",
+   "questions": [
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Two angles of a triangle are $47^\\circ$ and $68^\\circ$. What is the third angle?",
+     "options": [
+      "$75^\\circ$",
+      "$245^\\circ$",
+      "$65^\\circ$",
+      "$115^\\circ$"
+     ],
+     "answer": "C",
+     "explanation": "Angles in a triangle add up to $180^\\circ$: $180 - 47 - 68 = 65^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-angles-and-shapes-01"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the sum of the interior angles of a hexagon?",
+     "options": [
+      "$360^\\circ$",
+      "$540^\\circ$",
+      "$1080^\\circ$",
+      "$720^\\circ$"
+     ],
+     "answer": "D",
+     "explanation": "The sum is $(n - 2) \\times 180^\\circ$. For a hexagon, $n = 6$: $4 \\times 180 = 720^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-angles-and-shapes-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "An isosceles triangle has one angle of $40^\\circ$ between its two equal sides. What is the size of each of the other two angles?",
+     "options": [
+      "$70^\\circ$",
+      "$40^\\circ$",
+      "$140^\\circ$",
+      "$100^\\circ$"
+     ],
+     "answer": "A",
+     "explanation": "The other two angles are equal and add up to $180 - 40 = 140^\\circ$, so each is $70^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-angles-and-shapes-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the size of each exterior angle of a regular decagon (10 sides)?",
+     "options": [
+      "$144^\\circ$",
+      "$36^\\circ$",
+      "$18^\\circ$",
+      "$30^\\circ$"
+     ],
+     "answer": "B",
+     "explanation": "Exterior angles of any polygon add up to $360^\\circ$. For a regular decagon each one is $360 \\div 10 = 36^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-angles-and-shapes-04"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Points $A$, $B$ and $C$ lie on a circle with centre $O$. Angle $AOB = 124^\\circ$, and $C$ is on the major arc $AB$. What is angle $ACB$?",
+     "options": [
+      "$124^\\circ$",
+      "$248^\\circ$",
+      "$62^\\circ$",
+      "$56^\\circ$"
+     ],
+     "answer": "C",
+     "explanation": "The angle at the centre is twice the angle at the circumference standing on the same arc, so angle $ACB = 124 \\div 2 = 62^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-angles-and-shapes-05"
+    }
+   ]
+  },
+  "area-volume-and-pythagoras": {
+   "title": "Area, volume and Pythagoras",
+   "domain": "Geometry and measures",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Perimeter, area and volume, and Pythagoras' theorem.",
+   "questions": [
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A triangle has base $10\\ \\text{cm}$ and perpendicular height $7\\ \\text{cm}$. What is its area?",
+     "options": [
+      "$70\\ \\text{cm}^2$",
+      "$17\\ \\text{cm}^2$",
+      "$34\\ \\text{cm}^2$",
+      "$35\\ \\text{cm}^2$"
+     ],
+     "answer": "D",
+     "explanation": "Area of a triangle is $\\frac{1}{2} \\times \\text{base} \\times \\text{height} = \\frac{1}{2} \\times 10 \\times 7 = 35\\ \\text{cm}^2$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-area-volume-and-pythagoras-01"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the circumference of a circle of radius $6\\ \\text{cm}$, in terms of $\\pi$?",
+     "options": [
+      "$12\\pi\\ \\text{cm}$",
+      "$6\\pi\\ \\text{cm}$",
+      "$36\\pi\\ \\text{cm}$",
+      "$3\\pi\\ \\text{cm}$"
+     ],
+     "answer": "A",
+     "explanation": "Circumference is $2\\pi r = 2 \\times \\pi \\times 6 = 12\\pi\\ \\text{cm}$. Note that $36\\pi$ would be the area.",
+     "section": "drill",
+     "id": "gcse-maths-drill-area-volume-and-pythagoras-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The two shorter sides of a right-angled triangle are $5\\ \\text{cm}$ and $12\\ \\text{cm}$. How long is the hypotenuse?",
+     "options": [
+      "$17\\ \\text{cm}$",
+      "$13\\ \\text{cm}$",
+      "$169\\ \\text{cm}$",
+      "$10.9\\ \\text{cm}$"
+     ],
+     "answer": "B",
+     "explanation": "By Pythagoras, $c^2 = 5^2 + 12^2 = 25 + 144 = 169$, so $c = 13\\ \\text{cm}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-area-volume-and-pythagoras-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A trapezium has parallel sides of $6\\ \\text{cm}$ and $10\\ \\text{cm}$, and a perpendicular height of $4\\ \\text{cm}$. What is its area?",
+     "options": [
+      "$64\\ \\text{cm}^2$",
+      "$240\\ \\text{cm}^2$",
+      "$32\\ \\text{cm}^2$",
+      "$20\\ \\text{cm}^2$"
+     ],
+     "answer": "C",
+     "explanation": "Area of a trapezium is $\\frac{1}{2}(a + b)h = \\frac{1}{2} \\times (6 + 10) \\times 4 = 32\\ \\text{cm}^2$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-area-volume-and-pythagoras-04"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the volume of a sphere of radius $3\\ \\text{cm}$, in terms of $\\pi$? (Volume of a sphere $= \\frac{4}{3}\\pi r^3$)",
+     "options": [
+      "$9\\pi\\ \\text{cm}^3$",
+      "$12\\pi\\ \\text{cm}^3$",
+      "$108\\pi\\ \\text{cm}^3$",
+      "$36\\pi\\ \\text{cm}^3$"
+     ],
+     "answer": "D",
+     "explanation": "$\\frac{4}{3} \\times \\pi \\times 3^3 = \\frac{4}{3} \\times 27\\pi = 36\\pi\\ \\text{cm}^3$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-area-volume-and-pythagoras-05"
+    }
+   ]
+  },
+  "trigonometry": {
+   "title": "Trigonometry",
+   "domain": "Geometry and measures",
+   "section": "drill",
+   "minutes": 0,
+   "about": "SOHCAHTOA, exact values, and the sine and cosine rules.",
+   "questions": [
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "In a right-angled triangle, which ratio gives $\\tan x$?",
+     "options": [
+      "Opposite ÷ adjacent",
+      "Opposite ÷ hypotenuse",
+      "Adjacent ÷ hypotenuse",
+      "Adjacent ÷ opposite"
+     ],
+     "answer": "A",
+     "explanation": "Tangent is opposite divided by adjacent (the TOA in SOHCAHTOA). Opposite over hypotenuse is sine and adjacent over hypotenuse is cosine.",
+     "section": "drill",
+     "id": "gcse-maths-drill-trigonometry-01"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a right-angled triangle, the side adjacent to a $40^\\circ$ angle is $8\\ \\text{cm}$. How long is the side opposite the angle, to 3 significant figures?",
+     "options": [
+      "$9.53\\ \\text{cm}$",
+      "$6.71\\ \\text{cm}$",
+      "$5.14\\ \\text{cm}$",
+      "$6.13\\ \\text{cm}$"
+     ],
+     "answer": "B",
+     "explanation": "Opposite and adjacent means tangent: $\\text{opp} = 8 \\tan 40^\\circ = 6.71\\ \\text{cm}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-trigonometry-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a right-angled triangle, the side opposite angle $x$ is $5\\ \\text{cm}$ and the hypotenuse is $13\\ \\text{cm}$. What is $x$, to 1 decimal place?",
+     "options": [
+      "$67.4^\\circ$",
+      "$21.0^\\circ$",
+      "$22.6^\\circ$",
+      "$0.4^\\circ$"
+     ],
+     "answer": "C",
+     "explanation": "$\\sin x = \\frac{5}{13}$, so $x = \\sin^{-1}\\left(\\frac{5}{13}\\right) = 22.6^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-trigonometry-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the exact value of $\\cos 60^\\circ$?",
+     "options": [
+      "$\\dfrac{\\sqrt{3}}{2}$",
+      "$1$",
+      "$\\dfrac{\\sqrt{2}}{2}$",
+      "$\\dfrac{1}{2}$"
+     ],
+     "answer": "D",
+     "explanation": "$\\cos 60^\\circ = \\frac{1}{2}$. The value $\\frac{\\sqrt{3}}{2}$ is $\\cos 30^\\circ$, which is the same as $\\sin 60^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-trigonometry-04"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In triangle $ABC$, $a = 7\\ \\text{cm}$, $b = 9\\ \\text{cm}$ and angle $C = 60^\\circ$. What is the length of side $c$, to 3 significant figures?",
+     "options": [
+      "$8.19\\ \\text{cm}$",
+      "$67.0\\ \\text{cm}$",
+      "$11.4\\ \\text{cm}$",
+      "$13.9\\ \\text{cm}$"
+     ],
+     "answer": "A",
+     "explanation": "Use the cosine rule: $c^2 = 7^2 + 9^2 - 2 \\times 7 \\times 9 \\times \\cos 60^\\circ = 49 + 81 - 63 = 67$. So $c = \\sqrt{67} = 8.19\\ \\text{cm}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-trigonometry-05"
+    }
+   ]
+  },
+  "vectors-and-transformations": {
+   "title": "Vectors and transformations",
+   "domain": "Geometry and measures",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Column vectors, translations, reflections, rotations and enlargements.",
+   "questions": [
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The point $(2, 5)$ is translated by the vector $\\begin{pmatrix} 4 \\\\ -3 \\end{pmatrix}$. What are its new coordinates?",
+     "options": [
+      "$(6, 8)$",
+      "$(6, 2)$",
+      "$(-2, 8)$",
+      "$(8, -15)$"
+     ],
+     "answer": "B",
+     "explanation": "Add $4$ to the $x$-coordinate and subtract $3$ from the $y$-coordinate: $(2 + 4,\\ 5 - 3) = (6, 2)$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-vectors-and-transformations-01"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out $\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} + \\begin{pmatrix} -5 \\\\ 4 \\end{pmatrix}$.",
+     "options": [
+      "$\\begin{pmatrix} 7 \\\\ -5 \\end{pmatrix}$",
+      "$\\begin{pmatrix} -10 \\\\ -4 \\end{pmatrix}$",
+      "$\\begin{pmatrix} -3 \\\\ 3 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 3 \\\\ -3 \\end{pmatrix}$"
+     ],
+     "answer": "C",
+     "explanation": "Add the top numbers and add the bottom numbers: $2 + (-5) = -3$ and $-1 + 4 = 3$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-vectors-and-transformations-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The point $(3, -2)$ is reflected in the $x$-axis. What are the coordinates of its image?",
+     "options": [
+      "$(-3, -2)$",
+      "$(-3, 2)$",
+      "$(-2, 3)$",
+      "$(3, 2)$"
+     ],
+     "answer": "D",
+     "explanation": "Reflecting in the $x$-axis keeps the $x$-coordinate the same and changes the sign of the $y$-coordinate: $(3, 2)$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-vectors-and-transformations-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A shape of area $5\\ \\text{cm}^2$ is enlarged by scale factor $3$. What is the area of the enlarged shape?",
+     "options": [
+      "$45\\ \\text{cm}^2$",
+      "$15\\ \\text{cm}^2$",
+      "$8\\ \\text{cm}^2$",
+      "$125\\ \\text{cm}^2$"
+     ],
+     "answer": "A",
+     "explanation": "Lengths are multiplied by $3$, so areas are multiplied by $3^2 = 9$: $5 \\times 9 = 45\\ \\text{cm}^2$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-vectors-and-transformations-04"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the magnitude of the vector $\\begin{pmatrix} 5 \\\\ -12 \\end{pmatrix}$?",
+     "options": [
+      "$7$",
+      "$13$",
+      "$17$",
+      "$169$"
+     ],
+     "answer": "B",
+     "explanation": "Use Pythagoras: $\\sqrt{5^2 + (-12)^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-vectors-and-transformations-05"
+    }
+   ]
+  },
+  "probability": {
+   "title": "Probability",
+   "domain": "Probability and statistics",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Single events, expected outcomes, independent events and tree diagrams.",
+   "questions": [
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A bag contains 3 red, 5 blue and 2 green counters. One counter is taken at random. What is the probability that it is blue?",
+     "options": [
+      "$\\dfrac{1}{5}$",
+      "$\\dfrac{5}{8}$",
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{3}{10}$"
+     ],
+     "answer": "C",
+     "explanation": "There are $10$ counters and $5$ are blue, so the probability is $\\frac{5}{10} = \\frac{1}{2}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-probability-01"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "The probability that it rains tomorrow is $0.35$. What is the probability that it does not rain?",
+     "options": [
+      "$0.35$",
+      "$0.75$",
+      "$1.35$",
+      "$0.65$"
+     ],
+     "answer": "D",
+     "explanation": "The probabilities of an event happening and not happening add up to $1$: $1 - 0.35 = 0.65$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-probability-02"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A fair coin is flipped and a fair six-sided dice is rolled. What is the probability of getting a head and a 6?",
+     "options": [
+      "$\\dfrac{1}{12}$",
+      "$\\dfrac{2}{3}$",
+      "$\\dfrac{1}{8}$",
+      "$\\dfrac{1}{6}$"
+     ],
+     "answer": "A",
+     "explanation": "The events are independent, so multiply: $\\frac{1}{2} \\times \\frac{1}{6} = \\frac{1}{12}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-probability-03"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A biased spinner lands on red with probability $0.2$. It is spun $150$ times. How many times would you expect it to land on red?",
+     "options": [
+      "$20$",
+      "$30$",
+      "$75$",
+      "$3$"
+     ],
+     "answer": "B",
+     "explanation": "Expected number is probability times number of trials: $0.2 \\times 150 = 30$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-probability-04"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A bag contains 4 red and 6 blue counters. Two counters are taken at random without replacement. What is the probability of getting one of each colour?",
+     "options": [
+      "$\\dfrac{4}{15}$",
+      "$\\dfrac{6}{25}$",
+      "$\\dfrac{8}{15}$",
+      "$\\dfrac{12}{25}$"
+     ],
+     "answer": "C",
+     "explanation": "Red then blue: $\\frac{4}{10} \\times \\frac{6}{9} = \\frac{24}{90}$. Blue then red: $\\frac{6}{10} \\times \\frac{4}{9} = \\frac{24}{90}$. Add them: $\\frac{48}{90} = \\frac{8}{15}$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-probability-05"
+    }
+   ]
+  },
+  "statistics": {
+   "title": "Statistics",
+   "domain": "Probability and statistics",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Averages and range, frequency tables, charts, and histograms.",
+   "questions": [
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the median of $3,\\ 7,\\ 8,\\ 12,\\ 15$?",
+     "options": [
+      "$9$",
+      "$12$",
+      "$7$",
+      "$8$"
+     ],
+     "answer": "D",
+     "explanation": "The numbers are already in order and the middle one of the five is $8$. Note that $9$ is the mean.",
+     "section": "drill",
+     "id": "gcse-maths-drill-statistics-01"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the range of $4,\\ 9,\\ 2,\\ 11,\\ 6$?",
+     "options": [
+      "$9$",
+      "$6$",
+      "$11$",
+      "$6.4$"
+     ],
+     "answer": "A",
+     "explanation": "The range is the largest value minus the smallest: $11 - 2 = 9$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-statistics-02"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The table shows the number of goals scored in 10 matches.\n\n| Goals | 1 | 2 | 3 |\n| - | - | - | - |\n| Frequency | 4 | 5 | 1 |\n\nWhat is the mean number of goals per match?",
+     "options": [
+      "$2$",
+      "$1.7$",
+      "$3.3$",
+      "$0.6$"
+     ],
+     "answer": "B",
+     "explanation": "Total goals $= (1 \\times 4) + (2 \\times 5) + (3 \\times 1) = 17$. Divide by the $10$ matches: $17 \\div 10 = 1.7$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-statistics-03"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a survey of 60 people, 15 chose tea. What angle should represent tea on a pie chart?",
+     "options": [
+      "$15^\\circ$",
+      "$25^\\circ$",
+      "$90^\\circ$",
+      "$60^\\circ$"
+     ],
+     "answer": "C",
+     "explanation": "The fraction choosing tea is $\\frac{15}{60} = \\frac{1}{4}$, and a quarter of $360^\\circ$ is $90^\\circ$.",
+     "section": "drill",
+     "id": "gcse-maths-drill-statistics-04"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "On a histogram, a class has width 20 and frequency 30. What is the frequency density for this class?",
+     "options": [
+      "$600$",
+      "$50$",
+      "$0.67$",
+      "$1.5$"
+     ],
+     "answer": "D",
+     "explanation": "Frequency density is frequency divided by class width: $30 \\div 20 = 1.5$. On a histogram the area of each bar, not its height, shows the frequency.",
+     "section": "drill",
+     "id": "gcse-maths-drill-statistics-05"
+    }
+   ]
+  }
+ }
+}

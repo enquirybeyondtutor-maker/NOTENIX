@@ -5,13 +5,13 @@ import type { SatModule, ReviewQuestion, PlanTask } from "@/lib/satApi";
 // SAT keeps its own adaptive engine (lib/satApi.ts).
 
 /** Exams that have the engine: practice tests, diagnostic, skill map, plan and drills. */
-export const ENGINE_EXAMS = ["tmua", "ap-calc-ab"] as const;
+export const ENGINE_EXAMS = ["tmua", "ap-calc-ab", "gcse-maths", "gcse-biology", "gcse-chemistry", "gcse-physics"] as const;
 export const hasEngine = (slug: string) => (ENGINE_EXAMS as readonly string[]).includes(slug);
 
 export type ExamInfo = {
   exam: string; name: string; full_name: string; sections: Record<string, string>;
   domains: Record<string, string[]>; scale: { min: number; max: number; decimals: number };
-  calculator: boolean; mock_detail: string; about_score: string; has_diagnostic: boolean; mocks: number;
+  calculator: boolean; no_calculator?: string[]; mock_detail: string; about_score: string; has_diagnostic: boolean; mocks: number;
 };
 export type ExamSkillRow = { domain: string; skill: string; right: number; total: number };
 export type ExamSection = { right: number; total: number; score: number; band?: [number, number] };

@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-maths",
+ "slug": "mock-2",
+ "title": "GCSE Maths Practice Paper 2",
+ "kind": "mock",
+ "summary": "Higher · grades 4 to 9 · 24 questions · 50 min",
+ "stages": [
+  "non-calc",
+  "calc"
+ ],
+ "modules": {
+  "non-calc": {
+   "title": "Part 1: no calculator",
+   "section": "non-calc",
+   "minutes": 25,
+   "questions": [
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Simplify $\\dfrac{5^6 \\times 5^{-2}}{5^3}$.",
+     "options": [
+      "$5$",
+      "$25$",
+      "$\\dfrac{1}{5}$",
+      "$125$"
+     ],
+     "answer": "A",
+     "explanation": "Add the indices on top: $5^{6 + (-2)} = 5^4$. Subtract the index underneath: $5^{4 - 3} = 5^1 = 5$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out $2\\tfrac{1}{4} \\times 1\\tfrac{1}{3}$.",
+     "options": [
+      "$2\\tfrac{1}{12}$",
+      "$3\\tfrac{7}{12}$",
+      "$3$",
+      "$2$"
+     ],
+     "answer": "C",
+     "explanation": "Change to improper fractions: $\\frac{9}{4} \\times \\frac{4}{3} = \\frac{36}{12} = 3$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-02"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Expand and simplify $(x + 5)^2$.",
+     "options": [
+      "$x^2 + 25$",
+      "$x^2 + 10x + 25$",
+      "$x^2 + 5x + 25$",
+      "$2x + 10$"
+     ],
+     "answer": "B",
+     "explanation": "$(x + 5)^2 = (x + 5)(x + 5) = x^2 + 5x + 5x + 25 = x^2 + 10x + 25$. Do not forget the middle term.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Solve the simultaneous equations $y = x + 1$ and $x^2 + y^2 = 25$.",
+     "options": [
+      "$(4, 5)$ and $(-5, -4)$",
+      "$(3, 4)$ only",
+      "$(5, 0)$ and $(0, 5)$",
+      "$(3, 4)$ and $(-4, -3)$"
+     ],
+     "answer": "D",
+     "explanation": "Substitute: $x^2 + (x + 1)^2 = 25$ gives $2x^2 + 2x - 24 = 0$, so $x^2 + x - 12 = 0$ and $(x + 4)(x - 3) = 0$. $x = 3$ gives $y = 4$; $x = -4$ gives $y = -3$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-04"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Expand and simplify $(\\sqrt{5} + 2)(\\sqrt{5} - 2)$.",
+     "options": [
+      "$9$",
+      "$1 + 4\\sqrt{5}$",
+      "$3$",
+      "$1$"
+     ],
+     "answer": "D",
+     "explanation": "This is a difference of two squares: $(\\sqrt{5})^2 - 2^2 = 5 - 4 = 1$. The two surd terms cancel.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-05"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the $n$th term of the quadratic sequence $2,\\ 6,\\ 12,\\ 20,\\ \\ldots$?",
+     "options": [
+      "$4n - 2$",
+      "$n^2 + n$",
+      "$n^2 + 1$",
+      "$2n^2$"
+     ],
+     "answer": "B",
+     "explanation": "The second difference is $2$, so the rule starts $n^2$. Subtracting $n^2$ ($1, 4, 9, 16$) from the terms leaves $1, 2, 3, 4$, which is $n$. So the rule is $n^2 + n$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-06"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the equation of the circle with centre the origin and radius 5?",
+     "options": [
+      "$x^2 + y^2 = 25$",
+      "$x^2 + y^2 = 5$",
+      "$x + y = 25$",
+      "$y = x^2 + 25$"
+     ],
+     "answer": "A",
+     "explanation": "A circle with centre the origin and radius $r$ has equation $x^2 + y^2 = r^2$. Here $r^2 = 25$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-07"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$y$ is directly proportional to $\\sqrt{x}$. When $x = 9$, $y = 6$. What is $y$ when $x = 25$?",
+     "options": [
+      "$16.7$",
+      "$50$",
+      "$10$",
+      "$30$"
+     ],
+     "answer": "C",
+     "explanation": "Write $y = k\\sqrt{x}$. Using $x = 9$, $y = 6$: $6 = 3k$, so $k = 2$. When $x = 25$, $y = 2 \\times 5 = 10$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-08"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$AB$ is a diameter of a circle and $C$ is another point on the circumference. What is the size of angle $ACB$?",
+     "options": [
+      "$45^\\circ$",
+      "$90^\\circ$",
+      "$180^\\circ$",
+      "$60^\\circ$"
+     ],
+     "answer": "B",
+     "explanation": "The angle in a semicircle is always a right angle, so angle $ACB = 90^\\circ$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-09"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$P(A) = 0.5$, $P(B) = 0.4$ and $P(A \\text{ and } B) = 0.2$. What is $P(A \\text{ or } B)$?",
+     "options": [
+      "$0.7$",
+      "$0.9$",
+      "$0.2$",
+      "$0.1$"
+     ],
+     "answer": "A",
+     "explanation": "Add the two probabilities, then subtract the probability of both: $0.5 + 0.4 - 0.2 = 0.7$. Subtracting the overlap stops it being counted twice.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-10"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Simplify $3x^2y \\times 4xy^3$.",
+     "options": [
+      "$7x^3y^4$",
+      "$12x^2y^3$",
+      "$12x^2y^4$",
+      "$12x^3y^4$"
+     ],
+     "answer": "D",
+     "explanation": "Multiply the numbers: $3 \\times 4 = 12$. Add the indices for each letter: $x^{2+1} = x^3$ and $y^{1+3} = y^4$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-11"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A box plot shows a lower quartile of 12 and an upper quartile of 30. What is the interquartile range?",
+     "options": [
+      "$42$",
+      "$21$",
+      "$18$",
+      "$30$"
+     ],
+     "answer": "C",
+     "explanation": "The interquartile range is the upper quartile minus the lower quartile: $30 - 12 = 18$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-2-non-calc-12"
+    }
+   ]
+  },
+  "calc": {
+   "title": "Part 2: calculator allowed",
+   "section": "calc",
+   "minutes": 25,
+   "questions": [
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In a sale, prices are reduced by 30%. The sale price of a coat is £84. What was the original price?",
+     "options": [
+      "£109.20",
+      "£120",
+      "£114",
+      "£280"
+     ],
+     "answer": "B",
+     "explanation": "The sale price is 70% of the original, so divide by 0.7: 84 divided by 0.7 = £120. Adding 30% to £84 gives the wrong answer, £109.20.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-01"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In triangle $ABC$, angle $A = 40^\\circ$, angle $B = 75^\\circ$ and side $a = 8\\ \\text{cm}$. What is the length of side $b$, to 3 significant figures?",
+     "options": [
+      "$12.0\\ \\text{cm}$",
+      "$5.32\\ \\text{cm}$",
+      "$15.0\\ \\text{cm}$",
+      "$10.4\\ \\text{cm}$"
+     ],
+     "answer": "A",
+     "explanation": "Use the sine rule: $\\frac{b}{\\sin 75^\\circ} = \\frac{8}{\\sin 40^\\circ}$, so $b = \\frac{8 \\sin 75^\\circ}{\\sin 40^\\circ} = 12.0\\ \\text{cm}$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A cone has base radius $3\\ \\text{cm}$ and height $4\\ \\text{cm}$. What is its volume, to 1 decimal place? (Volume of a cone $= \\frac{1}{3}\\pi r^2 h$)",
+     "options": [
+      "$113.1\\ \\text{cm}^3$",
+      "$47.1\\ \\text{cm}^3$",
+      "$12.0\\ \\text{cm}^3$",
+      "$37.7\\ \\text{cm}^3$"
+     ],
+     "answer": "D",
+     "explanation": "$\\frac{1}{3} \\times \\pi \\times 3^2 \\times 4 = 12\\pi = 37.7\\ \\text{cm}^3$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Two sides of a triangle are $6\\ \\text{cm}$ and $10\\ \\text{cm}$, and the angle between them is $30^\\circ$. What is the area of the triangle?",
+     "options": [
+      "$30\\ \\text{cm}^2$",
+      "$26.0\\ \\text{cm}^2$",
+      "$15\\ \\text{cm}^2$",
+      "$60\\ \\text{cm}^2$"
+     ],
+     "answer": "C",
+     "explanation": "Area $= \\frac{1}{2}ab\\sin C = \\frac{1}{2} \\times 6 \\times 10 \\times \\sin 30^\\circ = 30 \\times 0.5 = 15\\ \\text{cm}^2$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-04"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the positive solution of $2x^2 + 3x - 4 = 0$, to 2 decimal places?",
+     "options": [
+      "$0.85$",
+      "$2.35$",
+      "$1.70$",
+      "$0.35$"
+     ],
+     "answer": "A",
+     "explanation": "Use the quadratic formula with $a = 2$, $b = 3$, $c = -4$: $x = \\frac{-3 \\pm \\sqrt{9 + 32}}{4} = \\frac{-3 \\pm \\sqrt{41}}{4}$. The positive solution is $0.85$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-05"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "What is the minimum value of $y = x^2 - 4x + 1$?",
+     "options": [
+      "$1$",
+      "$2$",
+      "$-3$",
+      "$-4$"
+     ],
+     "answer": "C",
+     "explanation": "Complete the square: $y = (x - 2)^2 - 4 + 1 = (x - 2)^2 - 3$. The smallest value of the squared bracket is $0$, so the minimum of $y$ is $-3$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-06"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$\\overrightarrow{OA} = \\mathbf{a}$ and $\\overrightarrow{OB} = \\mathbf{b}$. $M$ is the midpoint of $AB$. What is $\\overrightarrow{OM}$ in terms of $\\mathbf{a}$ and $\\mathbf{b}$?",
+     "options": [
+      "$\\mathbf{a} + \\mathbf{b}$",
+      "$\\tfrac{1}{2}(\\mathbf{a} + \\mathbf{b})$",
+      "$\\tfrac{1}{2}(\\mathbf{b} - \\mathbf{a})$",
+      "$\\mathbf{b} - \\mathbf{a}$"
+     ],
+     "answer": "B",
+     "explanation": "$\\overrightarrow{AB} = \\mathbf{b} - \\mathbf{a}$, so $\\overrightarrow{AM} = \\frac{1}{2}(\\mathbf{b} - \\mathbf{a})$. Then $\\overrightarrow{OM} = \\mathbf{a} + \\frac{1}{2}(\\mathbf{b} - \\mathbf{a}) = \\frac{1}{2}(\\mathbf{a} + \\mathbf{b})$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-07"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A bag contains 7 black and 3 white counters. Two counters are taken at random without replacement. What is the probability that they are the same colour?",
+     "options": [
+      "$\\dfrac{7}{15}$",
+      "$\\dfrac{21}{50}$",
+      "$\\dfrac{29}{50}$",
+      "$\\dfrac{8}{15}$"
+     ],
+     "answer": "D",
+     "explanation": "Both black: $\\frac{7}{10} \\times \\frac{6}{9} = \\frac{42}{90}$. Both white: $\\frac{3}{10} \\times \\frac{2}{9} = \\frac{6}{90}$. Add them: $\\frac{48}{90} = \\frac{8}{15}$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-08"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The table shows the times taken by 20 students to finish a puzzle.\n\n| Time (minutes) | Frequency |\n| - | - |\n| 0 to 10 | 4 |\n| 10 to 20 | 10 |\n| 20 to 30 | 6 |\n\nWhat is the estimate of the mean time?",
+     "options": [
+      "15 minutes",
+      "6.67 minutes",
+      "16 minutes",
+      "17 minutes"
+     ],
+     "answer": "C",
+     "explanation": "Use the midpoints $5$, $15$ and $25$: $(5 \\times 4) + (15 \\times 10) + (25 \\times 6) = 320$. Divide by the $20$ students: $16$ minutes.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-09"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "£3000 is invested at 2.5% compound interest per year. What is it worth after 5 years, to the nearest pound?",
+     "options": [
+      "£3375",
+      "£3075",
+      "£3381",
+      "£3394"
+     ],
+     "answer": "D",
+     "explanation": "Multiply by $1.025$ for each year: $3000 \\times 1.025^5 = 3394.22\\ldots$, which is £3394. £3375 would be simple interest.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-10"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A car travels 45 km at 60 km/h and then another 45 km at 90 km/h. What is its average speed for the whole journey?",
+     "options": [
+      "72 km/h",
+      "75 km/h",
+      "70 km/h",
+      "150 km/h"
+     ],
+     "answer": "A",
+     "explanation": "The times are 45 divided by 60 = 0.75 hours and 45 divided by 90 = 0.5 hours, a total of 1.25 hours. Average speed is total distance over total time: 90 divided by 1.25 = 72 km/h.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-11"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$a = 6.4$ and $b = 2.5$, each correct to 1 decimal place. What is the upper bound of $\\dfrac{a}{b}$, to 2 decimal places?",
+     "options": [
+      "$2.56$",
+      "$2.63$",
+      "$2.53$",
+      "$2.59$"
+     ],
+     "answer": "B",
+     "explanation": "For the largest answer, divide the largest $a$ by the smallest $b$: $\\frac{6.45}{2.45} = 2.63$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-2-calc-12"
+    }
+   ]
+  }
+ }
+}

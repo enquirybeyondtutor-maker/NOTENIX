@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-maths",
+ "slug": "mock-1",
+ "title": "GCSE Maths Practice Paper 1",
+ "kind": "mock",
+ "summary": "Foundation and crossover · grades 1 to 5 · 24 questions · 50 min",
+ "stages": [
+  "non-calc",
+  "calc"
+ ],
+ "modules": {
+  "non-calc": {
+   "title": "Part 1: no calculator",
+   "section": "non-calc",
+   "minutes": 25,
+   "questions": [
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Work out $0.6 \\times 0.3$.",
+     "options": [
+      "$1.8$",
+      "$0.18$",
+      "$0.018$",
+      "$18$"
+     ],
+     "answer": "B",
+     "explanation": "$6 \\times 3 = 18$. There are two decimal places in the question in total, so the answer has two: $0.18$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Round $4768$ to 2 significant figures.",
+     "options": [
+      "$4700$",
+      "$4770$",
+      "$48$",
+      "$4800$"
+     ],
+     "answer": "D",
+     "explanation": "The first two significant figures are $4$ and $7$. The next digit is $6$, so round up to $4800$. Keep the zeros to hold the place value.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-02"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Expand $4(2x - 3)$.",
+     "options": [
+      "$8x - 12$",
+      "$8x - 3$",
+      "$6x - 7$",
+      "$2x - 12$"
+     ],
+     "answer": "A",
+     "explanation": "Multiply both terms inside the bracket by $4$: $4 \\times 2x = 8x$ and $4 \\times (-3) = -12$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Solve $\\dfrac{x}{3} + 2 = 7$.",
+     "options": [
+      "$x = 3$",
+      "$x = 27$",
+      "$x = 15$",
+      "$x = 9$"
+     ],
+     "answer": "C",
+     "explanation": "Subtract $2$ from both sides: $\\frac{x}{3} = 5$. Multiply both sides by $3$: $x = 15$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-04"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "$40$ sweets are shared in the ratio $2 : 3$. How many sweets are in the smaller share?",
+     "options": [
+      "$8$",
+      "$24$",
+      "$16$",
+      "$20$"
+     ],
+     "answer": "C",
+     "explanation": "There are $2 + 3 = 5$ parts, so one part is $40 \\div 5 = 8$ sweets. The smaller share is $2$ parts: $16$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-05"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Two angles lie on a straight line. One of them is $115^\\circ$. What is the other?",
+     "options": [
+      "$65^\\circ$",
+      "$75^\\circ$",
+      "$245^\\circ$",
+      "$115^\\circ$"
+     ],
+     "answer": "A",
+     "explanation": "Angles on a straight line add up to $180^\\circ$: $180 - 115 = 65^\\circ$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-06"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A fair six-sided dice is rolled. What is the probability of rolling a prime number?",
+     "options": [
+      "$\\dfrac{1}{3}$",
+      "$\\dfrac{2}{3}$",
+      "$\\dfrac{1}{6}$",
+      "$\\dfrac{1}{2}$"
+     ],
+     "answer": "D",
+     "explanation": "The prime numbers on a dice are $2$, $3$ and $5$. Remember that $1$ is not prime. So the probability is $\\frac{3}{6} = \\frac{1}{2}$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-07"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the mean of $4,\\ 6,\\ 9,\\ 13$?",
+     "options": [
+      "$7.5$",
+      "$8$",
+      "$9$",
+      "$32$"
+     ],
+     "answer": "B",
+     "explanation": "Add the numbers: $4 + 6 + 9 + 13 = 32$. Divide by how many there are: $32 \\div 4 = 8$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-08"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out $2^3 \\times 3^2$.",
+     "options": [
+      "$72$",
+      "$36$",
+      "$54$",
+      "$48$"
+     ],
+     "answer": "A",
+     "explanation": "$2^3 = 8$ and $3^2 = 9$, so the answer is $8 \\times 9 = 72$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-09"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The $n$th term of a sequence is $5n - 2$. Which of these numbers is a term in the sequence?",
+     "options": [
+      "$40$",
+      "$41$",
+      "$43$",
+      "$45$"
+     ],
+     "answer": "C",
+     "explanation": "A term plus $2$ must be a multiple of $5$. $43 + 2 = 45 = 5 \\times 9$, so $43$ is the 9th term. The others do not work.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-10"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A point on the line $y = 2x + 3$ has $x$-coordinate $-2$. What is its $y$-coordinate?",
+     "options": [
+      "$-7$",
+      "$-1$",
+      "$1$",
+      "$7$"
+     ],
+     "answer": "B",
+     "explanation": "Substitute $x = -2$: $y = 2 \\times (-2) + 3 = -4 + 3 = -1$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-11"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A rectangle is $8\\ \\text{cm}$ long and $5\\ \\text{cm}$ wide. What is its perimeter?",
+     "options": [
+      "$40\\ \\text{cm}$",
+      "$13\\ \\text{cm}$",
+      "$80\\ \\text{cm}$",
+      "$26\\ \\text{cm}$"
+     ],
+     "answer": "D",
+     "explanation": "The perimeter is the distance all the way round: $8 + 5 + 8 + 5 = 26\\ \\text{cm}$. Note that $40$ is the area in $\\text{cm}^2$.",
+     "section": "non-calc",
+     "id": "gcse-maths-mock-1-non-calc-12"
+    }
+   ]
+  },
+  "calc": {
+   "title": "Part 2: calculator allowed",
+   "section": "calc",
+   "minutes": 25,
+   "questions": [
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Work out 35% of £260.",
+     "options": [
+      "£74.29",
+      "£9.10",
+      "£91",
+      "£169"
+     ],
+     "answer": "C",
+     "explanation": "$35\\% = 0.35$, and $0.35 \\times 260 = 91$, so the answer is £91.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Write $\\dfrac{3}{8}$ as a decimal.",
+     "options": [
+      "$0.375$",
+      "$0.38$",
+      "$2.67$",
+      "$0.83$"
+     ],
+     "answer": "A",
+     "explanation": "Divide the numerator by the denominator: $3 \\div 8 = 0.375$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the area of a circle of radius $7\\ \\text{cm}$, to 1 decimal place?",
+     "options": [
+      "$44.0\\ \\text{cm}^2$",
+      "$22.0\\ \\text{cm}^2$",
+      "$49.0\\ \\text{cm}^2$",
+      "$153.9\\ \\text{cm}^2$"
+     ],
+     "answer": "D",
+     "explanation": "Area is $\\pi r^2 = \\pi \\times 7^2 = 49\\pi = 153.9\\ \\text{cm}^2$. Note that $44.0$ is the circumference, $2\\pi r$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The two shorter sides of a right-angled triangle are $6\\ \\text{cm}$ and $8\\ \\text{cm}$. How long is the hypotenuse?",
+     "options": [
+      "$14\\ \\text{cm}$",
+      "$10\\ \\text{cm}$",
+      "$100\\ \\text{cm}$",
+      "$7\\ \\text{cm}$"
+     ],
+     "answer": "B",
+     "explanation": "By Pythagoras, $c^2 = 6^2 + 8^2 = 36 + 64 = 100$, so $c = \\sqrt{100} = 10\\ \\text{cm}$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-04"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A train travels 150 km in 2.5 hours. What is its average speed?",
+     "options": [
+      "375 km/h",
+      "60 km/h",
+      "152.5 km/h",
+      "50 km/h"
+     ],
+     "answer": "B",
+     "explanation": "Speed is distance divided by time: 150 divided by 2.5 = 60 km/h.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-05"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Solve $3(x + 4) = 5x - 2$.",
+     "options": [
+      "$x = 1$",
+      "$x = 3$",
+      "$x = 5$",
+      "$x = 7$"
+     ],
+     "answer": "D",
+     "explanation": "Expand: $3x + 12 = 5x - 2$. Subtract $3x$ and add $2$: $14 = 2x$, so $x = 7$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-06"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The point $(3, 1)$ is rotated $90^\\circ$ anticlockwise about the origin. What are the coordinates of its image?",
+     "options": [
+      "$(-1, 3)$",
+      "$(1, -3)$",
+      "$(-3, -1)$",
+      "$(3, -1)$"
+     ],
+     "answer": "A",
+     "explanation": "A $90^\\circ$ anticlockwise rotation about the origin sends $(x, y)$ to $(-y, x)$, so $(3, 1)$ goes to $(-1, 3)$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-07"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A scatter graph shows that as the temperature rises, ice cream sales rise. What type of correlation is this?",
+     "options": [
+      "Negative correlation",
+      "No correlation",
+      "Positive correlation",
+      "Inverse proportion"
+     ],
+     "answer": "C",
+     "explanation": "When both quantities increase together the correlation is positive. Negative correlation is when one goes up as the other goes down.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-08"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Events $A$ and $B$ are independent. $P(A) = 0.3$ and $P(B) = 0.5$. What is the probability that both happen?",
+     "options": [
+      "$0.8$",
+      "$0.2$",
+      "$0.35$",
+      "$0.15$"
+     ],
+     "answer": "D",
+     "explanation": "For independent events, multiply the probabilities: $0.3 \\times 0.5 = 0.15$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-09"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "£500 is invested at 4% simple interest per year. How much interest is earned in total after 3 years?",
+     "options": [
+      "£20",
+      "£60",
+      "£62.43",
+      "£560"
+     ],
+     "answer": "B",
+     "explanation": "Simple interest is the same every year: 4% of £500 is £20 per year, so after 3 years the interest is £60. £62.43 would be compound interest.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-10"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Factorise $6x + 15$.",
+     "options": [
+      "$6(x + 15)$",
+      "$3(2x + 15)$",
+      "$3(2x + 5)$",
+      "$2(3x + 7)$"
+     ],
+     "answer": "C",
+     "explanation": "The highest common factor of $6$ and $15$ is $3$. Take it outside the bracket: $3(2x + 5)$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-11"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The bearing of $B$ from $A$ is $070^\\circ$. What is the bearing of $A$ from $B$?",
+     "options": [
+      "$250^\\circ$",
+      "$110^\\circ$",
+      "$290^\\circ$",
+      "$020^\\circ$"
+     ],
+     "answer": "A",
+     "explanation": "A back bearing differs by $180^\\circ$. Since $70$ is less than $180$, add: $70 + 180 = 250^\\circ$.",
+     "section": "calc",
+     "id": "gcse-maths-mock-1-calc-12"
+    }
+   ]
+  }
+ }
+}

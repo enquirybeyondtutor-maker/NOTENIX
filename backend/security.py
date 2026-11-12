@@ -148,9 +148,9 @@ def can_write_practice(user: User) -> bool:
 
 
 def ai_marks_for(user: User) -> bool:
-    """Whether this user's written answers are AI-marked on submit. Pro only —
-    everyone else is marked by hand by a teacher/admin."""
-    return getattr(user, "plan", "free") == "pro"
+    """Whether this user's written answers are AI-marked on submit. Never (since Nov 2026):
+    every written answer is marked by a tutor."""
+    return False
 
 
 def can_mark_written(user: User, test) -> bool:

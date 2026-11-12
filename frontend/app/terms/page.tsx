@@ -29,8 +29,8 @@ export default function TermsPage() {
       <section>
         <h2>What you get</h2>
         <ul>
-          <li><b className="text-ink">Free account:</b> free sample questions, a limited number of AI-generated quizzes, tests a teacher or tutor assigns to you, and your results and progress.</li>
-          <li><b className="text-ink">Pro:</b> a 30-day pass with unlimited AI-generated quizzes and written-answer practice that is marked automatically by AI. Pro does not include marking by a human tutor.</li>
+          <li><b className="text-ink">Free account:</b> free sample questions, tests a teacher or tutor assigns to you, and your results and progress.</li>
+          <li><b className="text-ink">Pro:</b> a 30-day pass to the practice library and written-answer practice. Written answers are marked by a tutor, not by AI.</li>
           <li><b className="text-ink">Tutor-marked tests:</b> you request a mock, our team assigns one to your account, you sit it online, and a tutor marks your written answers and adds feedback. The price, or the fact that it is currently free, is shown on the request form before you send it.</li>
         </ul>
       </section>
@@ -48,7 +48,7 @@ export default function TermsPage() {
       <section>
         <h2>Marks, grades and feedback</h2>
         <p>
-          Automatic marks, AI marking and grade estimates are a guide to help you practise. They are not official
+          Automatic marks and grade estimates are a guide to help you practise. They are not official
           results and do not predict the grade you will receive. Grade boundaries change from year to year.
         </p>
       </section>

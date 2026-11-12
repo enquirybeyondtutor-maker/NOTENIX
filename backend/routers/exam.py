@@ -28,8 +28,9 @@ def _cfg(exam: str) -> dict:
 
 async def _allowed(exam: str, user: User, db: AsyncSession) -> dict:
     cfg = _cfg(exam)
-    if not course_svc.allows(await course_svc.live_courses(user, db), cfg["name"], None):
-        raise HTTPException(403, course_svc.locked_message(cfg["name"], None))
+    level, subject = cfg.get("access", (cfg["name"], None))   # GCSE courses: ("GCSE", "maths")
+    if not course_svc.allows(await course_svc.live_courses(user, db), level, subject):
+        raise HTTPException(403, course_svc.locked_message(level, subject))
     return cfg
 
 
@@ -38,7 +39,8 @@ async def info(exam: str):
     cfg = _cfg(exam)
     return {"exam": exam, "name": cfg["name"], "full_name": cfg["full_name"], "sections": cfg["sections"],
             "domains": cfg["domains"], "scale": {k: cfg["scale"][k] for k in ("min", "max", "decimals")},
-            "calculator": cfg["calculator"], "mock_detail": cfg["mock_detail"], "about_score": cfg["about_score"],
+            "calculator": cfg["calculator"], "no_calculator": list(cfg.get("no_calculator", ())),
+            "mock_detail": cfg["mock_detail"], "about_score": cfg["about_score"],
             "has_diagnostic": exams.form(exam, "diagnostic") is not None, "mocks": len(exams.mocks(exam))}
 
 
@@ -194,7 +196,8 @@ async def attempt(attempt_id: int, open_module: bool = False, user: User = Depen
     return {
         "status": "in_progress", "exam": a.exam, "name": cfg["name"], "title": f["title"], "kind": f.get("kind"),
         "stage": a.stage, "stages": len(f["stages"]), "module": exams.public_module(f, key), "seconds_left": left,
-        "started": a.module_started_at is not None, "calculator": cfg["calculator"],
+        "started": a.module_started_at is not None,
+        "calculator": exams.calculator_for(a.exam, f["modules"][key]["section"]),
         "answers": (a.answers or {}).get(key, {}), "marked": (a.marked or {}).get(key, []),
         "break_before": a.stage > 0 and a.module_started_at is None,
     }

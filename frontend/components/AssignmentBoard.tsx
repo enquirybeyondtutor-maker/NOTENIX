@@ -83,8 +83,8 @@ export default function AssignmentBoard({ kind, embedded = false }: { kind: "tes
           title={homework ? "No homework yet" : "No tests assigned yet"}
           desc={homework
             ? "When a teacher sets you homework, it'll appear here for you to complete."
-            : "When a teacher assigns you a test, it'll appear here. In the meantime, you can practise on your own."}
-          action={homework ? undefined : <Button href="/quiz">Practise a quiz</Button>}
+            : "When a teacher assigns you a test, it'll appear here. In the meantime, you can practise in your courses."}
+          action={homework ? undefined : <Button href="/courses">Open my courses</Button>}
         />
       ) : lists}
     </PageContainer>

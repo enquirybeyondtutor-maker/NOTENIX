@@ -22,11 +22,25 @@ def _is_bt_student(user: User) -> bool:
     return domain in login_domains() and domain.endswith("beyondtutors.com")
 
 
+GCSE_COURSES = ("gcse-maths", "gcse-biology", "gcse-chemistry", "gcse-physics")   # the Notenix GCSE courses
+
+
 def course_price(user: User, course: str | None = None) -> dict:
     """Price of one course for a year: £49-equivalent for BT students, £149 for everyone else.
-    SAT has its own price (pricing.SAT_PRICES) for students outside Beyond Tutors."""
+    SAT and the GCSE courses have their own prices (pricing.SAT_PRICES, GCSE_PRICES) for students
+    outside Beyond Tutors."""
     if course == "sat" and not _is_bt_student(user):
         return pricing.sat_for_currency(getattr(user, "billing_currency", None))
+    if course_svc.is_bundle(course):
+        cur = getattr(user, "billing_currency", None)
+        if _is_bt_student(user):   # BT students pay the BT price per course, so a bundle saves them nothing
+            one = pricing.for_currency(cur)
+            n = len(course_svc.bundle_courses(course))
+            return {"currency": one["currency"], "amount": one["amount"] * n,
+                    "label": pricing.label(one["currency"], one["amount"] * n)}
+        return pricing.gcse_bundle_for_currency(cur)
+    if course in GCSE_COURSES and not _is_bt_student(user):
+        return pricing.gcse_for_currency(getattr(user, "billing_currency", None))
     if _is_bt_student(user):
         return pricing.for_currency(getattr(user, "billing_currency", None))
     return {"currency": settings.price_currency, "amount": settings.revision_price,
@@ -49,8 +63,28 @@ async def mine(user: User = Depends(get_current_user), db: AsyncSession = Depend
         "courses": [course_svc.enrolment_row(e) for e in rows],
         "pending": sorted(set(pending)),  # courses paid for, waiting for the admin to confirm
         "price": course_price(user),
-        "prices": {"sat": course_price(user, "sat")},   # courses priced differently from the rest
+        # courses priced differently from the rest
+        "prices": {"sat": course_price(user, "sat"), **{c: course_price(user, c) for c in GCSE_COURSES},
+                   **{b: course_price(user, b) for b in course_svc.BUNDLES}},
+        "bundles": _bundles(user, rows),
     }
+
+
+def _bundles(user: User, rows: list) -> list[dict]:
+    """Bundles this student could buy, with what they save against buying each course alone.
+    Not offered to Beyond Tutors students (no saving) or once any course in it is already live."""
+    if _is_bt_student(user):
+        return []
+    live = {course_svc.enrolment_row(e)["course"] for e in rows if course_svc.enrolment_row(e)["live"]}
+    out = []
+    for key, (name, courses) in course_svc.BUNDLES.items():
+        if live & set(courses):
+            continue
+        price = course_price(user, key)
+        singles = sum(course_price(user, c)["amount"] for c in courses)
+        out.append({"key": key, "name": name, "courses": [course_svc.course_name(c) for c in courses],
+                    "price": price, "saving": pricing.label(price["currency"], singles - price["amount"])})
+    return out
 
 
 class BuyIn(BaseModel):
@@ -63,7 +97,7 @@ class BuyIn(BaseModel):
 @router.post("/buy")
 async def buy(data: BuyIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     """The student says they've paid for a course; it unlocks once an admin confirms."""
-    if not course_svc.is_course(data.course):
+    if not course_svc.is_course(data.course) and not course_svc.is_bundle(data.course):
         raise HTTPException(400, "Please choose a course.")
     if (await db.execute(select(Payment.id).where(
             Payment.user_id == user.id, Payment.status == "claimed", Payment.course == data.course))).first():

@@ -1,0 +1,367 @@
+{
+ "exam": "gcse-maths",
+ "slug": "diagnostic",
+ "title": "GCSE Maths diagnostic",
+ "kind": "diagnostic",
+ "summary": "20 multiple-choice questions across number, algebra, ratio, geometry, probability and statistics, from Foundation to Higher.",
+ "stages": [
+  "non-calc",
+  "calc"
+ ],
+ "modules": {
+  "non-calc": {
+   "title": "Part 1: no calculator",
+   "section": "non-calc",
+   "minutes": 15,
+   "questions": [
+    {
+     "domain": "Number",
+     "skill": "Fractions, decimals and percentages",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Work out $\\dfrac{3}{4} - \\dfrac{2}{5}$.",
+     "options": [
+      "$\\dfrac{1}{20}$",
+      "$\\dfrac{7}{20}$",
+      "$\\dfrac{1}{9}$",
+      "$\\dfrac{5}{9}$"
+     ],
+     "answer": "B",
+     "explanation": "Use a common denominator of $20$: $\\frac{15}{20} - \\frac{8}{20} = \\frac{7}{20}$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-01"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out the value of $27^{\\frac{2}{3}}$.",
+     "options": [
+      "$18$",
+      "$6$",
+      "$81$",
+      "$9$"
+     ],
+     "answer": "D",
+     "explanation": "The denominator $3$ means cube root and the numerator $2$ means square: $\\sqrt[3]{27} = 3$ and $3^2 = 9$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-02"
+    },
+    {
+     "domain": "Number",
+     "skill": "Factors, multiples and estimation",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "What is the highest common factor (HCF) of $84$ and $126$?",
+     "options": [
+      "$42$",
+      "$21$",
+      "$14$",
+      "$6$"
+     ],
+     "answer": "A",
+     "explanation": "$84 = 2^2 \\times 3 \\times 7$ and $126 = 2 \\times 3^2 \\times 7$. The shared factors are $2 \\times 3 \\times 7 = 42$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-03"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Expressions and formulae",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Expand and simplify $(2x - 3)(x + 4)$.",
+     "options": [
+      "$2x^2 - 12$",
+      "$2x^2 + 11x - 12$",
+      "$2x^2 + 5x - 12$",
+      "$2x^2 - 5x - 12$"
+     ],
+     "answer": "C",
+     "explanation": "Multiply each term: $2x^2 + 8x - 3x - 12$. Collect the $x$ terms: $2x^2 + 5x - 12$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-04"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Solve $5x - 7 = 2x + 11$.",
+     "options": [
+      "$x = 6$",
+      "$x = 18$",
+      "$x = \\dfrac{4}{3}$",
+      "$x = \\dfrac{18}{7}$"
+     ],
+     "answer": "A",
+     "explanation": "Subtract $2x$ from both sides: $3x - 7 = 11$. Add $7$: $3x = 18$, so $x = 6$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-05"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Sequences",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The first four terms of a sequence are $7,\\ 11,\\ 15,\\ 19$. What is the $n$th term?",
+     "options": [
+      "$n + 4$",
+      "$4n - 3$",
+      "$3n + 4$",
+      "$4n + 3$"
+     ],
+     "answer": "D",
+     "explanation": "The terms go up by $4$ each time, so the rule starts $4n$. When $n = 1$, $4n = 4$, and the first term is $7$, so add $3$: $4n + 3$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-06"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "£120 is shared between Amy and Ben in the ratio $3 : 5$. How much does Ben, who has the larger share, receive?",
+     "options": [
+      "£45",
+      "£75",
+      "£72",
+      "£80"
+     ],
+     "answer": "B",
+     "explanation": "There are $3 + 5 = 8$ parts, so one part is £$120 \\div 8$ = £15. Ben has $5$ parts: $5 \\times 15$ = £75.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-07"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Angles and shapes",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Each interior angle of a regular polygon is $150^\\circ$. How many sides does the polygon have?",
+     "options": [
+      "$10$",
+      "$15$",
+      "$12$",
+      "$6$"
+     ],
+     "answer": "C",
+     "explanation": "Each exterior angle is $180^\\circ - 150^\\circ = 30^\\circ$. Exterior angles add up to $360^\\circ$, so there are $360 \\div 30 = 12$ sides.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-08"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Simplify $\\sqrt{75} - \\sqrt{12}$.",
+     "options": [
+      "$3\\sqrt{3}$",
+      "$\\sqrt{63}$",
+      "$7\\sqrt{3}$",
+      "$3\\sqrt{7}$"
+     ],
+     "answer": "A",
+     "explanation": "$\\sqrt{75} = \\sqrt{25 \\times 3} = 5\\sqrt{3}$ and $\\sqrt{12} = \\sqrt{4 \\times 3} = 2\\sqrt{3}$. So the answer is $5\\sqrt{3} - 2\\sqrt{3} = 3\\sqrt{3}$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-09"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Probability",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A bag contains $5$ red counters and $3$ blue counters. Two counters are taken at random without replacement. What is the probability that both are red?",
+     "options": [
+      "$\\dfrac{25}{64}$",
+      "$\\dfrac{5}{16}$",
+      "$\\dfrac{9}{14}$",
+      "$\\dfrac{5}{14}$"
+     ],
+     "answer": "D",
+     "explanation": "The first is red with probability $\\frac{5}{8}$. That leaves $4$ red out of $7$, so the second is red with probability $\\frac{4}{7}$. Multiply: $\\frac{5}{8} \\times \\frac{4}{7} = \\frac{20}{56} = \\frac{5}{14}$.",
+     "section": "non-calc",
+     "id": "gcse-maths-diagnostic-non-calc-10"
+    }
+   ]
+  },
+  "calc": {
+   "title": "Part 2: calculator allowed",
+   "section": "calc",
+   "minutes": 15,
+   "questions": [
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A straight line passes through the points $(1, 3)$ and $(5, 11)$. What is the gradient of the line?",
+     "options": [
+      "$4$",
+      "$\\dfrac{1}{2}$",
+      "$2$",
+      "$8$"
+     ],
+     "answer": "C",
+     "explanation": "Gradient is change in $y$ divided by change in $x$: $\\frac{11 - 3}{5 - 1} = \\frac{8}{4} = 2$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-01"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Percentage change and growth",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "£2400 is invested at $3\\%$ compound interest per year. What is the investment worth after $4$ years, to the nearest pound?",
+     "options": [
+      "£2701",
+      "£2688",
+      "£2622",
+      "£2712"
+     ],
+     "answer": "A",
+     "explanation": "Each year the amount is multiplied by $1.03$. After $4$ years: $2400 \\times 1.03^4 = 2701.22\\ldots$, which is £2701 to the nearest pound.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-02"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Area, volume and Pythagoras",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A cylinder has radius $4\\ \\text{cm}$ and height $10\\ \\text{cm}$. What is its volume, to the nearest $\\text{cm}^3$?",
+     "options": [
+      "$251\\ \\text{cm}^3$",
+      "$503\\ \\text{cm}^3$",
+      "$126\\ \\text{cm}^3$",
+      "$1005\\ \\text{cm}^3$"
+     ],
+     "answer": "B",
+     "explanation": "Volume of a cylinder is $\\pi r^2 h = \\pi \\times 4^2 \\times 10 = 160\\pi = 502.65\\ldots$, which rounds to $503\\ \\text{cm}^3$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-03"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Trigonometry",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a right-angled triangle the hypotenuse is $12\\ \\text{cm}$ and one angle is $35^\\circ$. What is the length of the side opposite the $35^\\circ$ angle, to 3 significant figures?",
+     "options": [
+      "$9.83\\ \\text{cm}$",
+      "$8.40\\ \\text{cm}$",
+      "$20.9\\ \\text{cm}$",
+      "$6.88\\ \\text{cm}$"
+     ],
+     "answer": "D",
+     "explanation": "Opposite and hypotenuse means sine: $\\sin 35^\\circ = \\frac{\\text{opp}}{12}$, so $\\text{opp} = 12 \\sin 35^\\circ = 6.88\\ \\text{cm}$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-04"
+    },
+    {
+     "domain": "Geometry and measures",
+     "skill": "Vectors and transformations",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "$\\mathbf{a} = \\begin{pmatrix} 3 \\\\ -2 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} -1 \\\\ 4 \\end{pmatrix}$. Work out $2\\mathbf{a} - \\mathbf{b}$.",
+     "options": [
+      "$\\begin{pmatrix} 5 \\\\ 0 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 7 \\\\ -8 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 7 \\\\ 0 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 5 \\\\ -8 \\end{pmatrix}$"
+     ],
+     "answer": "B",
+     "explanation": "$2\\mathbf{a} = \\begin{pmatrix} 6 \\\\ -4 \\end{pmatrix}$. Subtract $\\mathbf{b}$ from each row: $6 - (-1) = 7$ and $-4 - 4 = -8$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-05"
+    },
+    {
+     "domain": "Probability and statistics",
+     "skill": "Statistics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The mean of $20$ numbers is $6.5$. One more number is added and the mean of all $21$ numbers is $7$. What number was added?",
+     "options": [
+      "$17$",
+      "$7.5$",
+      "$10.5$",
+      "$27$"
+     ],
+     "answer": "A",
+     "explanation": "The $20$ numbers total $20 \\times 6.5 = 130$. The $21$ numbers total $21 \\times 7 = 147$. The new number is $147 - 130 = 17$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-06"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Equations and inequalities",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Solve $x^2 - 5x - 14 = 0$.",
+     "options": [
+      "$x = 2$ or $x = -7$",
+      "$x = 14$ or $x = -1$",
+      "$x = -7$ or $x = -2$",
+      "$x = 7$ or $x = -2$"
+     ],
+     "answer": "D",
+     "explanation": "Find two numbers that multiply to $-14$ and add to $-5$: these are $-7$ and $2$. So $(x - 7)(x + 2) = 0$, giving $x = 7$ or $x = -2$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-07"
+    },
+    {
+     "domain": "Ratio and proportion",
+     "skill": "Ratio and proportion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$y$ is inversely proportional to $x^2$. When $x = 2$, $y = 9$. What is the value of $y$ when $x = 6$?",
+     "options": [
+      "$27$",
+      "$3$",
+      "$1$",
+      "$81$"
+     ],
+     "answer": "C",
+     "explanation": "Write $y = \\frac{k}{x^2}$. Using $x = 2$, $y = 9$: $k = 9 \\times 4 = 36$. When $x = 6$, $y = \\frac{36}{36} = 1$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-08"
+    },
+    {
+     "domain": "Algebra",
+     "skill": "Graphs and functions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$f(x) = 3x - 2$ and $g(x) = x^2$. What is the value of $fg(2)$?",
+     "options": [
+      "$16$",
+      "$10$",
+      "$8$",
+      "$14$"
+     ],
+     "answer": "B",
+     "explanation": "$fg(2)$ means do $g$ first, then $f$. $g(2) = 2^2 = 4$, and $f(4) = 3 \\times 4 - 2 = 10$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-09"
+    },
+    {
+     "domain": "Number",
+     "skill": "Indices, standard form and surds",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Work out $(3 \\times 10^5) \\times (4 \\times 10^{-2})$. Give your answer in standard form.",
+     "options": [
+      "$1.2 \\times 10^4$",
+      "$12 \\times 10^3$",
+      "$1.2 \\times 10^3$",
+      "$1.2 \\times 10^{-10}$"
+     ],
+     "answer": "A",
+     "explanation": "Multiply the numbers and add the powers: $12 \\times 10^3$. In standard form the first number must be between $1$ and $10$, so this is $1.2 \\times 10^4$.",
+     "section": "calc",
+     "id": "gcse-maths-diagnostic-calc-10"
+    }
+   ]
+  }
+ }
+}

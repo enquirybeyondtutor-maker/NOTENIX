@@ -98,7 +98,25 @@ _NAMES = {c["key"]: c["name"] for c in catalogue()}
 _NAMES.update({f"{ck}-maths": f"{CURRICULA[ck]} Maths (all)" for ck in MATHS_COURSES})
 
 
+# Bundles: one payment that switches on several courses. A bundle is not a course itself
+# (nobody is enrolled on "gcse-bundle"); confirming the payment grants each course in it.
+BUNDLES = {
+    "gcse-bundle": ("GCSE Maths, Biology, Chemistry and Physics",
+                    ["gcse-maths", "gcse-biology", "gcse-chemistry", "gcse-physics"]),
+}
+
+
+def is_bundle(key: str | None) -> bool:
+    return key in BUNDLES
+
+
+def bundle_courses(key: str) -> list[str]:
+    return list(BUNDLES[key][1])
+
+
 def course_name(key: str) -> str:
+    if key in BUNDLES:
+        return BUNDLES[key][0]
     return _NAMES.get(key, key)
 
 

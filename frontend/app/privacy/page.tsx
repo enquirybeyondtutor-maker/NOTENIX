@@ -46,7 +46,7 @@ export default function PrivacyPage() {
         <h2>Who processes it</h2>
         <ul>
           <li><b className="text-ink">Tutors:</b> tutors from Beyond Tutors see the answers you submit for a tutor-marked test so they can mark them. Teachers see the work you submit for tests they assigned.</li>
-          <li><b className="text-ink">AI marking:</b> to generate quizzes and mark written answers automatically, the question and your answer are sent to Anthropic&apos;s Claude AI. They are not used to train Anthropic&apos;s models.</li>
+          <li><b className="text-ink">AI tools used by our team:</b> students&apos; questions and answers are written and marked by people, not by AI. Our tutors may use Anthropic&apos;s Claude AI to turn a paper they upload into a test and to draft the written summary on a progress report, which sends test results to Anthropic. They are not used to train Anthropic&apos;s models.</li>
           <li><b className="text-ink">Hosting and email:</b> the site and database are hosted by cloud providers (Vercel and Render), and verification and notification emails go through an email delivery provider.</li>
         </ul>
       </section>

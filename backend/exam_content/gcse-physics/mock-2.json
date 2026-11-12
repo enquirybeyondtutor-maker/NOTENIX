@@ -1,0 +1,435 @@
+{
+ "exam": "gcse-physics",
+ "slug": "mock-2",
+ "title": "GCSE Physics Practice Paper 2",
+ "kind": "mock",
+ "summary": "Higher · grades 4 to 9 · 24 questions · 36 min",
+ "stages": [
+  "p1",
+  "p2"
+ ],
+ "modules": {
+  "p1": {
+   "title": "Part 1: Paper 1 topics",
+   "section": "p1",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A machine is 40% efficient. It is supplied with 500 J of energy. How much energy does it transfer usefully?",
+     "options": [
+      "200 J",
+      "300 J",
+      "1250 J",
+      "460 J"
+     ],
+     "answer": "A",
+     "explanation": "Useful output is efficiency multiplied by total input: 0.40 times 500 = 200 J. The other 300 J is wasted.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-01"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A ball is dropped from rest and falls $5\\ \\text{m}$. Ignoring air resistance, what is its speed just before it hits the ground? ($g = 9.8\\ \\text{N/kg}$)",
+     "options": [
+      "49 m/s",
+      "98 m/s",
+      "9.9 m/s",
+      "7.0 m/s"
+     ],
+     "answer": "C",
+     "explanation": "All the gravitational potential energy becomes kinetic energy: $mgh = \\frac{1}{2}mv^2$, so $v = \\sqrt{2gh} = \\sqrt{2 \\times 9.8 \\times 5} = \\sqrt{98} = 9.9$ m/s.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-02"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Energy stores and transfers",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A 60 W lamp is switched on for 2 minutes. How much energy does it transfer?",
+     "options": [
+      "120 J",
+      "30 J",
+      "0.5 J",
+      "7200 J"
+     ],
+     "answer": "D",
+     "explanation": "Change the time to seconds: 2 minutes is 120 s. Energy is power multiplied by time: 60 times 120 = 7200 J.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-03"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A $9\\ \\text{V}$ battery is connected to a $3\\ \\Omega$ resistor and a $6\\ \\Omega$ resistor in series. What is the current in the circuit?",
+     "options": [
+      "3 A",
+      "1 A",
+      "4.5 A",
+      "81 A"
+     ],
+     "answer": "B",
+     "explanation": "In series the total resistance is $3 + 6 = 9\\ \\Omega$. Current $= \\frac{V}{R} = \\frac{9}{9} = 1$ A.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-04"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A $12\\ \\text{V}$ battery is connected to a $2\\ \\Omega$ resistor and a $4\\ \\Omega$ resistor in series. What is the potential difference across the $4\\ \\Omega$ resistor?",
+     "options": [
+      "4 V",
+      "12 V",
+      "8 V",
+      "6 V"
+     ],
+     "answer": "C",
+     "explanation": "The total resistance is $6\\ \\Omega$, so the current is $\\frac{12}{6} = 2$ A. Across the $4\\ \\Omega$ resistor, $V = IR = 2 \\times 4 = 8$ V.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-05"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Electricity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What happens to the resistance of a filament lamp as the current through it increases?",
+     "options": [
+      "It increases, because the filament gets hotter",
+      "It decreases, because the filament gets hotter",
+      "It stays constant",
+      "It falls to zero"
+     ],
+     "answer": "A",
+     "explanation": "A larger current heats the filament. The ions in the metal vibrate more, making it harder for electrons to pass, so the resistance increases.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-06"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Why can a gas be compressed easily but a solid cannot?",
+     "options": [
+      "Gas particles are smaller",
+      "Gas particles are lighter",
+      "Gas particles are not moving",
+      "Gas particles are far apart, with space between them"
+     ],
+     "answer": "D",
+     "explanation": "In a gas there are large spaces between the particles, so they can be pushed closer together. In a solid the particles are already touching.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-07"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "$21\\,000\\ \\text{J}$ of energy is supplied to $0.5\\ \\text{kg}$ of water. By how much does its temperature rise? (Specific heat capacity of water $= 4200\\ \\text{J/kg}\\,^\\circ\\text{C}$)",
+     "options": [
+      "$5\\ ^\\circ\\text{C}$",
+      "$10\\ ^\\circ\\text{C}$",
+      "$25\\ ^\\circ\\text{C}$",
+      "$100\\ ^\\circ\\text{C}$"
+     ],
+     "answer": "B",
+     "explanation": "Rearrange $E = mc\\Delta\\theta$: $\\Delta\\theta = \\frac{E}{mc} = \\frac{21\\,000}{0.5 \\times 4200} = 10\\ ^\\circ\\text{C}$.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-08"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Particle model",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "How can the volume of a small, irregularly shaped stone be measured?",
+     "options": [
+      "By the rise in water level when it is placed in a measuring cylinder",
+      "By measuring its length with a ruler",
+      "By weighing it on a balance",
+      "By heating it and timing how long it takes to cool"
+     ],
+     "answer": "A",
+     "explanation": "Lower the stone into water in a measuring cylinder or displacement can. The volume of water displaced equals the volume of the stone.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-09"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What is the difference between two isotopes of the same element?",
+     "options": [
+      "They have different numbers of protons",
+      "They have different numbers of electrons",
+      "They have different charges",
+      "They have different numbers of neutrons"
+     ],
+     "answer": "D",
+     "explanation": "Isotopes are atoms of the same element, so they have the same number of protons, but they have different numbers of neutrons.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-10"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The count rate from a radioactive sample falls from 1200 counts per minute to 150 counts per minute in 15 days. What is the half-life?",
+     "options": [
+      "3 days",
+      "7.5 days",
+      "5 days",
+      "8 days"
+     ],
+     "answer": "C",
+     "explanation": "1200 halves to 600, then 300, then 150: three half-lives. Three half-lives take 15 days, so one half-life is 5 days.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-11"
+    },
+    {
+     "domain": "Energy and electricity",
+     "skill": "Atomic structure and radiation",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What happens in nuclear fission?",
+     "options": [
+      "Two small nuclei join to make a larger one",
+      "A large nucleus splits into smaller nuclei, releasing neutrons and energy",
+      "An electron is removed from an atom",
+      "A nucleus absorbs a gamma ray"
+     ],
+     "answer": "B",
+     "explanation": "In fission a large, unstable nucleus such as uranium splits into two smaller nuclei, releasing energy and two or three neutrons that can cause a chain reaction.",
+     "section": "p1",
+     "id": "gcse-physics-mock-2-p1-12"
+    }
+   ]
+  },
+  "p2": {
+   "title": "Part 2: Paper 2 topics",
+   "section": "p2",
+   "minutes": 18,
+   "questions": [
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "An astronaut has a mass of $60\\ \\text{kg}$. What is the astronaut's weight on the Moon, where the gravitational field strength is $1.6\\ \\text{N/kg}$?",
+     "options": [
+      "588 N",
+      "96 N",
+      "37.5 N",
+      "61.6 N"
+     ],
+     "answer": "B",
+     "explanation": "Weight $=$ mass $\\times$ gravitational field strength $= 60 \\times 1.6 = 96$ N. The mass is still $60\\ \\text{kg}$ on the Moon; only the weight changes.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-01"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Forces and their effects",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A force of $400\\ \\text{N}$ acts on an area of $0.02\\ \\text{m}^2$. What is the pressure?",
+     "options": [
+      "8 Pa",
+      "0.00005 Pa",
+      "400.02 Pa",
+      "20 000 Pa"
+     ],
+     "answer": "D",
+     "explanation": "Pressure $=$ force $\\div$ area $= 400 \\div 0.02 = 20\\,000$ Pa.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-02"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does the gradient of a velocity-time graph represent?",
+     "options": [
+      "Acceleration",
+      "Distance travelled",
+      "Speed",
+      "Momentum"
+     ],
+     "answer": "A",
+     "explanation": "The gradient of a velocity-time graph is the change in velocity divided by the time taken, which is the acceleration.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-03"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A car slows from 30 m/s to 10 m/s in 4 s. What is its acceleration?",
+     "options": [
+      "$5\\ \\text{m/s}^2$",
+      "$10\\ \\text{m/s}^2$",
+      "$-5\\ \\text{m/s}^2$",
+      "$-80\\ \\text{m/s}^2$"
+     ],
+     "answer": "C",
+     "explanation": "Acceleration $=$ change in velocity $\\div$ time $= (10 - 30) \\div 4 = -5\\ \\text{m/s}^2$. The negative sign shows the car is slowing down.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-04"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Motion and Newton's laws",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A skydiver is falling at terminal velocity. Which statement is correct?",
+     "options": [
+      "There are no forces acting on the skydiver",
+      "The weight is greater than the air resistance",
+      "The air resistance is greater than the weight",
+      "The resultant force on the skydiver is zero"
+     ],
+     "answer": "D",
+     "explanation": "At terminal velocity the air resistance equals the weight, so the resultant force is zero and the skydiver falls at a constant speed.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-05"
+    },
+    {
+     "domain": "Forces and motion",
+     "skill": "Momentum",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A skater of mass 60 kg is at rest on ice. She throws a 3 kg ball forwards at 8 m/s. What is her recoil speed?",
+     "options": [
+      "0.4 m/s",
+      "2.5 m/s",
+      "160 m/s",
+      "22.5 m/s"
+     ],
+     "answer": "A",
+     "explanation": "Total momentum starts at zero and is conserved. The ball's momentum is 3 times 8 = 24 kg m/s, so the skater has 24 kg m/s backwards: 24 divided by 60 = 0.4 m/s.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-06"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A girl shouts at a cliff and hears the echo 2 s later. The speed of sound is 340 m/s. How far away is the cliff?",
+     "options": [
+      "680 m",
+      "340 m",
+      "170 m",
+      "1360 m"
+     ],
+     "answer": "B",
+     "explanation": "In 2 s the sound travels 340 times 2 = 680 m, but that is there and back. The cliff is half of this distance: 340 m.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-07"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Waves",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which statement describes a transverse wave?",
+     "options": [
+      "The oscillations are parallel to the direction of energy transfer",
+      "The wave cannot be reflected",
+      "The oscillations are perpendicular to the direction of energy transfer",
+      "The wave always needs a medium"
+     ],
+     "answer": "C",
+     "explanation": "In a transverse wave the oscillations are at right angles to the direction in which the wave transfers energy. Light and water ripples are examples.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-08"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Electromagnetic spectrum",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "How are radio waves produced?",
+     "options": [
+      "By oscillations in electrical circuits",
+      "By changes in the nucleus of an atom",
+      "By very hot objects only",
+      "By sound waves in air"
+     ],
+     "answer": "A",
+     "explanation": "Radio waves are produced when charges oscillate in an electrical circuit, such as an alternating current in an aerial.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-09"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In Fleming's left-hand rule, what does the thumb represent?",
+     "options": [
+      "The direction of the magnetic field",
+      "The direction of the current",
+      "The size of the potential difference",
+      "The direction of the force on the conductor"
+     ],
+     "answer": "D",
+     "explanation": "The thumb shows the direction of the force, or motion. The first finger shows the field and the second finger shows the current.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-10"
+    },
+    {
+     "domain": "Waves and magnetism",
+     "skill": "Magnetism and electromagnetism",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "What does a step-down transformer do?",
+     "options": [
+      "It increases the potential difference",
+      "It decreases the potential difference",
+      "It changes alternating current into direct current",
+      "It increases the power"
+     ],
+     "answer": "B",
+     "explanation": "A step-down transformer has fewer turns on the secondary coil than on the primary, so the output potential difference is lower than the input.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-11"
+    },
+    {
+     "domain": "Space",
+     "skill": "Space physics",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A satellite moves to a stable orbit that is closer to the Earth. What happens to its speed?",
+     "options": [
+      "It decreases",
+      "It stays the same",
+      "It increases",
+      "It falls to zero"
+     ],
+     "answer": "C",
+     "explanation": "Closer to the Earth the gravitational force is stronger, so the satellite must travel faster to stay in a stable orbit of smaller radius.",
+     "section": "p2",
+     "id": "gcse-physics-mock-2-p2-12"
+    }
+   ]
+  }
+ }
+}

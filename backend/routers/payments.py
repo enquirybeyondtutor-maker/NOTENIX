@@ -384,7 +384,9 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         user.access_kind, user.access_until = "paid", datetime.utcnow() + timedelta(days=settings.subscription_days)
     if data.approve and (p.purpose == "course" or (p.purpose == "revision" and p.course)):
         # One course for a year (renewing early adds the year on to the current end date).
-        await course_svc.grant(user, p.course, "year", db, payment_id=p.id)
+        # A bundle payment switches on every course in the bundle.
+        for c in (course_svc.bundle_courses(p.course) if course_svc.is_bundle(p.course) else [p.course]):
+            await course_svc.grant(user, c, "year", db, payment_id=p.id)
     if data.approve and p.purpose in ("annual", "doubt", "plus"):
         from services import doubt
         doubt.set_plan(user, p.purpose)
@@ -404,7 +406,7 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
             }.get(p.purpose, f"test request #{p.request_id}")
     extra = {"pro": f"Pro is on for the next {PRO_DAYS} days.",
              "revision": f"{course_label} is now on for a year." if course_label else "Full revision access is now on for a year.",
-             "course": f"{course_label} is now on for a year: practice, quizzes and revision for this course.",
+             "course": f"{course_label} is now on for a year: practice, revision and tutor-marked papers.",
              "ks3": "Notenix KS3 is on for a year: a test every half-term, homework help, notes and a progress report every month.",
              "doubt": "Ask a Tutor is on for the next 30 days: up to 20 questions, answered step by step.",
              "annual": "Ask a Tutor is on for a whole year: up to 20 questions every month, answered step by step.",

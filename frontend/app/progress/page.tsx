@@ -21,14 +21,14 @@ export default function Progress() {
 
   return (
     <PageContainer>
-      <PageHeader icon={LineChart} title="Your progress" subtitle="Every quiz and practice session you've completed." />
+      <PageHeader icon={LineChart} title="Your progress" subtitle="Every practice session you've completed." />
 
       {history.length === 0 ? (
         <EmptyState
           icon={Brain}
           title="No practice yet"
-          desc="Take your first quiz to start tracking your progress over time."
-          action={<Button href="/quiz"><Brain size={16} /> Start a quiz</Button>}
+          desc="Work through a course drill or a test from your tutor to start tracking your progress."
+          action={<Button href="/courses"><Brain size={16} /> Open my courses</Button>}
         />
       ) : (
         <div className="card divide-y divide-line">
