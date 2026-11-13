@@ -662,11 +662,10 @@ async def set_excluded(attempt_id: int, data: ExcludeIn, teacher: User = Depends
 @router.get("/students")
 async def students(teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
     """Students this teacher has assigned work to, with attempt stats."""
+    # DISTINCT on the student ids only: users has JSON columns, which Postgres can't compare for SELECT DISTINCT.
+    assigned_ids = select(TestAssignment.student_id).where(TestAssignment.assigned_by == teacher.id)
     rows = (await db.execute(
-        select(User)
-        .join(TestAssignment, TestAssignment.student_id == User.id)
-        .where(TestAssignment.assigned_by == teacher.id)
-        .distinct()
+        select(User).where(User.id.in_(assigned_ids)).order_by(User.full_name)
     )).scalars().all()
 
     ids = [s.id for s in rows]
