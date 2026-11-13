@@ -45,6 +45,8 @@ class Settings(BaseSettings):
 
     # Admin — comma-separated emails auto-treated as admin (for /admin dashboard)
     admin_emails: str = ""
+    # Extra inboxes told about every payment to check (alerts only - this does NOT make them admins)
+    payment_alert_emails: str = "sinhaaryan1303@gmail.com"
 
     # Email — for signup OTP verification.
     # Prefer an HTTPS email API (works on hosts that block SMTP, e.g. Render):

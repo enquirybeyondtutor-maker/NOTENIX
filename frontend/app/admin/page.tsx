@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { formatDate, relativeTime, cn } from "@/lib/utils";
 
+interface PaymentInfo { amount: number; currency: string; label: string; what: string; reference: string; at: string | null }
+
 interface Row {
   id: number;
   email: string;
@@ -36,6 +38,8 @@ interface Row {
   help_until?: string | null;
   sg_level?: string | null;
   subscription_label?: string;
+  paid?: PaymentInfo | null;            // latest confirmed payment to Notenix
+  pending_payment?: PaymentInfo | null; // claimed, waiting to be checked
   courses?: Enrolment[];
   created_at: string;
   last_active: string | null;
@@ -454,7 +458,19 @@ export default function AdminPage() {
                       ) : (
                         <span className="text-xs text-ink-subtle">Not activated by a parent</span>
                       )}
-                      {u.role === "student" && !u.is_admin && priceList.length > 0 && (
+                      {u.paid && (
+                        <div className="mt-1 text-xs" title={`Payment ${u.paid.reference}`}>
+                          <span className="inline-flex rounded-full bg-emerald-50 px-2 py-0.5 font-semibold text-emerald-700">Paid {u.paid.label}</span>
+                          <div className="mt-0.5 text-ink-subtle">{u.paid.what}{u.paid.at ? ` · ${formatDate(u.paid.at)}` : ""}</div>
+                        </div>
+                      )}
+                      {u.pending_payment && (
+                        <div className="mt-1 text-xs" title={`Payment ${u.pending_payment.reference}`}>
+                          <span className="inline-flex rounded-full bg-amber-50 px-2 py-0.5 font-medium text-amber-700">Payment to check: {u.pending_payment.label}</span>
+                          <div className="mt-0.5 text-ink-subtle">{u.pending_payment.what}</div>
+                        </div>
+                      )}
+                      {u.role === "student" && !u.is_admin && priceList.length > 0 && !u.paid && !u.pending_payment && (
                         <select value={u.billing_currency || "GBP"} disabled={busy === u.id}
                           onChange={(e) => changeCurrency(u, e.target.value)} title="Billing currency shown in the parent's terms"
                           className="mt-1 block rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">

@@ -390,8 +390,12 @@ async def send_notice(to_email: str, subject: str, heading: str, body_html: str,
 
 
 async def notify_admins(subject: str, text: str, path: str, rows: list[tuple[str, str]] | None = None) -> None:
-    """Best-effort alert to everyone in ADMIN_EMAILS, with an optional summary table."""
+    """Best-effort alert to everyone in ADMIN_EMAILS, with an optional summary table.
+    Payment alerts ("Payment to check: ...") also go to PAYMENT_ALERT_EMAILS."""
     emails = [e.strip() for e in (settings.admin_emails or "").split(",") if e.strip()]
+    if subject.startswith("Payment to check"):
+        emails += [e.strip() for e in (settings.payment_alert_emails or "").split(",") if e.strip()]
+    emails = list(dict.fromkeys(e.lower() for e in emails))   # no duplicates
     body = T.para(escape(text)) + (T.info_table([(k, escape(v)) for k, v in rows]) if rows else "")
     html = T.layout(preheader=text[:90], heading=subject, body=body, buttons=[(T.site(path), "Open in Notenix")],
                     audience="admin", tagline="Admin")

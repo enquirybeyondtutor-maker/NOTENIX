@@ -75,7 +75,18 @@ async def list_users(admin: User = Depends(require_admin), db: AsyncSession = De
     by_user: dict[int, list] = {}
     for e in (await db.execute(select(Enrolment).order_by(Enrolment.created_at))).scalars().all():
         by_user.setdefault(e.user_id, []).append(e)
-    return [_user_row(u, by_user.get(u.id)) for u in rows]
+    # What each student actually paid Notenix (latest confirmed payment) and anything still waiting to be checked,
+    # so Admin shows e.g. "Paid £349" instead of the Beyond Tutors plan price.
+    from models import Payment
+    paid: dict[int, dict] = {}
+    pending: dict[int, dict] = {}
+    for p in (await db.execute(select(Payment).where(Payment.status.in_(("confirmed", "claimed")))
+                               .order_by(Payment.created_at))).scalars().all():
+        row = {"amount": p.amount, "currency": p.currency, "label": pricing.label((p.currency or "GBP").upper(), float(p.amount)),
+               "what": course_svc.course_name(p.course) if p.course else p.purpose, "reference": p.reference,
+               "at": (p.reviewed_at or p.created_at).isoformat() if (p.reviewed_at or p.created_at) else None}
+        (paid if p.status == "confirmed" else pending)[p.user_id] = row
+    return [{**_user_row(u, by_user.get(u.id)), "paid": paid.get(u.id), "pending_payment": pending.get(u.id)} for u in rows]
 
 
 @router.post("/users/{user_id}/ban")

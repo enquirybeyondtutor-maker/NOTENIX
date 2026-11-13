@@ -26,7 +26,7 @@ export default function RevisionCheckout() {
   const [catalogue, setCatalogue] = useState<Course[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [done, setDone] = useState<{ reference: string } | null>(null);
+  const [done, setDone] = useState<{ reference: string; login_id?: string } | null>(null);
   const country = useCountry();
   const rates = useRates();
 
@@ -57,7 +57,7 @@ export default function RevisionCheckout() {
     setBusy(true); setError("");
     try {
       const { data } = await paymentsAPI.revisionCheckout(form);
-      setDone({ reference: data.reference });
+      setDone({ reference: data.reference, login_id: data.login_id });
     } catch (err: any) {
       setError(err.response?.data?.detail || "Couldn't send that. Please try again.");
     } finally {
@@ -88,6 +88,15 @@ export default function RevisionCheckout() {
             Reference <b className="font-mono text-ink">{done.reference}</b>. We match it to our bank account, usually within a few hours,
             then email you. {courseName || "Your course"} {form.course === BUNDLE ? "switch" : "switches"} on for a year as soon as it&apos;s confirmed.
           </p>
+          {done.login_id && (
+            <div className="mx-auto mt-5 max-w-sm rounded-xl border border-brand-200 bg-brand-50/60 p-4 text-left text-sm">
+              <p className="font-semibold text-ink">Your Notenix login</p>
+              <p className="mt-2 text-ink-muted">User ID</p>
+              <p className="font-mono text-base font-semibold text-ink">{done.login_id}</p>
+              <p className="mt-2 text-ink-muted">Password: the one you just chose.</p>
+              <p className="mt-2 text-xs text-ink-muted">Save this user ID: you sign in with it, not your email. It&apos;s also in the confirmation we email to {form.email} once your payment is checked.</p>
+            </div>
+          )}
           <Button href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`} className="mt-6">Go to sign in</Button>
         </div>
       </PageContainer>
@@ -123,8 +132,9 @@ export default function RevisionCheckout() {
             )}
           </Field>
           <Field label="Student's full name"><Input required value={form.full_name} onChange={set("full_name")} placeholder="e.g. Priya Patel" /></Field>
-          <Field label="Email"><Input required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" /></Field>
-          <Field label="Choose a password" hint="At least 8 characters. You'll sign in with this email and password.">
+          <Field label="Email" hint="We send your receipt and updates here. Your Notenix user ID is made from the student's name, e.g. priya@notenix.com.">
+            <Input required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" /></Field>
+          <Field label="Choose a password" hint="At least 8 characters. You'll sign in with your Notenix user ID and this password.">
             <Input required type="password" minLength={8} value={form.password} onChange={set("password")} />
           </Field>
         </div>

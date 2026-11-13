@@ -223,14 +223,20 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
         raise HTTPException(400, "Please choose your course.")
     price = _public_price(data.course)   # GCSE £99, bundle £349, SAT £99, else £149
     now = datetime.utcnow()
-    user = (await db.execute(select(User).where(User.email == email))).scalar_one_or_none()
+    # Older accounts sign in with their own email; new ones have a name@notenix.com ID and keep the email
+    # they typed as notify_email (where receipts and updates go - a login ID has no inbox).
+    user = (await db.execute(select(User).where(
+        (User.email == email) | (User.notify_email == email)))).scalars().first()
     if user:
-        # A free test-request account upgrading: same email and password, keep their history.
+        # A free test-request account upgrading: same password, keep their history.
         if getattr(user, "access_kind", None) != "free" or not verify_password(data.password, user.password_hash):
-            raise HTTPException(400, "That email already has a Notenix account. Use its password, or sign in instead.")
+            raise HTTPException(400, f"That email already has a Notenix account (user ID {user.email}). "
+                                     "Use its password, or sign in instead.")
     else:
-        user = User(email=email, full_name=data.full_name.strip()[:120], password_hash=hash_password(data.password),
-                    role="student", is_verified=True)
+        from routers.admin import _free_id
+        login_id = await _free_id(data.full_name, db, domain=settings.ks3_id_domain)   # anushka@notenix.com
+        user = User(email=login_id, notify_email=email, full_name=data.full_name.strip()[:120],
+                    password_hash=hash_password(data.password), role="student", is_verified=True)
         db.add(user)
     user.access_kind, user.access_until = "pending", now  # locked until the payment is confirmed
     await db.flush()
@@ -246,12 +252,12 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
     await db.refresh(p)
     await notify_admins(
         f"Payment to check: {p.reference}",
-        f"{user.full_name} ({user.email}) says they paid {p.amount:g} {p.currency} for "
-        f"{course_svc.course_name(p.course) if p.course else 'revision access'} "
+        f"{user.full_name} (user ID {user.email}, email {user.notify_email or user.email}) says they paid "
+        f"{p.amount:g} {p.currency} for {course_svc.course_name(p.course) if p.course else 'revision access'} "
         f"via {p.paid_via or 'bank transfer'}. Note: {p.payer_note or '-'}",
         "/admin/requests",
     )
-    return _payment_row(p)
+    return {**_payment_row(p), "login_id": user.email}
 
 
 # ── Notenix KS3 (£149/yr): a trial family continues by bank transfer ──────────
