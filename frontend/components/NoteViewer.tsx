@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Download, FileText, ChevronDown, ChevronUp, Camera, X, CheckCircle2 } from "lucide-react";
+import { Download, FileText, ChevronDown, ChevronUp, Camera, X, CheckCircle2, Lock, Unlock } from "lucide-react";
 import { api, notesAPI } from "@/lib/api";
 import { invalidateInbox } from "@/lib/inbox";
 import { MathText } from "@/components/MathText";
@@ -174,8 +174,92 @@ export default function NoteViewer({ note, footer, defaultOpen = false }: { note
             </div>
           )}
           {!note.body && !note.has_file && <p className="flex items-center gap-1 text-sm text-ink-muted"><FileText size={14} /> Empty note</p>}
-          {isHomework && detail && !file && <HandIn noteId={note.id} sub={sub} onDone={(s) => setDetail({ ...detail, submission: s })} />}
+          {isHomework && detail && !file && (
+            <HandIn noteId={note.id} sub={sub} onDone={(s) => {
+              setDetail({ ...detail, submission: s });
+              // Handing in unlocks the solutions: fetch the note again so the panel opens up.
+              if (detail.solution) notesAPI.get(note.id).then((r) => setDetail(r.data)).catch(() => {});
+            }} />
+          )}
+          {isHomework && detail?.solution && <Solutions noteId={note.id} info={detail.solution} />}
+          {isHomework && detail?.solution_data && (
+            <a href={detail.solution_data} download={note.solution_name || "solutions"}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700">
+              <Lock size={14} /> Solutions: {note.solution_name || "file"} (students see these after handing in)
+            </a>
+          )}
           {footer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Homework solutions: locked until the student hands in, then shown as watermarked page images. */
+function Solutions({ noteId, info }: { noteId: number; info: { locked: boolean; pages?: number | null } }) {
+  const [pages, setPages] = useState<string[] | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState("");
+  const urls = useRef<string[]>([]);
+  useEffect(() => () => urls.current.forEach((u) => URL.revokeObjectURL(u)), []);
+
+  if (info.locked) {
+    return (
+      <div className="flex items-start gap-3 rounded-lg border border-dashed border-line bg-canvas p-4 text-sm">
+        <Lock size={18} className="mt-0.5 shrink-0 text-ink-subtle" />
+        <div>
+          <div className="font-semibold text-ink">Solutions are locked</div>
+          <p className="mt-0.5 text-ink-muted">Hand in your work above and the worked solutions open straight away, so you can check your answers.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const show = async () => {
+    setBusy(true);
+    setMsg("");
+    const token = localStorage.getItem("notenix_token");
+    try {
+      let count = info.pages ?? null;
+      // Solutions are turned into pages in the background; wait briefly if they're not ready yet.
+      for (let t = 0; !count && t < 20; t++) {
+        await new Promise((r) => setTimeout(r, 3000));
+        count = (await notesAPI.get(noteId)).data.solution?.pages ?? null;
+      }
+      if (!count) return setMsg("The solutions are still being prepared. Please try again in a minute.");
+      const out: string[] = [];
+      for (let n = 1; n <= count; n++) {
+        const res = await fetch(`/api/notes/${noteId}/solution/pages/${n}`, { headers: { Authorization: `Bearer ${token}` } });
+        if (res.status !== 200) throw new Error(String(res.status));
+        const u = URL.createObjectURL(await res.blob());
+        urls.current.push(u);
+        out.push(u);
+      }
+      setPages(out);
+    } catch {
+      setMsg("Couldn't load the solutions. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2 font-semibold text-emerald-900"><Unlock size={16} /> Solutions unlocked</div>
+        {!pages && (
+          <button onClick={show} disabled={busy} className="ml-auto rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60">
+            {busy ? "Loading…" : "Show solutions"}
+          </button>
+        )}
+      </div>
+      {msg && <p className="mt-2 text-sm text-red-600">{msg}</p>}
+      {pages && (
+        <div className="mt-3 select-none space-y-3" {...noSave}>
+          {pages.map((u, i) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={i} src={u} alt={`Solutions page ${i + 1}`} draggable={false} {...noSave} className="w-full rounded-lg border border-line bg-white" />
+          ))}
         </div>
       )}
     </div>

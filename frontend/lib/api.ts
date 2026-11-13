@@ -139,7 +139,8 @@ export const notesAPI = {
   mine: () => api.get("/notes"),
   get: (id: number | string) => api.get(`/notes/${id}`),
   teacherList: () => api.get("/teacher/notes"),
-  create: (data: { title: string; subject?: string; body?: string; file_name?: string; file_data?: string; student_emails: string[] }) =>
+  create: (data: { title: string; subject?: string; body?: string; file_name?: string; file_data?: string; student_emails: string[];
+    kind?: "notes" | "homework"; due_at?: string; solution_name?: string; solution_data?: string }) =>
     api.post("/teacher/notes", data),
   share: (id: number, student_emails: string[]) => api.post(`/teacher/notes/${id}/share`, { student_emails }),
   unshare: (id: number, studentId: number) => api.delete(`/teacher/notes/${id}/share/${studentId}`),

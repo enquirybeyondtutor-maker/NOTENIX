@@ -267,6 +267,10 @@ class ClassNote(Base):
     # data URI (PDF/image). Deferred: it can be ~12 MB, so it is only loaded on purpose.
     file_data: Mapped[str | None] = mapped_column(Text, nullable=True, deferred=True)
     has_file: Mapped[bool] = column_property(file_data.isnot(None))
+    # Homework only: worked solutions (PDF/image data URI). Students can't see them until they hand in.
+    solution_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    solution_data: Mapped[str | None] = mapped_column(Text, nullable=True, deferred=True)
+    has_solution: Mapped[bool] = column_property(solution_data.isnot(None))
     # notes | homework. Homework carries a due date; class_date links it to a lesson.
     kind: Mapped[str] = mapped_column(String(20), default="notes", server_default="notes")
     due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

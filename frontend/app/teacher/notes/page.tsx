@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { NotebookText, Paperclip, Trash2, X } from "lucide-react";
+import { NotebookText, Paperclip, Trash2, X, Lock } from "lucide-react";
 import { notesAPI, teacherAPI, adminAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, Spinner, EmptyState } from "@/components/ui/Page";
@@ -15,8 +15,9 @@ export default function TeacherNotesPage() {
   const { user, ready } = useAuthGuard("teacher");
   const [notes, setNotes] = useState<any[] | null>(null);
   const [students, setStudents] = useState<{ email: string; full_name: string }[]>([]);
-  const [form, setForm] = useState({ title: "", subject: "", body: "", emails: "" });
+  const [form, setForm] = useState({ title: "", subject: "", body: "", emails: "", kind: "notes" as "notes" | "homework", due: "" });
   const [file, setFile] = useState<{ name: string; data: string } | null>(null);
+  const [solution, setSolution] = useState<{ name: string; data: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
   const [shareFor, setShareFor] = useState<Record<number, string>>({});
@@ -34,13 +35,14 @@ export default function TeacherNotesPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready]);
 
-  const pickFile = (f: File | undefined) => {
-    if (!f) return setFile(null);
+  const pickFile = (f: File | undefined, set = setFile) => {
+    if (!f) return set(null);
     if (f.size > MAX_BYTES) return setMsg("That file is over 9 MB. Please compress it first.");
     const r = new FileReader();
-    r.onload = () => setFile({ name: f.name, data: String(r.result) });
+    r.onload = () => set({ name: f.name, data: String(r.result) });
     r.readAsDataURL(f);
   };
+  const isHw = form.kind === "homework";
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,10 +52,13 @@ export default function TeacherNotesPage() {
       const { data } = await notesAPI.create({
         title: form.title, subject: form.subject, body: form.body,
         file_name: file?.name, file_data: file?.data, student_emails: splitEmails(form.emails),
+        kind: form.kind, due_at: isHw && form.due ? `${form.due}T23:59:00` : undefined,
+        solution_name: isHw ? solution?.name : undefined, solution_data: isHw ? solution?.data : undefined,
       });
-      setMsg(data.not_found.length ? `Saved. No account found for: ${data.not_found.join(", ")}` : "Notes shared.");
-      setForm({ title: "", subject: "", body: "", emails: "" });
+      setMsg(data.not_found.length ? `Saved. No account found for: ${data.not_found.join(", ")}` : isHw ? "Homework set." : "Notes shared.");
+      setForm({ title: "", subject: "", body: "", emails: "", kind: form.kind, due: "" });
       setFile(null);
+      setSolution(null);
       load();
     } catch (err: any) {
       setMsg(err.response?.data?.detail || "Couldn't save the notes.");
@@ -75,6 +80,14 @@ export default function TeacherNotesPage() {
       <PageHeader icon={NotebookText} title="Class notes" subtitle="Share notes (text, PDF or image) with your students." />
 
       <form onSubmit={save} className="card space-y-4 p-6">
+        <div className="inline-flex rounded-lg border border-line p-0.5 text-sm">
+          {(["notes", "homework"] as const).map((k) => (
+            <button key={k} type="button" onClick={() => setForm({ ...form, kind: k })}
+              className={`rounded-md px-3 py-1.5 font-medium ${form.kind === k ? "bg-brand-600 text-white" : "text-ink-muted hover:text-ink"}`}>
+              {k === "notes" ? "Class notes" : "Homework"}
+            </button>
+          ))}
+        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Title">
             <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required placeholder="TMUA: inequalities, class 3" />
@@ -93,7 +106,21 @@ export default function TeacherNotesPage() {
             <input type="file" accept="application/pdf,image/*" className="hidden" onChange={(e) => pickFile(e.target.files?.[0])} />
           </label>
           {file && <button type="button" onClick={() => setFile(null)} className="text-ink-subtle hover:text-ink"><X size={16} /></button>}
+          {isHw && (
+            <>
+              <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-ink-muted hover:bg-slate-50">
+                <Lock size={14} /> {solution ? solution.name : "Attach solutions (locked until hand-in)"}
+                <input type="file" accept="application/pdf,image/*" className="hidden" onChange={(e) => pickFile(e.target.files?.[0], setSolution)} />
+              </label>
+              {solution && <button type="button" onClick={() => setSolution(null)} className="text-ink-subtle hover:text-ink"><X size={16} /></button>}
+            </>
+          )}
         </div>
+        {isHw && (
+          <Field label="Due date (optional)">
+            <Input type="date" value={form.due} onChange={(e) => setForm({ ...form, due: e.target.value })} className="max-w-xs" />
+          </Field>
+        )}
         <Field label="Share with (student IDs, separated by commas)">
           <Input value={form.emails} onChange={(e) => setForm({ ...form, emails: e.target.value })} list="note-students" placeholder="musa@beyondtutors.com" />
         </Field>

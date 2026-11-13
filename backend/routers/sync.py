@@ -117,6 +117,8 @@ class UploadIn(BaseModel):
     file_data: str | None = None  # data URI
     class_date: str | None = None
     due_at: datetime | None = None
+    solution_name: str | None = None
+    solution_data: str | None = None  # homework only: unlocked once the student hands in
 
 
 @router.post("/upload", dependencies=[Depends(require_sync)])
@@ -133,12 +135,16 @@ async def _save_upload(data: UploadIn, db: AsyncSession):
         raise HTTPException(400, "Add some text or a file")
     if data.file_data and (not data.file_data.startswith("data:") or len(data.file_data) > MAX_FILE_CHARS):
         raise HTTPException(400, "File must be a PDF or image under 9 MB")
+    sol = data.solution_data if data.kind == "homework" else None
+    if sol and (not sol.startswith("data:") or len(sol) > MAX_FILE_CHARS):
+        raise HTTPException(400, "Solutions must be a PDF or image under 9 MB")
     s = await _student(data.email, db)
     owner = await _owner(db)
     n = ClassNote(owner_id=owner.id, title=data.title.strip()[:200], kind=data.kind,
                   body=(data.body or "").strip() or None, file_name=(data.file_name or "")[:255] or None,
                   file_data=data.file_data or None, class_date=(data.class_date or None),
-                  due_at=data.due_at.replace(tzinfo=None) if data.due_at else None)
+                  due_at=data.due_at.replace(tzinfo=None) if data.due_at else None,
+                  solution_name=((data.solution_name or "solutions")[:255] if sol else None), solution_data=sol or None)
     db.add(n)
     await db.flush()
     db.add(NoteShare(note_id=n.id, student_id=s.id))
@@ -147,6 +153,9 @@ async def _save_upload(data: UploadIn, db: AsyncSession):
     if data.file_data:
         from routers.notes import start_render
         start_render(n.id)  # prepare the student page images now, not on first view
+    if sol:
+        from routers.notes import start_render
+        start_render(n.id, solution=True)
     return {"id": n.id}
 
 

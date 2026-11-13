@@ -24,39 +24,51 @@ MAX_FILE_CHARS = 12_000_000  # ~9 MB file once base64-encoded
 _rendering: dict[int, asyncio.Task] = {}
 
 
-async def _render_pages(note_id: int) -> None:
+# Homework solutions are rendered into the same table, numbered from here (page 1 = 1001).
+SOL_BASE = 1000
+
+
+def _page_range(solution: bool):
+    lo = SOL_BASE if solution else 0
+    return (NotePage.page > lo) & (NotePage.page <= lo + SOL_BASE)
+
+
+async def _render_pages(note_id: int, solution: bool = False) -> None:
     async with SessionLocal() as db:
-        if (await db.execute(select(NotePage.id).where(NotePage.note_id == note_id).limit(1))).first():
+        if (await db.execute(select(NotePage.id).where(NotePage.note_id == note_id, _page_range(solution)).limit(1))).first():
             return
-        data = await db.scalar(select(ClassNote.file_data).where(ClassNote.id == note_id))
+        col = ClassNote.solution_data if solution else ClassNote.file_data
+        data = await db.scalar(select(col).where(ClassNote.id == note_id))
         if not data:
             return
         try:
             images = await run_in_threadpool(note_pages.render_all, data)
         except Exception as e:
-            print(f"[notes] could not render note {note_id}: {e}")
+            print(f"[notes] could not render note {note_id}{' solutions' if solution else ''}: {e}")
             return
         del data
+        base = SOL_BASE if solution else 0
         for i, img in enumerate(images, 1):
-            db.add(NotePage(note_id=note_id, page=i, data=img))
+            db.add(NotePage(note_id=note_id, page=base + i, data=img))
         await db.commit()
 
 
-def start_render(note_id: int) -> None:
-    t = _rendering.get(note_id)
+def start_render(note_id: int, solution: bool = False) -> None:
+    key = (note_id, solution)
+    t = _rendering.get(key)
     if t and not t.done():
         return
-    task = asyncio.create_task(_render_pages(note_id))
-    _rendering[note_id] = task
-    task.add_done_callback(lambda _t: _rendering.pop(note_id, None))
+    task = asyncio.create_task(_render_pages(note_id, solution))
+    _rendering[key] = task
+    task.add_done_callback(lambda _t: _rendering.pop(key, None))
 
 
-async def _page_count(note_id: int, db: AsyncSession) -> int | None:
+async def _page_count(note_id: int, db: AsyncSession, solution: bool = False) -> int | None:
     """Number of ready pages, or None while they are still being made."""
-    n = await db.scalar(select(func.count()).select_from(NotePage).where(NotePage.note_id == note_id))
+    n = await db.scalar(select(func.count()).select_from(NotePage).where(NotePage.note_id == note_id, _page_range(solution)))
     if n:
         return n
-    start_render(note_id)
+    start_render(note_id, solution)
     return None
 
 
@@ -67,6 +79,10 @@ class NoteIn(BaseModel):
     file_name: str | None = None
     file_data: str | None = None   # data:application/pdf;base64,… or an image data URI
     student_emails: list[str] = []
+    kind: str = "notes"            # notes | homework
+    due_at: datetime | None = None
+    solution_name: str | None = None
+    solution_data: str | None = None  # homework only: locked until the student hands in
 
 
 class ShareIn(BaseModel):
@@ -77,6 +93,7 @@ def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
     row = {
         "id": n.id, "title": n.title, "subject": n.subject, "body": n.body,
         "file_name": n.file_name, "has_file": bool(n.has_file),
+        "has_solution": bool(getattr(n, "has_solution", False)), "solution_name": getattr(n, "solution_name", None),
         "kind": getattr(n, "kind", None) or "notes",
         "due_at": n.due_at.isoformat() if getattr(n, "due_at", None) else None,
         "class_date": getattr(n, "class_date", None),
@@ -119,9 +136,15 @@ async def create_note(data: NoteIn, teacher: User = Depends(require_teacher), db
         raise HTTPException(400, "Add some text or attach a file.")
     if data.file_data and (not data.file_data.startswith("data:") or len(data.file_data) > MAX_FILE_CHARS):
         raise HTTPException(400, "Attach a PDF or image under 9 MB.")
+    kind = "homework" if data.kind == "homework" else "notes"
+    sol = data.solution_data if kind == "homework" else None
+    if sol and (not sol.startswith("data:") or len(sol) > MAX_FILE_CHARS):
+        raise HTTPException(400, "Attach the solutions as a PDF or image under 9 MB.")
     n = ClassNote(owner_id=teacher.id, title=data.title.strip()[:200], subject=(data.subject or "").strip()[:80] or None,
                   body=(data.body or "").strip() or None, file_name=(data.file_name or "")[:255] or None,
-                  file_data=data.file_data or None)
+                  file_data=data.file_data or None, kind=kind,
+                  due_at=data.due_at.replace(tzinfo=None) if data.due_at and kind == "homework" else None,
+                  solution_name=((data.solution_name or "solutions")[:255] if sol else None), solution_data=sol or None)
     db.add(n)
     await db.flush()
     missing = await _share(n, data.student_emails, db, teacher)
@@ -129,6 +152,8 @@ async def create_note(data: NoteIn, teacher: User = Depends(require_teacher), db
     await db.refresh(n)
     if n.has_file:
         start_render(n.id)
+    if n.has_solution:
+        start_render(n.id, solution=True)
     return {"note": _note_row(n), "not_found": missing}
 
 
@@ -232,23 +257,49 @@ async def get_note(note_id: int, user: User = Depends(get_current_user), db: Asy
     n, staff = await _visible(note_id, user, db)
     row = _note_row(n)
     if staff:
-        # tutors keep the original file
+        # tutors keep the original files
         row["file_data"] = await db.scalar(select(ClassNote.file_data).where(ClassNote.id == n.id))
+        if n.has_solution:
+            row["solution_data"] = await db.scalar(select(ClassNote.solution_data).where(ClassNote.id == n.id))
     elif n.has_file:
         # Students get watermarked page images only (/pages/{n}), never the raw file.
         row["pages"] = await _page_count(n.id, db)
         row["rendering"] = row["pages"] is None
     if not staff and (n.kind or "notes") == "homework":
-        sub = (await db.execute(select(HomeworkSubmission).where(
-            HomeworkSubmission.note_id == n.id, HomeworkSubmission.student_id == user.id))).scalar_one_or_none()
+        sub = await _my_submission(n.id, user, db)
         row["submission"] = _sub_row(sub, images=True) if sub else None
+        if n.has_solution:
+            # Locked until they hand in; only then do we even say how many pages there are.
+            row["solution"] = {"locked": True} if not sub else {"locked": False, "pages": await _page_count(n.id, db, solution=True)}
     return row
+
+
+async def _my_submission(note_id: int, user: User, db: AsyncSession) -> HomeworkSubmission | None:
+    return (await db.execute(select(HomeworkSubmission).where(
+        HomeworkSubmission.note_id == note_id, HomeworkSubmission.student_id == user.id))).scalar_one_or_none()
+
+
+@router.get("/notes/{note_id}/solution/pages/{page}")
+async def solution_page(note_id: int, page: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """Homework solutions, one watermarked page at a time, only after this student has handed in."""
+    n, staff = await _visible(note_id, user, db)
+    if not n.has_solution or not 1 <= page <= SOL_BASE:
+        raise HTTPException(404, "No solutions")
+    if not staff and not await _my_submission(n.id, user, db):
+        raise HTTPException(403, "Hand in your homework to unlock the solutions.")
+    img = await db.scalar(select(NotePage.data).where(NotePage.note_id == n.id, NotePage.page == SOL_BASE + page))
+    if img is None:
+        if await _page_count(n.id, db, solution=True) is None:
+            return Response(status_code=202, headers={"Retry-After": "3"})
+        raise HTTPException(404, "No such page")
+    jpg = await run_in_threadpool(note_pages.watermark, img, f"{user.full_name} - {user.email}")
+    return Response(jpg, media_type="image/jpeg", headers={"Cache-Control": "no-store, private"})
 
 
 @router.get("/notes/{note_id}/pages/{page}")
 async def note_page(note_id: int, page: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     n, _ = await _visible(note_id, user, db)
-    if not n.has_file:
+    if not n.has_file or not 1 <= page <= SOL_BASE:  # never hand out solution pages here
         raise HTTPException(404, "No file")
     img = await db.scalar(select(NotePage.data).where(NotePage.note_id == n.id, NotePage.page == page))
     if img is None:
@@ -289,6 +340,8 @@ async def submit_homework(note_id: int, data: SubmitIn, user: User = Depends(get
         db.add(sub)
     sub.images, sub.comment, sub.submitted_at = imgs, (data.comment or "").strip()[:2000] or None, datetime.utcnow()
     await db.commit()
+    if n.has_solution:
+        start_render(n.id, solution=True)  # usually done already at upload; make sure they're ready to unlock
     return _sub_row(sub)
 
 
