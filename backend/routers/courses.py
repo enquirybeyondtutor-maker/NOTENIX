@@ -26,7 +26,8 @@ GCSE_COURSES = ("gcse-maths", "gcse-biology", "gcse-chemistry", "gcse-physics") 
 
 
 def course_price(user: User, course: str | None = None) -> dict:
-    """Price of one course for a year: £49-equivalent for BT students, £149 for everyone else.
+    """Price of one course for a year: £49-equivalent for BT students, the normal Notenix
+    price (pricing.normal_prices, £149 by default) for everyone else.
     SAT and the GCSE courses have their own prices (pricing.SAT_PRICES, GCSE_PRICES) for students
     outside Beyond Tutors."""
     if course == "sat" and not _is_bt_student(user):
@@ -43,8 +44,8 @@ def course_price(user: User, course: str | None = None) -> dict:
         return pricing.gcse_for_currency(getattr(user, "billing_currency", None))
     if _is_bt_student(user):
         return pricing.for_currency(getattr(user, "billing_currency", None))
-    return {"currency": settings.price_currency, "amount": settings.revision_price,
-            "label": pricing.label(settings.price_currency, settings.revision_price)}
+    # Normal Notenix price (set on the Admin page; defaults in pricing.NORMAL_PRICES).
+    return pricing.normal_for_currency(getattr(user, "billing_currency", None) or settings.price_currency)
 
 
 @router.get("/catalogue")

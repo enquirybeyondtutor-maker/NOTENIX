@@ -103,6 +103,57 @@ def ks3_for_currency(currency: str | None) -> dict:
     return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
 
 
+# Normal Notenix price: one course for a year, for students outside Beyond Tutors (courses that
+# have no price table of their own, i.e. not GCSE, the GCSE bundle or SAT). GBP follows
+# config.revision_price. The admin can change or add currencies on the Admin page; that table is
+# kept in the app_settings table (key "normal_prices") and cached here.
+NORMAL_PRICES = {
+    "GBP": float(settings.revision_price), "AED": 699, "USD": 189, "EUR": 179, "AUD": 289,
+    "NZD": 319, "SGD": 255, "CAD": 259, "INR": 16999, "THB": 5990,
+}
+_db_normal: dict[str, float] = {}
+
+
+def normal_prices() -> dict[str, float]:
+    return dict(_db_normal) if _db_normal else dict(NORMAL_PRICES)
+
+
+def normal_for_currency(currency: str | None) -> dict:
+    p = normal_prices()
+    cur = (currency or "GBP").upper()
+    if cur not in p:
+        cur = "GBP" if "GBP" in p else next(iter(p))
+    return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
+
+
+async def load_db_prices(db) -> None:
+    """Refresh the cached admin-set normal prices from the database."""
+    from sqlalchemy import select
+    from models import AppSetting
+    row = (await db.execute(select(AppSetting).where(AppSetting.key == "normal_prices"))).scalar_one_or_none()
+    _db_normal.clear()
+    if row:
+        try:
+            data = json.loads(row.value or "{}")
+            if isinstance(data, dict):
+                _db_normal.update({k.upper(): float(v) for k, v in data.items()})
+        except Exception:
+            pass
+
+
+async def save_normal_prices(db, table: dict[str, float]) -> None:
+    from sqlalchemy import select
+    from models import AppSetting
+    value = json.dumps({k.upper(): float(v) for k, v in table.items()})
+    row = (await db.execute(select(AppSetting).where(AppSetting.key == "normal_prices"))).scalar_one_or_none()
+    if row:
+        row.value = value
+    else:
+        db.add(AppSetting(key="normal_prices", value=value))
+    await db.commit()
+    await load_db_prices(db)
+
+
 def prices() -> dict[str, float]:
     try:
         custom = json.loads(settings.subscription_prices or "{}")

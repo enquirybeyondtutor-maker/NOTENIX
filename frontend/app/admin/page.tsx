@@ -7,6 +7,7 @@ import { adminAPI, getUser, authAPI } from "@/lib/api";
 import { coursesAPI, type Course, type Enrolment } from "@/lib/coursesApi";
 import CoursePicker from "@/components/CoursePicker";
 import CourseMigration from "./CourseMigration";
+import NormalPrices from "./NormalPrices";
 import { PageContainer, PageHeader, StatCard, Spinner, EmptyState } from "@/components/ui/Page";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -371,6 +372,7 @@ export default function AdminPage() {
       {issued && <IssuedCard issued={issued} onClose={() => setIssued(null)} />}
       <IssueAccount catalogue={catalogue} onIssued={(i) => { setIssued(i); load(); }} />
       <CourseMigration catalogue={catalogue} onDone={load} />
+      <NormalPrices />
 
       <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-ink-subtle">
         All users · {users.length}

@@ -195,9 +195,10 @@ def _known_course(course: str | None) -> bool:
 
 @router.get("/revision-checkout")
 async def revision_checkout_info(course: str | None = None):
+    from services import pricing
     p = _public_price(course if _known_course(course) else None)
     return {"accounts": payment_accounts(), "price": p["amount"], "currency": p["currency"],
-            "standard_price": settings.revision_price, "days": settings.subscription_days,
+            "standard_price": pricing.normal_for_currency(p["currency"])["amount"], "days": settings.subscription_days,
             "course_name": course_svc.course_name(course) if _known_course(course) else None,
             # Wise card links are fixed-amount, one per price; no link for a price -> bank transfer only.
             "pay_link": {settings.revision_price: settings.revision_pay_link, 99: settings.pay_link_99,

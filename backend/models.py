@@ -435,3 +435,13 @@ class HelpRequest(Base):
     replied_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     replied_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class AppSetting(Base):
+    """Small key/value store for settings the admin edits on the Admin page
+    (e.g. "normal_prices": the Notenix price for students outside Beyond Tutors)."""
+    __tablename__ = "app_settings"
+
+    key: Mapped[str] = mapped_column(String(80), primary_key=True)
+    value: Mapped[str] = mapped_column(Text)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

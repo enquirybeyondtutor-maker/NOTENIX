@@ -124,6 +124,9 @@ export const adminAPI = {
   // Beyond Tutors-issued accounts: the password comes back once, in the response.
   suggestId: (name: string) => api.get("/admin/suggest-id", { params: { name } }),
   prices: () => api.get("/admin/prices"),
+  // Normal Notenix price (students outside Beyond Tutors), per currency; editable by admin.
+  normalPrices: () => api.get("/admin/normal-prices"),
+  setNormalPrices: (prices: Record<string, number>) => api.put("/admin/normal-prices", { prices }),
   setKs3: (id: number | string, year: number | null) => api.post(`/ks3/admin/users/${id}`, { year }),
   setCurrency: (id: number | string, currency: string) => api.post(`/admin/users/${id}/currency`, { currency }),
   createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string }) =>

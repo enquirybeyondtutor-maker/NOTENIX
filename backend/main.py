@@ -83,6 +83,13 @@ async def _sittings_loop():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
+    try:   # admin-set normal Notenix prices (Admin page) into the pricing cache
+        from database import SessionLocal
+        from services import pricing
+        async with SessionLocal() as db:
+            await pricing.load_db_prices(db)
+    except Exception as e:
+        print(f"[pricing] couldn't load admin prices: {e}")
     tasks = [asyncio.create_task(_retention_loop()), asyncio.create_task(_sittings_loop()), asyncio.create_task(_ks3_loop())]
     try:
         yield

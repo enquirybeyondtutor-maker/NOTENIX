@@ -184,6 +184,36 @@ async def list_prices(admin: User = Depends(require_admin)):
     return pricing.options()
 
 
+class NormalPricesIn(BaseModel):
+    prices: dict[str, float]   # {"GBP": 149, "USD": 189, ...}
+
+
+@router.get("/normal-prices")
+async def get_normal_prices(admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
+    """Normal Notenix price per currency (students outside Beyond Tutors), with the BT price beside it."""
+    await pricing.load_db_prices(db)
+    bt = pricing.prices()
+    return [{**pricing.normal_for_currency(c), "region": pricing.NAMES.get(c, c),
+             "bt_label": pricing.label(c, bt[c]) if c in bt else None}
+            for c in pricing.normal_prices()]
+
+
+@router.put("/normal-prices")
+async def set_normal_prices(data: NormalPricesIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
+    table: dict[str, float] = {}
+    for k, v in data.prices.items():
+        cur = k.strip().upper()
+        if not re.fullmatch(r"[A-Z]{3}", cur):
+            raise HTTPException(400, f"Currency must be a 3-letter code like GBP (got '{k}').")
+        if not (0 < float(v) < 10_000_000):
+            raise HTTPException(400, f"Price for {cur} must be more than 0.")
+        table[cur] = float(v)
+    if "GBP" not in table:
+        raise HTTPException(400, "Keep a GBP price: it's the price used on the public checkout.")
+    await pricing.save_normal_prices(db, table)
+    return await get_normal_prices(admin, db)
+
+
 @router.post("/users/{user_id}/currency")
 async def set_currency(user_id: int, data: CurrencyIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
     cur = data.currency.strip().upper()
