@@ -140,10 +140,11 @@ export const notesAPI = {
   get: (id: number | string) => api.get(`/notes/${id}`),
   teacherList: () => api.get("/teacher/notes"),
   create: (data: { title: string; subject?: string; body?: string; file_name?: string; file_data?: string; student_emails: string[];
-    kind?: "notes" | "homework"; due_at?: string; solution_name?: string; solution_data?: string }) =>
+    kind?: "notes" | "homework"; due_at?: string; solution_name?: string; solution_data?: string; printable?: boolean }) =>
     api.post("/teacher/notes", data),
   share: (id: number, student_emails: string[]) => api.post(`/teacher/notes/${id}/share`, { student_emails }),
   unshare: (id: number, studentId: number) => api.delete(`/teacher/notes/${id}/share/${studentId}`),
+  setPrintable: (id: number, printable: boolean) => api.put(`/teacher/notes/${id}/printable`, { printable }),
   remove: (id: number) => api.delete(`/teacher/notes/${id}`),
   submit: (id: number, data: { images: string[]; comment?: string }) => api.post(`/notes/${id}/submission`, data),
   submissions: () => api.get("/teacher/homework-submissions"),

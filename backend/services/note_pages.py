@@ -70,3 +70,36 @@ def watermark(jpeg: bytes, mark: str) -> bytes:
     im = Image.open(io.BytesIO(jpeg)).convert("RGBA")
     im.alpha_composite(_overlay(mark, *im.size))
     return _jpeg(im.convert("RGB"), 80)
+
+
+def print_pdf(pages: list[bytes], mark: str, footer: str) -> bytes:
+    """A print copy: every stored page with `mark` tiled across it (darker than on screen, so
+    it survives printing and photocopying) and a `footer` line, burned into the image and
+    assembled as an A4 PDF. Nothing in the PDF is a separate layer that could be removed."""
+    out = fitz.open()
+    font = _font(22)
+    for jpeg in pages:
+        im = Image.open(io.BytesIO(jpeg)).convert("RGBA")
+        tiles = _overlay(mark, *im.size)
+        im.alpha_composite(_darker(tiles))
+        draw = ImageDraw.Draw(im)
+        h = 34
+        draw.rectangle((0, im.height - h, im.width, im.height), fill=(255, 255, 255, 235))
+        draw.text((14, im.height - h + 6), footer, font=font, fill=(60, 60, 75, 255))
+        b = io.BytesIO()
+        im.convert("RGB").save(b, "JPEG", quality=85)
+        page = out.new_page(width=595, height=842)  # A4 in points
+        r = page.rect
+        scale = min(r.width / im.width, r.height / im.height)
+        w, hh = im.width * scale, im.height * scale
+        x, y = (r.width - w) / 2, (r.height - hh) / 2
+        page.insert_image(fitz.Rect(x, y, x + w, y + hh), stream=b.getvalue())
+    data = out.tobytes(garbage=3, deflate=True)
+    out.close()
+    return data
+
+
+def _darker(tiles: Image.Image) -> Image.Image:
+    """The on-screen overlay is very faint; print needs it a little stronger."""
+    r, g, b, a = tiles.split()
+    return Image.merge("RGBA", (r, g, b, a.point(lambda v: min(255, int(v * 1.6)))))

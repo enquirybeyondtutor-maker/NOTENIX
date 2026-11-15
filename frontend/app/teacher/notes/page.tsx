@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { NotebookText, Paperclip, Trash2, X, Lock } from "lucide-react";
+import { NotebookText, Paperclip, Trash2, X, Lock, Printer } from "lucide-react";
 import { notesAPI, teacherAPI, adminAPI } from "@/lib/api";
 import { useAuthGuard } from "@/lib/guard";
 import { PageContainer, PageHeader, Spinner, EmptyState } from "@/components/ui/Page";
@@ -18,6 +18,7 @@ export default function TeacherNotesPage() {
   const [form, setForm] = useState({ title: "", subject: "", body: "", emails: "", kind: "notes" as "notes" | "homework", due: "" });
   const [file, setFile] = useState<{ name: string; data: string } | null>(null);
   const [solution, setSolution] = useState<{ name: string; data: string } | null>(null);
+  const [printable, setPrintable] = useState(false);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
   const [shareFor, setShareFor] = useState<Record<number, string>>({});
@@ -54,11 +55,13 @@ export default function TeacherNotesPage() {
         file_name: file?.name, file_data: file?.data, student_emails: splitEmails(form.emails),
         kind: form.kind, due_at: isHw && form.due ? `${form.due}T23:59:00` : undefined,
         solution_name: isHw ? solution?.name : undefined, solution_data: isHw ? solution?.data : undefined,
+        printable: !!file && printable,
       });
       setMsg(data.not_found.length ? `Saved. No account found for: ${data.not_found.join(", ")}` : isHw ? "Homework set." : "Notes shared.");
       setForm({ title: "", subject: "", body: "", emails: "", kind: form.kind, due: "" });
       setFile(null);
       setSolution(null);
+      setPrintable(false);
       load();
     } catch (err: any) {
       setMsg(err.response?.data?.detail || "Couldn't save the notes.");
@@ -106,6 +109,12 @@ export default function TeacherNotesPage() {
             <input type="file" accept="application/pdf,image/*" className="hidden" onChange={(e) => pickFile(e.target.files?.[0])} />
           </label>
           {file && <button type="button" onClick={() => setFile(null)} className="text-ink-subtle hover:text-ink"><X size={16} /></button>}
+          {file && (
+            <label className="inline-flex items-center gap-1.5 text-sm text-ink-muted" title="Each student downloads their own copy with their name on every page (up to 5 copies each).">
+              <input type="checkbox" checked={printable} onChange={(e) => setPrintable(e.target.checked)} />
+              <Printer size={14} /> Students can print it (their name on every page)
+            </label>
+          )}
           {isHw && (
             <>
               <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-ink-muted hover:bg-slate-50">
@@ -146,6 +155,10 @@ export default function TeacherNotesPage() {
                   {n.students.map((s: any) => (
                     <span key={s.id} className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs text-ink">
                       {s.full_name}
+                      {s.print_count > 0 && (
+                        <span title={s.printed_at ? `Last printed ${new Date(s.printed_at).toLocaleString()}` : undefined}
+                          className="inline-flex items-center gap-0.5 text-ink-subtle"><Printer size={11} />{s.print_count}</span>
+                      )}
                       <button onClick={() => notesAPI.unshare(n.id, s.id).then(load)} title="Stop sharing" className="text-ink-subtle hover:text-red-600"><X size={12} /></button>
                     </span>
                   ))}
@@ -154,6 +167,12 @@ export default function TeacherNotesPage() {
                   <Input value={shareFor[n.id] || ""} onChange={(e) => setShareFor({ ...shareFor, [n.id]: e.target.value })}
                     list="note-students" placeholder="Add student ID" className="max-w-xs" />
                   <Button size="sm" variant="secondary" onClick={() => share(n.id)}>Share</Button>
+                  {n.has_file && (
+                    <label className="inline-flex items-center gap-1.5 text-xs text-ink-muted">
+                      <input type="checkbox" checked={!!n.printable} onChange={(e) => notesAPI.setPrintable(n.id, e.target.checked).then(load)} />
+                      <Printer size={13} /> Students can print
+                    </label>
+                  )}
                   <button onClick={() => { if (confirm("Delete these notes for everyone?")) notesAPI.remove(n.id).then(load); }}
                     className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-red-600 hover:text-red-700">
                     <Trash2 size={13} /> Delete

@@ -83,10 +83,15 @@ class NoteIn(BaseModel):
     due_at: datetime | None = None
     solution_name: str | None = None
     solution_data: str | None = None  # homework only: locked until the student hands in
+    printable: bool = False        # students may download a name-stamped print copy
 
 
 class ShareIn(BaseModel):
     student_emails: list[str]
+
+
+class PrintableIn(BaseModel):
+    printable: bool
 
 
 def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
@@ -97,6 +102,7 @@ def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
         "kind": getattr(n, "kind", None) or "notes",
         "due_at": n.due_at.isoformat() if getattr(n, "due_at", None) else None,
         "class_date": getattr(n, "class_date", None),
+        "printable": bool(getattr(n, "printable", False)) and bool(n.has_file),
         "created_at": n.created_at.isoformat() if n.created_at else None,
     }
     if students is not None:
@@ -144,7 +150,8 @@ async def create_note(data: NoteIn, teacher: User = Depends(require_teacher), db
                   body=(data.body or "").strip() or None, file_name=(data.file_name or "")[:255] or None,
                   file_data=data.file_data or None, kind=kind,
                   due_at=data.due_at.replace(tzinfo=None) if data.due_at and kind == "homework" else None,
-                  solution_name=((data.solution_name or "solutions")[:255] if sol else None), solution_data=sol or None)
+                  solution_name=((data.solution_name or "solutions")[:255] if sol else None), solution_data=sol or None,
+                  printable=bool(data.printable))
     db.add(n)
     await db.flush()
     missing = await _share(n, data.student_emails, db, teacher)
@@ -165,12 +172,14 @@ async def my_notes(teacher: User = Depends(require_teacher), db: AsyncSession = 
     notes = (await db.execute(q)).scalars().all()
     shares: dict[int, list[dict]] = {}
     if notes:
-        for nid, uid, email, name in (await db.execute(
-            select(NoteShare.note_id, User.id, User.email, User.full_name)
+        for nid, uid, email, name, print_count, printed_at in (await db.execute(
+            select(NoteShare.note_id, User.id, User.email, User.full_name, NoteShare.print_count, NoteShare.printed_at)
             .join(User, User.id == NoteShare.student_id)
             .where(NoteShare.note_id.in_([n.id for n in notes]))
         )).all():
-            shares.setdefault(nid, []).append({"id": uid, "email": email, "full_name": name})
+            shares.setdefault(nid, []).append({"id": uid, "email": email, "full_name": name,
+                                               "print_count": print_count or 0,
+                                               "printed_at": printed_at.isoformat() if printed_at else None})
     return [_note_row(n, shares.get(n.id, [])) for n in notes]
 
 
@@ -180,6 +189,15 @@ async def share_note(note_id: int, data: ShareIn, teacher: User = Depends(requir
     missing = await _share(n, data.student_emails, db, teacher)
     await db.commit()
     return {"not_found": missing}
+
+
+@router.put("/teacher/notes/{note_id}/printable")
+async def set_printable(note_id: int, data: PrintableIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Let students download a print copy with their name on every page (or stop it)."""
+    n = await _owned(note_id, teacher, db)
+    n.printable = bool(data.printable)
+    await db.commit()
+    return {"printable": n.printable}
 
 
 @router.delete("/teacher/notes/{note_id}/share/{student_id}")
@@ -308,6 +326,39 @@ async def note_page(note_id: int, page: int, user: User = Depends(get_current_us
         raise HTTPException(404, "No such page")
     jpg = await run_in_threadpool(note_pages.watermark, img, f"{user.full_name} - {user.email}")
     return Response(jpg, media_type="image/jpeg", headers={"Cache-Control": "no-store, private"})
+
+
+PRINT_LIMIT = 5  # print copies per student per note; ask the tutor for more
+
+
+@router.get("/notes/{note_id}/print")
+async def print_copy(note_id: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """A PDF to print, made fresh for this student: their name, login and the date are burned into
+    every page, so a copy passed on shows whose it was. Counted, and capped per student."""
+    n, staff = await _visible(note_id, user, db)
+    if not n.has_file or not (n.printable or staff):
+        raise HTTPException(403, "Your tutor hasn't made this printable.")
+    share = None
+    if not staff:
+        share = (await db.execute(select(NoteShare).where(
+            NoteShare.note_id == n.id, NoteShare.student_id == user.id))).scalar_one()
+        if (share.print_count or 0) >= PRINT_LIMIT:
+            raise HTTPException(429, f"You've printed this {PRINT_LIMIT} times. Ask your tutor if you need another copy.")
+    if await _page_count(n.id, db) is None:
+        return Response(status_code=202, headers={"Retry-After": "3"})  # pages still being prepared
+    pages = [d for (d,) in (await db.execute(select(NotePage.data).where(
+        NotePage.note_id == n.id, _page_range(False)).order_by(NotePage.page))).all()]
+    now = datetime.utcnow()
+    mark = f"{user.full_name} - {user.email}"
+    footer = f"Printed for {user.full_name} ({user.email}) on {now:%d %b %Y} · Notenix · not for sharing"
+    pdf = await run_in_threadpool(note_pages.print_pdf, pages, mark, footer)
+    if share:
+        share.print_count = (share.print_count or 0) + 1
+        share.printed_at = now
+        await db.commit()
+    safe = "".join(c for c in f"{n.title} - {user.full_name}" if c.isalnum() or c in " -_.()")[:120] or "notes"
+    return Response(pdf, media_type="application/pdf", headers={
+        "Content-Disposition": f'attachment; filename="{safe}.pdf"', "Cache-Control": "no-store, private"})
 
 
 MAX_PHOTOS = 10

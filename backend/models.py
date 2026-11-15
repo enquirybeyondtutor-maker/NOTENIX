@@ -277,6 +277,8 @@ class ClassNote(Base):
     class_date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
     # Notenix KS3 notes library: shared automatically with KS3 students of this year.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    # Students may download a print copy (their name burned into every page) when set.
+    printable: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     ks3_key: Mapped[str | None] = mapped_column(String(60), nullable=True, unique=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
@@ -289,6 +291,8 @@ class NoteShare(Base):
     student_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     seen_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # student first opened it
+    print_count: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # print copies downloaded
+    printed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # last print copy
 
 
 class SatAttempt(Base):

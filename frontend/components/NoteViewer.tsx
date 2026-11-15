@@ -173,6 +173,7 @@ export default function NoteViewer({ note, footer, defaultOpen = false }: { note
               )}
             </div>
           )}
+          {note.printable && !file && <PrintCopy noteId={note.id} />}
           {!note.body && !note.has_file && <p className="flex items-center gap-1 text-sm text-ink-muted"><FileText size={14} /> Empty note</p>}
           {isHomework && detail && !file && (
             <HandIn noteId={note.id} sub={sub} onDone={(s) => {
@@ -191,6 +192,52 @@ export default function NoteViewer({ note, footer, defaultOpen = false }: { note
           {footer}
         </div>
       )}
+    </div>
+  );
+}
+
+/** A PDF made for this student to print: their name is on every page, so it can't be passed on unnoticed. */
+function PrintCopy({ noteId }: { noteId: number }) {
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState("");
+
+  const download = async () => {
+    setBusy(true);
+    setMsg("");
+    try {
+      const token = localStorage.getItem("notenix_token");
+      for (let t = 0; t < 40; t++) {
+        const res = await fetch(`/api/notes/${noteId}/print`, { headers: { Authorization: `Bearer ${token}` } });
+        if (res.status === 202) { await new Promise((r) => setTimeout(r, 3000)); continue; }  // pages still being prepared
+        if (!res.ok) {
+          setMsg((await res.json().catch(() => null))?.detail || "Couldn't make your print copy. Please try again.");
+          return;
+        }
+        const name = /filename="([^"]+)"/.exec(res.headers.get("Content-Disposition") || "")?.[1] || "notes.pdf";
+        const url = URL.createObjectURL(await res.blob());
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10_000);
+        setMsg("Downloaded. Your name is printed on every page: it's for you only, please don't share it.");
+        return;
+      }
+      setMsg("This file is still being prepared. Please try again in a minute.");
+    } catch {
+      setMsg("Couldn't make your print copy. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="rounded-lg border border-line bg-canvas p-3">
+      <button onClick={download} disabled={busy}
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 disabled:opacity-60">
+        <Download size={14} /> {busy ? "Preparing your print copy…" : "Download to print"}
+      </button>
+      <p className="mt-1 text-xs text-ink-subtle">{msg || "Made just for you, with your name on every page."}</p>
     </div>
   );
 }

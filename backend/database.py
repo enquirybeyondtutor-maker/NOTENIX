@@ -285,6 +285,9 @@ async def migrate_note_kinds():
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS solution_name VARCHAR(255)"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS solution_data TEXT"))
             await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS seen_at TIMESTAMP"))
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS printable BOOLEAN DEFAULT FALSE"))
+            await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS print_count INTEGER DEFAULT 0"))
+            await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS printed_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE payments ADD COLUMN IF NOT EXISTS course VARCHAR(60)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_since TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_test_date VARCHAR(10)"))
@@ -321,9 +324,15 @@ async def migrate_note_kinds():
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN solution_name VARCHAR(255)"))
             if "solution_data" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN solution_data TEXT"))
+            if "printable" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN printable BOOLEAN DEFAULT 0"))
             scols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(note_shares)"))).all()}
             if "seen_at" not in scols:
                 await conn.execute(text("ALTER TABLE note_shares ADD COLUMN seen_at TIMESTAMP"))
+            if "print_count" not in scols:
+                await conn.execute(text("ALTER TABLE note_shares ADD COLUMN print_count INTEGER DEFAULT 0"))
+            if "printed_at" not in scols:
+                await conn.execute(text("ALTER TABLE note_shares ADD COLUMN printed_at TIMESTAMP"))
             pcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(payments)"))).all()}
             if "course" not in pcols:
                 await conn.execute(text("ALTER TABLE payments ADD COLUMN course VARCHAR(60)"))

@@ -119,6 +119,7 @@ class UploadIn(BaseModel):
     due_at: datetime | None = None
     solution_name: str | None = None
     solution_data: str | None = None  # homework only: unlocked once the student hands in
+    printable: bool = False           # students may download a name-stamped print copy
 
 
 @router.post("/upload", dependencies=[Depends(require_sync)])
@@ -144,7 +145,8 @@ async def _save_upload(data: UploadIn, db: AsyncSession):
                   body=(data.body or "").strip() or None, file_name=(data.file_name or "")[:255] or None,
                   file_data=data.file_data or None, class_date=(data.class_date or None),
                   due_at=data.due_at.replace(tzinfo=None) if data.due_at else None,
-                  solution_name=((data.solution_name or "solutions")[:255] if sol else None), solution_data=sol or None)
+                  solution_name=((data.solution_name or "solutions")[:255] if sol else None), solution_data=sol or None,
+                  printable=bool(data.printable))
     db.add(n)
     await db.flush()
     db.add(NoteShare(note_id=n.id, student_id=s.id))
@@ -223,7 +225,7 @@ _SHARE_TYPES = {".pdf": "application/pdf", ".png": "image/png", ".jpg": "image/j
 
 @router.post("/share", dependencies=[Depends(require_sync)])
 async def share(email: str = Form(...), kind: str = Form("notes"), title: str = Form(""),
-                file: UploadFile = File(...), db: AsyncSession = Depends(get_db)):
+                file: UploadFile = File(...), printable: bool = Form(False), db: AsyncSession = Depends(get_db)):
     """One file as a normal form upload. Title defaults to the file name."""
     name = os.path.basename(file.filename or "notes.pdf")
     stem, ext = os.path.splitext(name)
@@ -242,5 +244,5 @@ async def share(email: str = Form(...), kind: str = Form("notes"), title: str = 
     kind = kind.strip().lower()
     email = await _share_email(email, db)
     out = await _save_upload(UploadIn(email=email, kind=kind, title=title.strip() or stem or "Class notes",
-                                      file_name=name, file_data=file_data), db)
+                                      file_name=name, file_data=file_data, printable=printable), db)
     return {**out, "message": f"Sent to {email} as {kind}"}
