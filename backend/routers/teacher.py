@@ -58,6 +58,9 @@ class PhotoQuestionsIn(BaseModel):
     exam_board: str = ""
     marks_per_question: int = 10
     images: list[str] = []          # compressed image data URIs, one per question
+    marks: list[int] = []           # optional marks per image (else marks_per_question)
+    mark_schemes: list[str] = []    # optional tutor-only mark scheme per image
+    duration_minutes: int | None = None
     kind: str = "test"              # test | homework
     is_library: bool = False
 
@@ -296,7 +299,11 @@ async def create_photo_questions(data: PhotoQuestionsIn, teacher: User = Depends
         raise HTTPException(400, "Your screenshots are too large in total. Please add fewer.")
 
     marks = max(1, min(int(data.marks_per_question or 10), 100))
-    questions = [{"question": "", "marks": marks, "mark_scheme": "", "image": uri} for uri in imgs]
+    per = lambda lst, i, default: lst[i] if i < len(lst) else default
+    questions = [{"question": "", "marks": max(1, min(int(per(data.marks, i, marks)), 100)),
+                  "mark_scheme": str(per(data.mark_schemes, i, "")).strip(), "image": uri}
+                 for i, uri in enumerate(imgs)]
+    hw = data.kind == "homework"
     library = bool(data.is_library) and is_admin(teacher)
 
     test = Test(
@@ -304,8 +311,9 @@ async def create_photo_questions(data: PhotoQuestionsIn, teacher: User = Depends
         title=(data.title.strip() or "Photo questions")[:200],
         subject=data.subject, topic=data.topic.strip() or "From screenshots", level=data.level,
         exam_board=(data.exam_board or "").strip(), difficulty="medium",
-        mode="written", kind=("homework" if data.kind == "homework" else "test"), is_library=library,
+        mode="written", kind=("homework" if hw else "test"), is_library=library,
         questions=questions, num_questions=len(questions),
+        duration_minutes=None if hw or not data.duration_minutes else max(1, min(int(data.duration_minutes), 600)),
     )
     db.add(test)
     await db.commit()
