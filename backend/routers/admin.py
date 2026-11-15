@@ -25,6 +25,25 @@ class WriteAccessIn(BaseModel):
     enabled: bool
 
 
+def _tier(u: User) -> str:
+    """"bt" or "normal": the price list this student is on (see courses._is_bt_student)."""
+    from routers.courses import _is_bt_student
+    return "bt" if _is_bt_student(u) else "normal"
+
+
+def _tier_price(u: User) -> dict:
+    cur = getattr(u, "billing_currency", None)
+    return pricing.for_currency(cur) if _tier(u) == "bt" else pricing.normal_for_currency(cur)
+
+
+def _check_currency(cur: str, tier: str) -> str:
+    cur = (cur or "GBP").strip().upper()
+    table = pricing.prices() if tier == "bt" else pricing.normal_prices()
+    if cur not in table:
+        raise HTTPException(400, f"No {'Beyond Tutors' if tier == 'bt' else 'normal Notenix'} price set for {cur}.")
+    return cur
+
+
 def _user_row(u: User, enrols: list | None = None) -> dict:
     return {
         "courses": [course_svc.enrolment_row(e) for e in (enrols or [])],
@@ -47,8 +66,9 @@ def _user_row(u: User, enrols: list | None = None) -> dict:
         "help_plan": getattr(u, "help_plan", None),
         "help_until": u.help_until.isoformat() if getattr(u, "help_until", None) else None,
         "sg_level": getattr(u, "sg_level", None),
-        "billing_currency": pricing.for_currency(getattr(u, "billing_currency", None))["currency"],
-        "subscription_label": pricing.for_currency(getattr(u, "billing_currency", None))["label"],
+        "price_tier": _tier(u),
+        "billing_currency": _tier_price(u)["currency"],
+        "subscription_label": _tier_price(u)["label"],
         "created_at": u.created_at.isoformat() if u.created_at else None,
         "last_active": u.last_active.isoformat() if u.last_active else None,
     }
@@ -167,7 +187,8 @@ class CreateUserIn(BaseModel):
     email: str | None = None   # blank → firstname@<student_id_domain>
     role: str = "student"      # student | teacher
     access: str = "trial"      # trial | year | none (students only)
-    currency: str = "GBP"      # billing currency for the £49-equivalent subscription
+    currency: str = "GBP"      # billing currency for the subscription
+    price_tier: str = "bt"     # bt = Beyond Tutors price, normal = normal Notenix price
     courses: list[str] = []    # e.g. ["igcse-chemistry"]: the student can open these courses only
 
 
@@ -177,6 +198,7 @@ class AccessIn(BaseModel):
 
 class CurrencyIn(BaseModel):
     currency: str
+    price_tier: str | None = None   # bt | normal; None keeps the student's current list
 
 
 @router.get("/prices")
@@ -216,13 +238,15 @@ async def set_normal_prices(data: NormalPricesIn, admin: User = Depends(require_
 
 @router.post("/users/{user_id}/currency")
 async def set_currency(user_id: int, data: CurrencyIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
-    cur = data.currency.strip().upper()
-    if cur not in pricing.prices():
-        raise HTTPException(400, "Unknown currency")
     u = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
     if not u:
         raise HTTPException(404, "User not found")
-    u.billing_currency = cur
+    if data.price_tier is not None and data.price_tier not in ("bt", "normal"):
+        raise HTTPException(400, "Price must be bt or normal")
+    tier = data.price_tier or _tier(u)
+    u.billing_currency = _check_currency(data.currency, tier)
+    if data.price_tier:
+        u.price_tier = tier
     await db.commit()
     return _user_row(u)
 
@@ -265,8 +289,10 @@ async def create_user(data: CreateUserIn, admin: User = Depends(require_admin), 
              is_verified=True, token_version=0, needs_activation=(data.role == "student"))
     if data.role == "student":
         _apply_access(u, data.access)
-        cur = (data.currency or "GBP").strip().upper()
-        u.billing_currency = cur if cur in pricing.prices() else "GBP"
+        if data.price_tier not in ("bt", "normal"):
+            raise HTTPException(400, "Price must be bt or normal")
+        u.price_tier = data.price_tier
+        u.billing_currency = _check_currency(data.currency, data.price_tier)
     bad = [c for c in data.courses if not course_svc.is_course(c)]
     if bad:
         raise HTTPException(400, f"Unknown course: {', '.join(bad)}")

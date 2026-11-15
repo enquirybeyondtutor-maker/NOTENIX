@@ -17,7 +17,7 @@ export const coursesAPI = {
   remove: (userId: number, course: string) => api.delete(`/admin/users/${userId}/courses/${course}`),
   suggestions: () => api.get("/admin/courses/suggestions"),
   apply: (items: { user_id: number; courses: string[] }[]) => api.post("/admin/courses/apply", { items }),
-  createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string; courses: string[] }) =>
+  createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string; price_tier?: "bt" | "normal"; courses: string[] }) =>
     api.post("/admin/users", data),
 };
 

@@ -33,6 +33,7 @@ interface Row {
   terms_accepted_at: string | null;
   terms_price?: string | null;
   billing_currency?: string;
+  price_tier?: "bt" | "normal";
   ks3_year?: number | null;
   notify_email?: string | null;
   help_plan?: string | null;
@@ -72,12 +73,18 @@ function IssueAccount({ onIssued, catalogue }: { onIssued: (i: Issued) => void; 
   const [touched, setTouched] = useState(false);
   const [role, setRole] = useState<"student" | "teacher">("student");
   const [access, setAccess] = useState<"trial" | "year">("trial");
-  const [currency, setCurrency] = useState("GBP");
+  // "bt:GBP" = Beyond Tutors price in GBP, "normal:USD" = normal Notenix price in USD.
+  const [pricing, setPricing] = useState("bt:GBP");
+  const [tier, currency] = pricing.split(":") as ["bt" | "normal", string];
   const [prices, setPrices] = useState<{ currency: string; label: string; region: string }[]>([]);
+  const [normal, setNormal] = useState<{ currency: string; label: string; region: string }[]>([]);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => { adminAPI.prices().then((r) => setPrices(r.data)).catch(() => {}); }, []);
-  const priceLabel = prices.find((p) => p.currency === currency)?.label || "£49";
+  useEffect(() => {
+    adminAPI.prices().then((r) => setPrices(r.data)).catch(() => {});
+    adminAPI.normalPrices().then((r) => setNormal(r.data)).catch(() => {});
+  }, []);
+  const priceLabel = (tier === "bt" ? prices : normal).find((p) => p.currency === currency)?.label || (tier === "bt" ? "£49" : "£149");
   const [error, setError] = useState("");
 
   // Suggest musa@beyondtutors.com from the name until the ID is edited by hand.
@@ -92,7 +99,7 @@ function IssueAccount({ onIssued, catalogue }: { onIssued: (i: Issued) => void; 
     setSaving(true);
     setError("");
     try {
-      const { data } = await coursesAPI.createUser({ full_name: name, email, role, access, currency, courses: role === "student" ? courses : [] });
+      const { data } = await coursesAPI.createUser({ full_name: name, email, role, access, currency, price_tier: tier, courses: role === "student" ? courses : [] });
       onIssued({ name: data.user.full_name, email: data.user.email, password: data.password, role });
       setName("");
       setEmail("");
@@ -121,11 +128,20 @@ function IssueAccount({ onIssued, catalogue }: { onIssued: (i: Issued) => void; 
           <option value="trial">Free trial access</option>
           <option value="year">Paid: 1 year ({priceLabel})</option>
         </select>
-        <select className={field} value={currency} onChange={(e) => setCurrency(e.target.value)} disabled={role !== "student"}
-          title="Currency Beyond Tutors bills this student in; shown in the parent's terms">
-          {(prices.length ? prices : [{ currency: "GBP", label: "£49", region: "UK" }]).map((p) => (
-            <option key={p.currency} value={p.currency}>{p.region}: {p.label} / year</option>
-          ))}
+        <select className={field} value={pricing} onChange={(e) => setPricing(e.target.value)} disabled={role !== "student"}
+          title="Price list and currency for this student; shown in the parent's terms">
+          <optgroup label="Beyond Tutors price">
+            {(prices.length ? prices : [{ currency: "GBP", label: "£49", region: "UK" }]).map((p) => (
+              <option key={`bt:${p.currency}`} value={`bt:${p.currency}`}>{p.region}: {p.label} / year</option>
+            ))}
+          </optgroup>
+          {normal.length > 0 && (
+            <optgroup label="Normal Notenix price (not with Beyond Tutors)">
+              {normal.map((p) => (
+                <option key={`normal:${p.currency}`} value={`normal:${p.currency}`}>Normal · {p.region}: {p.label} / year</option>
+              ))}
+            </optgroup>
+          )}
         </select>
       </div>
       {role === "student" && (
@@ -267,11 +283,16 @@ export default function AdminPage() {
   };
 
   const [priceList, setPriceList] = useState<{ currency: string; label: string; region: string }[]>([]);
-  useEffect(() => { adminAPI.prices().then((r) => setPriceList(r.data)).catch(() => {}); }, []);
-  const changeCurrency = async (row: Row, currency: string) => {
+  const [normalList, setNormalList] = useState<{ currency: string; label: string; region: string }[]>([]);
+  useEffect(() => {
+    adminAPI.prices().then((r) => setPriceList(r.data)).catch(() => {});
+    adminAPI.normalPrices().then((r) => setNormalList(r.data)).catch(() => {});
+  }, []);
+  const changeCurrency = async (row: Row, value: string) => {
+    const [tier, currency] = value.split(":") as ["bt" | "normal", string];
     setBusy(row.id);
     try {
-      await adminAPI.setCurrency(row.id, currency);
+      await adminAPI.setCurrency(row.id, currency, tier);
       load();
     } catch (e: any) {
       alert(e.response?.data?.detail || "Couldn't change the currency");
@@ -473,10 +494,17 @@ export default function AdminPage() {
                         </div>
                       )}
                       {u.role === "student" && !u.is_admin && priceList.length > 0 && !u.paid && !u.pending_payment && (
-                        <select value={u.billing_currency || "GBP"} disabled={busy === u.id}
-                          onChange={(e) => changeCurrency(u, e.target.value)} title="Billing currency shown in the parent's terms"
+                        <select value={`${u.price_tier || "bt"}:${u.billing_currency || "GBP"}`} disabled={busy === u.id}
+                          onChange={(e) => changeCurrency(u, e.target.value)} title="Price list and billing currency shown in the parent's terms"
                           className="mt-1 block rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">
-                          {priceList.map((p) => <option key={p.currency} value={p.currency}>{p.label}/yr ({p.region})</option>)}
+                          <optgroup label="Beyond Tutors price">
+                            {priceList.map((p) => <option key={`bt:${p.currency}`} value={`bt:${p.currency}`}>BT {p.label}/yr ({p.region})</option>)}
+                          </optgroup>
+                          {normalList.length > 0 && (
+                            <optgroup label="Normal Notenix price">
+                              {normalList.map((p) => <option key={`normal:${p.currency}`} value={`normal:${p.currency}`}>Normal {p.label}/yr ({p.region})</option>)}
+                            </optgroup>
+                          )}
                         </select>
                       )}
                       {u.role === "student" && !u.is_admin && (

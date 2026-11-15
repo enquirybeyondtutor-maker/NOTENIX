@@ -128,7 +128,8 @@ export const adminAPI = {
   normalPrices: () => api.get("/admin/normal-prices"),
   setNormalPrices: (prices: Record<string, number>) => api.put("/admin/normal-prices", { prices }),
   setKs3: (id: number | string, year: number | null) => api.post(`/ks3/admin/users/${id}`, { year }),
-  setCurrency: (id: number | string, currency: string) => api.post(`/admin/users/${id}/currency`, { currency }),
+  setCurrency: (id: number | string, currency: string, price_tier?: "bt" | "normal") =>
+    api.post(`/admin/users/${id}/currency`, { currency, price_tier }),
   createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string }) =>
     api.post("/admin/users", data),
   resetPassword: (id: number | string) => api.post(`/admin/users/${id}/reset-password`),

@@ -17,7 +17,11 @@ router = APIRouter(prefix="/courses", tags=["courses"])
 
 
 def _is_bt_student(user: User) -> bool:
-    """Beyond Tutors students (IDs issued on a Beyond Tutors domain) pay the BT price."""
+    """Beyond Tutors students pay the BT price: the admin's choice (price_tier) when set,
+    otherwise anyone with an ID on a Beyond Tutors domain."""
+    tier = getattr(user, "price_tier", None)
+    if tier in ("bt", "normal"):
+        return tier == "bt"
     domain = (user.email or "").rsplit("@", 1)[-1].lower()
     return domain in login_domains() and domain.endswith("beyondtutors.com")
 

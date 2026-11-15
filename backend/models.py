@@ -49,6 +49,9 @@ class User(Base):
     # shown in the terms the parent agreed to, e.g. "AED 229 per year".
     billing_currency: Mapped[str | None] = mapped_column(String(3), nullable=True)
     terms_price: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    # Which price list the admin put this student on: "bt" (Beyond Tutors price) or "normal"
+    # (normal Notenix price). NULL = decided by the login domain (beyondtutors.com -> BT).
+    price_tier: Mapped[str | None] = mapped_column(String(10), nullable=True)
     # Notenix KS3: school year (7/8/9) when the student is on KS3, when their free trial
     # started, and which parent emails of the trial sequence have gone out.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
