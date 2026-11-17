@@ -1,7 +1,9 @@
 name: Keep backend warm
 
-# Pings the backend (and, via /ping, the database) so Render + Neon don't
-# spin down on idle — which is what caused the intermittent slow first-load.
+# Pings the backend so Render's free web service doesn't spin down on idle (slow first load).
+# Uses /health, which does NOT touch the database: pinging /ping (which runs a query) every
+# 10 minutes kept Neon awake 24/7 and used up its free monthly compute allowance.
+# Neon wakes on the first real request in well under a second, so letting it sleep is fine.
 # Free: runs on GitHub-hosted runners (unlimited minutes on public repos).
 
 on:
@@ -13,6 +15,6 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping /ping (wakes web service + database)
+      - name: Ping /health (wakes web service only, lets the database sleep)
         run: |
-          curl -fsS --max-time 60 https://notenix-eu.onrender.com/ping || echo "ping failed (backend may be cold-starting)"
+          curl -fsS --max-time 60 https://notenix-eu.onrender.com/health || echo "ping failed (backend may be cold-starting)"

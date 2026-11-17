@@ -28,7 +28,8 @@ async def _retention_loop():
 
 
 async def _ks3_loop():
-    """KS3 free-trial parent emails (day 0/7/12/14), checked every hour."""
+    """KS3 free-trial parent emails and weekly progress emails, checked every 6 hours.
+    (Hourly checks woke the database 24x a day; the welcome email is sent at sign-up.)"""
     from services.ks3 import run_sequence
     while True:
         try:
@@ -65,19 +66,24 @@ async def _ks3_loop():
                 print(f"[ks3] yearly: {st}")
         except Exception as e:
             print(f"[ks3] yearly run failed: {e}")
-        await asyncio.sleep(3600)
+        await asyncio.sleep(6 * 3600)
 
 
 async def _sittings_loop():
-    """Finalize timed sittings whose clock has run out, every minute."""
+    """Finalize timed sittings whose clock has run out. Sleeps until the next deadline
+    (at most an hour) rather than polling, so the database can scale to zero when idle."""
+    from services.sittings import wait_for_next
     while True:
+        next_deadline = None
         try:
-            n = await auto_submit_expired()
+            n, next_deadline = await auto_submit_expired()
             if n:
                 print(f"[sittings] auto-submitted {n} expired sitting(s)")
         except Exception as e:
             print(f"[sittings] sweep failed: {e}")
-        await asyncio.sleep(60)
+            await asyncio.sleep(60)
+            continue
+        await wait_for_next(next_deadline)
 
 
 @asynccontextmanager
@@ -139,8 +145,8 @@ async def health():
 
 @app.get("/ping")
 async def ping():
-    """Keep-warm target: also runs a trivial query so the ping wakes the database
-    (Neon), not just the web service. Point an uptime pinger here every ~10 min."""
+    """Checks the database too. Do NOT point a keep-warm pinger here: that keeps Neon
+    awake 24/7 and uses up its compute allowance. Use /health for keep-warm."""
     from sqlalchemy import text
     from database import engine
     db_ok = False

@@ -253,6 +253,8 @@ async def start_sitting(assignment_id: int, user: User = Depends(get_current_use
     if assignment.started_at is None:
         assignment.started_at = now
         await db.commit()
+        from services.sittings import nudge
+        nudge()  # let the auto-submit sweep schedule this sitting's deadline
     return {"started_at": assignment.started_at.isoformat(), "server_now": now.isoformat()}
 
 
