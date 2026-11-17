@@ -94,6 +94,10 @@ class PrintableIn(BaseModel):
     printable: bool
 
 
+class KindIn(BaseModel):
+    kind: str                      # notes | homework
+
+
 def _note_row(n: ClassNote, students: list[dict] | None = None) -> dict:
     row = {
         "id": n.id, "title": n.title, "subject": n.subject, "body": n.body,
@@ -189,6 +193,19 @@ async def share_note(note_id: int, data: ShareIn, teacher: User = Depends(requir
     missing = await _share(n, data.student_emails, db, teacher)
     await db.commit()
     return {"not_found": missing}
+
+
+@router.put("/teacher/notes/{note_id}/kind")
+async def set_kind(note_id: int, data: KindIn, teacher: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    """Turn notes into homework (students can then hand in their answers) or back. Same link, no new email."""
+    if data.kind not in ("notes", "homework"):
+        raise HTTPException(400, "kind must be notes or homework")
+    n = await _owned(note_id, teacher, db)
+    n.kind = data.kind
+    if data.kind == "notes":
+        n.due_at = None
+    await db.commit()
+    return {"kind": n.kind}
 
 
 @router.put("/teacher/notes/{note_id}/printable")
