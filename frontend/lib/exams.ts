@@ -242,6 +242,74 @@ export const EXAMS: Exam[] = [
     ],
   },
   {
+    slug: "tara",
+    name: "TARA",
+    fullName: "Test of Academic Reasoning for Admissions",
+    title: "TARA Practice Tests: Critical Thinking & Problem Solving Mocks",
+    description:
+      "TARA practice online: a free diagnostic, timed Critical Thinking and Problem Solving mocks, skill drills, a score estimate on the 1.0–9.0 scale and tutor-marked Writing Task essays.",
+    keywords: ["TARA practice", "TARA mock test", "TARA test of academic reasoning", "TARA critical thinking", "TARA problem solving", "UAT-UK TARA preparation"],
+    tagline: "Critical Thinking and Problem Solving mocks, skill drills and tutor-marked essays for the TARA.",
+    intro:
+      "The TARA (Test of Academic Reasoning for Admissions) is run by UAT-UK and used by a growing number of UK universities for courses across the humanities, social sciences and beyond. It tests how well you reason, not what you have memorised: analysing arguments, solving unfamiliar problems with numbers and data, and writing a clear, balanced essay under time pressure. Notenix trains all three.",
+    facts: [
+      { label: "Modules", value: "Critical Thinking · Problem Solving · Writing" },
+      { label: "Per module", value: "40 minutes" },
+      { label: "Calculator", value: "Not allowed" },
+      { label: "Score scale", value: "1.0–9.0" },
+    ],
+    format: [
+      "Critical Thinking: multiple-choice questions on short arguments (conclusions, assumptions, flaws, strengthening and weakening), 40 minutes.",
+      "Problem Solving: multiple-choice numerical and data problems, 40 minutes.",
+      "Writing Task: one essay from a choice of prompts, 40 minutes.",
+      "Taken on computer at a test centre. No calculator or dictionary; no penalty for wrong answers.",
+    ],
+    howWeHelp: [
+      "A free 24-minute diagnostic with a score estimate and your weakest skills.",
+      "Three full practice tests: timed Critical Thinking and Problem Solving modules with worked explanations.",
+      "Drills for all ten TARA skills, from finding the main conclusion to choosing the right procedure.",
+      "Writing Task essays marked by a tutor, with written feedback on argument and structure.",
+    ],
+    samples: [
+      {
+        question: "\"Every member of the debating society is in Year 12. No one in Year 12 is going on the trip to Paris.\" Which conclusion can be drawn?",
+        options: ["No member of the debating society is going on the trip to Paris.", "Everyone in Year 12 is in the debating society.", "Some people on the Paris trip are in the debating society.", "Everyone not in Year 12 is going to Paris."],
+        answer: "No member of the debating society is going on the trip to Paris.",
+        explanation: "Debating members are all in Year 12, and nobody in Year 12 is going, so no debating member is going. The passage says nothing about who else is in Year 12 or on the trip.",
+      },
+      {
+        question: "\"Since the café started selling a cheaper coffee, its takings have risen. The cheaper coffee has brought in more customers.\" Which of these, if true, most weakens the argument?",
+        options: ["A large office opened next door at the same time.", "The cheaper coffee uses different beans.", "Some customers still buy the more expensive coffee.", "Coffee prices rose in other cafés."],
+        answer: "A large office opened next door at the same time.",
+        explanation: "The new office gives another explanation for the extra takings that has nothing to do with the cheaper coffee.",
+      },
+      {
+        question: "\"To win a medal, you must train every day. Aisha trains every day, so she will win a medal.\" What is the flaw?",
+        options: ["It treats a condition that is needed as if it were enough on its own.", "It attacks Aisha rather than her training.", "It generalises from a single athlete.", "It uses the word 'medal' in two different senses."],
+        answer: "It treats a condition that is needed as if it were enough on its own.",
+        explanation: "Training daily is necessary, but many people who train daily still do not win. Necessary is not the same as sufficient.",
+      },
+      {
+        question: "A taxi charges £3.50 plus £1.80 for every mile or part of a mile. How much is a 4.3-mile journey?",
+        options: ["£11.24", "£11.70", "£12.50", "£13.40"],
+        answer: "£12.50",
+        explanation: "4.3 miles counts as 5 charged miles: 5 × £1.80 = £9.00, plus £3.50 = £12.50.",
+      },
+      {
+        question: "A jacket costs £60 after a 25% discount. What was its original price?",
+        options: ["£75", "£80", "£85", "£90"],
+        answer: "£80",
+        explanation: "£60 is 75% of the original price, so the original was £60 ÷ 0.75 = £80. Adding 25% to £60 (£75) is wrong because the discount was taken from the larger amount.",
+      },
+    ],
+    faqs: [
+      { q: "What is the TARA?", a: "The Test of Academic Reasoning for Admissions is an admissions test run by UAT-UK. It has three 40-minute modules: Critical Thinking, Problem Solving and a Writing Task." },
+      { q: "Which universities require the TARA?", a: "A growing number of UK universities use it for selected courses. Requirements change from year to year, so always check the admissions page of each course you are applying for." },
+      { q: "How is the TARA scored?", a: "Critical Thinking and Problem Solving are reported on a 1.0–9.0 scale, with no penalty for wrong answers. The Writing Task essay is not scored on that scale; it is sent to the universities you apply to. Notenix gives you a score estimate after each practice test and a tutor's feedback on your essays." },
+      { q: "Are the Notenix TARA questions official?", a: "No. Every question is original, written by our team to match the style and difficulty of the real test. For official practice material, use the UAT-UK website." },
+    ],
+  },
+  {
     slug: "ap-calc-ab",
     name: "AP Calculus AB",
     fullName: "AP Calculus AB",
@@ -650,6 +718,7 @@ const REQUEST_FOR_SLUG: Record<string, { exam: string; subject?: string }> = {
   sat: { exam: "SAT" },
   esat: { exam: "ESAT" },
   tmua: { exam: "TMUA" },
+  tara: { exam: "TARA" },
   "ap-calc-ab": { exam: "AP", subject: "Maths" },
   "gcse-maths": { exam: "GCSE", subject: "Maths" },
   "gcse-biology": { exam: "GCSE", subject: "Biology" },
@@ -676,7 +745,7 @@ export function requestHref(slug: string): string {
  *  and pay, all on /revision/checkout. Slugs that are a single Notenix course (services/courses.py)
  *  open with it chosen; IGCSE covers several subjects, so the student picks one there. */
 const COURSE_FOR_SLUG: Record<string, string> = {
-  sat: "sat", esat: "esat", tmua: "tmua", "ap-calc-ab": "ap-calc-ab", "a-level-maths": "a-level-maths",
+  sat: "sat", esat: "esat", tmua: "tmua", tara: "tara", "ap-calc-ab": "ap-calc-ab", "a-level-maths": "a-level-maths",
   "gcse-maths": "gcse-maths", "gcse-biology": "gcse-biology", "gcse-chemistry": "gcse-chemistry", "gcse-physics": "gcse-physics",
 };
 

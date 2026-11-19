@@ -9,6 +9,7 @@ const COLS = [
       { label: "SAT practice", href: "/sat" },
       { label: "ESAT practice", href: "/esat" },
       { label: "TMUA practice", href: "/tmua" },
+      { label: "TARA practice", href: "/tara" },
       { label: "IGCSE practice", href: "/igcse" },
       { label: "GCSE Maths", href: "/gcse-maths" },
       { label: "GCSE Biology", href: "/gcse-biology" },

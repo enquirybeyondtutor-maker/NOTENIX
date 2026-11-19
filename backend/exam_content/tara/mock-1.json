@@ -1,0 +1,841 @@
+{
+ "exam": "tara",
+ "slug": "mock-1",
+ "title": "TARA Practice Test 1",
+ "kind": "mock",
+ "summary": "Critical Thinking + Problem Solving · 44 questions · 1 h 20 min",
+ "stages": [
+  "ct",
+  "ps"
+ ],
+ "modules": {
+  "ct": {
+   "title": "Critical Thinking",
+   "section": "ct",
+   "minutes": 40,
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Many young adults get into debt in their first year of work.",
+      "Schools should teach pupils how to manage money.",
+      "Parents are not always able to teach their children about money.",
+      "Mathematics lessons already cover percentages and interest.",
+      "Credit cards are the main cause of debt among young people."
+     ],
+     "answer": "B",
+     "explanation": "The passage gives reasons (early debt, parents who cannot teach it, the subject's usefulness) for one recommendation: money management belongs in schools. The other options are premises or claims the passage does not make.",
+     "passage": "A large number of young adults find themselves in serious debt within a year of starting their first job. Many of them say that nobody ever explained how loans, credit cards or interest work. Some parents teach their children these things, but many parents struggle with money themselves and cannot. Schools are the one place every child attends, so they should teach pupils how to manage money. Unlike much of what is taught, this is knowledge every pupil will certainly need.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Most pollution in the city is caused by buses and delivery lorries.",
+      "Drivers who are banned from the centre will drive further round the ring road.",
+      "City-centre businesses would lose customers if cars were banned.",
+      "Pollution in the city has risen every year for a decade.",
+      "Banning cars from the city centre would not, on its own, cut pollution in the city."
+     ],
+     "answer": "E",
+     "explanation": "The passage argues against the claim that a car ban will reduce pollution, giving two reasons: diverted traffic on the ring road and exempt buses and lorries. The conclusion is the rejection of that claim; the other options are reasons or unsupported claims.",
+     "passage": "Campaigners claim that banning private cars from the city centre would cut pollution. But drivers who can no longer cross the centre will simply take the ring road, which is longer, so the total distance driven, and the pollution produced, may well rise. Buses and delivery lorries, which would be exempt, already produce a large share of the city's pollution. A car ban by itself would not reduce the city's pollution, though it might shift it from the centre to the suburbs.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Personal statements are often written with help from teachers and parents.",
+      "Interviews are a better way of judging applicants than personal statements.",
+      "Applicants from private schools write better personal statements.",
+      "Universities should not judge applicants on their personal statements.",
+      "Universities receive too many applications to read every statement carefully."
+     ],
+     "answer": "D",
+     "explanation": "Help from others and unequal access to that help are the reasons; the claim they support is that statements are a poor and unfair basis for decisions, so universities should stop using them. Interviews are never mentioned.",
+     "passage": "A personal statement is meant to show what an applicant is like in their own words. In practice, many statements are drafted and redrafted with heavy help from teachers, parents or paid advisers. Applicants whose schools or families can give this help therefore present themselves far better than equally able applicants who write alone. Since the statement mostly measures the help an applicant has received, universities should stop using it to choose between applicants.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Everyone who uses the leisure centre can swim.",
+      "Most members of the swimming club also go to the gym.",
+      "Some people who use the leisure centre are not members of the swimming club.",
+      "Nobody in the swimming club uses the gym.",
+      "The swimming club is the largest club at the leisure centre."
+     ],
+     "answer": "C",
+     "explanation": "Some gym users are not swimming club members, and every gym user uses the leisure centre. So some leisure centre users are not swimming club members. Nothing is said about how many club members use the gym, or about ability to swim.",
+     "passage": "Everyone who uses the gym uses the leisure centre. Some of the people who use the gym are not members of the swimming club.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Raising the price would increase the shop's takings on this product.",
+      "Customers do not care about the price of this product.",
+      "The shop should raise the price of every product it sells.",
+      "Sales of the product will stay the same at the higher price.",
+      "The shop's profits will double if the price is raised."
+     ],
+     "answer": "A",
+     "explanation": "At £5 the shop sells 200 (takings £1,000). At £6 it would sell 180 (takings £1,080). So takings rise. Sales do fall, so customers do care about price, and nothing about other products or about profit (which depends on costs) follows.",
+     "passage": "A shop sells 200 units a week of a product at £5 each. Its research shows that if it raised the price to £6, it would sell 180 units a week instead. The cost of buying in the product would not change.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "The new varieties are less likely than the old ones to survive a dry summer.",
+      "Farmers will stop growing the new varieties.",
+      "The old varieties produce less grain in every kind of summer.",
+      "Dry summers will become more common in the future.",
+      "Deep roots are the only thing that helps a plant survive dry weather."
+     ],
+     "answer": "A",
+     "explanation": "The new varieties have shallower roots, and shallow roots reach less water in dry spells. So they are more vulnerable in drought. The passage says nothing about future weather or farmers' decisions, and does not say roots are the only factor.",
+     "passage": "Modern wheat varieties have been bred to put more of their energy into grain and less into roots, and their roots are noticeably shallower than those of older varieties. In wet years this makes no difference. In dry spells, however, shallow roots cannot reach the water held deeper in the soil.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-06"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Priya was at the café.",
+      "Priya was in the library.",
+      "Priya could have been somewhere other than the library or the café.",
+      "Priya was in the library and then went on to the café.",
+      "If Priya was not in the library, she was at the café."
+     ],
+     "answer": "E",
+     "explanation": "Priya was in exactly one of the two places, so if she was not in the library she must have been at the café. The passage does not say which of the two places she was in, and 'exactly one' rules out her being somewhere else or in both.",
+     "passage": "At 3 pm Priya was in exactly one of two places: the library or the café.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-07"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "The old swimming pool was too expensive to repair.",
+      "Swimming is the best form of exercise.",
+      "Some of the town's residents would swim regularly in the new pool.",
+      "The council has enough money to build the pool.",
+      "Other towns have built swimming pools recently."
+     ],
+     "answer": "C",
+     "explanation": "The argument says the pool will improve the health of 'the town' as a whole. That needs at least some residents to swim there regularly; a pool nobody uses improves nobody's health. Whether the council can afford it is a separate question about whether to build, not about the health benefit claimed.",
+     "passage": "Regular swimming improves heart health. A new swimming pool in the town would therefore improve the health of the town's residents, and the council should build one.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-08"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Paper bags are better for the environment than plastic bags.",
+      "Most shoppers support the charge.",
+      "The charge will raise money for environmental charities.",
+      "Customers would not simply buy plastic bags in bulk elsewhere to use instead.",
+      "Supermarkets make a profit on selling bags."
+     ],
+     "answer": "D",
+     "explanation": "The argument concludes that the charge will cut plastic use. If shoppers just bought cheap plastic bags elsewhere, plastic use would not fall. The argument needs that not to happen.",
+     "passage": "Since supermarkets began charging 10p for each plastic bag, the number of bags they hand out has fallen by 80%. A similar charge on plastic packaging for fruit and vegetables would therefore cut the amount of plastic used by a similar proportion.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-09"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Interviews take less time than written tests.",
+      "Applicants' interview performance reflects how well they would do the job.",
+      "All the applicants were interviewed by the same panel.",
+      "The company has had problems with employees in the past.",
+      "Applicants with degrees perform better at interview."
+     ],
+     "answer": "B",
+     "explanation": "The argument says choosing the best interviewee gives the best employee. That only follows if doing well at interview is a good guide to doing well at the job. If interview skill and job skill are unrelated, the conclusion fails.",
+     "passage": "We should hire whoever does best at interview. After all, our aim is to hire the person who will be best at the job.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-10"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Museums are more interesting than outdoor attractions.",
+      "The visitors who came in the rain would not otherwise have come on a dry day.",
+      "It rained more this summer than in a typical summer.",
+      "The museum's ticket prices did not change.",
+      "Rain makes people less likely to travel."
+     ],
+     "answer": "B",
+     "explanation": "The argument claims the wet summer added visitors overall. If the rain only moved visits from dry days to wet days, the total would not rise. The argument needs the wet-day visitors to be extra visitors.",
+     "passage": "The museum's visitor numbers are always highest on rainy days, when outdoor attractions are less appealing. This summer was unusually wet, so the museum will have had more visitors this summer than in a typical summer.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-11"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "The new street lights use less electricity than the old ones.",
+      "Some residents complained that the lights were too bright.",
+      "The fall in crime began a year before the street lights were installed.",
+      "Crime also fell in a neighbouring area which had new street lights.",
+      "Most crimes in the area happen at night."
+     ],
+     "answer": "C",
+     "explanation": "If crime was already falling before the lights went in, the fall cannot have been caused by the lights, at least not at first. A similar fall in another lit area would strengthen, not weaken, the claim.",
+     "passage": "After brighter street lights were installed on the estate, recorded crime fell by 20%. The brighter lights have deterred criminals.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-12"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "Pupils in the trial were randomly assigned to the new and old teaching methods.",
+      "The new method was developed by a well-known professor.",
+      "Teachers preferred the new method to the old one.",
+      "The new method has been used in other countries.",
+      "The pupils using the new method were in the most popular schools."
+     ],
+     "answer": "A",
+     "explanation": "The worry with any comparison is that the two groups differed before the trial. Random assignment rules this out, so the better results are more likely to be due to the method. Being in the most popular schools would weaken it.",
+     "passage": "In a trial, pupils taught reading with a new method scored higher on a reading test at the end of the year than pupils taught with the old method. The new method is better and should be used in all primary schools.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-13"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "Bus fares have risen by 5% over the period.",
+      "Some bus routes were changed during the period.",
+      "The bus company has bought several new buses.",
+      "Most of the people who stopped using the bus service now work from home.",
+      "Car ownership in the area has fallen."
+     ],
+     "answer": "D",
+     "explanation": "The argument says passengers left because the service got worse. If most of them left because they no longer travel to work at all, the fall is explained without any loss of quality.",
+     "passage": "The number of people using the town's bus service has fallen by a quarter in three years. Passengers have clearly lost confidence in the quality of the service, and the bus company must improve reliability to win them back.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-14"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "The pesticide is cheaper than other pesticides.",
+      "Farmers using the pesticide have higher crop yields.",
+      "Bee numbers have fallen in some areas where the pesticide is not used.",
+      "Bees are important pollinators for many food crops.",
+      "Bees from the same hives were found to visit treated and untreated crops equally often."
+     ],
+     "answer": "E",
+     "explanation": "If bees went to treated fields less often, fewer bees near treated fields could just mean bees avoided them, not that the pesticide harmed them. Equal visiting rules out that explanation and supports harm as the cause. Falls where the pesticide is not used would weaken the argument.",
+     "passage": "Researchers counted bees in fields of oilseed rape. They found far fewer bees in fields treated with a certain pesticide than in untreated fields. The pesticide is harming bees.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-15"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It relies on evidence from a source that may be biased.",
+      "It confuses cause and effect.",
+      "It assumes that what is true of most cases is true of this particular case.",
+      "It uses the word 'expensive' in two different senses.",
+      "It attacks the restaurant rather than its food."
+     ],
+     "answer": "C",
+     "explanation": "That most expensive restaurants serve good food does not guarantee that this one does. The argument moves from a general tendency to a certain conclusion about one case.",
+     "passage": "Most expensive restaurants serve excellent food. Le Jardin is very expensive, so the food there must be excellent.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-16"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It assumes that all actors work hard.",
+      "It treats a condition needed for success as if it were enough to guarantee success.",
+      "It assumes Leah wants to become a successful actor.",
+      "It ignores the possibility that Leah is not talented.",
+      "It generalises from a few famous actors."
+     ],
+     "answer": "B",
+     "explanation": "The passage says hard work is necessary: every successful actor worked hard. It then treats hard work as sufficient, concluding that Leah will succeed because she works hard. Many hard workers may still not succeed.",
+     "passage": "Every successful actor has worked extremely hard. Leah works extremely hard, so she will become a successful actor.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-17"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It assumes that the government's budget is fixed.",
+      "It relies on the views of motorists.",
+      "It ignores the cost of building new railways.",
+      "It assumes that only two options are possible when there are others.",
+      "It assumes that roads cause pollution."
+     ],
+     "answer": "D",
+     "explanation": "The passage presents the choice as either cutting the roads budget to zero or accepting worse pollution. Other options exist: spending less on roads without stopping, cleaner vehicles, charging for road use and so on.",
+     "passage": "Either we stop spending any money on new roads, or pollution in our cities will keep getting worse. Nobody wants worse pollution, so we must stop spending any money on new roads.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-18"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "All the cakes in this bakery contain eggs. This muffin contains no eggs, so it was not made in this bakery.",
+      "All the cakes in this bakery contain eggs. This muffin contains eggs, so it was made in this bakery.",
+      "Some cakes in this bakery contain eggs. This muffin was made in this bakery, so it may contain eggs.",
+      "No cake in this bakery contains nuts. This muffin contains eggs, so it contains no nuts.",
+      "Most cakes in this bakery contain eggs, so this muffin, which was made here, probably does too."
+     ],
+     "answer": "A",
+     "explanation": "The passage says: all X are Y; this is not Y; so this is not X. The bakery muffin argument has the same valid form. The first wrong option reverses it (this is Y, so it is X), which is invalid.",
+     "passage": "All the birds on the island are protected by law. This bird is not protected by law, so it does not live on the island.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-19"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "Every runner who trained for months finished the marathon. Jo finished, so Jo trained for months.",
+      "Every runner who finished the marathon trained for months. Jo trained for months, so Jo finished the marathon.",
+      "Some runners who trained for months did not finish. Jo trained for months, so Jo may not have finished.",
+      "Most runners who finished trained for months, so Jo, who finished, probably trained for months.",
+      "Every runner who finished the marathon trained for months. Jo did not train for months, so Jo did not finish the marathon."
+     ],
+     "answer": "E",
+     "explanation": "The passage's form is: everyone who is A is B; this one is not B; so this one is not A. That form is valid, and only the marathon option with Jo not training follows it. The option where Jo trained, so finished, makes the classic mistake of reversing the 'every' statement.",
+     "passage": "Everyone who passes the driving test has had at least twenty lessons. Tom has had only twelve lessons, so he cannot have passed the driving test.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-20"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following principles underlies the above argument?",
+     "options": [
+      "A charity should accept every donation it is offered, whatever the source.",
+      "Companies should give a fixed share of their profits to charity.",
+      "A charity should not accept a donation from a company whose products harm the people the charity helps.",
+      "Charities should only work in their own country.",
+      "A charity should spend all donations within a year."
+     ],
+     "answer": "C",
+     "explanation": "The passage argues the asthma charity should refuse money from a polluter because the polluter makes the charity's beneficiaries ill. The general principle is that a charity should not accept money from those who harm the people it serves.",
+     "passage": "An asthma charity has been offered a large donation by a company whose factories are among the biggest sources of air pollution in the region. Air pollution makes asthma worse. The charity should refuse the money.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-21"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "Officials should always accept what players tell them about incidents they missed.",
+      "A teacher who saw a pupil copy in a test can give a punishment; a teacher who was told about it by another pupil should first check the facts.",
+      "A judge should always follow the decisions of earlier judges.",
+      "A shop should give a refund only if the customer has a receipt.",
+      "Teachers should give the same punishment for every kind of cheating."
+     ],
+     "answer": "B",
+     "explanation": "The passage's principle is that a decision about wrongdoing should rest on what the decision-maker saw for themselves, and second-hand reports need checking first. The teacher example applies the same principle in a new setting.",
+     "passage": "An umpire may give a player out only for something the umpire saw happen. If another player tells the umpire about something the umpire did not see, the umpire must not simply take their word for it, but should consult the other officials first.",
+     "section": "ct",
+     "id": "tara-mock-1-ct-22"
+    }
+   ]
+  },
+  "ps": {
+   "title": "Problem Solving",
+   "section": "ps",
+   "minutes": 40,
+   "questions": [
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A phone contract costs £20 a month for 24 months, plus £60 upfront for the phone. Alternatively, the same phone can be bought outright for £300 and used with a SIM-only deal costing £8 a month. Over 24 months, how much more does the contract cost than buying the phone outright with the SIM-only deal?",
+     "options": [
+      "£8",
+      "£24",
+      "£36",
+      "£40",
+      "£48"
+     ],
+     "answer": "E",
+     "explanation": "Contract: £60 + 24 × £20 = £540. Outright: £300 + 24 × £8 = £492. The contract costs £540 − £492 = £48 more.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-01"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Buses from Ashby to Corton leave at 07:15, 07:50 and 08:25, and then every 35 minutes after that. The journey takes 48 minutes. Mia must arrive in Corton by 10:00. What is the latest bus she can catch?",
+     "options": [
+      "07:50",
+      "08:25",
+      "08:50",
+      "09:00",
+      "09:35"
+     ],
+     "answer": "D",
+     "explanation": "The buses after 08:25 leave at 09:00 and 09:35. The 09:00 arrives at 09:48, in time; the 09:35 arrives at 10:23, too late. So the latest bus is the 09:00.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-02"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Parcel postage costs £3.20 for up to 1 kg, £4.50 for over 1 kg and up to 2 kg, £7.80 for over 2 kg and up to 5 kg, and £11.60 for over 5 kg and up to 10 kg. Ravi posts three parcels weighing 0.8 kg, 2.0 kg and 5.4 kg. How much does he pay in total?",
+     "options": [
+      "£15.50",
+      "£18.90",
+      "£19.30",
+      "£22.60",
+      "£23.40"
+     ],
+     "answer": "C",
+     "explanation": "0.8 kg is in the up-to-1 kg band (£3.20). 2.0 kg is exactly 2 kg, so it is in the up-to-2 kg band (£4.50), not the next one. 5.4 kg is over 5 kg (£11.60). Total £19.30.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-03"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a survey of 400 sixth-form students, 55% walk to school, 25% take the bus and the rest cycle. Three quarters of the students who cycle are in Year 12. How many Year 12 students cycle to school?",
+     "options": [
+      "60",
+      "75",
+      "80",
+      "100",
+      "120"
+     ],
+     "answer": "A",
+     "explanation": "The cyclists are 100% − 55% − 25% = 20% of 400 = 80 students. Three quarters of 80 is 60.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-04"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Before a holiday, Jess changes £500 into euros at a rate of €1.15 to the pound. She spends €420. When she gets home she changes the euros she has left back into pounds at €1.20 to the pound. How many pounds does she get back, to the nearest penny?",
+     "options": [
+      "£80.00",
+      "£100.00",
+      "£125.00",
+      "£129.17",
+      "£155.00"
+     ],
+     "answer": "D",
+     "explanation": "£500 × 1.15 = €575. After spending €420 she has €155. Changing back: 155 ÷ 1.20 = £129.17.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-05"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A recipe for 4 people uses 300 g of flour, 2 eggs and 150 ml of milk. Sara has plenty of flour and milk but only 5 eggs, and eggs cannot be split. Keeping the recipe's proportions exactly, what is the largest number of people she can cook for, and how much flour will she use?",
+     "options": [
+      "8 people, using 600 g of flour",
+      "10 people, using 600 g of flour",
+      "5 people, using 375 g of flour",
+      "12 people, using 900 g of flour",
+      "10 people, using 750 g of flour"
+     ],
+     "answer": "E",
+     "explanation": "Two eggs serve 4 people, so each egg serves 2 people: 5 eggs serve 10. Flour scales from 300 g for 4 to 300 × 10 ÷ 4 = 750 g.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-06"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A car park charges £2.00 for the first hour and £0.90 for each further half hour or part of a half hour, up to a maximum of £9.00 a day. A car is parked from 08:40 to 13:05 on the same day. How much is the charge?",
+     "options": [
+      "£6.30",
+      "£7.40",
+      "£8.30",
+      "£9.00",
+      "£9.20"
+     ],
+     "answer": "C",
+     "explanation": "The stay is 4 hours 25 minutes. After the first hour, 3 hours 25 minutes remain, which is 6 full half hours plus part of a seventh: 7 × £0.90 = £6.30. Total £8.30, below the £9 maximum.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-07"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A car travels 45 miles on each gallon of fuel. One gallon is 4.5 litres, and fuel costs £1.50 a litre. How much does the fuel cost for a journey of 270 miles?",
+     "options": [
+      "£27.00",
+      "£40.50",
+      "£45.00",
+      "£54.00",
+      "£60.75"
+     ],
+     "answer": "B",
+     "explanation": "270 ÷ 45 = 6 gallons. 6 × 4.5 = 27 litres. 27 × £1.50 = £40.50.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-08"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A number is multiplied by 3 and then 7 is added. The result is the same as multiplying the number by 4 and then subtracting 2. What is the number?",
+     "options": [
+      "3",
+      "5",
+      "6",
+      "7",
+      "9"
+     ],
+     "answer": "E",
+     "explanation": "3x + 7 = 4x − 2, so x = 9. Check: 27 + 7 = 34 and 36 − 2 = 34.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-09"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Ali can paint a fence on his own in 6 hours. Ben can paint the same fence on his own in 3 hours. How long will it take them to paint the fence working together at these rates?",
+     "options": [
+      "1.5 hours",
+      "2 hours",
+      "2.5 hours",
+      "4.5 hours",
+      "9 hours"
+     ],
+     "answer": "B",
+     "explanation": "In one hour Ali paints 1/6 of the fence and Ben 1/3, together 1/6 + 2/6 = 1/2. So the whole fence takes 2 hours.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-10"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "At a meeting, every person shakes hands exactly once with every other person. There are 45 handshakes in total. How many people are at the meeting?",
+     "options": [
+      "6",
+      "8",
+      "9",
+      "10",
+      "15"
+     ],
+     "answer": "D",
+     "explanation": "With n people there are n(n − 1)/2 handshakes. 10 × 9 / 2 = 45.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-11"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A floor measuring 3.6 m by 2.4 m is to be covered with square tiles of side 30 cm, with no gaps. Tiles are sold only in boxes of 10. How many boxes are needed?",
+     "options": [
+      "9",
+      "10",
+      "11",
+      "12",
+      "13"
+     ],
+     "answer": "B",
+     "explanation": "Along the floor: 360 ÷ 30 = 12 tiles and 240 ÷ 30 = 8 tiles, so 96 tiles. Boxes of 10 means 9 boxes give only 90, so 10 boxes are needed.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-12"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In a test, a class of 20 pupils had a mean mark of 64 and a class of 30 pupils had a mean mark of 74. What was the mean mark of all 50 pupils together?",
+     "options": [
+      "68",
+      "69",
+      "70",
+      "71",
+      "72"
+     ],
+     "answer": "C",
+     "explanation": "Total marks: 20 × 64 = 1,280 and 30 × 74 = 2,220, so 3,500 over 50 pupils: a mean of 70. It is closer to 74 than to 64 because the second class is larger.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-13"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A shop raised the price of a coat by 20%. Later, in a sale, it reduced the new price by 20%. The sale price was £96. What was the original price?",
+     "options": [
+      "£96",
+      "£100",
+      "£104",
+      "£115.20",
+      "£120"
+     ],
+     "answer": "B",
+     "explanation": "Raising by 20% then cutting by 20% multiplies the price by 1.2 × 0.8 = 0.96. So the original price was 96 ÷ 0.96 = £100.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-14"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A clock loses 6 minutes every hour. It is set to the correct time at 12:00 noon. Later the same day it shows 6:00 pm. What is the real time then?",
+     "options": [
+      "5:24 pm",
+      "6:24 pm",
+      "6:30 pm",
+      "6:36 pm",
+      "6:40 pm"
+     ],
+     "answer": "E",
+     "explanation": "The clock moves only 54 minutes for every real hour. It has shown 360 minutes passing, so the real time passed is 360 × 60 ÷ 54 = 400 minutes, or 6 hours 40 minutes after noon.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-15"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A jar holds only 20p and 50p coins: 30 coins in all, worth £9.60. How many 50p coins are in the jar?",
+     "options": [
+      "10",
+      "12",
+      "14",
+      "18",
+      "20"
+     ],
+     "answer": "B",
+     "explanation": "If all 30 were 20p coins they would be worth £6.00. Each 50p coin adds 30p more, and £9.60 − £6.00 = £3.60 = 12 × 30p. So there are 12 50p coins (and 18 20p coins).",
+     "section": "ps",
+     "id": "tara-mock-1-ps-16"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following numbers leaves the same remainder as 47 when divided by 6?",
+     "options": [
+      "23",
+      "32",
+      "52",
+      "60",
+      "67"
+     ],
+     "answer": "A",
+     "explanation": "47 = 7 × 6 + 5, remainder 5. 23 = 3 × 6 + 5 also leaves 5. The others leave 2, 4, 0 and 1.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-17"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following has the same value as 15% of 60?",
+     "options": [
+      "1.5% of 60",
+      "6% of 15",
+      "15% of 600",
+      "50% of 16",
+      "60% of 15"
+     ],
+     "answer": "E",
+     "explanation": "15% of 60 = 9, and 60% of 15 = 9 as well (a% of b always equals b% of a). The others are 90, 0.9, 0.9 and 8.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-18"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A squash drink is mixed 2 parts juice to 3 parts water. Which of the following mixtures has exactly the same strength?",
+     "options": [
+      "500 ml juice with 700 ml water",
+      "300 ml juice with 500 ml water",
+      "200 ml juice with 400 ml water",
+      "400 ml juice with 600 ml water",
+      "600 ml juice with 800 ml water"
+     ],
+     "answer": "D",
+     "explanation": "2 : 3 means there is two thirds as much juice as water. 400 : 600 simplifies to 2 : 3. The others simplify to 5 : 7, 3 : 5, 1 : 2 and 3 : 4.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-19"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following shapes has the same area as a rectangle measuring 6 cm by 4 cm?",
+     "options": [
+      "A triangle with base 8 cm and height 6 cm",
+      "A square with sides of 5 cm",
+      "A triangle with base 6 cm and height 4 cm",
+      "A circle with radius 3 cm",
+      "A rectangle measuring 3 cm by 7 cm"
+     ],
+     "answer": "A",
+     "explanation": "The rectangle's area is 24 cm². The triangle with base 8 and height 6 has area ½ × 8 × 6 = 24 cm². The others are 25, 12, about 28.3 and 21 cm².",
+     "section": "ps",
+     "id": "tara-mock-1-ps-20"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A train travels 150 km in 2 hours 30 minutes. Which of the following journeys has the same average speed?",
+     "options": [
+      "45 km in 45 minutes",
+      "100 km in 1 hour 50 minutes",
+      "200 km in 3 hours 15 minutes",
+      "80 km in 1 hour 30 minutes",
+      "36 km in 40 minutes"
+     ],
+     "answer": "A",
+     "explanation": "The train's speed is 150 ÷ 2.5 = 60 km/h. 45 km in 45 minutes is 45 ÷ 0.75 = 60 km/h. The others are about 54.5, 61.5, 53.3 and 54 km/h.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-21"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A bracelet is made of beads in a repeating pattern: red, red, blue, green, red, red, blue, green, and so on all the way round. Reading in the same direction, which of the following could be five beads in a row on the bracelet?",
+     "options": [
+      "red, blue, red, green, red",
+      "green, red, blue, red, red",
+      "red, green, red, red, blue",
+      "blue, red, red, green, red",
+      "blue, green, red, red, blue"
+     ],
+     "answer": "E",
+     "explanation": "After each blue comes green, then two reds, then blue again. Only 'blue, green, red, red, blue' keeps that order. Each other option puts a colour after the wrong one, for example red straight after blue.",
+     "section": "ps",
+     "id": "tara-mock-1-ps-22"
+    }
+   ]
+  }
+ }
+}

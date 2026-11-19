@@ -1,11 +1,11 @@
 import { api } from "@/lib/api";
 import type { SatModule, ReviewQuestion, PlanTask } from "@/lib/satApi";
 
-// Notenix exam engine (backend routers/exam.py, services/exams.py): TMUA now, more exams later.
+// Notenix exam engine (backend routers/exam.py, services/exams.py): TMUA, TARA, AP Calculus AB and GCSE.
 // SAT keeps its own adaptive engine (lib/satApi.ts).
 
 /** Exams that have the engine: practice tests, diagnostic, skill map, plan and drills. */
-export const ENGINE_EXAMS = ["tmua", "ap-calc-ab", "gcse-maths", "gcse-biology", "gcse-chemistry", "gcse-physics"] as const;
+export const ENGINE_EXAMS = ["tmua", "tara", "ap-calc-ab", "gcse-maths", "gcse-biology", "gcse-chemistry", "gcse-physics"] as const;
 export const hasEngine = (slug: string) => (ENGINE_EXAMS as readonly string[]).includes(slug);
 
 export type ExamInfo = {

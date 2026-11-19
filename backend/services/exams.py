@@ -1,5 +1,5 @@
 """Notenix exam engine: timed practice tests, score estimates, skill map, study plan and weekly
-email for the admissions exams (TMUA now; ESAT, TARA and course diagnostics next).
+email for the admissions exams (TMUA, TARA) and course engines (AP Calculus, GCSE).
 
 Each exam is a settings block in EXAMS. Its content lives in backend/exam_content/<exam>/*.json,
 written by the scripts in that folder (see exam_content/_exam.py):
@@ -45,6 +45,28 @@ EXAMS: dict[str, dict] = {
         "calculator": False,
         "mock_detail": "2 papers · 40 questions · 2 h 30 min",
         "about_score": "TMUA scores run from 1.0 to 9.0. Ours are Notenix estimates from the share of questions you get right; the real test uses its own scaling.",
+    },
+    "tara": {
+        "name": "TARA",
+        "full_name": "Test of Academic Reasoning for Admissions (UAT-UK)",
+        "course": "tara",
+        # The two multiple-choice modules. The third module (the Writing Task, an essay) is
+        # not scored on the scale; students send essays for tutor marking through test requests.
+        "sections": {"ct": "Critical Thinking", "ps": "Problem Solving"},
+        "domains": {
+            "Critical thinking": ["Main conclusion", "Drawing conclusions", "Assumptions",
+                                  "Strengthening and weakening", "Flaws in reasoning",
+                                  "Matching arguments", "Applying principles"],
+            "Problem solving": ["Relevant selection", "Finding procedures", "Identifying similarity"],
+        },
+        # Share right -> score. Roughly the shape of TSA/TMUA-style conversions; an estimate only.
+        "scale": {"min": 1.0, "max": 9.0, "decimals": 1,
+                  "points": [(0.0, 1.0), (0.2, 2.5), (0.4, 4.0), (0.55, 5.0), (0.7, 6.0), (0.85, 7.2), (1.0, 9.0)]},
+        "band": 0.7,
+        "target_range": (1.0, 9.0),
+        "calculator": False,
+        "mock_detail": "Critical Thinking + Problem Solving · 44 questions · 1 h 20 min",
+        "about_score": "TARA scores run from 1.0 to 9.0 for each multiple-choice module. Ours are Notenix estimates from the share of questions you get right; the real test uses its own scaling. The Writing Task is not scored this way: send an essay to a tutor through a test request.",
     },
     "ap-calc-ab": {
         "name": "AP Calculus AB",

@@ -1,0 +1,91 @@
+r"""TARA free diagnostic: 6 Critical Thinking + 6 Problem Solving questions, 12 minutes each.
+Original questions. Run from this folder: python diagnostic.py"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _exam import module, save_form  # noqa: E402
+from tara_common import *  # noqa: E402,F403
+
+CTQ = [
+    mc(MAIN, 1, Q_MAIN,
+       "Libraries should not cut their opening hours to save money.",
+       ["Public libraries are used mainly by people without internet access at home.",
+        "Councils have to make savings somewhere in their budgets.",
+        "Libraries are cheaper to run than most other council services.",
+        "Opening hours matter more to students than to any other group."],
+       "Everything else in the passage is a reason offered for the claim that cutting library hours is a false economy, so that claim is the conclusion. The point about home internet access and the cost comparison are both premises that support it.",
+       passage="""Councils facing tight budgets often see library opening hours as an easy saving. This is a mistake. Many of the people who rely on libraries most, such as job seekers without internet access at home and students without a quiet place to work, can only visit in the evenings or at weekends, exactly the hours that are cut first. Running a building that is already heated and staffed for a few more hours costs relatively little. Libraries should therefore keep their hours, and councils should look for savings elsewhere."""),
+    mc(CONC, 2, Q_CONC,
+       "Some of the trainees who passed the written test did not pass the practical test.",
+       ["Every trainee who passed the practical test also passed the written test.",
+        "Fewer than half of the trainees passed the practical test.",
+        "The practical test is harder than the written test.",
+        "No trainee who failed the written test passed the practical test."],
+       "40 of the 50 trainees passed the written test, but only 30 passed the practical test. Even if all 30 practical passes were among the 40 written passes, at least 10 written passes failed the practical. The other options may or may not be true: the figures do not tell us who passed which test.",
+       passage="""Fifty trainees sat both a written test and a practical test at the end of the course. Forty of them passed the written test and thirty passed the practical test. Every trainee sat both tests."""),
+    mc(ASSUME, 2, Q_ASSUME,
+       "The fall in reported accidents is not mainly due to fewer accidents being reported.",
+       ["Speed cameras are the most effective way to reduce accidents.",
+        "Drivers who speed are more likely to have accidents than other drivers.",
+        "The number of cars on the road rose during the two years.",
+        "Other towns would see the same fall if they installed cameras."],
+       "The argument moves from fewer reported accidents to fewer accidents. That only works if reporting itself did not change. If people simply stopped reporting minor accidents, the cameras might have made no difference.",
+       passage="""Two years ago the town installed speed cameras on its five busiest roads. Since then the number of accidents reported to the police on those roads has fallen by a third. The cameras have clearly made the roads safer."""),
+    mc(STRW, 2, Q_WEAK,
+       "The households that chose to install smart meters were already more careful with energy than average.",
+       ["Smart meters cost energy companies a lot of money to install.",
+        "Some households with smart meters still use a great deal of energy.",
+        "Energy prices rose sharply during the year of the study.",
+        "Smart meters can also be used to read water consumption."],
+       "The argument says the meters caused the lower use. If the households that chose meters were already thrifty, their lower use could be explained without the meters at all. Rising prices would affect both groups alike, so they do not explain the difference.",
+       passage="""In a survey of 2,000 homes, households with a smart energy meter used 12% less electricity over a year than households without one. Smart meters show people how much energy they are using as they use it, which encourages them to switch things off. Installing smart meters in every home would therefore cut the nation's electricity use."""),
+    mc(FLAW, 3, Q_FLAW,
+       "It assumes that because the two things happen together, one must cause the other.",
+       ["It relies on the opinion of musicians rather than scientists.",
+        "It confuses a necessary condition with a sufficient condition.",
+        "It generalises from a single school to all schools.",
+        "It attacks the people who disagree rather than their argument."],
+       "Pupils who learn instruments may differ in many ways, for example family income or support at home, that also raise maths results. The passage treats the link between music and maths results as proof that music causes the higher results.",
+       passage="""Pupils who learn a musical instrument get better maths results, on average, than pupils who do not. Learning music must therefore develop the parts of the brain used in mathematics, so every school should make instrumental lessons compulsory."""),
+    mc(MATCH, 3, Q_MATCH,
+       "If the battery were flat, the car would not start. The car started, so the battery is not flat.",
+       ["If the battery is flat, the car will not start. The car did not start, so the battery is flat.",
+        "If it rains, the match is cancelled. It did not rain, so the match was not cancelled.",
+        "Whenever the shop is busy, the queue is long. The queue is long, so the shop is busy.",
+        "Flat batteries are a common cause of breakdowns, so this breakdown was probably caused by a flat battery."],
+       "The passage has the form: if P then not Q; Q happened; so not P (a valid denial of the consequence). The car example has exactly that structure. The other options either affirm the consequent, deny the antecedent or argue from probability.",
+       passage="""If the museum had been open on Monday, the guide would have been at work. But the guide was not at work on Monday; she was at home all day. So the museum cannot have been open on Monday."""),
+]
+
+PSQ = [
+    mc(REL, 1, """A café sells coffee for £2.40, tea for £1.80 and cakes for £2.10 each. On Tuesday it sold 50 coffees, 30 teas and 20 cakes. How much did it take on Tuesday?""",
+       "£216", ["£186", "£198", "£204", "£228"],
+       "Coffee: 50 × £2.40 = £120. Tea: 30 × £1.80 = £54. Cakes: 20 × £2.10 = £42. Total £120 + £54 + £42 = £216.",
+       check=lambda: 50 * 240 + 30 * 180 + 20 * 210 == 21600),
+    mc(REL, 2, """A train leaves Redfield at 08:47 and arrives at Hallam at 10:12. The return train leaves Hallam at 16:35 and the journey takes 8 minutes longer than the morning journey. At what time does the return train arrive in Redfield?""",
+       "18:08", ["17:52", "18:00", "18:02", "18:16"],
+       "The morning journey takes 1 hour 25 minutes (08:47 to 10:12). The return takes 1 hour 33 minutes, and 16:35 + 1:33 = 18:08.",
+       check=lambda: (10 * 60 + 12) - (8 * 60 + 47) == 85 and 16 * 60 + 35 + 93 == 18 * 60 + 8, order=None),
+    mc(PROC, 2, """A gym charges either £30 a month with unlimited visits, or £4 a visit with no monthly fee. What is the smallest number of visits in a month for which the monthly plan is cheaper?""",
+       "8", ["6", "7", "9", "10"],
+       "Pay-as-you-go costs £4 × visits. 7 visits cost £28, less than £30; 8 visits cost £32, more than £30. So 8 visits is the first point where the monthly plan is cheaper.",
+       check=lambda: min(n for n in range(1, 20) if 4 * n > 30) == 8),
+    mc(PROC, 2, """Sam is 4 years older than his sister. In 6 years' time, the sum of their ages will be 40. How old is Sam now?""",
+       "16", ["12", "14", "18", "20"],
+       "If his sister is s now, Sam is s + 4. In six years: (s + 6) + (s + 10) = 40, so 2s = 24 and s = 12. Sam is 16.",
+       check=lambda: (12 + 6) + (16 + 6) == 40 and 16 - 12 == 4),
+    mc(SIM, 2, """A shop advertises "3 for 2" on candles costing £6 each. Which of the following offers gives exactly the same price per candle when buying a multiple of 3?""",
+       "A third off every candle", ["£1 off every candle", "Buy 4, get 1 free", "25% off every candle", "Buy 2, get the third half price"],
+       "3 for 2 means paying £12 for 3 candles: £4 each, which is a third off £6. £1 off gives £5; buy 4 get 1 free gives £4.80; 25% off gives £4.50; buy 2 get the third half price gives £15 for 3, which is £5 each.",
+       check=lambda: 12 / 3 == 6 * (1 - 1 / 3) and 24 / 5 != 4 and 6 * 0.75 != 4),
+    mc(PROC, 3, """A rectangular garden is 12 m long and 8 m wide. A path 1 m wide runs all the way round the inside edge of the garden. What is the area of the path?""",
+       "36 m²", ["20 m²", "32 m²", "40 m²", "60 m²"],
+       "The whole garden is 12 × 8 = 96 m². Inside the path is a rectangle (12 − 2) × (8 − 2) = 10 × 6 = 60 m². The path is 96 − 60 = 36 m².",
+       check=lambda: 12 * 8 - 10 * 6 == 36),
+]
+
+save_form("tara", "diagnostic", "TARA free diagnostic", "diagnostic", [
+    module("ct", "Critical Thinking", "ct", 12, CTQ),
+    module("ps", "Problem Solving", "ps", 12, PSQ),
+], summary="6 Critical Thinking + 6 Problem Solving questions · 24 minutes")
