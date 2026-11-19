@@ -7,7 +7,7 @@ import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Input, Field } from "@/components/ui/Input";
 
-// Copy for each product: UK KS3 (Years 7-9) and US Middle School (Grades 5-7, track "us").
+// Copy for each product: UK KS3 (Years 7-9), US Middle School (Grades 5-7, track "us") and Ontario ("on").
 const COPY = {
   uk: {
     perks: [
@@ -46,6 +46,23 @@ const COPY = {
     defaultYear: 6,
     continueHref: "/middle-school/continue",
   },
+  on: {
+    perks: [
+      { icon: ClipboardCheck, title: "Baseline tests", desc: "Math and Language, about 30 minutes each." },
+      { icon: Camera, title: "Homework help", desc: "Stuck on homework? Send a photo, a tutor replies." },
+      { icon: BookOpen, title: "Grade-level notes", desc: "Short review notes that follow the Ontario curriculum." },
+      { icon: LineChart, title: "Progress report", desc: "Emailed to you on day 7: scores and what to work on first." },
+    ],
+    headline: "Stay ahead in Grades 5 to 7.",
+    pitch: "Harder math, longer reading, more independent homework. Grades 5 to 7 are where many kids quietly slip. In one week you'll know exactly where your child stands.",
+    footer: "Ontario with Beyond Tutors",
+    title: "Start a free Ontario trial",
+    sub: "For Grades 5, 6 and 7. Takes a minute; no payment details.",
+    yearLabel: "Grade",
+    years: [{ value: 5, label: "Grade 5" }, { value: 6, label: "Grade 6" }, { value: 7, label: "Grade 7" }],
+    defaultYear: 6,
+    continueHref: "/ontario/continue",
+  },
 };
 
 /**
@@ -54,8 +71,8 @@ const COPY = {
  * Step 2: code verified → a @notenix.com user ID is issued.
  * Step 3: the parent chooses the password → the trial week starts.
  */
-export default function Ks3Trial({ track }: { track?: "us" }) {
-  const C = COPY[track === "us" ? "us" : "uk"];
+export default function Ks3Trial({ track }: { track?: "us" | "on" }) {
+  const C = COPY[track ?? "uk"];
   const router = useRouter();
   const [step, setStep] = useState<"details" | "code" | "password" | "done">("details");
   const [childName, setChildName] = useState("");

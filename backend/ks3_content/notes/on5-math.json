@@ -1,0 +1,8 @@
+{
+ "key": "on5-math",
+ "year": 5,
+ "subject": "Math",
+ "title": "Grade 5 Math: the key ideas",
+ "body": "NUMBER\n• Place value to 100 000: in 54 312 the 4 is worth 4 000. Round by looking at the digit to the right.\n• Tenths and hundredths: 7/10 = 0.7, 25/100 = 0.25. Line up decimal points to add: 3.45 + 2.70 = 6.15.\n• Equivalent fractions: multiply or divide the top and bottom by the same number. 3/4 = 6/8 = 9/12.\n• Multiply by breaking numbers apart: 245 × 6 = 200 × 6 + 40 × 6 + 5 × 6 = 1 470.\n• Remainders: 150 bars in boxes of 12 → 12 boxes and 6 left over, so 13 boxes are needed.\n\nALGEBRA AND CODING\n• Patterns: 4, 9, 14, 19 adds 5 each time. Term 10 = 4 + 9 × 5 = 49.\n• Equations: find the value that makes both sides equal. 6 × n = 42 → n = 7.\n• Code runs in order; a loop repeats steps. Track the variable each time round.\n\nDATA AND PROBABILITY\nMode = most common value. Median = middle value in order. Mean = total ÷ number of values.\nProbability = favourable outcomes ÷ equally likely outcomes. 4 blue sections out of 8 → 1/2.\n\nSPATIAL SENSE\nParallelogram area = base × height. Triangle area = base × height ÷ 2.\n1 L = 1 000 mL · 1 m = 100 cm · 1 km = 1 000 m.\n\nFINANCIAL LITERACY\nTotal the cost of every item, then subtract from the amount paid to find the change.",
+ "track": "on"
+}

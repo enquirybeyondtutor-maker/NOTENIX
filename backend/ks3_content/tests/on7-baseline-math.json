@@ -1,0 +1,251 @@
+{
+ "slot": "on7-baseline",
+ "subject": "Math",
+ "title": "Grade 7 Math Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 7",
+ "board": "Ontario curriculum",
+ "questions": [
+  {
+   "topic": "Number",
+   "question": "What is −7 + (−5)?",
+   "options": [
+    "2",
+    "−12",
+    "−2",
+    "12"
+   ],
+   "answer": "−12",
+   "explanation": "Adding a negative moves further left: −7 − 5 = −12."
+  },
+  {
+   "topic": "Number",
+   "question": "What is −24 ÷ 6?",
+   "options": [
+    "4",
+    "−18",
+    "−30",
+    "−4"
+   ],
+   "answer": "−4",
+   "explanation": "A negative divided by a positive is negative: −24 ÷ 6 = −4."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 2/3 × 9/10?",
+   "options": [
+    "3/5",
+    "11/13",
+    "20/27",
+    "6/5"
+   ],
+   "answer": "3/5",
+   "explanation": "Multiply tops and bottoms: 18/30, which simplifies to 3/5."
+  },
+  {
+   "topic": "Number",
+   "question": "What is the square root of 144?",
+   "options": [
+    "72",
+    "14",
+    "12",
+    "24"
+   ],
+   "answer": "12",
+   "explanation": "12 × 12 = 144."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 5² + 3²?",
+   "options": [
+    "64",
+    "16",
+    "34",
+    "30"
+   ],
+   "answer": "34",
+   "explanation": "5² = 25 and 3² = 9, so the sum is 34. (8² = 64 is a common mistake.)"
+  },
+  {
+   "topic": "Financial literacy",
+   "question": "HST in Ontario is 13%. A jacket costs $80 before tax. What is the total cost with HST?",
+   "options": [
+    "$90.40",
+    "$10.40",
+    "$93.00",
+    "$81.30"
+   ],
+   "answer": "$90.40",
+   "explanation": "13% of 80 dollars is 10.40 dollars, so the total is 80 + 10.40 = 90.40 dollars."
+  },
+  {
+   "topic": "Financial literacy",
+   "question": "A shirt that costs $45 is 20% off. What is the sale price?",
+   "options": [
+    "$9",
+    "$25",
+    "$40",
+    "$36"
+   ],
+   "answer": "$36",
+   "explanation": "20% of 45 dollars is 9 dollars, so the sale price is 45 − 9 = 36 dollars."
+  },
+  {
+   "topic": "Number",
+   "question": "Four concert tickets cost $58. At the same price, how much do 7 tickets cost?",
+   "options": [
+    "$87.00",
+    "$101.50",
+    "$116.00",
+    "$94.50"
+   ],
+   "answer": "$101.50",
+   "explanation": "One ticket costs 58 ÷ 4 = 14.50 dollars, so 7 tickets cost 7 × 14.50 = 101.50 dollars."
+  },
+  {
+   "topic": "Algebra",
+   "question": "Solve 4x + 9 = 37.",
+   "options": [
+    "x = 6.5",
+    "x = 7",
+    "x = 11.5",
+    "x = 28"
+   ],
+   "answer": "x = 7",
+   "explanation": "Subtract 9: 4x = 28. Divide by 4: x = 7."
+  },
+  {
+   "topic": "Algebra",
+   "question": "Which expression is equivalent to 3(2y − 5) + 4y?",
+   "options": [
+    "10y − 5",
+    "6y − 15",
+    "10y + 15",
+    "10y − 15"
+   ],
+   "answer": "10y − 15",
+   "explanation": "3(2y − 5) = 6y − 15, and 6y + 4y = 10y, giving 10y − 15."
+  },
+  {
+   "topic": "Algebra",
+   "question": "Solve x/3 − 2 = 5.",
+   "options": [
+    "x = 21",
+    "x = 3",
+    "x = 9",
+    "x = 15"
+   ],
+   "answer": "x = 21",
+   "explanation": "Add 2: x/3 = 7. Multiply by 3: x = 21."
+  },
+  {
+   "topic": "Algebra",
+   "question": "Which describes all the values of n for which 2n + 1 > 11?",
+   "options": [
+    "n < 5",
+    "n > 6",
+    "n > 5",
+    "n > 11"
+   ],
+   "answer": "n > 5",
+   "explanation": "Subtract 1: 2n > 10. Divide by 2: n > 5."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "A circle has a diameter of 14 cm. Using 3.14 for π, what is its circumference?",
+   "options": [
+    "21.98 cm",
+    "153.86 cm",
+    "43.96 cm",
+    "87.92 cm"
+   ],
+   "answer": "43.96 cm",
+   "explanation": "Circumference = π × diameter = 3.14 × 14 = 43.96 cm."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "A circle has a radius of 3 m. Using 3.14 for π, what is its area?",
+   "options": [
+    "28.26 m²",
+    "18.84 m²",
+    "9.42 m²",
+    "113.04 m²"
+   ],
+   "answer": "28.26 m²",
+   "explanation": "Area = π × r × r = 3.14 × 9 = 28.26 m². (18.84 m would be its circumference.)"
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "What is the surface area of a cube with edges of 4 cm?",
+   "options": [
+    "64 cm²",
+    "16 cm²",
+    "48 cm²",
+    "96 cm²"
+   ],
+   "answer": "96 cm²",
+   "explanation": "Each face is 4 × 4 = 16 cm², and a cube has 6 faces: 6 × 16 = 96 cm². (64 cm³ is its volume.)"
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "Two angles of a triangle measure 47° and 68°. What is the third angle?",
+   "options": [
+    "115°",
+    "65°",
+    "75°",
+    "245°"
+   ],
+   "answer": "65°",
+   "explanation": "The angles of a triangle add up to 180°: 180 − 47 − 68 = 65°."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "On a floor plan, 1 cm represents 2.5 m. A room is 6 cm long on the plan. How long is the real room?",
+   "options": [
+    "8.5 m",
+    "15 m",
+    "12 m",
+    "2.4 m"
+   ],
+   "answer": "15 m",
+   "explanation": "Each centimetre stands for 2.5 m: 6 × 2.5 = 15 m."
+  },
+  {
+   "topic": "Data & probability",
+   "question": "A coin is flipped and a number cube (1 to 6) is rolled. What is the probability of getting heads and a 6?",
+   "options": [
+    "1/8",
+    "2/3",
+    "1/6",
+    "1/12"
+   ],
+   "answer": "1/12",
+   "explanation": "The events are independent: 1/2 × 1/6 = 1/12."
+  },
+  {
+   "topic": "Data & probability",
+   "question": "A coin was flipped 50 times and landed heads 22 times. What is the experimental probability of heads?",
+   "options": [
+    "11/25",
+    "1/2",
+    "14/25",
+    "11/50"
+   ],
+   "answer": "11/25",
+   "explanation": "Experimental probability = 22/50, which simplifies to 11/25. (1/2 is the theoretical probability.)"
+  },
+  {
+   "topic": "Number",
+   "question": "At 6 a.m. it was −6°C. The temperature rose 4°C, then fell 9°C. What was the final temperature?",
+   "options": [
+    "7°C",
+    "−1°C",
+    "−11°C",
+    "−19°C"
+   ],
+   "answer": "−11°C",
+   "explanation": "−6 + 4 = −2, and −2 − 9 = −11°C."
+  }
+ ]
+}

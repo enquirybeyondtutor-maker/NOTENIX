@@ -2,7 +2,7 @@
 
 tests/<slot>-<subject>.json : {"slot", "subject", "title", "topic", "duration", "questions": [...]}
 notes/<key>.json            : {"key", "year", "subject", "title", "body", "track"?}
-US Middle School content ("track": "us") uses g<grade>-... slots and keys, e.g. g6-baseline.
+Grade-track content ("track": "us" or "on") uses g<grade>- / on<grade>- slots and keys, e.g. on6-baseline.
 
 Matching rows are created or updated in place (key = slot+subject for tests, key for notes),
 so fixing a typo is a normal deploy. New notes are shared with that year's KS3 students.

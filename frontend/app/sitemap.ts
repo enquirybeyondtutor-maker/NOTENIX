@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE}/ks3`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE}/middle-school`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE}/middle-school/trial`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/ontario`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE}/ontario/trial`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     ...YEARS.map((y) => ({ url: `${SITE}/ks3/${yearSlug(y)}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.8 })),
     ...TOPICS.map((t) => ({ url: `${SITE}${topicPath(t)}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },

@@ -305,8 +305,8 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
     if not user or not verify_password(data.password, user.password_hash):
         raise HTTPException(400, "That Notenix user ID or password isn't right.")
     if not user.ks3_year:
-        raise HTTPException(400, "This account isn't on Notenix KS3 or Middle School. Start a free week at "
-                                 "notenix.com/ks3 or notenix.com/middle-school first.")
+        raise HTTPException(400, "This account isn't on Notenix KS3, Middle School or Ontario. Start a free week at "
+                                 "notenix.com/ks3, notenix.com/middle-school or notenix.com/ontario first.")
     if not (data.payer_name or "").strip():
         raise HTTPException(400, "Please tell us the name of the person who paid.")
     price = pricing.ks3_for_currency(data.currency)
@@ -460,8 +460,8 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
     extra = {"pro": f"Pro is on for the next {PRO_DAYS} days.",
              "revision": f"{course_label} is now on for a year." if course_label else "Full revision access is now on for a year.",
              "course": f"{course_label} is now on for a year: practice, revision and tutor-marked papers.",
-             "ks3": ("Notenix Middle School is on for a year: Math and ELA tests, homework help, notes and a progress report every month."
-                     if ks3.is_us(user) else
+             "ks3": (f"{ks3.product(user)} is on for a year: {ks3.subjects_text(user)} tests, homework help, notes and a progress report every month."
+                     if ks3.is_grades(user) else
                      "Notenix KS3 is on for a year: a test every half-term, homework help, notes and a progress report every month."),
              "doubt": "Ask a Tutor is on for the next 30 days: up to 20 questions, answered step by step.",
              "annual": "Ask a Tutor is on for a whole year: up to 20 questions every month, answered step by step.",

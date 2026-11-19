@@ -55,7 +55,7 @@ class User(Base):
     # Notenix KS3: school year (7/8/9) when the student is on KS3, when their free trial
     # started, and which parent emails of the trial sequence have gone out.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    # "us" = Notenix Middle School (US Grades 5-7, ks3_year holds the grade); None = UK KS3.
+    # Grade track (services/ks3.TRACKS): "us" = Middle School, "on" = Ontario; ks3_year holds the grade. None = UK KS3.
     ks3_track: Mapped[str | None] = mapped_column(String(8), nullable=True)
     # Notenix SAT: when they joined, their test date (YYYY-MM-DD) and target score.
     sat_since: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
