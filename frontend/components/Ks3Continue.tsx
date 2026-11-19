@@ -14,8 +14,16 @@ type Price = { currency: string; amount: number; label: string };
 // paid by bank transfer, confirmed by an admin in /admin/requests.
 // US Middle School families pay in dollars: without a local account for their country they see
 // the USD price (no Wise card link, which is fixed in GBP), not the GBP one.
-export default function Ks3Continue({ track }: { track?: "us" }) {
-  const us = track === "us";
+const GRADE_TRACKS = {
+  us: { product: "Notenix Middle School", currency: "USD", trial: "/middle-school/trial",
+        blurb: "Math and English Language Arts tests, homework help from Beyond Tutors tutors, grade-level notes, and a progress report in your inbox every month." },
+  on: { product: "Notenix Ontario", currency: "CAD", trial: "/ontario/trial",
+        blurb: "Math and Language tests that follow the Ontario curriculum, homework help from Beyond Tutors tutors, grade-level notes, and a progress report in your inbox every month." },
+};
+
+export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
+  const G = track ? GRADE_TRACKS[track] : null;
+  const us = !!G;   // a grade-based track (US or Ontario): local-currency price, no GBP card link
   const [info, setInfo] = useState<{ accounts: Account[]; prices: Record<string, Price>; gbp: Price; pay_link?: string } | null>(null);
   const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
   const [busy, setBusy] = useState(false);
@@ -47,9 +55,9 @@ export default function Ks3Continue({ track }: { track?: "us" }) {
     return info.prices[cur] || { currency: "GBP", amount: info.gbp.amount, label: priceFor(info.gbp.amount, a, rates) };
   };
   const chosen = shown.find((a) => a.label === form.paid_via) || shown[0];
-  const fallback = us ? info.prices.USD || info.gbp : info.gbp;
+  const fallback = G ? info.prices[G.currency] || info.gbp : info.gbp;
   const price = local ? priceOf(chosen) : fallback;
-  const product = us ? "Notenix Middle School" : "Notenix KS3";
+  const product = G ? G.product : "Notenix KS3";
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,11 +91,11 @@ export default function Ks3Continue({ track }: { track?: "us" }) {
 
   return (
     <PageContainer className="max-w-3xl">
-      <p className="text-sm font-semibold text-brand-600">{us ? "Notenix Middle School · Grades 5–7" : "Notenix KS3 · Year 7 to GCSE"}</p>
+      <p className="text-sm font-semibold text-brand-600">{G ? `${G.product} · Grades 5–7` : "Notenix KS3 · Year 7 to GCSE"}</p>
       <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink sm:text-3xl">{price.label} / year</h1>
       <p className="mt-1 text-sm text-ink-muted">
-        {us
-          ? "Math and English Language Arts tests, homework help from Beyond Tutors tutors, grade-level notes, and a progress report in your inbox every month."
+        {G
+          ? G.blurb
           : "A timed test every half-term in Maths, Science and English, homework help from Beyond Tutors tutors, KS3 notes, and a progress report in your inbox every month."}
       </p>
 
@@ -99,7 +107,7 @@ export default function Ks3Continue({ track }: { track?: "us" }) {
             <Field label="Notenix user ID"><Input required value={form.login_id} onChange={set("login_id")} placeholder="name@notenix.com" autoCapitalize="none" /></Field>
             <Field label="Password"><Input required type="password" value={form.password} onChange={set("password")} /></Field>
           </div>
-          <p className="text-xs text-ink-subtle">No free week yet? <a href={us ? "/middle-school/trial" : "/ks3/trial"} className="font-medium text-brand-600 hover:underline">Start one first</a>, it&apos;s free.</p>
+          <p className="text-xs text-ink-subtle">No free week yet? <a href={G ? G.trial : "/ks3/trial"} className="font-medium text-brand-600 hover:underline">Start one first</a>, it&apos;s free.</p>
         </div>
 
         <div className="card space-y-4 p-6">

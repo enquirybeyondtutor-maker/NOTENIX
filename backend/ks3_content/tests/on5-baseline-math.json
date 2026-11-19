@@ -1,0 +1,251 @@
+{
+ "slot": "on5-baseline",
+ "subject": "Math",
+ "title": "Grade 5 Math Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 5",
+ "board": "Ontario curriculum",
+ "questions": [
+  {
+   "topic": "Number",
+   "question": "What is the value of the digit 4 in 54 312?",
+   "options": [
+    "400",
+    "4 000",
+    "40 000",
+    "40"
+   ],
+   "answer": "4 000",
+   "explanation": "54 312 is 5 ten thousands, 4 thousands, 3 hundreds, 1 ten and 2 ones."
+  },
+  {
+   "topic": "Number",
+   "question": "Round 68 471 to the nearest thousand.",
+   "options": [
+    "69 000",
+    "68 500",
+    "70 000",
+    "68 000"
+   ],
+   "answer": "68 000",
+   "explanation": "Look at the hundreds digit: 4 is less than 5, so round down to 68 000."
+  },
+  {
+   "topic": "Number",
+   "question": "Which decimal is equal to 7/10?",
+   "options": [
+    "0.7",
+    "0.07",
+    "7.1",
+    "0.17"
+   ],
+   "answer": "0.7",
+   "explanation": "7 tenths is written 0.7. 0.07 is 7 hundredths."
+  },
+  {
+   "topic": "Number",
+   "question": "Which fraction is equivalent to 3/4?",
+   "options": [
+    "6/12",
+    "3/8",
+    "9/12",
+    "4/3"
+   ],
+   "answer": "9/12",
+   "explanation": "Multiply the top and bottom by 3: 3/4 = 9/12. 6/12 is equal to 1/2."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 245 × 6?",
+   "options": [
+    "1 270",
+    "1 450",
+    "1 470",
+    "1 520"
+   ],
+   "answer": "1 470",
+   "explanation": "200 × 6 = 1 200, 40 × 6 = 240, 5 × 6 = 30. 1 200 + 240 + 30 = 1 470."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 936 ÷ 4?",
+   "options": [
+    "234",
+    "224",
+    "233",
+    "244"
+   ],
+   "answer": "234",
+   "explanation": "900 ÷ 4 = 225 and 36 ÷ 4 = 9, so 936 ÷ 4 = 234."
+  },
+  {
+   "topic": "Number",
+   "question": "A box holds 12 granola bars. How many boxes are needed to pack 150 granola bars?",
+   "options": [
+    "12 boxes",
+    "15 boxes",
+    "18 boxes",
+    "13 boxes"
+   ],
+   "answer": "13 boxes",
+   "explanation": "150 ÷ 12 = 12 remainder 6. The 6 leftover bars need another box, so 13 boxes."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 3.45 + 2.7?",
+   "options": [
+    "5.52",
+    "6.15",
+    "6.42",
+    "3.72"
+   ],
+   "answer": "6.15",
+   "explanation": "Line up the decimal points: 3.45 + 2.70 = 6.15."
+  },
+  {
+   "topic": "Algebra",
+   "question": "A pattern starts 4, 9, 14, 19, … and keeps adding the same amount. What is the 10th term?",
+   "options": [
+    "44",
+    "49",
+    "50",
+    "54"
+   ],
+   "answer": "49",
+   "explanation": "The pattern adds 5 each time. The 10th term is 4 + 9 × 5 = 49."
+  },
+  {
+   "topic": "Algebra",
+   "question": "What value of n makes 6 × n = 42 true?",
+   "options": [
+    "6",
+    "36",
+    "48",
+    "7"
+   ],
+   "answer": "7",
+   "explanation": "6 × 7 = 42, so n = 7."
+  },
+  {
+   "topic": "Algebra",
+   "question": "What value of m makes m + 18 = 50 true?",
+   "options": [
+    "32",
+    "68",
+    "22",
+    "34"
+   ],
+   "answer": "32",
+   "explanation": "Subtract 18 from 50: m = 32."
+  },
+  {
+   "topic": "Coding",
+   "question": "A program sets x = 3. It then repeats the instruction 'add 4 to x' three times. What is x at the end?",
+   "options": [
+    "7",
+    "12",
+    "15",
+    "19"
+   ],
+   "answer": "15",
+   "explanation": "x goes 3 → 7 → 11 → 15."
+  },
+  {
+   "topic": "Data & probability",
+   "question": "What is the mode of this data set: 2, 8, 8, 3, 10, 6?",
+   "options": [
+    "7",
+    "6",
+    "8",
+    "10"
+   ],
+   "answer": "8",
+   "explanation": "The mode is the value that appears most often. 8 appears twice; every other value appears once."
+  },
+  {
+   "topic": "Data & probability",
+   "question": "What is the mean of 12, 15, 9 and 14?",
+   "options": [
+    "12.5",
+    "12",
+    "13",
+    "50"
+   ],
+   "answer": "12.5",
+   "explanation": "Add the values (50) and divide by how many there are (4): 50 ÷ 4 = 12.5."
+  },
+  {
+   "topic": "Data & probability",
+   "question": "A spinner has 8 equal sections: 3 red, 4 blue and 1 yellow. What is the probability of landing on blue?",
+   "options": [
+    "3/8",
+    "1/8",
+    "1/4",
+    "1/2"
+   ],
+   "answer": "1/2",
+   "explanation": "4 of the 8 equal sections are blue: 4/8 = 1/2."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "A parallelogram has a base of 8 cm and a height of 5 cm. What is its area?",
+   "options": [
+    "20 cm²",
+    "40 cm²",
+    "13 cm²",
+    "26 cm²"
+   ],
+   "answer": "40 cm²",
+   "explanation": "Area of a parallelogram = base × height = 8 × 5 = 40 cm²."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "A triangle has a base of 12 m and a height of 7 m. What is its area?",
+   "options": [
+    "84 m²",
+    "42 m²",
+    "19 m²",
+    "38 m²"
+   ],
+   "answer": "42 m²",
+   "explanation": "Area of a triangle = base × height ÷ 2 = 12 × 7 ÷ 2 = 42 m²."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "What is a triangle with three sides of different lengths called?",
+   "options": [
+    "isosceles",
+    "equilateral",
+    "right",
+    "scalene"
+   ],
+   "answer": "scalene",
+   "explanation": "Scalene: no equal sides. Isosceles: at least two equal sides. Equilateral: three equal sides."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "How many millilitres are in 2.5 L?",
+   "options": [
+    "2 500",
+    "250",
+    "25",
+    "25 000"
+   ],
+   "answer": "2 500",
+   "explanation": "1 L = 1 000 mL, so 2.5 L = 2 500 mL."
+  },
+  {
+   "topic": "Financial literacy",
+   "question": "Maya buys 3 notebooks at $2.75 each and a pen for $1.40. She pays with a $20 bill. How much change does she get?",
+   "options": [
+    "$9.65",
+    "$11.35",
+    "$10.35",
+    "$10.65"
+   ],
+   "answer": "$10.35",
+   "explanation": "The notebooks cost 3 × 2.75 = 8.25 dollars. With the pen: 8.25 + 1.40 = 9.65 dollars. Change: 20.00 − 9.65 = 10.35 dollars."
+  }
+ ]
+}

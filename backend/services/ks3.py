@@ -1,6 +1,7 @@
 """Notenix KS3: free-trial parent emails and the progress report ("Beat the Year 7 dip").
-The same machinery runs Notenix Middle School (US Grades 5-7, user.ks3_track == "us"): the grade
-is kept in ks3_year, its content uses g<grade>-... slots, and the wording below follows the product.
+The same machinery runs the grade-based tracks in TRACKS: Notenix Middle School (US Grades 5-7,
+user.ks3_track == "us") and Notenix Ontario (Grades 5-7, "on"). The grade is kept in ks3_year, content
+uses <prefix><grade>-... slots (g6-baseline, on6-baseline), and the wording follows the product.
 
 Sequence (days after the trial starts): 0 welcome · 3 check-in · 5 ending soon · 7 report.
 Everything here is plain inline-styled HTML so it renders in Gmail/Outlook.
@@ -20,39 +21,62 @@ GOOD, OK, WEAK = "#059669", "#d97706", "#dc2626"
 SEQUENCE = (("welcome", 0), ("checkin", 3), ("ending", 5), ("report", 7))
 
 
-# ── Which product: UK KS3 or US Middle School ──────────────────────────────────
+# ── Which product: UK KS3 or a grade-based track (US Middle School, Ontario) ────
 
-US_GRADES = (5, 6, 7)
+# Grade-based tracks on the KS3 machinery. user.ks3_track / ClassNote.ks3_track hold the key.
+TRACKS = {
+    "us": {"product": "Notenix Middle School", "short": "Middle School", "grades": (5, 6, 7), "prefix": "g",
+           "subjects": "Math and English Language Arts", "subjects_short": "Math and ELA",
+           "path": "/middle-school", "currency": "USD", "otp": "middle",
+           "intro": "Middle school is where many children quietly slip: harder math, longer reading and more "
+                    "independent homework, all at once."},
+    "on": {"product": "Notenix Ontario", "short": "Ontario", "grades": (5, 6, 7), "prefix": "on",
+           "subjects": "Math and Language", "subjects_short": "Math and Language",
+           "path": "/ontario", "currency": "CAD", "otp": "ontario",
+           "intro": "Grades 5 to 7 are where many children quietly slip: harder math, longer reading and more "
+                    "independent homework, all at once."},
+}
+US_GRADES = TRACKS["us"]["grades"]
 
 
-def is_us(u) -> bool:
-    return getattr(u, "ks3_track", None) == "us"
+def track(u) -> dict | None:
+    """The grade-based track this student is on, or None for UK KS3."""
+    return TRACKS.get(getattr(u, "ks3_track", None) or "")
+
+
+def is_grades(u) -> bool:
+    return track(u) is not None
 
 
 def product(u) -> str:
-    return "Notenix Middle School" if is_us(u) else "Notenix KS3"
+    t = track(u)
+    return t["product"] if t else "Notenix KS3"
 
 
 def year_label(u) -> str:
-    return f"Grade {u.ks3_year or 6}" if is_us(u) else f"Year {u.ks3_year or 7}"
+    return f"Grade {u.ks3_year or 6}" if is_grades(u) else f"Year {u.ks3_year or 7}"
 
 
 def subjects_text(u) -> str:
-    return "Math and English Language Arts" if is_us(u) else "Maths, Science and English"
+    t = track(u)
+    return t["subjects"] if t else "Maths, Science and English"
 
 
 def slot_prefix(u) -> str:
-    """Content slot for the student's year: g6-... (US grade) or y7-... (UK year)."""
-    return f"g{u.ks3_year}" if is_us(u) else f"y{u.ks3_year}"
+    """Content slot for the student's year: g6-... / on6-... (grade tracks) or y7-... (UK year)."""
+    t = track(u)
+    return f"{t['prefix']}{u.ks3_year}" if t else f"y{u.ks3_year}"
 
 
 def upgrade_url(u) -> str:
-    return _site("/middle-school/continue") if is_us(u) else settings.ks3_upgrade_url
+    t = track(u)
+    return _site(t["path"] + "/continue") if t else settings.ks3_upgrade_url
 
 
 def _plan_line(u, price: str) -> str:
-    if is_us(u):
-        return (f"<b>Notenix Middle School, {price}/year:</b> Math and ELA tests, homework help, notes, "
+    t = track(u)
+    if t:
+        return (f"<b>{t['product']}, {price}/year:</b> {t['subjects_short']} tests, homework help, notes, "
                 f"and this report every month, from Grade 5 through Grade 7.")
     return (f"<b>Notenix KS3, {price}/year:</b> a timed test every half-term, homework help, "
             f"notes, and this report every month, from Year 7 to GCSE.")
@@ -118,9 +142,9 @@ def _btn(url: str, label: str, primary: bool = True) -> str:
 
 def _shell(preheader: str, heading: str, body: str, u=None) -> str:
     """The shared Notenix design (services/mail_template.py), tagged KS3 or Middle School, footer for parents."""
-    us = u is not None and is_us(u)
-    return T.layout(preheader=preheader, heading=heading, body=body, audience="middle" if us else "ks3",
-                    tagline="Middle School · Grades 5–7" if us else "KS3 · Years 7–9")
+    t = track(u) if u is not None else None
+    return T.layout(preheader=preheader, heading=heading, body=body, audience=t["otp"] if t else "ks3",
+                    tagline=f"{t['short']} · Grades 5–7" if t else "KS3 · Years 7–9")
 
 
 def _color(pct: int) -> str:
@@ -153,9 +177,8 @@ def _site(path: str) -> str:
 # ── The four emails ────────────────────────────────────────────────────────────
 
 def welcome(u: User, p: dict) -> tuple[str, str, str]:
-    name, yl, us = _first(u.full_name), year_label(u), is_us(u)
-    intro = ("Middle school is where many children quietly slip: harder math, longer reading and more "
-             "independent homework, all at once." if us else
+    name, yl, us = _first(u.full_name), year_label(u), is_grades(u)
+    intro = (track(u)["intro"] if us else
              "The first year of secondary school is where many children quietly slip: new subjects, "
              "more homework and a new routine all at once.")
     notes = "Notes" if us else "KS3 notes"
@@ -185,7 +208,7 @@ def checkin(u: User, p: dict) -> tuple[str, str, str]:
                 f"Here's how it's going:</p>{_subject_table(p)}")
         if left:
             lead += (f"<p>{left} test{'s are' if left != 1 else ' is'} still waiting. A full picture needs "
-                     f"{'both subjects' if is_us(u) else 'all three subjects'}.</p>")
+                     f"{'both subjects' if is_grades(u) else 'all three subjects'}.</p>")
     else:
         lead = (f"<p>Three days in, and {name} hasn't started the baseline tests yet. They take about 30 minutes each, "
                 f"and they're what the day-7 report is built on.</p>")
@@ -199,8 +222,8 @@ def checkin(u: User, p: dict) -> tuple[str, str, str]:
 
 def ending(u: User, p: dict) -> tuple[str, str, str]:
     name, price = _first(u.full_name), _price(u)
-    offer = (f"<p>To keep going, Notenix Middle School is <b>{price} a year</b>: Math and ELA tests, homework help, "
-             f"notes, and a progress report in your inbox every month, from Grade 5 through Grade 7.</p>" if is_us(u) else
+    offer = (f"<p>To keep going, {product(u)} is <b>{price} a year</b>: {subjects_text(u)} tests, homework help, "
+             f"notes, and a progress report in your inbox every month, from Grade 5 through Grade 7.</p>" if is_grades(u) else
              f"<p>To keep going, Notenix KS3 is <b>{price} a year</b>: a timed test every half-term in Maths, "
              f"Science and English, homework help, KS3 notes, and a progress report in your inbox every month, "
              f"from Year 7 all the way to GCSE.</p>")
@@ -221,14 +244,14 @@ def report(u: User, p: dict) -> tuple[str, str, str]:
                 f'<p style="margin:16px 0 4px;color:{INK};font-weight:700">Scores by subject</p>{_subject_table(p)}'
                 f"{_topic_list(p['strengths'], 'Strong topics', GOOD)}"
                 f"{_topic_list(p['focus'], 'Topics to work on first', WEAK)}")
-        if p["gcse"] and not is_us(u):
+        if p["gcse"] and not is_grades(u):
             body += (f'<div style="background:#f8fafc;border:1px solid {LINE};border-radius:12px;padding:14px 16px;margin:18px 0">'
                      f'<div style="font-size:12px;color:{MUTED}">Early GCSE indicator</div>'
                      f'<div style="font-size:18px;font-weight:700;color:{INK};margin-top:2px">Working towards grades {p["gcse"]}</div>'
                      f'<div style="font-size:12px;color:{MUTED};margin-top:4px">Based on {len(p["taken"])} test'
                      f'{"s" if len(p["taken"]) != 1 else ""} so far. It is a starting point, not a prediction: '
                      f"{yl} is exactly when steady practice moves it.</div></div>")
-        if is_grammar(u) and not is_us(u):
+        if is_grammar(u) and not is_grades(u):
             body += _grammar_box(p)
         if p["missed"]:
             body += f"<p>{len(p['missed'])} test{'s were' if len(p['missed']) != 1 else ' was'} not taken, so this picture is partial.</p>"
@@ -261,12 +284,12 @@ def monthly(u: User, p: dict) -> tuple[str, str, str]:
                 f'<span style="color:#94a3b8;font-weight:500">(change since the first test)</span></p>{_subject_table(p)}'
                 f"{_topic_list(p['strengths'], 'Strong topics', GOOD)}"
                 f"{_topic_list(p['focus'], 'Topics to work on next', WEAK)}")
-        if p["gcse"] and not is_us(u):
+        if p["gcse"] and not is_grades(u):
             body += (f'<div style="background:#f8fafc;border:1px solid {LINE};border-radius:12px;padding:14px 16px;margin:18px 0">'
                      f'<div style="font-size:12px;color:{MUTED}">Early GCSE indicator</div>'
                      f'<div style="font-size:18px;font-weight:700;color:{INK};margin-top:2px">Working towards grades {p["gcse"]}</div>'
                      f'<div style="font-size:12px;color:{MUTED};margin-top:4px">A starting point from {len(p["taken"])} tests, not a prediction.</div></div>')
-        if is_grammar(u) and not is_us(u):
+        if is_grammar(u) and not is_grades(u):
             body += _grammar_box(p)
         if p["missed"]:
             body += f"<p>{len(p['missed'])} test{'s are' if len(p['missed']) != 1 else ' is'} still waiting in Notenix.</p>"
@@ -329,7 +352,7 @@ async def assign_due_tests(db, u: User) -> int:
         return 0
     prefix = slot_prefix(u)
     wanted = [f"{prefix}-baseline"]
-    if u.access_kind != "trial" and not is_us(u):
+    if u.access_kind != "trial" and not is_grades(u):
         wanted += [f"{prefix}-ht{n}" for n in range(1, half_term(datetime.utcnow()) + 1)]
     tests = (await db.execute(select(Test).where(Test.ks3_slot.in_(wanted), Test.is_archived == False))).scalars().all()  # noqa: E712
     if not tests:
@@ -341,7 +364,7 @@ async def assign_due_tests(db, u: User) -> int:
         if t.id not in have:
             label = "baseline" if t.ks3_slot.endswith("baseline") else f"half-term {t.ks3_slot.rsplit('ht', 1)[-1]}"
             rows.append({"test_id": t.id, "student_id": u.id, "assigned_by": t.owner_id, "status": "assigned",
-                         "class_label": f"{'Middle School' if is_us(u) else 'KS3'} {year_label(u)} {label}",
+                         "class_label": f"{track(u)['short'] if is_grades(u) else 'KS3'} {year_label(u)} {label}",
                          "created_at": datetime.utcnow()})
     if rows:  # one batched insert instead of a round trip per test
         from sqlalchemy import insert
@@ -365,7 +388,7 @@ async def run_yearly() -> dict:
             done = set(u.ks3_emails or [])
             year_key = f"yearup-{now.year}"
             if now.month >= 9 and year_key not in done:
-                if u.ks3_year < (max(US_GRADES) if is_us(u) else 9):
+                if u.ks3_year < (max(track(u)["grades"]) if is_grades(u) else 9):
                     u.ks3_year += 1
                     stats["promoted"] += 1
                 done.add(year_key)

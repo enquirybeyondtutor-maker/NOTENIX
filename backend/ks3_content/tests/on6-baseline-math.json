@@ -1,0 +1,251 @@
+{
+ "slot": "on6-baseline",
+ "subject": "Math",
+ "title": "Grade 6 Math Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 6",
+ "board": "Ontario curriculum",
+ "questions": [
+  {
+   "topic": "Number",
+   "question": "Which list is in order from least to greatest?",
+   "options": [
+    "0.46, 0.457, 0.45, 0.407",
+    "0.45, 0.407, 0.46, 0.457",
+    "0.407, 0.45, 0.457, 0.46",
+    "0.407, 0.457, 0.45, 0.46"
+   ],
+   "answer": "0.407, 0.45, 0.457, 0.46",
+   "explanation": "Compare place by place: 0.407 < 0.450 < 0.457 < 0.460."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 3/8 written as a percent?",
+   "options": [
+    "37.5%",
+    "38%",
+    "3.8%",
+    "83%"
+   ],
+   "answer": "37.5%",
+   "explanation": "3 ÷ 8 = 0.375, which is 37.5%."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 25% of 360?",
+   "options": [
+    "36",
+    "72",
+    "120",
+    "90"
+   ],
+   "answer": "90",
+   "explanation": "25% is one quarter: 360 ÷ 4 = 90."
+  },
+  {
+   "topic": "Number",
+   "question": "A juice mix uses 2 parts concentrate to 5 parts water. How much water goes with 6 cups of concentrate?",
+   "options": [
+    "9 cups",
+    "15 cups",
+    "12 cups",
+    "30 cups"
+   ],
+   "answer": "15 cups",
+   "explanation": "6 cups is 3 times 2 cups, so use 3 times 5 cups of water: 15 cups."
+  },
+  {
+   "topic": "Number",
+   "question": "A car uses 6 L of fuel to travel 100 km. At the same rate, how much fuel does it use to travel 350 km?",
+   "options": [
+    "18 L",
+    "21 L",
+    "24 L",
+    "35 L"
+   ],
+   "answer": "21 L",
+   "explanation": "350 km is 3.5 times 100 km, so the car uses 3.5 × 6 = 21 L."
+  },
+  {
+   "topic": "Number",
+   "question": "Which temperature is the warmest?",
+   "options": [
+    "−8°C",
+    "−12°C",
+    "−5°C",
+    "−3°C"
+   ],
+   "answer": "−3°C",
+   "explanation": "On a number line, −3 is furthest to the right of these numbers, so it is the greatest (warmest)."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 4.8 × 3?",
+   "options": [
+    "14.4",
+    "12.4",
+    "14.8",
+    "1.44"
+   ],
+   "answer": "14.4",
+   "explanation": "4 × 3 = 12 and 0.8 × 3 = 2.4, so the product is 14.4."
+  },
+  {
+   "topic": "Number",
+   "question": "What is 7.2 ÷ 0.9?",
+   "options": [
+    "0.8",
+    "6.3",
+    "8",
+    "80"
+   ],
+   "answer": "8",
+   "explanation": "Multiply both numbers by 10: 72 ÷ 9 = 8."
+  },
+  {
+   "topic": "Algebra",
+   "question": "What is the value of 5a − 4 when a = 6?",
+   "options": [
+    "2",
+    "30",
+    "26",
+    "52"
+   ],
+   "answer": "26",
+   "explanation": "5a means 5 × a = 30, and 30 − 4 = 26."
+  },
+  {
+   "topic": "Algebra",
+   "question": "Solve 3k = 27.",
+   "options": [
+    "k = 9",
+    "k = 24",
+    "k = 30",
+    "k = 81"
+   ],
+   "answer": "k = 9",
+   "explanation": "Divide both sides by 3: k = 9."
+  },
+  {
+   "topic": "Algebra",
+   "question": "Which value of y makes y + 4 < 10 true?",
+   "options": [
+    "y = 6",
+    "y = 7",
+    "y = 10",
+    "y = 5"
+   ],
+   "answer": "y = 5",
+   "explanation": "y + 4 < 10 means y < 6. Of the choices, only 5 is less than 6."
+  },
+  {
+   "topic": "Coding",
+   "question": "A program sets total = 3. A loop runs 4 times, and each time it doubles total. What is total at the end?",
+   "options": [
+    "11",
+    "48",
+    "24",
+    "96"
+   ],
+   "answer": "48",
+   "explanation": "3 → 6 → 12 → 24 → 48."
+  },
+  {
+   "topic": "Data & probability",
+   "question": "What is the median of 14, 9, 25, 9 and 18?",
+   "options": [
+    "9",
+    "14",
+    "15",
+    "25"
+   ],
+   "answer": "14",
+   "explanation": "In order: 9, 9, 14, 18, 25. The middle value is 14. (The mean is 15 and the mode is 9.)"
+  },
+  {
+   "topic": "Data & probability",
+   "question": "A number cube numbered 1 to 6 is rolled 60 times. About how many times would you expect to roll a 4?",
+   "options": [
+    "4",
+    "6",
+    "15",
+    "10"
+   ],
+   "answer": "10",
+   "explanation": "The probability of a 4 is 1/6, and 1/6 of 60 is 10."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "An L-shaped garden is made of a 6 m by 4 m rectangle joined to a 3 m by 2 m rectangle. What is its total area?",
+   "options": [
+    "30 m²",
+    "24 m²",
+    "15 m²",
+    "36 m²"
+   ],
+   "answer": "30 m²",
+   "explanation": "6 × 4 = 24 m² and 3 × 2 = 6 m². Together: 30 m²."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "What is the volume of a rectangular prism that measures 6 cm by 5 cm by 2 cm?",
+   "options": [
+    "13 cm³",
+    "104 cm³",
+    "60 cm³",
+    "30 cm³"
+   ],
+   "answer": "60 cm³",
+   "explanation": "Volume = length × width × height = 6 × 5 × 2 = 60 cm³. (104 cm² would be its surface area.)"
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "Two angles together make a straight line. One of them is 128°. What is the other?",
+   "options": [
+    "62°",
+    "232°",
+    "52°",
+    "38°"
+   ],
+   "answer": "52°",
+   "explanation": "Angles on a straight line add up to 180°: 180 − 128 = 52°."
+  },
+  {
+   "topic": "Spatial sense",
+   "question": "How many centimetres are in 4.25 m?",
+   "options": [
+    "425",
+    "42.5",
+    "4 250",
+    "4.25"
+   ],
+   "answer": "425",
+   "explanation": "1 m = 100 cm, so 4.25 m = 425 cm."
+  },
+  {
+   "topic": "Financial literacy",
+   "question": "Sam puts $500 in a savings account that pays 3% simple interest per year. How much interest does he earn in 2 years?",
+   "options": [
+    "$15",
+    "$3",
+    "$530",
+    "$30"
+   ],
+   "answer": "$30",
+   "explanation": "3% of 500 dollars is 15 dollars a year, so 2 years earn 30 dollars of interest."
+  },
+  {
+   "topic": "Financial literacy",
+   "question": "Which of these is the best buy (lowest price per litre)?",
+   "options": [
+    "2 L of milk for $4.40",
+    "4 L of milk for $8.60",
+    "1 L of milk for $2.29",
+    "500 mL of milk for $1.15"
+   ],
+   "answer": "4 L of milk for $8.60",
+   "explanation": "Per litre: 8.60 ÷ 4 = 2.15, 4.40 ÷ 2 = 2.20, 2.29, and 1.15 × 2 = 2.30 dollars. The 4 L jug is cheapest per litre."
+  }
+ ]
+}

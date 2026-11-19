@@ -31,7 +31,7 @@ class TrialStartIn(BaseModel):
     parent_email: EmailStr
     agree_terms: bool = False
     source: str | None = None  # landing page, e.g. "kent-grammar"
-    track: str | None = None   # "us" = Notenix Middle School: year_group is the US grade (5-7)
+    track: str | None = None   # a grade track (services/ks3.TRACKS: "us", "on"); year_group is the grade
 
 
 class TrialVerifyIn(BaseModel):
@@ -66,9 +66,10 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
     name = re.sub(r"\s+", " ", data.child_name).strip()[:120]
     if len(name) < 2:
         raise HTTPException(400, "Please enter your child's name.")
-    us = data.track == "us"
-    if us and data.year_group not in ks3.US_GRADES:
-        raise HTTPException(400, "Notenix Middle School is for Grades 5, 6 and 7.")
+    tr = ks3.TRACKS.get(data.track or "")
+    us = tr is not None   # a grade track (US Middle School or Ontario)
+    if us and data.year_group not in tr["grades"]:
+        raise HTTPException(400, f"{tr['product']} is for Grades 5, 6 and 7.")
     if not us and data.year_group not in (6, 7, 8, 9):
         raise HTTPException(400, "Notenix KS3 is for Years 7, 8 and 9 (or Year 6 starting Year 7 next September).")
     if not data.agree_terms:
@@ -89,10 +90,10 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
                  is_verified=True, password_hash="!", needs_activation=True,  # no password until the parent picks one
                  parent_email=email, token_version=0)
         db.add(u)
-    u.ks3_track = "us" if us else None
+    u.ks3_track = data.track if us else None
     u.full_name, u.ks3_year = name, (data.year_group if us else max(7, data.year_group))  # Year 6 works on Year 7 content
     if us:
-        u.billing_currency = "USD"   # Middle School families pay in dollars ($189/yr, pricing.KS3_PRICES)
+        u.billing_currency = tr["currency"]   # USD 189 / CAD 259 a year (pricing.KS3_PRICES)
     ks3.year_set_now(u, starting_next=not us and data.year_group == 6)
     if data.source == "kent-grammar":
         u.ks3_emails = sorted(set(u.ks3_emails or []) | {"src-kent-grammar"})
@@ -102,7 +103,7 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
     u.otp_attempts = 0
     await db.commit()
     try:
-        await send_otp_email(email, name, code, kind="middle" if us else "ks3")
+        await send_otp_email(email, name, code, kind=tr["otp"] if us else "ks3")
     except EmailSendError:
         raise HTTPException(502, EMAIL_FAIL_MSG)
     return _otp_sent_response(email, code)
@@ -143,7 +144,7 @@ async def trial_complete(data: TrialCompleteIn, db: AsyncSession = Depends(get_d
     u.activated_at = u.terms_accepted_at = u.ks3_trial_started_at = u.last_active = now
     u.otp_hash, u.otp_expires_at, u.otp_attempts = None, None, 0
     u.access_kind, u.access_until = "trial", now + timedelta(days=settings.ks3_trial_days)
-    u.terms_price = f"Free {settings.ks3_trial_days}-day {'Middle School' if ks3.is_us(u) else 'KS3'} trial"
+    u.terms_price = f"Free {settings.ks3_trial_days}-day {ks3.track(u)['short'] if ks3.is_grades(u) else 'KS3'} trial"
     u.token_version = (u.token_version or 0) + 1
     u.ks3_emails = sorted(set((u.ks3_emails or []) + ["welcome"]))
     await db.flush()  # one UPDATE for all of the above
@@ -170,22 +171,22 @@ async def preview_email(user_id: int, kind: str, admin: User = Depends(require_a
 
 
 class Ks3AdminIn(BaseModel):
-    year: int | None = None   # 7, 8, 9 (or 5, 6, 7 with track "us"), or None to switch KS3 off
-    track: str | None = None  # "us" = Notenix Middle School
+    year: int | None = None   # 7, 8, 9 (or 5, 6, 7 with a grade track), or None to switch KS3 off
+    track: str | None = None  # services/ks3.TRACKS key: "us" (Middle School) or "on" (Ontario)
 
 
 @router.post("/admin/users/{user_id}")
 async def admin_set_ks3(user_id: int, data: Ks3AdminIn, admin: User = Depends(require_admin), db: AsyncSession = Depends(get_db)):
     """Add Notenix KS3 to a student (e.g. a Beyond Tutors family) or switch it off."""
-    us = data.track == "us" and data.year is not None
-    if us and data.year not in ks3.US_GRADES:
+    us = data.track in ks3.TRACKS and data.year is not None
+    if us and data.year not in ks3.TRACKS[data.track]["grades"]:
         raise HTTPException(400, "Grade must be 5, 6 or 7.")
     if not us and data.year not in (None, 7, 8, 9):
         raise HTTPException(400, "Year must be 7, 8 or 9.")
     u = (await db.execute(select(User).where(User.id == user_id))).scalar_one_or_none()
     if not u or (u.role or "student") != "student":
         raise HTTPException(404, "Student not found")
-    u.ks3_year, u.ks3_track = data.year, ("us" if us else None)
+    u.ks3_year, u.ks3_track = data.year, (data.track if us else None)
     ks3.year_set_now(u)
     assigned = 0
     if data.year:

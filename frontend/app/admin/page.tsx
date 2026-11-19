@@ -35,7 +35,7 @@ interface Row {
   billing_currency?: string;
   price_tier?: "bt" | "normal";
   ks3_year?: number | null;
-  ks3_track?: string | null;   // "us" = Notenix Middle School (grade in ks3_year)
+  ks3_track?: string | null;   // "us" = Middle School, "on" = Ontario (grade in ks3_year)
   notify_email?: string | null;
   help_plan?: string | null;
   help_until?: string | null;
@@ -317,11 +317,11 @@ export default function AdminPage() {
   const changeKs3 = async (row: Row, value: string) => {
     setBusy(row.id);
     try {
-      // "us6" = Middle School Grade 6; "7" = KS3 Year 7.
-      const us = value.startsWith("us");
-      const year = value ? Number(us ? value.slice(2) : value) : null;
-      const { data } = await adminAPI.setKs3(row.id, year, us ? "us" : undefined);
-      const label = us ? `Middle School Grade ${year}` : `KS3 Year ${year}`;
+      // "us6" = Middle School Grade 6, "on6" = Ontario Grade 6, "7" = KS3 Year 7.
+      const tr = value.startsWith("us") ? "us" : value.startsWith("on") ? "on" : undefined;
+      const year = value ? Number(tr ? value.slice(2) : value) : null;
+      const { data } = await adminAPI.setKs3(row.id, year, tr);
+      const label = tr ? `${tr === "us" ? "Middle School" : "Ontario"} Grade ${year}` : `KS3 Year ${year}`;
       if (value && data.tests_assigned) alert(`${row.full_name} is on ${label}: ${data.tests_assigned} test(s) and the notes were added.`);
       load();
     } catch (e: any) {
@@ -513,7 +513,7 @@ export default function AdminPage() {
                         </select>
                       )}
                       {u.role === "student" && !u.is_admin && (
-                        <select value={u.ks3_year ? `${u.ks3_track === "us" ? "us" : ""}${u.ks3_year}` : ""} disabled={busy === u.id}
+                        <select value={u.ks3_year ? `${u.ks3_track || ""}${u.ks3_year}` : ""} disabled={busy === u.id}
                           onChange={(e) => changeKs3(u, e.target.value)} title="Notenix KS3: tests, notes, homework help, monthly parent report"
                           className="mt-1 block rounded-md border border-line bg-white px-1.5 py-0.5 text-xs text-ink outline-none focus:border-brand-500">
                           <option value="">KS3: off</option>
@@ -523,6 +523,9 @@ export default function AdminPage() {
                           <option value="us5">Middle School: Grade 5</option>
                           <option value="us6">Middle School: Grade 6</option>
                           <option value="us7">Middle School: Grade 7</option>
+                          <option value="on5">Ontario: Grade 5</option>
+                          <option value="on6">Ontario: Grade 6</option>
+                          <option value="on7">Ontario: Grade 7</option>
                         </select>
                       )}
                       {u.role === "student" && !u.is_admin && (
