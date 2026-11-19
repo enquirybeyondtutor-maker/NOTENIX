@@ -5,6 +5,7 @@ starts a timed test and never submits, this sweep finalizes it once the time is 
 (plus a short grace) so the test doesn't stay open forever and the teacher gets a
 result. Any autosaved draft answers are used; written tests go to the marking queue.
 """
+import asyncio
 from datetime import datetime, timedelta
 from sqlalchemy import select
 from database import SessionLocal
@@ -13,11 +14,35 @@ from services.grading import grade_mcq, estimate_grade, _pending_written_results
 
 _GRACE_SECONDS = 60
 
+# The sweep sleeps until the next sitting's deadline instead of polling the database every
+# minute. Polling kept Neon awake around the clock (it only suspends after 5 idle minutes)
+# and burned the free compute allowance. Starting a sitting calls nudge() so the sweep
+# re-plans its sleep around the new deadline.
+_wake = asyncio.Event()
 
-async def auto_submit_expired() -> int:
-    """Finalize timed sittings whose time has elapsed with no submission. Returns count."""
+
+def nudge() -> None:
+    _wake.set()
+
+
+async def wait_for_next(next_deadline: datetime | None, max_seconds: float = 3600) -> None:
+    """Sleep until next_deadline (capped at max_seconds), or until nudge() is called."""
+    delay = max_seconds
+    if next_deadline is not None:
+        delay = min(max_seconds, max(5.0, (next_deadline - datetime.utcnow()).total_seconds() + 1))
+    _wake.clear()
+    try:
+        await asyncio.wait_for(_wake.wait(), timeout=delay)
+    except asyncio.TimeoutError:
+        pass
+
+
+async def auto_submit_expired() -> tuple[int, datetime | None]:
+    """Finalize timed sittings whose time has elapsed with no submission.
+    Returns (count finalized, earliest deadline still pending or None)."""
     now = datetime.utcnow()
     finalized = 0
+    next_deadline = None
     async with SessionLocal() as db:
         rows = (await db.execute(
             select(TestAssignment, Test)
@@ -33,6 +58,7 @@ async def auto_submit_expired() -> int:
         for assignment, test in rows:
             deadline = assignment.started_at + timedelta(minutes=test.duration_minutes, seconds=_GRACE_SECONDS)
             if now <= deadline:
+                next_deadline = deadline if next_deadline is None else min(next_deadline, deadline)
                 continue
             # guard against a race with a real submission
             existing = (await db.execute(
@@ -67,4 +93,4 @@ async def auto_submit_expired() -> int:
 
         if rows:
             await db.commit()
-    return finalized
+    return finalized, next_deadline
