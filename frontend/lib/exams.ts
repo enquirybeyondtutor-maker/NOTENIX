@@ -745,7 +745,7 @@ export function requestHref(slug: string): string {
  *  and pay, all on /revision/checkout. Slugs that are a single Notenix course (services/courses.py)
  *  open with it chosen; IGCSE covers several subjects, so the student picks one there. */
 const COURSE_FOR_SLUG: Record<string, string> = {
-  sat: "sat", esat: "esat", tmua: "tmua", "ap-calc-ab": "ap-calc-ab", "a-level-maths": "a-level-maths",
+  sat: "sat", esat: "esat", tmua: "tmua", tara: "tara", "ap-calc-ab": "ap-calc-ab", "a-level-maths": "a-level-maths",
   "gcse-maths": "gcse-maths", "gcse-biology": "gcse-biology", "gcse-chemistry": "gcse-chemistry", "gcse-physics": "gcse-physics",
 };
 
