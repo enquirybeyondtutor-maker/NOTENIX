@@ -37,12 +37,14 @@ export default function Ks3TrialPage() {
   const [cooldown, setCooldown] = useState(0);
 
   const [source, setSource] = useState<string | undefined>();
+  const [payNext, setPayNext] = useState(false);   // ?pay=1 from "Enrol & pay": payment follows sign-up
   useEffect(() => {  // ?year=6&src=kent-grammar from the Kent grammar page
     const q = new URLSearchParams(window.location.search);
     const y = Number(q.get("year"));
     if ([6, 7, 8, 9].includes(y)) setYear(y);
     const src = q.get("src");
     if (src) setSource(src.slice(0, 40));
+    if (q.get("pay") === "1") setPayNext(true);
   }, []);
 
   useEffect(() => {
@@ -138,10 +140,22 @@ export default function Ks3TrialPage() {
                 <div className="mt-1 font-mono text-base font-semibold text-ink">{loginId}</div>
                 <div className="mt-1 text-xs text-ink-muted">Use it with the password you just chose. We&apos;ve emailed this user ID to you too.</div>
               </div>
-              <p className="mt-4 text-sm text-ink-muted">Start with the baseline tests: they&apos;re what your day-7 report is built on.</p>
-              <Button size="lg" className="mt-6 w-full" onClick={() => router.push("/tests")}>
-                Start the baseline tests <ArrowRight size={16} />
-              </Button>
+              {payNext ? (
+                <>
+                  <p className="mt-4 text-sm text-ink-muted">Next, pay for the year. {childName.split(" ")[0]} can use Notenix KS3 straight away while we check the payment.</p>
+                  <Button size="lg" className="mt-6 w-full" onClick={() => router.push("/ks3/continue")}>
+                    Continue to payment <ArrowRight size={16} />
+                  </Button>
+                  <Button variant="secondary" className="mt-3 w-full" onClick={() => router.push("/tests")}>Start the baseline tests first</Button>
+                </>
+              ) : (
+                <>
+                  <p className="mt-4 text-sm text-ink-muted">Start with the baseline tests: they&apos;re what your day-7 report is built on.</p>
+                  <Button size="lg" className="mt-6 w-full" onClick={() => router.push("/tests")}>
+                    Start the baseline tests <ArrowRight size={16} />
+                  </Button>
+                </>
+              )}
             </div>
           ) : (
             <>

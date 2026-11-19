@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Landmark, CheckCircle2, Lock, ShieldCheck } from "lucide-react";
-import { paymentsAPI } from "@/lib/api";
+import { paymentsAPI, saveAuth } from "@/lib/api";
+import { ENGINE_EXAMS } from "@/lib/examApi";
 import { coursesAPI, type Course } from "@/lib/coursesApi";
 import CoursePicker from "@/components/CoursePicker";
 import { safeReturnTo } from "@/lib/utils";
@@ -19,6 +20,14 @@ import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName
 const BUNDLE = "gcse-bundle";
 const BUNDLE_NAME = "GCSE Maths, Biology, Chemistry and Physics";
 
+/** Where a new student starts once their course is open (on its trial while we check the payment). */
+function startHref(course: string): string {
+  if (course === "sat") return "/sat/practice";
+  if (course === BUNDLE) return "/gcse-maths/practice";
+  if ((ENGINE_EXAMS as readonly string[]).includes(course)) return `/${course}/practice`;
+  return "/dashboard";
+}
+
 export default function RevisionCheckout() {
   const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string; standard_price?: number } | null>(null);
   const [returnTo, setReturnTo] = useState<string | null>(null);
@@ -26,7 +35,7 @@ export default function RevisionCheckout() {
   const [catalogue, setCatalogue] = useState<Course[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [done, setDone] = useState<{ reference: string; login_id?: string } | null>(null);
+  const [done, setDone] = useState<{ reference: string; login_id?: string; signed_in?: boolean } | null>(null);
   const country = useCountry();
   const rates = useRates();
 
@@ -57,7 +66,8 @@ export default function RevisionCheckout() {
     setBusy(true); setError("");
     try {
       const { data } = await paymentsAPI.revisionCheckout(form);
-      setDone({ reference: data.reference, login_id: data.login_id });
+      if (data.access_token) saveAuth(data.access_token, data.user);   // the course is open on a trial already
+      setDone({ reference: data.reference, login_id: data.login_id, signed_in: !!data.access_token });
     } catch (err: any) {
       setError(err.response?.data?.detail || "Couldn't send that. Please try again.");
     } finally {
@@ -86,7 +96,9 @@ export default function RevisionCheckout() {
           <h1 className="mt-4 text-2xl font-bold text-ink">Payment received for checking</h1>
           <p className="mt-2 text-sm text-ink-muted">
             Reference <b className="font-mono text-ink">{done.reference}</b>. We match it to our bank account, usually within a few hours,
-            then email you. {courseName || "Your course"} {form.course === BUNDLE ? "switch" : "switches"} on for a year as soon as it&apos;s confirmed.
+            then email you. {done.signed_in
+              ? <>You can start {courseName || "your course"} now; it becomes a full year as soon as the payment is confirmed.</>
+              : <>{courseName || "Your course"} {form.course === BUNDLE ? "switch" : "switches"} on for a year as soon as it&apos;s confirmed.</>}
           </p>
           {done.login_id && (
             <div className="mx-auto mt-5 max-w-sm rounded-xl border border-brand-200 bg-brand-50/60 p-4 text-left text-sm">
@@ -97,7 +109,9 @@ export default function RevisionCheckout() {
               <p className="mt-2 text-xs text-ink-muted">Save this user ID: you sign in with it, not your email. It&apos;s also in the confirmation we email to {form.email} once your payment is checked.</p>
             </div>
           )}
-          <Button href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`} className="mt-6">Go to sign in</Button>
+          {done.signed_in
+            ? <Button href={returnTo || startHref(form.course)} className="mt-6">Start {courseName || "your course"} now</Button>
+            : <Button href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`} className="mt-6">Go to sign in</Button>}
         </div>
       </PageContainer>
     );
@@ -185,7 +199,7 @@ export default function RevisionCheckout() {
         {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         <Button type="submit" loading={busy} className="w-full"><Lock size={15} /> I&apos;ve paid {price} · create my account</Button>
         <p className="flex items-center justify-center gap-1.5 text-xs text-ink-muted">
-          <ShieldCheck size={13} /> We never ask for card numbers or bank passwords. Access starts once we confirm your payment.
+          <ShieldCheck size={13} /> We never ask for card numbers or bank passwords. You can start your course straight away; it becomes a full year once we confirm your payment.
         </p>
       </form>
     </PageContainer>

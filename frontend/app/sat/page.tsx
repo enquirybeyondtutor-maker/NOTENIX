@@ -63,6 +63,7 @@ export default function SatLanding() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href="/sat/diagnostic" size="lg">Take the free diagnostic <ArrowRight size={18} /></Button>
               <Button href="/sat/diagnostic" size="lg" variant="secondary">Start a free week</Button>
+              <Button href="/revision/checkout?course=sat" size="lg" variant="secondary">Enrol &amp; pay</Button>
             </div>
             <p className="mt-3 text-sm text-ink-subtle">No sign-up for the diagnostic · Free for 7 days after · No card needed</p>
             <p className="mt-2 text-sm"><a href="/sat/skills" className="font-medium text-brand-600 hover:underline">Browse all 30 SAT skills with free practice questions</a></p>
@@ -116,6 +117,7 @@ export default function SatLanding() {
                   .map((x) => <li key={x} className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-emerald-600" /> {x}</li>)}
               </ul>
               <Button href="/sat/diagnostic" className="mt-8 w-full">Start with the free diagnostic <ArrowRight size={16} /></Button>
+              <Button href="/revision/checkout?course=sat" variant="secondary" className="mt-3 w-full">Enrol &amp; pay now</Button>
               <p className="mt-3 text-center text-xs text-ink-subtle">Pay once by bank transfer from any country. Nothing renews by itself.</p>
             </div>
           </div>
