@@ -671,3 +671,16 @@ export function requestHref(slug: string): string {
   if (r.subject) qs.set("subject", r.subject);
   return `/request?${qs.toString()}`;
 }
+
+/** "Enrol & pay": create the account, start the course (a trial until the payment is checked)
+ *  and pay, all on /revision/checkout. Slugs that are a single Notenix course (services/courses.py)
+ *  open with it chosen; IGCSE covers several subjects, so the student picks one there. */
+const COURSE_FOR_SLUG: Record<string, string> = {
+  sat: "sat", esat: "esat", tmua: "tmua", "ap-calc-ab": "ap-calc-ab", "a-level-maths": "a-level-maths",
+  "gcse-maths": "gcse-maths", "gcse-biology": "gcse-biology", "gcse-chemistry": "gcse-chemistry", "gcse-physics": "gcse-physics",
+};
+
+export function enrolHref(slug: string): string {
+  const course = COURSE_FOR_SLUG[slug];
+  return course ? `/revision/checkout?course=${course}` : "/revision/checkout";
+}

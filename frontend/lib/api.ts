@@ -193,7 +193,7 @@ export const paymentsAPI = {
   ks3Info: () => api.get("/payments/ks3-checkout"),
   ks3Checkout: (data: { login_id: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/ks3-checkout", data),
-  revisionCheckout: (data: { full_name: string; email: string; password: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+  revisionCheckout: (data: { full_name: string; email: string; password: string; course?: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/revision-checkout", data),
   adminList: (status?: string) => api.get("/payments/admin", { params: status ? { status } : {} }),
   review: (id: number, approve: boolean) => api.post(`/payments/admin/${id}/review`, { approve }),

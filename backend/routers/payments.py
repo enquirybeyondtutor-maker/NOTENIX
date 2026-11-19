@@ -11,8 +11,8 @@ from sqlalchemy import select
 
 from config import settings
 from database import get_db
-from models import User, Payment, TestRequest
-from security import get_current_user, require_admin, hash_password, verify_password
+from models import User, Payment, TestRequest, Enrolment
+from security import get_current_user, require_admin, hash_password, verify_password, create_token
 from services.email import send_payment_result, notify_admins
 from services import courses as course_svc
 
@@ -241,6 +241,14 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
         db.add(user)
     user.access_kind, user.access_until = "pending", now  # locked until the payment is confirmed
     await db.flush()
+    # Enrol & pay: with a course chosen, the student starts straight away on a trial of it
+    # (settings.trial_days); confirming the payment turns it into a paid year, rejecting it ends it.
+    if data.course:
+        for c in _checkout_courses(data.course):
+            e = (await db.execute(select(Enrolment).where(Enrolment.user_id == user.id,
+                                                          Enrolment.course == c))).scalar_one_or_none()
+            if not (e and e.kind == "paid" and (e.until is None or e.until > now)):
+                await course_svc.grant(user, c, "trial", db)
     p = Payment(
         user_id=user.id, purpose="revision", reference=f"NX-V{user.id}", course=data.course or None,
         amount=price["amount"], currency=price["currency"],
@@ -258,7 +266,15 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
         f"via {p.paid_via or 'bank transfer'}. Note: {p.payer_note or '-'}",
         "/admin/requests",
     )
-    return {**_payment_row(p), "login_id": user.email}
+    out = {**_payment_row(p), "login_id": user.email}
+    if data.course:   # signed straight in: the course is already open on its trial
+        from routers.auth import _user_dict
+        out.update(access_token=create_token(user.id, user.token_version or 0), user=_user_dict(user))
+    return out
+
+
+def _checkout_courses(course: str) -> list[str]:
+    return course_svc.bundle_courses(course) if course_svc.is_bundle(course) else [course]
 
 
 # ── Notenix KS3 (£149/yr): a trial family continues by bank transfer ──────────
@@ -411,6 +427,17 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         # A bundle payment switches on every course in the bundle.
         for c in (course_svc.bundle_courses(p.course) if course_svc.is_bundle(p.course) else [p.course]):
             await course_svc.grant(user, c, "year", db, payment_id=p.id)
+    if not data.approve and p.purpose == "revision" and p.course:
+        # The trial that started at checkout ends now (kept, not deleted: a student with no
+        # enrolments at all would be unrestricted).
+        now = datetime.utcnow()
+        for c in _checkout_courses(p.course):
+            e = (await db.execute(select(Enrolment).where(Enrolment.user_id == user.id,
+                                                          Enrolment.course == c))).scalar_one_or_none()
+            if e and e.kind == "trial":
+                e.until = now
+        await db.flush()
+        course_svc.sync_access(user, await course_svc.enrolments(user.id, db))
     if data.approve and p.purpose in ("annual", "doubt", "plus"):
         from services import doubt
         doubt.set_plan(user, p.purpose)

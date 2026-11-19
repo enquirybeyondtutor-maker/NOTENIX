@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, ClipboardCheck, Send, PenLine, UserCheck } from "lucide-react";
-import { EXAMS, EXAM_BY_SLUG, requestHref } from "@/lib/exams";
+import { EXAMS, EXAM_BY_SLUG, requestHref, enrolHref } from "@/lib/exams";
 import { SITE } from "@/lib/site";
 import SampleQuiz from "@/components/SampleQuiz";
 import { Button } from "@/components/ui/Button";
@@ -42,6 +42,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
   if (!exam) notFound();
   const url = `${SITE}/${exam.slug}`;
   const request = requestHref(exam.slug);
+  const enrol = enrolHref(exam.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -101,7 +102,13 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
             <Button href={request} variant="secondary" size="lg">
               Get a free marked mock
             </Button>
+            <Button href={enrol} variant="secondary" size="lg">
+              Enrol &amp; pay
+            </Button>
           </div>
+          <p className="mt-3 text-sm text-ink-muted">
+            Ready to start? <Link href={enrol} className="font-medium text-brand-600 hover:underline">Create your account, enrol in {exam.name} and pay</Link>: you can start straight away.
+          </p>
           <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {exam.facts.map((f) => (
               <div key={f.label} className="rounded-xl border border-line bg-white px-4 py-3">
@@ -143,6 +150,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
           </ul>
           <Button href={request} className="mt-6 w-full">Get your first test free</Button>
           <p className="mt-2 text-center text-xs text-ink-subtle">One free tutor-marked test per student. More tests with a Notenix subscription.</p>
+          <Button href={enrol} variant="secondary" className="mt-4 w-full">Enrol &amp; pay for {exam.name}</Button>
         </div>
       </section>
 

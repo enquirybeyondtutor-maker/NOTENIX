@@ -11,6 +11,8 @@ export const metadata: Metadata = {
 };
 
 const TRIAL = "/ks3/trial";
+// Enrol & pay: the same sign-up (child account, free week starts), then straight on to payment.
+const ENROL = "/ks3/trial?pay=1";
 
 const FREE_WEEK = [
   { icon: ClipboardCheck, title: "Baseline tests", desc: "Maths, Science and English, about 30 minutes each, marked instantly." },
@@ -87,6 +89,7 @@ export default function Ks3Landing() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={TRIAL} size="lg">Start a free week <ArrowRight size={16} /></Button>
               <Button href="#plans" size="lg" variant="secondary">See the plan</Button>
+              <Button href={ENROL} size="lg" variant="secondary">Enrol &amp; pay</Button>
             </div>
             <p className="mt-3 text-sm text-ink-subtle">Free for 7 days · no card · ends by itself</p>
           </div>
@@ -170,6 +173,7 @@ export default function Ks3Landing() {
               ))}
             </ul>
             <Button href={TRIAL} className="mt-8 w-full">Try it free first <ArrowRight size={16} /></Button>
+            <Button href={ENROL} variant="secondary" className="mt-3 w-full">Enrol &amp; pay now</Button>
             <a href="/ks3/continue" className="mt-3 text-center text-sm font-medium text-brand-600 hover:underline">Already had your free week? Continue here</a>
           </div>
         </div>
