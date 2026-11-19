@@ -124,6 +124,7 @@ def _user_dict(u: User) -> dict:
         "subscription": _subscription_quick(u),
         "bt_student": _is_bt(u),   # account issued on a Beyond Tutors domain (BT rate, invoiced by BT)
         "ks3_year": getattr(u, "ks3_year", None),
+        "ks3_track": getattr(u, "ks3_track", None),   # "us" = Notenix Middle School (grade in ks3_year)
         "notify_email": getattr(u, "notify_email", None),
         "help_plan": getattr(u, "help_plan", None) if doubt.live(u) else None,
         "help_until": u.help_until.isoformat() if getattr(u, "help_until", None) else None,

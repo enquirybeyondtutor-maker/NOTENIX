@@ -1,0 +1,251 @@
+{
+ "slot": "g5-baseline",
+ "subject": "English Language Arts",
+ "title": "Grade 5 English Language Arts Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 5",
+ "board": "Common Core",
+ "questions": [
+  {
+   "topic": "Inference",
+   "question": "Read the passage.\n\n\"Leo had practiced the piano piece for weeks, but when he walked onto the stage his fingers felt like frozen sticks. He looked out at the rows of faces and spotted his grandmother in the front row. She gave him a small nod, the same nod she gave him every Sunday when he played for her in her kitchen. Leo took a slow breath, set his hands on the keys, and began. The first notes wobbled, but by the middle of the piece the music was carrying him along like a boat on a calm river. When he finished, the applause sounded far away, and all he could see was his grandmother's proud smile.\"\n\nHow does Leo feel when he first walks onto the stage?",
+   "options": [
+    "bored",
+    "nervous",
+    "angry",
+    "proud"
+   ],
+   "answer": "nervous",
+   "explanation": "His fingers 'felt like frozen sticks', a sign of nerves. He only relaxes once he sees his grandmother and starts playing."
+  },
+  {
+   "topic": "Figurative language",
+   "question": "Read the passage.\n\n\"Leo had practiced the piano piece for weeks, but when he walked onto the stage his fingers felt like frozen sticks. He looked out at the rows of faces and spotted his grandmother in the front row. She gave him a small nod, the same nod she gave him every Sunday when he played for her in her kitchen. Leo took a slow breath, set his hands on the keys, and began. The first notes wobbled, but by the middle of the piece the music was carrying him along like a boat on a calm river. When he finished, the applause sounded far away, and all he could see was his grandmother's proud smile.\"\n\nThe phrase 'his fingers felt like frozen sticks' is an example of",
+   "options": [
+    "a metaphor",
+    "personification",
+    "alliteration",
+    "a simile"
+   ],
+   "answer": "a simile",
+   "explanation": "It compares two things using 'like', which makes it a simile."
+  },
+  {
+   "topic": "Inference",
+   "question": "Read the passage.\n\n\"Leo had practiced the piano piece for weeks, but when he walked onto the stage his fingers felt like frozen sticks. He looked out at the rows of faces and spotted his grandmother in the front row. She gave him a small nod, the same nod she gave him every Sunday when he played for her in her kitchen. Leo took a slow breath, set his hands on the keys, and began. The first notes wobbled, but by the middle of the piece the music was carrying him along like a boat on a calm river. When he finished, the applause sounded far away, and all he could see was his grandmother's proud smile.\"\n\nWhy does his grandmother's nod help Leo?",
+   "options": [
+    "It reminds him of playing for her at home, where he feels calm.",
+    "It tells him which piece to play.",
+    "It shows she wants him to stop.",
+    "It means the audience is leaving."
+   ],
+   "answer": "It reminds him of playing for her at home, where he feels calm.",
+   "explanation": "The nod is 'the same nod she gave him every Sunday' in her kitchen, so it brings back the feeling of playing safely at home."
+  },
+  {
+   "topic": "Theme",
+   "question": "Read the passage.\n\n\"Leo had practiced the piano piece for weeks, but when he walked onto the stage his fingers felt like frozen sticks. He looked out at the rows of faces and spotted his grandmother in the front row. She gave him a small nod, the same nod she gave him every Sunday when he played for her in her kitchen. Leo took a slow breath, set his hands on the keys, and began. The first notes wobbled, but by the middle of the piece the music was carrying him along like a boat on a calm river. When he finished, the applause sounded far away, and all he could see was his grandmother's proud smile.\"\n\nWhich sentence best states a theme of the passage?",
+   "options": [
+    "Practicing music is a waste of time.",
+    "Music is more important than family.",
+    "Support from someone you love can help you face your fears.",
+    "It is better to avoid performing in public."
+   ],
+   "answer": "Support from someone you love can help you face your fears.",
+   "explanation": "Leo's fear fades after he sees his grandmother's nod, and her proud smile is what he notices at the end."
+  },
+  {
+   "topic": "Main idea",
+   "question": "Read the passage.\n\n\"Honeybees live in large groups called colonies. Each colony has one queen, who lays all the eggs. Most of the bees are worker bees. Workers have many jobs: some clean the hive, some feed the young bees, and others fly out to collect nectar and pollen from flowers. As bees move from flower to flower, pollen sticks to their fuzzy bodies and is carried to the next flower. This helps plants make seeds and fruit. In fact, many of the fruits and vegetables people eat depend on bees. Without honeybees, farmers would have a much harder time growing food.\"\n\nWhat is the main idea of the passage?",
+   "options": [
+    "Queen bees are the most important bees.",
+    "Bees have fuzzy bodies.",
+    "Honeybees live and work together, and their work helps plants and people.",
+    "Farmers grow fruits and vegetables."
+   ],
+   "answer": "Honeybees live and work together, and their work helps plants and people.",
+   "explanation": "The passage describes how a colony works and then explains how bees' work helps plants grow food for people. The other choices are small details."
+  },
+  {
+   "topic": "Key details",
+   "question": "Read the passage.\n\n\"Honeybees live in large groups called colonies. Each colony has one queen, who lays all the eggs. Most of the bees are worker bees. Workers have many jobs: some clean the hive, some feed the young bees, and others fly out to collect nectar and pollen from flowers. As bees move from flower to flower, pollen sticks to their fuzzy bodies and is carried to the next flower. This helps plants make seeds and fruit. In fact, many of the fruits and vegetables people eat depend on bees. Without honeybees, farmers would have a much harder time growing food.\"\n\nAccording to the passage, what do worker bees do?",
+   "options": [
+    "They clean the hive, feed the young bees, and collect nectar and pollen.",
+    "They lay all the eggs.",
+    "They grow fruits and vegetables.",
+    "They plant new flowers."
+   ],
+   "answer": "They clean the hive, feed the young bees, and collect nectar and pollen.",
+   "explanation": "The passage lists the workers' jobs. Laying eggs is the queen's job."
+  },
+  {
+   "topic": "Text structure",
+   "question": "Read the passage.\n\n\"Honeybees live in large groups called colonies. Each colony has one queen, who lays all the eggs. Most of the bees are worker bees. Workers have many jobs: some clean the hive, some feed the young bees, and others fly out to collect nectar and pollen from flowers. As bees move from flower to flower, pollen sticks to their fuzzy bodies and is carried to the next flower. This helps plants make seeds and fruit. In fact, many of the fruits and vegetables people eat depend on bees. Without honeybees, farmers would have a much harder time growing food.\"\n\nHow is the second half of the passage mainly organized?",
+   "options": [
+    "compare and contrast",
+    "the order of a bee's life",
+    "question and answer",
+    "cause and effect"
+   ],
+   "answer": "cause and effect",
+   "explanation": "It explains a chain of causes and effects: bees carry pollen, which helps plants make fruit, which people depend on."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "Read the passage.\n\n\"Honeybees live in large groups called colonies. Each colony has one queen, who lays all the eggs. Most of the bees are worker bees. Workers have many jobs: some clean the hive, some feed the young bees, and others fly out to collect nectar and pollen from flowers. As bees move from flower to flower, pollen sticks to their fuzzy bodies and is carried to the next flower. This helps plants make seeds and fruit. In fact, many of the fruits and vegetables people eat depend on bees. Without honeybees, farmers would have a much harder time growing food.\"\n\nIn the passage, what does the word 'colonies' mean?",
+   "options": [
+    "kinds of flowers",
+    "large groups that live together",
+    "bee stings",
+    "farms"
+   ],
+   "answer": "large groups that live together",
+   "explanation": "The first sentence explains it: honeybees 'live in large groups called colonies.'"
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence uses the correct verb tense?",
+   "options": [
+    "Yesterday, we walk to the park.",
+    "Yesterday, we walked to the park.",
+    "Yesterday, we will walk to the park.",
+    "Yesterday, we walking to the park."
+   ],
+   "answer": "Yesterday, we walked to the park.",
+   "explanation": "'Yesterday' tells us the action is in the past, so the past tense 'walked' is correct."
+  },
+  {
+   "topic": "Punctuation",
+   "question": "Which sentence uses commas correctly?",
+   "options": [
+    "We bought, apples bananas and grapes.",
+    "We bought apples bananas, and, grapes.",
+    "We, bought apples, bananas and grapes.",
+    "We bought apples, bananas, and grapes."
+   ],
+   "answer": "We bought apples, bananas, and grapes.",
+   "explanation": "Commas separate the items in a list: apples, bananas, and grapes."
+  },
+  {
+   "topic": "Punctuation",
+   "question": "Which sentence correctly uses a comma after an introductory word?",
+   "options": [
+    "Yes, I would like to come.",
+    "Yes I, would like to come.",
+    "Yes I would, like to come.",
+    "Yes I would like, to come."
+   ],
+   "answer": "Yes, I would like to come.",
+   "explanation": "An introductory word such as 'yes' is followed by a comma."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which word best completes the sentence? 'I wanted to play outside, ___ it was raining.'",
+   "options": [
+    "and",
+    "so",
+    "but",
+    "because"
+   ],
+   "answer": "but",
+   "explanation": "'But' shows a contrast between wanting to play outside and the rain stopping it."
+  },
+  {
+   "topic": "Word parts",
+   "question": "What does the prefix 'mis-' mean in the word 'misunderstand'?",
+   "options": [
+    "again",
+    "before",
+    "wrongly",
+    "very"
+   ],
+   "answer": "wrongly",
+   "explanation": "'Mis-' means wrongly or badly, so 'misunderstand' means to understand wrongly."
+  },
+  {
+   "topic": "Word parts",
+   "question": "Which word means 'able to be seen'?",
+   "options": [
+    "visible",
+    "invisible",
+    "vision",
+    "visitor"
+   ],
+   "answer": "visible",
+   "explanation": "The root 'vis' means see and the suffix '-ible' means able to be. 'Invisible' means not able to be seen."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "Which word is closest in meaning to 'enormous'?",
+   "options": [
+    "tiny",
+    "noisy",
+    "ancient",
+    "huge"
+   ],
+   "answer": "huge",
+   "explanation": "'Enormous' means very big, like 'huge'."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "Which word is the opposite of 'generous'?",
+   "options": [
+    "kind",
+    "selfish",
+    "giving",
+    "friendly"
+   ],
+   "answer": "selfish",
+   "explanation": "A generous person shares; a selfish person does not."
+  },
+  {
+   "topic": "Figurative language",
+   "question": "'The wind whispered through the trees' is an example of",
+   "options": [
+    "a simile",
+    "personification",
+    "hyperbole",
+    "onomatopoeia"
+   ],
+   "answer": "personification",
+   "explanation": "Whispering is something people do. Giving a human action to the wind is personification."
+  },
+  {
+   "topic": "Figurative language",
+   "question": "'I have told you a million times!' is an example of",
+   "options": [
+    "a simile",
+    "personification",
+    "a metaphor",
+    "hyperbole"
+   ],
+   "answer": "hyperbole",
+   "explanation": "Hyperbole is exaggeration for effect. Nobody has really said something a million times."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which of these is a complete sentence?",
+   "options": [
+    "The dog barked at the mail carrier.",
+    "Barking at the mail carrier.",
+    "When the dog barked.",
+    "The dog at the mail carrier."
+   ],
+   "answer": "The dog barked at the mail carrier.",
+   "explanation": "A complete sentence has a subject (the dog) and a verb (barked) and expresses a complete thought."
+  },
+  {
+   "topic": "Spelling",
+   "question": "Which word is spelled correctly?",
+   "options": [
+    "beautifull",
+    "beutiful",
+    "beautiful",
+    "beatiful"
+   ],
+   "answer": "beautiful",
+   "explanation": "Beautiful: b-e-a-u-t-i-f-u-l, with one l at the end."
+  }
+ ]
+}

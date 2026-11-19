@@ -195,6 +195,11 @@ def _content(full_name: str, code: str, kind: str = "verify") -> tuple[str, str,
         heading, pre = f"Start {child}'s free week", "Enter this code on notenix.com to continue."
         lead = f"Enter this code on notenix.com to confirm your email and start {child}'s free Notenix KS3 week."
         ignore, audience = "If you didn't ask for this, you can ignore this email; nothing will be set up.", "signup"
+    elif kind == "middle":
+        subject = f"{code} is your code to start {child}'s free week"
+        heading, pre = f"Start {child}'s free week", "Enter this code on notenix.com to continue."
+        lead = f"Enter this code on notenix.com to confirm your email and start {child}'s free Notenix Middle School week."
+        ignore, audience = "If you didn't ask for this, you can ignore this email; nothing will be set up.", "signup"
     elif kind == "activate":
         subject = f"{code} is your Notenix activation code"
         heading, pre = f"Activate {child}'s Notenix account", "Enter this code to finish setting up the account."

@@ -277,6 +277,8 @@ async def migrate_note_kinds():
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS notify_email_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_trial_started_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_emails JSON"))
+            await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS ks3_track VARCHAR(8)"))
+            await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS ks3_track VARCHAR(8)"))
             await conn.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS ks3_slot VARCHAR(20)"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS kind VARCHAR(20) DEFAULT 'notes'"))
             await conn.execute(text("ALTER TABLE class_notes ADD COLUMN IF NOT EXISTS due_at TIMESTAMP"))
@@ -303,6 +305,7 @@ async def migrate_note_kinds():
             if "price_tier" not in ucols:
                 await conn.execute(text("ALTER TABLE users ADD COLUMN price_tier VARCHAR(10)"))
             for col, typ in (("ks3_year", "INTEGER"), ("ks3_trial_started_at", "TIMESTAMP"), ("ks3_emails", "JSON"),
+                             ("ks3_track", "VARCHAR(8)"),
                              ("notify_email", "VARCHAR(255)"), ("notify_email_at", "TIMESTAMP"),
                              ("help_plan", "VARCHAR(20)"), ("help_until", "TIMESTAMP"), ("sg_level", "VARCHAR(20)"),
                              ("help_emails", "JSON"), ("sat_since", "TIMESTAMP"), ("sat_test_date", "VARCHAR(10)"),
@@ -321,6 +324,8 @@ async def migrate_note_kinds():
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN class_date VARCHAR(10)"))
             if "ks3_year" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_year INTEGER"))
+            if "ks3_track" not in cols:
+                await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_track VARCHAR(8)"))
             if "ks3_key" not in cols:
                 await conn.execute(text("ALTER TABLE class_notes ADD COLUMN ks3_key VARCHAR(60)"))
             if "solution_name" not in cols:

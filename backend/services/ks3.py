@@ -1,4 +1,6 @@
 """Notenix KS3: free-trial parent emails and the progress report ("Beat the Year 7 dip").
+The same machinery runs Notenix Middle School (US Grades 5-7, user.ks3_track == "us"): the grade
+is kept in ks3_year, its content uses g<grade>-... slots, and the wording below follows the product.
 
 Sequence (days after the trial starts): 0 welcome · 3 check-in · 5 ending soon · 7 report.
 Everything here is plain inline-styled HTML so it renders in Gmail/Outlook.
@@ -16,6 +18,44 @@ from services import mail_template as T
 BRAND, INK, MUTED, LINE = T.BRAND, T.INK, T.MUTED, T.LINE
 GOOD, OK, WEAK = "#059669", "#d97706", "#dc2626"
 SEQUENCE = (("welcome", 0), ("checkin", 3), ("ending", 5), ("report", 7))
+
+
+# ── Which product: UK KS3 or US Middle School ──────────────────────────────────
+
+US_GRADES = (5, 6, 7)
+
+
+def is_us(u) -> bool:
+    return getattr(u, "ks3_track", None) == "us"
+
+
+def product(u) -> str:
+    return "Notenix Middle School" if is_us(u) else "Notenix KS3"
+
+
+def year_label(u) -> str:
+    return f"Grade {u.ks3_year or 6}" if is_us(u) else f"Year {u.ks3_year or 7}"
+
+
+def subjects_text(u) -> str:
+    return "Math and English Language Arts" if is_us(u) else "Maths, Science and English"
+
+
+def slot_prefix(u) -> str:
+    """Content slot for the student's year: g6-... (US grade) or y7-... (UK year)."""
+    return f"g{u.ks3_year}" if is_us(u) else f"y{u.ks3_year}"
+
+
+def upgrade_url(u) -> str:
+    return _site("/middle-school/continue") if is_us(u) else settings.ks3_upgrade_url
+
+
+def _plan_line(u, price: str) -> str:
+    if is_us(u):
+        return (f"<b>Notenix Middle School, {price}/year:</b> Math and ELA tests, homework help, notes, "
+                f"and this report every month, from Grade 5 through Grade 7.")
+    return (f"<b>Notenix KS3, {price}/year:</b> a timed test every half-term, homework help, "
+            f"notes, and this report every month, from Year 7 to GCSE.")
 
 
 # ── Progress data ──────────────────────────────────────────────────────────────
@@ -76,9 +116,11 @@ def _btn(url: str, label: str, primary: bool = True) -> str:
     return T.button(url, label, primary)
 
 
-def _shell(preheader: str, heading: str, body: str) -> str:
-    """The shared Notenix design (services/mail_template.py), tagged KS3, footer for parents."""
-    return T.layout(preheader=preheader, heading=heading, body=body, audience="ks3", tagline="KS3 · Years 7–9")
+def _shell(preheader: str, heading: str, body: str, u=None) -> str:
+    """The shared Notenix design (services/mail_template.py), tagged KS3 or Middle School, footer for parents."""
+    us = u is not None and is_us(u)
+    return T.layout(preheader=preheader, heading=heading, body=body, audience="middle" if us else "ks3",
+                    tagline="Middle School · Grades 5–7" if us else "KS3 · Years 7–9")
 
 
 def _color(pct: int) -> str:
@@ -111,22 +153,27 @@ def _site(path: str) -> str:
 # ── The four emails ────────────────────────────────────────────────────────────
 
 def welcome(u: User, p: dict) -> tuple[str, str, str]:
-    name, yr = _first(u.full_name), u.ks3_year or 7
-    body = (f"<p>Thanks for starting {name}'s free trial week. The first year of secondary school is where "
-            f"many children quietly slip: new subjects, more homework and a new routine all at once. "
+    name, yl, us = _first(u.full_name), year_label(u), is_us(u)
+    intro = ("Middle school is where many children quietly slip: harder math, longer reading and more "
+             "independent homework, all at once." if us else
+             "The first year of secondary school is where many children quietly slip: new subjects, "
+             "more homework and a new routine all at once.")
+    notes = "Notes" if us else "KS3 notes"
+    body = (f"<p>Thanks for starting {name}'s free trial week. {intro} "
             f"This week shows you exactly where {name} stands, and helps straight away.</p>"
             f"{_login_box(u)}"
             f'<p style="margin:16px 0 6px;color:{INK};font-weight:700">This week</p>'
             f'<ol style="margin:0;padding-left:20px">'
-            f"<li><b>Day 1–2: the Year {yr} baseline tests</b> in Maths, Science and English (about 30 minutes each).</li>"
+            f"<li><b>Day 1–2: the {yl} baseline tests</b> in {subjects_text(u)} (about 30 minutes each).</li>"
             f"<li><b>Homework help:</b> stuck on school homework? Send a photo in Notenix and a Beyond Tutors tutor replies.</li>"
-            f"<li><b>KS3 notes</b> for every Year {yr} topic, to revise from.</li>"
+            f"<li><b>{notes}</b> for every {yl} topic, to review from.</li>"
             f"<li><b>Day 7: your progress report</b>: scores, strong topics, and the topics to fix first.</li></ol>")
     subject = f"{_first(u.full_name)}'s free Notenix trial has started"
-    html = _shell("Start with the baseline tests", f"Welcome! Let's beat the Year {yr} dip", body
-                  + f'<p style="margin-top:20px">{_btn(_site("/tests"), "Start the baseline tests")}</p>')
-    text = (f"{name}'s free Notenix KS3 trial week has started.\nLogin: {u.email}\n"
-            f"1) Year {yr} baseline tests 2) homework help 3) KS3 notes 4) day-7 progress report.\n{_site('/tests')}")
+    heading = f"Welcome to {product(u)}!" if us else f"Welcome! Let's beat the {yl} dip"
+    html = _shell("Start with the baseline tests", heading, body
+                  + f'<p style="margin-top:20px">{_btn(_site("/tests"), "Start the baseline tests")}</p>', u)
+    text = (f"{name}'s free {product(u)} trial week has started.\nLogin: {u.email}\n"
+            f"1) {yl} baseline tests 2) homework help 3) {notes} 4) day-7 progress report.\n{_site('/tests')}")
     return subject, html, text + T.text_footer()
 
 
@@ -137,47 +184,51 @@ def checkin(u: User, p: dict) -> tuple[str, str, str]:
         lead = (f"<p>Three days into the trial, and {name} has finished <b>{done} test{'s' if done != 1 else ''}</b>. "
                 f"Here's how it's going:</p>{_subject_table(p)}")
         if left:
-            lead += f"<p>{left} test{'s are' if left != 1 else ' is'} still waiting. A full picture needs all three subjects.</p>"
+            lead += (f"<p>{left} test{'s are' if left != 1 else ' is'} still waiting. A full picture needs "
+                     f"{'both subjects' if is_us(u) else 'all three subjects'}.</p>")
     else:
         lead = (f"<p>Three days in, and {name} hasn't started the baseline tests yet. They take about 30 minutes each, "
                 f"and they're what the day-7 report is built on.</p>")
     body = lead + f"<p>Remember {name} can also send a photo of any homework question they're stuck on.</p>"
     subject = f"3 days in: how {_first(u.full_name)} is doing"
     html = _shell("Halfway through the free trial week", "Three days in", body
-                  + f'<p style="margin-top:20px">{_btn(_site("/tests"), "Open Notenix")}</p>')
+                  + f'<p style="margin-top:20px">{_btn(_site("/tests"), "Open Notenix")}</p>', u)
     text = f"Three days into {name}'s trial: {done} tests done, {left} waiting. {_site('/tests')}"
     return subject, html, text
 
 
 def ending(u: User, p: dict) -> tuple[str, str, str]:
     name, price = _first(u.full_name), _price(u)
+    offer = (f"<p>To keep going, Notenix Middle School is <b>{price} a year</b>: Math and ELA tests, homework help, "
+             f"notes, and a progress report in your inbox every month, from Grade 5 through Grade 7.</p>" if is_us(u) else
+             f"<p>To keep going, Notenix KS3 is <b>{price} a year</b>: a timed test every half-term in Maths, "
+             f"Science and English, homework help, KS3 notes, and a progress report in your inbox every month, "
+             f"from Year 7 all the way to GCSE.</p>")
     body = (f"<p>{name}'s free trial ends in <b>2 days</b>. On day 7 we'll email your progress report.</p>"
-            f"<p>To keep going, Notenix KS3 is <b>{price} a year</b>: a timed test every half-term in Maths, "
-            f"Science and English, homework help, KS3 notes, and a progress report in your inbox every month, "
-            f"from Year 7 all the way to GCSE.</p>"
+            f"{offer}"
             f"<p>Nothing is lost when the trial ends. {name}'s results stay saved and carry on when you continue.</p>")
     subject = f"{_first(u.full_name)}'s free trial ends in 2 days"
     html = _shell(f"Keep tracking for {price} a year", "2 days left", body
-                  + f'<p style="margin-top:20px">{_btn(settings.ks3_upgrade_url, f"Continue for {price}/year")}</p>')
-    text = f"{name}'s free trial ends in 2 days. Continue for {price}/year: {settings.ks3_upgrade_url}"
+                  + f'<p style="margin-top:20px">{_btn(upgrade_url(u), f"Continue for {price}/year")}</p>', u)
+    text = f"{name}'s free trial ends in 2 days. Continue for {price}/year: {upgrade_url(u)}"
     return subject, html, text
 
 
 def report(u: User, p: dict) -> tuple[str, str, str]:
-    name, price, yr = _first(u.full_name), _price(u), u.ks3_year or 7
+    name, price, yl = _first(u.full_name), _price(u), year_label(u)
     if p["taken"]:
         body = (f"<p>Here's what a week of Notenix showed about {name}.</p>"
                 f'<p style="margin:16px 0 4px;color:{INK};font-weight:700">Scores by subject</p>{_subject_table(p)}'
                 f"{_topic_list(p['strengths'], 'Strong topics', GOOD)}"
                 f"{_topic_list(p['focus'], 'Topics to work on first', WEAK)}")
-        if p["gcse"]:
+        if p["gcse"] and not is_us(u):
             body += (f'<div style="background:#f8fafc;border:1px solid {LINE};border-radius:12px;padding:14px 16px;margin:18px 0">'
                      f'<div style="font-size:12px;color:{MUTED}">Early GCSE indicator</div>'
                      f'<div style="font-size:18px;font-weight:700;color:{INK};margin-top:2px">Working towards grades {p["gcse"]}</div>'
                      f'<div style="font-size:12px;color:{MUTED};margin-top:4px">Based on {len(p["taken"])} test'
                      f'{"s" if len(p["taken"]) != 1 else ""} so far. It is a starting point, not a prediction: '
-                     f"Year {yr} is exactly when steady practice moves it.</div></div>")
-        if is_grammar(u):
+                     f"{yl} is exactly when steady practice moves it.</div></div>")
+        if is_grammar(u) and not is_us(u):
             body += _grammar_box(p)
         if p["missed"]:
             body += f"<p>{len(p['missed'])} test{'s were' if len(p['missed']) != 1 else ' was'} not taken, so this picture is partial.</p>"
@@ -185,38 +236,37 @@ def report(u: User, p: dict) -> tuple[str, str, str]:
         body = (f"<p>{name} didn't sit the baseline tests during the trial, so we can't show scores yet. "
                 f"The tests are still there whenever {name} is ready.</p>")
     body += (f'<p style="margin:20px 0 6px;color:{INK};font-weight:700">Two ways to keep {name} moving</p>'
-             f"<p style=\"margin:0 0 6px\"><b>Notenix KS3, {price}/year:</b> a timed test every half-term, homework help, "
-             f"notes, and this report every month, from Year 7 to GCSE.</p>"
+             f"<p style=\"margin:0 0 6px\">{_plan_line(u, price)}</p>"
              f"<p style=\"margin:0\"><b>A free trial class with Beyond Tutors:</b> a 1-to-1 tutor works on the topics above.</p>")
     subject = f"{_first(u.full_name)}'s 1-week progress report"
     html = _shell(f"Scores, strong topics and what to fix first", f"{name}'s progress report", body
-                  + f'<p style="margin-top:20px">{_btn(settings.ks3_upgrade_url, f"Continue Notenix KS3 ({price}/yr)")}'
-                  f'{_btn(settings.book_class_url, "Book a free trial class", primary=False)}</p>')
+                  + f'<p style="margin-top:20px">{_btn(upgrade_url(u), f"Continue {product(u)} ({price}/yr)")}'
+                  f'{_btn(settings.book_class_url, "Book a free trial class", primary=False)}</p>', u)
     lines = [f"{k}: {v['latest']}%" for k, v in p["subjects"].items()] or ["No tests taken yet."]
     text = (f"{name}'s 1-week progress report\n" + "\n".join(lines)
-            + f"\nContinue: {settings.ks3_upgrade_url}\nBook a free class: {settings.book_class_url}")
+            + f"\nContinue: {upgrade_url(u)}\nBook a free class: {settings.book_class_url}")
     return subject, html, text
 
 
 
 def monthly(u: User, p: dict) -> tuple[str, str, str]:
     """Paying families, once a month: the whole trend so far plus this month's tests."""
-    name, yr = _first(u.full_name), u.ks3_year or 7
+    name, yl = _first(u.full_name), year_label(u)
     month = datetime.utcnow().strftime("%B")
     recent = [x for x in p["taken"] if x["date"] and x["date"] > datetime.utcnow() - timedelta(days=31)]
     if p["taken"]:
-        body = (f"<p>Here's {name}'s Notenix progress, Year {yr}. "
+        body = (f"<p>Here's {name}'s Notenix progress, {yl}. "
                 f"{len(recent)} test{'s' if len(recent) != 1 else ''} this month, {len(p['taken'])} so far in total.</p>"
                 f'<p style="margin:16px 0 4px;color:{INK};font-weight:700">Latest score in each subject '
                 f'<span style="color:#94a3b8;font-weight:500">(change since the first test)</span></p>{_subject_table(p)}'
                 f"{_topic_list(p['strengths'], 'Strong topics', GOOD)}"
                 f"{_topic_list(p['focus'], 'Topics to work on next', WEAK)}")
-        if p["gcse"]:
+        if p["gcse"] and not is_us(u):
             body += (f'<div style="background:#f8fafc;border:1px solid {LINE};border-radius:12px;padding:14px 16px;margin:18px 0">'
                      f'<div style="font-size:12px;color:{MUTED}">Early GCSE indicator</div>'
                      f'<div style="font-size:18px;font-weight:700;color:{INK};margin-top:2px">Working towards grades {p["gcse"]}</div>'
                      f'<div style="font-size:12px;color:{MUTED};margin-top:4px">A starting point from {len(p["taken"])} tests, not a prediction.</div></div>')
-        if is_grammar(u):
+        if is_grammar(u) and not is_us(u):
             body += _grammar_box(p)
         if p["missed"]:
             body += f"<p>{len(p['missed'])} test{'s are' if len(p['missed']) != 1 else ' is'} still waiting in Notenix.</p>"
@@ -227,7 +277,7 @@ def monthly(u: User, p: dict) -> tuple[str, str, str]:
     subject = f"{_first(u.full_name)}'s {month} progress report"
     html = _shell("This month's scores and what to work on next", f"{name}'s {month} report", body
                   + f'<p style="margin-top:20px">{_btn(_site("/tests"), "Open Notenix")}'
-                  f'{_btn(settings.book_class_url, "Book a free class", primary=False)}</p>')
+                  f'{_btn(settings.book_class_url, "Book a free class", primary=False)}</p>', u)
     lines = [f"{k}: {v['latest']}%" for k, v in p["subjects"].items()] or ["No tests taken yet."]
     return subject, html, f"{name}'s {month} progress report\n" + "\n".join(lines) + f"\n{_site('/tests')}"
 
@@ -272,13 +322,15 @@ def half_term(d: datetime) -> int:
 
 
 async def assign_due_tests(db, u: User) -> int:
-    """Give a KS3 student the baseline for their year plus every half-term test that is due."""
+    """Give a KS3 student the baseline for their year plus every half-term test that is due.
+    Middle School (US) students get their grade's baseline (g6-baseline); no termly tests yet."""
     from models import Test, TestAssignment
     if not u.ks3_year:
         return 0
-    wanted = [f"y{u.ks3_year}-baseline"]
-    if u.access_kind != "trial":
-        wanted += [f"y{u.ks3_year}-ht{n}" for n in range(1, half_term(datetime.utcnow()) + 1)]
+    prefix = slot_prefix(u)
+    wanted = [f"{prefix}-baseline"]
+    if u.access_kind != "trial" and not is_us(u):
+        wanted += [f"{prefix}-ht{n}" for n in range(1, half_term(datetime.utcnow()) + 1)]
     tests = (await db.execute(select(Test).where(Test.ks3_slot.in_(wanted), Test.is_archived == False))).scalars().all()  # noqa: E712
     if not tests:
         return 0
@@ -289,7 +341,8 @@ async def assign_due_tests(db, u: User) -> int:
         if t.id not in have:
             label = "baseline" if t.ks3_slot.endswith("baseline") else f"half-term {t.ks3_slot.rsplit('ht', 1)[-1]}"
             rows.append({"test_id": t.id, "student_id": u.id, "assigned_by": t.owner_id, "status": "assigned",
-                         "class_label": f"KS3 Year {u.ks3_year} {label}", "created_at": datetime.utcnow()})
+                         "class_label": f"{'Middle School' if is_us(u) else 'KS3'} {year_label(u)} {label}",
+                         "created_at": datetime.utcnow()})
     if rows:  # one batched insert instead of a round trip per test
         from sqlalchemy import insert
         await db.execute(insert(TestAssignment), rows)
@@ -312,7 +365,7 @@ async def run_yearly() -> dict:
             done = set(u.ks3_emails or [])
             year_key = f"yearup-{now.year}"
             if now.month >= 9 and year_key not in done:
-                if u.ks3_year < 9:
+                if u.ks3_year < (max(US_GRADES) if is_us(u) else 9):
                     u.ks3_year += 1
                     stats["promoted"] += 1
                 done.add(year_key)

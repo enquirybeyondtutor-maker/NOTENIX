@@ -62,6 +62,7 @@ const PUBLIC_LINKS: NavItem[] = [
     ],
   },
   { href: "/ks3", label: "KS3" },
+  { href: "/middle-school", label: "Middle School (US)" },
   { href: "/request", label: "Request a test" },
   { href: "/pricing", label: "Pricing" },
 ];
@@ -97,7 +98,7 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password" || pathname === "/ks3/trial") return null;
+  if (pathname === "/login" || pathname === "/register" || pathname === "/verify-email" || pathname === "/reset-password" || pathname === "/ks3/trial" || pathname === "/middle-school/trial") return null;
 
   const isAuthed = !!user;
   const isTeacher = user?.role === "teacher" || user?.role === "admin";

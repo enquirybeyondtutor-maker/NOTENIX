@@ -1,0 +1,251 @@
+{
+ "slot": "g7-baseline",
+ "subject": "English Language Arts",
+ "title": "Grade 7 English Language Arts Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 7",
+ "board": "Common Core",
+ "questions": [
+  {
+   "topic": "Theme",
+   "question": "Read the passage.\n\n\"Every summer, Grandpa Joe planted more tomatoes than any family could eat. Mom teased him about it, but each August he filled paper bags with the extra and walked them down the street: to Mrs. Ortiz, who had just lost her job; to the new family in the blue house; to the firefighters at Station 9. \"A garden,\" he liked to say, \"is not measured by what you keep.\" This year Grandpa's knees are too stiff for the walk, so I carry the bags. At every door, people ask about him, and I realize the garden has been growing something besides tomatoes all along.\"\n\nWhich sentence best states the theme of the passage?",
+   "options": [
+    "Gardening is hard work.",
+    "Generosity builds connections between people.",
+    "Tomatoes grow best in summer.",
+    "Old age makes people lonely."
+   ],
+   "answer": "Generosity builds connections between people.",
+   "explanation": "Grandpa's gifts and his saying, 'a garden is not measured by what you keep', show that giving creates bonds with neighbors."
+  },
+  {
+   "topic": "Figurative language",
+   "question": "Read the passage.\n\n\"Every summer, Grandpa Joe planted more tomatoes than any family could eat. Mom teased him about it, but each August he filled paper bags with the extra and walked them down the street: to Mrs. Ortiz, who had just lost her job; to the new family in the blue house; to the firefighters at Station 9. \"A garden,\" he liked to say, \"is not measured by what you keep.\" This year Grandpa's knees are too stiff for the walk, so I carry the bags. At every door, people ask about him, and I realize the garden has been growing something besides tomatoes all along.\"\n\nWhat does the narrator mean by 'the garden has been growing something besides tomatoes'?",
+   "options": [
+    "Grandpa planted other vegetables too.",
+    "Weeds are growing in the garden.",
+    "The narrator wants to sell the tomatoes.",
+    "Grandpa's gifts have created friendships in the neighborhood."
+   ],
+   "answer": "Grandpa's gifts have created friendships in the neighborhood.",
+   "explanation": "People at every door ask about Grandpa: the 'something' the garden grew is the neighbors' care for him."
+  },
+  {
+   "topic": "Inference",
+   "question": "Read the passage.\n\n\"Every summer, Grandpa Joe planted more tomatoes than any family could eat. Mom teased him about it, but each August he filled paper bags with the extra and walked them down the street: to Mrs. Ortiz, who had just lost her job; to the new family in the blue house; to the firefighters at Station 9. \"A garden,\" he liked to say, \"is not measured by what you keep.\" This year Grandpa's knees are too stiff for the walk, so I carry the bags. At every door, people ask about him, and I realize the garden has been growing something besides tomatoes all along.\"\n\nWhy does Grandpa plant more tomatoes than his family can eat?",
+   "options": [
+    "He plans to give the extra to his neighbors.",
+    "He does not know how many to plant.",
+    "He wants to win a contest.",
+    "He sells them at the market."
+   ],
+   "answer": "He plans to give the extra to his neighbors.",
+   "explanation": "Every August he fills bags with the extra and walks them down the street to neighbors."
+  },
+  {
+   "topic": "Point of view",
+   "question": "Read the passage.\n\n\"Every summer, Grandpa Joe planted more tomatoes than any family could eat. Mom teased him about it, but each August he filled paper bags with the extra and walked them down the street: to Mrs. Ortiz, who had just lost her job; to the new family in the blue house; to the firefighters at Station 9. \"A garden,\" he liked to say, \"is not measured by what you keep.\" This year Grandpa's knees are too stiff for the walk, so I carry the bags. At every door, people ask about him, and I realize the garden has been growing something besides tomatoes all along.\"\n\nHow does the narrator's role change by the end of the passage?",
+   "options": [
+    "The narrator stops visiting the neighbors.",
+    "The narrator starts teasing Grandpa.",
+    "The narrator takes over Grandpa's tradition of sharing.",
+    "The narrator plants a garden alone."
+   ],
+   "answer": "The narrator takes over Grandpa's tradition of sharing.",
+   "explanation": "Grandpa can no longer make the walk, so the narrator now carries the bags."
+  },
+  {
+   "topic": "Main idea",
+   "question": "Read the passage.\n\n\"In 1900, about 40 percent of American workers were farmers. Today, fewer than 2 percent are. This change did not happen because Americans eat less food. Instead, machines such as tractors and combine harvesters allowed one farmer to do the work that once took dozens of people. Better seeds and fertilizers also increased how much food each acre could produce. As fewer workers were needed on farms, many people moved to cities to work in factories and offices. Today, the United States produces more food than ever with far fewer farmers.\"\n\nWhich sentence best states the central idea?",
+   "options": [
+    "Americans eat less food than they did in 1900.",
+    "Tractors were invented in 1900.",
+    "Machines and better farming methods let far fewer farmers produce more food, changing where Americans work.",
+    "Most Americans still work on farms."
+   ],
+   "answer": "Machines and better farming methods let far fewer farmers produce more food, changing where Americans work.",
+   "explanation": "The passage explains why the number of farmers fell and what happened as a result. It says directly that Americans do not eat less."
+  },
+  {
+   "topic": "Text structure",
+   "question": "Read the passage.\n\n\"In 1900, about 40 percent of American workers were farmers. Today, fewer than 2 percent are. This change did not happen because Americans eat less food. Instead, machines such as tractors and combine harvesters allowed one farmer to do the work that once took dozens of people. Better seeds and fertilizers also increased how much food each acre could produce. As fewer workers were needed on farms, many people moved to cities to work in factories and offices. Today, the United States produces more food than ever with far fewer farmers.\"\n\nHow does the author mainly organize the information?",
+   "options": [
+    "by explaining the causes and effects of a change",
+    "by telling a story in the first person",
+    "by comparing two different countries",
+    "by listing the steps in a process"
+   ],
+   "answer": "by explaining the causes and effects of a change",
+   "explanation": "It describes a change (fewer farmers), its causes (machines, better seeds) and its effects (people moving to cities)."
+  },
+  {
+   "topic": "Author's purpose",
+   "question": "Read the passage.\n\n\"In 1900, about 40 percent of American workers were farmers. Today, fewer than 2 percent are. This change did not happen because Americans eat less food. Instead, machines such as tractors and combine harvesters allowed one farmer to do the work that once took dozens of people. Better seeds and fertilizers also increased how much food each acre could produce. As fewer workers were needed on farms, many people moved to cities to work in factories and offices. Today, the United States produces more food than ever with far fewer farmers.\"\n\nWhat is the author's main purpose?",
+   "options": [
+    "to persuade readers to become farmers",
+    "to entertain readers with a story",
+    "to describe how to drive a tractor",
+    "to explain why the number of farmers fell"
+   ],
+   "answer": "to explain why the number of farmers fell",
+   "explanation": "The passage gives information and reasons; it does not try to persuade or tell a story."
+  },
+  {
+   "topic": "Citing evidence",
+   "question": "Read the passage.\n\n\"In 1900, about 40 percent of American workers were farmers. Today, fewer than 2 percent are. This change did not happen because Americans eat less food. Instead, machines such as tractors and combine harvesters allowed one farmer to do the work that once took dozens of people. Better seeds and fertilizers also increased how much food each acre could produce. As fewer workers were needed on farms, many people moved to cities to work in factories and offices. Today, the United States produces more food than ever with far fewer farmers.\"\n\nWhich sentence best supports the idea that farms became more productive?",
+   "options": [
+    "In 1900, about 40 percent of American workers were farmers.",
+    "Better seeds and fertilizers also increased how much food each acre could produce.",
+    "Many people moved to cities to work in factories and offices.",
+    "This change did not happen because Americans eat less food."
+   ],
+   "answer": "Better seeds and fertilizers also increased how much food each acre could produce.",
+   "explanation": "Producing more food from each acre is what 'more productive' means."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence has a misplaced modifier?",
+   "options": [
+    "Mom washed the dog, which was covered in mud.",
+    "Covered in mud, Mom washed the dog.",
+    "The dog, covered in mud, needed a bath.",
+    "Mom washed the muddy dog."
+   ],
+   "answer": "Covered in mud, Mom washed the dog.",
+   "explanation": "'Covered in mud' is placed next to 'Mom', so the sentence says Mom was covered in mud, not the dog."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence is a complex sentence?",
+   "options": [
+    "We kept reading.",
+    "It was late, and we kept reading.",
+    "We read and talked.",
+    "Although it was late, we kept reading."
+   ],
+   "answer": "Although it was late, we kept reading.",
+   "explanation": "A complex sentence has an independent clause and a dependent clause. 'Although it was late' cannot stand alone."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "In the sentence 'The girl with the red backpack won the race', what does 'with the red backpack' do?",
+   "options": [
+    "It tells which girl won.",
+    "It tells when the race happened.",
+    "It is the main verb.",
+    "It tells where the race took place."
+   ],
+   "answer": "It tells which girl won.",
+   "explanation": "The prepositional phrase describes the noun 'girl', showing which girl is meant."
+  },
+  {
+   "topic": "Punctuation",
+   "question": "Which sentence uses a semicolon correctly?",
+   "options": [
+    "I wanted; to go however it was too late.",
+    "I wanted to go however; it was too late.",
+    "I wanted to go; however, it was too late.",
+    "I; wanted to go, however it was too late."
+   ],
+   "answer": "I wanted to go; however, it was too late.",
+   "explanation": "A semicolon joins two complete sentences. Before 'however' it is followed by a comma."
+  },
+  {
+   "topic": "Punctuation",
+   "question": "Which sentence is punctuated correctly?",
+   "options": [
+    "It was a fascinating enjoyable, movie.",
+    "It was a, fascinating enjoyable movie.",
+    "It was a fascinating, enjoyable movie.",
+    "It was, a fascinating enjoyable movie."
+   ],
+   "answer": "It was a fascinating, enjoyable movie.",
+   "explanation": "Two adjectives that each describe the noun equally are separated by a comma, but no comma goes before the noun."
+  },
+  {
+   "topic": "Connotation",
+   "question": "Which word suggests that a home is small in a pleasant way?",
+   "options": [
+    "cozy",
+    "cramped",
+    "tiny",
+    "crowded"
+   ],
+   "answer": "cozy",
+   "explanation": "'Cozy' suggests small and comfortable. 'Cramped' and 'crowded' suggest too small."
+  },
+  {
+   "topic": "Greek & Latin roots",
+   "question": "The Latin root 'bene' means 'good' or 'well'. Which word means 'something that helps'?",
+   "options": [
+    "beneath",
+    "bench",
+    "bandage",
+    "benefit"
+   ],
+   "answer": "benefit",
+   "explanation": "A benefit is something good that helps you. 'Beneath' and 'bench' only look similar."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "'The speech was so verbose that the audience grew restless waiting for it to end.' What does 'verbose' mean?",
+   "options": [
+    "very funny",
+    "using too many words",
+    "angry",
+    "hard to hear"
+   ],
+   "answer": "using too many words",
+   "explanation": "The clue is that the audience grew restless waiting for it to end: the speech went on too long."
+  },
+  {
+   "topic": "Figurative language",
+   "question": "Which line contains alliteration?",
+   "options": [
+    "The snow fell during the night.",
+    "Silent snowflakes settled softly.",
+    "Snow covered the town like a blanket.",
+    "The snow was a white sea."
+   ],
+   "answer": "Silent snowflakes settled softly.",
+   "explanation": "Alliteration repeats the same first sound in nearby words: silent, snowflakes, settled, softly."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence is the most concise?",
+   "options": [
+    "We made the decision to postpone the meeting and move it to Friday instead.",
+    "The meeting was postponed by us and moved until the day of Friday.",
+    "We decided that we would postpone, until Friday, the meeting.",
+    "We postponed the meeting until Friday."
+   ],
+   "answer": "We postponed the meeting until Friday.",
+   "explanation": "It says the same thing in the fewest words, without repetition."
+  },
+  {
+   "topic": "Spelling",
+   "question": "Which word is spelled correctly?",
+   "options": [
+    "occurrence",
+    "occurence",
+    "ocurrence",
+    "occurrance"
+   ],
+   "answer": "occurrence",
+   "explanation": "Occurrence has double c, double r, and ends in -ence."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence shows correct subject–verb agreement?",
+   "options": [
+    "Each of the students have a locker.",
+    "Each of the students are having a locker.",
+    "Each of the students has a locker.",
+    "Each of the students have their lockers each."
+   ],
+   "answer": "Each of the students has a locker.",
+   "explanation": "The subject is 'each', which is singular, so it takes the singular verb 'has'."
+  }
+ ]
+}

@@ -1,0 +1,251 @@
+{
+ "slot": "g6-baseline",
+ "subject": "Math",
+ "title": "Grade 6 Math Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 6",
+ "board": "Common Core",
+ "questions": [
+  {
+   "topic": "Ratios & rates",
+   "question": "A class has 12 girls and 18 boys. What is the ratio of girls to boys in simplest form?",
+   "options": [
+    "3:2",
+    "2:3",
+    "12:30",
+    "2:5"
+   ],
+   "answer": "2:3",
+   "explanation": "12:18 divides by 6 to give 2:3. Order matters: girls first."
+  },
+  {
+   "topic": "Ratios & rates",
+   "question": "A car travels 150 miles in 3 hours at a steady speed. What is its speed?",
+   "options": [
+    "45 miles per hour",
+    "153 miles per hour",
+    "450 miles per hour",
+    "50 miles per hour"
+   ],
+   "answer": "50 miles per hour",
+   "explanation": "150 ÷ 3 = 50 miles in each hour."
+  },
+  {
+   "topic": "Ratios & rates",
+   "question": "Six apples cost $4.80. At the same price, how much do 10 apples cost?",
+   "options": [
+    "$8.00",
+    "$6.80",
+    "$7.20",
+    "$8.40"
+   ],
+   "answer": "$8.00",
+   "explanation": "One apple costs 4.80 ÷ 6 = 0.80 dollars, so 10 apples cost 8.00 dollars."
+  },
+  {
+   "topic": "Ratios & rates",
+   "question": "A recipe uses 2 cups of flour for every 3 cups of oats. How much flour goes with 9 cups of oats?",
+   "options": [
+    "4 cups",
+    "5 cups",
+    "6 cups",
+    "13.5 cups"
+   ],
+   "answer": "6 cups",
+   "explanation": "9 cups of oats is 3 times 3 cups, so use 3 times 2 cups of flour: 6 cups."
+  },
+  {
+   "topic": "Percents",
+   "question": "What is 35% of 80?",
+   "options": [
+    "24",
+    "35",
+    "28",
+    "45"
+   ],
+   "answer": "28",
+   "explanation": "10% of 80 is 8, so 30% is 24 and 5% is 4. 24 + 4 = 28."
+  },
+  {
+   "topic": "Percents",
+   "question": "15 is what percent of 60?",
+   "options": [
+    "25%",
+    "15%",
+    "40%",
+    "4%"
+   ],
+   "answer": "25%",
+   "explanation": "15/60 = 1/4 = 25%."
+  },
+  {
+   "topic": "Dividing fractions",
+   "question": "What is 3/4 ÷ 3/8?",
+   "options": [
+    "9/32",
+    "1/2",
+    "1 1/8",
+    "2"
+   ],
+   "answer": "2",
+   "explanation": "Multiply by the reciprocal: 3/4 × 8/3 = 24/12 = 2. There are two 3/8s in 3/4."
+  },
+  {
+   "topic": "Dividing fractions",
+   "question": "How many 2/3-cup servings are in 4 cups of rice?",
+   "options": [
+    "2 2/3",
+    "6",
+    "8",
+    "12"
+   ],
+   "answer": "6",
+   "explanation": "4 ÷ 2/3 = 4 × 3/2 = 6 servings."
+  },
+  {
+   "topic": "Negative numbers",
+   "question": "Which list is in order from least to greatest?",
+   "options": [
+    "−1, −3, −7, 2",
+    "−7, −3, −1, 2",
+    "2, −1, −3, −7",
+    "−3, −7, −1, 2"
+   ],
+   "answer": "−7, −3, −1, 2",
+   "explanation": "On a number line, numbers further left are smaller: −7 is furthest left, then −3, −1 and 2."
+  },
+  {
+   "topic": "Negative numbers",
+   "question": "What is the absolute value of −9?",
+   "options": [
+    "−9",
+    "0",
+    "1/9",
+    "9"
+   ],
+   "answer": "9",
+   "explanation": "Absolute value is the distance from 0, which is never negative: |−9| = 9."
+  },
+  {
+   "topic": "Negative numbers",
+   "question": "The temperature was −4°F in the morning and rose 11 degrees by noon. What was the temperature at noon?",
+   "options": [
+    "7°F",
+    "−15°F",
+    "−7°F",
+    "15°F"
+   ],
+   "answer": "7°F",
+   "explanation": "−4 + 11 = 7. Rising 4 degrees brings it to 0, and 7 more makes 7°F."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "What is the value of 3x + 5 when x = 4?",
+   "options": [
+    "12",
+    "35",
+    "17",
+    "39"
+   ],
+   "answer": "17",
+   "explanation": "3x means 3 × x: 3 × 4 = 12, and 12 + 5 = 17."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "Solve x + 9 = 23.",
+   "options": [
+    "x = 13",
+    "x = 32",
+    "x = 14",
+    "x = 207"
+   ],
+   "answer": "x = 14",
+   "explanation": "Subtract 9 from both sides: x = 23 − 9 = 14."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "Solve 6y = 42.",
+   "options": [
+    "y = 7",
+    "y = 36",
+    "y = 48",
+    "y = 252"
+   ],
+   "answer": "y = 7",
+   "explanation": "Divide both sides by 6: y = 42 ÷ 6 = 7."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "Which expression is equivalent to 4(2a + 3)?",
+   "options": [
+    "8a + 3",
+    "6a + 7",
+    "8a + 7",
+    "8a + 12"
+   ],
+   "answer": "8a + 12",
+   "explanation": "Multiply each term inside the parentheses by 4: 4 × 2a = 8a and 4 × 3 = 12."
+  },
+  {
+   "topic": "Area",
+   "question": "A triangle has a base of 10 cm and a height of 6 cm. What is its area?",
+   "options": [
+    "60 square centimeters",
+    "30 square centimeters",
+    "16 square centimeters",
+    "32 square centimeters"
+   ],
+   "answer": "30 square centimeters",
+   "explanation": "Area of a triangle = 1/2 × base × height = 1/2 × 10 × 6 = 30 square centimeters."
+  },
+  {
+   "topic": "Area",
+   "question": "A parallelogram has a base of 9 inches and a height of 5 inches. What is its area?",
+   "options": [
+    "22.5 square inches",
+    "45 square inches",
+    "28 square inches",
+    "14 square inches"
+   ],
+   "answer": "45 square inches",
+   "explanation": "Area of a parallelogram = base × height = 9 × 5 = 45 square inches."
+  },
+  {
+   "topic": "Statistics",
+   "question": "What is the mean of 4, 8, 9, 11 and 13?",
+   "options": [
+    "8",
+    "11",
+    "45",
+    "9"
+   ],
+   "answer": "9",
+   "explanation": "Add the numbers (45) and divide by how many there are (5): 45 ÷ 5 = 9."
+  },
+  {
+   "topic": "Statistics",
+   "question": "What is the median of 2, 3, 9, 1, 5 and 12?",
+   "options": [
+    "4",
+    "3",
+    "5",
+    "9"
+   ],
+   "answer": "4",
+   "explanation": "Put them in order: 1, 2, 3, 5, 9, 12. With six numbers, the median is halfway between the middle two: (3 + 5) ÷ 2 = 4."
+  },
+  {
+   "topic": "Factors & multiples",
+   "question": "What is the greatest common factor of 24 and 36?",
+   "options": [
+    "6",
+    "72",
+    "12",
+    "4"
+   ],
+   "answer": "12",
+   "explanation": "The factors of 24 are 1, 2, 3, 4, 6, 8, 12, 24; of 36 they include 12 but not 24. The greatest shared factor is 12. (72 is the least common multiple.)"
+  }
+ ]
+}

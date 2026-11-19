@@ -127,7 +127,7 @@ export const adminAPI = {
   // Normal Notenix price (students outside Beyond Tutors), per currency; editable by admin.
   normalPrices: () => api.get("/admin/normal-prices"),
   setNormalPrices: (prices: Record<string, number>) => api.put("/admin/normal-prices", { prices }),
-  setKs3: (id: number | string, year: number | null) => api.post(`/ks3/admin/users/${id}`, { year }),
+  setKs3: (id: number | string, year: number | null, track?: "us") => api.post(`/ks3/admin/users/${id}`, { year, track }),
   setCurrency: (id: number | string, currency: string, price_tier?: "bt" | "normal") =>
     api.post(`/admin/users/${id}/currency`, { currency, price_tier }),
   createUser: (data: { full_name: string; email?: string; role: "student" | "teacher"; access: "trial" | "year" | "none"; currency?: string }) =>
@@ -228,7 +228,7 @@ export const helpAPI = {
 
 // Notenix KS3 free trial (public sign-up by a parent).
 export const ks3API = {
-  startTrial: (data: { child_name: string; year_group: number; parent_email: string; agree_terms: boolean; source?: string }) =>
+  startTrial: (data: { child_name: string; year_group: number; parent_email: string; agree_terms: boolean; source?: string; track?: "us" }) =>
     api.post("/ks3/trial/start", data),
   verifyTrial: (data: { parent_email: string; code: string }) => api.post("/ks3/trial/verify", data),
   completeTrial: (data: { parent_email: string; setup_token: string; password: string }) => api.post("/ks3/trial/complete", data),

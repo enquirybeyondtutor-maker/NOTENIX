@@ -1,0 +1,251 @@
+{
+ "slot": "g6-baseline",
+ "subject": "English Language Arts",
+ "title": "Grade 6 English Language Arts Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 6",
+ "board": "Common Core",
+ "questions": [
+  {
+   "topic": "Inference",
+   "question": "Read the passage.\n\n\"The trail had disappeared under fresh snow, and Priya's map was useless. Her brother, Dev, wanted to keep walking downhill. \"Rivers run downhill,\" he said, \"and the cabin is by the river.\" Priya wasn't sure. The light was fading, and every pine tree looked the same. She noticed, though, that the snow was thicker on the north side of the trunks, and she remembered her father saying the cabin faced the south slope. \"We'll go your way,\" she told Dev, \"but we keep the thick snow behind us.\" An hour later, a thin line of smoke rose above the trees.\"\n\nWhat can you infer about Priya from the passage?",
+   "options": [
+    "She panics when things go wrong.",
+    "She refuses to listen to her brother.",
+    "She stays calm and uses clues to solve problems.",
+    "She does not care about getting back."
+   ],
+   "answer": "She stays calm and uses clues to solve problems.",
+   "explanation": "Even as the light fades, Priya notices the thicker snow on the north side of the trees and uses what her father said to choose a direction."
+  },
+  {
+   "topic": "Point of view",
+   "question": "Read the passage.\n\n\"The trail had disappeared under fresh snow, and Priya's map was useless. Her brother, Dev, wanted to keep walking downhill. \"Rivers run downhill,\" he said, \"and the cabin is by the river.\" Priya wasn't sure. The light was fading, and every pine tree looked the same. She noticed, though, that the snow was thicker on the north side of the trunks, and she remembered her father saying the cabin faced the south slope. \"We'll go your way,\" she told Dev, \"but we keep the thick snow behind us.\" An hour later, a thin line of smoke rose above the trees.\"\n\nFrom which point of view is the passage told?",
+   "options": [
+    "third person",
+    "first person",
+    "second person",
+    "Dev's point of view, in his own words"
+   ],
+   "answer": "third person",
+   "explanation": "A narrator outside the story tells it using 'she' and 'her', so it is third person."
+  },
+  {
+   "topic": "Citing evidence",
+   "question": "Read the passage.\n\n\"The trail had disappeared under fresh snow, and Priya's map was useless. Her brother, Dev, wanted to keep walking downhill. \"Rivers run downhill,\" he said, \"and the cabin is by the river.\" Priya wasn't sure. The light was fading, and every pine tree looked the same. She noticed, though, that the snow was thicker on the north side of the trunks, and she remembered her father saying the cabin faced the south slope. \"We'll go your way,\" she told Dev, \"but we keep the thick snow behind us.\" An hour later, a thin line of smoke rose above the trees.\"\n\nWhich detail best shows that the children reached the cabin?",
+   "options": [
+    "the trail had disappeared under fresh snow",
+    "every pine tree looked the same",
+    "Rivers run downhill",
+    "a thin line of smoke rose above the trees"
+   ],
+   "answer": "a thin line of smoke rose above the trees",
+   "explanation": "Smoke rising above the trees suggests a fire in the cabin's chimney, so they have found it."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "Read the passage.\n\n\"The trail had disappeared under fresh snow, and Priya's map was useless. Her brother, Dev, wanted to keep walking downhill. \"Rivers run downhill,\" he said, \"and the cabin is by the river.\" Priya wasn't sure. The light was fading, and every pine tree looked the same. She noticed, though, that the snow was thicker on the north side of the trunks, and she remembered her father saying the cabin faced the south slope. \"We'll go your way,\" she told Dev, \"but we keep the thick snow behind us.\" An hour later, a thin line of smoke rose above the trees.\"\n\nIn the passage, 'useless' most nearly means",
+   "options": [
+    "very old",
+    "of no help",
+    "torn",
+    "too small"
+   ],
+   "answer": "of no help",
+   "explanation": "The trail was hidden under snow, so the map could no longer help them find the way."
+  },
+  {
+   "topic": "Main idea",
+   "question": "Read the passage.\n\n\"Many schools are replacing paper textbooks with tablets. Supporters say tablets are lighter than a backpack full of books and can be updated instantly when information changes. They also point out that digital books can include videos and interactive quizzes. However, critics argue that screens can distract students, and some studies suggest people remember more when they read on paper. Tablets are also expensive to repair or replace. Before switching completely, schools should test tablets in a few classes and compare the results with paper books.\"\n\nWhat is the central idea of the passage?",
+   "options": [
+    "Tablets are always better than paper books.",
+    "Tablets have benefits and drawbacks, so schools should test them before switching completely.",
+    "Paper books should be banned.",
+    "Tablets are too heavy for students."
+   ],
+   "answer": "Tablets have benefits and drawbacks, so schools should test them before switching completely.",
+   "explanation": "The passage gives both sides and ends with a recommendation to test first. The other choices go beyond what it says."
+  },
+  {
+   "topic": "Claims & arguments",
+   "question": "Read the passage.\n\n\"Many schools are replacing paper textbooks with tablets. Supporters say tablets are lighter than a backpack full of books and can be updated instantly when information changes. They also point out that digital books can include videos and interactive quizzes. However, critics argue that screens can distract students, and some studies suggest people remember more when they read on paper. Tablets are also expensive to repair or replace. Before switching completely, schools should test tablets in a few classes and compare the results with paper books.\"\n\nWhat does the author recommend?",
+   "options": [
+    "Schools should buy tablets for every student now.",
+    "Schools should never use tablets.",
+    "Students should buy their own tablets.",
+    "Schools should try tablets in a few classes and compare the results."
+   ],
+   "answer": "Schools should try tablets in a few classes and compare the results.",
+   "explanation": "The last sentence gives the recommendation: test in a few classes and compare with paper books."
+  },
+  {
+   "topic": "Text structure",
+   "question": "Read the passage.\n\n\"Many schools are replacing paper textbooks with tablets. Supporters say tablets are lighter than a backpack full of books and can be updated instantly when information changes. They also point out that digital books can include videos and interactive quizzes. However, critics argue that screens can distract students, and some studies suggest people remember more when they read on paper. Tablets are also expensive to repair or replace. Before switching completely, schools should test tablets in a few classes and compare the results with paper books.\"\n\nWhich word signals that the author is turning to the other side of the argument?",
+   "options": [
+    "However",
+    "Many",
+    "also",
+    "Before"
+   ],
+   "answer": "However",
+   "explanation": "'However' introduces the critics' view after the supporters' points."
+  },
+  {
+   "topic": "Citing evidence",
+   "question": "Read the passage.\n\n\"Many schools are replacing paper textbooks with tablets. Supporters say tablets are lighter than a backpack full of books and can be updated instantly when information changes. They also point out that digital books can include videos and interactive quizzes. However, critics argue that screens can distract students, and some studies suggest people remember more when they read on paper. Tablets are also expensive to repair or replace. Before switching completely, schools should test tablets in a few classes and compare the results with paper books.\"\n\nWhich reason do the critics give?",
+   "options": [
+    "Tablets can be updated instantly.",
+    "Digital books can include videos.",
+    "Screens can distract students.",
+    "Tablets are lighter than books."
+   ],
+   "answer": "Screens can distract students.",
+   "explanation": "The other three are reasons given by supporters."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Choose the correct pronoun: 'Ms. Lee gave the tickets to Sam and ___.'",
+   "options": [
+    "I",
+    "myself",
+    "me",
+    "mine"
+   ],
+   "answer": "me",
+   "explanation": "After 'to', use the object pronoun 'me'. Test it alone: 'gave the tickets to me.'"
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Choose the correct pronoun: '___ and Ava are going to the game.'",
+   "options": [
+    "She",
+    "Her",
+    "Hers",
+    "Herself"
+   ],
+   "answer": "She",
+   "explanation": "The pronoun is part of the subject, so use the subject pronoun 'She'. Test it alone: 'She is going.'"
+  },
+  {
+   "topic": "Punctuation",
+   "question": "Which sentence uses commas correctly?",
+   "options": [
+    "My uncle who lives, in Ohio is visiting us.",
+    "My uncle, who lives in Ohio is visiting us.",
+    "My, uncle who lives in Ohio, is visiting us.",
+    "My uncle, who lives in Ohio, is visiting us."
+   ],
+   "answer": "My uncle, who lives in Ohio, is visiting us.",
+   "explanation": "'Who lives in Ohio' is extra information, so it needs a comma before and after it."
+  },
+  {
+   "topic": "Greek & Latin roots",
+   "question": "The Greek root 'graph' means 'write'. Which word means 'a person's own written name'?",
+   "options": [
+    "paragraph",
+    "autograph",
+    "graphic",
+    "photograph"
+   ],
+   "answer": "autograph",
+   "explanation": "'Auto' means self, so an autograph is something written by the person themselves: their signature."
+  },
+  {
+   "topic": "Greek & Latin roots",
+   "question": "The Latin root 'port' means 'carry'. What does 'portable' mean?",
+   "options": [
+    "able to see",
+    "easy to carry",
+    "made of metal",
+    "near the water"
+   ],
+   "answer": "easy to carry",
+   "explanation": "'Port' (carry) + '-able' (able to be) = able to be carried."
+  },
+  {
+   "topic": "Connotation",
+   "question": "Which word has the most negative connotation?",
+   "options": [
+    "determined",
+    "persistent",
+    "committed",
+    "stubborn"
+   ],
+   "answer": "stubborn",
+   "explanation": "All four describe someone who does not give up, but 'stubborn' suggests being unreasonable, which is negative."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "'The desert was arid; it had not rained there in months.' What does 'arid' mean?",
+   "options": [
+    "very dry",
+    "very cold",
+    "crowded",
+    "beautiful"
+   ],
+   "answer": "very dry",
+   "explanation": "The clue 'it had not rained there in months' shows that arid means very dry."
+  },
+  {
+   "topic": "Figurative language",
+   "question": "'Time is a thief' is an example of",
+   "options": [
+    "a simile",
+    "alliteration",
+    "a metaphor",
+    "onomatopoeia"
+   ],
+   "answer": "a metaphor",
+   "explanation": "It says time IS a thief, without 'like' or 'as', so it is a metaphor."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence is written correctly?",
+   "options": [
+    "It started to rain we went inside.",
+    "It started to rain, we went inside.",
+    "It started to rain, so we went inside.",
+    "It started to rain so, we went inside."
+   ],
+   "answer": "It started to rain, so we went inside.",
+   "explanation": "Two complete sentences joined with only a comma, or with nothing, make a run-on. A comma plus 'so' joins them correctly."
+  },
+  {
+   "topic": "Grammar & usage",
+   "question": "Which sentence is clearest?",
+   "options": [
+    "When Mia met Jen at the station, Mia was late.",
+    "When Mia met Jen at the station, she was late.",
+    "She was late when she met her at the station.",
+    "When she met Jen, she was late for it."
+   ],
+   "answer": "When Mia met Jen at the station, Mia was late.",
+   "explanation": "In the other sentences, 'she' could mean either girl. Repeating the name makes it clear who was late."
+  },
+  {
+   "topic": "Spelling",
+   "question": "Which word is spelled correctly?",
+   "options": [
+    "neccessary",
+    "necesary",
+    "neccesary",
+    "necessary"
+   ],
+   "answer": "necessary",
+   "explanation": "Necessary has one c and two s's: n-e-c-e-s-s-a-r-y."
+  },
+  {
+   "topic": "Vocabulary",
+   "question": "Which word best completes the sentence? 'The tired hikers ___ up the last steep hill.'",
+   "options": [
+    "skipped",
+    "trudged",
+    "raced",
+    "floated"
+   ],
+   "answer": "trudged",
+   "explanation": "'Trudged' means walked slowly and heavily, which fits tired hikers on a steep hill."
+  }
+ ]
+}
