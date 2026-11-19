@@ -1,7 +1,8 @@
 """Loads Notenix KS3 tests and notes from backend/ks3_content/*.json on startup.
 
 tests/<slot>-<subject>.json : {"slot", "subject", "title", "topic", "duration", "questions": [...]}
-notes/<key>.json            : {"key", "year", "subject", "title", "body"}
+notes/<key>.json            : {"key", "year", "subject", "title", "body", "track"?}
+US Middle School content ("track": "us") uses g<grade>-... slots and keys, e.g. g6-baseline.
 
 Matching rows are created or updated in place (key = slot+subject for tests, key for notes),
 so fixing a typo is a normal deploy. New notes are shared with that year's KS3 students.
@@ -64,11 +65,11 @@ async def sync_content() -> dict:
             row = await db.scalar(select(ClassNote).where(ClassNote.ks3_key == n["key"]))
             if not row:
                 row = ClassNote(owner_id=owner.id, ks3_key=n["key"], ks3_year=n["year"], kind="notes",
-                                title=n["title"], subject=n["subject"], body=n["body"])
+                                title=n["title"], subject=n["subject"], body=n["body"], ks3_track=n.get("track"))
                 db.add(row)
                 stats["notes_new"] += 1
-            elif (row.title, row.body, row.subject) != (n["title"], n["body"], n["subject"]):
-                row.title, row.body, row.subject = n["title"], n["body"], n["subject"]
+            elif (row.title, row.body, row.subject, row.ks3_track) != (n["title"], n["body"], n["subject"], n.get("track")):
+                row.title, row.body, row.subject, row.ks3_track = n["title"], n["body"], n["subject"], n.get("track")
                 stats["notes_updated"] += 1
         await db.flush()
         stats["shares"] = await share_year_notes(db)
@@ -77,12 +78,15 @@ async def sync_content() -> dict:
 
 
 async def share_year_notes(db, student: User | None = None) -> int:
-    """Share every KS3 note for a student's year with them (all KS3 students if none given)."""
+    """Share every KS3 note for a student's year with them (all KS3 students if none given).
+    Middle School (US) students get the notes for their grade, UK students those for their year."""
     students = [student] if student else (await db.execute(
         select(User).where(User.ks3_year.isnot(None), User.needs_activation == False))).scalars().all()  # noqa: E712
     added = 0
     for s in students:
-        notes = (await db.execute(select(ClassNote.id).where(ClassNote.ks3_year == s.ks3_year))).scalars().all()
+        track = getattr(s, "ks3_track", None)
+        same_track = ClassNote.ks3_track == track if track else ClassNote.ks3_track.is_(None)
+        notes = (await db.execute(select(ClassNote.id).where(ClassNote.ks3_year == s.ks3_year, same_track))).scalars().all()
         if not notes:
             continue
         have = set((await db.execute(select(NoteShare.note_id).where(

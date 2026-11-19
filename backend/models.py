@@ -55,6 +55,8 @@ class User(Base):
     # Notenix KS3: school year (7/8/9) when the student is on KS3, when their free trial
     # started, and which parent emails of the trial sequence have gone out.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # "us" = Notenix Middle School (US Grades 5-7, ks3_year holds the grade); None = UK KS3.
+    ks3_track: Mapped[str | None] = mapped_column(String(8), nullable=True)
     # Notenix SAT: when they joined, their test date (YYYY-MM-DD) and target score.
     sat_since: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     sat_test_date: Mapped[str | None] = mapped_column(String(10), nullable=True)
@@ -280,6 +282,7 @@ class ClassNote(Base):
     class_date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD
     # Notenix KS3 notes library: shared automatically with KS3 students of this year.
     ks3_year: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    ks3_track: Mapped[str | None] = mapped_column(String(8), nullable=True)   # "us" = Middle School notes
     # Students may download a print copy (their name burned into every page) when set.
     printable: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     ks3_key: Mapped[str | None] = mapped_column(String(60), nullable=True, unique=True)

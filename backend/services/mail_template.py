@@ -16,6 +16,7 @@ WHY = {
     "parent": "You're receiving this as the parent or guardian on a Notenix account.",
     "student": "You're receiving this because you have a Notenix account.",
     "ks3": "You're receiving this because you started Notenix KS3 for your child.",
+    "middle": "You're receiving this because you started Notenix Middle School for your child.",
     "signup": "You're receiving this because this email address was entered on notenix.com.",
     "admin": "Admin alert for the Notenix team.",
 }

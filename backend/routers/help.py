@@ -58,6 +58,12 @@ def _subjects(u: User) -> tuple[str, ...]:
     return doubt.subjects_for(u.sg_level) if (doubt.live(u) and u.sg_level) else SUBJECTS
 
 
+
+
+def _year_label(u) -> str:
+    from services.ks3 import year_label
+    return year_label(u)
+
 @router.get("/help")
 async def my_help(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     _require_ks3(user)
@@ -98,7 +104,7 @@ async def ask(data: AskIn, user: User = Depends(get_current_user), db: AsyncSess
     await db.commit()
     await notify_admins(f"Homework question from {user.full_name}",
                         f"{user.full_name} sent a {data.subject} homework question. Please reply within a day.", "/teacher/help",
-                        rows=[("Student", f"{user.full_name} ({user.sg_level or f'Year {user.ks3_year}'})"), ("Subject", data.subject),
+                        rows=[("Student", f"{user.full_name} ({user.sg_level or _year_label(user)})"), ("Subject", data.subject),
                               ("Question", text[:300] or "(photo only)"), ("Photos", str(len(imgs)))])
     return _row(h)
 
@@ -108,7 +114,7 @@ async def help_queue(teacher: User = Depends(require_teacher), db: AsyncSession 
     rows = (await db.execute(select(HelpRequest, User).join(User, User.id == HelpRequest.student_id)
                              .order_by(HelpRequest.created_at.desc()).limit(200))).all()
     out = [{**_row(h, images=False), "student": {"id": u.id, "full_name": u.full_name, "email": u.email,
-                                                 "year": u.ks3_year, "level": u.sg_level}} for h, u in rows]
+                                                 "year": u.ks3_year, "track": u.ks3_track, "level": u.sg_level}} for h, u in rows]
     out.sort(key=lambda r: r["status"] != "open")  # open first, newest first within each
     return out
 
@@ -120,7 +126,7 @@ async def help_detail(help_id: int, teacher: User = Depends(require_teacher), db
     if not row:
         raise HTTPException(404, "Not found")
     h, u = row
-    return {**_row(h), "student": {"id": u.id, "full_name": u.full_name, "email": u.email, "year": u.ks3_year, "level": u.sg_level}}
+    return {**_row(h), "student": {"id": u.id, "full_name": u.full_name, "email": u.email, "year": u.ks3_year, "track": u.ks3_track, "level": u.sg_level}}
 
 
 class ReplyIn(BaseModel):

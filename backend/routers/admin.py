@@ -62,6 +62,7 @@ def _user_row(u: User, enrols: list | None = None) -> dict:
         "terms_accepted_at": u.terms_accepted_at.isoformat() if getattr(u, "terms_accepted_at", None) else None,
         "terms_price": getattr(u, "terms_price", None),
         "ks3_year": getattr(u, "ks3_year", None),
+        "ks3_track": getattr(u, "ks3_track", None),
         "notify_email": getattr(u, "notify_email", None),
         "help_plan": getattr(u, "help_plan", None),
         "help_until": u.help_until.isoformat() if getattr(u, "help_until", None) else None,

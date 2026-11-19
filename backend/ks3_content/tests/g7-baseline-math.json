@@ -1,0 +1,251 @@
+{
+ "slot": "g7-baseline",
+ "subject": "Math",
+ "title": "Grade 7 Math Baseline",
+ "topic": "Baseline",
+ "duration": 30,
+ "level": "Grade 7",
+ "board": "Common Core",
+ "questions": [
+  {
+   "topic": "Proportional relationships",
+   "question": "y is proportional to x. When x = 4, y = 10. What is y when x = 10?",
+   "options": [
+    "16",
+    "20",
+    "25",
+    "40"
+   ],
+   "answer": "25",
+   "explanation": "The constant of proportionality is 10 ÷ 4 = 2.5, so y = 2.5 × 10 = 25."
+  },
+  {
+   "topic": "Proportional relationships",
+   "question": "Which table shows a proportional relationship between x and y?",
+   "options": [
+    "x = 1, 2, 3 and y = 3, 6, 9",
+    "x = 1, 2, 3 and y = 2, 4, 7",
+    "x = 1, 2, 3 and y = 4, 5, 6",
+    "x = 1, 2, 3 and y = 1, 4, 9"
+   ],
+   "answer": "x = 1, 2, 3 and y = 3, 6, 9",
+   "explanation": "In a proportional relationship y ÷ x is always the same. For 3, 6, 9 it is 3 every time; the others change."
+  },
+  {
+   "topic": "Proportional relationships",
+   "question": "On a map, 2 inches represent 15 miles. Two towns are 7 inches apart on the map. How far apart are they?",
+   "options": [
+    "30 miles",
+    "105 miles",
+    "45 miles",
+    "52.5 miles"
+   ],
+   "answer": "52.5 miles",
+   "explanation": "Each inch is 15 ÷ 2 = 7.5 miles, so 7 inches is 7 × 7.5 = 52.5 miles."
+  },
+  {
+   "topic": "Percent problems",
+   "question": "A jacket that costs $60 is on sale for 25% off. What is the sale price?",
+   "options": [
+    "$15",
+    "$45",
+    "$35",
+    "$75"
+   ],
+   "answer": "$45",
+   "explanation": "25% of 60 is 15. The sale price is 60 − 15 = 45 dollars."
+  },
+  {
+   "topic": "Percent problems",
+   "question": "A meal costs $40. The family leaves an 18% tip. What is the total cost?",
+   "options": [
+    "$7.20",
+    "$47.20",
+    "$41.80",
+    "$58.00"
+   ],
+   "answer": "$47.20",
+   "explanation": "18% of 40 is 7.20. The total is 40 + 7.20 = 47.20 dollars."
+  },
+  {
+   "topic": "Percent problems",
+   "question": "The price of a game rose from $50 to $65. What was the percent increase?",
+   "options": [
+    "15%",
+    "23%",
+    "65%",
+    "30%"
+   ],
+   "answer": "30%",
+   "explanation": "The increase is 15 dollars. As a percent of the original price: 15 ÷ 50 = 0.30 = 30%."
+  },
+  {
+   "topic": "Rational numbers",
+   "question": "What is −8 + 5?",
+   "options": [
+    "−3",
+    "3",
+    "−13",
+    "13"
+   ],
+   "answer": "−3",
+   "explanation": "Start at −8 and move 5 to the right on the number line: −3."
+  },
+  {
+   "topic": "Rational numbers",
+   "question": "What is −6 × (−4)?",
+   "options": [
+    "−24",
+    "−10",
+    "24",
+    "10"
+   ],
+   "answer": "24",
+   "explanation": "A negative times a negative is positive: 6 × 4 = 24."
+  },
+  {
+   "topic": "Rational numbers",
+   "question": "What is −2.5 − 3.75?",
+   "options": [
+    "1.25",
+    "−1.25",
+    "−6.25",
+    "6.25"
+   ],
+   "answer": "−6.25",
+   "explanation": "Subtracting a positive moves further left: −2.5 − 3.75 = −6.25."
+  },
+  {
+   "topic": "Rational numbers",
+   "question": "What is (−3/4) ÷ (1/2)?",
+   "options": [
+    "−1 1/2",
+    "−3/8",
+    "3/8",
+    "1 1/2"
+   ],
+   "answer": "−1 1/2",
+   "explanation": "Multiply by the reciprocal: −3/4 × 2 = −6/4 = −1 1/2. A negative divided by a positive is negative."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "Solve 3x − 7 = 14.",
+   "options": [
+    "x = 2 1/3",
+    "x = 21",
+    "x = 3",
+    "x = 7"
+   ],
+   "answer": "x = 7",
+   "explanation": "Add 7 to both sides: 3x = 21. Divide by 3: x = 7."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "Which expression is equivalent to 5x − 2(x − 4)?",
+   "options": [
+    "3x − 8",
+    "3x + 8",
+    "3x − 4",
+    "7x + 8"
+   ],
+   "answer": "3x + 8",
+   "explanation": "−2(x − 4) = −2x + 8, so 5x − 2x + 8 = 3x + 8. Watch the sign: −2 times −4 is +8."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "Solve −2x > 10.",
+   "options": [
+    "x > −5",
+    "x < −5",
+    "x < 5",
+    "x > 5"
+   ],
+   "answer": "x < −5",
+   "explanation": "Divide both sides by −2. Dividing by a negative number flips the inequality sign: x < −5."
+  },
+  {
+   "topic": "Expressions & equations",
+   "question": "A gym charges $25 to join plus $15 a month. Which equation gives the total cost, c, after m months?",
+   "options": [
+    "c = 25m + 15",
+    "c = 40m",
+    "c = 15m − 25",
+    "c = 15m + 25"
+   ],
+   "answer": "c = 15m + 25",
+   "explanation": "The monthly charge is multiplied by the number of months (15m), and the joining fee is added once (+ 25)."
+  },
+  {
+   "topic": "Geometry",
+   "question": "A circle has a radius of 5 cm. Using 3.14 for π, what is its circumference?",
+   "options": [
+    "31.4 cm",
+    "15.7 cm",
+    "78.5 cm",
+    "62.8 cm"
+   ],
+   "answer": "31.4 cm",
+   "explanation": "Circumference = 2 × π × r = 2 × 3.14 × 5 = 31.4 cm. 78.5 would be the area."
+  },
+  {
+   "topic": "Geometry",
+   "question": "A circle has a diameter of 10 m. Using 3.14 for π, what is its area?",
+   "options": [
+    "31.4 square meters",
+    "314 square meters",
+    "78.5 square meters",
+    "15.7 square meters"
+   ],
+   "answer": "78.5 square meters",
+   "explanation": "The radius is half the diameter, 5 m. Area = π × r × r = 3.14 × 25 = 78.5 square meters."
+  },
+  {
+   "topic": "Geometry",
+   "question": "Two angles are supplementary. One of them measures 65°. What does the other measure?",
+   "options": [
+    "25°",
+    "35°",
+    "115°",
+    "295°"
+   ],
+   "answer": "115°",
+   "explanation": "Supplementary angles add up to 180°: 180 − 65 = 115°. (Complementary angles add up to 90°.)"
+  },
+  {
+   "topic": "Probability",
+   "question": "A bag holds 3 red, 5 blue and 2 green marbles. One marble is picked at random. What is the probability that it is blue?",
+   "options": [
+    "1/2",
+    "1/5",
+    "5/8",
+    "1/3"
+   ],
+   "answer": "1/2",
+   "explanation": "There are 10 marbles and 5 are blue: 5/10 = 1/2."
+  },
+  {
+   "topic": "Probability",
+   "question": "A number cube numbered 1 to 6 is rolled. What is the probability of rolling a number greater than 4?",
+   "options": [
+    "1/2",
+    "2/3",
+    "1/6",
+    "1/3"
+   ],
+   "answer": "1/3",
+   "explanation": "Only 5 and 6 are greater than 4: 2 out of 6 = 1/3."
+  },
+  {
+   "topic": "Probability",
+   "question": "A coin is flipped and a number cube (1 to 6) is rolled. How many different outcomes are possible?",
+   "options": [
+    "8",
+    "12",
+    "6",
+    "36"
+   ],
+   "answer": "12",
+   "explanation": "Each of the 2 coin results can pair with each of the 6 numbers: 2 × 6 = 12."
+  }
+ ]
+}
