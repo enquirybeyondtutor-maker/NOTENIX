@@ -1,0 +1,841 @@
+{
+ "exam": "tara",
+ "slug": "mock-2",
+ "title": "TARA Practice Test 2",
+ "kind": "mock",
+ "summary": "Critical Thinking + Problem Solving · 44 questions · 1 h 20 min",
+ "stages": [
+  "ct",
+  "ps"
+ ],
+ "modules": {
+  "ct": {
+   "title": "Critical Thinking",
+   "section": "ct",
+   "minutes": 40,
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Homework causes arguments in many families.",
+      "Primary schools should stop setting compulsory homework.",
+      "Reading for pleasure is more valuable than homework.",
+      "Secondary school pupils benefit from homework.",
+      "Teachers spend too long marking homework."
+     ],
+     "answer": "B",
+     "explanation": "The research finding, the family conflict and the better uses of the time are all reasons. They support one recommendation: compulsory homework should stop in primary schools.",
+     "passage": "Research has found little evidence that homework improves the results of children under eleven. It is, however, a common cause of arguments at home, and it takes up time that young children could spend reading for pleasure, playing outside or simply resting. Primary schools should stop setting compulsory homework, although they might still suggest optional activities for families who want them.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "A four-day working week would reduce productivity.",
+      "Companies that volunteer for trials are unusually well run.",
+      "The government should not introduce a four-day week.",
+      "Office work is easier to reorganise than factory or hospital work.",
+      "The trials do not show that a four-day week would work across the whole economy."
+     ],
+     "answer": "E",
+     "explanation": "The passage accepts that productivity held up in the trials, then explains why the trial firms were not typical. Its conclusion is the limited one: the trials do not show the idea would work everywhere. It does not claim productivity would fall or that the policy should be rejected.",
+     "passage": "Supporters of a four-day working week point to trials in which companies cut hours with no loss of output. But the companies in these trials chose to take part, and most were office-based firms whose managers were already keen on the idea. Hospitals, schools, factories and shops, where output depends on staff being present, were barely represented. Whatever the trials show about firms like these, they do not show that a four-day week would work across the whole economy.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Museums look after artefacts better than anyone else could.",
+      "All artefacts taken during colonial rule should be returned.",
+      "The argument about care would justify taking objects from anyone.",
+      "Whether an artefact should be returned depends on how it was acquired, not on who can look after it best.",
+      "Museums should not be allowed to buy new artefacts."
+     ],
+     "answer": "D",
+     "explanation": "The passage rejects one argument (museums care for objects better) by showing where it would lead, and puts forward the real test instead: how the object was acquired. The point about where the care argument leads is a reason, not the conclusion.",
+     "passage": "It is often said that museums should keep artefacts taken from other countries because they can look after them better than anyone else. But if that were a good reason, it would justify taking any object from anyone who looked after it less well, which nobody accepts. Whether an artefact should be returned depends on how it was acquired, not on who can look after it best.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Everyone in the maths club is in the chess club.",
+      "Some members of the drama club are in the chess club.",
+      "No one in the chess club is in the drama club.",
+      "The maths club is larger than the drama club.",
+      "Anyone not in the drama club is in the maths club."
+     ],
+     "answer": "C",
+     "explanation": "Every chess member is in the maths club, and no maths member is in the drama club, so no chess member can be in the drama club. The passage does not say that all maths members play chess, or compare club sizes.",
+     "passage": "Every student in the chess club is also in the maths club. No one in the maths club is in the drama club.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "More households in the town had a dog in 2020 than in 2010.",
+      "Fewer households in the town had a dog in 2020 than in 2010.",
+      "The number of dogs in the town rose between 2010 and 2020.",
+      "The population of the town rose by half between 2010 and 2020.",
+      "Households formed after 2010 were less likely to own a dog."
+     ],
+     "answer": "A",
+     "explanation": "40% of 20,000 is 8,000 households; 30% of 30,000 is 9,000 households. So more households had a dog, even though the share fell. Households are not people or dogs, so nothing follows about population or the number of dogs.",
+     "passage": "In 2010, 40% of the town's 20,000 households had a dog. In 2020, 30% of the town's 30,000 households had a dog.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "The family was made up of three adults and one child.",
+      "The family included two children.",
+      "One member of the family was under 3.",
+      "The family included at least two adults and two children.",
+      "The family would have paid less with a family ticket."
+     ],
+     "answer": "A",
+     "explanation": "With adults at £12 and children at £6, four paying or free people costing £42 must be three adults (£36) and one child (£6). Two adults would leave £18 for at most two more people, which is too much, and an under-3 would leave three paying places for £42, which needs more than three adults.",
+     "passage": "A zoo charges £12 for each adult and £6 for each child aged 3 to 15. Children under 3 go in free. The four members of the Patel family went to the zoo together and paid £42 in total.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-06"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Fewer than 100 of the people asked read news both online and in print.",
+      "Online news is more reliable than printed news.",
+      "Most of the people asked read news both online and in print.",
+      "Printed newspapers will soon stop being published.",
+      "Exactly 100 of the people asked read news both online and in print."
+     ],
+     "answer": "E",
+     "explanation": "600 + 500 = 1,100 answers come from only 1,000 people, each of whom gave at least one. So exactly 100 people must have been counted twice, reading both.",
+     "passage": "In a poll of 1,000 people, 600 said they read news online and 500 said they read a printed newspaper. Every person asked said they did at least one of these.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-07"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Business users travel a lot.",
+      "Other manufacturers cannot improve their batteries.",
+      "Battery life is the most important feature of a phone for business users.",
+      "Most phones are bought by business users.",
+      "The phone's camera is better than its rivals' cameras."
+     ],
+     "answer": "C",
+     "explanation": "Having the longest battery life only makes it the best phone for business users if battery life outweighs everything else they need, such as security, price or reliability.",
+     "passage": "Our new phone has the longest battery life of any phone on the market. It is therefore the best phone for business users.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-08"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Most children read on screens for several hours a day.",
+      "Adults who read on screens all day read nothing on paper.",
+      "Eye tests for adults are more accurate than eye tests for children.",
+      "Children's eyes respond to reading on screens in the same way as adults' eyes do.",
+      "Screens today are brighter than screens used to be."
+     ],
+     "answer": "D",
+     "explanation": "The evidence is about adults; the conclusion is about children. The argument only works if what is true of adult eyes is also true of children's eyes, which are still developing.",
+     "passage": "Reading on screens cannot harm children's eyesight. After all, most adults who read on screens all day have perfectly good eyesight.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-09"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Most people catch at least one cold every year.",
+      "The cost of the drug is less than the value of the working days it would save.",
+      "The drug has no side effects of any kind.",
+      "Everyone with a cold stays off work for the whole cold.",
+      "Colds are more common in winter than in summer."
+     ],
+     "answer": "B",
+     "explanation": "Saving money overall requires the savings to be larger than the cost. If the drug cost more than the working days it saved, prescribing it to everyone would lose money. The other options are either not needed or much stronger than the argument needs.",
+     "passage": "A new drug shortens the common cold by two days. Colds cost the economy millions of lost working days each year, so prescribing the drug to everyone with a cold would save money.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-10"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Tom usually leaves work before 9 pm.",
+      "Tom's car would still have been in the car park if Tom had still been at work.",
+      "Sue arrived at the car park at exactly 9 pm.",
+      "Tom had no reason to stay late that evening.",
+      "Sue would have seen Tom if he had still been at work."
+     ],
+     "answer": "B",
+     "explanation": "The argument goes from 'his car was gone' to 'he had gone'. That needs the car's absence to show Tom's absence: if he could have been at work with his car elsewhere (lent out, parked on the street), the conclusion would not follow. The time Sue arrived is stated, not assumed.",
+     "passage": "Tom must have left work before 9 pm. When Sue arrived in the car park at 9 pm, his car was not there.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-11"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "Many people now own an e-reader.",
+      "Printed books cost more to produce than e-books.",
+      "E-books still make up less than a fifth of all book sales.",
+      "Some authors now publish only e-books.",
+      "Libraries have started to lend e-books."
+     ],
+     "answer": "C",
+     "explanation": "A 30% rise from a small base and a 5% fall from a large one leave printed books far ahead. If e-books are still under a fifth of sales, printed books are nowhere near disappearing.",
+     "passage": "Last year sales of e-books rose by 30% while sales of printed books fell by 5%. Printed books will soon disappear.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-12"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "In cities that added cycle lanes, accidents per cyclist fell after the new lanes opened.",
+      "Cycling is good for people's health.",
+      "Cycle lanes are cheap to build compared with roads.",
+      "Cities with more cycle lanes tend to be flatter than other cities.",
+      "Most cyclists say they prefer to ride in cycle lanes."
+     ],
+     "answer": "A",
+     "explanation": "A comparison between cities could reflect other differences between them, such as flatness. Seeing accidents fall in the same cities once lanes were added is much better evidence that the lanes made the difference. Flatter cities would weaken the argument.",
+     "passage": "Cities with more cycle lanes have fewer cycling accidents per cyclist than cities with fewer cycle lanes. Building more cycle lanes would therefore make cycling safer.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-13"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "The centre is open in the evenings as well as the day.",
+      "Some students who use the centre still fail their exams.",
+      "The centre's staff are all experienced teachers.",
+      "Students who choose to use the centre had higher entry grades, on average, than those who do not.",
+      "The university plans to make the centre bigger."
+     ],
+     "answer": "D",
+     "explanation": "If the students who use the centre were already stronger, their higher marks could come from that, not from the centre. A few students still failing does not affect the averages.",
+     "passage": "Students who use the university's study skills centre get higher marks, on average, than students who do not. The centre clearly improves students' marks.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-14"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "Many teenagers say they would like to start school later.",
+      "Teachers in most schools would prefer an earlier finish.",
+      "Some adults also have body clocks that run late.",
+      "Schools that start later finish later in the afternoon.",
+      "When one district moved its school start time from 8:00 to 10:00, attendance and grades rose, while they stayed level in a similar district that did not change."
+     ],
+     "answer": "E",
+     "explanation": "This is a before-and-after comparison with a similar district as a control, so it ties the improvement to the change in start time. The others are opinions or irrelevant.",
+     "passage": "Teenagers' body clocks run later than those of children and adults, so many are not properly awake in early lessons. Schools starting at 10:00 instead of 8:00 would improve teenagers' attendance and grades.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-15"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It confuses a necessary condition with a sufficient one.",
+      "It assumes what it sets out to prove.",
+      "It draws a general conclusion from a group that may not be representative.",
+      "It attacks the other candidates rather than their policies.",
+      "It assumes that one event caused another."
+     ],
+     "answer": "C",
+     "explanation": "People we know tend to be like us. The speaker's friends may hold very different views from the electorate as a whole, so their votes say little about the result.",
+     "passage": "Everyone I know is voting for the Green candidate, so the Green candidate is sure to win the election.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-16"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It relies on the opinion of the newspaper's readers.",
+      "It assumes the very thing it is trying to prove.",
+      "It generalises from a single story.",
+      "It attacks the newspaper's critics rather than their arguments.",
+      "It confuses cause and effect."
+     ],
+     "answer": "B",
+     "explanation": "The argument says the newspaper is trustworthy because it says it is accurate, and its word can be trusted because it is trustworthy. The conclusion is used as a premise: the reasoning is circular.",
+     "passage": "This newspaper is trustworthy. It states clearly that it only publishes accurate stories, and a trustworthy newspaper would not lie about something like that.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-17"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It relies on a single study.",
+      "It assumes that all diet research is unreliable.",
+      "It assumes that being overweight is caused by diet alone.",
+      "It rejects a claim because of a fact about the person making it rather than the evidence for it.",
+      "It confuses a correlation with a cause."
+     ],
+     "answer": "D",
+     "explanation": "Whether Dr Smith follows her own advice has no bearing on whether her research is sound. The argument dismisses the research by attacking her, not by examining her evidence.",
+     "passage": "Dr Smith's research says that cutting sugar is the most effective way to lose weight. We can ignore it: Dr Smith is overweight herself.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-18"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "If a plant is overwatered, its leaves turn yellow. This plant's leaves are yellow, so it must have been overwatered.",
+      "If a plant is overwatered, its leaves turn yellow. This plant was overwatered, so its leaves will turn yellow.",
+      "If a plant is overwatered, its leaves turn yellow. This plant's leaves are green, so it was not overwatered.",
+      "All overwatered plants have yellow leaves. Some plants in the shop are overwatered, so some have yellow leaves.",
+      "Most plants with yellow leaves were overwatered, so this yellow-leaved plant was probably overwatered."
+     ],
+     "answer": "A",
+     "explanation": "The passage reasons 'if P then Q; Q; so P', which is a mistake (school might close for other reasons). The plant argument makes the same mistake: yellow leaves could have other causes. The other two 'if' options are valid forms.",
+     "passage": "If it snows heavily, the school closes. The school is closed today, so it must have snowed heavily.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-19"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "All musicians are teachers. Some teachers have a degree. So some musicians have a degree.",
+      "Some musicians are teachers. Some teachers have a degree. So some musicians have a degree.",
+      "All teachers have a degree. No musicians are teachers. So no musicians have a degree.",
+      "Some musicians have a degree. All teachers have a degree. So some musicians are teachers.",
+      "Some musicians are teachers. All teachers have a degree. So some musicians have a degree."
+     ],
+     "answer": "E",
+     "explanation": "The passage has the valid form: some A are B; all B are C; so some A are C. The musicians argument with 'some musicians are teachers; all teachers have a degree' matches it exactly. The others use 'some ... some', a negative premise or a reversed conclusion, none of which are valid.",
+     "passage": "Some doctors are vegetarians. All vegetarians avoid gelatine. So some doctors avoid gelatine.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-20"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "A company should reward staff who report rule-breaking.",
+      "A school should set the same homework for every pupil in a class.",
+      "A company should not cut the bonuses of all its staff because a few employees broke the rules.",
+      "A team should be punished if any of its players cheats.",
+      "Pupils who misbehave should be given extra homework."
+     ],
+     "answer": "C",
+     "explanation": "The principle is that people who did nothing wrong should not be penalised for the wrongdoing of others. Cutting everyone's bonus for a few people's rule-breaking breaks the same principle. Punishing a whole team goes against it.",
+     "passage": "The whole class should not be kept in at break because a few pupils misbehaved. Those who did nothing wrong should not suffer for what others did.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-21"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "A teacher should give pupils easier tests so that they do not lose confidence.",
+      "A financial adviser should tell a client about the risks of an investment, even if the client would rather not hear about them.",
+      "A friend should keep a secret if asked to.",
+      "A shop should not tell customers about a sale until it starts.",
+      "A manager should decide what training each employee needs."
+     ],
+     "answer": "B",
+     "explanation": "The principle is that adults are entitled to the facts they need to make decisions about their own lives, even unwelcome facts. The adviser example applies it to money. Easier tests to protect feelings go against it.",
+     "passage": "A doctor should never hold back information about a patient's illness, even to spare the patient's feelings. Adults are entitled to make decisions about their own lives with all the relevant facts.",
+     "section": "ct",
+     "id": "tara-mock-2-ct-22"
+    }
+   ]
+  },
+  "ps": {
+   "title": "Problem Solving",
+   "section": "ps",
+   "minutes": 40,
+   "questions": [
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A cinema charges £11 for an adult, £7 for a child and £8 for anyone aged 65 or over. A family ticket for 2 adults and 2 children costs £30. A group of 2 adults, 3 children and 1 grandparent aged 70 goes to see a film. What is the cheapest total price they can pay?",
+     "options": [
+      "£43",
+      "£45",
+      "£48",
+      "£51",
+      "£53"
+     ],
+     "answer": "B",
+     "explanation": "The family ticket covers 2 adults and 2 children for £30. Add the third child (£7) and the grandparent (£8): £45. Paying for everyone separately would cost £22 + £21 + £8 = £51.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-01"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A library is open from 09:00 to 17:00 Monday to Friday and from 10:00 to 16:00 on Saturday. It is closed on Sunday. For how many hours is it open each week?",
+     "options": [
+      "40",
+      "42",
+      "46",
+      "48",
+      "52"
+     ],
+     "answer": "C",
+     "explanation": "Monday to Friday: 5 × 8 = 40 hours. Saturday: 6 hours. Total 46 hours.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-02"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Phone plan A costs £10 a month and includes 5 GB of data; extra data costs £2 for each GB or part of a GB. Plan B costs £15 a month and includes 12 GB; extra data costs £1.50 for each GB or part of a GB. Over three months Kai used 8 GB, 4 GB and 13 GB. How much more would plan A have cost than plan B over the three months?",
+     "options": [
+      "£1.50",
+      "£2.50",
+      "£3.50",
+      "£4.50",
+      "£5.50"
+     ],
+     "answer": "E",
+     "explanation": "Plan A: (£10 + 3 × £2) + £10 + (£10 + 8 × £2) = £16 + £10 + £26 = £52. Plan B: £15 + £15 + (£15 + £1.50) = £46.50. Difference £5.50.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-03"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A flight leaves London at 14:30 London time and takes 7 hours 45 minutes to reach New York. New York time is 5 hours behind London time. At what time, New York time, does the flight land?",
+     "options": [
+      "12:15",
+      "13:15",
+      "16:15",
+      "17:15",
+      "22:15"
+     ],
+     "answer": "D",
+     "explanation": "In London time the flight lands at 14:30 + 7:45 = 22:15. New York is 5 hours behind, so it is 17:15 there.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-04"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A shop runs an offer: in every group of three items, the cheapest is free. The till sorts a customer's items from most to least expensive and groups them in threes in that order. Ana buys six items costing £8, £12, £5, £15, £9 and £6. How much does she pay?",
+     "options": [
+      "£36",
+      "£41",
+      "£44",
+      "£46",
+      "£50"
+     ],
+     "answer": "B",
+     "explanation": "Sorted: £15, £12, £9 | £8, £6, £5. The free items are £9 and £5. She pays £55 − £14 = £41.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-05"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Rainfall at a weather station from January to June was 80 mm, 60 mm, 70 mm, 50 mm, 40 mm and 30 mm. What was the mean rainfall of the months that had more rain than the six-month mean?",
+     "options": [
+      "55 mm",
+      "60 mm",
+      "70 mm",
+      "75 mm",
+      "80 mm"
+     ],
+     "answer": "C",
+     "explanation": "The six-month mean is 330 ÷ 6 = 55 mm. The months above it had 80, 60 and 70 mm, whose mean is 210 ÷ 3 = 70 mm.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-06"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Leo is paid £12 an hour for the first 37.5 hours he works in a week, and time and a half for every hour after that. Last week he worked 45 hours. How much was he paid?",
+     "options": [
+      "£585",
+      "£600",
+      "£630",
+      "£675",
+      "£810"
+     ],
+     "answer": "A",
+     "explanation": "37.5 × £12 = £450. The other 7.5 hours are paid at £18: 7.5 × £18 = £135. Total £585.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-07"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "1 March in a certain year is a Monday. On what day of the week is 1 June in the same year?",
+     "options": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday"
+     ],
+     "answer": "C",
+     "explanation": "From 1 March to 1 June is 31 + 30 + 31 = 92 days, which is 13 weeks and 1 day. So 1 June is one day later in the week than Monday: Tuesday.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-08"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Two numbers add up to 50 and differ by 14. What is the larger number?",
+     "options": [
+      "18",
+      "25",
+      "28",
+      "32",
+      "36"
+     ],
+     "answer": "D",
+     "explanation": "Larger + smaller = 50 and larger − smaller = 14. Adding: 2 × larger = 64, so the larger number is 32 (and the smaller 18).",
+     "section": "ps",
+     "id": "tara-mock-2-ps-09"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A tap fills an empty tank in 4 hours. A drain empties a full tank in 6 hours. If the tank starts empty and both the tap and the drain are open, how long does it take to fill?",
+     "options": [
+      "2 hours",
+      "5 hours",
+      "8 hours",
+      "10 hours",
+      "12 hours"
+     ],
+     "answer": "E",
+     "explanation": "Each hour the tap adds 1/4 of the tank and the drain removes 1/6. The net gain is 3/12 − 2/12 = 1/12 of a tank an hour, so it takes 12 hours.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-10"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The sum of three consecutive odd numbers is 87. What is the largest of the three?",
+     "options": [
+      "29",
+      "31",
+      "33",
+      "35",
+      "37"
+     ],
+     "answer": "B",
+     "explanation": "The middle number is 87 ÷ 3 = 29, so the numbers are 27, 29 and 31. The largest is 31.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-11"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A map has a scale of 1 : 25,000. Two villages are 6.4 cm apart on the map. How far apart are they in real life?",
+     "options": [
+      "1.6 km",
+      "2.5 km",
+      "4 km",
+      "6.4 km",
+      "16 km"
+     ],
+     "answer": "A",
+     "explanation": "6.4 cm × 25,000 = 160,000 cm = 1,600 m = 1.6 km.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-12"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The price of a bicycle including VAT at 20% is £84. What is its price before VAT is added?",
+     "options": [
+      "£64",
+      "£67.20",
+      "£70",
+      "£80",
+      "£100.80"
+     ],
+     "answer": "C",
+     "explanation": "The price with VAT is 120% of the price without it. £84 ÷ 1.2 = £70. Taking 20% off £84 gives £67.20, which is wrong because the 20% was added to a smaller amount.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-13"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A rectangle has a perimeter of 34 cm and an area of 60 cm². How long is its longer side?",
+     "options": [
+      "5 cm",
+      "8.5 cm",
+      "10 cm",
+      "11 cm",
+      "12 cm"
+     ],
+     "answer": "E",
+     "explanation": "Length + width = 17 and length × width = 60. The pair 12 and 5 works (12 + 5 = 17, 12 × 5 = 60), so the longer side is 12 cm.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-14"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The mean of five numbers is 12. When one of the numbers is removed, the mean of the other four is 10. What number was removed?",
+     "options": [
+      "2",
+      "10",
+      "12",
+      "18",
+      "20"
+     ],
+     "answer": "E",
+     "explanation": "The five numbers total 5 × 12 = 60. The remaining four total 4 × 10 = 40. The removed number is 60 − 40 = 20.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-15"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A car loses 20% of its value each year. It was bought for £15,000. What is it worth after two years?",
+     "options": [
+      "£9,000",
+      "£9,600",
+      "£10,200",
+      "£12,000",
+      "£12,600"
+     ],
+     "answer": "B",
+     "explanation": "After one year it is worth 80% of £15,000 = £12,000. After two years it is worth 80% of £12,000 = £9,600. Taking 40% off at once (£9,000) ignores that the second fall is on the lower value.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-16"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following fractions is equal to 0.375?",
+     "options": [
+      "9/25",
+      "3/8",
+      "6/15",
+      "5/12",
+      "3/7"
+     ],
+     "answer": "B",
+     "explanation": "0.375 = 375/1000 = 3/8. The others are 0.36, about 0.417, about 0.429 and 0.4.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-17"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "At exactly 3 o'clock, the hands of a clock make an angle of 90°. At which of the following times do the hands make the same angle?",
+     "options": [
+      "2 o'clock",
+      "4 o'clock",
+      "6 o'clock",
+      "9 o'clock",
+      "12:15"
+     ],
+     "answer": "D",
+     "explanation": "Each hour mark is 30° apart. At 9 o'clock the hands are 3 hours apart: 90°. At 2 and 4 o'clock they are 60° and 120°; at 6 o'clock 180°. At 12:15 the hour hand has moved 7.5°, so the angle is 82.5°.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-18"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "In code X, each letter is replaced by the next letter of the alphabet (A becomes B, Z becomes A). In code Y, each letter is replaced by the letter two places later (A becomes C, Y becomes A). Which word becomes the same in code Y as CAT becomes in code X?",
+     "options": [
+      "BAT",
+      "DBU",
+      "AYR",
+      "CZS",
+      "BZS"
+     ],
+     "answer": "E",
+     "explanation": "In code X, CAT becomes DBU. In code Y we need a word that becomes DBU, so go back two letters from each: D → B, B → Z, U → S, giving BZS.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-19"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "The sequence 3, 7, 15, 31 follows the rule 'double and add 1'. Which of the following sequences follows the same rule?",
+     "options": [
+      "1, 4, 9, 16",
+      "2, 4, 8, 16",
+      "3, 6, 12, 24",
+      "4, 9, 19, 39",
+      "5, 9, 13, 17"
+     ],
+     "answer": "D",
+     "explanation": "4 × 2 + 1 = 9, 9 × 2 + 1 = 19, 19 × 2 + 1 = 39. The others double, are square numbers, double, and add 4.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-20"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following has the same number of lines of symmetry as a regular hexagon?",
+     "options": [
+      "The capital letter H",
+      "An equilateral triangle",
+      "A square",
+      "A six-pointed star made of two overlapping equilateral triangles",
+      "A rectangle that is not a square"
+     ],
+     "answer": "D",
+     "explanation": "A regular hexagon has 6 lines of symmetry, and so does the six-pointed star. The letter H and a rectangle have 2, an equilateral triangle 3 and a square 4.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-21"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following ratios is equivalent to 1.5 : 2.5?",
+     "options": [
+      "5 : 3",
+      "12 : 20",
+      "6 : 8",
+      "10 : 15",
+      "15 : 20"
+     ],
+     "answer": "B",
+     "explanation": "1.5 : 2.5 = 3 : 5, and 12 : 20 also simplifies to 3 : 5. The others simplify to 3 : 4, 2 : 3, 3 : 4 and 5 : 3.",
+     "section": "ps",
+     "id": "tara-mock-2-ps-22"
+    }
+   ]
+  }
+ }
+}

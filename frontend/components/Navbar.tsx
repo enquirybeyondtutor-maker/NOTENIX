@@ -53,12 +53,12 @@ const PUBLIC_LINKS: NavItem[] = [
     ],
   },
   {
-    // UK university admissions tests. TARA has no page yet, so it opens the request form.
+    // UK university admissions tests.
     href: "/tmua", label: "Admissions tests",
     children: [
       { href: "/tmua", label: "TMUA" },
       { href: "/esat", label: "ESAT" },
-      { href: "/request?exam=TARA", label: "TARA (request a mock)" },
+      { href: "/tara", label: "TARA" },
     ],
   },
   { href: "/ks3", label: "KS3" },

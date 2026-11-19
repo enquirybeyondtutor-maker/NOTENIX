@@ -1,0 +1,1221 @@
+{
+ "exam": "tara",
+ "slug": "drills",
+ "title": "TARA skill drills",
+ "kind": "drills",
+ "stages": [],
+ "modules": {
+  "main-conclusion": {
+   "title": "Main conclusion",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Find the claim the rest of the passage is there to support. It may come first, last or in the middle, and it is not the same as a reason or an intermediate step.",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Mobile phones distract pupils in lessons.",
+      "Mobile phones should be banned in classrooms.",
+      "Phones make it easier to cheat in tests.",
+      "Pupils spend too much time on their phones.",
+      "Teachers find it hard to control phone use."
+     ],
+     "answer": "B",
+     "explanation": "The distraction and cheating points are the reasons; the ban is what they are given to support.",
+     "passage": "Mobile phones should be banned in classrooms. They distract pupils from their work, and they make it easier to cheat in tests.",
+     "section": "drill",
+     "id": "tara-drill-main-conclusion-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Lorries no longer pass through the village centre.",
+      "The high street is quieter and safer than before.",
+      "More villages should have bypasses.",
+      "Lorries are dangerous on narrow streets.",
+      "The bypass has been good for the village."
+     ],
+     "answer": "E",
+     "explanation": "Lorries leaving the centre leads to a quieter, safer high street, and both support the overall judgement that the bypass has been good for the village.",
+     "passage": "Since the new bypass opened, lorries no longer drive through the village centre. As a result, the high street is quieter and safer than it has been for years. The bypass has been good for the village.",
+     "section": "drill",
+     "id": "tara-drill-main-conclusion-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Much plastic cannot be recycled at all.",
+      "We should use less plastic in the first place.",
+      "Plastic recycling should be stopped.",
+      "Recycling alone will not solve the problem of plastic waste.",
+      "Recycled plastic is lower in quality than new plastic."
+     ],
+     "answer": "D",
+     "explanation": "The two facts about plastic are reasons. The 'therefore' introduces the conclusion they support. Using less plastic may be a sensible response, but the passage does not say it.",
+     "passage": "Much plastic cannot be recycled at all, and plastic that can be recycled breaks down a little each time, so it can only be reused a few times. Recycling alone, therefore, will not solve the problem of plastic waste.",
+     "section": "drill",
+     "id": "tara-drill-main-conclusion-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Zoos are cruel to the animals they keep.",
+      "Several species exist today only because zoos saved them.",
+      "Zoos do more good than harm.",
+      "All endangered species should be kept in zoos.",
+      "Zoos pay for conservation projects in the wild."
+     ],
+     "answer": "C",
+     "explanation": "The passage mentions the critics' view and then gives breeding, conservation funding and saved species as reasons to reach its own verdict: zoos do more good than harm.",
+     "passage": "Some people believe that keeping animals in zoos is cruel. However, modern zoos breed endangered species and pay for conservation work in the wild, and several species exist today only because zoos saved them from extinction. Zoos do more good than harm.",
+     "section": "drill",
+     "id": "tara-drill-main-conclusion-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Governments should not assume that replacing petrol cars with electric ones will, on its own, meet their climate targets.",
+      "Electric cars are not as clean as they first appear.",
+      "Electric cars produce no exhaust fumes.",
+      "Making car batteries uses a great deal of energy.",
+      "Governments should stop encouraging people to buy electric cars."
+     ],
+     "answer": "A",
+     "explanation": "'Not as clean as they first appear' is an intermediate conclusion drawn from the points about power stations and batteries. It then supports the final claim about what governments should not assume.",
+     "passage": "Electric cars produce no exhaust fumes. But the electricity that charges them is often generated by burning gas or coal, and making their batteries uses a great deal of energy. So electric cars are not as clean as they first appear. Governments should not assume that replacing petrol cars with electric ones will, on its own, meet their climate targets.",
+     "section": "drill",
+     "id": "tara-drill-main-conclusion-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Main conclusion",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best expresses the main conclusion of the above argument?",
+     "options": [
+      "Judging the library by the number of books borrowed misses most of what it does.",
+      "The new library was a waste of money.",
+      "Few people borrow books any more.",
+      "Every town should build a new library.",
+      "The library is used for many things besides borrowing books."
+     ],
+     "answer": "A",
+     "explanation": "The critics' view is reported, not endorsed. The list of other uses is the reason, and it supports the final sentence: borrowing figures miss most of the library's value.",
+     "passage": "Critics of the new library say it was a waste of money because few people borrow books any more. But borrowing is only one of the things a library is for. It is also where people without computers go online, where children do their homework and where community groups meet, and all of these uses have grown since it opened. Judging the library by the number of books borrowed misses most of what it does.",
+     "section": "drill",
+     "id": "tara-drill-main-conclusion-06"
+    }
+   ]
+  },
+  "drawing-conclusions": {
+   "title": "Drawing conclusions",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Decide what must follow from the passage. Take the information as true, add nothing of your own, and watch for conclusions that go further than the evidence.",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "The 10:15 train is going to York.",
+      "Every train that stops at York goes to Leeds.",
+      "The 10:15 train is running late.",
+      "No trains stop at York.",
+      "The 10:15 train is not going to Leeds."
+     ],
+     "answer": "E",
+     "explanation": "Every Leeds train stops at York. The 10:15 does not stop at York, so it cannot be a Leeds train.",
+     "passage": "Every train to Leeds stops at York. The 10:15 train does not stop at York.",
+     "section": "drill",
+     "id": "tara-drill-drawing-conclusions-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Kim works on Saturdays.",
+      "Kim does not work on Saturdays.",
+      "Kim may or may not work on Saturdays.",
+      "Everyone who gets a weekday off works on Saturdays.",
+      "Kim works six days a week."
+     ],
+     "answer": "C",
+     "explanation": "Saturday workers get a weekday off, but other staff might too. Knowing Kim has a weekday off does not tell us whether Kim works Saturdays.",
+     "passage": "Every member of staff who works on Saturdays gets a day off during the week. Kim gets a day off during the week.",
+     "section": "drill",
+     "id": "tara-drill-drawing-conclusions-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Shop B's sales rose by more money than Shop A's.",
+      "Shop B now sells more than Shop A.",
+      "Shop A is losing customers to Shop B.",
+      "Shop B's sales rose by a larger percentage than Shop A's.",
+      "Both shops' sales rose by the same amount."
+     ],
+     "answer": "D",
+     "explanation": "Shop A rose by £40,000 out of £200,000 (20%); Shop B by £20,000 out of £50,000 (40%). B's rise is larger as a percentage but smaller in money.",
+     "passage": "Last year Shop A's sales rose from £200,000 to £240,000, and Shop B's sales rose from £50,000 to £70,000.",
+     "section": "drill",
+     "id": "tara-drill-drawing-conclusions-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "Ella failed the course.",
+      "Ella was not on module 2.",
+      "Ella passed the course.",
+      "Everyone who passed module 1 went on to module 2.",
+      "Everyone who passed the course was on module 2."
+     ],
+     "answer": "B",
+     "explanation": "Nobody who failed module 1 was allowed onto module 2, and Ella failed module 1. Whether she passed the course is not stated: the passage says only that module 2 students passed, not that nobody else did.",
+     "passage": "No one who failed module 1 was allowed onto module 2. Everyone on module 2 passed the course. Ella failed module 1.",
+     "section": "drill",
+     "id": "tara-drill-drawing-conclusions-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "There are 5,000 cars in the town.",
+      "2,500 households in the town have exactly one car.",
+      "1,000 households have exactly two cars.",
+      "Most households have two or more cars.",
+      "There are more cars than households in the town."
+     ],
+     "answer": "B",
+     "explanation": "20% have no car and 30% have two or more, so the remaining 50% have exactly one: half of 5,000 is 2,500. The number of cars cannot be found because we do not know how many cars the 'two or more' households have.",
+     "passage": "In a town of 5,000 households, 20% of households have no car and 30% have two or more cars.",
+     "section": "drill",
+     "id": "tara-drill-drawing-conclusions-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Drawing conclusions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following conclusions can be drawn from the above passage?",
+     "options": [
+      "The bridge is never closed.",
+      "The bus took the long route today.",
+      "The bridge was not closed today.",
+      "The ferry waited for the bus today.",
+      "The bus always catches the 9:00 ferry."
+     ],
+     "answer": "C",
+     "explanation": "Closed bridge → long route → missed ferry. The bus caught the ferry, so it did not take the long route, so the bridge was not closed. Nothing follows about other days.",
+     "passage": "If the bridge is closed, the bus takes the long route. If the bus takes the long route, it misses the 9:00 ferry. Today the bus caught the 9:00 ferry.",
+     "section": "drill",
+     "id": "tara-drill-drawing-conclusions-06"
+    }
+   ]
+  },
+  "assumptions": {
+   "title": "Assumptions",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Find the unstated claim the argument needs. Test each option: if it were false, would the conclusion collapse?",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "The new chef is a better cook than the previous one.",
+      "The restaurant has changed its menu.",
+      "The new chef trained in France.",
+      "The restaurant is often busy.",
+      "Most customers liked the old food."
+     ],
+     "answer": "A",
+     "explanation": "A new chef only means better food if the new chef cooks better than the old one. If not, the food could stay the same or get worse.",
+     "passage": "The restaurant has a new chef, so the food there will be better than before.",
+     "section": "drill",
+     "id": "tara-drill-assumptions-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Umbrellas are the shop's best-selling item.",
+      "The forecast is always accurate.",
+      "Umbrellas cost less in bulk.",
+      "The shop does not already have enough umbrellas to meet the extra demand.",
+      "Other shops will also order more umbrellas."
+     ],
+     "answer": "D",
+     "explanation": "Ordering more is only needed if current stock would run out. The forecast does not need to be always accurate, only reliable enough this time.",
+     "passage": "Sales of umbrellas rise whenever it rains. The forecast says it will rain all next week, so the shop should order more umbrellas.",
+     "section": "drill",
+     "id": "tara-drill-assumptions-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Political parties want more young members.",
+      "Older people join more parties than young people.",
+      "Young people do not vote.",
+      "Political parties are less popular than they used to be.",
+      "Joining a political party is a good measure of interest in politics."
+     ],
+     "answer": "E",
+     "explanation": "The evidence is about party membership; the conclusion is about interest in politics. Young people might follow politics closely through campaigns or online without joining a party.",
+     "passage": "Far fewer young people join political parties than did thirty years ago. Young people are less interested in politics than they used to be.",
+     "section": "drill",
+     "id": "tara-drill-assumptions-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Most museums charge for entry.",
+      "Visitors spend money in the museum café.",
+      "The benefit of having more visitors would outweigh the loss of income from entry charges.",
+      "The museum's collection is popular with tourists.",
+      "The museum is not currently full."
+     ],
+     "answer": "C",
+     "explanation": "More visitors is only a reason to stop charging if it is worth more than the money given up. Café spending might help, but the argument does not need it.",
+     "passage": "The museum should stop charging for entry. Museums that are free attract many more visitors than those that charge.",
+     "section": "drill",
+     "id": "tara-drill-assumptions-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "Ella has copied work before.",
+      "Ella could not have improved her vocabulary so much by her own efforts.",
+      "Most students copy from the internet.",
+      "Teachers can always tell when work is copied.",
+      "Ella's essay is the best in her class."
+     ],
+     "answer": "B",
+     "explanation": "The argument infers copying from a sudden jump in vocabulary. If Ella could have improved that much herself, for example by reading widely, the jump would not show copying.",
+     "passage": "Ella's latest essay must have been copied from the internet. It uses far more advanced vocabulary than any of her earlier work.",
+     "section": "drill",
+     "id": "tara-drill-assumptions-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Assumptions",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following is an underlying assumption of the above argument?",
+     "options": [
+      "The new houses would be cheaper to build than older houses.",
+      "Most people in the area rent their homes.",
+      "Rents in the area have risen every year.",
+      "The new houses would be available for people to live in, rather than left empty or used as second homes.",
+      "Builders want to build in the area."
+     ],
+     "answer": "D",
+     "explanation": "More homes can only bring rents down if they add to the homes people can actually rent or live in. If they stood empty, the shortage would remain.",
+     "passage": "Building more houses in the area will bring rents down. Rents are high only because there are not enough homes.",
+     "section": "drill",
+     "id": "tara-drill-assumptions-06"
+    }
+   ]
+  },
+  "strengthening-and-weakening": {
+   "title": "Strengthening and weakening",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Decide which new fact makes the conclusion more or less likely. Look for other explanations of the evidence, and for evidence that rules them out.",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "Both rise in hot weather, when more people buy ice cream and more people go swimming.",
+      "Ice cream contains a lot of sugar.",
+      "Most drownings happen in the sea.",
+      "Some people eat ice cream in winter.",
+      "Lifeguards work longer hours in summer."
+     ],
+     "answer": "A",
+     "explanation": "Hot weather causes both rises, which explains the link without ice cream making swimming dangerous.",
+     "passage": "Ice cream sales and the number of drownings both rise in the same months. Eating ice cream must make swimming more dangerous.",
+     "section": "drill",
+     "id": "tara-drill-strengthening-and-weakening-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "The library has also bought more books.",
+      "Some regular visitors now come on Sundays instead of Saturdays.",
+      "Sunday opening costs more in staff wages.",
+      "Other libraries open on Sundays too.",
+      "Most of the increase came from people visiting on Sundays who had never used the library before."
+     ],
+     "answer": "E",
+     "explanation": "If the extra visits are new people coming on Sundays, that supports the claim. Regular visitors simply switching days would weaken it.",
+     "passage": "Since the library started opening on Sundays, the number of visits has risen by a fifth. Sunday opening has attracted new visitors.",
+     "section": "drill",
+     "id": "tara-drill-strengthening-and-weakening-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "School X has larger classrooms.",
+      "School Y has more teachers per pupil.",
+      "School X chooses its pupils by an entrance exam, while School Y takes every child from its area.",
+      "Both schools teach the same subjects.",
+      "School X's teachers are paid more."
+     ],
+     "answer": "C",
+     "explanation": "If X selects able pupils, its better results could come from its intake rather than its teaching.",
+     "passage": "Pupils at School X get better exam results than pupils at School Y. School X must have better teaching.",
+     "section": "drill",
+     "id": "tara-drill-strengthening-and-weakening-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "Fitness trackers have become cheaper.",
+      "In a trial, people given a tracker walked more each day than before, and more than a similar group who were not given one.",
+      "Many runners own a fitness tracker.",
+      "Trackers can also measure sleep.",
+      "Some people stop wearing their tracker after a few weeks."
+     ],
+     "answer": "B",
+     "explanation": "Comparing the same people before and after, against a similar group without trackers, shows the tracker made the difference, not that active people choose trackers.",
+     "passage": "People who wear fitness trackers walk more steps each day, on average, than people who do not. Fitness trackers make people more active.",
+     "section": "drill",
+     "id": "tara-drill-strengthening-and-weakening-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most weaken the above argument?",
+     "options": [
+      "The new website cost more than the old one.",
+      "Some customers said they preferred the old website.",
+      "The company also sells in shops.",
+      "Online orders are a third of the company's sales.",
+      "Online orders rise by about 25% every year in the three months before Christmas, which is when the new website was launched."
+     ],
+     "answer": "E",
+     "explanation": "If orders always rise by this much at this time of year, the rise would have happened anyway, so it does not show the website caused it.",
+     "passage": "Online orders are up 25% in the three months since the company launched its new website. The new website has increased sales.",
+     "section": "drill",
+     "id": "tara-drill-strengthening-and-weakening-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Strengthening and weakening",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following, if true, would most strengthen the above argument?",
+     "options": [
+      "Many drivers already use hands-free phones.",
+      "Holding a phone while driving is already illegal.",
+      "Hands-free kits are now cheap.",
+      "In driving simulator tests, drivers on hands-free calls reacted to hazards as slowly as drivers holding their phones.",
+      "Some drivers use their phones as maps."
+     ],
+     "answer": "D",
+     "explanation": "Direct evidence that hands-free calls slow reactions as much as handheld ones supports the claim that they are just as distracting.",
+     "passage": "Drivers using a phone hands-free are just as distracted as drivers holding a phone. Hands-free phone use while driving should therefore be banned too.",
+     "section": "drill",
+     "id": "tara-drill-strengthening-and-weakening-06"
+    }
+   ]
+  },
+  "flaws-in-reasoning": {
+   "title": "Flaws in reasoning",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Name the mistake in the reasoning: attacking the person, generalising from too little, mixing up 'needed' and 'enough', confusing correlation with cause, and so on.",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It dismisses the group's view because of who they are, rather than looking at their reasons.",
+      "It generalises from a single case.",
+      "It confuses cause and effect.",
+      "It uses a word in two different senses.",
+      "It assumes that only two options exist."
+     ],
+     "answer": "A",
+     "explanation": "That cyclists benefit from cycle lanes does not make their arguments wrong. The reasons need to be judged on their merits.",
+     "passage": "We should ignore the cycling group's arguments for more cycle lanes. They are cyclists, so of course they want more cycle lanes.",
+     "section": "drill",
+     "id": "tara-drill-flaws-in-reasoning-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It draws a general conclusion from too few cases.",
+      "It attacks the brand rather than its phones.",
+      "It confuses a necessary condition with a sufficient one.",
+      "It assumes what it is trying to prove.",
+      "It relies on the opinion of an expert."
+     ],
+     "answer": "A",
+     "explanation": "Two phones are far too small a sample to show that every phone the brand makes is unreliable.",
+     "passage": "I have bought two phones from this brand and both broke within a month. All of this brand's phones are unreliable.",
+     "section": "drill",
+     "id": "tara-drill-flaws-in-reasoning-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It draws a conclusion from too few cases.",
+      "It attacks Sam rather than his grades.",
+      "It assumes Sam applied to the university.",
+      "It confuses cause and effect.",
+      "It treats a condition that is needed as if it were enough on its own."
+     ],
+     "answer": "E",
+     "explanation": "Three A grades are necessary, but the university may also look at interviews, tests or the number of places. Meeting a minimum does not guarantee a place.",
+     "passage": "To get into the university you need at least three A grades. Sam got three A grades, so he will get into the university.",
+     "section": "drill",
+     "id": "tara-drill-flaws-in-reasoning-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It relies on figures from shoe companies.",
+      "It generalises from a single runner.",
+      "It treats a necessary condition as a sufficient one.",
+      "It assumes the shoes cause the running, when keen runners may simply be more likely to buy expensive shoes.",
+      "It uses the word 'expensive' in two senses."
+     ],
+     "answer": "D",
+     "explanation": "The link between expensive shoes and frequent running could run the other way: people who already run a lot are more willing to pay for good shoes.",
+     "passage": "People who own expensive running shoes run more often than people who do not. Buying expensive running shoes will make you run more often.",
+     "section": "drill",
+     "id": "tara-drill-flaws-in-reasoning-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It attacks scientists rather than their evidence.",
+      "It uses the word 'theory' in two different senses.",
+      "It draws a conclusion from too few cases.",
+      "It assumes there are only two possibilities.",
+      "It confuses cause and effect."
+     ],
+     "answer": "B",
+     "explanation": "In science, a theory is a well-tested explanation; in everyday speech it can mean a guess. The argument slides from the first meaning to the second.",
+     "passage": "Scientists themselves call evolution a theory. A theory is just a guess, so evolution is just a guess.",
+     "section": "drill",
+     "id": "tara-drill-flaws-in-reasoning-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Flaws in reasoning",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best identifies the flaw in the above argument?",
+     "options": [
+      "It assumes crime will keep rising.",
+      "It relies on figures from the police.",
+      "It compares percentage changes without considering the actual numbers involved.",
+      "It confuses a necessary condition with a sufficient one.",
+      "It attacks the people of the village."
+     ],
+     "answer": "C",
+     "explanation": "A rise from 2 crimes to 3 is 50%; a rise from 10,000 to 10,500 is 5%. Percentage changes alone cannot show which place has the worse problem.",
+     "passage": "Recorded crime rose by 50% in a small village last year but by only 5% in a nearby city. The village now has a worse crime problem than the city.",
+     "section": "drill",
+     "id": "tara-drill-flaws-in-reasoning-06"
+    }
+   ]
+  },
+  "matching-arguments": {
+   "title": "Matching arguments",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Strip each argument down to its form (if P then Q; all A are B; …) and find the option with the same form, flawed or valid.",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "If it is Tuesday, there is a swimming lesson. There is a swimming lesson, so it is Tuesday.",
+      "If it is Tuesday, there is a swimming lesson. It is not Tuesday, so there is no swimming lesson.",
+      "There is usually a swimming lesson on Tuesdays, so there will probably be one today.",
+      "If it is Tuesday, there is a swimming lesson. It is Tuesday, so there is a swimming lesson.",
+      "All swimming lessons are on Tuesdays. Today is Wednesday, so there is no lesson."
+     ],
+     "answer": "D",
+     "explanation": "The passage is: if P then Q; P; so Q. The swimming argument that starts from 'it is Tuesday' and concludes there is a lesson has the same form.",
+     "passage": "If the shop is open, the lights are on. The shop is open, so the lights are on.",
+     "section": "drill",
+     "id": "tara-drill-matching-arguments-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "All squares have four sides. This shape has four sides, so it is a square.",
+      "All squares have four sides. This shape is a square, so it has four sides.",
+      "All squares have four sides. This shape has three sides, so it is not a square.",
+      "No triangles have four sides. This shape has four sides, so it is not a triangle.",
+      "Most four-sided shapes are rectangles, so this one probably is."
+     ],
+     "answer": "A",
+     "explanation": "The passage reasons: all A are B; this is B; so it is A. That is a mistake, and the square argument that moves from 'four sides' to 'square' makes the same mistake.",
+     "passage": "All cats have whiskers. My pet has whiskers, so it must be a cat.",
+     "section": "drill",
+     "id": "tara-drill-matching-arguments-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "If it rains, the grass gets wet. It rained, so the grass is wet.",
+      "If it rains, the grass gets wet. It did not rain, so the grass is not wet.",
+      "If it rains, the grass gets wet. The grass is not wet, so it did not rain.",
+      "If it rains, the grass gets wet. The grass is wet, so it may have rained.",
+      "It usually rains in April, so the grass is probably wet."
+     ],
+     "answer": "B",
+     "explanation": "The passage is: if P then Q; not P; so not Q. That ignores other routes to Q (you might pass without studying). The grass argument from 'it did not rain' makes the same mistake: sprinklers can wet grass.",
+     "passage": "If you study, you will pass the exam. You did not study, so you will not pass.",
+     "section": "drill",
+     "id": "tara-drill-matching-arguments-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "Surgeons train for many years, so they should be paid more than teachers.",
+      "Pilots must pass strict tests, so teachers should pass strict tests too.",
+      "Most passengers trust pilots, so most parents probably trust teachers.",
+      "We do not vote on how planes are flown, so we should not vote at all.",
+      "We let a surgeon decide how to operate without the patient's family voting on it, so we should let teachers decide what to teach without parents deciding."
+     ],
+     "answer": "E",
+     "explanation": "The passage argues by analogy: in one expert field we let experts decide without a vote, so we should do the same in another. The surgeon-and-teachers argument has the same structure.",
+     "passage": "Passengers do not vote on how a pilot should fly the plane; they trust the pilot's expertise. In the same way, we should let economic experts run the economy without voters deciding each policy.",
+     "section": "drill",
+     "id": "tara-drill-matching-arguments-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "All the players in the band can read music. Everyone who can read music had lessons. So all the players in the band had lessons.",
+      "Some players in the band can read music. All people who read music had lessons. So some players in the band had lessons.",
+      "All the players in the band can read music. Some people who can read music play the piano. So some players in the band play the piano.",
+      "No players in the band can read music. Some pianists can read music. So some pianists are not in the band.",
+      "All the players in the band can read music. Ali cannot read music. So Ali is not in the band."
+     ],
+     "answer": "C",
+     "explanation": "The passage's form is: all A are B; some B are C; so some A are C. That does not follow (the B's who are C might not be A's). The band argument with 'some people who can read music play the piano' has the same faulty form; the others are valid.",
+     "passage": "All the lawyers at the firm went to university. Some people who went to university studied law. So some of the lawyers at the firm studied law.",
+     "section": "drill",
+     "id": "tara-drill-matching-arguments-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Matching arguments",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following most closely parallels the reasoning used in the above argument?",
+     "options": [
+      "Most children who play football every day enjoy it. My son plays every day, so he probably enjoys it.",
+      "All professional footballers trained hard. My son does not train hard, so he will not become one.",
+      "My son plays football every day, so he is likely to be fitter than most children.",
+      "Most professional footballers played football every day as children. My son plays football every day, so he will probably become a professional footballer.",
+      "Few children become professional footballers, so my son probably will not."
+     ],
+     "answer": "D",
+     "explanation": "The passage turns 'most winners did X' into 'someone who does X will probably win', which ignores how many people do X without winning. The footballer argument makes the same move. The enjoyment argument reasons the right way round.",
+     "passage": "Almost everyone who wins the lottery bought tickets regularly. Raj buys a ticket every week, so he will probably win the lottery.",
+     "section": "drill",
+     "id": "tara-drill-matching-arguments-06"
+    }
+   ]
+  },
+  "applying-principles": {
+   "title": "Applying principles",
+   "domain": "Critical thinking",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Work out the general rule behind the argument, then find the option that applies that same rule to a new situation.",
+   "questions": [
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "Neighbours should lend each other tools.",
+      "Taking a neighbour's ladder without asking is wrong, even if you put it back the same day.",
+      "You should always return what you borrow on time.",
+      "It is fine to use a friend's things if you would let them use yours.",
+      "A car should be returned with a full tank."
+     ],
+     "answer": "B",
+     "explanation": "The principle is that it is wrong to use someone else's property without permission, whatever condition you return it in. The ladder case applies exactly that.",
+     "passage": "You should not borrow a friend's car without asking, even if you return it without a scratch. It is their car, and it is up to them who uses it.",
+     "section": "drill",
+     "id": "tara-drill-applying-principles-01"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "The council should pay to repair all broken windows.",
+      "Factories should not be built near rivers.",
+      "Children should not play football near houses.",
+      "Insurance companies should pay for all accidents.",
+      "A footballer who breaks a window with a ball should pay for the new glass."
+     ],
+     "answer": "E",
+     "explanation": "The principle is that whoever causes damage should pay to put it right. The footballer case applies it on a small scale.",
+     "passage": "The company that polluted the river should pay the full cost of cleaning it up. It caused the damage, so it should pay to repair it.",
+     "section": "drill",
+     "id": "tara-drill-applying-principles-02"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "A cooking competition should judge the food the contestants actually make, not just their written recipes.",
+      "A school should test pupils in every subject.",
+      "Driving instructors should be tested regularly.",
+      "Exams should be marked by two examiners.",
+      "A singing contest should allow the audience to vote."
+     ],
+     "answer": "A",
+     "explanation": "The principle is that a test should directly measure the skill it claims to measure. Judging the cooked food rather than the recipe applies it.",
+     "passage": "A driving test should involve actually driving a car on real roads. A test of whether someone can drive should measure their driving, not just their knowledge of the rules.",
+     "section": "drill",
+     "id": "tara-drill-applying-principles-03"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "A student who works hard deserves a good mark.",
+      "A driver who causes an accident should lose their licence.",
+      "A student who cheats in a test has done wrong even if they still fail the test.",
+      "A footballer who scores a lucky goal deserves praise.",
+      "A doctor should be judged by how many patients recover."
+     ],
+     "answer": "C",
+     "explanation": "The principle is that an action can be wrong whatever its outcome. The cheating student did wrong even though it brought no benefit. Judging doctors only by outcomes goes against the principle.",
+     "passage": "A driver who speeds through a red light has done something wrong even if, by luck, nobody is hurt. We should not judge actions only by how they turn out.",
+     "section": "drill",
+     "id": "tara-drill-applying-principles-04"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "Councils should spend the same amount on every road.",
+      "Rural areas should receive more money than cities.",
+      "Health services should treat patients in the order they ask.",
+      "Every patient should receive the most expensive treatment available.",
+      "A health service that cannot afford both should fund a cheap vaccine that protects millions before an expensive treatment that helps a few."
+     ],
+     "answer": "E",
+     "explanation": "The principle is to spend limited public money where it helps the most people. The vaccine choice applies that rule in health care; spending equally or in order of request does not.",
+     "passage": "Public money should be spent where it does the most good for the most people. The council should therefore repair potholes on busy main roads before it repairs those on quiet country lanes.",
+     "section": "drill",
+     "id": "tara-drill-applying-principles-05"
+    },
+    {
+     "domain": "Critical thinking",
+     "skill": "Applying principles",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Which of the following best illustrates the principle underlying the above argument?",
+     "options": [
+      "A contract should be written in plain English.",
+      "A survey that employees fill in while their manager watches should not be trusted to show what they really think.",
+      "Police should record every interview.",
+      "Witnesses should give evidence as soon as possible.",
+      "Employees should be paid for overtime."
+     ],
+     "answer": "B",
+     "explanation": "The principle is that what people say under pressure cannot be relied on as their true account. Answers given while being watched by a manager fall under the same principle.",
+     "passage": "A confession obtained by threatening a suspect should not be used in court. Something a person says under threat cannot be relied on to be true.",
+     "section": "drill",
+     "id": "tara-drill-applying-principles-06"
+    }
+   ]
+  },
+  "relevant-selection": {
+   "title": "Relevant selection",
+   "domain": "Problem solving",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Pick out the information that matters from a table, timetable or price list, and ignore the rest. Read the conditions carefully: 'up to', 'or part of', 'maximum'.",
+   "questions": [
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A pizza shop charges £8 for a small pizza, £11 for a medium and £14 for a large. Each extra topping costs £1.50 on any size. Tom orders two medium pizzas, each with one extra topping, and one large pizza with no extra toppings. How much does he pay?",
+     "options": [
+      "£36",
+      "£37.50",
+      "£39",
+      "£40.50",
+      "£42"
+     ],
+     "answer": "C",
+     "explanation": "Each medium with a topping costs £12.50, so two cost £25. Add the large at £14: £39.",
+     "section": "drill",
+     "id": "tara-drill-relevant-selection-01"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A dentist sees patients from 08:30 to 12:30 and from 13:30 to 17:00. Each appointment lasts 20 minutes and must finish within one of these sessions. What is the largest number of appointments in a day?",
+     "options": [
+      "21",
+      "22",
+      "23",
+      "24",
+      "25"
+     ],
+     "answer": "B",
+     "explanation": "The morning session is 240 minutes: 12 appointments. The afternoon is 210 minutes: 10 full appointments (with 10 minutes spare). Total 22.",
+     "section": "drill",
+     "id": "tara-drill-relevant-selection-02"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A swimming pool charges £5.20 for an adult swim and £3.10 for a child swim. A card for 10 adult swims costs £44 and a card for 10 child swims costs £26. One adult and two children plan to swim together 10 times. What is the cheapest total cost?",
+     "options": [
+      "£78",
+      "£88",
+      "£96",
+      "£104",
+      "£114"
+     ],
+     "answer": "C",
+     "explanation": "The adult card (£44) is cheaper than 10 adult swims (£52), and each child card (£26) is cheaper than 10 child swims (£31). Total £44 + 2 × £26 = £96.",
+     "section": "drill",
+     "id": "tara-drill-relevant-selection-03"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "A holiday cottage costs £420 a week in low season, £560 a week in mid season and £780 a week in high season. June weeks are mid season and July weeks are high season. Stays of three weeks or more get 10% off the total. A family books the last week of June and the first two weeks of July. How much do they pay?",
+     "options": [
+      "£1,764",
+      "£1,908",
+      "£2,034",
+      "£2,120",
+      "£2,340"
+     ],
+     "answer": "B",
+     "explanation": "One mid-season week (£560) and two high-season weeks (£1,560) cost £2,120. Three weeks qualifies for 10% off: £2,120 × 0.9 = £1,908.",
+     "section": "drill",
+     "id": "tara-drill-relevant-selection-04"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A phone's full battery lasts 20 hours on standby or 5 hours of watching video. Mia starts with a full battery and watches 2 hours of video. For how many hours can the phone then stay on standby?",
+     "options": [
+      "8",
+      "10",
+      "12",
+      "15",
+      "18"
+     ],
+     "answer": "C",
+     "explanation": "Each hour of video uses 1/5 of the battery, so 2 hours use 2/5 and leave 3/5. Three fifths of 20 standby hours is 12 hours.",
+     "section": "drill",
+     "id": "tara-drill-relevant-selection-05"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Relevant selection",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "Large letters cost £1.55 up to 250 g and £2.10 up to 500 g. Parcels cost £3.40 up to 1 kg. Ana has documents weighing 260 g in total. She can post them as one item, or split them between two large letters of 130 g each. What is the cheapest way to post them?",
+     "options": [
+      "£1.55",
+      "£1.70",
+      "£2.10",
+      "£3.10",
+      "£3.40"
+     ],
+     "answer": "C",
+     "explanation": "As one item, 260 g is just over 250 g, so it costs the 500 g large-letter rate: £2.10. Two large letters cost 2 × £1.55 = £3.10. The cheapest is £2.10.",
+     "section": "drill",
+     "id": "tara-drill-relevant-selection-06"
+    }
+   ]
+  },
+  "finding-procedures": {
+   "title": "Finding procedures",
+   "domain": "Problem solving",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Find a method for a problem you have not seen before: set it up as an equation, work backwards, or try the options.",
+   "questions": [
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Concert tickets cost £18 each, and there is a booking fee of £2.50 for each order. What is the largest number of tickets that can be bought in one order with £100?",
+     "options": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+     ],
+     "answer": "C",
+     "explanation": "After the £2.50 fee, £97.50 is left. 5 tickets cost £90 and 6 would cost £108, so 5 is the most.",
+     "section": "drill",
+     "id": "tara-drill-finding-procedures-01"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "A train travels 120 km at an average speed of 80 km/h. How many minutes does the journey take?",
+     "options": [
+      "60",
+      "75",
+      "90",
+      "100",
+      "150"
+     ],
+     "answer": "C",
+     "explanation": "Time = distance ÷ speed = 120 ÷ 80 = 1.5 hours = 90 minutes.",
+     "section": "drill",
+     "id": "tara-drill-finding-procedures-02"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Ravi's mean score over four tests is 72. What must he score in the fifth test to raise his mean to 75?",
+     "options": [
+      "78",
+      "81",
+      "84",
+      "87",
+      "90"
+     ],
+     "answer": "D",
+     "explanation": "Five tests with a mean of 75 total 375. His first four total 4 × 72 = 288. He needs 375 − 288 = 87.",
+     "section": "drill",
+     "id": "tara-drill-finding-procedures-03"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "One tin of paint covers 12 m². A wall is 5 m long and 2.6 m high and has a door of 2 m² that is not painted. The wall needs two coats. How many tins are needed?",
+     "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "answer": "B",
+     "explanation": "The area to paint is 5 × 2.6 − 2 = 11 m². Two coats need 22 m², and 22 ÷ 12 is just under 2, so 2 tins are enough.",
+     "section": "drill",
+     "id": "tara-drill-finding-procedures-04"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The pages of a book are numbered from 1. Printing all the page numbers uses 192 digits in total. How many pages does the book have?",
+     "options": [
+      "96",
+      "99",
+      "100",
+      "101",
+      "192"
+     ],
+     "answer": "C",
+     "explanation": "Pages 1–9 use 9 digits and pages 10–99 use 90 × 2 = 180 digits, 189 in all. The 3 remaining digits are page 100.",
+     "section": "drill",
+     "id": "tara-drill-finding-procedures-05"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Finding procedures",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "A water bill rose by 10% one year and by another 10% the next year. It is now £242. What was it two years ago?",
+     "options": [
+      "£198",
+      "£200",
+      "£202",
+      "£205.70",
+      "£217.80"
+     ],
+     "answer": "B",
+     "explanation": "Two rises of 10% multiply the bill by 1.1 × 1.1 = 1.21. So the bill two years ago was £242 ÷ 1.21 = £200. Taking 20% off £242 would be wrong.",
+     "section": "drill",
+     "id": "tara-drill-finding-procedures-06"
+    }
+   ]
+  },
+  "identifying-similarity": {
+   "title": "Identifying similarity",
+   "domain": "Problem solving",
+   "section": "drill",
+   "minutes": 0,
+   "about": "Spot which option has the same value, shape, rule or pattern as the one given, even when it is written differently.",
+   "questions": [
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "Which of the following has the same value as three quarters of 80?",
+     "options": [
+      "half of 120",
+      "two thirds of 80",
+      "75% of 60",
+      "a quarter of 200",
+      "one fifth of 250"
+     ],
+     "answer": "A",
+     "explanation": "Three quarters of 80 is 60, and half of 120 is also 60. The others are about 53.3, 45, 50 and 50.",
+     "section": "drill",
+     "id": "tara-drill-identifying-similarity-01"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 1,
+     "type": "mcq",
+     "question": "In the word ACT, the letters are in alphabetical order. Which of the following words also has its letters in alphabetical order?",
+     "options": [
+      "DOG",
+      "CAB",
+      "TEA",
+      "BEG",
+      "SIT"
+     ],
+     "answer": "D",
+     "explanation": "B, E, G come in alphabetical order. In DOG, G comes before O; CAB, TEA and SIT are also out of order.",
+     "section": "drill",
+     "id": "tara-drill-identifying-similarity-02"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following shapes has the same perimeter as a rectangle measuring 9 cm by 3 cm?",
+     "options": [
+      "A rectangle measuring 8 cm by 3 cm",
+      "An equilateral triangle with sides of 7 cm",
+      "A square with sides of 6 cm",
+      "A square with sides of 5 cm",
+      "A rectangle measuring 10 cm by 4 cm"
+     ],
+     "answer": "C",
+     "explanation": "The rectangle's perimeter is 2 × (9 + 3) = 24 cm, and a 6 cm square has perimeter 24 cm. The others are 22, 21, 20 and 28 cm.",
+     "section": "drill",
+     "id": "tara-drill-identifying-similarity-03"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 2,
+     "type": "mcq",
+     "question": "Which of the following is the same speed as 30 metres per second?",
+     "options": [
+      "30 km/h",
+      "108 km/h",
+      "180 km/h",
+      "50 m/s",
+      "300 m per minute"
+     ],
+     "answer": "B",
+     "explanation": "30 m/s × 3,600 s = 108,000 m an hour = 108 km/h. 300 m per minute is only 5 m/s, and 180 km/h is 50 m/s.",
+     "section": "drill",
+     "id": "tara-drill-identifying-similarity-04"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "The sequence 2, 6, 18, 54 is made by multiplying by 3 each time. Which of the following follows the same rule?",
+     "options": [
+      "3, 6, 9, 12",
+      "1, 3, 6, 10",
+      "2, 4, 8, 16",
+      "4, 12, 24, 72",
+      "5, 15, 45, 135"
+     ],
+     "answer": "E",
+     "explanation": "5 × 3 = 15, 15 × 3 = 45, 45 × 3 = 135. The others add 3, add increasing amounts, double, and alternate ×3 and ×2.",
+     "section": "drill",
+     "id": "tara-drill-identifying-similarity-05"
+    },
+    {
+     "domain": "Problem solving",
+     "skill": "Identifying similarity",
+     "difficulty": 3,
+     "type": "mcq",
+     "question": "In any year, which of the following dates always falls on the same day of the week as 4 April?",
+     "options": [
+      "3 March",
+      "5 May",
+      "6 June",
+      "7 July",
+      "9 September"
+     ],
+     "answer": "C",
+     "explanation": "From 4 April to 6 June is 26 + 31 + 6 = 63 days, exactly 9 weeks, every year. The other dates are not a whole number of weeks away from 4 April.",
+     "section": "drill",
+     "id": "tara-drill-identifying-similarity-06"
+    }
+   ]
+  }
+ }
+}
