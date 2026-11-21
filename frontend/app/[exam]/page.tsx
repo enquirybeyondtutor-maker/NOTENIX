@@ -6,6 +6,7 @@ import { EXAMS, EXAM_BY_SLUG, requestHref, enrolHref } from "@/lib/exams";
 import { SITE } from "@/lib/site";
 import SampleQuiz from "@/components/SampleQuiz";
 import { Button } from "@/components/ui/Button";
+import FactValue from "@/components/FactValue";
 import { hasEngine } from "@/lib/examApi";
 
 // Only the exams in lib/exams.ts exist; anything else 404s (static routes like /pricing win anyway).
@@ -90,7 +91,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
             <Link href="/" className="hover:text-ink">Notenix</Link> <span className="mx-1">/</span> {exam.name} practice
           </nav>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-5xl">
-            {exam.name} practice tests, <span className="text-brand-600">marked by tutors</span>
+            {exam.name} practice tests, <span className="whitespace-nowrap text-brand-600 sm:block">marked by tutors</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-ink-muted">{exam.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -113,7 +114,7 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
             {exam.facts.map((f) => (
               <div key={f.label} className="rounded-xl border border-line bg-white px-4 py-3">
                 <dt className="text-xs font-medium text-ink-subtle">{f.label}</dt>
-                <dd className="mt-1 text-sm font-semibold text-ink">{f.value}</dd>
+                <dd className="mt-1 text-sm font-semibold text-ink"><FactValue value={f.value} /></dd>
               </div>
             ))}
           </dl>

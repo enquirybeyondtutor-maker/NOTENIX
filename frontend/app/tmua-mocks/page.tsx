@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AlarmClock, ArrowRight, CalendarDays, CheckCircle2, ClipboardList, Gauge, Lock, MessageSquarePlus, Monitor, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import FactValue from "@/components/FactValue";
 import TmuaSeriesPrice from "@/components/TmuaSeriesPrice";
 import { SERIES, SCHEDULE } from "@/lib/tmuaSeries";
 
@@ -61,7 +62,7 @@ export default function TmuaMocksPage() {
           </nav>
           <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">TMUA Mock Series · {SERIES.sitting} sitting</p>
           <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-5xl">
-            TMUA mocks that feel like <span className="text-brand-600">the real test</span>
+            TMUA mocks that feel like <span className="whitespace-nowrap text-brand-600 sm:block">the real test</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-ink-muted">
             10 full computer-based mocks before your TMUA: on screen, timed, no calculator. With a Baseline Mock, rankings,
@@ -76,7 +77,7 @@ export default function TmuaMocksPage() {
             {FACTS.map((f) => (
               <div key={f.label} className="rounded-xl border border-line bg-white px-4 py-3">
                 <dt className="text-xs font-medium text-ink-subtle">{f.label}</dt>
-                <dd className="mt-1 text-sm font-semibold text-ink">{f.value}</dd>
+                <dd className="mt-1 text-sm font-semibold text-ink"><FactValue value={f.value} /></dd>
               </div>
             ))}
           </dl>
