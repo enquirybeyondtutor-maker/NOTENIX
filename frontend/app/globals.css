@@ -25,6 +25,11 @@
 
 html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 
+/* Even line lengths in headings (no single word left on the last line), and no
+   one-word last lines in body text. Browsers without support simply wrap as before. */
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+
 body {
   background: rgb(var(--canvas));
   color: rgb(var(--ink));
