@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from services.retention import purge_old_responses
 from services.sittings import auto_submit_expired
-from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests, notes, papers, sync, ks3, help, doubt, courses, sat, exam
+from routers import auth, quiz, progress, leaderboard, payments, teacher, student_tests, admin, practice, marking, reports, requests, notes, papers, sync, ks3, help, doubt, courses, sat, exam, series
 from routers.payments import expire_pro_plans
 
 
@@ -136,6 +136,7 @@ app.include_router(doubt.router)
 app.include_router(courses.router)
 app.include_router(sat.router)
 app.include_router(exam.router)
+app.include_router(series.router)
 
 
 @app.get("/health")

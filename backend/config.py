@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     # Accounts in PAYMENT_ACCOUNTS can also carry their own "pay_link".
     revision_pay_link: str = "https://wise.com/pay/r/BeDOBG4eucVVAg0"
     pay_link_99: str = "https://wise.com/pay/r/76Ch6kq7sJpErfU"    # Wise card link, GBP 99 (one GCSE subject, SAT)
+    pay_link_109: str = ""   # Wise card link, GBP 109 (TMUA Mock Series full price); empty = bank transfer only
     pay_link_349: str = "https://wise.com/pay/r/pmJ_vlY6iKl8a8k"   # Wise card link, GBP 349 (all four GCSEs)
 
     # Freemium limits

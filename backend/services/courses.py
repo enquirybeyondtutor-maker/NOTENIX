@@ -96,6 +96,8 @@ _NAMES = {c["key"]: c["name"] for c in catalogue()}
 # Older single-maths keys ("hsc-maths") stay valid for enrolments made before the split;
 # they open every maths course of that curriculum.
 _NAMES.update({f"{ck}-maths": f"{CURRICULA[ck]} Maths (all)" for ck in MATHS_COURSES})
+# Fixed-term series (not sold through the course catalogue): services/tmua_series.py
+_NAMES["tmua-mocks-jan27"] = "TMUA Mock Series (January 2027)"
 
 
 # Bundles: one payment that switches on several courses. A bundle is not a course itself

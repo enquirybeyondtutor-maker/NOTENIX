@@ -204,7 +204,13 @@ async def create(data: RequestIn, user: User = Depends(get_current_user), db: As
         raise HTTPException(400, "Please choose an exam from the list.")
     # Students with courses can request tests for those courses only.
     subject = data.subject or (data.paper.course if data.paper else None)
-    if not course_svc.allows(await course_svc.live_courses(user, db), data.exam, subject):
+    from services import tmua_series
+    series_request = data.exam == "TMUA" and await tmua_series.is_member(user, db)
+    if series_request:
+        if await tmua_series.requests_this_week(user, db) >= tmua_series.REQUESTS_PER_WEEK:
+            raise HTTPException(400, f"You've used your {tmua_series.REQUESTS_PER_WEEK} topic requests for this week. "
+                                     "You can request again 7 days after your earlier ones.")
+    elif not course_svc.allows(await course_svc.live_courses(user, db), data.exam, subject):
         raise HTTPException(403, course_svc.locked_message(data.exam, subject))
     if is_free_account(user):
         used = len((await db.execute(select(TestRequest.id).where(
@@ -217,7 +223,7 @@ async def create(data: RequestIn, user: User = Depends(get_current_user), db: As
     if open_count >= OPEN_LIMIT:
         raise HTTPException(400, f"You already have {open_count} requests waiting. We'll get to them soon!")
 
-    price = max(0.0, settings.request_price)
+    price = 0.0 if series_request else max(0.0, settings.request_price)   # included in the series
     req = TestRequest(
         student_id=user.id, exam=data.exam,
         subject=(data.subject or "").strip()[:120] or None,

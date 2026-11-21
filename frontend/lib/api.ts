@@ -183,6 +183,14 @@ export const leaderboardAPI = {
   weekly: () => api.get("/leaderboard/weekly"),
 };
 // Manual bank-transfer payments (Wise etc.): the student pays, then an admin confirms.
+// Notenix TMUA Mock Series (January 2027): public info, enrol & pay, and the student's view.
+export const seriesAPI = {
+  tmua: () => api.get("/series/tmua"),
+  tmuaEnrol: (data: { full_name: string; email: string; password: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+    api.post("/series/tmua/enrol", data),
+  tmuaMine: () => api.get("/series/tmua/mine"),
+};
+
 export const paymentsAPI = {
   plans: () => api.get("/payments/plans"),
   accounts: () => api.get("/payments/accounts"),
