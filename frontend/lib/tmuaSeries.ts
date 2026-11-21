@@ -9,7 +9,7 @@ export const SERIES = {
   earlyUntil: "2026-11-25T00:00:00Z", // early bird ends after Tue 24 Nov (UK)
   earlyLabel: "Tue 24 Nov",
   requestsPerWeek: 2,
-  opensAt: "10:00 UK · 15:30 IST",
+  opensAt: "10 a.m. UK time",
 };
 
 export type SeriesRow = { date: string; day: string; kind: "mock" | "deadline" | "exam"; title: string; detail?: string; at: string };

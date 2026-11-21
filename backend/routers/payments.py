@@ -477,7 +477,7 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
              }.get(p.purpose, "Our team will send the test shortly.")
     if is_series:
         extra = ("Your place on the TMUA Mock Series is confirmed. Sign in at notenix.com: the Baseline Mock is waiting "
-                 "in Tests, and each mock appears there at 10:00 UK on its date. Stuck on a topic? Request a topic set "
+                 "in Tests, and each mock appears there at 10 a.m. UK time on its date. Stuck on a topic? Request a topic set "
                  "from Request a test (up to 2 a week).")
     try:
         await send_payment_result(user, data.approve, what, p.amount, p.currency, p.reference, extra)

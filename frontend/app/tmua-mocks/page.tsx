@@ -12,7 +12,7 @@ const ENROL = "/tmua-mocks/enrol";
 const FACTS = [
   { label: "Mocks", value: "10 + a Baseline Mock" },
   { label: "Each mock", value: "2 papers · 75 min each" },
-  { label: "First mock", value: "Wed 25 Nov · 10:00 UK" },
+  { label: "First mock", value: "Wed 25 Nov · 10 a.m. UK" },
   { label: "Your TMUA", value: "4–8 January 2027" },
 ];
 
@@ -129,7 +129,7 @@ export default function TmuaMocksPage() {
                             {r.detail?.includes("Real") ? "Exam level" : "Hard"}
                           </span>
                         </div>
-                        <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-muted"><CalendarDays size={14} /> {r.day} {r.date} · 10:00 UK</p>
+                        <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-muted"><CalendarDays size={14} /> {r.day} {r.date} · 10 a.m. UK time</p>
                         {(r.title.includes("Final") || r.detail?.includes("Launch")) && (
                           <p className="mt-1 text-xs font-medium text-brand-600">{r.title.includes("Final") ? "Final mock" : "Launch mock"}</p>
                         )}
