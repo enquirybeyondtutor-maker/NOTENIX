@@ -426,8 +426,12 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
     if data.approve and (p.purpose == "course" or (p.purpose == "revision" and p.course)):
         # One course for a year (renewing early adds the year on to the current end date).
         # A bundle payment switches on every course in the bundle.
-        for c in (course_svc.bundle_courses(p.course) if course_svc.is_bundle(p.course) else [p.course]):
-            await course_svc.grant(user, c, "year", db, payment_id=p.id)
+        from services import tmua_series
+        if p.course == tmua_series.KEY:   # fixed-term series: open until the January 2027 test window ends
+            await tmua_series.grant(user, db, payment_id=p.id)
+        else:
+            for c in (course_svc.bundle_courses(p.course) if course_svc.is_bundle(p.course) else [p.course]):
+                await course_svc.grant(user, c, "year", db, payment_id=p.id)
     if not data.approve and p.purpose == "revision" and p.course:
         # The trial that started at checkout ends now (kept, not deleted: a student with no
         # enrolments at all would be unrestricted).
@@ -449,6 +453,10 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
     if req and req.status == "payment_claimed":
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
+    from services import tmua_series
+    is_series = p.course == tmua_series.KEY
+    if data.approve and is_series:
+        await tmua_series.sync_assignments(user, db)
 
     course_label = course_svc.course_name(p.course) if p.course else None
     from services import ks3
@@ -467,6 +475,10 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
              "annual": "Ask a Tutor is on for a whole year: up to 20 questions every month, answered step by step.",
              "plus": "Ask a Tutor is on for the next 30 days: up to 50 questions, plus 2 live 30-minute doubt calls. Reply on WhatsApp to book them.",
              }.get(p.purpose, "Our team will send the test shortly.")
+    if is_series:
+        extra = ("Your place on the TMUA Mock Series is confirmed. Sign in at notenix.com: the Baseline Mock is waiting "
+                 "in Tests, and each mock appears there at 10:00 UK on its date. Stuck on a topic? Request a topic set "
+                 "from Request a test (up to 2 a week).")
     try:
         await send_payment_result(user, data.approve, what, p.amount, p.currency, p.reference, extra)
     except Exception as ex:

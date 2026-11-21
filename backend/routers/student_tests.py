@@ -122,6 +122,8 @@ async def join_by_link(token: str, user: User = Depends(get_current_user), db: A
 @router.get("")
 async def my_assignments(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     """All tests assigned to the current student, with status + score."""
+    from services import tmua_series
+    await tmua_series.sync_assignments(user, db)   # TMUA Mock Series: Baseline + every opened mock
     rows = (await db.execute(
         select(TestAssignment, Test, User.full_name)
         .join(Test, Test.id == TestAssignment.test_id)
