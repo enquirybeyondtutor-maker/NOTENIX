@@ -8,6 +8,8 @@ import SampleQuiz from "@/components/SampleQuiz";
 import { Button } from "@/components/ui/Button";
 import FactValue from "@/components/FactValue";
 import { hasEngine } from "@/lib/examApi";
+import TmuaSeriesPrice from "@/components/TmuaSeriesPrice";
+import { SERIES } from "@/lib/tmuaSeries";
 
 // Only the exams in lib/exams.ts exist; anything else 404s (static routes like /pricing win anyway).
 export const dynamicParams = false;
@@ -125,6 +127,30 @@ export default async function ExamPage({ params }: { params: Promise<{ exam: str
           )}
         </div>
       </section>
+
+      {/* TMUA only: point mock-seekers at the TMUA Mock Series */}
+      {exam.slug === "tmua" && (
+        <section id="tmua-mocks" className="scroll-mt-20 border-b border-line bg-brand-50/60">
+          <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">
+                Looking for TMUA mocks? · {SERIES.sitting} sitting
+              </p>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink">Join the Notenix TMUA Mock Series</h2>
+              <p className="mt-2 leading-relaxed text-ink-muted">
+                10 full computer-based mocks plus a Baseline Mock, on screen, timed and with no calculator, just like the real
+                test. You get an instant score, a ranking and worked solutions for every mock. The first mock opens Wed 25 Nov;
+                the last is Sat 2 Jan, just before the {SERIES.examWindow} test window.
+              </p>
+              <p className="mt-3 text-sm text-ink-muted"><TmuaSeriesPrice variant="line" /> · open to every TMUA candidate</p>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-3 lg:flex-col">
+              <Button href="/tmua-mocks" size="lg">See the mock series <ArrowRight size={18} /></Button>
+              <Button href="/tmua-mocks#schedule" variant="secondary" size="lg">Mock schedule</Button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* About + format */}
       <section className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
