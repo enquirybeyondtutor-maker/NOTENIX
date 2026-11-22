@@ -13,6 +13,12 @@ const STATUS_LABEL: Record<string, string> = {
   assigned: "Assigned", submitted: "Needs marking", marked: "Marked", cancelled: "Cancelled",
 };
 
+function paymentLabel(p: any): string {
+  if (p.course_name) return `Course · ${p.course_name}`;
+  return ({ revision: "Revision access", ks3: "Notenix KS3", annual: "Ask a Tutor · 1 year", doubt: "Doubt Help · 30 days",
+    plus: "Doubt Help Plus · 30 days", test_request: "Test request" } as Record<string, string>)[p.purpose] || "Pro";
+}
+
 function AssignBox({ req, tests, onDone }: { req: any; tests: any[]; onDone: () => void }) {
   // Suggest tests for the same exam first.
   const sorted = useMemo(() => {
@@ -72,13 +78,15 @@ export default function AdminRequestsPage() {
   const [rows, setRows] = useState<any[] | null>(null);
   const [tests, setTests] = useState<any[]>([]);
   const [proPayments, setProPayments] = useState<any[]>([]);
-  const [tab, setTab] = useState<"action" | "all">("action");
+  const [paidPayments, setPaidPayments] = useState<any[]>([]);
+  const [tab, setTab] = useState<"action" | "all" | "paid">("action");
   const [busy, setBusy] = useState<string | null>(null);
 
   const load = () => {
     requestsAPI.adminList().then((r) => setRows(r.data)).catch(() => setRows([]));
     requestsAPI.adminTests().then((r) => setTests(r.data)).catch(() => {});
     paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro" || p.purpose === "revision" || p.purpose === "course" || p.purpose === "ks3" || p.purpose === "doubt" || p.purpose === "plus" || p.purpose === "annual"))).catch(() => {});
+    paymentsAPI.adminList("confirmed").then((r) => setPaidPayments(r.data)).catch(() => {});
   };
 
   useEffect(() => {
@@ -123,7 +131,7 @@ export default function AdminRequestsPage() {
               <div key={p.id} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
                 <div>
                   <b>{p.user?.full_name}</b> <span className="text-ink-subtle">{p.user?.email}</span>{" "}
-                  <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{p.course_name ? `Course · ${p.course_name}` : p.purpose === "revision" ? "Revision access" : p.purpose === "ks3" ? "Notenix KS3" : p.purpose === "annual" ? "Ask a Tutor · 1 year" : p.purpose === "doubt" ? "Doubt Help · 30 days" : p.purpose === "plus" ? "Doubt Help Plus · 30 days" : "Pro"}</span>
+                  <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{paymentLabel(p)}</span>
                   <div className="text-ink-muted">
                     {p.currency} {p.amount} · ref <span className="font-mono">{p.reference}</span> · via {p.paid_via || "?"} · payer {p.payer_name || "?"}
                     {p.payer_note ? ` · "${p.payer_note}"` : ""} · {relativeTime(p.created_at)}
@@ -140,15 +148,39 @@ export default function AdminRequestsPage() {
       )}
 
       <div className="mb-4 flex gap-2">
-        {(["action", "all"] as const).map((t) => (
+        {(["action", "all", "paid"] as const).map((t) => (
           <button key={t} onClick={() => setTab(t)}
             className={cn("rounded-lg px-3 py-1.5 text-sm font-medium", tab === t ? "bg-brand-600 text-white" : "bg-white text-ink-muted ring-1 ring-line")}>
-            {t === "action" ? `Needs action (${rows.filter(needsAction).length})` : `All (${rows.length})`}
+            {t === "action" ? `Needs action (${rows.filter(needsAction).length})` : t === "all" ? `All (${rows.length})` : `Paid (${paidPayments.length})`}
           </button>
         ))}
       </div>
 
-      {!visible.length ? (
+      {tab === "paid" ? (
+        !paidPayments.length ? (
+          <EmptyState icon={Wallet} title="No confirmed payments yet" desc="Payments you mark as received show up here." />
+        ) : (
+          <div className="card divide-y divide-line px-5">
+            {paidPayments.map((p) => (
+              <div key={p.id} className="py-3 text-sm">
+                <div className="flex flex-wrap items-center gap-2">
+                  <b>{p.user?.full_name}</b>
+                  {p.user?.email && <a href={`mailto:${p.user.email}`} className="text-brand-600">{p.user.email}</a>}
+                  <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{paymentLabel(p)}</span>
+                  <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-xs font-semibold text-emerald-700">{p.currency} {p.amount}</span>
+                </div>
+                <div className="mt-1 text-ink-muted">
+                  ref <span className="font-mono">{p.reference}</span> · via {p.paid_via || "?"} · payer {p.payer_name || "?"}
+                  {p.payer_note ? ` · "${p.payer_note}"` : ""}
+                </div>
+                <div className="mt-0.5 text-xs text-ink-subtle">
+                  Claimed {formatDate(p.created_at)}{p.reviewed_at ? ` · approved ${formatDate(p.reviewed_at)} (${relativeTime(p.reviewed_at)})` : ""}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      ) : !visible.length ? (
         <EmptyState icon={Inbox} title={tab === "action" ? "Nothing to do" : "No requests yet"} desc="New requests show up here and are emailed to ADMIN_EMAILS." />
       ) : (
         <div className="space-y-4">
