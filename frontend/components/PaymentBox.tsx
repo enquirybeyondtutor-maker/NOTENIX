@@ -7,6 +7,7 @@ import { Button } from "./ui/Button";
 import { Input, Select, Field } from "./ui/Input";
 import PayLink from "./PayLink";
 import { type Account, useCountry, pickAccounts, countryName } from "@/lib/country";
+import PayerDobField from "@/components/PayerDobField";
 
 
 function CopyValue({ value }: { value: string }) {
@@ -39,6 +40,7 @@ export default function PaymentBox({
   const [via, setVia] = useState("");
   const [payerName, setPayerName] = useState("");
   const [note, setNote] = useState("");
+  const [dob, setDob] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
@@ -59,8 +61,8 @@ export default function PaymentBox({
     e.preventDefault();
     setBusy(true); setError("");
     try {
-      if (purpose === "course" && course) await coursesAPI.buy({ course, paid_via: via, payer_name: payerName, payer_note: note });
-      else await paymentsAPI.claim({ purpose: purpose as "pro" | "test_request", request_id: requestId, paid_via: via, payer_name: payerName, payer_note: note });
+      if (purpose === "course" && course) await coursesAPI.buy({ course, paid_via: via, payer_name: payerName, payer_note: note, payer_dob: dob });
+      else await paymentsAPI.claim({ purpose: purpose as "pro" | "test_request", request_id: requestId, paid_via: via, payer_name: payerName, payer_note: note, payer_dob: dob });
       setMsg("Thanks! We'll check our account and confirm by email, usually within 24 hours.");
       onClaimed?.();
     } catch (err: any) {
@@ -132,6 +134,7 @@ export default function PaymentBox({
               <Input value={payerName} onChange={(e) => setPayerName(e.target.value)} placeholder="e.g. parent's name" required />
             </Field>
           </div>
+          <PayerDobField value={dob} onChange={setDob} />
           <Field label="Transfer ID or note (optional)" hint="Amount and currency sent, Wise/UPI transaction ID, date…">
             <Input value={note} onChange={(e) => setNote(e.target.value)} />
           </Field>

@@ -61,6 +61,6 @@ export const SAT_DOMAINS: Record<"rw" | "math", string[]> = {
 // Paying after the free week (public: the student is locked out by then).
 export const satCheckoutAPI = {
   info: () => api.get("/payments/sat-checkout"),
-  pay: (data: { email: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+  pay: (data: { email: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string }) =>
     api.post("/payments/sat-checkout", data),
 };

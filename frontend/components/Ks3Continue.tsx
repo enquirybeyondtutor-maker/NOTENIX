@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
+import PayerDobField from "@/components/PayerDobField";
 
 type Price = { currency: string; amount: number; label: string };
 
@@ -25,7 +26,7 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
   const G = track ? GRADE_TRACKS[track] : null;
   const us = !!G;   // a grade-based track (US or Ontario): local-currency price, no GBP card link
   const [info, setInfo] = useState<{ accounts: Account[]; prices: Record<string, Price>; gbp: Price; pay_link?: string } | null>(null);
-  const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
+  const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState<{ reference: string } | null>(null);
@@ -144,6 +145,7 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
               </Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
+            <PayerDobField value={form.payer_dob} onChange={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Bank or Wise reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. Barclays, ref 48213" />
             </Field>

@@ -292,6 +292,7 @@ async def migrate_note_kinds():
             await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS print_count INTEGER DEFAULT 0"))
             await conn.execute(text("ALTER TABLE note_shares ADD COLUMN IF NOT EXISTS printed_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE payments ADD COLUMN IF NOT EXISTS course VARCHAR(60)"))
+            await conn.execute(text("ALTER TABLE payments ADD COLUMN IF NOT EXISTS payer_dob VARCHAR(10)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_since TIMESTAMP"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_test_date VARCHAR(10)"))
             await conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS sat_target INTEGER"))
@@ -344,3 +345,5 @@ async def migrate_note_kinds():
             pcols = {c[1] for c in (await conn.execute(text("PRAGMA table_info(payments)"))).all()}
             if "course" not in pcols:
                 await conn.execute(text("ALTER TABLE payments ADD COLUMN course VARCHAR(60)"))
+            if "payer_dob" not in pcols:
+                await conn.execute(text("ALTER TABLE payments ADD COLUMN payer_dob VARCHAR(10)"))

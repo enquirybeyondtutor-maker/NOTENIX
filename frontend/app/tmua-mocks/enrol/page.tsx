@@ -9,6 +9,8 @@ import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
 import { SERIES } from "@/lib/tmuaSeries";
+import PayerDobField from "@/components/PayerDobField";
+import NotenixIdPreview from "@/components/NotenixIdPreview";
 
 // Enrol & pay for the TMUA Mock Series. The account is created locked; an admin confirms the
 // payment in /admin/requests, which opens the series (Baseline Mock first, then each mock on its date).
@@ -18,7 +20,7 @@ type Info = { accounts: Account[]; pay_link: string; price: { amount: number; cu
 export default function TmuaEnrol() {
   const [info, setInfo] = useState<Info | null>(null);
   const [loadError, setLoadError] = useState("");
-  const [form, setForm] = useState({ full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
+  const [form, setForm] = useState({ full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "" });
   const [agree, setAgree] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -100,6 +102,7 @@ export default function TmuaEnrol() {
           <Field label="Student's full name"><Input required value={form.full_name} onChange={set("full_name")} placeholder="e.g. Priya Patel" /></Field>
           <Field label="Email" hint="We send your confirmation and updates here. Your Notenix user ID is made from your name, e.g. priya@notenix.com.">
             <Input required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" /></Field>
+          <NotenixIdPreview name={form.full_name} />
           <Field label="Choose a password" hint="At least 8 characters. Already have a Notenix account? Use its email and password.">
             <Input required type="password" minLength={8} value={form.password} onChange={set("password")} />
           </Field>
@@ -136,6 +139,7 @@ export default function TmuaEnrol() {
               </Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
+            <PayerDobField value={form.payer_dob} onChange={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Wise or bank reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. HDFC, ref 48213" />
             </Field>

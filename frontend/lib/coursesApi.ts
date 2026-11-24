@@ -10,7 +10,7 @@ export type Price = { currency: string; amount: number; label: string };
 export const coursesAPI = {
   catalogue: () => api.get<Course[]>("/courses/catalogue"),
   mine: () => api.get<{ restricted: boolean; courses: Enrolment[]; pending: string[]; price: Price }>("/courses/mine"),
-  buy: (data: { course: string; paid_via?: string; payer_name?: string; payer_note?: string }) => api.post("/courses/buy", data),
+  buy: (data: { course: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string }) => api.post("/courses/buy", data),
   // admin
   add: (userId: number, course: string, access: "trial" | "year" | "none") =>
     api.post(`/admin/users/${userId}/courses`, { course, access }),

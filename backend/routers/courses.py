@@ -2,6 +2,8 @@
 by bank transfer (an admin confirms the payment, which unlocks the course for a year)."""
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+
+from services.payer import clean_dob
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -97,6 +99,7 @@ class BuyIn(BaseModel):
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
+    payer_dob: str | None = None   # optional; helps match Wise payments
 
 
 @router.post("/buy")
@@ -113,7 +116,7 @@ async def buy(data: BuyIn, user: User = Depends(get_current_user), db: AsyncSess
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None,
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
     )
     db.add(p)
     await db.commit()
