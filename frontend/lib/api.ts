@@ -194,7 +194,8 @@ export const seriesAPI = {
 export const paymentsAPI = {
   plans: () => api.get("/payments/plans"),
   accounts: () => api.get("/payments/accounts"),
-  claim: (data: { purpose: "pro" | "test_request"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+  unlock: () => api.get("/payments/unlock"),
+  claim: (data: { purpose: "pro" | "test_request" | "unlock"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string }) =>
     api.post("/payments/claim", data),
   mine: () => api.get("/payments/mine"),
   revisionInfo: (course?: string) => api.get("/payments/revision-checkout", { params: course ? { course } : {} }),

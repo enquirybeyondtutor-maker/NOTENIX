@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ClipboardList, BookOpen, Clock, CheckCircle2, ArrowRight, CalendarClock, PenLine, Hourglass, type LucideIcon } from "lucide-react";
+import { ClipboardList, BookOpen, Clock, CheckCircle2, ArrowRight, CalendarClock, PenLine, Hourglass, Lock, type LucideIcon } from "lucide-react";
 import { testsAPI } from "@/lib/api";
 import { boardKind } from "@/lib/inbox";
 import { useAuthGuard } from "@/lib/guard";
@@ -27,6 +27,7 @@ interface Assignment {
   marking_status?: "graded" | "awaiting_marking" | null;
   score: number | null;
   grade: string | null;
+  locked?: boolean;   // locked until paid: opening it shows the payment screen
 }
 
 function dueLabel(due: string | null): { text: string; tone: "warning" | "neutral" | "danger" } {
@@ -115,7 +116,10 @@ export default function AssignmentBoard({ kind, embedded = false }: { kind: "tes
                             )}
                             {t.class_label && <span className="badge-neutral">{t.class_label}</span>}
                           </div>
-                          <h3 className="mt-3 font-semibold text-ink">{t.title}</h3>
+                          <h3 className="mt-3 flex items-center gap-1.5 font-semibold text-ink">
+                            {t.locked && <Lock size={15} className="shrink-0 text-amber-600" aria-label="Locked" />}
+                            {t.title}
+                          </h3>
                           <p className="mt-0.5 text-sm text-ink-muted">{humanize(t.topic)}</p>
                         </div>
                       </div>

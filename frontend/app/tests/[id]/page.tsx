@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { cn, humanize } from "@/lib/utils";
 import { MathText } from "@/components/MathText";
+import LockedTest, { type UnlockInfo } from "@/components/LockedTest";
 
 interface Question {
   question: string;
@@ -78,6 +79,7 @@ export default function AttemptTestPage() {
   const [test, setTest] = useState<TestData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [locked, setLocked] = useState<UnlockInfo | null>(null);  // locked until paid
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [photos, setPhotos] = useState<Record<number, string[]>>({});
@@ -152,7 +154,11 @@ export default function AttemptTestPage() {
         // Homework has no Begin gate, so its clock starts on open; tests start on "Begin exam".
         if (data.kind === "homework") startClock(data.duration_minutes);
       })
-      .catch((e) => setError(e.response?.data?.detail || "Could not load this test."))
+      .catch((e) => {
+        const d = e.response?.data?.detail;
+        if (e.response?.status === 402 && d && typeof d === "object") setLocked(d as UnlockInfo);
+        else setError((typeof d === "string" && d) || "Could not load this test.");
+      })
       .finally(() => setLoading(false));
   }, [ready, id, startClock]);
 
@@ -331,6 +337,7 @@ export default function AttemptTestPage() {
   const aiMarking = !!getUser()?.ai_marking;
 
   if (!ready || loading) return <Spinner label="Preparing your test…" />;
+  if (locked) return <LockedTest info={locked} />;
 
   if (error && !test) {
     return (

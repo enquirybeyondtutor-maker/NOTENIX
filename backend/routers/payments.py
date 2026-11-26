@@ -15,6 +15,7 @@ from models import User, Payment, TestRequest, Enrolment
 from security import get_current_user, require_admin, hash_password, verify_password, create_token
 from services.email import send_payment_result, notify_admins
 from services import courses as course_svc
+from services import unlock as unlock_svc
 
 router = APIRouter(prefix="/payments", tags=["payments"])
 
@@ -80,8 +81,14 @@ async def accounts(user: User = Depends(get_current_user)):
             "plan": user.plan, "pro_until": user.pro_until.isoformat() if user.pro_until else None}
 
 
+@router.get("/unlock")
+async def unlock_status(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    """What the student pays to unlock their locked tests ({"locked": false} if none)."""
+    return await unlock_svc.info(user, db) or {"locked": False}
+
+
 class ClaimIn(BaseModel):
-    purpose: str                      # pro | test_request
+    purpose: str                      # pro | test_request | unlock
     request_id: int | None = None
     paid_via: str | None = None
     payer_name: str | None = None
@@ -91,11 +98,16 @@ class ClaimIn(BaseModel):
 @router.post("/claim")
 async def claim(data: ClaimIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     """Student says "I've paid". An admin then confirms it against the bank statement."""
-    if data.purpose not in ("pro", "test_request"):
+    if data.purpose not in ("pro", "test_request", unlock_svc.PURPOSE):
         raise HTTPException(400, "Unknown payment purpose")
 
     req = None
-    if data.purpose == "test_request":
+    if data.purpose == unlock_svc.PURPOSE:
+        owed = await unlock_svc.info(user, db)
+        if not owed:
+            raise HTTPException(400, "You have no locked tests to pay for.")
+        amount, currency = owed["amount"], owed["currency"]
+    elif data.purpose == "test_request":
         req = (await db.execute(select(TestRequest).where(
             TestRequest.id == data.request_id, TestRequest.student_id == user.id))).scalar_one_or_none()
         if not req:
@@ -117,7 +129,8 @@ async def claim(data: ClaimIn, user: User = Depends(get_current_user), db: Async
 
     p = Payment(
         user_id=user.id, purpose=data.purpose, request_id=req.id if req else None,
-        reference=reference_for(data.purpose, user.id, req.id if req else None),
+        reference=(unlock_svc.reference(user.id) if data.purpose == unlock_svc.PURPOSE
+                   else reference_for(data.purpose, user.id, req.id if req else None)),
         amount=amount, currency=currency,
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
@@ -129,7 +142,8 @@ async def claim(data: ClaimIn, user: User = Depends(get_current_user), db: Async
     await db.commit()
     await db.refresh(p)
 
-    what = "Pro" if p.purpose == "pro" else f"test request #{p.request_id}"
+    what = ("Pro" if p.purpose == "pro" else "unlocking their locked tests" if p.purpose == unlock_svc.PURPOSE
+            else f"test request #{p.request_id}")
     await notify_admins(
         f"Payment to check: {p.reference}",
         f"{user.full_name} ({user.email}) says they paid {p.amount:g} {p.currency} for {what} "
@@ -450,6 +464,8 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
         now = datetime.utcnow()
         start = user.access_until if (user.access_kind == "paid" and user.access_until and user.access_until > now) else now
         user.access_kind, user.access_until = "paid", start + timedelta(days=settings.subscription_days)
+    if data.approve and p.purpose == unlock_svc.PURPOSE:
+        await unlock_svc.unlock_all(user, db)
     if req and req.status == "payment_claimed":
         req.status = "open" if data.approve else "awaiting_payment"
     await db.commit()
@@ -463,7 +479,8 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
     what = {"pro": "Notenix Pro", "revision": f"Notenix {course_label}" if course_label else "Notenix revision access",
             "course": f"Notenix {course_label}", "ks3": f"{user.full_name}'s {ks3.product(user)} year",
             "doubt": f"{user.full_name}'s Doubt Help (30 days)", "plus": f"{user.full_name}'s Doubt Help Plus (30 days)",
-            "annual": f"{user.full_name}'s Ask a Tutor year"
+            "annual": f"{user.full_name}'s Ask a Tutor year",
+            unlock_svc.PURPOSE: "your locked Notenix tests",
             }.get(p.purpose, f"test request #{p.request_id}")
     extra = {"pro": f"Pro is on for the next {PRO_DAYS} days.",
              "revision": f"{course_label} is now on for a year." if course_label else "Full revision access is now on for a year.",
@@ -474,6 +491,7 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
              "doubt": "Ask a Tutor is on for the next 30 days: up to 20 questions, answered step by step.",
              "annual": "Ask a Tutor is on for a whole year: up to 20 questions every month, answered step by step.",
              "plus": "Ask a Tutor is on for the next 30 days: up to 50 questions, plus 2 live 30-minute doubt calls. Reply on WhatsApp to book them.",
+             unlock_svc.PURPOSE: "Your tests are now unlocked. Sign in at notenix.com and open them from Tests.",
              }.get(p.purpose, "Our team will send the test shortly.")
     if is_series:
         extra = ("Your place on the TMUA Mock Series is confirmed. Sign in at notenix.com: the Baseline Mock is waiting "

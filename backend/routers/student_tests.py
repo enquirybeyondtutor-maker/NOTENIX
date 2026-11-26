@@ -11,6 +11,7 @@ from security import get_current_user, ai_marks_for
 from services.grading import grade_mcq, grade_written, estimate_grade, _pending_written_results
 from config import settings
 from services.answer_pdf import pdf_to_answer_pages
+from services import unlock as unlock_svc
 
 router = APIRouter(prefix="/tests", tags=["student-tests"])
 
@@ -160,7 +161,8 @@ async def my_assignments(user: User = Depends(get_current_user), db: AsyncSessio
             "assigned_by": teacher_name,
             "due_at": a.due_at.isoformat() if a.due_at else None,
             "status": "completed" if at else "assigned",
-            "started": bool(a.started_at or a.draft_answers),  # opened at least once ("New" until then)
+            "started": bool(a.started_at or a.draft_answers),
+            "locked": unlock_svc.is_locked(a) and not at,  # opened at least once ("New" until then)
             "marking_status": getattr(at, "status", None) if at else None,
             "score": None if (not at or pending) else at.score,
             "grade": None if (not at or pending) else at.grade,
@@ -180,6 +182,16 @@ async def _load_assignment(assignment_id: int, user: User, db: AsyncSession):
     return row  # (assignment, test)
 
 
+async def _block_if_locked(assignment: TestAssignment, user: User, db: AsyncSession) -> None:
+    """A locked test is never sent or started until the student has paid (402 + what to pay)."""
+    if not unlock_svc.is_locked(assignment):
+        return
+    detail = await unlock_svc.info(user, db) or {"locked": True}
+    detail["message"] = (f"Your payment isn't done yet. Please unlock this test by making a payment of "
+                         f"{detail.get('price_label', '')}.").replace(" of .", ".")
+    raise HTTPException(402, detail)
+
+
 class PdfPagesIn(BaseModel):
     file: str            # data:application/pdf;base64,…
     max_pages: int = 4   # photo slots the student still has free on this question
@@ -191,6 +203,7 @@ async def pdf_answer_pages(assignment_id: int, data: PdfPagesIn, user: User = De
     """A student attaches a PDF of their answers (e.g. a scan): turn its pages into answer
     images, which then go in with the photos, so tutors mark them exactly the same way."""
     assignment, test = await _load_assignment(assignment_id, user, db)
+    await _block_if_locked(assignment, user, db)
     if getattr(test, "mode", "mcq") != "written":
         raise HTTPException(400, "This test doesn't take uploaded answers.")
     if (await db.execute(select(TestAttempt.id).where(TestAttempt.assignment_id == assignment_id))).first():
@@ -201,6 +214,7 @@ async def pdf_answer_pages(assignment_id: int, data: PdfPagesIn, user: User = De
 @router.get("/{assignment_id}")
 async def get_test_to_attempt(assignment_id: int, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     assignment, test = await _load_assignment(assignment_id, user, db)
+    await _block_if_locked(assignment, user, db)
 
     existing = (await db.execute(
         select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)
@@ -246,6 +260,7 @@ async def start_sitting(assignment_id: int, user: User = Depends(get_current_use
     """Anchor the exam clock when the student actually begins. Idempotent: a resumed
     sitting keeps its original start so the countdown can't be reset by reopening."""
     assignment, _ = await _load_assignment(assignment_id, user, db)
+    await _block_if_locked(assignment, user, db)
     existing = (await db.execute(
         select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)
     )).scalar_one_or_none()
@@ -264,6 +279,7 @@ async def start_sitting(assignment_id: int, user: User = Depends(get_current_use
 async def save_draft(assignment_id: int, data: DraftIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     """Autosave in-progress text answers so a resumed sitting isn't blank."""
     assignment, test = await _load_assignment(assignment_id, user, db)
+    await _block_if_locked(assignment, user, db)
     existing = (await db.execute(
         select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)
     )).scalar_one_or_none()
@@ -277,6 +293,7 @@ async def save_draft(assignment_id: int, data: DraftIn, user: User = Depends(get
 @router.post("/{assignment_id}/submit")
 async def submit_test(assignment_id: int, data: SubmitIn, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     assignment, test = await _load_assignment(assignment_id, user, db)
+    await _block_if_locked(assignment, user, db)
 
     existing = (await db.execute(
         select(TestAttempt).where(TestAttempt.assignment_id == assignment_id)

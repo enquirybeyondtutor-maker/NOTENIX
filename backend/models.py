@@ -168,6 +168,11 @@ class TestAssignment(Base):
     started_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     # Autosaved in-progress text answers so a resumed sitting isn't blank.
     draft_answers: Mapped[list | None] = mapped_column(JSON, nullable=True)
+    # Locked until paid: set = the student sees the test (with a lock) but can't open it until
+    # they pay this amount. One payment unlocks every locked test of theirs together, so a
+    # bundle of tests all carry the bundle price. Cleared when an admin confirms the payment.
+    unlock_price: Mapped[float | None] = mapped_column(Float, nullable=True)
+    unlock_currency: Mapped[str | None] = mapped_column(String(3), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 
