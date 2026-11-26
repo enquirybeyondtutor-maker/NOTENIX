@@ -9,7 +9,7 @@ export const doubtAPI = {
   verifyTrial: (data: { parent_email: string; code: string }) => api.post("/doubt/trial/verify", data),
   completeTrial: (data: { parent_email: string; setup_token: string; password: string }) => api.post("/doubt/trial/complete", data),
   checkoutInfo: () => api.get("/doubt/checkout"),
-  checkout: (data: { login_id: string; password: string; plan: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string }) =>
+  checkout: (data: { login_id: string; password: string; plan: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/doubt/checkout", data),
   adminSet: (id: number | string, data: { plan: string | null; level?: string | null; days?: number }) => api.post(`/doubt/admin/users/${id}`, data),
 };

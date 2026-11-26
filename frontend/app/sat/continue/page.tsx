@@ -7,6 +7,7 @@ import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
+import PayerDetailsFields from "@/components/PayerDetailsFields";
 
 type Price = { currency: string; amount: number; label: string };
 
@@ -14,7 +15,7 @@ type Price = { currency: string; amount: number; label: string };
 // local price for local accounts, paid by bank transfer, confirmed by an admin in /admin/requests.
 export default function SatContinue() {
   const [info, setInfo] = useState<{ accounts: Account[]; prices: Record<string, Price>; usd: Price; pay_link?: string } | null>(null);
-  const [form, setForm] = useState({ email: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
+  const [form, setForm] = useState({ email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState<{ reference: string } | null>(null);
@@ -126,6 +127,8 @@ export default function SatContinue() {
               </Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
+            <PayerDetailsFields country={form.payer_country} dob={form.payer_dob}
+              onCountry={(v) => setForm((f) => ({ ...f, payer_country: v }))} onDob={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Bank or Wise reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. Barclays, ref 48213" />
             </Field>

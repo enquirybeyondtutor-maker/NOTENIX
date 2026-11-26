@@ -134,7 +134,7 @@ export default function AdminRequestsPage() {
                   <span className="rounded bg-brand-50 px-1.5 py-0.5 text-xs font-semibold text-brand-700">{paymentLabel(p)}</span>
                   <div className="text-ink-muted">
                     {p.currency} {p.amount} · ref <span className="font-mono">{p.reference}</span> · via {p.paid_via || "?"} · payer {p.payer_name || "?"}
-                    {p.payer_note ? ` · "${p.payer_note}"` : ""} · {relativeTime(p.created_at)}
+                    {p.payer_note ? ` · "${p.payer_note}"` : ""}{p.payer_country ? ` · lives in ${p.payer_country}` : ""}{p.payer_dob ? ` · born ${p.payer_dob}` : ""} · {relativeTime(p.created_at)}
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -171,7 +171,7 @@ export default function AdminRequestsPage() {
                 </div>
                 <div className="mt-1 text-ink-muted">
                   ref <span className="font-mono">{p.reference}</span> · via {p.paid_via || "?"} · payer {p.payer_name || "?"}
-                  {p.payer_note ? ` · "${p.payer_note}"` : ""}
+                  {p.payer_note ? ` · "${p.payer_note}"` : ""}{p.payer_country ? ` · lives in ${p.payer_country}` : ""}{p.payer_dob ? ` · born ${p.payer_dob}` : ""}
                 </div>
                 <div className="mt-0.5 text-xs text-ink-subtle">
                   Claimed {formatDate(p.created_at)}{p.reviewed_at ? ` · approved ${formatDate(p.reviewed_at)} (${relativeTime(p.reviewed_at)})` : ""}
@@ -206,7 +206,7 @@ export default function AdminRequestsPage() {
                     {r.payment && (
                       <p className="mt-2 text-sm text-ink-muted">
                         Payment {r.payment.status}: {r.payment.currency} {r.payment.amount} · ref <span className="font-mono">{r.reference}</span> · via {r.payment.paid_via || "?"} · payer {r.payment.payer_name || "?"}
-                        {r.payment.payer_note ? ` · "${r.payment.payer_note}"` : ""}
+                        {r.payment.payer_note ? ` · "${r.payment.payer_note}"` : ""}{r.payment.payer_country ? ` · lives in ${r.payment.payer_country}` : ""}{r.payment.payer_dob ? ` · born ${r.payment.payer_dob}` : ""}
                       </p>
                     )}
                   </div>

@@ -7,6 +7,7 @@ import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import { type Account, useCountry, pickAccounts, countryName } from "@/lib/country";
+import PayerDetailsFields from "@/components/PayerDetailsFields";
 
 type Info = { accounts: Account[]; prices: Record<string, Record<string, number>>;
   plans: Record<string, { name: string; cap: number; calls: number; days?: number }> };
@@ -26,7 +27,7 @@ function accountsFor(accounts: Account[], country: string) {
 export default function DoubtContinue() {
   const [info, setInfo] = useState<Info | null>(null);
   const [plan, setPlan] = useState<"annual" | "doubt" | "plus">("annual");
-  const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
+  const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState<{ reference: string } | null>(null);
@@ -132,6 +133,8 @@ export default function DoubtContinue() {
               <Field label="Account you paid into"><Select value={form.paid_via} onChange={set("paid_via")}>{shown.map((a) => <option key={a.label}>{a.label}</option>)}</Select></Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. Mr Tan" /></Field>
+            <PayerDetailsFields country={form.payer_country} dob={form.payer_dob}
+              onCountry={(v) => setForm((f) => ({ ...f, payer_country: v }))} onDob={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Bank or PayNow reference" hint="Optional: helps us find it faster."><Input value={form.payer_note} onChange={set("payer_note")} /></Field>
           </div>
         </div>

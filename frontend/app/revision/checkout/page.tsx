@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
+import PayerDetailsFields from "@/components/PayerDetailsFields";
+import NotenixIdPreview from "@/components/NotenixIdPreview";
 
 // One course a year for students outside Beyond Tutors: GCSE £99 a subject, all four GCSEs £349
 // (?course=gcse-bundle), SAT £99, anything else £149. The backend prices the chosen course.
@@ -31,7 +33,7 @@ function startHref(course: string): string {
 export default function RevisionCheckout() {
   const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string; standard_price?: number } | null>(null);
   const [returnTo, setReturnTo] = useState<string | null>(null);
-  const [form, setForm] = useState({ course: "", full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "" });
+  const [form, setForm] = useState({ course: "", full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [catalogue, setCatalogue] = useState<Course[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -148,6 +150,7 @@ export default function RevisionCheckout() {
           <Field label="Student's full name"><Input required value={form.full_name} onChange={set("full_name")} placeholder="e.g. Priya Patel" /></Field>
           <Field label="Email" hint="We send your receipt and updates here. Your Notenix user ID is made from the student's name, e.g. priya@notenix.com.">
             <Input required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" /></Field>
+          <NotenixIdPreview name={form.full_name} />
           <Field label="Choose a password" hint="At least 8 characters. You'll sign in with your Notenix user ID and this password.">
             <Input required type="password" minLength={8} value={form.password} onChange={set("password")} />
           </Field>
@@ -190,6 +193,8 @@ export default function RevisionCheckout() {
               </Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
+            <PayerDetailsFields country={form.payer_country} dob={form.payer_dob}
+              onCountry={(v) => setForm((f) => ({ ...f, payer_country: v }))} onDob={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Wise or bank reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. Barclays, ref 48213" />
             </Field>
