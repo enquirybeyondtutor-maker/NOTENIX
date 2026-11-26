@@ -287,13 +287,13 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
+        payer_note=note[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()
     await db.refresh(p)
     await notify_admins(
-        f"Payment to check: {p.reference}",
+        f"Payment to check: {p.reference}" + (f" (+ {extra})" if extra else ""),
         f"{user.full_name} (user ID {user.email}, email {user.notify_email or user.email}) says they paid "
         f"{p.amount:g} {p.currency} for {course_svc.course_name(p.course) if p.course else 'revision access'} "
         f"via {p.paid_via or 'bank transfer'}. Note: {p.payer_note or '-'}",
@@ -318,7 +318,7 @@ async def ks3_checkout_info():
     from services import pricing
     table = pricing.ks3_table()
     return {"accounts": payment_accounts(), "prices": table, "gbp": table["GBP"],
-            "offer": pricing.ks3_offer_on(),
+            "offer": pricing.ks3_offer_on(), "extra_subjects": list(KS3_EXTRA_SUBJECTS),
             "offer_until": (u.isoformat() if (u := pricing.ks3_offer_until()) and pricing.ks3_offer_on() else None),
             "days": settings.subscription_days, "pay_link": settings.revision_pay_link}
 
@@ -332,6 +332,12 @@ class Ks3CheckoutIn(BaseModel):
     payer_note: str | None = None
     payer_dob: str | None = None   # optional; helps match Wise payments
     payer_country: str | None = None   # payer's country of residence
+    extra_subject: str | None = None   # UK KS3: one extra subject included (KS3_EXTRA_SUBJECTS)
+
+
+# Every UK KS3 year includes one extra subject of the parent's choice, tested alongside
+# Maths, Science and English. Tutors set these tests; the choice reaches the admin with the payment.
+KS3_EXTRA_SUBJECTS = ("French", "Spanish", "German")
 
 
 @router.post("/ks3-checkout")
@@ -348,6 +354,10 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
     if not (data.payer_name or "").strip():
         raise HTTPException(400, "Please tell us the name of the person who paid.")
     price = pricing.ks3_for_user(user, data.currency)   # the child's own year group decides the price
+    extra = next((x for x in KS3_EXTRA_SUBJECTS if x.lower() == (data.extra_subject or "").strip().lower()), None)
+    if data.extra_subject and not extra:
+        raise HTTPException(400, f"Please choose the extra subject from: {', '.join(KS3_EXTRA_SUBJECTS)}.")
+    note = " ".join(x for x in (f"Extra subject: {extra}." if extra else "", (data.payer_note or "").strip()) if x)
     open_claim = (await db.execute(select(Payment).where(
         Payment.user_id == user.id, Payment.purpose == "ks3", Payment.status == "claimed"))).scalar_one_or_none()
     if open_claim:
@@ -358,13 +368,13 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
+        payer_note=note[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()
     await db.refresh(p)
     await notify_admins(
-        f"Payment to check: {p.reference}",
+        f"Payment to check: {p.reference}" + (f" (+ {extra})" if extra else ""),
         f"{user.full_name} ({user.email}, {ks3.year_label(user)}) says they paid {price['label']} for {ks3.product(user)} "
         f"via {p.paid_via or 'bank transfer'}. Payer: {p.payer_name}. Note: {p.payer_note or '-'}",
         "/admin/requests",
@@ -416,13 +426,13 @@ async def sat_checkout(data: SatCheckoutIn, db: AsyncSession = Depends(get_db)):
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
+        payer_note=note[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()
     await db.refresh(p)
     await notify_admins(
-        f"Payment to check: {p.reference}",
+        f"Payment to check: {p.reference}" + (f" (+ {extra})" if extra else ""),
         f"{user.full_name} ({user.email}) says they paid {price['label']} for Notenix SAT "
         f"via {p.paid_via or 'bank transfer'}. Payer: {p.payer_name}. Note: {p.payer_note or '-'}",
         "/admin/requests",

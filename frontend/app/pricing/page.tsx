@@ -76,6 +76,7 @@ const PLANS: Plan[] = [
     gbp: 169, per: "/ year", ks3: true,   // priced by year group: shown by Ks3YearPrices
     includes: [
       "A timed test in Maths, Science and English every half-term",
+      "Plus one extra subject of your choice: French, Spanish or German",
       "Homework help from Beyond Tutors tutors",
       "KS3 notes for every topic",
       "A progress report for parents every month",

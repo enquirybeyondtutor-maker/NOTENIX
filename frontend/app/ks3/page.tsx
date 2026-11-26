@@ -30,6 +30,7 @@ const PATH = [
 
 const PLAN = [
   "A timed test every half-term in Maths, Science and English",
+  "Plus one extra subject of your choice: French, Spanish or German",
   "Instant marking with a worked explanation for every question",
   "A progress report in your inbox every month",
   "Homework help from Beyond Tutors tutors (up to 30 questions a month)",

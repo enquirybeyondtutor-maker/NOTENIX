@@ -35,6 +35,7 @@ const TIMELINE = [
 
 const PLAN = [
   "Year 7 tests in Maths, Science and English, every half-term",
+  "Plus one extra subject of your choice: French, Spanish or German",
   "Grammar-level benchmark in every report",
   "Monthly progress report emailed to you",
   "Homework help from Beyond Tutors tutors (up to 30 questions a month)",

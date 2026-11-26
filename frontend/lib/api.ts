@@ -202,7 +202,7 @@ export const paymentsAPI = {
   ks3Info: () => api.get("/payments/ks3-checkout"),
   // The @notenix.com user ID a new student would get from this name (shown while they type).
   userIdPreview: (name: string) => api.get("/payments/user-id", { params: { name } }),
-  ks3Checkout: (data: { login_id: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
+  ks3Checkout: (data: { login_id: string; password: string; currency: string; extra_subject?: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/payments/ks3-checkout", data),
   revisionCheckout: (data: { full_name: string; email: string; password: string; course?: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/payments/revision-checkout", data),

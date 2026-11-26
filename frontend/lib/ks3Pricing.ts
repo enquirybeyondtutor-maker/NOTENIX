@@ -15,6 +15,7 @@ export type Ks3Info = {
   gbp: Ks3Price[];
   offer?: boolean;
   offer_until?: string | null;
+  extra_subjects?: string[];   // UK KS3: one extra subject included, chosen at checkout
   pay_link?: string;
 };
 
@@ -33,7 +34,8 @@ export function ks3Tier(year: number | null | undefined, track?: Ks3Track | null
 
 // Used only if the API can't be reached: the usual (list) prices, no offer.
 const gbp = (a: number): Ks3Price => ({ currency: "GBP", amount: a, label: `£${a}` });
-export const KS3_FALLBACK: Ks3Info = { accounts: [], prices: { GBP: [gbp(169), gbp(189), gbp(209)] }, gbp: [gbp(169), gbp(189), gbp(209)] };
+export const KS3_EXTRA_SUBJECTS = ["French", "Spanish", "German"];
+export const KS3_FALLBACK: Ks3Info = { accounts: [], extra_subjects: KS3_EXTRA_SUBJECTS, prices: { GBP: [gbp(169), gbp(189), gbp(209)] }, gbp: [gbp(169), gbp(189), gbp(209)] };
 
 let infoPromise: Promise<Ks3Info> | null = null;
 export function loadKs3Info(): Promise<Ks3Info> {

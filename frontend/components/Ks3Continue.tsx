@@ -6,7 +6,7 @@ import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import { type Account, useCountry, pickAccounts, countryName } from "@/lib/country";
-import { type Ks3Info, type Ks3Price, KS3_FALLBACK, loadKs3Info, ks3Years, ks3Tier, useOfferCountdown } from "@/lib/ks3Pricing";
+import { type Ks3Info, type Ks3Price, KS3_FALLBACK, KS3_EXTRA_SUBJECTS, loadKs3Info, ks3Years, ks3Tier, useOfferCountdown } from "@/lib/ks3Pricing";
 import PayerDetailsFields from "@/components/PayerDetailsFields";
 
 type Price = Ks3Price;
@@ -28,7 +28,7 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
   const G = track ? GRADE_TRACKS[track] : null;
   const [info, setInfo] = useState<Ks3Info | null>(null);
   const [tier, setTier] = useState(0);
-  const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
+  const [form, setForm] = useState({ login_id: "", password: "", extra_subject: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState<{ reference: string } | null>(null);
@@ -67,7 +67,8 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
     setBusy(true);
     setError("");
     try {
-      const { data } = await paymentsAPI.ks3Checkout({ ...form, currency: price.currency });
+      const { extra_subject, ...rest } = form;
+      const { data } = await paymentsAPI.ks3Checkout({ ...rest, currency: price.currency, ...(G ? {} : { extra_subject }) });
       setDone({ reference: data.reference });
     } catch (err: any) {
       setError(err.response?.data?.detail || "Couldn't send that. Please try again.");
@@ -108,7 +109,7 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
       <p className="mt-1 text-sm text-ink-muted">
         {G
           ? G.blurb
-          : "A timed test every half-term in Maths, Science and English, homework help from Beyond Tutors tutors, KS3 notes, and a progress report in your inbox every month."}
+          : "A timed test every half-term in Maths, Science and English, plus one extra subject of your choice (French, Spanish or German), homework help from Beyond Tutors tutors, KS3 notes, and a progress report in your inbox every month."}
       </p>
 
       <form onSubmit={submit} className="mt-6 space-y-6">
@@ -126,6 +127,14 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
               ))}
             </Select>
           </Field>
+          {!G && (
+            <Field label="Extra subject (included)" hint="Choose one more subject to be tested in, as well as Maths, Science and English.">
+              <Select required value={form.extra_subject} onChange={set("extra_subject")}>
+                <option value="" disabled>Choose a subject…</option>
+                {(info.extra_subjects?.length ? info.extra_subjects : KS3_EXTRA_SUBJECTS).map((x) => <option key={x}>{x}</option>)}
+              </Select>
+            </Field>
+          )}
           <p className="text-xs text-ink-subtle">No free week yet? <a href={G ? G.trial : "/ks3/trial"} className="font-medium text-brand-600 hover:underline">Start one first</a>, it&apos;s free.</p>
         </div>
 
