@@ -6,6 +6,7 @@ import re
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
+from services.payer import clean_dob
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from config import settings
@@ -156,6 +157,7 @@ class CheckoutIn(BaseModel):
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
+    payer_dob: str | None = None   # optional; helps match Wise payments
 
 
 @router.get("/checkout")
@@ -185,7 +187,7 @@ async def checkout(data: CheckoutIn, db: AsyncSession = Depends(get_db)):
     user.billing_currency = pr["currency"]
     p = Payment(user_id=user.id, purpose=data.plan, reference=f"NX-D{user.id}", amount=pr["amount"], currency=pr["currency"],
                 paid_via=(data.paid_via or "")[:80] or None, payer_name=(data.payer_name or "")[:120] or None,
-                payer_note=(data.payer_note or "")[:1000] or None)
+                payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob))
     db.add(p)
     await db.commit()
     await db.refresh(p)

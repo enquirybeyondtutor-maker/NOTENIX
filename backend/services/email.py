@@ -306,7 +306,9 @@ async def send_request_cancelled(student, exam: str, request_id: int, note: str 
 # ── Payments and homework help ─────────────────────────────────────────────────
 
 async def send_payment_result(user, approved: bool, what: str, amount: float, currency: str,
-                              reference: str, extra: str = "") -> None:
+                              reference: str, extra: str = "", guide: dict | None = None) -> None:
+    """guide (services/welcome_guide.py): numbered "how to get started" steps and an optional
+    schedule, added to the "Payment received" email so it doubles as the welcome email."""
     from services.pricing import label as money
     amt = money((currency or "GBP").upper(), float(amount))  # £149, AED 699, ₹16,999
 
@@ -315,7 +317,8 @@ async def send_payment_result(user, approved: bool, what: str, amount: float, cu
             heading, subj = "Payment received", f"Payment received · {what}"
             body = (T.para(f"Thank you. We've received your payment for {escape(what)}.") +
                     T.info_table([("Amount", escape(amt)), ("Reference", escape(reference)), ("For", escape(what))]) +
-                    (T.para(escape(extra)) if extra else "") + T.login_box(user.email, user.full_name if role == "parent" else None))
+                    (T.para(escape(extra)) if extra else "") + T.login_box(user.email, user.full_name if role == "parent" else None)
+                    + _guide_html(guide))
             btn = [(T.signin_url(user.email), "Open Notenix")]
         else:
             heading, subj = "We couldn't match your payment", f"Please check your payment · {reference}"
@@ -326,6 +329,20 @@ async def send_payment_result(user, approved: bool, what: str, amount: float, cu
         html = T.layout(preheader=f"{amt} · {reference}", heading=heading, body=body, buttons=btn, audience=role)
         return subj, html, f"{heading}\n{what}: {amt}, reference {reference}" + T.text_footer()
     await _to_family(user, build)
+
+
+def _guide_html(guide: dict | None) -> str:
+    if not guide:
+        return ""
+    out = ""
+    if guide.get("steps"):
+        items = "".join(f'<li style="margin:0 0 8px">{step}</li>' for step in guide["steps"])
+        out += (f'<p style="margin:18px 0 8px;font-weight:700;color:{T.INK}">How to get started</p>'
+                f'<ol style="margin:0 0 14px;padding-left:20px">{items}</ol>')
+    if guide.get("schedule"):
+        out += (f'<p style="margin:18px 0 8px;font-weight:700;color:{T.INK}">{escape(guide.get("schedule_title") or "Schedule")}</p>'
+                + T.info_table(guide["schedule"]))
+    return out
 
 
 async def send_help_answered(student, subject: str) -> None:

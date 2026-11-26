@@ -6,6 +6,8 @@ from html import escape
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+
+from services.payer import clean_dob
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -42,7 +44,7 @@ def _payment_row(p: Payment, user: User | None = None) -> dict:
         "id": p.id, "purpose": p.purpose, "request_id": p.request_id, "reference": p.reference,
         "course": course, "course_name": course_svc.course_name(course) if course else None,
         "amount": p.amount, "currency": p.currency, "paid_via": p.paid_via,
-        "payer_name": p.payer_name, "payer_note": p.payer_note, "status": p.status,
+        "payer_name": p.payer_name, "payer_note": p.payer_note, "payer_dob": getattr(p, "payer_dob", None), "status": p.status,
         "created_at": p.created_at.isoformat() if p.created_at else None,
         "reviewed_at": p.reviewed_at.isoformat() if p.reviewed_at else None,
     }
@@ -93,6 +95,7 @@ class ClaimIn(BaseModel):
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
+    payer_dob: str | None = None   # optional; helps match Wise payments
 
 
 @router.post("/claim")
@@ -134,7 +137,7 @@ async def claim(data: ClaimIn, user: User = Depends(get_current_user), db: Async
         amount=amount, currency=currency,
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None,
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
     )
     db.add(p)
     if req:
@@ -207,6 +210,18 @@ def _known_course(course: str | None) -> bool:
     return bool(course) and (course_svc.is_course(course) or course_svc.is_bundle(course))
 
 
+@router.get("/user-id")
+async def user_id_preview(name: str = "", db: AsyncSession = Depends(get_db)):
+    """The @notenix.com user ID a new student would get from this name (aryan@notenix.com, or
+    aryan.s@... if that is taken). Shown on the sign-up checkouts as the name is typed; the ID is
+    only reserved when the form is sent, so it can still change if someone takes it first."""
+    clean = " ".join(name.split())[:120]
+    if len(clean) < 2:
+        return {"login_id": None}
+    from routers.admin import _free_id
+    return {"login_id": await _free_id(clean, db, domain=settings.ks3_id_domain)}
+
+
 @router.get("/revision-checkout")
 async def revision_checkout_info(course: str | None = None):
     from services import pricing
@@ -227,6 +242,7 @@ class RevisionCheckoutIn(BaseModel):
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
+    payer_dob: str | None = None   # optional; helps match Wise payments
 
 
 @router.post("/revision-checkout")
@@ -268,7 +284,7 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None,
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
     )
     db.add(p)
     await db.commit()
@@ -308,6 +324,7 @@ class Ks3CheckoutIn(BaseModel):
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
+    payer_dob: str | None = None   # optional; helps match Wise payments
 
 
 @router.post("/ks3-checkout")
@@ -334,7 +351,7 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None,
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
     )
     db.add(p)
     await db.commit()
@@ -365,6 +382,7 @@ class SatCheckoutIn(BaseModel):
     paid_via: str | None = None
     payer_name: str | None = None
     payer_note: str | None = None
+    payer_dob: str | None = None   # optional; helps match Wise payments
 
 
 @router.post("/sat-checkout")
@@ -390,7 +408,7 @@ async def sat_checkout(data: SatCheckoutIn, db: AsyncSession = Depends(get_db)):
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None,
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
     )
     db.add(p)
     await db.commit()
@@ -498,7 +516,9 @@ async def review(payment_id: int, data: ReviewIn, admin: User = Depends(require_
                  "in Tests, and each mock appears there at 10 a.m. UK time on its date. Stuck on a topic? Request a topic set "
                  "from Request a test (up to 2 a week).")
     try:
-        await send_payment_result(user, data.approve, what, p.amount, p.currency, p.reference, extra)
+        from services.welcome_guide import guide
+        await send_payment_result(user, data.approve, what, p.amount, p.currency, p.reference, extra,
+                                  guide=guide(user, p) if data.approve else None)
     except Exception as ex:
         print(f"[payments] notice failed: {ex}")
     return _payment_row(p, user)
