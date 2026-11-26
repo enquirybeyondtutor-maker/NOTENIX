@@ -48,6 +48,9 @@ class AssignIn(BaseModel):
     student_emails: list[str]
     class_label: str | None = None
     due_at: UtcDateTime | None = None
+    # Locked until paid: the student sees the test with a lock and must pay this to open it.
+    unlock_price: float | None = None
+    unlock_currency: str | None = None   # e.g. EUR; defaults to EUR
 
 
 class PhotoQuestionsIn(BaseModel):
@@ -500,6 +503,9 @@ async def assign_test(test_id: int, data: AssignIn, teacher: User = Depends(requ
     students = (await db.execute(select(User).where(User.email.in_(emails)))).scalars().all()
     found_by_email = {s.email: s for s in students}
 
+    lock_price = data.unlock_price if data.unlock_price and data.unlock_price > 0 else None
+    lock_currency = ((data.unlock_currency or "EUR").strip().upper()[:3]) if lock_price else None
+
     created, skipped, not_found = 0, 0, []
     newly_assigned: list[User] = []
     for email in emails:
@@ -513,11 +519,14 @@ async def assign_test(test_id: int, data: AssignIn, teacher: User = Depends(requ
             )
         )).scalar_one_or_none()
         if exists:
+            if lock_price:   # re-assigning with a price locks a test the student already has
+                exists.unlock_price, exists.unlock_currency = lock_price, lock_currency
             skipped += 1
             continue
         db.add(TestAssignment(
             test_id=test_id, student_id=s.id, assigned_by=teacher.id,
             class_label=data.class_label, due_at=data.due_at,
+            unlock_price=lock_price, unlock_currency=lock_currency,
         ))
         newly_assigned.append(s)
         created += 1

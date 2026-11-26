@@ -16,7 +16,7 @@ const STATUS_LABEL: Record<string, string> = {
 function paymentLabel(p: any): string {
   if (p.course_name) return `Course · ${p.course_name}`;
   return ({ revision: "Revision access", ks3: "Notenix KS3", annual: "Ask a Tutor · 1 year", doubt: "Doubt Help · 30 days",
-    plus: "Doubt Help Plus · 30 days", test_request: "Test request" } as Record<string, string>)[p.purpose] || "Pro";
+    plus: "Doubt Help Plus · 30 days", test_request: "Test request", unlock: "Unlock locked tests" } as Record<string, string>)[p.purpose] || "Pro";
 }
 
 function AssignBox({ req, tests, onDone }: { req: any; tests: any[]; onDone: () => void }) {
@@ -85,7 +85,7 @@ export default function AdminRequestsPage() {
   const load = () => {
     requestsAPI.adminList().then((r) => setRows(r.data)).catch(() => setRows([]));
     requestsAPI.adminTests().then((r) => setTests(r.data)).catch(() => {});
-    paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro" || p.purpose === "revision" || p.purpose === "course" || p.purpose === "ks3" || p.purpose === "doubt" || p.purpose === "plus" || p.purpose === "annual"))).catch(() => {});
+    paymentsAPI.adminList("claimed").then((r) => setProPayments(r.data.filter((p: any) => p.purpose === "pro" || p.purpose === "revision" || p.purpose === "course" || p.purpose === "ks3" || p.purpose === "doubt" || p.purpose === "plus" || p.purpose === "annual" || p.purpose === "unlock"))).catch(() => {});
     paymentsAPI.adminList("confirmed").then((r) => setPaidPayments(r.data)).catch(() => {});
   };
 

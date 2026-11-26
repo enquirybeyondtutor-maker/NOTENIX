@@ -185,6 +185,8 @@ async def run_migrations():
             # Server-anchored timer + draft autosave
             await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS started_at TIMESTAMP"))
             await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS draft_answers JSON"))
+            await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS unlock_price DOUBLE PRECISION"))
+            await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN IF NOT EXISTS unlock_currency VARCHAR(3)"))
             # Integrity signals
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS focus_lost_count INTEGER DEFAULT 0"))
             await conn.execute(text("ALTER TABLE test_attempts ADD COLUMN IF NOT EXISTS time_away_seconds INTEGER DEFAULT 0"))
@@ -257,6 +259,10 @@ async def run_migrations():
                 await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN started_at TIMESTAMP"))
             if ascols and "draft_answers" not in ascols:
                 await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN draft_answers JSON"))
+            if ascols and "unlock_price" not in ascols:
+                await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN unlock_price FLOAT"))
+            if ascols and "unlock_currency" not in ascols:
+                await conn.execute(text("ALTER TABLE test_assignments ADD COLUMN unlock_currency VARCHAR(3)"))
 
 
 async def migrate_note_kinds():

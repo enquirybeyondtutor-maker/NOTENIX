@@ -23,11 +23,12 @@ function CopyValue({ value }: { value: string }) {
   );
 }
 
-// Bank-transfer instructions + "I've paid" form. Used for Pro, paid test requests and buying a course.
+// Bank-transfer instructions + "I've paid" form. Used for Pro, paid test requests, buying a course
+// and unlocking tests that are locked until paid.
 export default function PaymentBox({
   purpose, requestId, course, amount, currency, reference, onClaimed,
 }: {
-  purpose: "pro" | "test_request" | "course";
+  purpose: "pro" | "test_request" | "course" | "unlock";
   requestId?: number;
   course?: string;
   amount: number;
@@ -60,7 +61,7 @@ export default function PaymentBox({
     setBusy(true); setError("");
     try {
       if (purpose === "course" && course) await coursesAPI.buy({ course, paid_via: via, payer_name: payerName, payer_note: note });
-      else await paymentsAPI.claim({ purpose: purpose as "pro" | "test_request", request_id: requestId, paid_via: via, payer_name: payerName, payer_note: note });
+      else await paymentsAPI.claim({ purpose: purpose as "pro" | "test_request" | "unlock", request_id: requestId, paid_via: via, payer_name: payerName, payer_note: note });
       setMsg("Thanks! We'll check our account and confirm by email, usually within 24 hours.");
       onClaimed?.();
     } catch (err: any) {
