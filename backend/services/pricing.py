@@ -16,10 +16,22 @@ NAMES = {"GBP": "UK", "AED": "UAE", "USD": "US", "EUR": "Europe", "AUD": "Austra
          "THB": "Thailand"}
 
 
-KS3_PRICES = {
-    "GBP": 149, "AED": 699, "USD": 189, "EUR": 179, "AUD": 289,
-    "NZD": 319, "SGD": 255, "CAD": 259, "INR": 16999, "THB": 5990,
+# Notenix KS3 by year group: [first, second, third year] = UK Years 7/8/9, or Grades 5/6/7 on the
+# US (Middle School) and Ontario tracks. Agreed Nov 2026: list GBP 169/189/209, offer GBP 159/179/199.
+# Other currencies scaled from the old flat price (GBP 149) by the same ratio and rounded.
+# While the offer is on (settings.ks3_offer, until settings.ks3_offer_until), families pay KS3_PRICES
+# and see KS3_LIST_PRICES struck through; after that they pay KS3_LIST_PRICES.
+KS3_LIST_PRICES = {
+    "GBP": (169, 189, 209), "AED": (799, 889, 979), "USD": (219, 239, 269), "EUR": (199, 229, 249),
+    "AUD": (329, 369, 409), "NZD": (359, 409, 449), "SGD": (289, 325, 359), "CAD": (295, 329, 365),
+    "INR": (19499, 21499, 23999), "THB": (6790, 7590, 8390),
 }
+KS3_PRICES = {   # offer prices
+    "GBP": (159, 179, 199), "AED": (749, 839, 929), "USD": (199, 229, 249), "EUR": (189, 215, 239),
+    "AUD": (309, 349, 389), "NZD": (339, 379, 429), "SGD": (269, 305, 339), "CAD": (275, 309, 345),
+    "INR": (17999, 19999, 22499), "THB": (6390, 7190, 7990),
+}
+KS3_FIRST_YEAR = {"us": 5, "on": 5}   # first grade of each grade-based track; UK KS3 starts at Year 7
 
 
 # Notenix SAT, one year. Lower than KS3: SAT families are mostly in India, the Gulf and Asia.
@@ -88,19 +100,78 @@ def sat_for_currency(currency: str | None) -> dict:
     return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
 
 
-def ks3_for_currency(currency: str | None) -> dict:
-    """Notenix KS3 yearly price in this currency (KS3_PRICES env overrides the defaults)."""
+def ks3_tier(year: int | None, track: str | None = None) -> int:
+    """0, 1 or 2: which price step a KS3 year (7-9) or track grade (5-7) is on."""
+    first = KS3_FIRST_YEAR.get(track or "", 7)
+    try:
+        return min(2, max(0, int(year) - first))
+    except (TypeError, ValueError):
+        return 0
+
+
+def ks3_offer_until():
+    """When the KS3 offer ends (aware UTC datetime), or None for no end date."""
+    from datetime import datetime
+    raw = (getattr(settings, "ks3_offer_until", "") or "").strip()
+    if not raw:
+        return None
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def ks3_offer_on() -> bool:
+    """The offer is switched on and its end time hasn't passed."""
+    from datetime import datetime, timezone
+    if not settings.ks3_offer:
+        return False
+    until = ks3_offer_until()
+    if until and until.tzinfo is None:
+        until = until.replace(tzinfo=timezone.utc)
+    return until is None or datetime.now(timezone.utc) < until
+
+
+def _ks3_table(offer: bool) -> dict[str, tuple]:
+    if not offer:
+        return dict(KS3_LIST_PRICES)
     p = dict(KS3_PRICES)
     try:
         custom = json.loads(settings.ks3_prices or "{}")
         if isinstance(custom, dict) and custom:
-            p = {k.upper(): float(v) for k, v in custom.items()}
+            p = {k.upper(): tuple(float(x) for x in v) if isinstance(v, (list, tuple)) else (float(v),) * 3
+                 for k, v in custom.items()}
     except Exception:
         pass
+    return p
+
+
+def ks3_for_currency(currency: str | None, tier: int = 0) -> dict:
+    """Notenix KS3 yearly price for one year group (tier 0/1/2) in this currency.
+    While the offer is on, "was"/"was_label" carry the list price to show struck through."""
+    offer = ks3_offer_on()
+    p = _ks3_table(offer)
     cur = (currency or "GBP").upper()
     if cur not in p:
         cur = "GBP" if "GBP" in p else next(iter(p))
-    return {"currency": cur, "amount": p[cur], "label": label(cur, p[cur])}
+    tier = min(max(int(tier or 0), 0), len(p[cur]) - 1)
+    amount = float(p[cur][tier])
+    out = {"currency": cur, "amount": amount, "label": label(cur, amount)}
+    was = KS3_LIST_PRICES.get(cur)
+    if offer and was and was[tier] > amount:
+        out.update(was=float(was[tier]), was_label=label(cur, was[tier]))
+    return out
+
+
+def ks3_for_user(u, currency: str | None = None) -> dict:
+    """The KS3 price for this student's own year group (Year 6 children on Year 7 work pay Year 7)."""
+    tier = ks3_tier(getattr(u, "ks3_year", None), getattr(u, "ks3_track", None))
+    return ks3_for_currency(currency or getattr(u, "billing_currency", None), tier)
+
+
+def ks3_table() -> dict[str, list[dict]]:
+    """Every currency's three year-group prices, for the public checkout page."""
+    return {c: [ks3_for_currency(c, t) for t in range(3)] for c in _ks3_table(ks3_offer_on())}
 
 
 # Normal Notenix price: one course for a year, for students outside Beyond Tutors (courses that

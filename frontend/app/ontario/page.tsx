@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Check, ArrowRight, ClipboardCheck, Camera, BookOpen, LineChart, Mail, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import Ks3YearPrices from "@/components/Ks3YearPrices";
 
 // Notenix Ontario: the KS3 product for families in Ontario, Canada, Grades 5-7, Math and Language
-// following the Ontario curriculum. Same machinery as /ks3 and /middle-school; priced in CAD ($259/yr).
+// following the Ontario curriculum. Same machinery as /ks3 and /middle-school; priced in CAD by grade (Ks3YearPrices).
 
 export const metadata: Metadata = {
   title: "Ontario Grades 5–7 Math & Language Practice | Progress Reports for Parents",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 const TRIAL = "/ontario/trial";
 const ENROL = "/ontario/trial?pay=1";   // the same sign-up, then straight on to payment
-const PRICE = "C$259";
+const PRICE = "C$295 to C$365";
 
 const FREE_WEEK = [
   { icon: ClipboardCheck, title: "Baseline tests", desc: "Math and Language, about 30 minutes each, scored instantly." },
@@ -45,7 +46,7 @@ const FAQ = [
   ["What does the free week cost?", "Nothing, and we don't ask for card details. It ends by itself after 7 days. Your child's results are saved if you decide to continue."],
   ["How does homework help work?", "Your child takes a photo of a homework question they're stuck on. A Beyond Tutors tutor replies with the method, step by step, so your child can finish it themselves."],
   ["What's in the monthly report?", "Scores in Math and Language and how they're changing, the topics your child is strong in, the 3 topics to work on next, and any tests not yet taken."],
-  ["How much is it, and how do I pay?", `${PRICE} (Canadian dollars) a year, paid once by bank transfer. There's no subscription that renews by itself.`],
+  ["How much is it, and how do I pay?", `${PRICE} (Canadian dollars) a year depending on grade, paid once by bank transfer. There's no subscription that renews by itself.`],
   ["Is it the same as tutoring?", "No. Notenix is practice and progress tracking. If the report shows your child needs more, you can book a free trial class with a Beyond Tutors tutor."],
 ];
 
@@ -160,10 +161,7 @@ export default function OntarioLanding() {
           </div>
           <div className="card flex flex-col border-brand-300 p-8 ring-2 ring-brand-600/20">
             <h3 className="text-lg font-semibold text-ink">Notenix Ontario</h3>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-4xl font-bold text-ink">{PRICE}</span>
-              <span className="text-sm text-ink-subtle">/ year</span>
-            </div>
+            <Ks3YearPrices track="on" />
             <p className="mt-1 text-sm text-ink-muted">Canadian dollars, paid once a year by bank transfer. No auto-renewal.</p>
             <ul className="mt-6 flex-1 space-y-3 text-sm text-ink-muted">
               {PLAN.map((f) => (

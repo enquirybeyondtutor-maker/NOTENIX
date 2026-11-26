@@ -93,7 +93,7 @@ async def trial_start(data: TrialStartIn, db: AsyncSession = Depends(get_db)):
     u.ks3_track = data.track if us else None
     u.full_name, u.ks3_year = name, (data.year_group if us else max(7, data.year_group))  # Year 6 works on Year 7 content
     if us:
-        u.billing_currency = tr["currency"]   # USD 189 / CAD 259 a year (pricing.KS3_PRICES)
+        u.billing_currency = tr["currency"]   # priced in USD / CAD by grade (pricing.KS3_PRICES)
     ks3.year_set_now(u, starting_next=not us and data.year_group == 6)
     if data.source == "kent-grammar":
         u.ks3_emails = sorted(set(u.ks3_emails or []) | {"src-kent-grammar"})

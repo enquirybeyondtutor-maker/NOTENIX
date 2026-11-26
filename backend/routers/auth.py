@@ -79,7 +79,7 @@ def _subscription_quick(u: User) -> dict:
     if _is_bt(u):
         return pricing.for_currency(cur)
     if getattr(u, "ks3_year", None):
-        return pricing.ks3_for_currency(cur)
+        return pricing.ks3_for_user(u, cur)   # priced by the child's year group
     return course_price(u)
 
 

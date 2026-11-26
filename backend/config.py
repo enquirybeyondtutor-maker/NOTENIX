@@ -78,8 +78,13 @@ class Settings(BaseSettings):
     # Student subscription price per billing currency, JSON, e.g. {"GBP": 49, "AED": 229}.
     # Empty = the defaults in services/pricing.py.
     subscription_prices: str = ""
-    # Notenix KS3 (Year 7-9): yearly price per currency (JSON, empty = defaults) and free trial length.
+    # Notenix KS3 (Year 7-9, and the Grade 5-7 tracks): price by year group, see pricing.KS3_PRICES.
+    # JSON override of the charged price per currency: a number (every year) or [Y7, Y8, Y9].
     ks3_prices: str = ""
+    ks3_offer: bool = True   # charge the offer price (£159/179/199) with the list price struck through
+    # The offer ends by itself at this UTC time (ISO); then the list price (£169/189/209) applies.
+    # Empty = no end date. 24-hour launch offer agreed 26 Nov 2026.
+    ks3_offer_until: str = "2026-11-27T17:15:00Z"
     sat_prices: str = ""   # Notenix SAT yearly price per currency, JSON; empty = pricing.SAT_PRICES
     ks3_trial_days: int = 7
     ks3_help_trial_cap: int = 5      # homework-help questions during the free week

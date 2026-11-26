@@ -1,6 +1,7 @@
 import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import LocalPrice from "@/components/LocalPrice";
+import Ks3YearPrices from "@/components/Ks3YearPrices";
 
 const BOOK = "https://www.thebeyondtutors.com/book";
 
@@ -14,9 +15,9 @@ const FEATURES = [
 ];
 
 // Yearly prices for students outside Beyond Tutors. Keep in step with backend/services/pricing.py
-// (GCSE_PRICES, GCSE_BUNDLE_PRICES, SAT_PRICES, KS3_PRICES), config.revision_price and services/doubt.py.
+// (GCSE_PRICES, GCSE_BUNDLE_PRICES, SAT_PRICES, KS3_PRICES / KS3_LIST_PRICES by year), config.revision_price and services/doubt.py.
 type Plan = {
-  name: string; who: string; gbp: number; per: string; from?: boolean; tag?: string;
+  name: string; who: string; gbp: number; per: string; from?: boolean; tag?: string; ks3?: boolean;
   includes: string[]; pay: string; cta: string; href: string; more?: { label: string; href: string };
 };
 
@@ -72,7 +73,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "KS3 (Years 7 to 9)", who: "Parents of students in Years 7, 8 and 9 who want regular checks on progress.",
-    gbp: 149, per: "/ year",
+    gbp: 169, per: "/ year", ks3: true,   // priced by year group: shown by Ks3YearPrices
     includes: [
       "A timed test in Maths, Science and English every half-term",
       "Homework help from Beyond Tutors tutors",
@@ -122,11 +123,13 @@ export default function Pricing() {
                 <h3 className="font-semibold text-ink">{p.name}</h3>
                 {p.tag && <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700">{p.tag}</span>}
               </div>
-              <div className="mt-2 flex flex-wrap items-baseline gap-1">
-                {p.from && <span className="text-sm text-ink-subtle">from</span>}
-                <LocalPrice gbp={p.gbp} className="text-3xl font-bold text-ink" subClassName="text-xs text-ink-subtle" />
-                <span className="text-sm text-ink-subtle">{p.per}</span>
-              </div>
+              {p.ks3 ? <Ks3YearPrices /> : (
+                <div className="mt-2 flex flex-wrap items-baseline gap-1">
+                  {p.from && <span className="text-sm text-ink-subtle">from</span>}
+                  <LocalPrice gbp={p.gbp} className="text-3xl font-bold text-ink" subClassName="text-xs text-ink-subtle" />
+                  <span className="text-sm text-ink-subtle">{p.per}</span>
+                </div>
+              )}
               <p className="mt-2 text-sm text-ink-muted">{p.who}</p>
               <ul className="mt-4 flex-1 space-y-2">
                 {p.includes.map((f) => (

@@ -310,13 +310,16 @@ def _checkout_courses(course: str) -> list[str]:
     return course_svc.bundle_courses(course) if course_svc.is_bundle(course) else [course]
 
 
-# ── Notenix KS3 (£149/yr): a trial family continues by bank transfer ──────────
+# ── Notenix KS3 (priced by year group): a trial family continues by bank transfer ──
 
 @router.get("/ks3-checkout")
 async def ks3_checkout_info():
+    """prices: {currency: [first, second, third year]} (Years 7/8/9, or Grades 5/6/7 on a track)."""
     from services import pricing
-    table = {c: pricing.ks3_for_currency(c) for c in pricing.KS3_PRICES}
-    return {"accounts": payment_accounts(), "prices": table, "gbp": pricing.ks3_for_currency("GBP"),
+    table = pricing.ks3_table()
+    return {"accounts": payment_accounts(), "prices": table, "gbp": table["GBP"],
+            "offer": pricing.ks3_offer_on(),
+            "offer_until": (u.isoformat() if (u := pricing.ks3_offer_until()) and pricing.ks3_offer_on() else None),
             "days": settings.subscription_days, "pay_link": settings.revision_pay_link}
 
 
@@ -344,7 +347,7 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
                                  "notenix.com/ks3, notenix.com/middle-school or notenix.com/ontario first.")
     if not (data.payer_name or "").strip():
         raise HTTPException(400, "Please tell us the name of the person who paid.")
-    price = pricing.ks3_for_currency(data.currency)
+    price = pricing.ks3_for_user(user, data.currency)   # the child's own year group decides the price
     open_claim = (await db.execute(select(Payment).where(
         Payment.user_id == user.id, Payment.purpose == "ks3", Payment.status == "claimed"))).scalar_one_or_none()
     if open_claim:

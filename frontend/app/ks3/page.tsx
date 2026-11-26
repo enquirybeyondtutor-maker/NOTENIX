@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Check, ArrowRight, ClipboardCheck, Camera, BookOpen, LineChart, Mail, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import LocalPrice from "@/components/LocalPrice";
+import Ks3YearPrices from "@/components/Ks3YearPrices";
 
 export const metadata: Metadata = {
   title: "KS3 Practice & Progress Reports for Parents: Beat the Year 7 Dip",
@@ -162,11 +162,8 @@ export default function Ks3Landing() {
           </div>
           <div className="card flex flex-col border-brand-300 p-8 ring-2 ring-brand-600/20">
             <h3 className="text-lg font-semibold text-ink">Notenix KS3</h3>
-            <div className="mt-2 flex items-baseline gap-1">
-              <LocalPrice gbp={149} className="text-4xl font-bold text-ink" subClassName="text-sm text-ink-subtle" />
-              <span className="text-sm text-ink-subtle">/ year</span>
-            </div>
-            <p className="mt-1 text-sm text-ink-muted">Local prices for the UAE, US, Australia, India and more at checkout.</p>
+            <Ks3YearPrices />
+            <p className="mt-1 text-sm text-ink-muted">Priced by your child's year. Local prices for the UAE, US, Australia, India and more at checkout.</p>
             <ul className="mt-6 flex-1 space-y-3 text-sm text-ink-muted">
               {PLAN.map((f) => (
                 <li key={f} className="flex items-start gap-2"><Check size={16} className="mt-0.5 shrink-0 text-brand-600" /> {f}</li>

@@ -167,7 +167,15 @@ def _login_box(u: User) -> str:
 
 
 def _price(u: User) -> str:
-    return pricing.ks3_for_currency(u.billing_currency)["label"]
+    """This child's year-group price (the offer price while the offer is on)."""
+    return pricing.ks3_for_user(u)["label"]
+
+
+def _offer_note(u: User) -> str:
+    """'(offer price, usually £189)' after the price while the offer is on; empty otherwise."""
+    p = pricing.ks3_for_user(u)
+    return (f' <span style="color:{MUTED}">(offer price, usually <s>{p["was_label"]}</s>)</span>'
+            if p.get("was_label") else "")
 
 
 def _site(path: str) -> str:
@@ -221,10 +229,11 @@ def checkin(u: User, p: dict) -> tuple[str, str, str]:
 
 
 def ending(u: User, p: dict) -> tuple[str, str, str]:
-    name, price = _first(u.full_name), _price(u)
-    offer = (f"<p>To keep going, {product(u)} is <b>{price} a year</b>: {subjects_text(u)} tests, homework help, "
+    name, price, yl = _first(u.full_name), _price(u), year_label(u)
+    note = _offer_note(u)
+    offer = (f"<p>To keep going, {product(u)} for {yl} is <b>{price} a year</b>{note}: {subjects_text(u)} tests, homework help, "
              f"notes, and a progress report in your inbox every month, from Grade 5 through Grade 7.</p>" if is_grades(u) else
-             f"<p>To keep going, Notenix KS3 is <b>{price} a year</b>: a timed test every half-term in Maths, "
+             f"<p>To keep going, Notenix KS3 for {yl} is <b>{price} a year</b>{note}: a timed test every half-term in Maths, "
              f"Science and English, homework help, KS3 notes, and a progress report in your inbox every month, "
              f"from Year 7 all the way to GCSE.</p>")
     body = (f"<p>{name}'s free trial ends in <b>2 days</b>. On day 7 we'll email your progress report.</p>"
@@ -259,7 +268,7 @@ def report(u: User, p: dict) -> tuple[str, str, str]:
         body = (f"<p>{name} didn't sit the baseline tests during the trial, so we can't show scores yet. "
                 f"The tests are still there whenever {name} is ready.</p>")
     body += (f'<p style="margin:20px 0 6px;color:{INK};font-weight:700">Two ways to keep {name} moving</p>'
-             f"<p style=\"margin:0 0 6px\">{_plan_line(u, price)}</p>"
+             f"<p style=\"margin:0 0 6px\">{_plan_line(u, price)}{_offer_note(u)}</p>"
              f"<p style=\"margin:0\"><b>A free trial class with Beyond Tutors:</b> a 1-to-1 tutor works on the topics above.</p>")
     subject = f"{_first(u.full_name)}'s 1-week progress report"
     html = _shell(f"Scores, strong topics and what to fix first", f"{name}'s progress report", body

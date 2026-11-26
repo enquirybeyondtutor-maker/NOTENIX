@@ -1,18 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Landmark, CheckCircle2, Lock, ShieldCheck } from "lucide-react";
+import { Landmark, CheckCircle2, Lock, ShieldCheck, Clock } from "lucide-react";
 import { paymentsAPI, getUser } from "@/lib/api";
 import { PageContainer, Spinner } from "@/components/ui/Page";
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
-import PayLink from "@/components/PayLink";
-import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
+import { type Account, useCountry, pickAccounts, countryName } from "@/lib/country";
+import { type Ks3Info, type Ks3Price, KS3_FALLBACK, loadKs3Info, ks3Years, ks3Tier, useOfferCountdown } from "@/lib/ks3Pricing";
 import PayerDetailsFields from "@/components/PayerDetailsFields";
 
-type Price = { currency: string; amount: number; label: string };
+type Price = Ks3Price;
 
-// Continue Notenix KS3 after the free week: £149/year (local price for local accounts),
-// paid by bank transfer, confirmed by an admin in /admin/requests.
+// Continue Notenix KS3 after the free week, priced by year group (Year 7/8/9, or Grade 5/6/7 on a
+// track; local price for local accounts), paid by bank transfer, confirmed by an admin in /admin/requests.
+// The backend charges the account's own year, so the year picker only chooses the price shown.
+// No Wise card link here: that link is a fixed GBP amount and KS3 prices now differ by year.
 // US Middle School families pay in dollars: without a local account for their country they see
 // the USD price (no Wise card link, which is fixed in GBP), not the GBP one.
 const GRADE_TRACKS = {
@@ -24,20 +26,20 @@ const GRADE_TRACKS = {
 
 export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
   const G = track ? GRADE_TRACKS[track] : null;
-  const us = !!G;   // a grade-based track (US or Ontario): local-currency price, no GBP card link
-  const [info, setInfo] = useState<{ accounts: Account[]; prices: Record<string, Price>; gbp: Price; pay_link?: string } | null>(null);
+  const [info, setInfo] = useState<Ks3Info | null>(null);
+  const [tier, setTier] = useState(0);
   const [form, setForm] = useState({ login_id: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState<{ reference: string } | null>(null);
   const country = useCountry();
-  const rates = useRates();
+  const countdown = useOfferCountdown(info?.offer ? info.offer_until : null);
 
   useEffect(() => {
     const u = getUser() as any;
     if (u?.email) setForm((f) => ({ ...f, login_id: u.email }));
-    paymentsAPI.ks3Info().then((r) => setInfo(r.data))
-      .catch(() => setInfo({ accounts: [], prices: {}, gbp: { currency: "GBP", amount: 149, label: "£149" } }));
+    if (u?.ks3_year) setTier(ks3Tier(u.ks3_year, u.ks3_track || null));
+    loadKs3Info().then(setInfo).catch(() => setInfo(KS3_FALLBACK));
   }, []);
 
   useEffect(() => {
@@ -51,13 +53,13 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
 
   if (!info) return <Spinner label="Loading…" />;
   const { shown, local } = pickAccounts(info.accounts, country);
-  const priceOf = (a?: Account): Price => {
-    const cur = (a?.currency || "GBP").toUpperCase();
-    return info.prices[cur] || { currency: "GBP", amount: info.gbp.amount, label: priceFor(info.gbp.amount, a, rates) };
-  };
+  const pick = (row?: Price[]): Price | undefined => row?.[tier] ?? row?.[0];
+  const gbpPrice = pick(info.gbp) || KS3_FALLBACK.gbp[tier];
+  const priceOf = (a?: Account): Price => pick(info.prices[(a?.currency || "GBP").toUpperCase()]) || gbpPrice;
   const chosen = shown.find((a) => a.label === form.paid_via) || shown[0];
-  const fallback = G ? info.prices[G.currency] || info.gbp : info.gbp;
+  const fallback = (G && pick(info.prices[G.currency])) || gbpPrice;
   const price = local ? priceOf(chosen) : fallback;
+  const shownRow = local ? info.prices[(chosen?.currency || "GBP").toUpperCase()] : (G ? info.prices[G.currency] : info.gbp);
   const product = G ? G.product : "Notenix KS3";
 
   const submit = async (e: React.FormEvent) => {
@@ -93,7 +95,16 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
   return (
     <PageContainer className="max-w-3xl">
       <p className="text-sm font-semibold text-brand-600">{G ? `${G.product} · Grades 5–7` : "Notenix KS3 · Year 7 to GCSE"}</p>
-      <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink sm:text-3xl">{price.label} / year</h1>
+      <h1 className="mt-1 flex flex-wrap items-baseline gap-x-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        {countdown && price.was_label && <s className="text-xl font-semibold text-ink-subtle">{price.was_label}</s>}
+        <span>{price.label} / year</span>
+        <span className="text-base font-medium text-ink-muted">for {ks3Years(track)[tier].label}</span>
+      </h1>
+      {countdown && price.was_label && (
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+          <Clock size={13} /> Launch offer: {countdown.replace("Offer ends", "ends")}
+        </p>
+      )}
       <p className="mt-1 text-sm text-ink-muted">
         {G
           ? G.blurb
@@ -108,16 +119,19 @@ export default function Ks3Continue({ track }: { track?: "us" | "on" }) {
             <Field label="Notenix user ID"><Input required value={form.login_id} onChange={set("login_id")} placeholder="name@notenix.com" autoCapitalize="none" /></Field>
             <Field label="Password"><Input required type="password" value={form.password} onChange={set("password")} /></Field>
           </div>
+          <Field label={track ? "Your child's grade" : "Your child's year"} hint="The price depends on the year. We charge the year on your child's account.">
+            <Select value={String(tier)} onChange={(e) => setTier(Number(e.target.value))}>
+              {ks3Years(track).map((y, i) => (
+                <option key={y.year} value={i}>{y.label}: {(shownRow?.[i] || info.gbp[i] || gbpPrice).label} a year</option>
+              ))}
+            </Select>
+          </Field>
           <p className="text-xs text-ink-subtle">No free week yet? <a href={G ? G.trial : "/ks3/trial"} className="font-medium text-brand-600 hover:underline">Start one first</a>, it&apos;s free.</p>
         </div>
 
         <div className="card space-y-4 p-6">
           <h2 className="flex items-center gap-2 font-semibold text-ink"><Landmark size={16} /> 2. Pay {price.label}</h2>
-          {info.pay_link && !local && !us && <PayLink href={info.pay_link} label={`Pay ${info.gbp.label} now`} />}
-          {info.pay_link && !local && !us && shown.length > 0 && (
-            <p className="text-xs font-medium uppercase tracking-wide text-ink-subtle">Or pay by bank transfer</p>
-          )}
-          {shown.length === 0 && (us || !info.pay_link) ? (
+          {shown.length === 0 ? (
             <p className="rounded-lg bg-slate-50 p-4 text-sm text-ink-muted">Bank details aren&apos;t set up yet. Reply to any Notenix email and we&apos;ll send them.</p>
           ) : (
             shown.map((a) => (

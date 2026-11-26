@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Check, ArrowRight, ClipboardCheck, Camera, Gauge, LineChart, Mail, Layers, Clock, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import LocalPrice from "@/components/LocalPrice";
+import Ks3YearPrices from "@/components/Ks3YearPrices";
 
 export const metadata: Metadata = {
   title: "Starting a Kent Grammar School in Sept 2027? Get Grammar-Ready for Year 7",
@@ -170,10 +170,7 @@ export default function KentGrammarLanding() {
             </div>
             <div className="card flex flex-col border-brand-300 p-8 ring-2 ring-brand-600/20">
               <h3 className="text-lg font-semibold text-ink">Notenix KS3</h3>
-              <div className="mt-2 flex items-baseline gap-1">
-                <LocalPrice gbp={149} className="text-4xl font-bold text-ink" subClassName="text-sm text-ink-subtle" />
-                <span className="text-sm text-ink-subtle">/ year</span>
-              </div>
+              <Ks3YearPrices />
               <p className="mt-1 text-sm text-ink-muted">Covers the summer before Year 7 and the whole first year.</p>
               <ul className="mt-6 flex-1 space-y-3 text-sm text-ink-muted">
                 {PLAN.map((f) => (
