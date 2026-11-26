@@ -9,7 +9,7 @@ import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
 import { SERIES } from "@/lib/tmuaSeries";
-import PayerDobField from "@/components/PayerDobField";
+import PayerDetailsFields from "@/components/PayerDetailsFields";
 import NotenixIdPreview from "@/components/NotenixIdPreview";
 
 // Enrol & pay for the TMUA Mock Series. The account is created locked; an admin confirms the
@@ -20,7 +20,7 @@ type Info = { accounts: Account[]; pay_link: string; price: { amount: number; cu
 export default function TmuaEnrol() {
   const [info, setInfo] = useState<Info | null>(null);
   const [loadError, setLoadError] = useState("");
-  const [form, setForm] = useState({ full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "" });
+  const [form, setForm] = useState({ full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [agree, setAgree] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -139,7 +139,8 @@ export default function TmuaEnrol() {
               </Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
-            <PayerDobField value={form.payer_dob} onChange={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
+            <PayerDetailsFields country={form.payer_country} dob={form.payer_dob}
+              onCountry={(v) => setForm((f) => ({ ...f, payer_country: v }))} onDob={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Wise or bank reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. HDFC, ref 48213" />
             </Field>

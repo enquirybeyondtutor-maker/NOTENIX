@@ -79,7 +79,7 @@ async def _rows(db: AsyncSession, reqs: list[TestRequest], with_student: bool = 
             "score": att.score if att and att.status == "graded" else None,
             "grade": att.grade if att and att.status == "graded" else None,
             "payment": {"id": p.id, "status": p.status, "paid_via": p.paid_via, "payer_name": p.payer_name,
-                        "payer_note": p.payer_note, "payer_dob": getattr(p, "payer_dob", None), "amount": p.amount, "currency": p.currency} if p else None,
+                        "payer_note": p.payer_note, "payer_dob": getattr(p, "payer_dob", None), "payer_country": getattr(p, "payer_country", None), "amount": p.amount, "currency": p.currency} if p else None,
             "admin_note": r.admin_note,
             "created_at": r.created_at.isoformat() if r.created_at else None,
         }

@@ -186,7 +186,7 @@ export const leaderboardAPI = {
 // Notenix TMUA Mock Series (January 2027): public info, enrol & pay, and the student's view.
 export const seriesAPI = {
   tmua: () => api.get("/series/tmua"),
-  tmuaEnrol: (data: { full_name: string; email: string; password: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string }) =>
+  tmuaEnrol: (data: { full_name: string; email: string; password: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/series/tmua/enrol", data),
   tmuaMine: () => api.get("/series/tmua/mine"),
 };
@@ -195,16 +195,16 @@ export const paymentsAPI = {
   plans: () => api.get("/payments/plans"),
   accounts: () => api.get("/payments/accounts"),
   unlock: () => api.get("/payments/unlock"),
-  claim: (data: { purpose: "pro" | "test_request" | "unlock"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string }) =>
+  claim: (data: { purpose: "pro" | "test_request" | "unlock"; request_id?: number; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/payments/claim", data),
   mine: () => api.get("/payments/mine"),
   revisionInfo: (course?: string) => api.get("/payments/revision-checkout", { params: course ? { course } : {} }),
   ks3Info: () => api.get("/payments/ks3-checkout"),
   // The @notenix.com user ID a new student would get from this name (shown while they type).
   userIdPreview: (name: string) => api.get("/payments/user-id", { params: { name } }),
-  ks3Checkout: (data: { login_id: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string }) =>
+  ks3Checkout: (data: { login_id: string; password: string; currency: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/payments/ks3-checkout", data),
-  revisionCheckout: (data: { full_name: string; email: string; password: string; course?: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string }) =>
+  revisionCheckout: (data: { full_name: string; email: string; password: string; course?: string; paid_via?: string; payer_name?: string; payer_note?: string; payer_dob?: string; payer_country?: string }) =>
     api.post("/payments/revision-checkout", data),
   adminList: (status?: string) => api.get("/payments/admin", { params: status ? { status } : {} }),
   review: (id: number, approve: boolean) => api.post(`/payments/admin/${id}/review`, { approve }),

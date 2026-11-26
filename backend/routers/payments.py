@@ -7,7 +7,7 @@ from html import escape
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
-from services.payer import clean_dob
+from services.payer import clean_dob, clean_country
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -44,7 +44,8 @@ def _payment_row(p: Payment, user: User | None = None) -> dict:
         "id": p.id, "purpose": p.purpose, "request_id": p.request_id, "reference": p.reference,
         "course": course, "course_name": course_svc.course_name(course) if course else None,
         "amount": p.amount, "currency": p.currency, "paid_via": p.paid_via,
-        "payer_name": p.payer_name, "payer_note": p.payer_note, "payer_dob": getattr(p, "payer_dob", None), "status": p.status,
+        "payer_name": p.payer_name, "payer_note": p.payer_note, "payer_dob": getattr(p, "payer_dob", None),
+        "payer_country": getattr(p, "payer_country", None), "status": p.status,
         "created_at": p.created_at.isoformat() if p.created_at else None,
         "reviewed_at": p.reviewed_at.isoformat() if p.reviewed_at else None,
     }
@@ -96,6 +97,7 @@ class ClaimIn(BaseModel):
     payer_name: str | None = None
     payer_note: str | None = None
     payer_dob: str | None = None   # optional; helps match Wise payments
+    payer_country: str | None = None   # payer's country of residence
 
 
 @router.post("/claim")
@@ -137,7 +139,7 @@ async def claim(data: ClaimIn, user: User = Depends(get_current_user), db: Async
         amount=amount, currency=currency,
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     if req:
@@ -243,6 +245,7 @@ class RevisionCheckoutIn(BaseModel):
     payer_name: str | None = None
     payer_note: str | None = None
     payer_dob: str | None = None   # optional; helps match Wise payments
+    payer_country: str | None = None   # payer's country of residence
 
 
 @router.post("/revision-checkout")
@@ -284,7 +287,7 @@ async def revision_checkout(data: RevisionCheckoutIn, db: AsyncSession = Depends
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()
@@ -325,6 +328,7 @@ class Ks3CheckoutIn(BaseModel):
     payer_name: str | None = None
     payer_note: str | None = None
     payer_dob: str | None = None   # optional; helps match Wise payments
+    payer_country: str | None = None   # payer's country of residence
 
 
 @router.post("/ks3-checkout")
@@ -351,7 +355,7 @@ async def ks3_checkout(data: Ks3CheckoutIn, db: AsyncSession = Depends(get_db)):
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()
@@ -383,6 +387,7 @@ class SatCheckoutIn(BaseModel):
     payer_name: str | None = None
     payer_note: str | None = None
     payer_dob: str | None = None   # optional; helps match Wise payments
+    payer_country: str | None = None   # payer's country of residence
 
 
 @router.post("/sat-checkout")
@@ -408,7 +413,7 @@ async def sat_checkout(data: SatCheckoutIn, db: AsyncSession = Depends(get_db)):
         amount=price["amount"], currency=price["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()

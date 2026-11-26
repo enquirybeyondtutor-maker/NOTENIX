@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { Input, Select, Field } from "@/components/ui/Input";
 import PayLink from "@/components/PayLink";
 import { type Account, useCountry, useRates, pickAccounts, priceFor, countryName } from "@/lib/country";
-import PayerDobField from "@/components/PayerDobField";
+import PayerDetailsFields from "@/components/PayerDetailsFields";
 import NotenixIdPreview from "@/components/NotenixIdPreview";
 
 // One course a year for students outside Beyond Tutors: GCSE £99 a subject, all four GCSEs £349
@@ -33,7 +33,7 @@ function startHref(course: string): string {
 export default function RevisionCheckout() {
   const [info, setInfo] = useState<{ accounts: Account[]; price: number; currency: string; pay_link?: string; standard_price?: number } | null>(null);
   const [returnTo, setReturnTo] = useState<string | null>(null);
-  const [form, setForm] = useState({ course: "", full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "" });
+  const [form, setForm] = useState({ course: "", full_name: "", email: "", password: "", paid_via: "", payer_name: "", payer_note: "", payer_dob: "", payer_country: "" });
   const [catalogue, setCatalogue] = useState<Course[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -193,7 +193,8 @@ export default function RevisionCheckout() {
               </Field>
             )}
             <Field label="Name of the person who paid"><Input required value={form.payer_name} onChange={set("payer_name")} placeholder="e.g. R Patel" /></Field>
-            <PayerDobField value={form.payer_dob} onChange={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
+            <PayerDetailsFields country={form.payer_country} dob={form.payer_dob}
+              onCountry={(v) => setForm((f) => ({ ...f, payer_country: v }))} onDob={(v) => setForm((f) => ({ ...f, payer_dob: v }))} />
             <Field label="Wise or bank reference" hint="Optional: helps us find it faster.">
               <Input value={form.payer_note} onChange={set("payer_note")} placeholder="e.g. Barclays, ref 48213" />
             </Field>

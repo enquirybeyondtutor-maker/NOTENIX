@@ -17,3 +17,10 @@ def clean_dob(value: str | None) -> str | None:
     if not date(1900, 1, 1) <= d <= date.today():
         raise HTTPException(400, "Please check the date of birth of the person who paid.")
     return d.isoformat()
+
+
+def clean_country(value: str | None) -> str | None:
+    """The payer's country of residence (an English country name from the form's list).
+    The forms ask for it; it stays optional here so older open pages still go through."""
+    v = " ".join((value or "").split())[:60]
+    return v or None

@@ -254,6 +254,7 @@ class Payment(Base):
     payer_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
     payer_note: Mapped[str | None] = mapped_column(Text, nullable=True)       # transfer id, amount sent…
     payer_dob: Mapped[str | None] = mapped_column(String(10), nullable=True)  # YYYY-MM-DD; Wise sometimes asks for it
+    payer_country: Mapped[str | None] = mapped_column(String(60), nullable=True)  # payer's country of residence
     status: Mapped[str] = mapped_column(String(20), default="claimed", index=True)  # claimed | confirmed | rejected
     course: Mapped[str | None] = mapped_column(String(60), nullable=True)   # purpose "course": which course it buys
     reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)

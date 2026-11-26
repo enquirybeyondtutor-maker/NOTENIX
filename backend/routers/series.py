@@ -4,7 +4,7 @@ from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from services.payer import clean_dob
+from services.payer import clean_dob, clean_country
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -40,6 +40,7 @@ class EnrolIn(BaseModel):
     payer_name: str | None = None
     payer_note: str | None = None
     payer_dob: str | None = None   # optional; helps match Wise payments
+    payer_country: str | None = None   # payer's country of residence
 
 
 @router.post("/tmua/enrol")
@@ -82,7 +83,7 @@ async def tmua_enrol(data: EnrolIn, db: AsyncSession = Depends(get_db)):
         amount=p_info["amount"], currency=p_info["currency"],
         paid_via=(data.paid_via or "")[:80] or None,
         payer_name=(data.payer_name or "")[:120] or None,
-        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob),
+        payer_note=(data.payer_note or "")[:1000] or None, payer_dob=clean_dob(data.payer_dob), payer_country=clean_country(data.payer_country),
     )
     db.add(p)
     await db.commit()
