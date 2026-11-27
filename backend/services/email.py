@@ -9,6 +9,7 @@ Who receives what: Notenix user IDs (name@beyondtutors.com, older name@thebeyond
 not mailboxes. recipients() sends to the parent's email instead (worded for a parent), and to
 the student as well when their login is a real address.
 """
+import base64
 import smtplib
 import secrets
 from html import escape
@@ -98,39 +99,51 @@ def best_address(user) -> str | None:
 
 # ── Providers ──────────────────────────────────────────────────────────────────
 
-async def _send_resend(to_email: str, subject: str, html: str, text: str) -> None:
+Attachment = tuple[str, bytes]   # (filename, content)
+
+
+async def _send_resend(to_email: str, subject: str, html: str, text: str,
+                       attachments: list[Attachment] | None = None) -> None:
     name, email = _from()
-    async with httpx.AsyncClient(timeout=20) as client:
+    body = {"from": f"{name} <{email}>", "to": [to_email], "subject": subject, "html": html, "text": text,
+            "reply_to": settings.support_email}
+    if attachments:
+        body["attachments"] = [{"filename": f, "content": base64.b64encode(c).decode()} for f, c in attachments]
+    async with httpx.AsyncClient(timeout=60 if attachments else 20) as client:
         r = await client.post(
             "https://api.resend.com/emails",
             headers={"Authorization": f"Bearer {settings.resend_api_key}"},
-            json={"from": f"{name} <{email}>", "to": [to_email], "subject": subject, "html": html, "text": text,
-                  "reply_to": settings.support_email},
+            json=body,
         )
     if r.status_code >= 300:
         raise EmailSendError(f"resend {r.status_code}: {r.text[:200]}")
 
 
-async def _send_brevo(to_email: str, subject: str, html: str, text: str) -> None:
+async def _send_brevo(to_email: str, subject: str, html: str, text: str,
+                      attachments: list[Attachment] | None = None) -> None:
     name, email = _from()
-    async with httpx.AsyncClient(timeout=20) as client:
+    body = {
+        "sender": {"name": name, "email": email},
+        "replyTo": {"email": settings.support_email, "name": "Notenix support"},
+        "to": [{"email": to_email}],
+        "subject": subject,
+        "htmlContent": html,
+        "textContent": text,
+    }
+    if attachments:
+        body["attachment"] = [{"name": f, "content": base64.b64encode(c).decode()} for f, c in attachments]
+    async with httpx.AsyncClient(timeout=60 if attachments else 20) as client:
         r = await client.post(
             "https://api.brevo.com/v3/smtp/email",
             headers={"api-key": settings.brevo_api_key, "content-type": "application/json"},
-            json={
-                "sender": {"name": name, "email": email},
-                "replyTo": {"email": settings.support_email, "name": "Notenix support"},
-                "to": [{"email": to_email}],
-                "subject": subject,
-                "htmlContent": html,
-                "textContent": text,
-            },
+            json=body,
         )
     if r.status_code >= 300:
         raise EmailSendError(f"brevo {r.status_code}: {r.text[:200]}")
 
 
-def _send_smtp_sync(to_email: str, subject: str, html: str, text: str) -> None:
+def _send_smtp_sync(to_email: str, subject: str, html: str, text: str,
+                    attachments: list[Attachment] | None = None) -> None:
     name, email = _from()
     msg = EmailMessage()
     msg["Subject"] = subject
@@ -139,6 +152,9 @@ def _send_smtp_sync(to_email: str, subject: str, html: str, text: str) -> None:
     msg["Reply-To"] = settings.support_email
     msg.set_content(text)
     msg.add_alternative(html, subtype="html")
+    for fname, content in attachments or []:
+        msg.add_attachment(content, maintype="application", subtype="pdf" if fname.endswith(".pdf") else "octet-stream",
+                           filename=fname)
     with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=20) as server:
         server.starttls()
         server.login(settings.smtp_user, settings.smtp_password)
@@ -163,6 +179,20 @@ async def _deliver(to_email: str, subject: str, html: str, text: str) -> bool:
     except Exception as e:
         print(f"[WARN] {provider} notification email failed for {to_email}: {e}")
         return False
+
+
+async def send_with_attachments(to_email: str, subject: str, html: str, text: str,
+                                attachments: list[Attachment]) -> None:
+    """User-triggered send with files attached. Raises EmailSendError if it can't be sent,
+    so the person who clicked gets a real answer."""
+    if settings.resend_api_key:
+        await _send_resend(to_email, subject, html, text, attachments)
+    elif settings.brevo_api_key:
+        await _send_brevo(to_email, subject, html, text, attachments)
+    elif settings.smtp_user and settings.smtp_password:
+        await run_in_threadpool(_send_smtp_sync, to_email, subject, html, text, attachments)
+    else:
+        raise EmailSendError("No email provider is configured.")
 
 
 async def _to_family(user, build) -> None:

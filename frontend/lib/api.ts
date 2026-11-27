@@ -154,6 +154,8 @@ export const notesAPI = {
   submissions: () => api.get("/teacher/homework-submissions"),
   submission: (id: number) => api.get(`/teacher/homework-submissions/${id}`),
   markSubmission: (id: number, data: { mark?: string; feedback?: string }) => api.post(`/teacher/homework-submissions/${id}/mark`, data),
+  submissionPdf: (id: number) => api.get(`/teacher/homework-submissions/${id}/pdf`, { responseType: "blob" }),
+  emailSubmission: (id: number, to?: string) => api.post(`/teacher/homework-submissions/${id}/email`, { to: to || null }),
 };
 
 // Revision papers: page 1 public, full paper needs live access (app/papers/[slug]).
