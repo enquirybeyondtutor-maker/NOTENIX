@@ -177,6 +177,8 @@ export const markingAPI = {
   get: (attemptId: number | string) => api.get(`/marking/${attemptId}`),
   submit: (attemptId: number | string, marks: { marks_awarded: number; feedback?: string; model_answer?: string }[]) =>
     api.post(`/marking/${attemptId}`, { marks }),
+  pdf: (attemptId: number | string) => api.get(`/marking/${attemptId}/pdf`, { responseType: "blob" }),
+  email: (attemptId: number | string, to?: string) => api.post(`/marking/${attemptId}/email`, { to: to || null }),
 };
 
 export const progressAPI = { dashboard: () => api.get("/progress/dashboard") };

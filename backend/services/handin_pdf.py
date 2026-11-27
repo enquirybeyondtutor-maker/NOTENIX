@@ -1,7 +1,9 @@
-"""A worksheet hand-in (HomeworkSubmission photos) as one A4 PDF for marking on paper or on screen.
+"""Student work as one A4 PDF for marking on paper or on screen.
 
-Page 1 is a cover: student, homework, dates, the student's comment and a mark/feedback box.
-Then one photo per page, fitted inside a white border so nothing is cropped when printed.
+build():         a worksheet hand-in (HomeworkSubmission photos). Cover page with a mark box,
+                 then one photo per page, fitted inside a white border so nothing is cropped.
+build_attempt(): a written test attempt (Marking page). Cover with a marks table, then each
+                 question with the student's typed answer and answer photos, then the mark scheme.
 Every page carries a Notenix header and footer.
 """
 import base64
@@ -134,3 +136,140 @@ def build(*, student: str, login: str, title: str, images: list[str], comment: s
 def filename(student: str, title: str) -> str:
     safe = "".join(c for c in f"{student} - {title}" if c.isalnum() or c in " -_.()")[:120].strip()
     return (safe or "homework") + ".pdf"
+
+
+# ── Written test attempts (Marking page) ───────────────────────────────────────
+
+CONTENT = fitz.Rect(MARGIN, HEADER_H + 10, A4.width - MARGIN, A4.height - FOOTER_H - 10)
+_CSS = ("* {font-family: sans-serif; color: #1E1B4B;} body {font-size: 10.5pt;} "
+        "h1 {font-size: 18pt; margin: 2pt 0 10pt;} h2 {font-size: 13pt; margin: 0 0 6pt; color: #4F46E5;} "
+        ".kicker {font-size: 8.5pt; color: #4F46E5; font-weight: bold; letter-spacing: 1px;} "
+        ".muted {color: #64748B;} .q {margin: 0 0 8pt;} "
+        ".ans {background-color: #F1F5F9; padding: 8pt; margin: 4pt 0 8pt;} "
+        ".ms {background-color: #EEF2FF; padding: 8pt; margin: 4pt 0 10pt;} "
+        ".box {border: 1px solid #4F46E5; padding: 8pt; margin-top: 8pt;} "
+        "table {border-collapse: collapse; width: 100%;} td, th {border: 1px solid #E2E8F0; padding: 4pt 6pt; text-align: left;} "
+        "th {background-color: #F8FAFC;}")
+
+
+def _text(t) -> str:
+    """Plain text to HTML, keeping line breaks."""
+    return escape(str(t or "")).replace("\n", "<br>")
+
+
+def _story_pages(doc: fitz.Document, html: str, archive: fitz.Archive | None = None) -> None:
+    """Flow `html` over as many A4 pages as it needs (inside the header/footer area) and add them."""
+    buf = io.BytesIO()
+    writer = fitz.DocumentWriter(buf)
+    story = fitz.Story(html=html, user_css=_CSS, archive=archive)
+    more = 1
+    while more:
+        dev = writer.begin_page(A4)
+        more, _ = story.place(CONTENT)
+        story.draw(dev)
+        writer.end_page()
+    writer.close()
+    src = fitz.open("pdf", buf.getvalue())
+    doc.insert_pdf(src)
+    src.close()
+
+
+def _photo_page(doc: fitz.Document, jpg: bytes, w: int, h: int, caption: str = "") -> None:
+    """One photo on its own page, scaled to fit inside the white border (never cropped)."""
+    landscape = w > h * 1.15
+    pw, ph = (A4.height, A4.width) if landscape else (A4.width, A4.height)
+    page = doc.new_page(width=pw, height=ph)
+    top = HEADER_H + 6 + (18 if caption else 0)
+    if caption:
+        _html(page, fitz.Rect(MARGIN, HEADER_H + 2, pw - MARGIN, HEADER_H + 22),
+              f'<b style="font-size:10px">{escape(caption)}</b>')
+    box = fitz.Rect(MARGIN, top, pw - MARGIN, ph - FOOTER_H - 6)
+    page.insert_image(box, stream=jpg, keep_proportion=True)
+    s = min(box.width / w, box.height / h)
+    iw, ih = w * s, h * s
+    x0, y0 = box.x0 + (box.width - iw) / 2, box.y0 + (box.height - ih) / 2
+    page.draw_rect(fitz.Rect(x0, y0, x0 + iw, y0 + ih), color=LINE, width=0.6)
+
+
+def _finish(doc: fitz.Document, student: str, title: str) -> bytes:
+    """Notenix header and footer (with page X of N) on every page, then the PDF bytes."""
+    total = doc.page_count
+    for i, page in enumerate(doc, start=1):
+        _frame(page, student, title, i, total)
+    doc.set_metadata({"title": f"{title} - {student}", "author": "Notenix", "creator": "Notenix · notenix.com"})
+    data = doc.tobytes(garbage=3, deflate=True)
+    doc.close()
+    return data
+
+
+def _dur(sec) -> str:
+    if sec is None:
+        return "-"
+    m, s = divmod(int(sec), 60)
+    return f"{m} min {s:02d} s" if m else f"{s} s"
+
+
+def _plural(n: int, word: str) -> str:
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+def build_attempt(*, student: str, title: str, subject: str | None, level: str | None,
+                  submitted_at: datetime | None, time_taken: int | None, questions: list[dict]) -> bytes:
+    """questions: [{question, marks, mark_scheme, image, your_answer, answer_images, time_seconds}]."""
+    doc = fitz.open()
+    total = sum(int(q.get("marks") or 0) for q in questions)
+    photos_total = sum(len(q.get("answer_images") or []) for q in questions)
+
+    # Cover: details and a marks table to fill in.
+    rows = "".join(
+        f"<tr><td>Question {i}</td><td>{int(q.get('marks') or 0)}</td><td></td><td>{_dur(q.get('time_seconds'))}</td></tr>"
+        for i, q in enumerate(questions, start=1))
+    info = [("Student", student), ("Test", title), ("Subject", " · ".join(x for x in (subject, level) if x) or "-"),
+            ("Submitted", _fmt(submitted_at)), ("Time taken", _dur(time_taken)),
+            ("Answer photos", str(photos_total))]
+    info_html = "".join(f'<tr><td class="muted" style="border:none;width:110px">{k}</td>'
+                        f'<td style="border:none"><b>{escape(v)}</b></td></tr>' for k, v in info)
+    _story_pages(doc,
+                 f'<p class="kicker">WRITTEN ANSWERS FOR MARKING</p><h1>{escape(title)}</h1>'
+                 f'<table>{info_html}</table><br>'
+                 f'<table><tr><th>Question</th><th>Out of</th><th>Mark</th><th>Time spent</th></tr>{rows}'
+                 f'<tr><td><b>Total</b></td><td><b>{total}</b></td><td></td><td></td></tr></table>'
+                 f'<div class="box"><b>Overall feedback:</b><br><br><br><br><br></div>')
+
+    # Each question: text, the student's typed answer, then each answer photo on its own page.
+    for i, q in enumerate(questions, start=1):
+        marks = int(q.get("marks") or 0)
+        arch = fitz.Archive()
+        img_html = ""
+        qimg = _photo_jpeg(q["image"]) if str(q.get("image") or "").startswith("data:image/") else None
+        if qimg:
+            arch.add(qimg[0], f"q{i}.jpg")
+            img_html = f'<p><img src="q{i}.jpg" width="{min(520, qimg[1])}"/></p>'
+        imgs = [p for p in (_photo_jpeg(x) for x in (q.get("answer_images") or [])
+                            if str(x).startswith("data:image/")) if p]
+        if (q.get("your_answer") or "").strip():
+            answer = _text(q.get("your_answer"))
+            if imgs:
+                answer += f"<br><i>(+ {_plural(len(imgs), 'photo')} on the next page{'s' if len(imgs) > 1 else ''})</i>"
+        elif imgs:
+            answer = f"(answer in the {_plural(len(imgs), 'photo')} on the next page{'s' if len(imgs) > 1 else ''})"
+        else:
+            answer = "(not answered)"
+        _story_pages(doc, archive=arch, html=(
+            f'<h2>Question {i} <span class="muted" style="font-size:10pt">· {_plural(marks, "mark")}'
+            f' · time {_dur(q.get("time_seconds"))}</span></h2>'
+            f'<p class="q">{_text(q.get("question"))}</p>{img_html}'
+            f'<p class="muted" style="font-size:9pt;margin-bottom:0"><b>STUDENT ANSWER</b></p>'
+            f'<div class="ans">{answer}</div>'
+            f'<div class="box"><b>Mark:</b> ______ / {marks} &nbsp;&nbsp; <b>Feedback:</b><br><br><br></div>'))
+        for j, (jpg, w, h) in enumerate(imgs, start=1):
+            _photo_page(doc, jpg, w, h, caption=f"Question {i}: answer photo {j} of {len(imgs)}")
+
+    # Mark scheme at the end, so the answer pages stay clean.
+    schemes = [(i, q.get("mark_scheme")) for i, q in enumerate(questions, start=1)
+               if (q.get("mark_scheme") or "").strip()]
+    if schemes:
+        _story_pages(doc, '<p class="kicker">FOR THE MARKER</p><h1>Mark scheme</h1>' + "".join(
+            f'<h2>Question {i}</h2><div class="ms">{_text(ms)}</div>' for i, ms in schemes))
+
+    return _finish(doc, student, title)

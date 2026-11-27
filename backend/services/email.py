@@ -195,6 +195,47 @@ async def send_with_attachments(to_email: str, subject: str, html: str, text: st
         raise EmailSendError("No email provider is configured.")
 
 
+def marker_inbox(user) -> str | None:
+    """Where 'Email PDF' goes by default: the tutor's own inbox (their update email, or their login
+    if it's a real address); for an admin with neither, the first ADMIN_EMAILS address."""
+    own = student_inbox(user)
+    if own:
+        return own
+    from security import is_admin
+    if is_admin(user):
+        admins = [e.strip() for e in (settings.admin_emails or "").split(",") if e.strip()]
+        return admins[0].lower() if admins else None
+    return None
+
+
+MAX_EMAIL_PDF = 18 * 1024 * 1024   # providers cap attachment size; bigger files: use Download PDF
+
+
+async def send_work_pdf(marker, to: str | None, subject: str, heading: str, rows: list[tuple[str, str]],
+                        intro_html: str, extra_html: str, path: str, filename: str, pdf: bytes) -> str:
+    """Email a student's work PDF to the marker (or a typed address). Returns the address used.
+    Raises ValueError with a message for the person who clicked."""
+    import re
+    to = (to or "").strip().lower() or marker_inbox(marker)
+    if not to:
+        raise ValueError("Type the email address to send it to.")
+    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", to) or not is_mailbox(to):
+        raise ValueError("That isn't an email inbox. Notenix login IDs can't receive email; use a real address.")
+    if len(pdf) > MAX_EMAIL_PDF:
+        raise ValueError("This is too large to email. Use Download PDF instead.")
+    body = (T.para(intro_html) + T.info_table([(k, escape(v)) for k, v in rows]) + extra_html
+            + T.para("When you've marked it, enter the marks and feedback in Notenix so the student sees them."))
+    html = T.layout(preheader=heading, heading=heading, body=body, buttons=[(T.site(path), "Mark in Notenix")],
+                    audience="admin", tagline="Marking")
+    text = f"{heading}. The PDF is attached. Mark it in Notenix: {T.site(path)}"
+    try:
+        await send_with_attachments(to, subject, html, text, [(filename, pdf)])
+    except EmailSendError as e:
+        print(f"[email] work PDF to {to} failed: {e}")
+        raise ValueError("The email couldn't be sent just now. Try again, or use Download PDF.")
+    return to
+
+
 async def _to_family(user, build) -> None:
     """build(role) -> (subject, html, text); sent to every real inbox for this student."""
     for address, role in recipients(user):

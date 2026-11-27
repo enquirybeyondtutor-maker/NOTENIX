@@ -5,6 +5,8 @@ tests they own) or an admin (for any test) reviews the answers against the mark
 scheme, enters marks + feedback per question, and the attempt becomes `graded`.
 """
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import Response
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -13,7 +15,7 @@ from database import get_db
 from models import User, Test, TestAssignment, TestAttempt
 from security import require_teacher, is_admin, can_mark_written
 from services.grading import finalize_written_marks, estimate_grade
-from services.email import send_marked_email
+from services.email import send_marked_email, marker_inbox, send_work_pdf
 
 router = APIRouter(prefix="/marking", tags=["marking"])
 
@@ -92,6 +94,7 @@ async def get_attempt(attempt_id: int, marker: User = Depends(require_teacher), 
         "level": test.level,
         "time_taken_seconds": attempt.time_taken_seconds,
         "questions": questions,
+        "email_to": marker_inbox(marker),
         "integrity": {
             "focus_lost": getattr(attempt, "focus_lost_count", 0) or 0,
             "time_away_seconds": getattr(attempt, "time_away_seconds", 0) or 0,
@@ -142,3 +145,52 @@ async def submit_marks(attempt_id: int, data: SubmitMarksIn, marker: User = Depe
             pass
 
     return {"attempt_id": attempt.id, "status": "graded", "score": score, "grade": grade}
+
+
+# ── The attempt as one PDF (download, or emailed to the marker) ───────────────
+
+async def _attempt_pdf(attempt_id: int, marker: User, db: AsyncSession):
+    from services import handin_pdf
+    data = await get_attempt(attempt_id, marker, db)   # same checks and the same view the marker sees
+    attempt, test = await _load_for_marking(attempt_id, marker, db)
+    pdf = await run_in_threadpool(lambda: handin_pdf.build_attempt(
+        student=data["student"], title=data["test_title"] or "Test", subject=data["subject"], level=data["level"],
+        submitted_at=attempt.completed_at, time_taken=data["time_taken_seconds"], questions=data["questions"]))
+    return pdf, handin_pdf.filename(data["student"], data["test_title"] or "Test"), data, attempt
+
+
+@router.get("/{attempt_id}/pdf")
+async def attempt_pdf(attempt_id: int, marker: User = Depends(require_teacher), db: AsyncSession = Depends(get_db)):
+    pdf, fname, *_ = await _attempt_pdf(attempt_id, marker, db)
+    return Response(pdf, media_type="application/pdf", headers={
+        "Content-Disposition": f'attachment; filename="{fname}"', "Cache-Control": "no-store, private"})
+
+
+class EmailPdfIn(BaseModel):
+    to: str | None = None   # empty = the marker's own inbox
+
+
+@router.post("/{attempt_id}/email")
+async def email_attempt(attempt_id: int, data: EmailPdfIn, marker: User = Depends(require_teacher),
+                        db: AsyncSession = Depends(get_db)):
+    """Email the written answers as one PDF (cover with marks table, each question with the student's
+    answer and photos, mark scheme at the end) so they can be marked properly on paper or in a PDF app."""
+    from html import escape
+    pdf, fname, d, attempt = await _attempt_pdf(attempt_id, marker, db)
+    total = sum(int(q.get("marks") or 0) for q in d["questions"])
+    photos = sum(len(q.get("answer_images") or []) for q in d["questions"])
+    submitted = attempt.completed_at.strftime("%d %b %Y, %H:%M UTC") if attempt.completed_at else "-"
+    try:
+        to = await send_work_pdf(
+            marker, data.to, f"[Notenix] To mark: {d['student']} · {d['test_title']}",
+            f"{d['student']}: {d['test_title']}",
+            [("Student", d["student"]), ("Test", d["test_title"] or "Test"),
+             ("Subject", " · ".join(x for x in (d.get("subject"), d.get("level")) if x) or "-"),
+             ("Submitted", submitted), ("Questions", f"{len(d['questions'])} ({total} marks)"),
+             ("Answer photos", str(photos))],
+            f"{escape(d['student'])}'s written answers are attached as a PDF: a cover with a marks table, "
+            f"each question with the answer and a mark box, then the mark scheme.",
+            "", "/marking", fname, pdf)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"sent_to": to, "filename": fname, "size_kb": len(pdf) // 1024}

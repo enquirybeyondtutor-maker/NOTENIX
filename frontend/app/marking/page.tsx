@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Input";
 import { humanize } from "@/lib/utils";
 import { MathText } from "@/components/MathText";
+import EmailPdfBox from "@/components/EmailPdfBox";
 
 interface QueueItem {
   attempt_id: number;
@@ -47,6 +48,7 @@ interface Detail {
   time_taken_seconds?: number | null;
   questions: MarkQ[];
   integrity?: Integrity;
+  email_to?: string | null;
 }
 interface Entry { marks_awarded: number; feedback: string; model_answer: string }
 
@@ -166,6 +168,16 @@ export default function MarkingPage() {
             <div className="text-xs uppercase tracking-wide text-ink-subtle">Total awarded</div>
             <div className="text-2xl font-bold text-ink">{awarded}<span className="text-base text-ink-subtle">/{totalMarks}</span></div>
           </div>
+        </div>
+
+        <div className="mb-6">
+          <EmailPdfBox
+            defaultTo={detail.email_to}
+            filename={`${detail.student} - ${detail.test_title}`}
+            note={`All ${detail.questions.length} question${detail.questions.length === 1 ? "" : "s"} in one PDF: a marks table, each answer with a mark box, answer photos inside a white border, then the mark scheme.`}
+            send={(to) => markingAPI.email(detail.attempt_id, to)}
+            download={() => markingAPI.pdf(detail.attempt_id)}
+          />
         </div>
 
         {/* Integrity panel */}

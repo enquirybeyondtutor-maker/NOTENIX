@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Inbox, X, Mail, Download } from "lucide-react";
+import { Inbox, X } from "lucide-react";
+import EmailPdfBox from "@/components/EmailPdfBox";
 import { notesAPI } from "@/lib/api";
 import { formatDate } from "@/lib/utils";
 
 /** Teacher view: worksheet homework handed in by students, with marking.
  *  "Email PDF" sends the hand-in to the tutor as one PDF (photos inside a white border, Notenix
  *  header and footer on each page) for proper marking; "Download PDF" saves the same file. */
-const EMAIL_KEY = "nx-handin-email";
+
 export default function HomeworkHandins() {
   const [rows, setRows] = useState<any[] | null>(null);
   const [open, setOpen] = useState<any>(null);
@@ -15,20 +16,14 @@ export default function HomeworkHandins() {
   const [feedback, setFeedback] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
-  const [emailTo, setEmailTo] = useState("");
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState("");
-  const [downloading, setDownloading] = useState(false);
 
   const load = () => notesAPI.submissions().then((r) => setRows(r.data)).catch(() => setRows([]));
   useEffect(() => { load(); }, []);
 
   const view = async (id: number) => {
     setMsg("");
-    setSent("");
     const { data } = await notesAPI.submission(id);
     setOpen(data);
-    setEmailTo((typeof window !== "undefined" && localStorage.getItem(EMAIL_KEY)) || data.email_to || "");
     setMark(data.mark || "");
     setFeedback(data.feedback || "");
   };
@@ -44,39 +39,6 @@ export default function HomeworkHandins() {
       setMsg(e?.response?.data?.detail || "Couldn't save the mark.");
     } finally {
       setBusy(false);
-    }
-  };
-
-  const emailPdf = async () => {
-    setSending(true);
-    setMsg("");
-    setSent("");
-    try {
-      const { data } = await notesAPI.emailSubmission(open.id, emailTo.trim());
-      if (emailTo.trim()) localStorage.setItem(EMAIL_KEY, emailTo.trim());
-      setSent(`Sent to ${data.sent_to}`);
-    } catch (e: any) {
-      setMsg(e?.response?.data?.detail || "Couldn't send the email.");
-    } finally {
-      setSending(false);
-    }
-  };
-
-  const downloadPdf = async () => {
-    setDownloading(true);
-    setMsg("");
-    try {
-      const { data } = await notesAPI.submissionPdf(open.id);
-      const url = URL.createObjectURL(data as Blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${open.student.full_name} - ${open.title}.pdf`.replace(/[^\w\s().-]/g, "");
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 5000);
-    } catch {
-      setMsg("Couldn't make the PDF.");
-    } finally {
-      setDownloading(false);
     }
   };
 
@@ -116,22 +78,14 @@ export default function HomeworkHandins() {
               </div>
               <button onClick={() => setOpen(null)} aria-label="Close"><X size={18} /></button>
             </div>
-            <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50/50 p-3">
-              <div className="text-xs font-semibold text-ink">Mark it on paper or in a PDF app</div>
-              <div className="mt-2 flex flex-wrap items-center gap-2">
-                <input type="email" value={emailTo} onChange={(e) => setEmailTo(e.target.value)} placeholder="your@email.com"
-                  className="min-w-[200px] flex-1 rounded-lg border border-line bg-surface p-2 text-sm" />
-                <button onClick={emailPdf} disabled={sending}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60">
-                  <Mail size={15} /> {sending ? "Sending…" : "Email PDF"}
-                </button>
-                <button onClick={downloadPdf} disabled={downloading}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-3 py-2 text-sm font-medium text-ink hover:bg-canvas disabled:opacity-60">
-                  <Download size={15} /> {downloading ? "Preparing…" : "Download PDF"}
-                </button>
-              </div>
-              <p className="mt-1.5 text-xs text-ink-subtle">All {open.images.length} photo{open.images.length === 1 ? "" : "s"} in one PDF with a cover page and mark box, nothing cropped.</p>
-              {sent && <p className="mt-1.5 text-xs font-semibold text-emerald-700">✓ {sent}</p>}
+            <div className="mt-4">
+              <EmailPdfBox
+                defaultTo={open.email_to}
+                filename={`${open.student.full_name} - ${open.title}`}
+                note={`All ${open.images.length} photo${open.images.length === 1 ? "" : "s"} in one PDF with a cover page and mark box, nothing cropped.`}
+                send={(to) => notesAPI.emailSubmission(open.id, to)}
+                download={() => notesAPI.submissionPdf(open.id)}
+              />
             </div>
             {open.comment && <p className="mt-3 rounded-lg bg-canvas p-3 text-sm text-ink">&ldquo;{open.comment}&rdquo;</p>}
             <div className="mt-4 space-y-3">

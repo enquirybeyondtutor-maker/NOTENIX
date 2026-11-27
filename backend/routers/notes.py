@@ -12,7 +12,7 @@ from services.answer_pdf import pdf_to_answer_pages
 from database import get_db, SessionLocal
 from models import User, ClassNote, NoteShare, HomeworkSubmission, NotePage
 from services import note_pages
-from services.email import in_background, send_new_material
+from services.email import in_background, send_new_material, marker_inbox
 from security import require_teacher, get_current_user, is_admin
 
 router = APIRouter(tags=["notes"])
@@ -453,24 +453,13 @@ async def get_submission(sub_id: int, teacher: User = Depends(require_teacher), 
     return {**_sub_row(s, images=True), "title": n.title, "body": n.body, "has_file": bool(n.has_file),
             "due_at": n.due_at.isoformat() if n.due_at else None,
             "student": {"id": u.id, "full_name": u.full_name, "email": u.email},
-            "email_to": _marker_inbox(teacher)}
+            "email_to": marker_inbox(teacher)}
+
+
+
 
 
 # ── A hand-in as one PDF (download, or emailed to the marker) ─────────────────
-
-def _marker_inbox(teacher: User) -> str | None:
-    """Where 'Email PDF' goes by default: the tutor's own inbox (their update email, or their
-    login if it's a real address); for an admin with neither, the first ADMIN_EMAILS address."""
-    from services.email import student_inbox
-    from config import settings
-    own = student_inbox(teacher)
-    if own:
-        return own
-    if is_admin(teacher):
-        admins = [e.strip() for e in (settings.admin_emails or "").split(",") if e.strip()]
-        return admins[0].lower() if admins else None
-    return None
-
 
 async def _handin_pdf(sub_id: int, teacher: User, db: AsyncSession) -> tuple[bytes, str, HomeworkSubmission, ClassNote, User]:
     from services import handin_pdf
@@ -493,10 +482,7 @@ async def submission_pdf(sub_id: int, teacher: User = Depends(require_teacher), 
 
 
 class EmailPdfIn(BaseModel):
-    to: str | None = None   # empty = the tutor's own inbox (_marker_inbox)
-
-
-MAX_EMAIL_PDF = 18 * 1024 * 1024   # email providers cap attachments; bigger hand-ins: use Download
+    to: str | None = None   # empty = the tutor's own inbox (services.email.marker_inbox)
 
 
 @router.post("/teacher/homework-submissions/{sub_id}/email")
@@ -504,37 +490,22 @@ async def email_submission(sub_id: int, data: EmailPdfIn, teacher: User = Depend
                            db: AsyncSession = Depends(get_db)):
     """Email this hand-in to the tutor as one PDF (photos inside a white border, Notenix header and
     footer on each page), so it can be marked on paper or in a PDF app."""
-    import re
     from html import escape
-    from services import mail_template as T
-    from services.email import send_with_attachments, EmailSendError, is_mailbox
-    to = (data.to or "").strip().lower() or _marker_inbox(teacher)
-    if not to:
-        raise HTTPException(400, "Type the email address to send it to.")
-    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", to) or not is_mailbox(to):
-        raise HTTPException(400, "That isn't an email inbox. Notenix login IDs can't receive email; use a real address.")
+    from services.email import send_work_pdf
     pdf, fname, s, n, u = await _handin_pdf(sub_id, teacher, db)
-    if len(pdf) > MAX_EMAIL_PDF:
-        raise HTTPException(400, "This hand-in is too large to email. Use Download PDF instead.")
-    photos = len(s.images or [])
     late = bool(n.due_at and s.submitted_at and s.submitted_at > n.due_at)
-    rows = [("Student", f"{u.full_name} ({u.email})"), ("Homework", n.title or "Homework"),
-            ("Handed in", s.submitted_at.strftime("%d %b %Y, %H:%M UTC") + (" (late)" if late else "") if s.submitted_at else "-"),
-            ("Photos", str(photos))]
-    body = (T.para(f"{escape(u.full_name or 'A student')}'s hand-in is attached as a PDF ({escape(fname)}): "
-                   f"a cover page with a mark box, then one page per photo.")
-            + T.info_table([(k, escape(v)) for k, v in rows])
-            + (T.para(f"<b>Student's note:</b> &ldquo;{escape(s.comment)}&rdquo;") if s.comment else "")
-            + T.para("When you've marked it, enter the mark and feedback in Notenix so the student sees it."))
-    html = T.layout(preheader=f"{u.full_name}: {n.title}", heading="Homework to mark", body=body,
-                    buttons=[(T.site("/teacher/homework"), "Mark in Notenix")], audience="admin", tagline="Marking")
-    text = (f"{u.full_name}'s hand-in for {n.title} is attached as a PDF ({photos} photos). "
-            f"Mark it in Notenix: {T.site('/teacher/homework')}")
+    handed = (s.submitted_at.strftime("%d %b %Y, %H:%M UTC") + (" (late)" if late else "")) if s.submitted_at else "-"
     try:
-        await send_with_attachments(to, f"[Notenix] To mark: {u.full_name} · {n.title}", html, text, [(fname, pdf)])
-    except EmailSendError as e:
-        print(f"[email] hand-in {sub_id} to {to} failed: {e}")
-        raise HTTPException(502, "The email couldn't be sent just now. Try again, or use Download PDF.")
+        to = await send_work_pdf(
+            teacher, data.to, f"[Notenix] To mark: {u.full_name} · {n.title}", f"{u.full_name}: {n.title}",
+            [("Student", f"{u.full_name} ({u.email})"), ("Homework", n.title or "Homework"),
+             ("Handed in", handed), ("Photos", str(len(s.images or [])))],
+            f"{escape(u.full_name or 'A student')}'s hand-in is attached as a PDF: a cover page with a mark box, "
+            f"then one page per photo.",
+            f'<p style="margin:12px 0"><b>Student\'s note:</b> &ldquo;{escape(s.comment)}&rdquo;</p>' if s.comment else "",
+            "/teacher/homework", fname, pdf)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
     return {"sent_to": to, "filename": fname, "size_kb": len(pdf) // 1024}
 
 
