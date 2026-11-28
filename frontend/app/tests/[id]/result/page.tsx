@@ -136,10 +136,11 @@ function SeriesPanel({ t }: { t: Tmua }) {
         <RankTile label={`Rank · Paper ${s.paper}`} r={s.paper_rank} />
         {s.combined_rank && <RankTile label="Rank · both papers" r={s.combined_rank} />}
       </div>
-      {/* Simulated benchmark (backend SIM_SIZE): the heading must keep saying "simulated". */}
+      {/* Simulated benchmark (backend SIM_SIZE). Keep the heading worded as an estimate ("Projected"):
+          it must never read as real students who sat this mock. */}
       <div className="border-t border-line px-6 py-4">
         <div className="text-xs font-semibold uppercase tracking-wide text-ink-subtle">
-          Against {s.simulated.paper.of.toLocaleString("en-GB")} simulated strong candidates
+          Projected rank among {s.simulated.paper.of.toLocaleString("en-GB")} strong TMUA applicants
         </div>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
           {([[`Paper ${s.paper}`, s.simulated.paper], ["Both papers", s.simulated.combined]] as const).map(([label, r]) => r && (
