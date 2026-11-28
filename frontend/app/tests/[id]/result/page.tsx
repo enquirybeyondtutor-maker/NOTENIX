@@ -140,7 +140,7 @@ function SeriesPanel({ t }: { t: Tmua }) {
           it must never read as real students who sat this mock. */}
       <div className="border-t border-line px-6 py-4">
         <div className="text-xs font-semibold uppercase tracking-wide text-ink-subtle">
-          Projected rank among {s.simulated.paper.of.toLocaleString("en-GB")} strong TMUA applicants
+          Projected rank among {s.simulated.paper.of.toLocaleString("en-GB")} TMUA applicants
         </div>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
           {([[`Paper ${s.paper}`, s.simulated.paper], ["Both papers", s.simulated.combined]] as const).map(([label, r]) => r && (

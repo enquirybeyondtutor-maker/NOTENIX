@@ -22,6 +22,21 @@ from services.sat import is_correct  # same marking rules (mcq letter, or accept
 
 CONTENT = Path(__file__).resolve().parent.parent / "exam_content"
 
+# The TMUA conversion, raw marks out of 40 -> 1.0-9.0: used by the exam engine, Mock Series
+# results and parent progress reports (services/report.py), so a script gets one score everywhere.
+# Built the way UAT-UK scores the live test (2025-26 Technical Report): a Rasch model of 40 items
+# spread from -2.2 to +2.2 logits, then scaled = 4.6046 + 1.6369 * ability, capped at 1.0 and 9.0.
+# That puts the typical October candidate (4.5) at about 19-20/40 and the top 10% (7.0) at 30/40,
+# with a measurement error of about ±0.6, like the real test. An estimate for a real-level paper,
+# not an official table (UAT-UK publishes none since 2024). Source: Beyond Tutors research report
+# "TMUA mock scoring methods" (Nov 2026), kept outside this repo in 05 Operations & Finance/bt-sessions/reports.
+TMUA_TABLE = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.3,      # 0-7
+              1.6, 1.9, 2.2, 2.4, 2.7, 3.0, 3.2, 3.4,      # 8-15
+              3.7, 3.9, 4.1, 4.4, 4.6, 4.8, 5.1, 5.3,      # 16-23
+              5.5, 5.8, 6.0, 6.2, 6.5, 6.8, 7.0, 7.3,      # 24-31
+              7.6, 8.0, 8.3, 8.7, 9.0, 9.0, 9.0, 9.0, 9.0]  # 32-40
+TMUA_POINTS = [(k / 40, v) for k, v in enumerate(TMUA_TABLE)]
+
 EXAMS: dict[str, dict] = {
     "tmua": {
         "name": "TMUA",
@@ -37,9 +52,8 @@ EXAMS: dict[str, dict] = {
             "Logic": ["Logical statements", "Necessary and sufficient conditions"],
             "Proof": ["Proof and counterexamples", "Errors in proofs"],
         },
-        # Share right -> score. Roughly the shape of past TMUA conversions; an estimate only.
-        "scale": {"min": 1.0, "max": 9.0, "decimals": 1,
-                  "points": [(0.0, 1.0), (0.2, 2.5), (0.4, 4.0), (0.55, 5.0), (0.7, 6.0), (0.85, 7.2), (1.0, 9.0)]},
+        # Share right -> score: TMUA_TABLE below, the one TMUA conversion Notenix uses everywhere.
+        "scale": {"min": 1.0, "max": 9.0, "decimals": 1, "points": TMUA_POINTS},
         "band": 0.7,                 # ± around a diagnostic estimate
         "target_range": (1.0, 9.0),
         "calculator": False,
