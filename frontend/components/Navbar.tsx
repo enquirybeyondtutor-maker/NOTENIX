@@ -173,8 +173,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="hidden items-center gap-2 lg:flex">
-              <Button href="/login" variant="ghost" size="sm">Sign in</Button>
-              <Button href="https://www.thebeyondtutors.com/book" size="sm">Book a free trial</Button>
+              <Button href="/login" size="sm">Sign in</Button>
             </div>
           )}
 
@@ -231,8 +230,7 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex flex-col gap-2">
-                <Button href="/login" variant="secondary">Sign in</Button>
-                <Button href="https://www.thebeyondtutors.com/book">Book a free trial</Button>
+                <Button href="/login">Sign in</Button>
               </div>
             )}
           </div>
