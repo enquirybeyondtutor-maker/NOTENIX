@@ -23,14 +23,15 @@ from config import settings
 # 7.0 ≈ 19–21; 8.0 ≈ 21–23 (public estimates, ±2 raw marks).
 _ESAT_ANCHORS = [(0, 1.0), (5 / 27, 2.5), (9 / 27, 3.5), (13 / 27, 4.5), (17 / 27, 6.0),
                  (20 / 27, 7.0), (22.5 / 27, 8.0), (1.0, 9.0)]
-# TMUA: total of 40 across two papers. 2023 published conversion (0→1.0, 9→2.8,
-# 14→4.5, 20→6.2, 26→7.0, 38→9.0) blended with recent calibrated estimates.
-_TMUA_ANCHORS = [(0, 1.0), (9 / 40, 2.8), (14 / 40, 4.5), (20 / 40, 6.0), (26 / 40, 7.0),
-                 (32 / 40, 8.0), (38 / 40, 9.0), (1.0, 9.0)]
+# TMUA: total of 40 across two papers. The same table as the exam engine and Mock Series
+# results (services/exams.py TMUA_TABLE), so a report never disagrees with the result page.
+from services.exams import TMUA_POINTS as _TMUA_ANCHORS  # noqa: E402
 
 # (scaled score, approx. percentile of all candidates)
 _ESAT_PCTL = [(1.0, 0), (3.0, 12), (4.5, 48), (5.0, 60), (6.0, 82), (7.0, 92), (8.0, 98), (9.0, 100)]
-_TMUA_PCTL = [(1.0, 0), (3.8, 50), (4.5, 66), (5.0, 76), (6.0, 88), (6.5, 92), (7.0, 94), (8.0, 96.5), (9.0, 100)]
+# UAT-UK October sittings (Technical Reports 2024-25, 2025-26; Oct 2026 results chart): the scale is
+# set so the median is 4.5 and the 90th percentile 7.0; 3.3 ≈ 25th, 5.8 ≈ 75th; 7.5 ≈ 92nd, 8.0 ≈ 95th.
+_TMUA_PCTL = [(1.0, 0), (3.3, 25), (4.5, 50), (5.8, 75), (7.0, 90), (7.5, 92), (8.0, 95), (9.0, 100)]
 
 EXAMS = {
     "ESAT": {
@@ -72,13 +73,15 @@ EXAMS = {
         "pctl": _TMUA_PCTL,
         "band_unit": "total",  # one score across Paper 1 + Paper 2
         "benchmarks": [
-            {"label": "Median candidate", "score": 3.8},
+            {"label": "Typical candidate", "score": 4.5},
             {"label": "Competitive", "score": 6.5},
-            {"label": "Top 6%", "score": 7.0},
+            {"label": "Top 10%", "score": 7.0},
         ],
         "context": ("TMUA: two papers of 20 MCQs in 75 minutes each, one combined score 1.0–9.0, no negative "
-                    "marking. Oct 2025: median ≈ 3.8, 6.0 ≈ 88th percentile, 7.0 ≈ 94th. Roughly 6.0–6.5+ "
-                    "is broadly competitive for Cambridge, Imperial, LSE and Warwick maths/CS/econ."),
+                    "marking. UAT-UK sets the scale so the October median is 4.5 and the top 10% score 7.0+ "
+                    "(Oct 2025: 9,685 candidates; 25th pct ≈ 3.3, 75th ≈ 5.8). January cohorts score lower "
+                    "(Jan 2026 median ≈ 3.6). Roughly 6.0–6.5+ is broadly competitive for Cambridge, Imperial, "
+                    "LSE and Warwick maths/CS/econ; universities publish no cut-offs."),
         "taxonomy": {
             "Paper 1": ["Algebra & equations", "Polynomials & factor theorem", "Inequalities",
                         "Functions & graph transformations", "Coordinate geometry & circles", "Trigonometry",

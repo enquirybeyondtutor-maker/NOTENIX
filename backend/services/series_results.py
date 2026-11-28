@@ -10,13 +10,15 @@ A Mock Series paper (matched by title, see services/tmua_series.py) also gets:
 Only students' first, graded sittings count; teachers, admins and attempts a tutor has
 excluded from analysis are left out. Ties share a rank (two people on 5.0 are both 2nd).
 
-Every series paper is also ranked against a SIMULATED cohort of SIM_SIZE (1,165) strong TMUA candidates
-(`simulated_rank`). These are not real people and the page says so: a Rasch (1-parameter IRT)
-model where each simulated candidate has an ability, each question a difficulty, and
-P(right) = 1 / (1 + e^-(ability - difficulty)). Abilities are drawn from N(SIM_MEAN, SIM_SD),
-set so the cohort's median lands near 5.8 on a real-exam-level paper (a strong applicant,
-well above the national median of ~3.8). Question difficulty comes from the mock's level
-(Hard mocks are harder for everyone) plus the question's own 1-3 difficulty where it has one.
+Every series paper is also ranked against a SIMULATED cohort of SIM_SIZE (1,165) TMUA candidates
+(`simulated_rank`); the page calls it a "projected rank". These are not real people: a Rasch
+(1-parameter IRT) model where each simulated candidate has an ability, each question a difficulty,
+and P(right) = 1 / (1 + e^-(ability - difficulty)), the same model behind exams.TMUA_TABLE.
+Abilities are drawn from N(SIM_MEAN, SIM_SD), fitted to the real October TMUA cohort: on the
+scale 4.6046 + 1.6369 * ability, the median is 4.5 and the 90th percentile 7.0 (UAT-UK). So a
+projected rank of "top 10%" means about the top 10% of real candidates. Each paper's 20 questions
+are spread from -2.2 to +2.2 logits (getting harder through the paper), shifted by the mock's level
+(Hard mocks are harder for everyone) and by the question's own 1-3 difficulty where it has one.
 Each simulated candidate sits both papers with the same ability, so a combined rank works too.
 The cohort is seeded by the mock's title: everyone on a mock is ranked against the same cohort.
 """
@@ -34,7 +36,10 @@ from services import exams, tmua_series
 WINDOW = timedelta(hours=24)
 
 SIM_SIZE = 1165
-SIM_MEAN, SIM_SD = 0.7, 1.1                     # ability of the simulated strong candidates
+# Real October cohort: median 4.5 -> ability (4.5 - 4.6046) / 1.6369 = -0.064;
+# 90th percentile 7.0 -> 1.463, so SD = (1.463 + 0.064) / 1.2816 = 1.19.
+SIM_MEAN, SIM_SD = -0.064, 1.19
+ITEM_SPREAD = 2.2                               # question difficulties run -2.2 .. +2.2 logits
 LEVEL_SHIFT = {"Hard": 0.45, "Real exam level": 0.0}   # mock level -> extra question difficulty
 QUESTION_SHIFT = {1: -0.8, 2: 0.0, 3: 0.8, "easy": -0.8, "medium": 0.0, "hard": 0.8}
 
@@ -84,8 +89,11 @@ def _rank(mine: float, ranked: list[float]) -> dict:
 def _difficulties(test, mock: str) -> tuple[float, ...]:
     level = next((lvl for n, _, lvl in tmua_series.MOCKS if str(n) == mock), None)
     base = LEVEL_SHIFT.get(level, 0.0)
-    return tuple(base + QUESTION_SHIFT.get(q.get("difficulty") if isinstance(q, dict) else None, 0.0)
-                 for q in (test.questions or []))
+    qs = test.questions or []
+    n = len(qs)
+    return tuple(base + (ITEM_SPREAD * (2 * i / (n - 1) - 1) if n > 1 else 0.0)
+                 + QUESTION_SHIFT.get(q.get("difficulty") if isinstance(q, dict) else None, 0.0)
+                 for i, q in enumerate(qs))
 
 
 @lru_cache(maxsize=64)
