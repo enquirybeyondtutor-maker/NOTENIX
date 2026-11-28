@@ -54,7 +54,7 @@ interface Tmua {
   series: null | {
     mock: string;
     paper: number;
-    paper_rank: Rank;
+    paper_rank: Rank | null;      // null until enough students have sat it (backend MIN_RANKED)
     combined: { score: number; right: number; total: number } | null;
     combined_rank: Rank | null;
     other_paper: { paper: number; title: string; assignment_id: number | null; done: boolean } | null;
@@ -101,17 +101,20 @@ function SeriesPanel({ t }: { t: Tmua }) {
   const s = t.series!;
   const max = t.scale_max.toFixed(1);
   const other = s.other_paper;
-  let note: string;
-  if (!s.window) note = "Ranked against everyone on the Mock Series who has sat the Baseline Mock.";
+  // The note explains the real-cohort ranking, so it only appears when that ranking is shown.
+  let note = "";
+  if (!s.paper_rank) note = "";
+  else if (!s.window) note = "Ranked against everyone on the Mock Series who has sat the Baseline Mock.";
   else if (s.window.open && s.paper_rank.ranked) note = `Ranking so far. The ranked window closes ${ukTime(s.window.end)}, so your place can still change.`;
   else if (s.paper_rank.ranked) note = `Final ranking: sittings finished between ${ukTime(s.window.start)} and ${ukTime(s.window.end)}.`;
   else note = `This mock was ranked for 24 hours from ${ukTime(s.window.start)}. Later sittings are practice: your score is yours, but it doesn't change the ranking.`;
+  const tiles = 1 + (s.paper_rank ? 1 : 0) + (s.combined_rank ? 1 : 0);
   return (
     <div className="card mt-6 overflow-hidden">
       <div className="border-b border-line px-6 py-4">
         <h2 className="font-semibold text-ink">{s.mock}: your TMUA result</h2>
       </div>
-      <div className={cn("grid gap-px bg-line", s.combined_rank ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
+      <div className={cn("grid gap-px bg-line", tiles === 3 ? "sm:grid-cols-3" : tiles === 2 ? "sm:grid-cols-2" : "")}>
         <div className="bg-gradient-to-br from-brand-600 to-brand-700 p-5 text-white">
           <div className="text-xs font-semibold uppercase tracking-wide text-white/70">Combined TMUA score</div>
           {s.combined ? (
@@ -122,7 +125,7 @@ function SeriesPanel({ t }: { t: Tmua }) {
           ) : other ? (
             <>
               <div className="mt-1 text-lg font-bold">Paper {other.paper} to go</div>
-              <div className="mt-1 text-xs text-white/80">Sit Paper {other.paper} to get your combined score and overall rank.</div>
+              <div className="mt-1 text-xs text-white/80">Sit Paper {other.paper} to get your combined score and projected rank for both papers.</div>
               {other.assignment_id && (
                 <Link href={`/tests/${other.assignment_id}`} className="mt-3 inline-block rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-brand-700 hover:bg-white/90">
                   Start Paper {other.paper}
@@ -133,7 +136,7 @@ function SeriesPanel({ t }: { t: Tmua }) {
             <div className="mt-1 text-sm text-white/80">This paper's partner isn't available yet.</div>
           )}
         </div>
-        <RankTile label={`Rank · Paper ${s.paper}`} r={s.paper_rank} />
+        {s.paper_rank && <RankTile label={`Rank · Paper ${s.paper}`} r={s.paper_rank} />}
         {s.combined_rank && <RankTile label="Rank · both papers" r={s.combined_rank} />}
       </div>
       {/* Simulated benchmark (backend SIM_SIZE). Keep the heading worded as an estimate ("Projected"):
@@ -155,7 +158,7 @@ function SeriesPanel({ t }: { t: Tmua }) {
           ))}
         </div>
       </div>
-      <div className="border-t border-line bg-slate-50 px-6 py-3 text-xs text-ink-muted">{note} {t.about}</div>
+      <div className="border-t border-line bg-slate-50 px-6 py-3 text-xs text-ink-muted">{note ? `${note} ` : ""}{t.about}</div>
     </div>
   );
 }

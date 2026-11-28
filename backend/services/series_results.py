@@ -36,6 +36,7 @@ from services import exams, tmua_series
 
 WINDOW = timedelta(hours=24)
 
+MIN_RANKED = 20        # real-cohort ranks stay hidden until this many students are ranked
 SIM_SIZE = 1165
 # Real October cohort: median 4.5 -> ability (4.5 - 4.6046) / 1.6369 = -0.064;
 # 90th percentile 7.0 -> 1.463, so SD = (1.463 + 0.064) / 1.2816 = 1.19.
@@ -192,6 +193,12 @@ async def tmua_extras(test, attempt, user, db: AsyncSession) -> dict | None:
                     for s in a_counted.keys() & b_counted.keys()]
             series["combined_rank"] = {**_rank(series["combined"]["score"], both),
                                        "ranked": mine_ranked and in_window(o_mine)}
+
+    # A rank among a handful of students says little (and "1st of 2" hints at how few sat it),
+    # so the real-cohort ranks are only shown once MIN_RANKED students are counted.
+    for key in ("paper_rank", "combined_rank"):
+        if series[key] and series[key]["of"] < MIN_RANKED:
+            series[key] = None
 
     # Simulated cohort of SIM_SIZE strong candidates (always Paper 1 first, so both papers share one cohort).
     d_this = _difficulties(test, mock)
