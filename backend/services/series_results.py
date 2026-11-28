@@ -17,8 +17,9 @@ and P(right) = 1 / (1 + e^-(ability - difficulty)), the same model behind exams.
 Abilities are drawn from N(SIM_MEAN, SIM_SD), fitted to the real October TMUA cohort: on the
 scale 4.6046 + 1.6369 * ability, the median is 4.5 and the 90th percentile 7.0 (UAT-UK). So a
 projected rank of "top 10%" means about the top 10% of real candidates. Each paper's 20 questions
-are spread from -2.2 to +2.2 logits (getting harder through the paper), shifted by the mock's level
-(Hard mocks are harder for everyone) and by the question's own 1-3 difficulty where it has one.
+are spread from -2.2 to +2.2 logits (getting harder through the paper), shifted by
+exams.MOCK_EASIER (every Notenix mock is treated as easier than the live test, whatever its
+"Hard" label, matching TMUA_TABLE) and by the question's own 1-3 difficulty where it has one.
 Each simulated candidate sits both papers with the same ability, so a combined rank works too.
 The cohort is seeded by the mock's title: everyone on a mock is ranked against the same cohort.
 """
@@ -40,7 +41,6 @@ SIM_SIZE = 1165
 # 90th percentile 7.0 -> 1.463, so SD = (1.463 + 0.064) / 1.2816 = 1.19.
 SIM_MEAN, SIM_SD = -0.064, 1.19
 ITEM_SPREAD = 2.2                               # question difficulties run -2.2 .. +2.2 logits
-LEVEL_SHIFT = {"Hard": 0.45, "Real exam level": 0.0}   # mock level -> extra question difficulty
 QUESTION_SHIFT = {1: -0.8, 2: 0.0, 3: 0.8, "easy": -0.8, "medium": 0.0, "hard": 0.8}
 
 _PAPER = re.compile(r"·\s*Paper\s*([12])\s*$")
@@ -87,8 +87,7 @@ def _rank(mine: float, ranked: list[float]) -> dict:
 
 
 def _difficulties(test, mock: str) -> tuple[float, ...]:
-    level = next((lvl for n, _, lvl in tmua_series.MOCKS if str(n) == mock), None)
-    base = LEVEL_SHIFT.get(level, 0.0)
+    base = exams.MOCK_EASIER            # the same for every mock: treated as easier than the live test
     qs = test.questions or []
     n = len(qs)
     return tuple(base + (ITEM_SPREAD * (2 * i / (n - 1) - 1) if n > 1 else 0.0)

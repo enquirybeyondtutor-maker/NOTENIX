@@ -26,15 +26,18 @@ CONTENT = Path(__file__).resolve().parent.parent / "exam_content"
 # results and parent progress reports (services/report.py), so a script gets one score everywhere.
 # Built the way UAT-UK scores the live test (2025-26 Technical Report): a Rasch model of 40 items
 # spread from -2.2 to +2.2 logits, then scaled = 4.6046 + 1.6369 * ability, capped at 1.0 and 9.0.
-# That puts the typical October candidate (4.5) at about 19-20/40 and the top 10% (7.0) at 30/40,
-# with a measurement error of about ±0.6, like the real test. An estimate for a real-level paper,
-# not an official table (UAT-UK publishes none since 2024). Source: Beyond Tutors research report
-# "TMUA mock scoring methods" (Nov 2026), kept outside this repo in 05 Operations & Finance/bt-sessions/reports.
-TMUA_TABLE = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.3,      # 0-7
-              1.6, 1.9, 2.2, 2.4, 2.7, 3.0, 3.2, 3.4,      # 8-15
-              3.7, 3.9, 4.1, 4.4, 4.6, 4.8, 5.1, 5.3,      # 16-23
-              5.5, 5.8, 6.0, 6.2, 6.5, 6.8, 7.0, 7.3,      # 24-31
-              7.6, 8.0, 8.3, 8.7, 9.0, 9.0, 9.0, 9.0, 9.0]  # 32-40
+# Our papers are treated as EASIER than the live test (every item shifted by MOCK_EASIER = -0.4
+# logits, about one paper's worth of year-to-year variation), so the same raw mark is worth less:
+# 20/40 -> 3.9, 30/40 -> 6.4, 32/40 -> 7.0, 36/40 -> 8.5, 37+ -> 9.0. A deliberately cautious
+# estimate (a real-level paper would give 20 -> 4.6, 32 -> 7.6). Measurement error is about ±0.6,
+# like the real test. Not an official table (UAT-UK publishes none since 2024). Source: Beyond Tutors
+# research report "TMUA mock scoring methods" (Nov 2026), kept in 05 Operations & Finance/bt-sessions/reports.
+MOCK_EASIER = -0.4
+TMUA_TABLE = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,      # 0-7
+              1.0, 1.2, 1.5, 1.8, 2.1, 2.3, 2.6, 2.8,      # 8-15
+              3.0, 3.3, 3.5, 3.7, 3.9, 4.2, 4.4, 4.6,      # 16-23
+              4.9, 5.1, 5.3, 5.6, 5.8, 6.1, 6.4, 6.7,      # 24-31
+              7.0, 7.3, 7.7, 8.1, 8.5, 9.0, 9.0, 9.0, 9.0]  # 32-40
 TMUA_POINTS = [(k / 40, v) for k, v in enumerate(TMUA_TABLE)]
 
 EXAMS: dict[str, dict] = {
