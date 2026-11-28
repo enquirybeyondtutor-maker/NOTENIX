@@ -59,8 +59,10 @@ interface Tmua {
     combined_rank: Rank | null;
     other_paper: { paper: number; title: string; assignment_id: number | null; done: boolean } | null;
     window: { start: string; end: string; open: boolean } | null;
+    simulated: { paper: SimRank; combined: SimRank | null };
   };
 }
+interface SimRank { rank: number; of: number; top_percent: number; median: number }
 
 const ordinal = (n: number) => {
   const s = n % 100 >= 11 && n % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" } as Record<number, string>)[n % 10] ?? "th";
@@ -133,6 +135,26 @@ function SeriesPanel({ t }: { t: Tmua }) {
         </div>
         <RankTile label={`Rank · Paper ${s.paper}`} r={s.paper_rank} />
         {s.combined_rank && <RankTile label="Rank · both papers" r={s.combined_rank} />}
+      </div>
+      {/* Simulated benchmark: 1,000 modelled strong candidates, never presented as real students. */}
+      <div className="border-t border-line px-6 py-4">
+        <div className="text-xs font-semibold uppercase tracking-wide text-ink-subtle">Against 1,000 simulated strong candidates</div>
+        <div className="mt-2 grid gap-3 sm:grid-cols-2">
+          {([[`Paper ${s.paper}`, s.simulated.paper], ["Both papers", s.simulated.combined]] as const).map(([label, r]) => r && (
+            <div key={label} className="flex items-baseline justify-between gap-3 rounded-xl border border-line px-4 py-3">
+              <span className="text-sm font-medium text-ink">{label}</span>
+              <span className="text-right">
+                <span className="text-xl font-bold tabular-nums text-ink">{ordinal(r.rank)}</span>
+                <span className="text-sm text-ink-subtle"> of {r.of.toLocaleString("en-GB")}</span>
+                <span className="ml-2 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-semibold text-brand-700">top {r.top_percent}%</span>
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-2 text-xs text-ink-muted">
+          A model of strong TMUA applicants, not real people: everyone on this mock is compared with the same 1,000.
+          Their median here is {(s.simulated.combined ?? s.simulated.paper).median.toFixed(1)}.
+        </p>
       </div>
       <div className="border-t border-line bg-slate-50 px-6 py-3 text-xs text-ink-muted">{note} {t.about}</div>
     </div>

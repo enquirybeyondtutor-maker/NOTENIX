@@ -9,9 +9,22 @@ A Mock Series paper (matched by title, see services/tmua_series.py) also gets:
     are told where they would have placed. The Baseline Mock has no window: everyone counts.
 Only students' first, graded sittings count; teachers, admins and attempts a tutor has
 excluded from analysis are left out. Ties share a rank (two people on 5.0 are both 2nd).
+
+Every series paper is also ranked against a SIMULATED cohort of 1,000 strong TMUA candidates
+(`simulated_rank`). These are not real people and the page says so: a Rasch (1-parameter IRT)
+model where each simulated candidate has an ability, each question a difficulty, and
+P(right) = 1 / (1 + e^-(ability - difficulty)). Abilities are drawn from N(SIM_MEAN, SIM_SD),
+set so the cohort's median lands near 5.8 on a real-exam-level paper (a strong applicant,
+well above the national median of ~3.8). Question difficulty comes from the mock's level
+(Hard mocks are harder for everyone) plus the question's own 1-3 difficulty where it has one.
+Each simulated candidate sits both papers with the same ability, so a combined rank works too.
+The cohort is seeded by the mock's title: everyone on a mock is ranked against the same 1,000.
 """
+import math
+import random
 import re
 from datetime import datetime, timedelta
+from functools import lru_cache
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,6 +32,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from services import exams, tmua_series
 
 WINDOW = timedelta(hours=24)
+
+SIM_SIZE = 1000
+SIM_MEAN, SIM_SD = 0.7, 1.1                     # ability of the simulated strong candidates
+LEVEL_SHIFT = {"Hard": 0.45, "Real exam level": 0.0}   # mock level -> extra question difficulty
+QUESTION_SHIFT = {1: -0.8, 2: 0.0, 3: 0.8, "easy": -0.8, "medium": 0.0, "hard": 0.8}
+
 _PAPER = re.compile(r"·\s*Paper\s*([12])\s*$")
 _MOCK = re.compile(r"^TMUA January 2027 · Mock (\d+) ·")
 
@@ -60,6 +79,33 @@ def _rank(mine: float, ranked: list[float]) -> dict:
     """Competition rank of `mine` among `ranked` (which may or may not include it)."""
     return {"rank": 1 + sum(1 for s in ranked if s > mine), "of": len(ranked),
             "average": round(sum(ranked) / len(ranked), 1) if ranked else None}
+
+
+def _difficulties(test, mock: str) -> tuple[float, ...]:
+    level = next((lvl for n, _, lvl in tmua_series.MOCKS if str(n) == mock), None)
+    base = LEVEL_SHIFT.get(level, 0.0)
+    return tuple(base + QUESTION_SHIFT.get(q.get("difficulty") if isinstance(q, dict) else None, 0.0)
+                 for q in (test.questions or []))
+
+
+@lru_cache(maxsize=64)
+def _cohort(seed: str, p1: tuple[float, ...], p2: tuple[float, ...]) -> tuple[tuple[int, ...], tuple[int, ...]]:
+    """Right answers on Paper 1 and Paper 2 for each of the SIM_SIZE simulated candidates."""
+    rng = random.Random(seed)
+    a, b = [], []
+    for _ in range(SIM_SIZE):
+        ability = rng.gauss(SIM_MEAN, SIM_SD)
+        a.append(sum(rng.random() < 1 / (1 + math.exp(d - ability)) for d in p1))
+        b.append(sum(rng.random() < 1 / (1 + math.exp(d - ability)) for d in p2))
+    return tuple(a), tuple(b)
+
+
+def _sim_rank(mine: int, cohort: list[int], total: int) -> dict:
+    """Where `mine` (right answers) falls among the simulated candidates; ties share a place."""
+    rank = 1 + sum(1 for s in cohort if s > mine)
+    median = sorted(cohort)[len(cohort) // 2]
+    return {"rank": rank, "of": len(cohort), "top_percent": max(1, math.ceil(100 * rank / len(cohort))),
+            "median": _scaled(median, total)}
 
 
 async def _sittings(test_ids: list[int], db: AsyncSession) -> dict[int, dict[int, object]]:
@@ -139,5 +185,18 @@ async def tmua_extras(test, attempt, user, db: AsyncSession) -> dict | None:
                     for s in a_counted.keys() & b_counted.keys()]
             series["combined_rank"] = {**_rank(series["combined"]["score"], both),
                                        "ranked": mine_ranked and in_window(o_mine)}
+
+    # Simulated cohort of 1,000 strong candidates (always Paper 1 first, so both papers share one cohort).
+    d_this = _difficulties(test, mock)
+    d_other = _difficulties(other, mock) if other else ()
+    p1, p2 = (d_this, d_other) if paper == 1 else (d_other, d_this)
+    sim1, sim2 = _cohort(stem, p1, p2)
+    sim_this = sim1 if paper == 1 else sim2
+    simulated = {"paper": _sim_rank(right, list(sim_this), total), "combined": None}
+    if series["combined"]:
+        c = series["combined"]
+        simulated["combined"] = _sim_rank(c["right"], [x + y for x, y in zip(sim1, sim2)], c["total"])
+    series["simulated"] = simulated
+
     out["series"] = series
     return out
