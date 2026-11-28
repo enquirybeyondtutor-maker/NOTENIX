@@ -10,7 +10,7 @@ A Mock Series paper (matched by title, see services/tmua_series.py) also gets:
 Only students' first, graded sittings count; teachers, admins and attempts a tutor has
 excluded from analysis are left out. Ties share a rank (two people on 5.0 are both 2nd).
 
-Every series paper is also ranked against a SIMULATED cohort of 1,000 strong TMUA candidates
+Every series paper is also ranked against a SIMULATED cohort of SIM_SIZE (1,165) strong TMUA candidates
 (`simulated_rank`). These are not real people and the page says so: a Rasch (1-parameter IRT)
 model where each simulated candidate has an ability, each question a difficulty, and
 P(right) = 1 / (1 + e^-(ability - difficulty)). Abilities are drawn from N(SIM_MEAN, SIM_SD),
@@ -18,7 +18,7 @@ set so the cohort's median lands near 5.8 on a real-exam-level paper (a strong a
 well above the national median of ~3.8). Question difficulty comes from the mock's level
 (Hard mocks are harder for everyone) plus the question's own 1-3 difficulty where it has one.
 Each simulated candidate sits both papers with the same ability, so a combined rank works too.
-The cohort is seeded by the mock's title: everyone on a mock is ranked against the same 1,000.
+The cohort is seeded by the mock's title: everyone on a mock is ranked against the same cohort.
 """
 import math
 import random
@@ -33,7 +33,7 @@ from services import exams, tmua_series
 
 WINDOW = timedelta(hours=24)
 
-SIM_SIZE = 1000
+SIM_SIZE = 1165
 SIM_MEAN, SIM_SD = 0.7, 1.1                     # ability of the simulated strong candidates
 LEVEL_SHIFT = {"Hard": 0.45, "Real exam level": 0.0}   # mock level -> extra question difficulty
 QUESTION_SHIFT = {1: -0.8, 2: 0.0, 3: 0.8, "easy": -0.8, "medium": 0.0, "hard": 0.8}
@@ -186,7 +186,7 @@ async def tmua_extras(test, attempt, user, db: AsyncSession) -> dict | None:
             series["combined_rank"] = {**_rank(series["combined"]["score"], both),
                                        "ranked": mine_ranked and in_window(o_mine)}
 
-    # Simulated cohort of 1,000 strong candidates (always Paper 1 first, so both papers share one cohort).
+    # Simulated cohort of SIM_SIZE strong candidates (always Paper 1 first, so both papers share one cohort).
     d_this = _difficulties(test, mock)
     d_other = _difficulties(other, mock) if other else ()
     p1, p2 = (d_this, d_other) if paper == 1 else (d_other, d_this)
