@@ -401,7 +401,9 @@ async def get_result(assignment_id: int, user: User = Depends(get_current_user),
         raise HTTPException(404, "No attempt found for this test.")
 
     pending = getattr(attempt, "status", "graded") == "awaiting_marking"
+    from services.series_results import tmua_extras   # TMUA 1-9 estimate; Mock Series combined score + rank
     return {
+        "tmua": None if pending else await tmua_extras(test, attempt, user, db),
         "title": test.title,
         "subject": test.subject,
         "topic": test.topic,
